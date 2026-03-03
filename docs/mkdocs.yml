@@ -1,0 +1,144 @@
+site_name: AI Agents Learning Hub
+site_author: Community Contributors
+site_description: >-
+  Step-by-step labs for building AI agents with Microsoft technologies.
+  Learn GitHub Copilot, Microsoft Foundry, MCP, Semantic Kernel, RAG, and more.
+
+repo_name: ai-agents-learning-hub
+repo_url: https://github.com/YOUR_ORG/ai-agents-learning-hub
+
+copyright: >
+  Copyright &copy; 2025 - present · Community Contributors
+
+docs_dir: docs/en
+
+nav:
+  - Home: index.md
+  - How to Use This Hub: how-to-use.md
+  - Prerequisites & Accounts: prerequisites.md
+
+  - Learning Paths:
+      - All Paths: paths/index.md
+      - 🤖 GitHub Copilot: paths/copilot/index.md
+      - 🏭 Microsoft Foundry: paths/foundry/index.md
+      - 🔌 Model Context Protocol (MCP): paths/mcp/index.md
+      - 🧠 Semantic Kernel: paths/semantic-kernel/index.md
+      - 📚 RAG: paths/rag/index.md
+      - 👥 Agent Builder — Teams: paths/agent-builder-teams/index.md
+      - 💻 Agent Builder — VS Code: paths/agent-builder-vscode/index.md
+      - ⚙️ Pro Code Agents: paths/pro-code/index.md
+
+  - Labs:
+      - All Labs: labs/index.md
+
+      - "L50 — Awareness":
+          - "Lab 001: What are AI Agents?": labs/lab-001-what-are-ai-agents.md
+          - "Lab 002: AI Agent Landscape": labs/lab-002-agent-landscape.md
+          - "Lab 003: Choosing the Right Tool": labs/lab-003-choosing-the-right-tool.md
+
+      - "L100 — Foundations":
+          - "Lab 010: GitHub Copilot First Steps": labs/lab-010-github-copilot-first-steps.md
+          - "Lab 011: Copilot Studio First Agent": labs/lab-011-copilot-studio-first-agent.md
+          - "Lab 012: What is MCP?": labs/lab-012-what-is-mcp.md
+          - "Lab 013: GitHub Models — Free LLMs": labs/lab-013-github-models.md
+          - "Lab 014: SK Hello Agent": labs/lab-014-sk-hello-agent.md
+
+      - "L200 — Intermediate":
+          - "Lab 020: MCP Server in Python": labs/lab-020-mcp-server-python.md
+          - "Lab 021: MCP Server in C#": labs/lab-021-mcp-server-csharp.md
+          - "Lab 022: RAG with GitHub Models + pgvector": labs/lab-022-rag-github-models.md
+          - "Lab 023: SK Plugins, Memory & Planners": labs/lab-023-sk-plugins-memory.md
+          - "Lab 024: Teams AI Library Bot": labs/lab-024-teams-ai-library.md
+          - "Lab 025: VS Code Copilot Chat Participant": labs/lab-025-vscode-chat-participant.md
+
+      - "L300 — Advanced":
+          - "Lab 030: Foundry Agent Service + MCP": labs/lab-030-foundry-agent-mcp.md
+          - "Lab 031: pgvector Semantic Search on Azure": labs/lab-031-pgvector-semantic-search.md
+          - "Lab 032: Row Level Security for Agents": labs/lab-032-row-level-security.md
+          - "Lab 033: Agent Observability with App Insights": labs/lab-033-agent-observability.md
+          - "Lab 034: Multi-Agent with Semantic Kernel": labs/lab-034-multi-agent-sk.md
+
+      - "L400 — Expert":
+          - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
+          - "Lab 041: Custom GitHub Copilot Extension": labs/lab-041-copilot-extension.md
+          - "Lab 042: Enterprise RAG with Evaluations": labs/lab-042-enterprise-rag.md
+
+plugins:
+  - search
+  - glightbox
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          name: English
+          default: true
+          site_name: AI Agents Learning Hub
+          admonition_translations:
+            tip: Tip
+            warning: Warning
+            info: Info
+            note: Note
+            danger: Danger
+            success: Success
+            question: Question
+
+theme:
+  name: material
+  favicon: media/favicon.png
+  logo: media/favicon.png
+  features:
+    - navigation.footer
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+    - content.tabs.link
+    - search.highlight
+    - search.suggest
+
+  font:
+    code: Roboto Mono
+    text: Roboto
+
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/brightness-2
+        name: Switch to dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+
+extra_css:
+  - css/custom.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/YOUR_ORG/ai-agents-learning-hub
+
+exclude_docs: |
+  **/includes/**/_*
