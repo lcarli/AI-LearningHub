@@ -33,6 +33,9 @@ jobs:
         run: |
           pip install -r docs/requirements.txt
 
+      - name: Generate What's New page
+        run: python scripts/generate_whats_new.py
+
       - name: Build MkDocs site
         run: |
           cd docs
