@@ -98,7 +98,7 @@ Recommended path:
 **Goal:** Understand AI agents and build something real, for free.
 
 Recommended path:
-1. [Lab 001](lab-001-what-are-ai-agents.md) → [Lab 002](lab-002-agent-landscape.md) → [Lab 013](lab-013-github-models.md) → [Lab 014](lab-014-sk-hello-agent.md) → [Lab 022](lab-022-rag-github-models.md)
+1. [Lab 001](lab-001-what-are-ai-agents.md) → [Lab 002](lab-002-agent-landscape.md) → [Lab 013](lab-013-github-models.md) → [Lab 014](lab-014-sk-hello-agent.md) → [Lab 022](lab-022-rag-github-models-pgvector.md)
 
 **Tools:** GitHub Models, Semantic Kernel — everything free!
 

@@ -251,6 +251,6 @@ You now have a fully local LLM stack:
 
 ## Next Steps
 
-- **Build a RAG app with local embeddings:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models.md)
+- **Build a RAG app with local embeddings:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
 - **Use with Semantic Kernel plugins:** → [Lab 023 — SK Plugins, Memory & Planners](lab-023-sk-plugins-memory.md)
 - **Production local AI:** → [Lab 044 — Phi-4 + Ollama in Production](lab-044-phi4-ollama-production.md)

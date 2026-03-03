@@ -216,5 +216,5 @@ User → Retrieve → Grade relevance → If poor: web search fallback
 ## Next Steps
 
 - **Understand the embedding vectors:** → [Lab 007 — What are Embeddings?](lab-007-what-are-embeddings.md)
-- **Build a RAG app for free:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models.md)
+- **Build a RAG app for free:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
 - **Production RAG on Azure:** → [Lab 031 — pgvector Semantic Search on Azure](lab-031-pgvector-semantic-search.md)

@@ -42,22 +42,39 @@ Browse all labs by level. Each lab is self-contained — no shared state between
 |-----|-------|------|------|
 | [Lab 020](lab-020-mcp-server-python.md) | Build an MCP Server in Python | MCP | ~45 min |
 | [Lab 021](lab-021-mcp-server-csharp.md) | Build an MCP Server in C# | MCP | ~45 min |
-| [Lab 022](lab-022-rag-github-models.md) | RAG with GitHub Models + pgvector | RAG | ~60 min |
+| [Lab 022](lab-022-rag-github-models-pgvector.md) | RAG with GitHub Models + pgvector | RAG | ~50 min |
 | [Lab 023](lab-023-sk-plugins-memory.md) | SK Plugins, Memory & Planners | Semantic Kernel | ~45 min |
 | [Lab 024](lab-024-teams-ai-library.md) | Teams AI Library Bot | Agent Builder Teams | ~60 min |
 | [Lab 025](lab-025-vscode-chat-participant.md) | VS Code Copilot Chat Participant | Agent Builder VS Code | ~45 min |
+| [Lab 026](lab-026-agentic-rag.md) | Agentic RAG Pattern | RAG | ~40 min |
+| [Lab 027](lab-027-agent-memory-patterns.md) | Agent Memory Patterns | Pro Code / SK | ~35 min |
 
 ---
 
-## <span class="level-badge level-300">L300</span> Advanced — Azure subscription required
+## <span class="level-badge level-300">L300</span> Advanced — Azure subscription or GitHub free
 
 | Lab | Title | Path | Time |
 |-----|-------|------|------|
+| [Lab 028](lab-028-deploy-mcp-azure.md) | Deploy MCP Server to Azure Container Apps | MCP | ~60 min |
 | [Lab 030](lab-030-foundry-agent-mcp.md) | Foundry Agent Service + MCP | Foundry + MCP | ~90 min |
 | [Lab 031](lab-031-pgvector-semantic-search.md) | pgvector Semantic Search on Azure | RAG + Foundry | ~60 min |
 | [Lab 032](lab-032-row-level-security.md) | Row Level Security for Agents | Foundry + Security | ~45 min |
 | [Lab 033](lab-033-agent-observability.md) | Agent Observability with App Insights | Foundry | ~45 min |
 | [Lab 034](lab-034-multi-agent-sk.md) | Multi-Agent Orchestration with SK | Semantic Kernel | ~90 min |
+| [Lab 035](lab-035-agent-evaluation.md) | Agent Evaluation with Azure AI Eval SDK | Pro Code | ~60 min |
+| [Lab 036](lab-036-prompt-injection-security.md) | Prompt Injection Defense & Security | Pro Code | ~40 min |
+| [Lab 037](lab-037-cicd-github-actions.md) | CI/CD for AI Agents with GitHub Actions | Pro Code | ~45 min |
+
+---
+
+## <span class="level-badge level-400">L400</span> Expert — Azure paid resources
+
+| Lab | Title | Path | Time |
+|-----|-------|------|------|
+| [Lab 040](lab-040-autogen-multi-agent.md) | Production Multi-Agent with AutoGen | Pro Code | ~120 min |
+| [Lab 041](lab-041-copilot-extension.md) | Custom GitHub Copilot Extension | GitHub Copilot | ~90 min |
+| [Lab 042](lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | RAG | ~120 min |
+| [Lab 044](lab-044-phi4-ollama-production.md) | Phi-4 + Ollama in Production | Pro Code | ~90 min |
 
 ---
 

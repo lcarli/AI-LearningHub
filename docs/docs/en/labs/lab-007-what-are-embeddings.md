@@ -186,6 +186,6 @@ Embedding a 10-page document into one vector loses fine-grained meaning. That's 
 
 ## Next Steps
 
-- **See embeddings in a RAG app:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models.md)
+- **See embeddings in a RAG app:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
 - **Run embeddings locally for free:** → [Lab 015 — Ollama Local LLMs](lab-015-ollama-local-llms.md)
 - **Use embeddings in Semantic Kernel:** → [Lab 023 — SK Plugins, Memory & Planners](lab-023-sk-plugins-memory.md)

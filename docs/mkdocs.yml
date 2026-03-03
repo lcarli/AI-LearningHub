@@ -54,22 +54,29 @@ nav:
       - "L200 — Intermediate":
           - "Lab 020: MCP Server in Python": labs/lab-020-mcp-server-python.md
           - "Lab 021: MCP Server in C#": labs/lab-021-mcp-server-csharp.md
-          - "Lab 022: RAG with GitHub Models + pgvector": labs/lab-022-rag-github-models.md
+          - "Lab 022: RAG with GitHub Models + pgvector": labs/lab-022-rag-github-models-pgvector.md
           - "Lab 023: SK Plugins, Memory & Planners": labs/lab-023-sk-plugins-memory.md
           - "Lab 024: Teams AI Library Bot": labs/lab-024-teams-ai-library.md
           - "Lab 025: VS Code Copilot Chat Participant": labs/lab-025-vscode-chat-participant.md
+          - "Lab 026: Agentic RAG Pattern": labs/lab-026-agentic-rag.md
+          - "Lab 027: Agent Memory Patterns": labs/lab-027-agent-memory-patterns.md
 
       - "L300 — Advanced":
+          - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
           - "Lab 030: Foundry Agent Service + MCP": labs/lab-030-foundry-agent-mcp.md
           - "Lab 031: pgvector Semantic Search on Azure": labs/lab-031-pgvector-semantic-search.md
           - "Lab 032: Row Level Security for Agents": labs/lab-032-row-level-security.md
           - "Lab 033: Agent Observability with App Insights": labs/lab-033-agent-observability.md
           - "Lab 034: Multi-Agent with Semantic Kernel": labs/lab-034-multi-agent-sk.md
+          - "Lab 035: Agent Evaluation with Azure AI Eval SDK": labs/lab-035-agent-evaluation.md
+          - "Lab 036: Prompt Injection Defense & Security": labs/lab-036-prompt-injection-security.md
+          - "Lab 037: CI/CD for AI Agents": labs/lab-037-cicd-github-actions.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
           - "Lab 041: Custom GitHub Copilot Extension": labs/lab-041-copilot-extension.md
           - "Lab 042: Enterprise RAG with Evaluations": labs/lab-042-enterprise-rag.md
+          - "Lab 044: Phi-4 + Ollama in Production": labs/lab-044-phi4-ollama-production.md
 
 plugins:
   - search

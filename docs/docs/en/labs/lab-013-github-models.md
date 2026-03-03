@@ -223,4 +223,4 @@ GitHub Models gives you **free access to frontier LLMs** using just your GitHub 
 ## Next Steps
 
 - **Build an agent with Semantic Kernel:** → [Lab 014 — SK Hello Agent](lab-014-sk-hello-agent.md)
-- **Build a RAG app:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models.md)
+- **Build a RAG app:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
