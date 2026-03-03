@@ -244,6 +244,45 @@ kernel.add_filter("function_invocation", log_function_calls)
 
 ---
 
+---
+
+## 🐛 Bug-Fix Exercise: Fix the Broken SK Plugin
+
+This lab includes a deliberately broken Semantic Kernel plugin. Find and fix 3 bugs!
+
+```
+lab-023/
+└── broken_plugin.py    ← 3 intentional bugs to find and fix
+```
+
+**Setup:**
+```bash
+pip install semantic-kernel openai
+
+# Run the test suite to see which tests fail
+python lab-023/broken_plugin.py
+```
+
+**The 3 bugs:**
+
+| # | Function | Symptom | Type |
+|---|----------|---------|------|
+| 1 | `search_products` | SK doesn't discover the function | Missing `@kernel_function` decorator |
+| 2 | `get_cart_total` | Returns `$2.00` instead of `$339.98` | Accumulates quantity not price |
+| 3 | `calculate_price_with_tax` | Returns `$291.59` instead of `$269.99` | Tax applied twice |
+
+**Verify your fixes:** The built-in test runner checks each function:
+```bash
+python lab-023/broken_plugin.py
+# Expected output:
+# ✅ Passed — found 3 tents
+# ✅ Passed — cart total = $339.98
+# ✅ Passed — price with tax = $269.99
+# 🎉 All tests passed! Your plugin is bug-free.
+```
+
+---
+
 ## Next Steps
 
 - **Multi-agent orchestration with SK:** → [Lab 034 — SK Multi-Agent Systems](lab-034-multi-agent-sk.md)

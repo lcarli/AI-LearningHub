@@ -63,6 +63,7 @@ nav:
           - "Lab 025: VS Code Copilot Chat Participant": labs/lab-025-vscode-chat-participant.md
           - "Lab 026: Agentic RAG Pattern": labs/lab-026-agentic-rag.md
           - "Lab 027: Agent Memory Patterns": labs/lab-027-agent-memory-patterns.md
+          - "Lab 029: LangChain & LangGraph Basics": labs/lab-029-langchain-langgraph.md
           - "Lab 045: GitHub Copilot Workspace": labs/lab-045-copilot-workspace.md
 
       - "L300 — Advanced":
@@ -75,6 +76,9 @@ nav:
           - "Lab 035: Agent Evaluation with Azure AI Eval SDK": labs/lab-035-agent-evaluation.md
           - "Lab 036: Prompt Injection Defense & Security": labs/lab-036-prompt-injection-security.md
           - "Lab 037: CI/CD for AI Agents": labs/lab-037-cicd-github-actions.md
+          - "Lab 038: AI Cost Optimization": labs/lab-038-cost-optimization.md
+          - "Lab 039: Vector Database Comparison": labs/lab-039-vector-db-comparison.md
+          - "Lab 043: Multimodal Agents with GPT-4o Vision": labs/lab-043-multimodal-agents.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md

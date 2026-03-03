@@ -23,6 +23,7 @@
 | [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Free LLM & Embeddings | <span class="level-badge level-100">L100</span> | ✅ Free |
 | [Lab 022](../../labs/lab-022-rag-github-models-pgvector.md) | RAG with GitHub Models + pgvector | <span class="level-badge level-200">L200</span> | ✅ Free (Docker) |
 | [Lab 031](../../labs/lab-031-pgvector-semantic-search.md) | pgvector Semantic Search on Azure | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |
+| [Lab 039](../../labs/lab-039-vector-db-comparison.md) | Vector Database Comparison | <span class="level-badge level-300">L300</span> | ✅ Free |
 | [Lab 042](../../labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | <span class="level-badge level-400">L400</span> | 💰 Azure paid |
 
 ---

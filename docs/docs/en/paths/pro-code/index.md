@@ -21,6 +21,9 @@ For developers who want full control over their agent architecture. Go beyond ma
 |-----|-------|-------|------|
 | [Lab 018](../../labs/lab-018-function-calling.md) | Function Calling & Tool Use | <span class="level-badge level-100">L100</span> | ✅ Free |
 | [Lab 019](../../labs/lab-019-streaming-responses.md) | Streaming Responses in Agents | <span class="level-badge level-100">L100</span> | ✅ Free |
+| [Lab 029](../../labs/lab-029-langchain-langgraph.md) | LangChain & LangGraph Basics | <span class="level-badge level-200">L200</span> | ✅ Free |
+| [Lab 038](../../labs/lab-038-cost-optimization.md) | AI Cost Optimization | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 043](../../labs/lab-043-multimodal-agents.md) | Multimodal Agents with GPT-4o Vision | <span class="level-badge level-300">L300</span> | ✅ Free |
 | [Lab 040](../../labs/lab-040-autogen-multi-agent.md) | Production Multi-Agent with AutoGen | <span class="level-badge level-400">L400</span> | 💰 Azure paid |
 | [Lab 042](../../labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | <span class="level-badge level-400">L400</span> | 💰 Azure paid |
 

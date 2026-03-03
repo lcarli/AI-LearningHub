@@ -193,6 +193,46 @@ Enable Agent Mode in VS Code, then ask: *"What camping products are in stock?"*
 
 ---
 
+---
+
+## 🐛 Bug-Fix Exercise: Fix the Broken MCP Server
+
+This lab includes a deliberately broken C# MCP server file. Your challenge: find and fix 3 bugs.
+
+```
+lab-021/
+└── BrokenMcpServer.cs    ← 3 intentional bugs to find and fix
+```
+
+**Setup:**
+```bash
+mkdir mcp-bugfix && cd mcp-bugfix
+dotnet new console -o BugFixServer
+cd BugFixServer
+dotnet add package ModelContextProtocol --prerelease
+dotnet add package Microsoft.Extensions.Hosting
+
+# Copy the broken file over Program.cs
+cp ../lab-021/BrokenMcpServer.cs Program.cs
+dotnet run
+```
+
+**The 3 bugs:**
+
+| # | Tool | Symptom | Type |
+|---|------|---------|------|
+| 1 | `list_categories` | `NullReferenceException` on startup | Null initialization |
+| 2 | `search_products` | Always returns empty list `[]` | Logic inversion (`!`) |
+| 3 | `get_product_details` | Returns "not found" for lowercase IDs | Case-sensitive comparison |
+
+**Verify your fixes:** After fixing all 3 bugs, connect with the MCP Inspector and run:
+
+- `list_categories()` → should return `["Backpacks", "Sleeping Bags", "Tents"]`
+- `search_products(keyword: "tent")` → should return P001, P002, P003
+- `get_product_details(productId: "p001")` → should return TrailBlazer Tent 2P details
+
+---
+
 ## Next Steps
 
 - **Deploy this server to the cloud:** → [Lab 028 — Deploy MCP to Azure Container Apps](lab-028-deploy-mcp-azure.md)

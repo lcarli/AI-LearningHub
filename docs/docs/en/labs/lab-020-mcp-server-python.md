@@ -241,6 +241,57 @@ def get_product_catalog() -> str:
 
 ---
 
+---
+
+## 📁 Starter File
+
+This lab includes a starter file with TODO markers to guide you through building the server:
+
+```
+lab-020/
+└── outdoorgear_mcp_server_starter.py   ← 6 TODOs to complete
+```
+
+```bash
+# Copy the starter file to your working directory
+cp lab-020/outdoorgear_mcp_server_starter.py products-mcp-server/server.py
+cd products-mcp-server
+
+# Install dependencies
+pip install fastmcp
+
+# Work through the TODOs in the file, then run:
+python server.py
+```
+
+The starter contains the OutdoorGear product catalog (P001–P007) already populated. You implement: `list_categories`, `search_products`, `get_product_details`, and a challenge tool `compare_products`.
+
+---
+
+## 🏆 Challenge: Add a `compare_products` Tool
+
+Once you have the basic 3 tools working, add a fourth:
+
+```python
+@mcp.tool()
+def compare_products(product_ids: list[str]) -> dict:
+    """
+    Compare multiple products side by side.
+
+    Args:
+        product_ids: List of 2–4 product IDs to compare (e.g. ["P001", "P003"])
+    """
+    # TODO: implement comparison
+    # Return: {"products": [...], "not_found": [...], "lightest": "...", "cheapest": "..."}
+```
+
+Test it in the MCP Inspector by asking:
+> *"Compare the TrailBlazer Tent 2P and the TrailBlazer Solo. Which is lighter?"*
+
+The agent should call `compare_products(["P001", "P003"])` and return a structured comparison.
+
+---
+
 ## Summary
 
 You've built a fully functional MCP server that:
