@@ -86,6 +86,7 @@ plugins:
   - search
   - glightbox
   - tags:
+      tags_file: tags.md
   - i18n:
       docs_structure: folder
       languages:
