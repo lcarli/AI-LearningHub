@@ -28,20 +28,7 @@ Most AI agent frameworks focus on *building* agents — how they reason, call to
 
 Think of Agent 365 as the *control plane* for AI agents in your Microsoft 365 tenant:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Microsoft Agent 365                       │
-│  ┌─────────────┐  ┌──────────────┐  ┌────────────────────┐ │
-│  │   Registry  │  │ Access Control│  │   Observability    │ │
-│  │ (all agents)│  │ (Entra ID)   │  │ (OpenTelemetry)    │ │
-│  └─────────────┘  └──────────────┘  └────────────────────┘ │
-│  ┌─────────────┐  ┌──────────────┐  ┌────────────────────┐ │
-│  │  Blueprint  │  │ Notifications │  │ Governed MCP Tools │ │
-│  │ (template)  │  │ (Teams/Mail) │  │ (Mail/Cal/SPO)     │ │
-│  └─────────────┘  └──────────────┘  └────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-         ↑ Works with ANY agent (Copilot Studio, SK, OpenAI, LangChain...)
-```
+![Agent 365 Control Plane](../../assets/diagrams/agent-365-control-plane.svg)
 
 An agent enhanced with Agent 365 gets:
 
@@ -60,18 +47,7 @@ An agent enhanced with Agent 365 gets:
 
 ## Architecture: Agent 365 Layers
 
-```
-┌────────────────────────────────────────────────────────────┐
-│  Layer 3: Enterprise Capabilities (Agent 365 SDK)          │
-│  → Entra identity · Notifications · Observability · MCP    │
-├────────────────────────────────────────────────────────────┤
-│  Layer 2: Agent Logic (YOUR code)                          │
-│  → Prompts · Workflows · Reasoning · Tools                 │
-├────────────────────────────────────────────────────────────┤
-│  Layer 1: LLM Orchestrator (your chosen framework)         │
-│  → OpenAI Agents SDK · Semantic Kernel · LangChain · etc.  │
-└────────────────────────────────────────────────────────────┘
-```
+![Agent 365 Layered Architecture](../../assets/diagrams/agent-365-layers.svg)
 
 Agent 365 SDK sits *above* your agent framework. It does **not** replace it — it wraps and enhances it.
 
