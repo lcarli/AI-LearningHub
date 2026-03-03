@@ -79,6 +79,7 @@ nav:
           - "Lab 038: AI Cost Optimization": labs/lab-038-cost-optimization.md
           - "Lab 039: Vector Database Comparison": labs/lab-039-vector-db-comparison.md
           - "Lab 043: Multimodal Agents with GPT-4o Vision": labs/lab-043-multimodal-agents.md
+          - "Lab 046: Microsoft Agent 365 — Enterprise Governance": labs/lab-046-agent-365.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
