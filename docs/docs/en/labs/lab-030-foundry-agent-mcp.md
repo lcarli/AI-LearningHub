@@ -1,3 +1,6 @@
+---
+tags: [foundry, mcp, azure, azure-required]
+---
 # Lab 030: Microsoft Foundry Agent Service + MCP
 
 <div class="lab-meta">

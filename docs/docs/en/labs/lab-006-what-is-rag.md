@@ -1,3 +1,6 @@
+---
+tags: [free, beginner, no-account-needed, rag]
+---
 # Lab 006: What is RAG?
 
 <div class="lab-meta">

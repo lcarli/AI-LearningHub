@@ -1,3 +1,6 @@
+---
+tags: [memory, python, free, github-models]
+---
 # Lab 027: Agent Memory Patterns
 
 <div class="lab-meta">

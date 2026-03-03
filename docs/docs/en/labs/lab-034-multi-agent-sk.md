@@ -1,3 +1,6 @@
+---
+tags: [semantic-kernel, multi-agent, python, free, github-models]
+---
 # Lab 034: Multi-Agent Orchestration with Semantic Kernel
 
 <div class="lab-meta">
@@ -311,4 +314,4 @@ Returns: 60 days from purchase, must be unused. Once worn, non-refundable unless
 ## Next Steps
 
 - **Agent Evaluation:** → [Lab 035 — Evaluate agent quality](lab-035-agent-evaluation.md)
-- **Production AutoGen:** → [Lab 040 — Production Multi-Agent with AutoGen](lab-040-production-multi-agent.md)
+- **Production AutoGen:** → [Lab 040 — Production Multi-Agent with AutoGen](lab-040-autogen-multi-agent.md)

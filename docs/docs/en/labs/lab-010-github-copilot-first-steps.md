@@ -1,3 +1,6 @@
+---
+tags: [github-copilot, free, foundations]
+---
 # Lab 010: GitHub Copilot — First Steps
 
 <div class="lab-meta">

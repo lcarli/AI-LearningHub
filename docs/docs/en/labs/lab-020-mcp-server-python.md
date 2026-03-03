@@ -1,3 +1,6 @@
+---
+tags: [mcp, python, free, github-models]
+---
 # Lab 020: Build an MCP Server in Python
 
 <div class="lab-meta">

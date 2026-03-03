@@ -79,10 +79,13 @@ nav:
           - "Lab 044: Phi-4 + Ollama in Production": labs/lab-044-phi4-ollama-production.md
 
   - Glossary: glossary.md
+  - What's New: whats-new.md
+  - Tags: tags.md
 
 plugins:
   - search
   - glightbox
+  - tags:
   - i18n:
       docs_structure: folder
       languages:

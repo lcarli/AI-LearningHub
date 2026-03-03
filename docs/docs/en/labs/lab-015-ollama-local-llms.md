@@ -1,3 +1,6 @@
+---
+tags: [ollama, local-llm, free, python]
+---
 # Lab 015: Ollama — Run LLMs Locally for Free
 
 <div class="lab-meta">

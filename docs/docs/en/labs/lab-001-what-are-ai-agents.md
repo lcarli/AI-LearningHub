@@ -1,3 +1,6 @@
+---
+tags: [free, beginner, no-account-needed, awareness]
+---
 # Lab 001: What are AI Agents?
 
 <div class="lab-meta">

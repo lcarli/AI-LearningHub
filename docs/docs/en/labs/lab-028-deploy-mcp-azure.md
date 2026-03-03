@@ -1,3 +1,6 @@
+---
+tags: [mcp, azure, container-apps, bicep, azure-required]
+---
 # Lab 028: Deploy MCP Server to Azure Container Apps
 
 <div class="lab-meta">

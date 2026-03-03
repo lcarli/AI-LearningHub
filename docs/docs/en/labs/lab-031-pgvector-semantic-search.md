@@ -1,3 +1,6 @@
+---
+tags: [pgvector, rag, azure, azure-required]
+---
 # Lab 031: pgvector Semantic Search on Azure
 
 <div class="lab-meta">

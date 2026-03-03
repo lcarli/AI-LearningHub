@@ -1,3 +1,6 @@
+---
+tags: [free, beginner, no-account-needed, llm]
+---
 # Lab 004: How LLMs Work
 
 <div class="lab-meta">

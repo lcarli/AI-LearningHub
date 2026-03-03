@@ -1,3 +1,6 @@
+---
+tags: [mcp, csharp, free, github-models]
+---
 # Lab 021: Build an MCP Server in C#
 
 <div class="lab-meta">

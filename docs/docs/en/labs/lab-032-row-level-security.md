@@ -1,3 +1,6 @@
+---
+tags: [security, postgresql, python, free]
+---
 # Lab 032: Row Level Security for Agents
 
 <div class="lab-meta">

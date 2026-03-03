@@ -59,7 +59,7 @@ Providing retrieved documents to the LLM as context, so the answer is based on s
 ## E
 
 **Embedding**
-A fixed-length numerical vector that captures the semantic meaning of text. See [Lab 007 — What are Embeddings?](labs/lab-007-embeddings.md).
+A fixed-length numerical vector that captures the semantic meaning of text. See [Lab 007 — What are Embeddings?](labs/lab-007-what-are-embeddings.md).
 
 **Embedding Model**
 A model that converts text to embeddings. Examples: `text-embedding-3-small` (OpenAI), `text-embedding-ada-002`, `nomic-embed-text` (local/Ollama).

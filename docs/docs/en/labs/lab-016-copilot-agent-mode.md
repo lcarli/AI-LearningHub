@@ -1,3 +1,6 @@
+---
+tags: [github-copilot, free, vscode]
+---
 # Lab 016: GitHub Copilot Agent Mode
 
 <div class="lab-meta">

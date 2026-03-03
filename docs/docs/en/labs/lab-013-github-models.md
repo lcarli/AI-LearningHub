@@ -1,3 +1,6 @@
+---
+tags: [github-models, free, python, llm]
+---
 # Lab 013: GitHub Models — Free LLM Inference
 
 <div class="lab-meta">

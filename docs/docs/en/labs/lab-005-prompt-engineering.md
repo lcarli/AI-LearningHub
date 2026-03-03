@@ -1,3 +1,6 @@
+---
+tags: [free, beginner, no-account-needed, prompt-engineering]
+---
 # Lab 005: Prompt Engineering
 
 <div class="lab-meta">

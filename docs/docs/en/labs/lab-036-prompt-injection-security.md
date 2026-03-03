@@ -1,3 +1,6 @@
+---
+tags: [security, prompt-injection, python, free]
+---
 # Lab 036: Prompt Injection Defense & Agent Security
 
 <div class="lab-meta">

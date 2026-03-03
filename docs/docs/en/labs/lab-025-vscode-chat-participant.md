@@ -1,3 +1,6 @@
+---
+tags: [vscode, typescript, github-copilot, free]
+---
 # Lab 025: VS Code Copilot Chat Participant
 
 <div class="lab-meta">

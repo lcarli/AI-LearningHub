@@ -1,3 +1,6 @@
+---
+tags: [rag, agentic-rag, python, free, github-models]
+---
 # Lab 026: Agentic RAG Pattern
 
 <div class="lab-meta">
