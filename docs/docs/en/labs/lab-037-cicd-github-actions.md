@@ -348,6 +348,25 @@ jobs:
 
 ---
 
+## 📁 Supporting Files
+
+```
+lab-037/
+└── ai-agent-ci.yml    ← Complete GitHub Actions CI/CD workflow for AI agents
+```
+
+This is a **production-ready workflow** you can copy directly into `.github/workflows/` in your project. It includes all 7 jobs: unit tests, integration tests, security scan, agent evaluation, Docker build, staging deploy, and production deploy with manual approval gate.
+
+**Copy to your project:**
+```bash
+mkdir -p .github/workflows
+cp lab-037/ai-agent-ci.yml .github/workflows/ai-agent-ci.yml
+```
+
+Then customize the environment variables at the top (`AGENT_SERVICE_NAME`, `STAGING_URL`) and add the required secrets in your GitHub repository settings.
+
+---
+
 ## Next Steps
 
 - **Evaluate at scale with Azure AI:** → [Lab 035 — Agent Evaluation with Azure AI Eval SDK](lab-035-agent-evaluation.md)

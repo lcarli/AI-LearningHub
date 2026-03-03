@@ -174,6 +174,39 @@ Embedding a 10-page document into one vector loses fine-grained meaning. That's 
 
 ---
 
+## 📁 Hands-On: Embedding Explorer
+
+This lab includes a Python script that lets you **see embeddings in action** using the GitHub Models free tier.
+
+```
+lab-007/
+└── embedding_explorer.py   ← Cosine similarity demo with OutdoorGear products
+```
+
+**Prerequisites:** Python 3.9+ and a GitHub token (free)
+
+```bash
+# Install dependencies
+pip install openai
+
+# Set your GitHub token
+export GITHUB_TOKEN=<your_PAT>    # Linux/macOS
+set GITHUB_TOKEN=<your_PAT>       # Windows
+
+# Run the explorer
+python lab-007/embedding_explorer.py
+```
+
+**What you'll see:**
+
+1. **Semantic search:** Find products matching "lightweight tent for solo hiking" without keyword matching
+2. **Semantic vs. keyword:** Compare how keyword search misses "something to sleep in the cold" while semantic search finds the sleeping bag
+3. **Similarity matrix:** See that two tent descriptions score higher similarity to each other than a tent vs. a sleeping bag
+
+This directly illustrates why RAG works: the embedding of a *question* and the embedding of its *answer document* land close together in vector space.
+
+---
+
 ## 🧠 Knowledge Check
 
 ??? question "1. What does a higher cosine similarity score mean?"

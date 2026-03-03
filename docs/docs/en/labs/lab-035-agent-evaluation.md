@@ -237,6 +237,30 @@ Scores are 1–5. Below 3.0 on groundedness usually indicates hallucination.
 
 ---
 
+## 📁 Supporting Files
+
+```
+lab-035/
+└── eval_dataset.jsonl    ← 20 OutdoorGear Q&A pairs for evaluation
+```
+
+Each line is a JSON object with `query`, `ground_truth`, `category`, and `product_ids`. The dataset covers product recommendations, pricing, comparisons, and an out-of-scope test case.
+
+**Load it in Python:**
+```python
+import json
+
+with open("lab-035/eval_dataset.jsonl") as f:
+    dataset = [json.loads(line) for line in f]
+
+print(f"Loaded {len(dataset)} evaluation examples")
+# Categories: tents, sleeping_bags, backpacks, pricing, recommendations, out_of_scope
+categories = set(d["category"] for d in dataset)
+print(f"Categories: {categories}")
+```
+
+---
+
 ## Next Steps
 
 - **CI/CD for agents:** → [Lab 037 — GitHub Actions for AI Agents](lab-037-cicd-github-actions.md)

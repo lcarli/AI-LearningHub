@@ -203,6 +203,25 @@ User → Retrieve → Grade relevance → If poor: web search fallback
 
 ---
 
+## 📁 Supporting Files
+
+This lab includes a sample knowledge base you can use to practice RAG concepts:
+
+```
+lab-006/
+├── faq_tents.txt          ← OutdoorGear tent FAQs (5 Q&A pairs)
+├── faq_sleeping_bags.txt  ← Sleeping bag FAQs (5 Q&A pairs)
+├── faq_backpacks.txt      ← Backpack FAQs (5 Q&A pairs)
+├── faq_clothing.txt       ← Clothing & layering FAQs (5 Q&A pairs)
+└── faq_footwear.txt       ← Footwear FAQs (5 Q&A pairs)
+```
+
+These 5 files form a mini OutdoorGear knowledge base — exactly the kind of document set a RAG system would ingest. In [Lab 022](lab-022-rag-github-models-pgvector.md) you'll use these same files to build a working RAG application.
+
+**Try it now:** Open any `.txt` file and notice how it's structured. Think about how you would chunk it — by Q&A pair? By paragraph? This decision directly affects retrieval quality.
+
+---
+
 ## 🧠 Knowledge Check
 
 ??? question "1. What does RAG stand for, and what problem does it solve?"

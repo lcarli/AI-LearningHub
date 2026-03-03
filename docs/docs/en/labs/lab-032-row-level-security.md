@@ -297,6 +297,24 @@ docker stop pg-rls-demo && docker rm pg-rls-demo
 
 ---
 
+## 📁 Supporting Files
+
+```
+lab-032/
+└── migrations/
+    └── 002_rls.sql    ← Tenants table, agent_sessions, conversation_messages, RLS policies, roles
+```
+
+**Apply after migration 001:**
+```bash
+psql "host=$PG_HOST port=5432 dbname=$PG_DATABASE user=$PG_USER password=$PG_PASSWORD sslmode=require" \
+    -f lab-032/migrations/002_rls.sql
+```
+
+The migration creates the tenant tables, enables RLS on all tenant-scoped tables, creates `agent_app` and `agent_admin` roles with correct permissions, and seeds two demo tenants.
+
+---
+
 ## Next Steps
 
 - **Agent Observability:** → [Lab 033 — App Insights Tracing](lab-033-agent-observability.md)
