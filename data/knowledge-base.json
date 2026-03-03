@@ -1,0 +1,95 @@
+{
+  "company": "OutdoorGear Inc.",
+  "last_updated": "2025-01-01",
+  "sections": {
+    "return_policy": {
+      "title": "Return Policy",
+      "content": "All items may be returned within 60 days of purchase for a full refund. Items must be unused and in original packaging with tags attached. Worn footwear and used climbing gear are non-refundable unless defective. Defective items receive a free replacement regardless of when they were purchased. To initiate a return, visit our website or call customer service. Return shipping is free for defective items; standard items require a prepaid label at $5.99.",
+      "key_facts": ["60-day return window", "unused + original packaging required", "worn footwear non-refundable", "defective items: free replacement anytime", "return shipping: $5.99 prepaid label"]
+    },
+    "shipping": {
+      "title": "Shipping Policy",
+      "content": "Standard shipping (3-5 business days) costs $5.99 and is free on orders over $75. Express shipping (1-2 business days) costs $14.99. Overnight shipping costs $24.99. We ship to 35 countries internationally; rates vary by destination. Same-day delivery is available in Seattle, Portland, and Denver metro areas for orders placed before noon. Oversized items (tents, large packs) may incur an additional $10 handling fee.",
+      "key_facts": ["standard: $5.99 (3-5 days)", "free standard on orders $75+", "express: $14.99 (1-2 days)", "overnight: $24.99", "same-day in Seattle/Portland/Denver", "35 countries international"]
+    },
+    "warranty": {
+      "title": "Warranty Policy",
+      "content": "All products carry a 2-year manufacturer warranty against defects in materials and workmanship. Climbing and safety equipment (harnesses, crampons, carabiners) carry a lifetime defect warranty. Normal wear and tear is not covered. Warranty claims require proof of purchase and photos of the defect. We will repair, replace, or issue store credit at our discretion.",
+      "key_facts": ["2-year warranty on all products", "lifetime warranty on climbing/safety gear", "wear and tear not covered", "proof of purchase required"]
+    },
+    "price_match": {
+      "title": "Price Match Guarantee",
+      "content": "We match prices from any authorized retailer within 30 days of purchase. The competitor must have the identical item (same model, color, size) in stock. We do not match clearance, liquidation, or marketplace seller prices (Amazon 3rd party, eBay, etc.). To request a price match, contact customer service with a link to the competitor's listing.",
+      "key_facts": ["30-day price match window", "authorized retailers only", "identical item must be in stock", "no clearance or marketplace matches"]
+    },
+    "loyalty_program": {
+      "title": "Summit Rewards Program",
+      "content": "Earn 1 point per $1 spent. Redeem 100 points for $5 off. Points expire after 18 months of account inactivity. Silver status (500 pts/year): free standard shipping. Gold status (1500 pts/year): free express shipping + early access to sales. Platinum status (3000 pts/year): personal shopper, free returns, 10% ongoing discount.",
+      "key_facts": ["1 point per $1", "100 pts = $5 discount", "Silver at 500pts/year: free shipping", "Gold at 1500pts/year: free express", "Platinum at 3000pts/year: 10% discount"]
+    }
+  },
+  "faqs": [
+    {
+      "id": "F001",
+      "question": "How do I find my hiking boot size?",
+      "answer": "We recommend going up half a size from your street shoe size for hiking boots, as feet swell during long hikes. Use our online size chart: measure your foot length in cm and compare to the size table. Wide-fit options are available for the TrailBlazer X200. If between sizes, size up. Always try boots with hiking socks."
+    },
+    {
+      "id": "F002",
+      "question": "Can I wash my sleeping bag?",
+      "answer": "Yes. Use a front-loading washing machine on delicate/gentle cycle with cold water and down-specific detergent (for down bags) or sport wash (for synthetic). Never use fabric softener. Dry on low heat with 2-3 clean tennis balls to re-loft the fill. Down bags may require 3-4 drying cycles. Air dry completely before storing."
+    },
+    {
+      "id": "F003",
+      "question": "What is the difference between 3-season and 4-season tents?",
+      "answer": "3-season tents (spring/summer/fall) prioritize ventilation, are lighter, and have more mesh panels. They handle rain and mild wind but not heavy snow loads. 4-season tents use stronger poles, less mesh, and steeper walls to shed snow. They are heavier but safe in winter alpine conditions. For most camping, 3-season is sufficient."
+    },
+    {
+      "id": "F004",
+      "question": "How do I care for my Gore-Tex jacket?",
+      "answer": "Wash regularly with a technical wash like Nikwax Tech Wash. Rinse thoroughly: detergent residue blocks Gore-Tex pores. Tumble dry on low for 20 minutes to reactivate the DWR coating. If water no longer beads off, apply Nikwax TX.Direct wash-in or spray-on. Never use fabric softener or dry clean."
+    },
+    {
+      "id": "F005",
+      "question": "Do crampons fit all boots?",
+      "answer": "No. Crampons require compatible boot soles. The CrampTech crampons require B1 or B2 rated boots (semi-rigid to rigid sole with toe/heel welt). They will NOT fit flexible trail runners or standard hiking boots. Check your boot's B-rating on the label or product page before purchasing."
+    },
+    {
+      "id": "F006",
+      "question": "Can I use the CampChef stove with any canister?",
+      "answer": "Yes. The CampChef stove uses standard Lindal valve canisters (EN417), compatible with MSR, Jetboil, Primus, Snow Peak, and other brands. Screw-thread Optimus canisters use the same valve."
+    },
+    {
+      "id": "F007",
+      "question": "How should I store my harness?",
+      "answer": "Store harnesses in a cool, dry, dark place away from UV light, chemicals, and heat. Never store near car exhaust, solvents, or acids. Inspect before every use: check for cuts, fraying, or discoloration. Retire the harness if it has been factor-2 fallen on, even if no visible damage. UIAA recommends retiring climbing gear after 10 years regardless of condition."
+    },
+    {
+      "id": "F008",
+      "question": "What countries do you ship to?",
+      "answer": "We ship to 35 countries including all of North America, most of Europe (EU + UK), Australia, New Zealand, Japan, and South Korea. We do not currently ship to countries under US trade sanctions. International orders are subject to local customs duties which are the buyer's responsibility."
+    }
+  ],
+  "product_guides": [
+    {
+      "id": "G001",
+      "title": "Layering System Guide",
+      "content": "The 3-layer system: Base layer (AlphaLayer) wicks moisture from skin. Mid layer (fleece or down) provides insulation. Shell layer (StormShell) blocks wind and rain. In summer, base + shell may suffice. In winter, all three are recommended. Never wear cotton as a base layer: it retains moisture and causes hypothermia."
+    },
+    {
+      "id": "G002",
+      "title": "Tent Site Selection",
+      "content": "Choose ground that is flat, dry, and slightly elevated to avoid pooling. Keep 200 feet from water sources. Use Leave No Trace principles: prefer durable surfaces (rock, gravel, dry grass). In bear country, camp 200 yards from cooking and food storage areas."
+    },
+    {
+      "id": "G003",
+      "title": "Pack Fit and Adjustment",
+      "content": "Load heavy items (tent, food, water) close to your back and high. Load sleeping bag at the bottom. Adjust hip belt first: it should sit on your iliac crest (hip bones), not your waist. Then tighten shoulder straps. Adjust load lifters at 45-degree angle. Sternum strap should allow deep breathing."
+    },
+    {
+      "id": "G004",
+      "title": "Crampon Compatibility Guide",
+      "content": "C1 crampons (flexible frame) fit B1-B3 boots. C2 crampons (semi-rigid) fit B2-B3 boots. C3 crampons (rigid) require B3 boots only. The CrampTech crampons are C2 and require B2 or B3 rated boots. Check the boot sole rigidity before purchasing. Using mismatched crampons is a serious safety hazard."
+    }
+  ]
+}

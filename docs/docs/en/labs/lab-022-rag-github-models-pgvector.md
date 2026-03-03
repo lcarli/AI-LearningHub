@@ -21,6 +21,16 @@
 
 In [Lab 006](lab-006-what-is-rag.md) you learned RAG theory. Here you build the real thing — a working RAG system using only free tools: GitHub Models for embeddings + generation, and pgvector running locally in Docker.
 
+!!! tip "Pre-built dataset included"
+    This lab uses the **OutdoorGear sample dataset** — 25 products, FAQs, and company policies, ready to ingest.  
+    📥 [`data/products.csv`](https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv) · [`data/knowledge-base.json`](https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json)
+
+    ```bash
+    # Download the sample data
+    curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
+    curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
+    ```
+
 ---
 
 ## Prerequisites
@@ -91,11 +101,18 @@ print("Database ready.")
 python setup_db.py
 ```
 
-### Step 3: Ingest documents
+### Step 3: Ingest documents from the sample dataset
+
+The sample dataset lives in the repo. Download it (or use the URL directly):
+
+```bash
+curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
+curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
+```
 
 ```python
 # ingest.py
-import os, psycopg2
+import os, csv, json, psycopg2
 from openai import OpenAI
 
 client = OpenAI(
@@ -103,46 +120,50 @@ client = OpenAI(
     api_key=os.environ["GITHUB_TOKEN"],
 )
 
-# Sample product knowledge base
-documents = [
-    {
-        "title": "TrailBlazer X200 — Product Guide",
-        "content": "The TrailBlazer X200 is a waterproof hiking boot rated for 3-season use. "
-                   "It features a Gore-Tex membrane, Vibram outsole, and weighs 420g per boot. "
-                   "Available in sizes 6-15. Price: $189.99. Best for: day hikes and light backpacking.",
-        "source": "product-catalog"
-    },
-    {
-        "title": "Summit Pro Tent — Setup Guide",
-        "content": "The Summit Pro is a 2-person, 4-season tent. Setup time: 8 minutes. "
-                   "Weight: 2.1kg. Poles: DAC aluminum. Floor dimensions: 210cm x 130cm. "
-                   "Packed size: 48cm x 18cm. Includes footprint. Price: $349.",
-        "source": "product-catalog"
-    },
-    {
-        "title": "Return Policy",
-        "content": "All items may be returned within 60 days for a full refund. "
-                   "Items must be unused and in original packaging. "
-                   "Worn footwear is non-refundable unless defective. "
-                   "Defective items receive free replacement regardless of return window.",
-        "source": "policies"
-    },
-    {
-        "title": "Shipping Information",
-        "content": "Standard shipping takes 3-5 business days and costs $5.99. "
-                   "Express (1-2 days) costs $14.99. Free shipping on orders over $75. "
-                   "International shipping available to 30+ countries. Same-day available in Seattle.",
-        "source": "policies"
-    },
-    {
-        "title": "ClimbTech Harness — Safety Guide",
-        "content": "The ClimbTech Pro harness is CE EN12277 certified. Max load: 15kN. "
-                   "Fits waist 65-90cm, leg 47-65cm. Webbing: 25mm Dyneema blend. "
-                   "Inspection interval: every 10 uses or 6 months. "
-                   "Retire immediately if fallen on or exposed to chemicals.",
-        "source": "product-catalog"
-    },
-]
+def build_documents() -> list[dict]:
+    """Load products.csv and knowledge-base.json into a flat list of documents."""
+    docs = []
+
+    # --- Products from CSV ---
+    with open("products.csv") as f:
+        for p in csv.DictReader(f):
+            docs.append({
+                "title": f"{p['name']} — Product Info",
+                "content": (
+                    f"{p['name']} ({p['category']}/{p['subcategory']}). "
+                    f"SKU: {p['sku']}. Price: ${p['price']}. "
+                    f"In stock: {p['in_stock']}. Weight: {p['weight_kg']}kg. "
+                    f"Rating: {p['rating']}/5. {p['description']}"
+                ),
+                "source": "product-catalog",
+            })
+
+    # --- Policies, FAQs, and guides from JSON ---
+    with open("knowledge-base.json") as f:
+        kb = json.load(f)
+
+    for section in kb["sections"].values():
+        docs.append({
+            "title": section["title"],
+            "content": section["content"],
+            "source": "policies",
+        })
+
+    for faq in kb["faqs"]:
+        docs.append({
+            "title": f"FAQ: {faq['question']}",
+            "content": f"Q: {faq['question']}\nA: {faq['answer']}",
+            "source": "faq",
+        })
+
+    for guide in kb["product_guides"]:
+        docs.append({
+            "title": guide["title"],
+            "content": guide["content"],
+            "source": "guide",
+        })
+
+    return docs
 
 def get_embedding(text: str) -> list[float]:
     response = client.embeddings.create(
@@ -151,6 +172,9 @@ def get_embedding(text: str) -> list[float]:
     )
     return response.data[0].embedding
 
+documents = build_documents()
+print(f"Prepared {len(documents)} documents to ingest")
+
 conn = psycopg2.connect(
     host="localhost", port=5432,
     dbname="ragdb", user="postgres", password="ragpass"
@@ -158,7 +182,7 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 for doc in documents:
-    print(f"Embedding: {doc['title']}")
+    print(f"  Embedding: {doc['title'][:60]}")
     embedding = get_embedding(doc["content"])
     cur.execute(
         "INSERT INTO documents (title, content, embedding, source) VALUES (%s, %s, %s, %s)",
@@ -168,11 +192,13 @@ for doc in documents:
 conn.commit()
 cur.close()
 conn.close()
-print(f"Ingested {len(documents)} documents.")
+print(f"\n✅ Ingested {len(documents)} documents.")
 ```
 
 ```bash
 python ingest.py
+# Prepared 42 documents to ingest
+# ✅ Ingested 42 documents.
 ```
 
 ### Step 4: Query with semantic search

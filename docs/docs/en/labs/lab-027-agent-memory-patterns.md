@@ -35,8 +35,15 @@ The four memory types:
 ## Prerequisites
 
 - Python 3.11+
-- `pip install openai chromadb sqlite3`
+- `pip install openai chromadb`
 - `GITHUB_TOKEN` set
+
+!!! tip "Sample data included"
+    This lab uses `orders.csv` and `products.csv` from the repo.
+    ```bash
+    curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/orders.csv
+    curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
+    ```
 
 ---
 

@@ -1,0 +1,26 @@
+id,name,category,subcategory,price,in_stock,sku,description,weight_kg,rating
+P001,TrailBlazer X200,footwear,hiking-boots,189.99,true,TB-X200-BLK,"Waterproof Gore-Tex hiking boot. Vibram outsole, 3-season rated. Available in sizes 6-15.",0.42,4.7
+P002,TrailBlazer X200 (Wide),footwear,hiking-boots,189.99,true,TB-X200-WID,"Waterproof Gore-Tex hiking boot — wide fit. Same specs as X200, sizes 7-14.",0.42,4.7
+P003,Summit Pro Tent,camping,tents,349.00,true,SP-TENT-2P,"2-person 4-season tent. DAC aluminum poles, 2.1kg, 8-min setup. Includes footprint.",2.1,4.8
+P004,Summit Base Tent,camping,tents,199.00,true,SB-TENT-2P,"2-person 3-season tent. 1.6kg, fiberglass poles. Great value for weekend trips.",1.6,4.5
+P005,ClimbTech Pro Harness,climbing,harnesses,129.99,true,CT-PRO-HAR,"CE EN12277 certified. Waist 65-90cm, leg 47-65cm. 15kN rated. Dyneema blend webbing.",0.38,4.9
+P006,ClimbTech Lite Harness,climbing,harnesses,89.99,false,CT-LITE-HAR,"Sport climbing harness. Waist 60-85cm. Pre-threaded buckles. 12kN rated.",0.28,4.6
+P007,HydroFlow 1L Bottle,hydration,water-bottles,34.99,true,HF-1L-BLU,"Insulated stainless steel. Keeps cold 24h / hot 12h. BPA free. Fits standard cup holders.",0.31,4.8
+P008,HydroFlow 750ml Bottle,hydration,water-bottles,29.99,true,HF-750-GRN,"Lightweight insulated bottle. 750ml. Carabiner clip included. BPA free.",0.26,4.7
+P009,ArcLite Headlamp 350,lighting,headlamps,59.99,true,AL-350-WHT,"350 lumen, IPX4 water resistant. 3 modes + red night vision. 45h runtime on AAA.",0.085,4.6
+P010,ArcLite Headlamp 750,lighting,headlamps,89.99,true,AL-750-WHT,"750 lumen rechargeable. USB-C. IPX6. Spot + flood beam. 8h on high, 40h on eco.",0.11,4.8
+P011,OmniPack 45L,packs,backpacks,279.99,true,OP-45L-GRY,"Technical 45L pack. Hip belt with pockets. Hydration sleeve. Rain cover included. 1.8kg.",1.8,4.7
+P012,DayPack 22L,packs,backpacks,129.99,true,DP-22L-BLU,"Versatile 22L daypack. Laptop sleeve (15in). Trekking pole loops. 0.75kg.",0.75,4.5
+P013,ThermaTech Sleeping Bag (-10C),camping,sleeping-bags,289.00,true,TT-SB-M10,"Down-filled sleeping bag rated to -10C. 800-fill power. Mummy style. 1.1kg.",1.1,4.8
+P014,ThermaTech Sleeping Bag (0C),camping,sleeping-bags,189.00,true,TT-SB-000,"Synthetic fill rated to 0C. Moisture resistant. 1.4kg. Semi-rec shape.",1.4,4.6
+P015,TrailPole Carbon (pair),trekking,poles,149.99,true,TP-CARB-PR,"Lightweight carbon fiber trekking poles. Flick-lock adjustable 100-135cm. Foam grips. 240g/pair.",0.24,4.7
+P016,GripPole Aluminum (pair),trekking,poles,79.99,true,GP-ALUM-PR,"3-section aluminum poles. Twist-lock. Cork + foam grip combo. 480g/pair.",0.48,4.4
+P017,RockWall Shoes (Men),climbing,shoes,165.00,true,RW-M-SHOE,"Neutral-profile all-day climbing shoe. Vibram XS Edge sole. Half-sizes available.",0.35,4.6
+P018,RockWall Shoes (Women),climbing,shoes,165.00,true,RW-W-SHOE,"Women specific last. Slightly downturned for edge performance. Vibram XS Edge.",0.30,4.7
+P019,AlphaLayer Base (M),clothing,base-layers,79.99,true,AL-BASE-M,"Merino wool blend base layer. 190gsm. Odor resistant. Sizes XS-XXL.",0.22,4.8
+P020,AlphaLayer Base (W),clothing,base-layers,79.99,true,AL-BASE-W,"Womens merino base layer. Slightly longer back hem. 190gsm. Sizes XS-XXL.",0.20,4.8
+P021,StormShell Jacket (M),clothing,jackets,349.00,true,SS-JAC-M,"3-layer Gore-Tex Pro shell. 20k/20k waterproof/breathable. Pit zips. Helmet-compatible hood.",0.65,4.9
+P022,StormShell Jacket (W),clothing,jackets,349.00,false,SS-JAC-W,"Womens fit Gore-Tex Pro shell. Same specs as mens. Pre-curved sleeves.",0.60,4.9
+P023,CampChef Stove,camping,cooking,89.99,true,CC-STOVE-1,"Canister stove. 2500W output. 4-minute boil (1L). Piezo ignition. 85g.",0.085,4.7
+P024,TitanPot 1.5L,camping,cooking,49.99,true,TP-POT-1L,"Hard-anodized aluminum pot. 1.5L. Foldable handles. Compatible with CampChef stoves.",0.22,4.6
+P025,CrampTech Crampons,climbing,snow-gear,189.99,true,CT-CRAMP-10,"10-point stainless steel crampons. Compatible with B1/B2 boots. 750g/pair.",0.75,4.8

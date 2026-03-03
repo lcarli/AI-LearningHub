@@ -36,6 +36,9 @@ Agentic RAG adds reasoning loops around retrieval. The agent *decides* how to se
 - `GITHUB_TOKEN` set
 - pgvector container running: `docker start pgvector-rag`
 
+!!! tip "Sample data already loaded?"
+    If you ran Lab 022's ingest step with the sample dataset, you already have 42 documents in pgvector ready for this lab. If not, run Lab 022's Step 3 first.
+
 ---
 
 ## Lab Exercise
