@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="900" height="440" font-family="Segoe UI, Arial, sans-serif">
+  <!-- Background -->
+  <rect width="900" height="440" fill="#f8f9fa" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="36" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">Agent Tool-Calling Loop</text>
+
+  <!-- ===== USER ===== -->
+  <rect x="30" y="65" width="120" height="55" rx="8" fill="#cfe2ff" stroke="#0d6efd" stroke-width="1.5"/>
+  <text x="90" y="89" text-anchor="middle" font-size="13" font-weight="bold" fill="#0a3d8a">👤 User</text>
+  <text x="90" y="107" text-anchor="middle" font-size="10" fill="#444">"Find a tent under</text>
+  <text x="90" y="119" text-anchor="middle" font-size="10" fill="#444">$300 for solo hike"</text>
+
+  <!-- Arrow user → LLM -->
+  <line x1="150" y1="92" x2="265" y2="92" stroke="#0d6efd" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <text x="207" y="84" text-anchor="middle" font-size="10" fill="#0d6efd">message</text>
+
+  <!-- ===== LLM ===== -->
+  <rect x="265" y="55" width="160" height="75" rx="8" fill="#e8f4fd" stroke="#4a90d9" stroke-width="2"/>
+  <text x="345" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a6eb5">🤖 LLM</text>
+  <text x="345" y="98" text-anchor="middle" font-size="10" fill="#444">Reads tools from system</text>
+  <text x="345" y="112" text-anchor="middle" font-size="10" fill="#444">prompt, decides which</text>
+  <text x="345" y="124" text-anchor="middle" font-size="10" fill="#444">to call (if any)</text>
+
+  <!-- Arrow LLM → decision diamond -->
+  <line x1="345" y1="130" x2="345" y2="175" stroke="#888" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- ===== DECISION ===== -->
+  <polygon points="345,175 400,210 345,245 290,210" fill="#fff3cd" stroke="#f0ad4e" stroke-width="1.5"/>
+  <text x="345" y="205" text-anchor="middle" font-size="11" font-weight="bold" fill="#856404">Tool</text>
+  <text x="345" y="220" text-anchor="middle" font-size="11" font-weight="bold" fill="#856404">call?</text>
+
+  <!-- NO path: right → answer -->
+  <line x1="400" y1="210" x2="590" y2="210" stroke="#28a745" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <text x="490" y="203" text-anchor="middle" font-size="10" fill="#28a745">NO — final answer</text>
+
+  <!-- YES path: down → tools -->
+  <line x1="345" y1="245" x2="345" y2="290" stroke="#dc3545" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+  <text x="362" y="272" font-size="10" fill="#dc3545">YES</text>
+
+  <!-- ===== TOOLS ===== -->
+  <rect x="220" y="290" width="250" height="90" rx="8" fill="#fde8e8" stroke="#dc3545" stroke-width="1.5"/>
+  <text x="345" y="315" text-anchor="middle" font-size="13" font-weight="bold" fill="#b91c1c">🔧 Tool Execution</text>
+  <!-- Tool icons -->
+  <text x="240" y="340" font-size="11" fill="#444">🔍 search_products(keyword="tent")</text>
+  <text x="240" y="358" font-size="11" fill="#444">📋 get_product_details(id="P003")</text>
+  <text x="240" y="376" font-size="11" fill="#444">💰 calculate_total(ids=["P003"], qty=[1])</text>
+
+  <!-- Arrow tools → LLM (loop back) -->
+  <path d="M220,335 Q150,335 150,210 Q150,92 265,92" fill="none" stroke="#888" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGray)"/>
+  <text x="148" y="280" text-anchor="middle" font-size="10" fill="#888" transform="rotate(-90,148,280)">tool results</text>
+
+  <!-- ===== ANSWER ===== -->
+  <rect x="590" y="175" width="270" height="75" rx="8" fill="#d4edda" stroke="#28a745" stroke-width="1.5"/>
+  <text x="725" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="#155724">✅ Final Answer</text>
+  <text x="725" y="220" text-anchor="middle" font-size="10" fill="#444">"The TrailBlazer Solo (P003)</text>
+  <text x="725" y="234" text-anchor="middle" font-size="10" fill="#444">costs $299.99 and weighs 850g…"</text>
+
+  <!-- Arrow answer → user -->
+  <line x1="725" y1="250" x2="725" y2="360" stroke="#28a745" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowGreen)"/>
+  <line x1="725" y1="380" x2="160" y2="380" stroke="#28a745" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <line x1="90" y1="380" x2="90" y2="120" stroke="#28a745" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <text x="460" y="374" text-anchor="middle" font-size="10" fill="#28a745">response to user</text>
+
+  <!-- ===== KEY INSIGHT ===== -->
+  <rect x="590" y="290" width="270" height="100" rx="8" fill="#fff" stroke="#dee2e6" stroke-width="1"/>
+  <text x="725" y="312" text-anchor="middle" font-size="12" font-weight="bold" fill="#495057">💡 The loop</text>
+  <text x="610" y="330" font-size="11" fill="#666">1. LLM sees user message + tool schemas</text>
+  <text x="610" y="347" font-size="11" fill="#666">2. LLM returns tool_calls (JSON)</text>
+  <text x="610" y="364" font-size="11" fill="#666">3. App executes tools, adds results</text>
+  <text x="610" y="381" font-size="11" fill="#666">4. Repeat until LLM gives final answer</text>
+
+  <defs>
+    <marker id="arrowBlue"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0d6efd"/></marker>
+    <marker id="arrowGray"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#888"/></marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#28a745"/></marker>
+    <marker id="arrowRed"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#dc3545"/></marker>
+  </defs>
+</svg>

@@ -28,6 +28,8 @@ The LLM doesn't know. Its training data has a cutoff date. And even if the infor
 
 **RAG (Retrieval-Augmented Generation)** solves this by connecting the LLM to your own, up-to-date knowledge at query time — without retraining the model.
 
+![RAG Pipeline](../../assets/diagrams/rag-pipeline.svg)
+
 ---
 
 ## Part 1: The Core Problem

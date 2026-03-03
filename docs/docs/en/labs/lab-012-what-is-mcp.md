@@ -25,14 +25,7 @@ Before MCP, if you wanted to connect an AI agent to a database, you had to write
 
 **MCP solves this with a standard protocol:**
 
-```
-Without MCP:                    With MCP:
-──────────────                  ──────────────
-Agent A ──► DB custom code      Agent A ──┐
-Agent A ──► API custom code     Agent B ──┤  MCP Protocol  ──► MCP Server ──► Any Data
-Agent B ──► DB custom code      Agent C ──┘
-Agent B ──► API custom code
-```
+![MCP Architecture](../../assets/diagrams/mcp-architecture.svg)
 
 MCP was created by Anthropic in 2024 and quickly adopted by Microsoft, OpenAI, Google, and others as the industry standard.
 

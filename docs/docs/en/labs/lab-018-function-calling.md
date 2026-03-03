@@ -29,15 +29,7 @@ Your code then executes that function, returns the result, and the model uses it
 
 This is the foundation of every AI agent:
 
-```
-User: "What products do we have under $50?"
-  ↓
-LLM decides: I need to call search_products(max_price=50)
-  ↓
-Your code: executes search_products(max_price=50) → returns list
-  ↓
-LLM: "Here are the products under $50: [uses real data from tool]"
-```
+![Agent Tool-Calling Loop](../../assets/diagrams/agent-tool-loop.svg)
 
 ---
 
