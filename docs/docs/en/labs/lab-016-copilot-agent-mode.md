@@ -50,119 +50,176 @@ GitHub Copilot in VS Code has three modes:
 ### Step 1: Activate agent mode
 
 1. Open the Copilot Chat panel (`Ctrl+Shift+I`)
-2. Look for the mode switcher at the top of the chat input (dropdown showing "Ask", "Edit", "Agent")
+2. Look for the mode switcher at the top of the chat input
 3. Select **"Agent"**
 
 You'll notice the input changes — you can now describe goals, not just ask questions.
 
-### Step 2: Explore codebase exploration
+---
 
-Create a simple project (or use any existing one). In agent mode, ask:
+### Step 2: The Broken Project — Fix it with Agent Mode 🐛
 
-```
-Analyze this codebase and give me a summary of:
-1. What it does
-2. The main files and their responsibilities
-3. Any potential issues you see
-```
+This exercise gives you a **real broken Python project** to fix using agent mode. The goal is to see how the agent reads files, identifies problems, and fixes them — step by step.
 
-Watch what Copilot does:
-- It reads multiple files autonomously
-- It references specific line numbers
-- It synthesizes a coherent summary
-
-This is fundamentally different from "Ask" mode — the agent *searches* your codebase, it doesn't wait for you to paste code.
-
-### Step 3: Multi-step code task
-
-Try a task that requires multiple steps:
-
-```
-Add a unit test suite for this project:
-1. Create a tests/ folder
-2. Write tests for the main functions
-3. Make sure they pass (run them)
-```
-
-Observe the agent:
-- Creates files
-- Writes test code
-- Runs the tests via terminal
-- Fixes failures it discovers
-- Reports when done
-
-!!! tip "You stay in control"
-    The agent asks for confirmation before running terminal commands. You can review and approve/reject each action.
-
-### Step 4: Use built-in tools
-
-Agent mode has built-in tools it uses automatically:
-
-| Tool | What it does |
-|------|-------------|
-| `read_file` | Reads any file in your workspace |
-| `list_directory` | Explores folder structure |
-| `run_terminal_command` | Runs shell commands (with your approval) |
-| `create_file` | Creates new files |
-| `replace_in_file` | Makes targeted edits |
-| `search_web` | (If enabled) Searches the internet |
-
-You don't invoke these directly — the agent decides when to use them.
-
-### Step 5: Connect an MCP server
-
-Agent mode supports MCP servers, dramatically expanding what it can do. Let's connect the products server from [Lab 020](lab-020-mcp-server-python.md):
-
-**1. Start the MCP server (from Lab 020):**
+**Download the project:**
 ```bash
-cd products-mcp-server
-python server.py  # stdio mode
+cd AI-LearningHub/docs/docs/en/labs/lab-016
 ```
 
-**2. Configure VS Code to use it (`.vscode/mcp.json`):**
+Or copy the file `outdoorgear_api.py` below:
+
+```python title="lab-016/outdoorgear_api.py — 5 bugs, 1 missing feature, no tests"
+--8<-- "labs/lab-016/outdoorgear_api.py"
+```
+
+**Open the folder in VS Code** (important — the agent needs to see the whole project):
+```bash
+code docs/docs/en/labs/lab-016/
+```
+
+---
+
+### Phase 1: Let the agent find and fix the bugs
+
+Switch to **Agent mode** and type exactly this:
+
+```
+Fix all the bugs in outdoorgear_api.py so that the basic tests 
+at the bottom of the file pass when I run: python outdoorgear_api.py
+
+Don't fix the "Test 7" failure yet — that requires a missing function.
+```
+
+Watch what the agent does:
+
+1. 🔍 It **reads the file** without you pasting anything
+2. 🐛 It **identifies each bug** and explains why it's wrong
+3. ✏️ It **proposes fixes** and asks your approval
+4. ▶️ It **runs the file** to verify the fix worked
+
+After accepting, run the verification:
+```bash
+python outdoorgear_api.py
+```
+Tests 1–6 should pass. Test 7 will fail (that's expected — the function is missing).
+
+!!! tip "If the agent gets stuck"
+    Try being more specific: "Run python outdoorgear_api.py and show me the error output, then fix the remaining bug"
+
+---
+
+### Phase 2: Add the missing feature
+
+Now ask the agent to implement the missing `search_by_price_range` function:
+
+```
+Implement the search_by_price_range(min_price, max_price) function 
+that is referenced in Test 7. 
+It should return active products in that price range, sorted by price ascending.
+Then run python outdoorgear_api.py to verify all 7 tests pass.
+```
+
+The agent should:
+1. Read the existing code to understand the data structures
+2. Implement the function
+3. Run the tests to verify
+
+---
+
+### Phase 3: Write a test suite
+
+Now ask the agent to create proper tests:
+
+```
+Create a tests/ folder with a file test_outdoorgear_api.py.
+Write pytest tests that cover:
+- get_all_products() with include_inactive=True and False
+- get_product_by_id() for valid and invalid IDs
+- add_to_cart() including the stock check
+- calculate_cart_total() with multiple items
+- apply_promo_code() with valid and invalid codes
+- place_order() end-to-end
+
+Run pytest to make sure all tests pass.
+```
+
+Watch the agent:
+- Creates the `tests/` folder
+- Writes comprehensive tests using pytest fixtures
+- Runs `pytest` in the terminal
+- Fixes any test failures it finds
+
+---
+
+### Phase 4: Improve code quality
+
+```
+Add type hints to all public functions in outdoorgear_api.py.
+Add Google-style docstrings to each function.
+Don't change any logic.
+```
+
+---
+
+### Step 3: Codebase exploration
+
+Try asking the agent to analyze what it just created:
+
+```
+Give me a summary of the outdoorgear_api.py module:
+1. What it does
+2. All public functions and their signatures
+3. Any edge cases not currently handled
+```
+
+The agent reads the whole codebase and synthesizes a coherent answer — without you pasting any code.
+
+---
+
+### Step 4: Connect an MCP server (bonus)
+
+Agent mode supports MCP servers. Configure VS Code to use the MCP server from [Lab 020](lab-020-mcp-server-python.md):
+
+**`.vscode/mcp.json`:**
 ```json
 {
   "servers": {
-    "products": {
+    "outdoorgear-products": {
       "type": "stdio",
       "command": "python",
       "args": ["server.py"],
-      "cwd": "${workspaceFolder}/products-mcp-server"
+      "cwd": "${workspaceFolder}"
     }
   }
 }
 ```
 
-**3. Restart VS Code and ask in agent mode:**
+Then ask in agent mode:
 ```
-What product categories are available in our catalog?
-Find all camping products under $100.
+What camping products do we have in stock? Use the outdoorgear-products MCP tool.
 ```
 
-The agent now has access to your custom tools alongside its built-in ones!
+### Step 5: Custom instructions
 
-### Step 6: Advanced — custom instructions
-
-Create `.github/copilot-instructions.md` to customize agent behavior for your project:
+Create `.github/copilot-instructions.md` to make the agent always follow your project conventions:
 
 ```markdown
 # Copilot Instructions
 
 ## Project
-This is a Python FastAPI project. Always use async/await.
+Python API project for OutdoorGear Inc.
 
-## Code style
+## Code Style
 - Use type hints on all functions
-- Docstrings follow Google style
-- Tests use pytest with fixtures
+- Docstrings follow Google style  
+- Tests use pytest with fixtures, no unittest
+- All prices rounded to 2 decimal places
 
 ## Never
-- Use print() for logging (use loguru)
-- Commit secrets or API keys
-- Skip error handling
+- Use print() for logging
+- Hardcode product data outside CATALOG
+- Skip ValueError validation on public functions
 ```
-
-The agent reads this file and applies these rules automatically.
 
 ---
 
@@ -173,28 +230,43 @@ The agent reads this file and applies these rules automatically.
 | You know exactly what to change | You have a goal but not a plan |
 | Simple, targeted edits | Multi-file, multi-step tasks |
 | You want full control of each edit | You want the agent to figure it out |
-| Quick fixes, refactors | Adding features, writing tests, debugging |
+| Quick fixes, refactors | Debugging, adding features, writing tests |
 
 ---
 
-## Limitations
+## What the Agent Did (Behind the Scenes)
 
-- **Approval required** for terminal commands (by design — security)
-- **Context limit** applies — very large codebases may require guidance on where to look
-- **Non-deterministic** — same prompt may produce slightly different approaches
-- **Review everything** — agent mode is fast but not infallible; always review generated code
+```
+Your request: "Fix all bugs"
+        │
+        ▼
+[read_file] outdoorgear_api.py        ← agent reads without you pasting
+        │
+        ▼
+[analysis] Found 5 bugs:
+  Bug 1: line 45 — = instead of ==
+  Bug 2: line 57 — =+ instead of +=
+  ...
+        │
+        ▼
+[replace_in_file] × 5 targeted fixes  ← surgical edits, not rewriting whole file
+        │
+        ▼
+[run_terminal] python outdoorgear_api.py
+        │
+        ▼
+✅ All 6 tests pass
+```
 
 ---
 
 ## Summary
 
-GitHub Copilot agent mode transforms your editor into an autonomous coding assistant:
-
-- ✅ **Reads your codebase** — understands context without you pasting code
+- ✅ **Reads your codebase** — no copying/pasting code into chat
 - ✅ **Multi-step execution** — plans and completes complex tasks
-- ✅ **Terminal access** — runs tests, installs packages, executes scripts
-- ✅ **MCP integration** — connect any tool or data source
-- ✅ **Stays in VS Code** — no context switching
+- ✅ **Terminal access** — runs tests, verifies fixes
+- ✅ **MCP integration** — connect custom tools
+- ✅ **Approvals at every step** — you stay in control
 
 ---
 

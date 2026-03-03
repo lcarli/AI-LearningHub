@@ -392,6 +392,53 @@ For out-of-scope questions: "{out_of_scope_response}"
 
 ---
 
+## Part 6: 🧪 Interactive Challenges — Fix the Prompts
+
+Reading about prompts is good. **Writing and running them** is better.
+
+These 4 challenges give you **broken or vague prompts** that produce bad results. Your task: improve them until the output matches the target.
+
+### Setup (5 minutes, free)
+
+```bash
+pip install openai
+export GITHUB_TOKEN=your_github_token   # github.com → Settings → Developer Settings → Tokens
+```
+
+Download the challenge file:
+```bash
+# From the cloned repo:
+cd AI-LearningHub/docs/docs/en/labs/lab-005
+python prompt_challenges.py
+```
+
+Or copy it from below:
+
+```python title="lab-005/prompt_challenges.py"
+--8<-- "labs/lab-005/prompt_challenges.py"
+```
+
+### What each challenge tests
+
+| # | What's broken | Technique to apply |
+|---|---------------|--------------------|
+| **1** | Vague user prompt, no format instruction | Specific output format |
+| **2** | No structure, likely prose instead of JSON | Structured output |
+| **3** | Direct question without reasoning steps | Chain-of-thought |
+| **4** | No scope guardrails → hallucinated products | Scope control |
+
+### How to work through each challenge
+
+1. Run `python prompt_challenges.py` and read the **❌ BAD PROMPT result**
+2. Edit the `IMPROVED_SYSTEM_*` or `IMPROVED_USER_*` variables at the bottom of each challenge
+3. Re-run and compare with the **Target** description in the comments
+4. Keep iterating until your output matches
+
+!!! tip "There's no single right answer"
+    The goal is to get output that meets the target spec. How you phrase the prompt is up to you — compare approaches with a colleague!
+
+---
+
 ## Summary
 
 | Technique | Best for |
