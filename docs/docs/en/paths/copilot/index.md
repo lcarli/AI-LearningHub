@@ -11,7 +11,6 @@ GitHub Copilot is Microsoft's AI-powered developer tool, embedded directly in yo
 By the end of this path you will have:
 
 - ✅ Set up GitHub Copilot in VS Code and used inline completions + chat
-- ✅ Built a no-code agent with **Copilot Studio**
 - ✅ Used **GitHub Models** to interact with frontier LLMs for free
 - ✅ Created a custom **VS Code Chat Participant** (Copilot extension)
 - ✅ Published a **GitHub Copilot Extension** to the Marketplace
@@ -23,8 +22,8 @@ By the end of this path you will have:
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|
 | [Lab 010](../../labs/lab-010-github-copilot-first-steps.md) | GitHub Copilot First Steps | <span class="level-badge level-100">L100</span> | ✅ Free tier |
-| [Lab 011](../../labs/lab-011-copilot-studio-first-agent.md) | Copilot Studio: First Agent | <span class="level-badge level-100">L100</span> | ✅ Free trial |
 | [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Free LLM Inference | <span class="level-badge level-100">L100</span> | ✅ Free |
+| [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | Copilot Agent Mode | <span class="level-badge level-100">L100</span> | ✅ Free tier |
 | [Lab 025](../../labs/lab-025-vscode-chat-participant.md) | VS Code Chat Participant | <span class="level-badge level-200">L200</span> | ✅ Free |
 | [Lab 041](../../labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension | <span class="level-badge level-400">L400</span> | 💰 Azure paid |
 
