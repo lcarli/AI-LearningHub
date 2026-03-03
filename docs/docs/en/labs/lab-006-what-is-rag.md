@@ -203,6 +203,20 @@ User → Retrieve → Grade relevance → If poor: web search fallback
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "1. What does RAG stand for, and what problem does it solve?"
+    **Retrieval-Augmented Generation.** It solves the problem of LLMs not knowing your **private or up-to-date data**. Instead of retraining the model (expensive, slow), RAG retrieves relevant documents at query time and adds them to the prompt — grounding the answer in real, current information.
+
+??? question "2. What are the two main phases in a RAG system?"
+    1. **Ingestion** (runs once when data changes): Load documents → Chunk → Generate embeddings → Store in vector database
+    2. **Retrieval + Generation** (runs every query): Embed query → Vector search → Retrieve top-k chunks → Augment prompt → LLM generates answer
+
+??? question "3. When should you use fine-tuning instead of RAG?"
+    Use **fine-tuning** to change the model's **behavior, tone, style, or domain vocabulary** — not to add knowledge. Use **RAG** for **facts, documents, and dynamic data**. They're complementary: a fine-tuned model can *communicate* better; RAG gives it *accurate information* to communicate.
+
+---
+
 ## Summary
 
 | Concept | Key takeaway |

@@ -1,3 +1,6 @@
+---
+tags: [free, beginner, no-account-needed, awareness]
+---
 # Lab 003: Choosing the Right Tool
 
 <div class="lab-meta">
@@ -132,9 +135,22 @@ L50 labs             GitHub Models        Foundry Agent Svc
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "1. A developer wants to add AI chat to their VS Code extension. Which tool should they use?"
+    The **VS Code Chat Participant API** (covered in Lab 025). It lets you register a `@myextension` participant in GitHub Copilot Chat that responds with custom logic — without needing a separate server or Azure subscription.
+
+??? question "2. Which tool should you choose if you need maximum control over agent logic in Python or C#?"
+    **Semantic Kernel** for a single sophisticated agent, or **AutoGen / LangGraph** for multi-agent orchestration. Both give you full code control, custom tool integration, and production-grade capabilities.
+
+??? question "3. What is the 'least privilege' principle in the context of agent tools?"
+    Give the agent **only the minimum permissions required** for its task. If it only needs to read a database, don't grant write access. If it needs one API endpoint, don't give it full admin credentials. Least privilege limits the blast radius if the agent behaves unexpectedly.
+
+---
+
 ## Summary
 
-There's no single "right" tool — it depends on your role, goals, and constraints. The good news: **everything in this hub starts free**, and you can always level up. The decision framework above points you to the most efficient path.
+There's no single "right" tool — it depends on your role, goals, and constraints.The good news: **everything in this hub starts free**, and you can always level up. The decision framework above points you to the most efficient path.
 
 ---
 

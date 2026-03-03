@@ -103,9 +103,26 @@ Goal Achieved
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "1. What are the four core properties of an AI agent?"
+    **Perception, Memory, Reasoning, and Action.**
+    - *Perception*: receives inputs (user messages, tool results, sensor data)
+    - *Memory*: retains context across steps (short-term) or interactions (long-term)
+    - *Reasoning*: uses an LLM to decide what to do next
+    - *Action*: calls tools, APIs, or executes code
+
+??? question "2. What is the main difference between an AI agent and a traditional chatbot?"
+    A traditional chatbot follows a **pre-programmed decision tree** — every possible response is coded in advance. An AI agent uses an LLM to **autonomously decide what to do** at each step, including which tools to call, making it capable of handling novel situations that weren't explicitly programmed.
+
+??? question "3. In the perceive → reason → act → observe loop, what happens in the 'act' phase?"
+    The agent **executes a tool call** — for example: running a database query, calling a REST API, writing a file, or sending an email. The result of that action is then fed back as an observation, closing the loop.
+
+---
+
 ## Summary
 
-An AI agent is an LLM-powered system that **perceives, remembers, reasons, and acts** to achieve a goal. It differs from traditional software because the logic is not hardcoded — the LLM decides at runtime. This flexibility is powerful, but requires careful design of instructions and tools.
+An AI agent is an LLM-powered system that **perceives, remembers, reasons, and acts** to achieve a goal.It differs from traditional software because the logic is not hardcoded — the LLM decides at runtime. This flexibility is powerful, but requires careful design of instructions and tools.
 
 ---
 

@@ -32,6 +32,21 @@ In this lab, we build a simple agent that can answer questions **and** call a cu
 
 ---
 
+## 📁 Starter File
+
+A skeleton starter file is provided with `TODO` comments for each step:
+
+```bash
+# From your cloned repo:
+cd AI-LearningHub/docs/docs/en/labs/lab-014
+pip install -r requirements.txt
+python hello_agent_starter.py
+```
+
+Complete the TODOs in order (1–16) to build a full SK agent with semantic functions, native plugins, and a chat loop.
+
+---
+
 ## Prerequisites Setup
 
 ### Python

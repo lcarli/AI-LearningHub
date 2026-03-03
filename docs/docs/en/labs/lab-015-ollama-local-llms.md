@@ -228,6 +228,26 @@ curl http://localhost:11434/api/chat -d '{
 
 ---
 
+## 📁 Starter Files
+
+Two files are provided to help you follow along:
+
+```bash
+# From your cloned repo:
+cd AI-LearningHub/docs/docs/en/labs/lab-015
+
+# Chat with any local model
+python chat_starter.py
+
+# Create the OutdoorGear custom model first:
+ollama create outdoorgear -f Modelfile
+ollama run outdoorgear
+```
+
+The `Modelfile` creates a custom **OutdoorGear Advisor** persona on top of Phi-4. The `chat_starter.py` has 5 exercises covering basic completion, custom models, comparison, and streaming.
+
+---
+
 ## Model Comparison (on a typical laptop)
 
 | Model | Size | RAM needed | Speed | Quality |

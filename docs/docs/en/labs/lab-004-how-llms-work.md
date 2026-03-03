@@ -215,6 +215,23 @@ This is why LLMs understand context so well — every word is interpreted in rel
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "1. Approximately how many characters is one token?"
+    Roughly **4 characters** (about ¾ of a word). "Hello world" = 2 tokens. A 1,000-word document ≈ 1,300 tokens. This matters for cost (billed per token) and context window limits.
+
+??? question "2. Name two reasons why LLMs hallucinate."
+    Any two of these:
+    1. **Predicts likely text, not true text** — a plausible-sounding answer scores higher than "I don't know"
+    2. **Training data has gaps and noise** — if the web said something wrong enough times, the model learned it
+    3. **No external memory** — the model can't "look things up," it generates from learned patterns
+    4. **Context window limits** — details from early in a long conversation can be "forgotten"
+
+??? question "3. What is the effect of setting temperature=0 when calling an LLM?"
+    The model always picks the **most probable next token** — output becomes **deterministic and reproducible**. Every run with the same input produces the same output. Use `temperature=0` when accuracy and consistency matter more than creativity (e.g., data extraction, structured output).
+
+---
+
 ## Summary
 
 | Concept | Key takeaway |

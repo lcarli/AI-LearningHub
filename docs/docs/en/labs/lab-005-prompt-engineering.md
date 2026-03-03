@@ -439,6 +439,22 @@ Or copy it from below:
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "1. What is chain-of-thought prompting and when should you use it?"
+    Chain-of-thought adds explicit reasoning steps to the prompt — either by saying "think step by step" or showing examples where reasoning is demonstrated before the answer. Use it for **complex reasoning, math, multi-step problems, and code debugging**. It dramatically improves accuracy on tasks that require inference.
+
+??? question "2. What are the three roles in an LLM message conversation?"
+    **System, User, and Assistant.**
+    - *System*: the agent's constitution — sets behavior, scope, and rules. The user never sees this directly.
+    - *User*: the human's input each turn.
+    - *Assistant*: the model's previous responses (included in subsequent calls to maintain context).
+
+??? question "3. Your agent keeps inventing product information that isn't in the database. Which prompt rule fixes this?"
+    Add to the system prompt: **"Never invent, estimate, or assume data. Only use outputs from the tools provided to you."** Also define what to say when information isn't found: *"If the product is not in the database, say 'I don't have that product in our catalog.'"* Defining the fallback behavior is as important as the rule itself.
+
+---
+
 ## Summary
 
 | Technique | Best for |

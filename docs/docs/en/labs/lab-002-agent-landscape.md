@@ -1,3 +1,6 @@
+---
+tags: [free, beginner, no-account-needed, awareness]
+---
 # Lab 002: AI Agent Landscape 2025
 
 <div class="lab-meta">
@@ -142,9 +145,22 @@ MCP works with **all the platforms above** — and also with Claude Desktop, Ope
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "1. Which Microsoft tool is best for building a no-code agent in Teams, with no coding required?"
+    **Copilot Studio.** It provides a GUI-based builder for agents that live inside Microsoft 365 / Teams, using natural language to define behavior, knowledge sources, and actions — no code needed.
+
+??? question "2. What does MCP stand for, and what is its role in the ecosystem?"
+    **Model Context Protocol.** MCP is a universal standard (like USB-C for AI tools) that lets *any* agent connect to *any* data source or tool via a common interface. It works across Copilot Studio, Foundry, Semantic Kernel, Claude, and others.
+
+??? question "3. What is the key difference between Semantic Kernel and AutoGen?"
+    **Semantic Kernel** is an SDK for building a **single sophisticated agent** — with plugins, memory, and planners. **AutoGen** is for **multi-agent orchestration** — multiple specialized agents collaborating, each doing a part of a complex task. SK focuses on depth; AutoGen focuses on breadth across agents.
+
+---
+
 ## Summary
 
-The Microsoft ecosystem has tools for **every skill level and use case** — from no-code Copilot Studio to pro-code AutoGen. MCP is the universal connector that works across all of them. In the next lab, we'll help you choose the right tool for your specific situation.
+The Microsoft ecosystem has tools for **every skill level and use case**— from no-code Copilot Studio to pro-code AutoGen. MCP is the universal connector that works across all of them. In the next lab, we'll help you choose the right tool for your specific situation.
 
 ---
 

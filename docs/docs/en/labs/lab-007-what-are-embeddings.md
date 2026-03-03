@@ -1,3 +1,6 @@
+---
+tags: [free, beginner, no-account-needed, embeddings, rag]
+---
 # Lab 007: What are Embeddings?
 
 <div class="lab-meta">
@@ -168,6 +171,19 @@ For exact IDs, codes, or keywords → use keyword/BM25 search alongside embeddin
 
 ### ⚠️ Long text loses detail
 Embedding a 10-page document into one vector loses fine-grained meaning. That's why we **chunk** first, then embed each chunk separately.
+
+---
+
+## 🧠 Knowledge Check
+
+??? question "1. What does a higher cosine similarity score mean?"
+    The two texts are **more semantically similar** — closer in meaning. Cosine similarity ranges from -1 (opposite meaning) to 1 (identical meaning). In practice, similar product descriptions score ~0.85–0.95; unrelated texts score ~0.1–0.3.
+
+??? question "2. Why must you always use the same embedding model for queries and documents?"
+    Embeddings are **model-specific** — the numerical space is completely different for each model. Comparing a vector from `text-embedding-3-small` with one from `nomic-embed-text` is like comparing GPS coordinates in different coordinate systems. Always embed queries and documents with the same model.
+
+??? question "3. Why do we chunk documents before embedding instead of embedding the whole document?"
+    A whole-document embedding **averages out all the meaning** into one vector, losing fine-grained detail. If you embed a 50-page manual, the vector represents "a technical manual" — not specific sections. By chunking first (~512 tokens), each chunk gets its own precise vector, so retrieval finds the *exact relevant passage*, not just the *right document*.
 
 ---
 

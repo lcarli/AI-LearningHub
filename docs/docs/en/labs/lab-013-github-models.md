@@ -204,6 +204,21 @@ for model in models.data:
 
 ---
 
+## 📁 Starter Files
+
+Download the starter file to follow along:
+
+```bash
+# From your cloned repo:
+cd AI-LearningHub/docs/docs/en/labs/lab-013
+pip install -r requirements.txt
+python starter.py
+```
+
+The `starter.py` contains 4 exercises with `TODO` comments. Complete each TODO to build a working GitHub Models client.
+
+---
+
 ## Rate Limits
 
 GitHub Models is free but rate-limited:
