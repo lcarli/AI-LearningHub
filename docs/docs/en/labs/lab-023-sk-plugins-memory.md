@@ -283,6 +283,40 @@ python lab-023/broken_plugin.py
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "**Q1 (Run the Lab):** After fixing bug #2, what does `get_cart_total()` return when the cart contains P001 (×1) at $249.99 and P007 (×1) at $89.99?"
+
+    Fix bug #2 in `broken_plugin.py` and run it, or calculate manually: P001 price × 1 + P007 price × 1.
+
+    ??? success "✅ Reveal Answer"
+        **$339.98**
+
+        The cart contains 1× P001 (TrailBlazer Tent 2P, $249.99) and 1× P007 (DayHiker 22L, $89.99). `total = 249.99 + 89.99 = $339.98`. Bug #2 was accumulating the item *quantity* instead of `price * quantity`, so single-item carts returned the quantity number (e.g., `$1.00`, `$2.00`) instead of the price.
+
+??? question "**Q2 (Run the Lab):** After fixing ALL 3 bugs, run `python lab-023/broken_plugin.py`. How many SK functions does the test runner discover in the OutdoorGearPlugin?"
+
+    After all fixes, run the script. Look for the "SK discovers N functions" line in the output.
+
+    ??? success "✅ Reveal Answer"
+        **3 functions: `search_products`, `get_cart_total`, and `calculate_price_with_tax`**
+
+        Before fixing bug #1 (missing `@kernel_function` decorator), SK could only discover 2 functions. After adding the decorator back to `search_products`, all 3 are visible to the SK planner. This is why decorators matter — without `@kernel_function`, SK simply ignores the function.
+
+??? question "**Q3 (Multiple Choice):** Bug #3 caused `calculate_price_with_tax(249.99, tax_rate=0.08)` to return ~$291.59 instead of $269.99. What was the root cause?"
+
+    - A) The base price was doubled before tax was applied
+    - B) Tax was applied to the result of a previous tax calculation (applied twice)
+    - C) The function used the wrong tax rate variable
+    - D) The tax was subtracted instead of added
+
+    ??? success "✅ Reveal Answer"
+        **Correct: B — Tax was applied twice**
+
+        The buggy code first computed `price_with_tax = price * (1 + tax_rate)` → $269.99, then applied tax *again* on that result: `$269.99 * 1.08 = $291.59`. The fix: compute and return in a single step — `return round(price * (1 + tax_rate), 2)`.
+
+---
+
 ## Next Steps
 
 - **Multi-agent orchestration with SK:** → [Lab 034 — SK Multi-Agent Systems](lab-034-multi-agent-sk.md)

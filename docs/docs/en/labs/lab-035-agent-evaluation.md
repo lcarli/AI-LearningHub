@@ -261,6 +261,40 @@ print(f"Categories: {categories}")
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "**Q1 (Run the Lab):** Load `lab-035/eval_dataset.jsonl` in Python. How many examples are in the dataset, and how many are in the `out_of_scope` category?"
+
+    Run the loader code from the Supporting Files section above.
+
+    ??? success "✅ Reveal Answer"
+        **20 total examples. 1 example is in the `out_of_scope` category.**
+
+        The dataset has exactly 20 lines. Run `sum(1 for d in dataset if d["category"] == "out_of_scope")` to confirm there is 1 out-of-scope example. That example tests whether your agent correctly refuses to answer questions unrelated to outdoor gear.
+
+??? question "**Q2 (Run the Lab):** For the single `out_of_scope` example in `eval_dataset.jsonl`, what is the value of the `product_ids` field?"
+
+    Load the dataset and filter for `category == "out_of_scope"`. Print the `product_ids` field.
+
+    ??? success "✅ Reveal Answer"
+        **`[]` (empty list)**
+
+        The out-of-scope example has `"product_ids": []` because the question is not about any specific product — it's testing whether the agent refuses to answer irrelevant questions (like asking for cooking recipes). A well-designed agent should return a refusal message rather than hallucinating an answer. Your evaluation metric should check that the agent's `groundedness` score is high and it does NOT reference any product IDs.
+
+??? question "**Q3 (Multiple Choice):** How many examples in `eval_dataset.jsonl` are in the `tents` category?"
+
+    - A) 3
+    - B) 5
+    - C) 7
+    - D) 4
+
+    ??? success "✅ Reveal Answer"
+        **Correct: B — 5 examples**
+
+        The `tents` category has 5 examples, making it the largest single category. Run `sum(1 for d in dataset if d["category"] == "tents")` to confirm. The full breakdown: tents(5), backpacks(4), sleeping_bags(3), pricing(3), recommendations(3), out_of_scope(1), comparisons(1).
+
+---
+
 ## Next Steps
 
 - **CI/CD for agents:** → [Lab 037 — GitHub Actions for AI Agents](lab-037-cicd-github-actions.md)

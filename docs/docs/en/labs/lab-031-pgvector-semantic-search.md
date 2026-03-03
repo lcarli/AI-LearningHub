@@ -281,6 +281,42 @@ The migration creates the `products` table with the 7 OutdoorGear products, the 
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "**Q1 (Run the Lab):** After running `001_init.sql` against your database, how many rows are in the `products` table? Run `SELECT COUNT(*) FROM products;` to verify."
+
+    Run the migration then query the table.
+
+    ??? success "✅ Reveal Answer"
+        **7 rows**
+
+        The migration seeds 7 OutdoorGear products: P001 (TrailBlazer Tent 2P), P002 (Summit Dome 4P), P003 (TrailBlazer Solo), P004 (ArcticDown -20°C), P005 (SummerLight +5°C), P006 (Osprey Atmos 65L), P007 (DayHiker 22L). Run `SELECT id, name, category FROM products ORDER BY id;` to see them all.
+
+??? question "**Q2 (Run the Lab):** What type of index is created on the `product_embeddings` table, and which column does it index?"
+
+    Open `lab-031/migrations/001_init.sql` and find the `CREATE INDEX` statement.
+
+    ??? success "✅ Reveal Answer"
+        **IVFFlat index on the `embedding` column**
+
+        The migration creates: `CREATE INDEX ON product_embeddings USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);`
+
+        IVFFlat (Inverted File with Flat quantization) is an approximate nearest neighbor index — it's faster than exact search but sacrifices a small amount of recall. The `lists = 100` parameter defines the number of Voronoi cells for clustering. `vector_cosine_ops` means distances are computed using cosine similarity.
+
+??? question "**Q3 (Multiple Choice):** You run `SELECT * FROM search_products_by_vector($1::vector, 3)` and get 3 results. What do the results represent?"
+
+    - A) The 3 most recently inserted products
+    - B) The 3 products with the highest price
+    - C) The 3 products whose embedding vectors are most similar (closest cosine distance) to the query vector
+    - D) 3 randomly selected products from the database
+
+    ??? success "✅ Reveal Answer"
+        **Correct: C**
+
+        The `search_products_by_vector()` function performs an **approximate nearest neighbor (ANN) search** using the IVFFlat index. It computes cosine distance between the query vector and all stored product embeddings, then returns the `k` products with the smallest distance (= highest semantic similarity). The result represents the most semantically relevant products for the user's query.
+
+---
+
 ## Next Steps
 
 - **Row Level Security for multi-tenant agents:** → [Lab 032 — Row Level Security](lab-032-row-level-security.md)

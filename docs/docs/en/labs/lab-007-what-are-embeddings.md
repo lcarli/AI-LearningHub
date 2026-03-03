@@ -209,14 +209,38 @@ This directly illustrates why RAG works: the embedding of a *question* and the e
 
 ## 🧠 Knowledge Check
 
-??? question "1. What does a higher cosine similarity score mean?"
-    The two texts are **more semantically similar** — closer in meaning. Cosine similarity ranges from -1 (opposite meaning) to 1 (identical meaning). In practice, similar product descriptions score ~0.85–0.95; unrelated texts score ~0.1–0.3.
+??? question "**Q1 (Multiple Choice):** Two product descriptions have a cosine similarity of 0.95. What does this mean?"
 
-??? question "2. Why must you always use the same embedding model for queries and documents?"
-    Embeddings are **model-specific** — the numerical space is completely different for each model. Comparing a vector from `text-embedding-3-small` with one from `nomic-embed-text` is like comparing GPS coordinates in different coordinate systems. Always embed queries and documents with the same model.
+    - A) They are completely unrelated products
+    - B) They share 95% of the same words
+    - C) They are semantically very similar — their vector representations point in nearly the same direction
+    - D) One document is 95% longer than the other
 
-??? question "3. Why do we chunk documents before embedding instead of embedding the whole document?"
-    A whole-document embedding **averages out all the meaning** into one vector, losing fine-grained detail. If you embed a 50-page manual, the vector represents "a technical manual" — not specific sections. By chunking first (~512 tokens), each chunk gets its own precise vector, so retrieval finds the *exact relevant passage*, not just the *right document*.
+    ??? success "✅ Reveal Answer"
+        **Correct: C**
+
+        Cosine similarity measures the *angle* between two vectors, not word overlap. A score of 0.95 means the vectors point in nearly the same direction — the texts are semantically very similar. In practice: same-category products like two tents score ~0.90–0.96; unrelated products (tent vs backpack) score ~0.70–0.82; completely unrelated text scores < 0.5.
+
+??? question "**Q2 (Multiple Choice):** Your RAG system uses `text-embedding-3-small` for document ingestion but `text-embedding-3-large` for query embedding. What will happen?"
+
+    - A) Queries will be slower but more accurate
+    - B) Similarity scores will be meaningless — you are comparing vectors from different spaces
+    - C) The system will automatically normalize the vectors to be compatible
+    - D) Performance improves because the larger model provides richer query understanding
+
+    ??? success "✅ Reveal Answer"
+        **Correct: B — Vectors from different models are incompatible**
+
+        Each embedding model maps text to its own unique high-dimensional space. `text-embedding-3-small` produces 1,536-dimensional vectors; `text-embedding-3-large` produces 3,072-dimensional vectors. Even if you forced them to the same dimension, the numerical meanings are completely different. You would get random similarity scores. **Always use the same model for both ingestion and querying.**
+
+??? question "**Q3 (Run the Lab):** Run `python lab-007/embedding_explorer.py`. In the similarity matrix output, which two products (other than a product compared to itself) have the HIGHEST cosine similarity score to each other?"
+
+    Run the script and look at the similarity matrix section at the end of the output.
+
+    ??? success "✅ Reveal Answer"
+        **P001 (TrailBlazer Tent 2P) and P003 (TrailBlazer Solo)**
+
+        Both are 3-season backpacking tents with very similar descriptions — same category, same season, same construction materials. Their descriptions share the most semantic overlap in the catalog. Typical score: **~0.93–0.97**. In contrast, a tent vs. a sleeping bag scores much lower (~0.75–0.85) because they serve different purposes despite both being camping gear.
 
 ---
 

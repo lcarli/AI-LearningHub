@@ -226,15 +226,38 @@ These 5 files form a mini OutdoorGear knowledge base — exactly the kind of doc
 
 ## 🧠 Knowledge Check
 
-??? question "1. What does RAG stand for, and what problem does it solve?"
-    **Retrieval-Augmented Generation.** It solves the problem of LLMs not knowing your **private or up-to-date data**. Instead of retraining the model (expensive, slow), RAG retrieves relevant documents at query time and adds them to the prompt — grounding the answer in real, current information.
+??? question "**Q1 (Multiple Choice):** What does RAG stand for, and what problem does it primarily solve?"
 
-??? question "2. What are the two main phases in a RAG system?"
-    1. **Ingestion** (runs once when data changes): Load documents → Chunk → Generate embeddings → Store in vector database
-    2. **Retrieval + Generation** (runs every query): Embed query → Vector search → Retrieve top-k chunks → Augment prompt → LLM generates answer
+    - A) Recursive Augmented Graph — it solves multi-step reasoning problems
+    - B) Retrieval-Augmented Generation — it grounds LLM answers in private or up-to-date data without retraining
+    - C) Randomized Agent Generation — it makes agent responses less deterministic
+    - D) Ranked Answer Generation — it improves ranking of search results
 
-??? question "3. When should you use fine-tuning instead of RAG?"
-    Use **fine-tuning** to change the model's **behavior, tone, style, or domain vocabulary** — not to add knowledge. Use **RAG** for **facts, documents, and dynamic data**. They're complementary: a fine-tuned model can *communicate* better; RAG gives it *accurate information* to communicate.
+    ??? success "✅ Reveal Answer"
+        **Correct: B — Retrieval-Augmented Generation**
+
+        RAG connects the LLM to your own knowledge at query time. Instead of the model relying on training data (which has a cutoff date and doesn't include your private documents), RAG retrieves the most relevant chunks from your data store and includes them in the prompt. No retraining needed.
+
+??? question "**Q2 (Multiple Choice):** In the RAG ingestion pipeline, which step comes immediately BEFORE storing vectors in the database?"
+
+    - A) Chunking
+    - B) Loading documents
+    - C) Generating embeddings
+    - D) Semantic reranking
+
+    ??? success "✅ Reveal Answer"
+        **Correct: C — Generating embeddings**
+
+        The ingestion order is: **Load → Chunk → Embed → Store**. You first load raw documents, split them into smaller chunks (~512 tokens with overlap), *then* convert each chunk to a vector embedding using the embedding model, and finally store those vectors in the vector database. Semantic reranking is a retrieval step, not an ingestion step.
+
+??? question "**Q3 (Run the Lab):** Open the file `lab-006/faq_tents.txt`. How many Q&A pairs does it contain, and what is the topic of the LAST question?"
+
+    Open `lab-006/faq_tents.txt` and count the Q&A pairs. The last question starts with "Q:".
+
+    ??? success "✅ Reveal Answer"
+        **5 Q&A pairs. The last question is: "Can I use a 2-person tent solo?"**
+
+        `faq_tents.txt` contains exactly 5 Q&A pairs covering: solo backpacking tent choice, 3-season vs 4-season, waterproofing, pole materials, and using a 2P tent solo. This is the kind of knowledge base a RAG system would ingest — each Q&A pair is a natural chunk for embedding.
 
 ---
 

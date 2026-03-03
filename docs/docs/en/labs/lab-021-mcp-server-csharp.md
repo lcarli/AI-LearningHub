@@ -233,6 +233,40 @@ dotnet run
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "**Q1 (Run the Lab):** After fixing all 3 bugs and calling `list_categories()`, what does the tool return? List the categories in the order they appear in the output."
+
+    Fix the bugs, start the server, connect with MCP Inspector, and call `list_categories()`.
+
+    ??? success "✅ Reveal Answer"
+        **`["Backpacks", "Sleeping Bags", "Tents"]`**
+
+        The categories are returned in alphabetical order because the original code uses a sorted `List<string>`. Bug #1 (`categories = null`) caused a `NullReferenceException` before returning anything — fixing it reveals the properly sorted list.
+
+??? question "**Q2 (Run the Lab):** After fixing bug #3 (the case-sensitive comparison bug), what `StringComparison` value replaces `StringComparison.Ordinal` in the fix?"
+
+    Read the bug #3 description carefully, then look at the fix you applied in `BrokenMcpServer.cs`.
+
+    ??? success "✅ Reveal Answer"
+        **`StringComparison.OrdinalIgnoreCase`**
+
+        The original code used `StringComparison.Ordinal` which is case-sensitive, so `get_product_details("p001")` failed because the stored IDs are uppercase (`"P001"`). Replacing it with `OrdinalIgnoreCase` makes ID lookups work regardless of the case the client sends.
+
+??? question "**Q3 (Multiple Choice):** Bug #2 in `search_products` caused it to always return an empty list. What was the root cause?"
+
+    - A) The keyword parameter was null
+    - B) The `Contains()` call was inverted with `!` — it filtered OUT matches instead of keeping them
+    - C) The product list was not initialized
+    - D) The search was case-sensitive and no products matched
+
+    ??? success "✅ Reveal Answer"
+        **Correct: B — Logic inversion**
+
+        The code had `!product.Name.Contains(keyword)` — the `!` negated the condition, so products that DID contain the keyword were excluded, and products that did NOT contain the keyword were returned. With an empty results list, there were no non-matching products either. Removing the `!` fixes the logic.
+
+---
+
 ## Next Steps
 
 - **Deploy this server to the cloud:** → [Lab 028 — Deploy MCP to Azure Container Apps](lab-028-deploy-mcp-azure.md)

@@ -367,6 +367,40 @@ Then customize the environment variables at the top (`AGENT_SERVICE_NAME`, `STAG
 
 ---
 
+## 🧠 Knowledge Check
+
+??? question "**Q1 (Run the Lab):** Open `lab-037/ai-agent-ci.yml`. How many jobs are defined in the workflow?"
+
+    Open the file and count the number of `job-name:` entries under the `jobs:` key.
+
+    ??? success "✅ Reveal Answer"
+        **7 jobs**
+
+        The workflow defines: `unit-tests`, `integration-tests`, `security-scan`, `agent-evaluation`, `docker-build`, `deploy-staging`, and `deploy-production`. Each job has a distinct responsibility in the agent deployment pipeline.
+
+??? question "**Q2 (Run the Lab):** Which job in `ai-agent-ci.yml` does NOT run on pull requests — only on pushes to the `main` branch?"
+
+    Look at the `if:` condition on each job, or the workflow-level trigger vs per-job conditions.
+
+    ??? success "✅ Reveal Answer"
+        **`integration-tests`**
+
+        Integration tests call real external APIs (GitHub Models, etc.) and could fail due to rate limits or cost if run on every PR. The `integration-tests` job has `if: github.event_name == 'push' && github.ref == 'refs/heads/main'` — it only runs on pushes to main, not on every pull request. Unit tests run on all events.
+
+??? question "**Q3 (Multiple Choice):** The `deploy-production` job in the workflow requires manual approval. What GitHub Actions feature enables this?"
+
+    - A) A `manual-approval: true` flag in the job definition
+    - B) An `environment:` block referencing a protected environment with required reviewers configured
+    - C) A `wait-for-approval` step using the GitHub API
+    - D) Setting `runs-on: manual` instead of `runs-on: ubuntu-latest`
+
+    ??? success "✅ Reveal Answer"
+        **Correct: B — A protected GitHub Environment with required reviewers**
+
+        The `deploy-production` job specifies `environment: production`. In GitHub repository settings, you configure the `production` environment to require 1+ specific reviewers before the job runs. When the workflow reaches this job, GitHub sends a notification to the reviewers, pauses the workflow, and waits. Only after approval does the deployment proceed. This is the standard GitHub Actions pattern for human-in-the-loop production deployments.
+
+---
+
 ## Next Steps
 
 - **Evaluate at scale with Azure AI:** → [Lab 035 — Agent Evaluation with Azure AI Eval SDK](lab-035-agent-evaluation.md)

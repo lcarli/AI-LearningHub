@@ -412,14 +412,35 @@ In practice, SK plugins **generate the JSON schema automatically** from your Pyt
 
 ## 🧠 Knowledge Check
 
-??? question "1. What does finish_reason='tool_calls' mean in the response?"
-    The LLM is requesting one or more function calls instead of returning a final text answer. Your code must execute the requested functions, add the results to the message history as `role: tool` messages, then call the LLM again to get the final answer.
+??? question "**Q1 (Multiple Choice):** When the LLM returns `finish_reason='tool_calls'`, what should your agent loop do next?"
 
-??? question "2. Why must you add the LLM's tool_call message to history before adding tool results?"
-    The message history must be coherent — the LLM's `tool_calls` message references specific `tool_call_id` values, and the tool result messages reference those same IDs. If you skip the LLM's message, the API will reject the request with a validation error.
+    - A) Return the partial answer to the user and wait for confirmation
+    - B) Execute the requested function(s), add results as `role: tool` messages, then call the LLM again
+    - C) Discard the response and retry with a different prompt
+    - D) Switch to a different model that supports the tool
 
-??? question "3. What happens if you set tool_choice='required' but the LLM can't find a relevant tool to call?"
-    The LLM will be forced to call *some* tool anyway — potentially one that doesn't make sense. Always design your tools to cover the expected question domains. Use `tool_choice="auto"` in general and `"required"` only when you specifically need to guarantee tool use.
+    ??? success "✅ Reveal Answer"
+        **Correct: B**
+
+        `finish_reason='tool_calls'` means the LLM needs external data before it can answer. Your loop must: (1) read `response.choices[0].message.tool_calls`, (2) call each requested function with the provided arguments, (3) add the LLM's message AND tool results to history with `role: tool`, then (4) call the LLM again. Repeat until `finish_reason == 'stop'`.
+
+??? question "**Q2 (Run the Lab):** Using the `search_products` function defined in Step 2, how many tents are currently **in stock**?"
+
+    Run the search manually or trace through the product list in Step 2. Count tents where `in_stock == True`.
+
+    ??? success "✅ Reveal Answer"
+        **2 tents are in stock: P001 (TrailBlazer Tent 2P, $189.99) and P002 (Summit Dome 4P, $349.99)**
+
+        P003 (UltraLight Solo) is marked `"in_stock": False`. So `search_products("tent", in_stock=True)` returns exactly 2 items.
+
+??? question "**Q3 (Run the Lab):** What does `calculate_total(["P001", "P007"])` return as the `total` field? (No discount applied)"
+
+    Look up the prices for P001 and P007 in the PRODUCTS list and add them together.
+
+    ??? success "✅ Reveal Answer"
+        **$279.98**
+
+        P001 (TrailBlazer Tent 2P) = $189.99 + P007 (DayHiker 22L) = $89.99 = **$279.98**. The function applies no discount when `discount_percent=0`, so `total == subtotal == 279.98`.
 
 ---
 
