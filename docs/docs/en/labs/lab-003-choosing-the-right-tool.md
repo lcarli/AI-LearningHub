@@ -146,3 +146,4 @@ Pick your path and dive in!
 - **Developer route (free):** → [Lab 013 — GitHub Models](lab-013-github-models.md)
 - **MCP route:** → [Lab 012 — What is MCP?](lab-012-what-is-mcp.md)
 - **Full Azure route:** → [Lab 030 — Foundry + MCP](lab-030-foundry-agent-mcp.md)
+- **Want to understand LLMs first?** → [Lab 004 — How LLMs Work](lab-004-how-llms-work.md)

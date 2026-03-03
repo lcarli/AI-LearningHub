@@ -35,6 +35,8 @@ nav:
           - "Lab 001: What are AI Agents?": labs/lab-001-what-are-ai-agents.md
           - "Lab 002: AI Agent Landscape": labs/lab-002-agent-landscape.md
           - "Lab 003: Choosing the Right Tool": labs/lab-003-choosing-the-right-tool.md
+          - "Lab 004: How LLMs Work": labs/lab-004-how-llms-work.md
+          - "Lab 005: Prompt Engineering": labs/lab-005-prompt-engineering.md
 
       - "L100 — Foundations":
           - "Lab 010: GitHub Copilot First Steps": labs/lab-010-github-copilot-first-steps.md

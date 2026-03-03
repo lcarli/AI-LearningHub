@@ -13,6 +13,8 @@ Browse all labs by level. Each lab is self-contained — no shared state between
 | [Lab 001](lab-001-what-are-ai-agents.md) | What are AI Agents? | All paths | ~15 min |
 | [Lab 002](lab-002-agent-landscape.md) | AI Agent Landscape 2025 | All paths | ~20 min |
 | [Lab 003](lab-003-choosing-the-right-tool.md) | Choosing the Right Tool | All paths | ~15 min |
+| [Lab 004](lab-004-how-llms-work.md) | How LLMs Work | All paths | ~20 min |
+| [Lab 005](lab-005-prompt-engineering.md) | Prompt Engineering | All paths | ~25 min |
 
 ---
 
