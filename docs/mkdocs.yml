@@ -89,6 +89,7 @@ nav:
 
   - Glossary: glossary.md
   - What's New: whats-new.md
+  - "🗺️ Proposed Labs": proposed-labs.md
   - Tags: tags.md
 
 plugins:
