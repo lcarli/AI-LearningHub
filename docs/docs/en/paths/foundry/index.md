@@ -23,6 +23,7 @@ By the end of this path you will have:
 
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|
+| [Lab 009](../../labs/lab-009-azure-openai.md) | Azure OpenAI Service Quickstart | <span class="level-badge level-100">L100</span> | ⚠️ Azure free |
 | [Lab 030](../../labs/lab-030-foundry-agent-mcp.md) | Foundry Agent Service + MCP | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |
 | [Lab 031](../../labs/lab-031-pgvector-semantic-search.md) | pgvector Semantic Search on Azure | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |
 | [Lab 032](../../labs/lab-032-row-level-security.md) | Row Level Security for Agents | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |

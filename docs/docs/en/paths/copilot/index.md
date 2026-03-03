@@ -25,6 +25,7 @@ By the end of this path you will have:
 | [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Free LLM Inference | <span class="level-badge level-100">L100</span> | ✅ Free |
 | [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | Copilot Agent Mode | <span class="level-badge level-100">L100</span> | ✅ Free tier |
 | [Lab 025](../../labs/lab-025-vscode-chat-participant.md) | VS Code Chat Participant | <span class="level-badge level-200">L200</span> | ✅ Free |
+| [Lab 045](../../labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | <span class="level-badge level-200">L200</span> | ✅ GitHub Copilot |
 | [Lab 041](../../labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension | <span class="level-badge level-400">L400</span> | 💰 Azure paid |
 
 ---

@@ -42,6 +42,7 @@ nav:
           - "Lab 008: Responsible AI for Agents": labs/lab-008-responsible-ai.md
 
       - "L100 — Foundations":
+          - "Lab 009: Azure OpenAI Service Quickstart": labs/lab-009-azure-openai.md
           - "Lab 010: GitHub Copilot First Steps": labs/lab-010-github-copilot-first-steps.md
           - "Lab 011: Copilot Studio First Agent": labs/lab-011-copilot-studio-first-agent.md
           - "Lab 012: What is MCP?": labs/lab-012-what-is-mcp.md
@@ -50,6 +51,8 @@ nav:
           - "Lab 015: Ollama — Local LLMs": labs/lab-015-ollama-local-llms.md
           - "Lab 016: Copilot Agent Mode": labs/lab-016-copilot-agent-mode.md
           - "Lab 017: Structured Output & JSON Mode": labs/lab-017-structured-output.md
+          - "Lab 018: Function Calling & Tool Use": labs/lab-018-function-calling.md
+          - "Lab 019: Streaming Responses in Agents": labs/lab-019-streaming-responses.md
 
       - "L200 — Intermediate":
           - "Lab 020: MCP Server in Python": labs/lab-020-mcp-server-python.md
@@ -60,6 +63,7 @@ nav:
           - "Lab 025: VS Code Copilot Chat Participant": labs/lab-025-vscode-chat-participant.md
           - "Lab 026: Agentic RAG Pattern": labs/lab-026-agentic-rag.md
           - "Lab 027: Agent Memory Patterns": labs/lab-027-agent-memory-patterns.md
+          - "Lab 045: GitHub Copilot Workspace": labs/lab-045-copilot-workspace.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
