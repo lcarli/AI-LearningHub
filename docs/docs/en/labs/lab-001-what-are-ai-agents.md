@@ -45,22 +45,7 @@ The LLM decides *what to do next*: answer directly, call a tool, ask a clarifyin
 ### 4. ⚡ Action
 The agent *does something*: calls an API, queries a database, writes a file, sends an email, triggers another agent.
 
-```
-User Goal
-    │
-    ▼
-┌──────────────────────────────────┐
-│          AI Agent Loop           │
-│                                  │
-│  Perceive → Reason → Act         │
-│      ▲                 │         │
-│      └─── Observe ◄────┘         │
-│                                  │
-└──────────────────────────────────┘
-    │
-    ▼
-Goal Achieved
-```
+![AI Agent Loop — Perceive, Reason, Act, Observe](../../assets/diagrams/agent-loop-cycle.svg)
 
 ---
 
@@ -105,18 +90,41 @@ Goal Achieved
 
 ## 🧠 Knowledge Check
 
-??? question "1. What are the four core properties of an AI agent?"
-    **Perception, Memory, Reasoning, and Action.**
-    - *Perception*: receives inputs (user messages, tool results, sensor data)
-    - *Memory*: retains context across steps (short-term) or interactions (long-term)
-    - *Reasoning*: uses an LLM to decide what to do next
-    - *Action*: calls tools, APIs, or executes code
+??? question "**Q1 (Multiple Choice):** Which of the following best describes an AI agent?"
 
-??? question "2. What is the main difference between an AI agent and a traditional chatbot?"
-    A traditional chatbot follows a **pre-programmed decision tree** — every possible response is coded in advance. An AI agent uses an LLM to **autonomously decide what to do** at each step, including which tools to call, making it capable of handling novel situations that weren't explicitly programmed.
+    - A) A chatbot that follows a pre-programmed decision tree
+    - B) A machine learning model fine-tuned on your company's data
+    - C) Software that uses an LLM to autonomously pursue a goal, deciding what to do and which tools to call at each step
+    - D) A rule-based keyword matching system that routes users to FAQs
 
-??? question "3. In the perceive → reason → act → observe loop, what happens in the 'act' phase?"
-    The agent **executes a tool call** — for example: running a database query, calling a REST API, writing a file, or sending an email. The result of that action is then fed back as an observation, closing the loop.
+    ??? success "✅ Reveal Answer"
+        **Correct: C**
+
+        An AI agent uses an LLM as its *reasoning engine* to autonomously decide what to do at each step — including which tools to call, when to loop, and when to stop. Option A describes a traditional chatbot. Option B is fine-tuning (changes model behavior, not agent structure). Option D is a classic NLP routing system.
+
+??? question "**Q2 (Multiple Choice):** In the perceive → reason → act → observe loop, what is the purpose of the 'observe' step?"
+
+    - A) The agent reformulates the original user query before reasoning
+    - B) The agent receives the result of an action and adds it back to context for the next reasoning step
+    - C) The agent calls the LLM to generate a final answer
+    - D) The agent saves the conversation to long-term memory
+
+    ??? success "✅ Reveal Answer"
+        **Correct: B**
+
+        After the agent *acts* (calls a tool, runs code, queries a database), it *observes* the result — the tool output is added back to the message history. This closes the loop: the LLM now has new information to reason over in the next step. The loop continues until the agent decides it has enough to answer.
+
+??? question "**Q3 (Multiple Choice):** Which of the following is NOT one of the four core properties of an AI agent?"
+
+    - A) Perception
+    - B) Compilation
+    - C) Memory
+    - D) Action
+
+    ??? success "✅ Reveal Answer"
+        **Correct: B — Compilation is not a core agent property**
+
+        The four core properties are **Perception** (receives inputs), **Memory** (retains context), **Reasoning** (uses LLM to decide next step), and **Action** (calls tools/APIs/code). Compilation is a programming language concept, not part of the agent architecture.
 
 ---
 
