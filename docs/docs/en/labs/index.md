@@ -15,6 +15,9 @@ Browse all labs by level. Each lab is self-contained — no shared state between
 | [Lab 003](lab-003-choosing-the-right-tool.md) | Choosing the Right Tool | All paths | ~15 min |
 | [Lab 004](lab-004-how-llms-work.md) | How LLMs Work | All paths | ~20 min |
 | [Lab 005](lab-005-prompt-engineering.md) | Prompt Engineering | All paths | ~25 min |
+| [Lab 006](lab-006-what-is-rag.md) | What is RAG? | RAG | ~20 min |
+| [Lab 007](lab-007-what-are-embeddings.md) | What are Embeddings? | RAG / SK | ~15 min |
+| [Lab 008](lab-008-responsible-ai.md) | Responsible AI for Agent Builders | All paths | ~20 min |
 
 ---
 
@@ -27,6 +30,9 @@ Browse all labs by level. Each lab is self-contained — no shared state between
 | [Lab 012](lab-012-what-is-mcp.md) | What is MCP? | MCP | ~20 min |
 | [Lab 013](lab-013-github-models.md) | GitHub Models — Free LLM Inference | RAG / Copilot | ~25 min |
 | [Lab 014](lab-014-sk-hello-agent.md) | Semantic Kernel: Hello Agent | Semantic Kernel | ~30 min |
+| [Lab 015](lab-015-ollama-local-llms.md) | Ollama — Local LLMs for Free | All paths | ~30 min |
+| [Lab 016](lab-016-copilot-agent-mode.md) | GitHub Copilot Agent Mode | GitHub Copilot | ~30 min |
+| [Lab 017](lab-017-structured-output.md) | Structured Output & JSON Mode | All paths | ~25 min |
 
 ---
 

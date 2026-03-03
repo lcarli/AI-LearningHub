@@ -37,6 +37,9 @@ nav:
           - "Lab 003: Choosing the Right Tool": labs/lab-003-choosing-the-right-tool.md
           - "Lab 004: How LLMs Work": labs/lab-004-how-llms-work.md
           - "Lab 005: Prompt Engineering": labs/lab-005-prompt-engineering.md
+          - "Lab 006: What is RAG?": labs/lab-006-what-is-rag.md
+          - "Lab 007: What are Embeddings?": labs/lab-007-what-are-embeddings.md
+          - "Lab 008: Responsible AI for Agents": labs/lab-008-responsible-ai.md
 
       - "L100 — Foundations":
           - "Lab 010: GitHub Copilot First Steps": labs/lab-010-github-copilot-first-steps.md
@@ -44,6 +47,9 @@ nav:
           - "Lab 012: What is MCP?": labs/lab-012-what-is-mcp.md
           - "Lab 013: GitHub Models — Free LLMs": labs/lab-013-github-models.md
           - "Lab 014: SK Hello Agent": labs/lab-014-sk-hello-agent.md
+          - "Lab 015: Ollama — Local LLMs": labs/lab-015-ollama-local-llms.md
+          - "Lab 016: Copilot Agent Mode": labs/lab-016-copilot-agent-mode.md
+          - "Lab 017: Structured Output & JSON Mode": labs/lab-017-structured-output.md
 
       - "L200 — Intermediate":
           - "Lab 020: MCP Server in Python": labs/lab-020-mcp-server-python.md
