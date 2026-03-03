@@ -78,6 +78,8 @@ nav:
           - "Lab 042: Enterprise RAG with Evaluations": labs/lab-042-enterprise-rag.md
           - "Lab 044: Phi-4 + Ollama in Production": labs/lab-044-phi4-ollama-production.md
 
+  - Glossary: glossary.md
+
 plugins:
   - search
   - glightbox
