@@ -4,7 +4,7 @@
 
 ## 🌐 Live Site
 
-→ [View the learning hub](https://YOUR_ORG.github.io/ai-agents-learning-hub/)
+→ [View the learning hub](https://lcarli.github.io/AI-LearningHub/)
 
 ## 📚 What's Inside
 
