@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="arrowDown" markerWidth="10" markerHeight="7" refX="3.5" refY="10" orient="auto">
+      <polygon points="0 0, 3.5 10, 7 0" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="420" fill="#f8f9fa" rx="12"/>
+  <text x="450" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Impact Attribution Model — From Usage to ROI</text>
+
+  <!-- ── Layer 1: Data Sources ── -->
+  <text x="60" y="68" font-size="11" font-weight="600" fill="#94a3b8">DATA SOURCES</text>
+
+  <rect x="20" y="80" width="180" height="70" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="106" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">📊 Copilot Usage</text>
+  <text x="110" y="124" text-anchor="middle" font-size="9" fill="#3b82f6">Active days · Features · Time saved</text>
+  <text x="110" y="140" text-anchor="middle" font-size="9" fill="#3b82f6">3 months × 7 departments</text>
+
+  <rect x="220" y="80" width="180" height="70" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="310" y="106" text-anchor="middle" font-size="12" font-weight="600" fill="#16a34a">📈 Business Outcomes</text>
+  <text x="310" y="124" text-anchor="middle" font-size="9" fill="#22c55e">Revenue · Satisfaction · Projects</text>
+  <text x="310" y="140" text-anchor="middle" font-size="9" fill="#22c55e">KPIs per department per month</text>
+
+  <rect x="420" y="80" width="180" height="70" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="510" y="106" text-anchor="middle" font-size="12" font-weight="600" fill="#6d28d9">🏢 Org Data</text>
+  <text x="510" y="124" text-anchor="middle" font-size="9" fill="#8b5cf6">Department · Role · Manager</text>
+  <text x="510" y="140" text-anchor="middle" font-size="9" fill="#8b5cf6">Entra ID / Viva Insights import</text>
+
+  <!-- Arrows down from Layer 1 to Layer 2 -->
+  <line x1="110" y1="150" x2="250" y2="195" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="310" y1="150" x2="400" y2="195" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="510" y1="150" x2="550" y2="195" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ── Layer 2: Analysis ── -->
+  <text x="60" y="190" font-size="11" font-weight="600" fill="#94a3b8">ANALYSIS</text>
+
+  <rect x="220" y="200" width="160" height="65" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="226" text-anchor="middle" font-size="11" font-weight="600" fill="#a16207">🔗 Merge & Correlate</text>
+  <text x="300" y="244" text-anchor="middle" font-size="9" fill="#ca8a04">Pearson r = 0.97</text>
+  <text x="300" y="258" text-anchor="middle" font-size="9" fill="#ca8a04">usage ↔ satisfaction</text>
+
+  <rect x="400" y="200" width="160" height="65" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="480" y="226" text-anchor="middle" font-size="11" font-weight="600" fill="#a16207">💰 ROI Calculation</text>
+  <text x="480" y="244" text-anchor="middle" font-size="9" fill="#ca8a04">188 hrs × $50/hr</text>
+  <text x="480" y="258" text-anchor="middle" font-size="9" fill="#ca8a04">= $9,400 total value</text>
+
+  <rect x="580" y="200" width="160" height="65" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="660" y="226" text-anchor="middle" font-size="11" font-weight="600" fill="#a16207">📉 Trend Analysis</text>
+  <text x="660" y="244" text-anchor="middle" font-size="9" fill="#ca8a04">Jan→Mar: +60% growth</text>
+  <text x="660" y="258" text-anchor="middle" font-size="9" fill="#ca8a04">20 → 32 active users</text>
+
+  <!-- Arrows down from Layer 2 to Layer 3 -->
+  <line x1="300" y1="265" x2="430" y2="315" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="480" y1="265" x2="480" y2="315" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="660" y1="265" x2="530" y2="315" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ── Layer 3: Output ── -->
+  <text x="60" y="315" font-size="11" font-weight="600" fill="#94a3b8">OUTPUT</text>
+
+  <rect x="350" y="320" width="260" height="70" rx="12" fill="#ffedd5" stroke="#f97316" stroke-width="2" filter="url(#shadow)"/>
+  <text x="480" y="348" text-anchor="middle" font-size="14" font-weight="700" fill="#c2410c">📋 Executive Impact Narrative</text>
+  <text x="480" y="368" text-anchor="middle" font-size="10" fill="#ea580c">ROI proof · Department ranking · Recommendations</text>
+  <text x="480" y="382" text-anchor="middle" font-size="10" fill="#ea580c">Ready for board presentation</text>
+
+  <!-- Power BI badge -->
+  <rect x="700" y="80" width="170" height="70" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="785" y="106" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">📊 Power BI</text>
+  <text x="785" y="124" text-anchor="middle" font-size="9" fill="#64748b">Optional: import CSVs</text>
+  <text x="785" y="140" text-anchor="middle" font-size="9" fill="#64748b">for interactive dashboards</text>
+
+  <!-- Bottom note -->
+  <text x="450" y="412" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">Lab 048 builds on Lab 047 — from adoption tracking to impact attribution</text>
+</svg>

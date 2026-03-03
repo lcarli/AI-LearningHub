@@ -81,6 +81,7 @@ nav:
           - "Lab 039: Vector Database Comparison": labs/lab-039-vector-db-comparison.md
           - "Lab 043: Multimodal Agents with GPT-4o Vision": labs/lab-043-multimodal-agents.md
           - "Lab 046: Microsoft Agent 365 — Enterprise Governance": labs/lab-046-agent-365.md
+          - "Lab 048: Work IQ — Impact Analytics & Power BI": labs/lab-048-work-iq-power-bi.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md

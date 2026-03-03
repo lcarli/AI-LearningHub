@@ -22,49 +22,10 @@
 
 ## 1. Work IQ — Copilot Analytics & ROI
 
-### Lab 047: Work IQ — Copilot Adoption Analytics with Viva Insights Dashboard
-> *Proposed by: GPT-5.2 + Gemini (consolidated)*
-
-| | |
-|---|---|
-| **Level** | L200 — Intermediate |
-| **Category** | Enterprise / Work IQ |
-| **Time** | ~45 min |
-| **Cost** | M365 Copilot license required |
-
-**What you'll learn:**
-- Access and interpret the Viva Insights Copilot Dashboard (adoption, active users, retention)
-- Read M365 admin center Copilot usage reports and identify minimum threshold issues
-- Analyze adoption blockers (licensing gaps, enablement, data delays)
-- Identify high-impact use cases by department or persona
-- Create a rollout "scorecard" to present to leadership
-
-**Why it's exciting:** Companies in 2025-2026 are moving from *deploying* Copilot to *measuring ROI*. Work IQ turns agent rollout into a data-driven product launch — the skill that justifies continued AI investment.
-
-**Key technologies:** Viva Insights, M365 Copilot Dashboard, Microsoft Entra org data
-
----
-
-### Lab 048: Work IQ — Building Custom Copilot Impact Analytics with Advanced Reporting + Power BI
-> *Proposed by: GPT-5.2*
-
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Enterprise / Work IQ |
-| **Time** | ~90 min |
-| **Cost** | M365 Copilot license required |
-
-**What you'll learn:**
-- Use Viva Insights Advanced Reporting to query 100+ Copilot metrics, sliced by org attributes
-- Upload business outcome KPIs (CSV) and correlate with Copilot usage data
-- Design an "impact narrative" (time saved, engagement, sentiment) for leadership presentations
-- Build a Power BI report from Viva Insights templates
-- Establish measurement hygiene: privacy thresholds, minimum group sizes, delegation
-
-**Why it's exciting:** Org-wide agents force executives to ask "what value did we get?" This lab operationalizes ROI and impact attribution — the real unlock for scaled AI funding.
-
-**Key technologies:** Viva Insights Advanced Reporting, Power BI templates, organizational data import
+> ✅ **Labs 047 and 048 have been implemented!**
+>
+> - [Lab 047: Work IQ — Copilot Adoption Analytics](labs/lab-047-work-iq-copilot-analytics.md) (L200)
+> - [Lab 048: Work IQ — Copilot Impact Analytics & Power BI](labs/lab-048-work-iq-power-bi.md) (L300)
 
 ---
 
@@ -712,8 +673,8 @@
 
 | Lab | Title | Level | Category | Time | Cost |
 |-----|-------|-------|----------|------|------|
-| 047 | Work IQ — Copilot Adoption Dashboard | L200 | Enterprise | 45m | M365 |
-| 048 | Work IQ — Custom Impact Analytics + Power BI | L300 | Enterprise | 90m | M365 |
+| ~~047~~ | ~~Work IQ — Copilot Adoption Dashboard~~ ✅ | L200 | Enterprise | 45m | Free |
+| ~~048~~ | ~~Work IQ — Custom Impact Analytics + Power BI~~ ✅ | L300 | Enterprise | 90m | Free |
 | 049 | Foundry IQ — Agent Tracing with OpenTelemetry | L300 | Foundry | 75m | Azure |
 | 050 | Foundry IQ — Multi-Agent Observability | L400 | Foundry | 120m | Azure |
 | 051 | Fabric IQ — Real-Time Intelligence Agents | L300 | Fabric | 75m | Fabric |
