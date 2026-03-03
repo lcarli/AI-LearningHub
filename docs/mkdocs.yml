@@ -65,6 +65,7 @@ nav:
           - "Lab 027: Agent Memory Patterns": labs/lab-027-agent-memory-patterns.md
           - "Lab 029: LangChain & LangGraph Basics": labs/lab-029-langchain-langgraph.md
           - "Lab 045: GitHub Copilot Workspace": labs/lab-045-copilot-workspace.md
+          - "Lab 047: Work IQ — Copilot Analytics": labs/lab-047-work-iq-copilot-analytics.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md

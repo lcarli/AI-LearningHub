@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="340" fill="#f8f9fa" rx="12"/>
+  <text x="450" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Work IQ — Copilot Adoption Analytics Flow</text>
+
+  <!-- Step 1: M365 Users -->
+  <rect x="20" y="70" width="120" height="80" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="80" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">Microsoft 365</text>
+  <text x="80" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">Users</text>
+  <text x="80" y="138" text-anchor="middle" font-size="9" fill="#3b82f6">52 employees</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="140" y1="110" x2="170" y2="110" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: Copilot Activity -->
+  <rect x="175" y="70" width="120" height="80" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="235" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="#6d28d9">Copilot</text>
+  <text x="235" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#6d28d9">Activity</text>
+  <text x="235" y="138" text-anchor="middle" font-size="9" fill="#8b5cf6">Meetings · Emails · Docs · Chat</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="295" y1="110" x2="325" y2="110" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Viva Insights -->
+  <rect x="330" y="70" width="120" height="80" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="390" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">Viva Insights</text>
+  <text x="390" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">Dashboard</text>
+  <text x="390" y="138" text-anchor="middle" font-size="9" fill="#22c55e">Adoption metrics</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="450" y1="110" x2="480" y2="110" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: Data Export -->
+  <rect x="485" y="70" width="120" height="80" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="545" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="#a16207">Usage Data</text>
+  <text x="545" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#a16207">Export (CSV)</text>
+  <text x="545" y="138" text-anchor="middle" font-size="9" fill="#ca8a04">Per-user metrics</text>
+
+  <!-- Arrow 4→5 -->
+  <line x1="605" y1="110" x2="635" y2="110" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: Python Analysis -->
+  <rect x="640" y="70" width="120" height="80" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="700" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="#be185d">Python</text>
+  <text x="700" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#be185d">Analysis</text>
+  <text x="700" y="138" text-anchor="middle" font-size="9" fill="#ec4899">pandas · matplotlib</text>
+
+  <!-- Arrow 5→6 -->
+  <line x1="760" y1="110" x2="790" y2="110" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 6: Scorecard -->
+  <rect x="795" y="70" width="85" height="80" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="838" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="#c2410c">Adoption</text>
+  <text x="838" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#c2410c">Scorecard</text>
+  <text x="838" y="138" text-anchor="middle" font-size="9" fill="#ea580c">For leadership</text>
+
+  <!-- Metrics row -->
+  <text x="450" y="195" text-anchor="middle" font-size="13" font-weight="600" fill="#475569">Key Metrics You'll Analyze</text>
+
+  <!-- Metric boxes -->
+  <rect x="35"  y="215" width="165" height="55" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="118" y="237" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">📊 Adoption Rate</text>
+  <text x="118" y="255" text-anchor="middle" font-size="9" fill="#64748b">active ÷ enabled × 100</text>
+
+  <rect x="220" y="215" width="165" height="55" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="303" y="237" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">⚠️ Enablement Gap</text>
+  <text x="303" y="255" text-anchor="middle" font-size="9" fill="#64748b">licensed but NOT enabled</text>
+
+  <rect x="405" y="215" width="165" height="55" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="488" y="237" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">🔧 Feature Mix</text>
+  <text x="488" y="255" text-anchor="middle" font-size="9" fill="#64748b">meetings · emails · docs · chat</text>
+
+  <rect x="590" y="215" width="165" height="55" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="673" y="237" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">⏱️ Time Saved</text>
+  <text x="673" y="255" text-anchor="middle" font-size="9" fill="#64748b">minutes → hours per dept</text>
+
+  <!-- Bottom note -->
+  <text x="450" y="310" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">OutdoorGear Inc. — 52 users · 7 departments · 1-month snapshot</text>
+</svg>
