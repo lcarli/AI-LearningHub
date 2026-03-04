@@ -1,0 +1,11 @@
+server_id,server_name,team,tools_count,auth_type,rate_limit_rpm,has_dlp,has_logging,monthly_calls,avg_latency_ms,error_rate_pct,compliant
+MCP01,product-catalog,Commerce,5,oauth2,100,true,true,45000,120,0.5,true
+MCP02,order-management,Commerce,8,oauth2,50,true,true,32000,180,1.2,true
+MCP03,customer-support,Support,4,api_key,200,false,true,28000,95,0.8,false
+MCP04,inventory-sync,Operations,3,oauth2,150,true,true,18000,85,0.3,true
+MCP05,payment-gateway,Finance,6,oauth2,30,true,true,15000,250,2.1,true
+MCP06,analytics-export,Analytics,4,api_key,100,false,false,12000,110,0.6,false
+MCP07,hr-directory,HR,3,oauth2,50,true,true,5000,90,0.2,true
+MCP08,legacy-erp,Operations,10,basic,20,false,false,8000,450,5.8,false
+MCP09,maps-geocoding,Logistics,2,api_key,500,false,true,22000,65,0.1,false
+MCP10,email-sender,Marketing,3,oauth2,60,true,true,9500,140,0.9,true

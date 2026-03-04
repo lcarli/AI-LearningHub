@@ -1,0 +1,16 @@
+scenario_id,agent_name,action,token_scope,permission_type,identity_flow,resource,risk_level,compliant,violation_reason
+S01,ProductAgent,read_catalog,Products.Read,delegated,OBO,product-api,low,true,
+S02,ProductAgent,update_price,Products.Write,delegated,OBO,product-api,medium,true,
+S03,OrderAgent,read_orders,Orders.Read,delegated,OBO,order-api,low,true,
+S04,OrderAgent,process_refund,Orders.Write,delegated,OBO,payment-api,high,true,
+S05,OrderAgent,read_all_orders,Orders.ReadAll,application,client_credentials,order-api,high,false,App permission reads ALL orders not just user's
+S06,SupportAgent,read_tickets,Support.Read,delegated,OBO,support-api,low,true,
+S07,SupportAgent,access_customer_pii,Customer.ReadAll,application,client_credentials,customer-api,critical,false,App permission exposes all customer PII
+S08,AnalyticsAgent,read_reports,Reports.Read,delegated,OBO,analytics-api,low,true,
+S09,AnalyticsAgent,export_data,Data.Export,delegated,OBO,analytics-api,medium,true,
+S10,AdminAgent,modify_permissions,Directory.ReadWrite,application,client_credentials,graph-api,critical,false,Agent should not have directory write access
+S11,ProductAgent,search_inventory,Inventory.Read,delegated,OBO,inventory-api,low,true,
+S12,OrderAgent,cancel_order,Orders.Write,delegated,OBO,order-api,medium,true,
+S13,SupportAgent,escalate_ticket,Support.Write,delegated,OBO,support-api,low,true,
+S14,SupportAgent,delete_customer,Customer.Delete,application,client_credentials,customer-api,critical,false,Agents must never delete customer records
+S15,AnalyticsAgent,read_financials,Finance.Read,delegated,OBO,finance-api,high,true,

@@ -5,7 +5,7 @@
 
 ---
 
-## ✅ Implemented Labs (047–060)
+## ✅ Implemented Labs (047–065)
 
 | Lab | Title | Level | Link |
 |-----|-------|-------|------|
@@ -23,6 +23,11 @@
 | 058 | Browser Automation Agents with OpenAI CUA | L300 | [Lab 058](labs/lab-058-browser-automation-cua.md) |
 | 059 | Voice Agents with GPT Realtime API | L200 | [Lab 059](labs/lab-059-voice-agents-realtime.md) |
 | 060 | Reasoning Models — o3 & DeepSeek R1 | L200 | [Lab 060](labs/lab-060-reasoning-models.md) |
+| 061 | SLMs — Phi-4 Mini for Low-Cost Agent Skills | L200 | [Lab 061](labs/lab-061-slm-phi4-mini.md) |
+| 062 | On-Device Agents — Phi Silica & Windows AI | L300 | [Lab 062](labs/lab-062-ondevice-phi-silica.md) |
+| 063 | Agent Identity — Entra OBO & Least Privilege | L300 | [Lab 063](labs/lab-063-agent-identity-entra.md) |
+| 064 | Securing MCP at Scale with APIM | L400 | [Lab 064](labs/lab-064-securing-mcp-apim.md) |
+| 065 | Purview DSPM for AI — Data Flow Governance | L300 | [Lab 065](labs/lab-065-purview-dspm-ai.md) |
 
 ---
 
@@ -30,107 +35,13 @@
 
 ### Reasoning Models & Small Language Models
 
-#### Lab 061: SLMs — Phi-4 Mini for Low-Cost, Privacy-First Agent Skills
-
-| | |
-|---|---|
-| **Level** | L200 — Intermediate |
-| **Category** | Pro Code / SLMs |
-| **Time** | ~60 min |
-| **Cost** | Free (local) / Azure paid (optional) |
-
-**What you'll learn:**
-- Pick SLMs for latency/compute-constrained "agent skills" (extract, classify, route, draft)
-- Run Microsoft Phi-4 Mini locally using ONNX Runtime — no cloud costs, full privacy
-- Build a RAG pipeline that never sends data to the cloud
-- Compare quality/cost tradeoffs vs frontier reasoning models on the same task
-- Deploy via Foundry Model Catalog as a MaaS API or run offline
-
-**Key technologies:** Microsoft Phi-4 / Phi-4-mini, ONNX Runtime, DirectML, Foundry Model Catalog
-
----
-
-#### Lab 062: On-Device Agents with Phi Silica — Windows AI APIs
-
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Edge AI / Pro Code |
-| **Time** | ~90 min |
-| **Cost** | Free (requires Copilot+ PC, Windows App SDK) |
-
-**What you'll learn:**
-- Run local model inference via `Microsoft.Windows.AI.Text.LanguageModel` (Windows AI API)
-- Implement on-device summarization, rewrite, text-to-table, and classification "skills"
-- Use readiness checks and graceful fallbacks when the NPU model isn't available
-- Add basic safety/content moderation for local generation
-- Compare NPU inference speed vs cloud API latency on real tasks
-
-**Key technologies:** Windows AI APIs (Windows App SDK), Phi Silica, NPU inference, C#/.NET
+> ✅ **Labs 061 and 062 have been implemented!** See the [Implemented Labs](#-implemented-labs-047065) table above.
 
 ---
 
 ### Enterprise Governance & Security
 
-#### Lab 063: Agent Identity — Secure Tool Calls with Entra OBO Flow & Least Privilege
-
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Enterprise / Security |
-| **Time** | ~75 min |
-| **Cost** | Azure paid |
-
-**What you'll learn:**
-- Implement OAuth 2.0 On-Behalf-Of (OBO) to pass user identity through agent → API → downstream API chains
-- Prevent privilege escalation by scoping to delegated permissions vs app roles
-- Design "agent permissions" as auditable, consented capabilities
-- Run agents in sandboxed containers with restricted network access
-- Implement human-in-the-loop approval gates for high-impact actions
-
-**Key technologies:** Microsoft Entra ID, OAuth 2.0 OBO flow, MSAL, Azure Container Apps, Azure Policy, RBAC
-
----
-
-#### Lab 064: Securing MCP at Scale with Azure API Management
-
-| | |
-|---|---|
-| **Level** | L400 — Expert |
-| **Category** | Enterprise / Security / MCP |
-| **Time** | ~90 min |
-| **Cost** | Azure paid (APIM + hosting) |
-
-**What you'll learn:**
-- Use Azure API Management as an OAuth gateway/proxy for remote MCP servers
-- Implement OAuth 2.0 flows and token exchange patterns for tool access
-- Apply throttling, rate limiting, and DLP policies for "tool APIs" at enterprise scale
-- Monitor agent tool usage and set up anomaly detection
-- Design a secure reference architecture for many MCP servers across teams
-
-**Key technologies:** Azure API Management, MCP remote servers (SSE/HTTP), OAuth 2.0, Microsoft Entra, Azure Monitor
-
----
-
-#### Lab 065: Purview DSPM for AI — Govern Agent Prompts, Responses & Data Flows
-
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Enterprise / Governance |
-| **Time** | ~90 min |
-| **Cost** | M365 Copilot + Purview license required |
-
-**What you'll learn:**
-- Use Microsoft Purview DSPM for AI to discover risky AI usage across the organization
-- Capture AI interactions in the unified audit log and investigate oversharing patterns
-- Enforce sensitivity labels and encryption behaviors for Copilot and agent outputs
-- Set up DLP policies for AI: prompt injection detection, protected material protection
-- Create Insider Risk detections for unusual agent/Copilot data access patterns
-
-**Key technologies:** Microsoft Purview DSPM for AI, unified audit log, sensitivity labels, DLP, Insider Risk Management
-
----
+> ✅ **Labs 063, 064, and 065 have been implemented!** See the [Implemented Labs](#-implemented-labs-047065) table above.
 
 #### Lab 066: Copilot Studio Enterprise Governance — Data Policies, Security Scans & Monitoring
 
@@ -342,11 +253,6 @@
 
 | Lab | Title | Level | Category | Time | Cost | Status |
 |-----|-------|-------|----------|------|------|--------|
-| 061 | SLMs — Phi-4 Mini for Low-Cost Skills | L200 | Pro Code | 60m | Free | 📋 Proposed |
-| 062 | On-Device Agents — Phi Silica + Windows AI | L300 | Edge AI | 90m | Free | 📋 Proposed |
-| 063 | Agent Identity — Entra OBO & Sandboxing | L300 | Enterprise | 75m | Azure | 📋 Proposed |
-| 064 | Securing MCP with Azure API Management | L400 | Enterprise | 90m | Azure | 📋 Proposed |
-| 065 | Purview DSPM for AI — Prompt & Data Governance | L300 | Enterprise | 90m | M365 | 📋 Proposed |
 | 066 | Copilot Studio Enterprise Governance | L300 | Copilot | 75m | M365 | 📋 Proposed |
 | 067 | GraphRAG — Knowledge Graphs for RAG | L300 | RAG | 90m | Azure | 📋 Proposed |
 | 068 | Hybrid Search — Vector + BM25 + Semantic Ranker | L200 | RAG | 60m | Azure | 📋 Proposed |
@@ -358,7 +264,7 @@
 | 074 | Foundry Agent Service — Production Multi-Agent | L300 | Foundry | 120m | Azure | 📋 Proposed |
 | 075 | Power BI Copilot — Autonomous Analytics | L100 | Low Code | 45m | Fabric | 📋 Proposed |
 
-**15 remaining proposals** out of the original 29. Sources: GPT-5.2 · Gemini 3 Pro · Claude Opus 4.6
+**10 remaining proposals** out of the original 29.Sources: GPT-5.2 · Gemini 3 Pro · Claude Opus 4.6
 
 ---
 

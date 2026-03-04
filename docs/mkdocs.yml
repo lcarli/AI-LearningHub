@@ -70,6 +70,7 @@ nav:
           - "Lab 054: A2A Protocol": labs/lab-054-a2a-protocol.md
           - "Lab 059: Voice Agents — Realtime API": labs/lab-059-voice-agents-realtime.md
           - "Lab 060: Reasoning Models — o3 & DeepSeek R1": labs/lab-060-reasoning-models.md
+          - "Lab 061: SLMs — Phi-4 Mini": labs/lab-061-slm-phi4-mini.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
@@ -92,6 +93,9 @@ nav:
           - "Lab 056: Federated Copilot Connectors + MCP": labs/lab-056-federated-connectors.md
           - "Lab 057: Computer-Using Agents": labs/lab-057-computer-use-agents.md
           - "Lab 058: Browser Automation — OpenAI CUA": labs/lab-058-browser-automation-cua.md
+          - "Lab 062: On-Device Agents — Phi Silica": labs/lab-062-ondevice-phi-silica.md
+          - "Lab 063: Agent Identity — Entra OBO": labs/lab-063-agent-identity-entra.md
+          - "Lab 065: Purview DSPM for AI": labs/lab-065-purview-dspm-ai.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
@@ -100,6 +104,7 @@ nav:
           - "Lab 044: Phi-4 + Ollama in Production": labs/lab-044-phi4-ollama-production.md
           - "Lab 050: Multi-Agent Observability": labs/lab-050-multi-agent-observability.md
           - "Lab 055: A2A + MCP Capstone": labs/lab-055-a2a-mcp-capstone.md
+          - "Lab 064: Securing MCP with APIM": labs/lab-064-securing-mcp-apim.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
