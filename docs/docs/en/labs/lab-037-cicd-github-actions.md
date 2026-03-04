@@ -350,6 +350,8 @@ jobs:
 
 ## 📁 Supporting Files
 
+- 📥 [ai-agent-ci.yml](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml)
+
 ```
 lab-037/
 └── ai-agent-ci.yml    ← Complete GitHub Actions CI/CD workflow for AI agents

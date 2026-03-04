@@ -137,14 +137,41 @@ L50 labs             GitHub Models        Foundry Agent Svc
 
 ## 🧠 Knowledge Check
 
-??? question "1. A developer wants to add AI chat to their VS Code extension. Which tool should they use?"
-    The **VS Code Chat Participant API** (covered in Lab 025). It lets you register a `@myextension` participant in GitHub Copilot Chat that responds with custom logic — without needing a separate server or Azure subscription.
+??? question "**Q1 (Multiple Choice):** A developer wants to build a VS Code extension that responds to `@mybot` in GitHub Copilot Chat. Which tool/API should they use?"
 
-??? question "2. Which tool should you choose if you need maximum control over agent logic in Python or C#?"
-    **Semantic Kernel** for a single sophisticated agent, or **AutoGen / LangGraph** for multi-agent orchestration. Both give you full code control, custom tool integration, and production-grade capabilities.
+    - A) Copilot Studio
+    - B) VS Code Chat Participant API (Lab 025)
+    - C) Microsoft Foundry Agent Service
+    - D) Azure Bot Service
 
-??? question "3. What is the 'least privilege' principle in the context of agent tools?"
-    Give the agent **only the minimum permissions required** for its task. If it only needs to read a database, don't grant write access. If it needs one API endpoint, don't give it full admin credentials. Least privilege limits the blast radius if the agent behaves unexpectedly.
+    ??? success "✅ Reveal Answer"
+        **Correct: B — VS Code Chat Participant API**
+
+        The Chat Participant API registers a `@yourextension` participant directly inside VS Code's Copilot Chat interface. It runs entirely inside VS Code — no Azure subscription, no server required. Copilot Studio is for Teams/M365 non-code agents. Foundry is for server-side hosted agents with full cloud scale.
+
+??? question "**Q2 (Multiple Choice):** Which factor is MOST important when choosing between Copilot Studio and Semantic Kernel?"
+
+    - A) The programming language you prefer (Python vs C#)
+    - B) Whether you need cloud deployment or local deployment
+    - C) Your role and how much code control you need — citizen developer vs. professional developer
+    - D) The LLM provider (OpenAI vs Anthropic)
+
+    ??? success "✅ Reveal Answer"
+        **Correct: C**
+
+        The primary decision axis is **code control vs. speed**. Copilot Studio targets citizen developers and IT pros who need a functional agent fast with no code. Semantic Kernel targets professional developers who need full control over logic, tool schemas, memory patterns, and production behavior. Both support multiple LLMs and cloud deployment.
+
+??? question "**Q3 (Multiple Choice):** The 'least privilege' principle says your agent should have access to exactly what it needs — no more. Which of these violates least privilege?"
+
+    - A) A product search agent that can call `search_products()` and `get_product_details()`
+    - B) A customer service agent given read-only database access
+    - C) An order-status agent given full admin credentials to the orders database
+    - D) A weather agent that can only call the public weather API
+
+    ??? success "✅ Reveal Answer"
+        **Correct: C — Full admin credentials violates least privilege**
+
+        An order-status agent only needs to *read* order records. Giving it admin credentials means a prompt injection attack or logic error could delete orders, modify prices, or access all customer data. The correct setup is a read-only database user scoped to the specific tables the agent needs. Options A, B, and D all follow least privilege correctly.
 
 ---
 

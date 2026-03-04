@@ -287,6 +287,9 @@ python lab-064/broken_apim.py
 
 ## 📁 Supporting Files
 
+- 📥 [broken_apim.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/broken_apim.py)
+- 📥 [mcp_servers.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/mcp_servers.csv)
+
 ```
 lab-064/
 ├── mcp_servers.csv     ← 10 MCP servers across 6 teams (fleet inventory)

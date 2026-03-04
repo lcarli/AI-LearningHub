@@ -326,6 +326,9 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ## 📁 Supporting Files
 
+- 📥 [broken_cua.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/broken_cua.py)
+- 📥 [browser_tasks.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/browser_tasks.csv)
+
 ```
 lab-058/
 ├── browser_tasks.csv     ← 10 benchmark tasks (CUA + Playwright results, screenshots, risk)

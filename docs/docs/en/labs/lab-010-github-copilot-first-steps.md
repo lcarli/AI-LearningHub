@@ -255,6 +255,16 @@ Is there a more Pythonic way to write this?
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 exercise1_fibonacci.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py)
+- [📥 exercise2_shopping_cart.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py)
+- [📥 exercise3_product_search.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py)
+- [📥 exercise4_refactor_me.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
+
+---
+
 ## Next Steps
 
 - **Build a no-code Teams agent:** → [Lab 011 — Copilot Studio](lab-011-copilot-studio-first-agent.md)

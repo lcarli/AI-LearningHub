@@ -304,6 +304,14 @@ Let's make it interactive:
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 hello_agent_starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/hello_agent_starter.py)
+- [📥 requirements.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/requirements.txt)
+
+---
+
 ## Summary
 
 You've built your first **Semantic Kernel agent** that:

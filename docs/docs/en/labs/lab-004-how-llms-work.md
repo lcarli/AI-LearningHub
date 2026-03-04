@@ -217,18 +217,41 @@ This is why LLMs understand context so well — every word is interpreted in rel
 
 ## 🧠 Knowledge Check
 
-??? question "1. Approximately how many characters is one token?"
-    Roughly **4 characters** (about ¾ of a word). "Hello world" = 2 tokens. A 1,000-word document ≈ 1,300 tokens. This matters for cost (billed per token) and context window limits.
+??? question "**Q1 (Multiple Choice):** Approximately how many tokens is the sentence *'Hello world'*?"
 
-??? question "2. Name two reasons why LLMs hallucinate."
-    Any two of these:
-    1. **Predicts likely text, not true text** — a plausible-sounding answer scores higher than "I don't know"
-    2. **Training data has gaps and noise** — if the web said something wrong enough times, the model learned it
-    3. **No external memory** — the model can't "look things up," it generates from learned patterns
-    4. **Context window limits** — details from early in a long conversation can be "forgotten"
+    - A) 1 token
+    - B) 2 tokens
+    - C) 6 tokens
+    - D) 10 tokens
 
-??? question "3. What is the effect of setting temperature=0 when calling an LLM?"
-    The model always picks the **most probable next token** — output becomes **deterministic and reproducible**. Every run with the same input produces the same output. Use `temperature=0` when accuracy and consistency matter more than creativity (e.g., data extraction, structured output).
+    ??? success "✅ Reveal Answer"
+        **Correct: B — 2 tokens**
+
+        "Hello" is 1 token and "world" is 1 token. As a rule of thumb, 1 token ≈ 4 characters ≈ ¾ of a word. A 1,000-word document is approximately 1,300 tokens. This matters for both cost (APIs charge per token) and context window limits (GPT-4o has a 128K token context window).
+
+??? question "**Q2 (Multiple Choice):** You are calling an LLM for structured data extraction (e.g., parsing JSON from a customer email). Which temperature setting is most appropriate?"
+
+    - A) temperature = 1.5 (high creativity)
+    - B) temperature = 0.8 (moderate creativity)
+    - C) temperature = 0.0 (deterministic)
+    - D) temperature = 2.0 (maximum randomness)
+
+    ??? success "✅ Reveal Answer"
+        **Correct: C — temperature = 0.0**
+
+        When accuracy and reproducibility matter more than creativity, use `temperature=0`. This makes the model always pick the most probable next token — so the same input always produces the same output. For creative writing: use 0.7–1.0. For data extraction, SQL generation, or tool argument formatting: use 0.
+
+??? question "**Q3 (Multiple Choice):** An LLM confidently states that a fictional city in Brazil has a population of 2.3 million. This city doesn't exist. What is the primary cause?"
+
+    - A) The model's context window was too small
+    - B) The temperature was set too high
+    - C) The model predicts likely-sounding text rather than verified facts — it pattern-matched to similar real cities
+    - D) The system prompt was missing
+
+    ??? success "✅ Reveal Answer"
+        **Correct: C — LLMs predict likely text, not factual text**
+
+        LLMs are trained to predict the next token that is *statistically likely* given the context. A made-up city that resembles real cities in pattern ("São Paulo has 12M, Rio has 6M...") leads the model to generate a plausible-sounding but fabricated answer. This is hallucination. The fix is RAG or tool calling — force the model to look up facts rather than predict them.
 
 ---
 

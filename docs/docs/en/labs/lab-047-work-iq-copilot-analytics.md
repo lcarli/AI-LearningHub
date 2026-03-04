@@ -324,6 +324,10 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ## 📁 Supporting Files
 
+- 📥 [broken_scorecard.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/broken_scorecard.py)
+- 📥 [copilot_usage_data.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv)
+- 📥 [scorecard_builder.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/scorecard_builder.py)
+
 ```
 lab-047/
 ├── copilot_usage_data.csv     ← 52-user mock dataset (7 departments)

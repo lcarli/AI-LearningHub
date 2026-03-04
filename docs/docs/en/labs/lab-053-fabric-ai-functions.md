@@ -399,6 +399,9 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ## 📁 Supporting Files
 
+- 📥 [broken_pipeline.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/broken_pipeline.py)
+- 📥 [product_reviews.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/product_reviews.csv)
+
 ```
 lab-053/
 ├── product_reviews.csv    ← 20 product reviews (7 products, ratings 1–5)

@@ -299,6 +299,8 @@ docker stop pg-rls-demo && docker rm pg-rls-demo
 
 ## 📁 Supporting Files
 
+- 📥 [migrations](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-032/migrations)
+
 ```
 lab-032/
 └── migrations/

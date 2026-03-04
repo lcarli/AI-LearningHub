@@ -301,6 +301,9 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ## 📁 Supporting Files
 
+- 📥 [broken_slm.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/broken_slm.py)
+- 📥 [slm_benchmark.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv)
+
 ```
 lab-061/
 ├── slm_benchmark.csv    ← 15 tasks × 2 models (accuracy, latency, cost)

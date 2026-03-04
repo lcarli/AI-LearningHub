@@ -213,6 +213,9 @@ python lab-070/broken_ux.py
 
 ## 📁 Supporting Files
 
+- 📥 [broken_ux.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/broken_ux.py)
+- 📥 [ux_patterns.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/ux_patterns.csv)
+
 ```
 lab-070/
 ├── ux_patterns.csv          ← 12 UX patterns with satisfaction scores

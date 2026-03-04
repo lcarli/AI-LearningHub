@@ -147,14 +147,41 @@ MCP works with **all the platforms above** — and also with Claude Desktop, Ope
 
 ## 🧠 Knowledge Check
 
-??? question "1. Which Microsoft tool is best for building a no-code agent in Teams, with no coding required?"
-    **Copilot Studio.** It provides a GUI-based builder for agents that live inside Microsoft 365 / Teams, using natural language to define behavior, knowledge sources, and actions — no code needed.
+??? question "**Q1 (Multiple Choice):** You are a citizen developer with no coding experience. You need to build a Teams chatbot that answers HR policy questions from SharePoint. Which tool should you choose?"
 
-??? question "2. What does MCP stand for, and what is its role in the ecosystem?"
-    **Model Context Protocol.** MCP is a universal standard (like USB-C for AI tools) that lets *any* agent connect to *any* data source or tool via a common interface. It works across Copilot Studio, Foundry, Semantic Kernel, Claude, and others.
+    - A) AutoGen
+    - B) Semantic Kernel
+    - C) Copilot Studio
+    - D) Microsoft Foundry Agent Service
 
-??? question "3. What is the key difference between Semantic Kernel and AutoGen?"
-    **Semantic Kernel** is an SDK for building a **single sophisticated agent** — with plugins, memory, and planners. **AutoGen** is for **multi-agent orchestration** — multiple specialized agents collaborating, each doing a part of a complex task. SK focuses on depth; AutoGen focuses on breadth across agents.
+    ??? success "✅ Reveal Answer"
+        **Correct: C — Copilot Studio**
+
+        Copilot Studio is the **no-code/low-code** option designed for citizen developers and IT pros. It integrates natively with Teams and Microsoft 365, can point at SharePoint as a knowledge source, and requires zero code. AutoGen and Semantic Kernel require Python/C# development skills. Foundry is for developers building custom backends.
+
+??? question "**Q2 (Multiple Choice):** What does MCP (Model Context Protocol) solve in the AI agent ecosystem?"
+
+    - A) It provides a GUI builder for agents without coding
+    - B) It optimizes LLM token usage to reduce API costs
+    - C) It defines a universal standard so any agent can connect to any tool/data source through a common interface
+    - D) It manages authentication and role-based access control for agents
+
+    ??? success "✅ Reveal Answer"
+        **Correct: C**
+
+        MCP is described as "USB-C for AI tools" — a universal plug standard. Without MCP, connecting 5 agents to 5 tools requires 25 custom integrations. With MCP, each tool publishes one MCP server and every MCP-compatible agent can use it. It solves the N×M integration problem across the entire ecosystem.
+
+??? question "**Q3 (Multiple Choice):** What is the primary difference between Semantic Kernel and AutoGen?"
+
+    - A) Semantic Kernel is open-source; AutoGen is Microsoft-proprietary
+    - B) Semantic Kernel builds single sophisticated agents with plugins; AutoGen orchestrates multiple specialized agents collaborating on complex tasks
+    - C) AutoGen only works with GPT-4o; Semantic Kernel supports any LLM
+    - D) Semantic Kernel is for Python only; AutoGen supports Python and C#
+
+    ??? success "✅ Reveal Answer"
+        **Correct: B**
+
+        **Semantic Kernel** excels at building one deeply capable agent — with plugins, memory, planners, and structured tool use. **AutoGen** excels at orchestrating *multiple* agents — a researcher agent, a writer agent, a reviewer agent — each doing a specialized subtask and passing results between them. Both are open-source and support multiple LLMs.
 
 ---
 

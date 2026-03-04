@@ -266,6 +266,10 @@ python lab-049/broken_tracing.py
 
 ## 📁 Supporting Files
 
+- 📥 [broken_tracing.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/broken_tracing.py)
+- 📥 [sample_traces.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv)
+- 📥 [traced_agent.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/traced_agent.py)
+
 ```
 lab-049/
 ├── sample_traces.csv     ← 10 traces with latency, tokens, status

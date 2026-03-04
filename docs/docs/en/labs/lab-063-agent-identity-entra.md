@@ -310,6 +310,9 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ## 📁 Supporting Files
 
+- 📥 [broken_identity.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/broken_identity.py)
+- 📥 [identity_scenarios.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv)
+
 ```
 lab-063/
 ├── identity_scenarios.csv  ← 15 scenarios × 4 agents (auth flow, risk, compliance)

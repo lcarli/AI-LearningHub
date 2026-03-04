@@ -226,6 +226,9 @@ python lab-069/broken_manifest.py
 
 ## 📁 Supporting Files
 
+- 📥 [broken_manifest.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/broken_manifest.py)
+- 📥 [declarative_agent.json](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/declarative_agent.json)
+
 ```
 lab-069/
 ├── declarative_agent.json   ← Complete declarative agent manifest

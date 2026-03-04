@@ -286,6 +286,9 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ## 📁 Supporting Files
 
+- 📥 [broken_cache.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/broken_cache.py)
+- 📥 [cache_benchmark.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv)
+
 ```
 lab-071/
 ├── cache_benchmark.csv     ← 15-request benchmark (3 providers × 5 requests)

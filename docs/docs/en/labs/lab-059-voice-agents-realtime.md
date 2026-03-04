@@ -349,6 +349,9 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ## 📁 Supporting Files
 
+- 📥 [broken_voice.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/broken_voice.py)
+- 📥 [voice_sessions.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv)
+
 ```
 lab-059/
 ├── voice_sessions.csv    ← 15 voice sessions with latency, sentiment, and RAG data

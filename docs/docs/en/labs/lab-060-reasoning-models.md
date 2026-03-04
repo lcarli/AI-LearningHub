@@ -393,6 +393,9 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ## 📁 Supporting Files
 
+- 📥 [broken_reasoning.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/broken_reasoning.py)
+- 📥 [reasoning_benchmark.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv)
+
 ```
 lab-060/
 ├── reasoning_benchmark.csv    ← 12 problems × 3 models (accuracy, time, tokens)

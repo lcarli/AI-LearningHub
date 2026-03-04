@@ -289,6 +289,9 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ## 📁 Supporting Files
 
+- 📥 [broken_foundry.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/broken_foundry.py)
+- 📥 [foundry_agents.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv)
+
 ```
 lab-074/
 ├── foundry_agents.csv     ← 8-agent fleet (2 orchestrators + 6 specialists)

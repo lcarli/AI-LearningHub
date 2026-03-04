@@ -239,6 +239,8 @@ Scores are 1–5. Below 3.0 on groundedness usually indicates hallucination.
 
 ## 📁 Supporting Files
 
+- 📥 [eval_dataset.jsonl](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl)
+
 ```
 lab-035/
 └── eval_dataset.jsonl    ← 20 OutdoorGear Q&A pairs for evaluation

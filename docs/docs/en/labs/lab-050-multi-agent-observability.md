@@ -302,6 +302,10 @@ python lab-050/broken_conventions.py
 
 ## 📁 Supporting Files
 
+- 📥 [broken_conventions.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/broken_conventions.py)
+- 📥 [dashboard_builder.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/dashboard_builder.py)
+- 📥 [multi_agent_spans.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/multi_agent_spans.csv)
+
 ```
 lab-050/
 ├── multi_agent_spans.csv    ← 46 spans across 5 traces (hierarchical)

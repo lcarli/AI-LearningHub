@@ -259,6 +259,9 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ## 📁 Supporting Files
 
+- 📥 [broken_structured.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/broken_structured.py)
+- 📥 [structured_outputs.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv)
+
 ```
 lab-072/
 ├── structured_outputs.csv     ← 15 extraction tests (10 schema + 5 no-schema)

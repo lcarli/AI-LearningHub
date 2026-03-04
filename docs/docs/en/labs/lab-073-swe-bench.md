@@ -260,6 +260,9 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ## 📁 Supporting Files
 
+- 📥 [broken_benchmark.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/broken_benchmark.py)
+- 📥 [swe_bench_results.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/swe_bench_results.csv)
+
 ```
 lab-073/
 ├── swe_bench_results.csv     ← 8 agent configs (3 models × multiple strategies)

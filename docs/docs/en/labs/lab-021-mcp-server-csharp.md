@@ -233,6 +233,13 @@ dotnet run
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 BrokenMcpServer.cs](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs)
+
+---
+
 ## 🧠 Knowledge Check
 
 ??? question "**Q1 (Run the Lab):** After fixing all 3 bugs and calling `list_categories()`, what does the tool return? List the categories in the order they appear in the output."

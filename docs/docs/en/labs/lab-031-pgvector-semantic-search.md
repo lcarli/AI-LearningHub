@@ -263,6 +263,8 @@ az group delete --name rg-ai-labs-rag --yes --no-wait
 
 ## 📁 Supporting Files
 
+- 📥 [migrations](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-031/migrations)
+
 This lab includes a complete SQL migration you can run directly on your Azure PostgreSQL instance:
 
 ```

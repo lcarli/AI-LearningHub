@@ -227,6 +227,9 @@ python lab-067/broken_graphrag.py
 
 ## 📁 Supporting Files
 
+- 📥 [broken_graphrag.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/broken_graphrag.py)
+- 📥 [knowledge_graph.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/knowledge_graph.csv)
+
 ```
 lab-067/
 ├── knowledge_graph.csv     ← 15 entities with relationships and communities

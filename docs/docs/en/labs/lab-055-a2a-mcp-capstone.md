@@ -367,6 +367,9 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ## 📁 Supporting Files
 
+- 📥 [broken_delegation.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/broken_delegation.py)
+- 📥 [delegation_traces.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv)
+
 ```
 lab-055/
 ├── delegation_traces.csv    ← 20 trace events (8 A2A + 12 MCP calls)

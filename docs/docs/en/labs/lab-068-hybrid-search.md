@@ -213,6 +213,9 @@ python lab-068/broken_search.py
 
 ## 📁 Supporting Files
 
+- 📥 [broken_search.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/broken_search.py)
+- 📥 [search_comparison.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/search_comparison.csv)
+
 ```
 lab-068/
 ├── search_comparison.csv    ← 20 queries with recall/precision across 4 strategies

@@ -225,6 +225,9 @@ python lab-066/broken_governance.py
 
 ## 📁 Supporting Files
 
+- 📥 [broken_governance.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/broken_governance.py)
+- 📥 [studio_agents.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/studio_agents.csv)
+
 ```
 lab-066/
 ├── studio_agents.csv       ← 12 Copilot Studio agents across environments

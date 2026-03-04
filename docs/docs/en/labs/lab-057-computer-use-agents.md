@@ -285,6 +285,9 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ## 📁 Supporting Files
 
+- 📥 [broken_safety.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/broken_safety.py)
+- 📥 [desktop_tasks.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv)
+
 ```
 lab-057/
 ├── desktop_tasks.csv     ← 10 benchmark tasks (desktop + browser, with completion/risk data)

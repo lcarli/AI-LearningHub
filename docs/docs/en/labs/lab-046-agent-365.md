@@ -359,6 +359,10 @@ python lab-046/broken_observability.py
 
 ## 📁 Supporting Files
 
+- 📥 [a365.config.sample.json](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/a365.config.sample.json)
+- 📥 [broken_observability.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/broken_observability.py)
+- 📥 [outdoorgear_a365_starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/outdoorgear_a365_starter.py)
+
 ```
 lab-046/
 ├── outdoorgear_a365_starter.py   ← Starter agent with 5 TODOs + Agent 365 integration points

@@ -283,6 +283,13 @@ python lab-023/broken_plugin.py
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 broken_plugin.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py)
+
+---
+
 ## 🧠 Knowledge Check
 
 ??? question "**Q1 (Run the Lab):** After fixing bug #2, what does `get_cart_total()` return when the cart contains P001 (×1) at $249.99 and P007 (×1) at $89.99?"

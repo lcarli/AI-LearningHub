@@ -261,6 +261,14 @@ The `Modelfile` creates a custom **OutdoorGear Advisor** persona on top of Phi-4
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 Modelfile](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile)
+- [📥 chat_starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py)
+
+---
+
 ## Summary
 
 You now have a fully local LLM stack:

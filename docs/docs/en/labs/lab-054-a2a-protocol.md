@@ -389,6 +389,9 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ## 📁 Supporting Files
 
+- 📥 [agent_cards.json](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json)
+- 📥 [broken_a2a.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/broken_a2a.py)
+
 ```
 lab-054/
 ├── agent_cards.json    ← 3 OutdoorGear agent cards (skills, capabilities, auth)

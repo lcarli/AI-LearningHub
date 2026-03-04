@@ -321,6 +321,9 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ## 📁 Supporting Files
 
+- 📥 [broken_connector.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/broken_connector.py)
+- 📥 [connector_comparison.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv)
+
 ```
 lab-056/
 ├── connector_comparison.csv    ← 20 queries (10 federated + 10 synced)

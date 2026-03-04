@@ -352,6 +352,9 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ## 📁 Supporting Files
 
+- 📥 [broken_ondevice.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/broken_ondevice.py)
+- 📥 [ondevice_tasks.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv)
+
 ```
 lab-062/
 ├── ondevice_tasks.csv     ← 15 tasks × NPU/cloud (availability, quality, latency)

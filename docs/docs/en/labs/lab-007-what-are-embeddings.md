@@ -207,6 +207,13 @@ This directly illustrates why RAG works: the embedding of a *question* and the e
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 embedding_explorer.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-007/embedding_explorer.py)
+
+---
+
 ## 🧠 Knowledge Check
 
 ??? question "**Q1 (Multiple Choice):** Two product descriptions have a cosine similarity of 0.95. What does this mean?"

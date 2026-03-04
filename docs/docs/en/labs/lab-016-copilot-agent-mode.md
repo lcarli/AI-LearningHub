@@ -260,6 +260,13 @@ Your request: "Fix all bugs"
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 outdoorgear_api.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py)
+
+---
+
 ## Summary
 
 - ✅ **Reads your codebase** — no copying/pasting code into chat

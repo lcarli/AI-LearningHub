@@ -207,6 +207,12 @@ User → Retrieve → Grade relevance → If poor: web search fallback
 
 ## 📁 Supporting Files
 
+- 📥 [faq_backpacks.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_backpacks.txt)
+- 📥 [faq_clothing.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_clothing.txt)
+- 📥 [faq_footwear.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_footwear.txt)
+- 📥 [faq_sleeping_bags.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_sleeping_bags.txt)
+- 📥 [faq_tents.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_tents.txt)
+
 This lab includes a sample knowledge base you can use to practice RAG concepts:
 
 ```

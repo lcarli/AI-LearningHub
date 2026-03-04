@@ -352,6 +352,9 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ## 📁 Supporting Files
 
+- 📥 [broken_alerting.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/broken_alerting.py)
+- 📥 [sensor_events.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/sensor_events.csv)
+
 ```
 lab-051/
 ├── sensor_events.csv      ← 50 sensor events (5 warehouses × 4 sensor types)

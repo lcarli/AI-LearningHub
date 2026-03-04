@@ -464,6 +464,15 @@ if __name__ == "__main__":
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 broken_query_gen.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/broken_query_gen.py)
+- [📥 orders.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/orders.csv)
+- [📥 products.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/products.csv)
+
+---
+
 ## Knowledge Check
 
 ??? question "**Q1 (Multiple Choice):** What security model does a Fabric Data Agent use for query execution?"

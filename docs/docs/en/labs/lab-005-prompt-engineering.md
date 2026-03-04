@@ -439,19 +439,50 @@ Or copy it from below:
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 prompt_challenges.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-005/prompt_challenges.py)
+
+---
+
 ## 🧠 Knowledge Check
 
-??? question "1. What is chain-of-thought prompting and when should you use it?"
-    Chain-of-thought adds explicit reasoning steps to the prompt — either by saying "think step by step" or showing examples where reasoning is demonstrated before the answer. Use it for **complex reasoning, math, multi-step problems, and code debugging**. It dramatically improves accuracy on tasks that require inference.
+??? question "**Q1 (Multiple Choice):** You are building an agent that needs to solve a multi-step math problem. Which prompting technique will most improve accuracy?"
 
-??? question "2. What are the three roles in an LLM message conversation?"
-    **System, User, and Assistant.**
-    - *System*: the agent's constitution — sets behavior, scope, and rules. The user never sees this directly.
-    - *User*: the human's input each turn.
-    - *Assistant*: the model's previous responses (included in subsequent calls to maintain context).
+    - A) Zero-shot prompting
+    - B) Role prompting (e.g., "You are a mathematician")
+    - C) Chain-of-thought prompting (e.g., "Think step by step")
+    - D) Structured output prompting
 
-??? question "3. Your agent keeps inventing product information that isn't in the database. Which prompt rule fixes this?"
-    Add to the system prompt: **"Never invent, estimate, or assume data. Only use outputs from the tools provided to you."** Also define what to say when information isn't found: *"If the product is not in the database, say 'I don't have that product in our catalog.'"* Defining the fallback behavior is as important as the rule itself.
+    ??? success "✅ Reveal Answer"
+        **Correct: C — Chain-of-thought prompting**
+
+        Chain-of-thought (CoT) forces the model to reason through intermediate steps before producing a final answer. This dramatically reduces errors on math, logic, and multi-step problems. "Think step by step" or showing few-shot examples with explicit reasoning both trigger CoT. Zero-shot works for simple tasks; role prompting helps with tone/expertise; structured output helps with formatting.
+
+??? question "**Q2 (Multiple Choice):** Which of the three conversation roles does the USER never directly see when interacting with an agent?"
+
+    - A) user
+    - B) assistant
+    - C) system
+    - D) function
+
+    ??? success "✅ Reveal Answer"
+        **Correct: C — system**
+
+        The `system` message is the agent's "constitution" — it sets the persona, rules, scope, and behavior. It's set by the developer and not visible to end users in the chat interface. The `user` role holds the human's inputs. The `assistant` role holds the model's previous responses (included in subsequent API calls to maintain context).
+
+??? question "**Q3 (Multiple Choice):** Your OutdoorGear agent keeps saying things like 'The TrailBlazer Tent probably weighs around 1.5kg' even though the exact weight is in the database. Which system prompt rule is the best fix?"
+
+    - A) "You are a helpful OutdoorGear assistant."
+    - B) "Never invent, estimate, or assume data. Only use outputs from the tools provided to you. If the product is not found, say: 'I don't have that information in our catalog.'"
+    - C) "Think step by step before answering."
+    - D) "Always respond in JSON format."
+
+    ??? success "✅ Reveal Answer"
+        **Correct: B**
+
+        The key is two instructions working together: (1) the prohibition on inventing/estimating data, and (2) an explicit fallback phrase for when data is unavailable. Without the fallback, the model will invent an answer rather than say nothing. Grounding rules + fallback behavior together prevent hallucination in tool-using agents.
 
 ---
 

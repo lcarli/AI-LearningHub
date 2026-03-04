@@ -232,6 +232,14 @@ For lab purposes, these limits are more than sufficient. If you hit a limit, wai
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 requirements.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/requirements.txt)
+- [📥 starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py)
+
+---
+
 ## Summary
 
 GitHub Models gives you **free access to frontier LLMs** using just your GitHub account. You can use the playground browser UI or call the API from Python/C#/REST. The API is OpenAI-compatible, so any code that works with OpenAI works here too.

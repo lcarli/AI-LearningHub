@@ -291,6 +291,9 @@ python lab-065/broken_dspm.py
 
 ## 📁 Supporting Files
 
+- 📥 [ai_interactions.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-065/ai_interactions.csv)
+- 📥 [broken_dspm.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-065/broken_dspm.py)
+
 ```
 lab-065/
 ├── ai_interactions.csv    ← 20 AI interactions across departments

@@ -291,6 +291,9 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ## 📁 Supporting Files
 
+- 📥 [broken_powerbi.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/broken_powerbi.py)
+- 📥 [powerbi_reports.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv)
+
 ```
 lab-075/
 ├── powerbi_reports.csv     ← 10 reports (2 manual + 4 assisted + 4 generated)

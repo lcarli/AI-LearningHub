@@ -292,6 +292,13 @@ The agent should call `compare_products(["P001", "P003"])` and return a structur
 
 ---
 
+
+## 📥 Download Supporting Files
+
+- [📥 outdoorgear_mcp_server_starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-020/outdoorgear_mcp_server_starter.py)
+
+---
+
 ## Summary
 
 You've built a fully functional MCP server that:

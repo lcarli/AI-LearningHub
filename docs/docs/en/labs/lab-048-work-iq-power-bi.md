@@ -400,6 +400,11 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ## 📁 Supporting Files
 
+- 📥 [broken_roi_calculator.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/broken_roi_calculator.py)
+- 📥 [business_outcomes.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv)
+- 📥 [copilot_quarterly_summary.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv)
+- 📥 [impact_analyzer.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/impact_analyzer.py)
+
 ```
 lab-048/
 ├── copilot_quarterly_summary.csv  ← 21-row aggregated usage data (7 depts × 3 months)
