@@ -1,0 +1,13 @@
+pattern_id,pattern_name,category,complexity,user_satisfaction,implementation_effort,accessibility_score,example_scenario
+P01,Simple Text Response,basic,low,3.2,low,95,Agent answers a simple FAQ question
+P02,Adaptive Card with Buttons,interactive,medium,4.5,medium,90,Agent shows product options with Buy/Details buttons
+P03,Carousel Card,interactive,medium,4.3,medium,85,Agent displays 3 product recommendations as swipeable cards
+P04,Form Input Card,interactive,high,4.1,high,80,Agent collects shipping address via structured form
+P05,Progressive Disclosure,advanced,high,4.7,high,88,Simple answer first then expandable details on demand
+P06,Proactive Notification,proactive,high,4.0,high,75,Agent alerts user about low stock on watched items
+P07,Error with Retry,error_handling,medium,3.8,medium,92,Tool call fails — agent explains and offers alternatives
+P08,Clarification Request,conversational,medium,4.2,medium,90,Agent asks which product the user means (ambiguity)
+P09,Multi-turn Context,conversational,high,4.6,high,85,Agent remembers preferences across conversation turns
+P10,Confirmation Before Action,safety,medium,4.4,low,95,Agent asks for confirmation before processing a refund
+P11,Typing Indicator,feedback,low,3.5,low,98,Shows typing dots while agent processes
+P12,Source Citation,trust,medium,4.8,medium,90,Agent cites SharePoint document for policy answer

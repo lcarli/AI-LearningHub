@@ -1,0 +1,48 @@
+{
+  "agent_name": "OutdoorGear Product Advisor",
+  "description": "Helps employees find product information, answer customer questions, and check inventory availability using OutdoorGear Inc. knowledge.",
+  "instructions": "You are the OutdoorGear Product Advisor. Help employees answer customer questions about products, policies, and orders. Always cite your sources. If you don't know the answer, say so clearly.",
+  "conversation_starters": [
+    "What tents do we have for winter camping?",
+    "What's our return policy for damaged items?",
+    "Show me our best-selling products this quarter",
+    "Help me draft a response to a customer complaint"
+  ],
+  "knowledge_sources": [
+    {
+      "type": "sharepoint",
+      "name": "Product Catalog",
+      "url": "https://outdoorgear.sharepoint.com/sites/products",
+      "description": "Full product catalog with specs, pricing, and inventory"
+    },
+    {
+      "type": "sharepoint",
+      "name": "Policy Documents",
+      "url": "https://outdoorgear.sharepoint.com/sites/policies",
+      "description": "Return, warranty, shipping, and employee policies"
+    },
+    {
+      "type": "graph_connector",
+      "name": "Order System",
+      "connector_id": "outdoorgear-orders",
+      "description": "Real-time order data from the ERP system"
+    }
+  ],
+  "api_plugins": [
+    {
+      "name": "Inventory Check",
+      "description": "Check real-time stock levels across all warehouses",
+      "openapi_url": "https://api.outdoorgear.com/openapi/inventory.json"
+    }
+  ],
+  "capabilities": {
+    "web_search": false,
+    "code_interpreter": false,
+    "image_generation": false
+  },
+  "admin_settings": {
+    "available_to": "entire_organization",
+    "require_admin_approval": true,
+    "data_classification": "confidential"
+  }
+}

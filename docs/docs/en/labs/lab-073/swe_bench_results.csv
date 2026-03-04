@@ -1,0 +1,9 @@
+agent_id,agent_name,model,benchmark,total_issues,resolved,resolve_rate_pct,avg_time_sec,avg_cost_usd,strategy
+AG01,Baseline GPT-4o,gpt-4o,swe-bench-lite,300,90,30.0,45,0.85,direct_prompt
+AG02,CoT GPT-4o,gpt-4o,swe-bench-lite,300,120,40.0,68,1.20,chain_of_thought
+AG03,Agentic GPT-4o,gpt-4o,swe-bench-lite,300,150,50.0,120,2.50,agentic_loop
+AG04,Baseline o3,o3,swe-bench-lite,300,135,45.0,90,3.00,direct_prompt
+AG05,Agentic o3,o3,swe-bench-lite,300,195,65.0,180,5.50,agentic_loop
+AG06,Baseline Claude,claude-3.5-sonnet,swe-bench-lite,300,105,35.0,55,0.95,direct_prompt
+AG07,Agentic Claude,claude-3.5-sonnet,swe-bench-lite,300,168,56.0,145,3.20,agentic_loop
+AG08,Mini SWE-agent,gpt-4o,swe-bench-verified,500,175,35.0,95,1.80,mini_swe_agent

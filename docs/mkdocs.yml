@@ -53,6 +53,10 @@ nav:
           - "Lab 017: Structured Output & JSON Mode": labs/lab-017-structured-output.md
           - "Lab 018: Function Calling & Tool Use": labs/lab-018-function-calling.md
           - "Lab 019: Streaming Responses in Agents": labs/lab-019-streaming-responses.md
+          - "Lab 069: Declarative Agents for M365 Copilot": labs/lab-069-declarative-agents.md
+          - "Lab 070: Agent UX Patterns": labs/lab-070-agent-ux-patterns.md
+          - "Lab 072: Structured Outputs — Guaranteed JSON": labs/lab-072-structured-outputs.md
+          - "Lab 075: Power BI Copilot — Analytics": labs/lab-075-powerbi-copilot.md
 
       - "L200 — Intermediate":
           - "Lab 020: MCP Server in Python": labs/lab-020-mcp-server-python.md
@@ -71,6 +75,7 @@ nav:
           - "Lab 059: Voice Agents — Realtime API": labs/lab-059-voice-agents-realtime.md
           - "Lab 060: Reasoning Models — o3 & DeepSeek R1": labs/lab-060-reasoning-models.md
           - "Lab 061: SLMs — Phi-4 Mini": labs/lab-061-slm-phi4-mini.md
+          - "Lab 068: Hybrid Search — Vector + BM25": labs/lab-068-hybrid-search.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
@@ -96,6 +101,11 @@ nav:
           - "Lab 062: On-Device Agents — Phi Silica": labs/lab-062-ondevice-phi-silica.md
           - "Lab 063: Agent Identity — Entra OBO": labs/lab-063-agent-identity-entra.md
           - "Lab 065: Purview DSPM for AI": labs/lab-065-purview-dspm-ai.md
+          - "Lab 066: Copilot Studio Governance": labs/lab-066-copilot-studio-governance.md
+          - "Lab 067: GraphRAG — Knowledge Graphs": labs/lab-067-graphrag.md
+          - "Lab 071: Context Caching": labs/lab-071-context-caching.md
+          - "Lab 073: Agent Benchmarking — SWE-bench": labs/lab-073-swe-bench.md
+          - "Lab 074: Foundry Agent Service": labs/lab-074-foundry-agent-service.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
@@ -108,7 +118,6 @@ nav:
 
   - Glossary: glossary.md
   - What's New: whats-new.md
-  - "🗺️ Proposed Labs": proposed-labs.md
   - Tags: tags.md
 
 plugins:

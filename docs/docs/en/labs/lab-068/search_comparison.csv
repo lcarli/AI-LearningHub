@@ -1,0 +1,21 @@
+query_id,query_text,query_type,search_strategy,results_count,relevant_results,precision,recall,latency_ms,reranker_used
+Q01,What tents are waterproof?,keyword,bm25,15,4,0.27,0.57,45,false
+Q02,What tents are waterproof?,semantic,vector,10,5,0.50,0.71,120,false
+Q03,What tents are waterproof?,hybrid,hybrid_rrf,12,6,0.50,0.86,85,false
+Q04,What tents are waterproof?,hybrid+rerank,hybrid_rrf,12,7,0.58,1.00,150,true
+Q05,lightweight backpack for day hikes,keyword,bm25,20,3,0.15,0.43,42,false
+Q06,lightweight backpack for day hikes,semantic,vector,8,5,0.63,0.71,115,false
+Q07,lightweight backpack for day hikes,hybrid,hybrid_rrf,14,6,0.43,0.86,80,false
+Q08,lightweight backpack for day hikes,hybrid+rerank,hybrid_rrf,14,7,0.50,1.00,145,true
+Q09,return policy for damaged items,keyword,bm25,25,2,0.08,0.33,38,false
+Q10,return policy for damaged items,semantic,vector,6,4,0.67,0.67,110,false
+Q11,return policy for damaged items,hybrid,hybrid_rrf,10,5,0.50,0.83,78,false
+Q12,return policy for damaged items,hybrid+rerank,hybrid_rrf,10,6,0.60,1.00,140,true
+Q13,sleeping bag rated below 20 degrees,keyword,bm25,12,5,0.42,0.71,40,false
+Q14,sleeping bag rated below 20 degrees,semantic,vector,7,4,0.57,0.57,118,false
+Q15,sleeping bag rated below 20 degrees,hybrid,hybrid_rrf,10,6,0.60,0.86,82,false
+Q16,sleeping bag rated below 20 degrees,hybrid+rerank,hybrid_rrf,10,7,0.70,1.00,148,true
+Q17,best gear for rainy weather camping,keyword,bm25,30,2,0.07,0.29,48,false
+Q18,best gear for rainy weather camping,semantic,vector,8,5,0.63,0.71,125,false
+Q19,best gear for rainy weather camping,hybrid,hybrid_rrf,15,6,0.40,0.86,88,false
+Q20,best gear for rainy weather camping,hybrid+rerank,hybrid_rrf,15,7,0.47,1.00,155,true

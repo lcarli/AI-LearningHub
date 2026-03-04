@@ -1,0 +1,11 @@
+report_id,report_name,created_by,creation_method,pages,visuals,dax_measures,copilot_queries,time_saved_min,accuracy_score,department
+R01,Q1 Sales Dashboard,analyst,manual,5,18,8,0,0,0.95,Sales
+R02,Q1 Sales Dashboard v2,analyst,copilot_assisted,5,22,12,15,45,0.92,Sales
+R03,Customer Segmentation,business_user,copilot_generated,3,10,4,8,60,0.88,Marketing
+R04,Inventory Health Report,analyst,copilot_assisted,4,15,6,10,30,0.94,Operations
+R05,HR Headcount Analysis,business_user,copilot_generated,2,8,3,6,50,0.85,HR
+R06,Financial Summary,analyst,manual,6,25,15,0,0,0.97,Finance
+R07,Financial Summary v2,analyst,copilot_assisted,6,28,18,20,55,0.96,Finance
+R08,Marketing Campaign ROI,business_user,copilot_generated,3,12,5,9,65,0.82,Marketing
+R09,Supply Chain Dashboard,analyst,copilot_assisted,4,16,7,12,35,0.93,Operations
+R10,Employee Satisfaction,business_user,copilot_generated,2,9,3,7,55,0.86,HR

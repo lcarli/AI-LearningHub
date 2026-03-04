@@ -1,0 +1,13 @@
+agent_id,agent_name,creator_type,connector_count,http_actions,security_scan,runtime_protection,dlp_policy,audit_enabled,published,risk_level
+A01,Product FAQ Bot,citizen,3,0,passed,protected,applied,true,true,low
+A02,Order Status Agent,citizen,5,2,passed,protected,applied,true,true,medium
+A03,HR Benefits Agent,citizen,4,1,warning,partial,applied,true,true,medium
+A04,Sales Dashboard Bot,citizen,8,5,failed,unprotected,not_applied,false,false,high
+A05,IT Helpdesk Agent,pro_dev,6,3,passed,protected,applied,true,true,low
+A06,Customer Sentiment Agent,citizen,7,4,warning,partial,not_applied,true,true,high
+A07,Finance Report Agent,pro_dev,4,2,passed,protected,applied,true,true,medium
+A08,Marketing Email Agent,citizen,10,8,failed,unprotected,not_applied,false,true,critical
+A09,Legal Contract Agent,pro_dev,3,1,passed,protected,applied,true,true,low
+A10,Inventory Alert Agent,citizen,6,3,warning,partial,applied,true,false,medium
+A11,Recruitment Screener,citizen,5,2,failed,unprotected,not_applied,false,false,high
+A12,Executive Summary Agent,pro_dev,4,1,passed,protected,applied,true,true,low
