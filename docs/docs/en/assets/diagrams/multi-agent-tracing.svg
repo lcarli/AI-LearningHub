@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="900" height="440" fill="#f8f9fa" rx="12"/>
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Multi-Agent Observability — Trace Hierarchy</text>
+
+  <!-- Trace timeline -->
+  <text x="50" y="62" font-size="11" font-weight="600" fill="#94a3b8">TRACE A001 — Product Search</text>
+  <rect x="50" y="70" width="800" height="8" rx="4" fill="#e2e8f0"/>
+
+  <!-- Router Agent -->
+  <rect x="50" y="85" width="800" height="35" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1" filter="url(#shadow)"/>
+  <text x="60" y="107" font-size="10" font-weight="600" fill="#1e40af">🤖 Router Agent</text>
+  <text x="750" y="107" text-anchor="end" font-size="9" fill="#3b82f6">gen_ai.agent.name = "Router" · 4200ms</text>
+
+  <!-- Classify LLM call -->
+  <rect x="70" y="128" width="140" height="28" rx="5" fill="#fef9c3" stroke="#eab308" stroke-width="1"/>
+  <text x="140" y="147" text-anchor="middle" font-size="9" font-weight="600" fill="#a16207">classify · gpt-4o-mini</text>
+
+  <!-- Product Specialist -->
+  <rect x="220" y="128" width="420" height="28" rx="5" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <text x="230" y="147" font-size="9" font-weight="600" fill="#16a34a">🤖 ProductSpec</text>
+  <text x="560" y="147" text-anchor="end" font-size="9" fill="#22c55e">2800ms</text>
+
+  <!-- Specialist children -->
+  <rect x="240" y="163" width="150" height="24" rx="4" fill="#fef9c3" stroke="#eab308" stroke-width="0.8"/>
+  <text x="315" y="179" text-anchor="middle" font-size="8" fill="#a16207">search_reasoning · gpt-4o</text>
+
+  <rect x="400" y="163" width="80" height="24" rx="4" fill="#fce7f3" stroke="#ec4899" stroke-width="0.8"/>
+  <text x="440" y="179" text-anchor="middle" font-size="8" fill="#be185d">🔧 search_products</text>
+
+  <rect x="490" y="163" width="140" height="24" rx="4" fill="#fef9c3" stroke="#eab308" stroke-width="0.8"/>
+  <text x="560" y="179" text-anchor="middle" font-size="8" fill="#a16207">format_response · gpt-4o</text>
+
+  <!-- Reviewer -->
+  <rect x="650" y="128" width="180" height="28" rx="5" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="660" y="147" font-size="9" font-weight="600" fill="#6d28d9">🤖 Reviewer</text>
+  <text x="770" y="147" text-anchor="end" font-size="9" fill="#8b5cf6">✅ 0.95</text>
+
+  <rect x="670" y="163" width="140" height="24" rx="4" fill="#fef9c3" stroke="#eab308" stroke-width="0.8"/>
+  <text x="740" y="179" text-anchor="middle" font-size="8" fill="#a16207">quality_check · gpt-4o-mini</text>
+
+  <!-- Arrows showing handoff -->
+  <line x1="210" y1="142" x2="220" y2="142" stroke="#64748b" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="640" y1="142" x2="650" y2="142" stroke="#64748b" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- GenAI conventions section -->
+  <text x="50" y="225" font-size="13" font-weight="600" fill="#475569">GenAI Semantic Conventions — Standard Attributes</text>
+
+  <!-- Agent conventions -->
+  <rect x="30" y="240" width="260" height="90" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1" filter="url(#shadow)"/>
+  <text x="160" y="262" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">Agent Spans</text>
+  <text x="45" y="280" font-size="9" fill="#3b82f6" font-family="Consolas, monospace">gen_ai.agent.name</text>
+  <text x="45" y="294" font-size="9" fill="#3b82f6" font-family="Consolas, monospace">gen_ai.agent.id</text>
+  <text x="45" y="308" font-size="9" fill="#3b82f6" font-family="Consolas, monospace">gen_ai.operation.name</text>
+  <text x="45" y="322" font-size="9" fill="#3b82f6" font-family="Consolas, monospace">kind = INTERNAL</text>
+
+  <!-- Model conventions -->
+  <rect x="310" y="240" width="260" height="90" rx="8" fill="#fef9c3" stroke="#eab308" stroke-width="1" filter="url(#shadow)"/>
+  <text x="440" y="262" text-anchor="middle" font-size="11" font-weight="600" fill="#a16207">Model Spans</text>
+  <text x="325" y="280" font-size="9" fill="#ca8a04" font-family="Consolas, monospace">gen_ai.request.model</text>
+  <text x="325" y="294" font-size="9" fill="#ca8a04" font-family="Consolas, monospace">gen_ai.usage.input_tokens</text>
+  <text x="325" y="308" font-size="9" fill="#ca8a04" font-family="Consolas, monospace">gen_ai.usage.output_tokens</text>
+  <text x="325" y="322" font-size="9" fill="#ca8a04" font-family="Consolas, monospace">kind = CLIENT</text>
+
+  <!-- Tool conventions -->
+  <rect x="590" y="240" width="280" height="90" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1" filter="url(#shadow)"/>
+  <text x="730" y="262" text-anchor="middle" font-size="11" font-weight="600" fill="#be185d">Tool Spans</text>
+  <text x="605" y="280" font-size="9" fill="#ec4899" font-family="Consolas, monospace">gen_ai.tool.name</text>
+  <text x="605" y="294" font-size="9" fill="#ec4899" font-family="Consolas, monospace">gen_ai.tool.call.id</text>
+  <text x="605" y="308" font-size="9" fill="#ec4899" font-family="Consolas, monospace">gen_ai.response.finish_reason</text>
+  <text x="605" y="322" font-size="9" fill="#ec4899" font-family="Consolas, monospace">kind = CLIENT</text>
+
+  <!-- Framework compatibility -->
+  <rect x="30" y="355" width="840" height="55" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="450" y="375" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Works Across Frameworks</text>
+  <rect x="60" y="385" width="130" height="20" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="125" y="399" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">Azure AI Foundry</text>
+  <rect x="210" y="385" width="130" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="275" y="399" text-anchor="middle" font-size="9" font-weight="600" fill="#16a34a">Semantic Kernel</text>
+  <rect x="360" y="385" width="100" height="20" rx="4" fill="#fef9c3" stroke="#eab308" stroke-width="0.8"/>
+  <text x="410" y="399" text-anchor="middle" font-size="9" font-weight="600" fill="#a16207">LangChain</text>
+  <rect x="480" y="385" width="100" height="20" rx="4" fill="#ede9fe" stroke="#8b5cf6" stroke-width="0.8"/>
+  <text x="530" y="399" text-anchor="middle" font-size="9" font-weight="600" fill="#6d28d9">LangGraph</text>
+  <rect x="600" y="385" width="100" height="20" rx="4" fill="#fce7f3" stroke="#ec4899" stroke-width="0.8"/>
+  <text x="650" y="399" text-anchor="middle" font-size="9" font-weight="600" fill="#be185d">AutoGen</text>
+  <rect x="720" y="385" width="130" height="20" rx="4" fill="#ffedd5" stroke="#f97316" stroke-width="0.8"/>
+  <text x="785" y="399" text-anchor="middle" font-size="9" font-weight="600" fill="#c2410c">Plain OpenAI SDK</text>
+
+  <text x="450" y="432" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">OTel GenAI semantic conventions provide a standard vocabulary for all agent frameworks</text>
+</svg>

@@ -31,50 +31,12 @@
 
 ## 2. Foundry IQ — Azure AI Foundry Observability
 
-### Lab 049: Foundry IQ — Agent Tracing with OpenTelemetry in Azure AI Foundry
-> *Proposed by: GPT-5.2 + Gemini + Claude Opus (consolidated)*
+## 2. Foundry IQ — Azure AI Foundry Observability
 
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Foundry / Observability |
-| **Time** | ~75 min |
-| **Cost** | Azure paid |
-
-**What you'll learn:**
-- Instrument agent runs with OpenTelemetry spans and attributes (GenAI semantic conventions)
-- Export traces to Azure Monitor / Application Insights and Foundry portal
-- Run automated evaluations (groundedness, coherence, relevance) on agent outputs in real-time
-- Visualize token usage, latency, cost, and quality metrics on dashboards
-- Configure alerts for quality degradation and cost anomalies
-- Redact sensitive content and control message recording via environment flags
-
-**Why it's exciting:** Production agents fail silently — responses degrade, costs spike, models drift. "Foundry IQ" provides the mission-control observability needed to run agents reliably at enterprise scale.
-
-**Key technologies:** Azure AI Foundry SDK, OpenTelemetry, Azure Monitor, Application Insights, Azure AI Evaluation SDK
-
----
-
-### Lab 050: Foundry IQ — Multi-Agent Observability with GenAI Semantic Conventions
-> *Proposed by: GPT-5.2*
-
-| | |
-|---|---|
-| **Level** | L400 — Expert |
-| **Category** | Foundry / Enterprise / Observability |
-| **Time** | ~120 min |
-| **Cost** | Azure paid |
-
-**What you'll learn:**
-- Apply GenAI semantic conventions: model spans, agent spans, tool call attributes
-- Trace agent-to-agent handoffs, planning steps, memory/state management events
-- Standardize telemetry across polyglot stacks (Foundry, Semantic Kernel, LangChain, LangGraph)
-- Build "quality / safety / cost" dashboards from trace attributes in Azure Monitor
-- Correlate traces with evaluation results to identify failure patterns
-
-**Why it's exciting:** 2025-2026 agent stacks are polyglot. Standardized telemetry is the only way to compare reliability across teams, models, and frameworks in a heterogeneous enterprise.
-
-**Key technologies:** OpenTelemetry GenAI semantic conventions, W3C trace context, Azure Monitor, App Insights, multi-framework comparison
+> ✅ **Labs 049 and 050 have been implemented!**
+>
+> - [Lab 049: Foundry IQ — Agent Tracing with OpenTelemetry](labs/lab-049-foundry-iq-agent-tracing.md) (L300)
+> - [Lab 050: Multi-Agent Observability with GenAI Semantic Conventions](labs/lab-050-multi-agent-observability.md) (L400)
 
 ---
 
@@ -675,8 +637,8 @@
 |-----|-------|-------|----------|------|------|
 | ~~047~~ | ~~Work IQ — Copilot Adoption Dashboard~~ ✅ | L200 | Enterprise | 45m | Free |
 | ~~048~~ | ~~Work IQ — Custom Impact Analytics + Power BI~~ ✅ | L300 | Enterprise | 90m | Free |
-| 049 | Foundry IQ — Agent Tracing with OpenTelemetry | L300 | Foundry | 75m | Azure |
-| 050 | Foundry IQ — Multi-Agent Observability | L400 | Foundry | 120m | Azure |
+| ~~049~~ | ~~Foundry IQ — Agent Tracing with OpenTelemetry~~ ✅ | L300 | Foundry | 75m | Free |
+| ~~050~~ | ~~Foundry IQ — Multi-Agent Observability~~ ✅ | L400 | Foundry | 120m | Free |
 | 051 | Fabric IQ — Real-Time Intelligence Agents | L300 | Fabric | 75m | Fabric |
 | 052 | Fabric IQ — Conversational Data Agent (NL→SQL) | L200 | Fabric | 75m | Fabric |
 | 053 | Fabric IQ — Batch AI Enrichment with AI Functions | L300 | Fabric | 90m | Fabric |
