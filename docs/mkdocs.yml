@@ -66,6 +66,7 @@ nav:
           - "Lab 029: LangChain & LangGraph Basics": labs/lab-029-langchain-langgraph.md
           - "Lab 045: GitHub Copilot Workspace": labs/lab-045-copilot-workspace.md
           - "Lab 047: Work IQ — Copilot Analytics": labs/lab-047-work-iq-copilot-analytics.md
+          - "Lab 052: Fabric IQ — Conversational Data Agent": labs/lab-052-fabric-conversational-agent.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
@@ -83,6 +84,8 @@ nav:
           - "Lab 046: Microsoft Agent 365 — Enterprise Governance": labs/lab-046-agent-365.md
           - "Lab 048: Work IQ — Impact Analytics & Power BI": labs/lab-048-work-iq-power-bi.md
           - "Lab 049: Foundry IQ — Agent Tracing": labs/lab-049-foundry-iq-agent-tracing.md
+          - "Lab 051: Fabric IQ — Real-Time Intelligence": labs/lab-051-fabric-rti-agents.md
+          - "Lab 053: Fabric IQ — AI Functions": labs/lab-053-fabric-ai-functions.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md

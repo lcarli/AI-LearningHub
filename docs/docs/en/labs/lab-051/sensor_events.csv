@@ -1,0 +1,51 @@
+timestamp,warehouse_id,warehouse_city,sensor_type,value,unit
+2026-03-01T10:00:00Z,WH-NYC,New York,temperature,22.5,celsius
+2026-03-01T10:00:30Z,WH-NYC,New York,humidity,55.0,percent
+2026-03-01T10:01:00Z,WH-NYC,New York,stock_level,42,units
+2026-03-01T10:02:00Z,WH-NYC,New York,temperature,38.0,celsius
+2026-03-01T10:03:00Z,WH-NYC,New York,stock_level,45,units
+2026-03-01T10:04:00Z,WH-NYC,New York,humidity,60.0,percent
+2026-03-01T10:05:00Z,WH-NYC,New York,door_opens,5,count
+2026-03-01T10:06:00Z,WH-NYC,New York,temperature,21.0,celsius
+2026-03-01T10:07:00Z,WH-NYC,New York,stock_level,40,units
+2026-03-01T10:08:00Z,WH-NYC,New York,door_opens,3,count
+2026-03-01T10:00:00Z,WH-LAX,Los Angeles,temperature,24.0,celsius
+2026-03-01T10:01:00Z,WH-LAX,Los Angeles,humidity,45.0,percent
+2026-03-01T10:02:00Z,WH-LAX,Los Angeles,stock_level,30,units
+2026-03-01T10:03:00Z,WH-LAX,Los Angeles,temperature,25.5,celsius
+2026-03-01T10:04:00Z,WH-LAX,Los Angeles,stock_level,8,units
+2026-03-01T10:05:00Z,WH-LAX,Los Angeles,humidity,50.0,percent
+2026-03-01T10:06:00Z,WH-LAX,Los Angeles,door_opens,4,count
+2026-03-01T10:07:00Z,WH-LAX,Los Angeles,temperature,23.0,celsius
+2026-03-01T10:08:00Z,WH-LAX,Los Angeles,stock_level,3,units
+2026-03-01T10:09:00Z,WH-LAX,Los Angeles,door_opens,6,count
+2026-03-01T10:00:00Z,WH-CHI,Chicago,temperature,20.0,celsius
+2026-03-01T10:01:00Z,WH-CHI,Chicago,humidity,65.0,percent
+2026-03-01T10:02:00Z,WH-CHI,Chicago,stock_level,55,units
+2026-03-01T10:03:00Z,WH-CHI,Chicago,temperature,19.5,celsius
+2026-03-01T10:04:00Z,WH-CHI,Chicago,stock_level,60,units
+2026-03-01T10:05:00Z,WH-CHI,Chicago,humidity,85.0,percent
+2026-03-01T10:06:00Z,WH-CHI,Chicago,door_opens,3,count
+2026-03-01T10:07:00Z,WH-CHI,Chicago,temperature,21.0,celsius
+2026-03-01T10:08:00Z,WH-CHI,Chicago,stock_level,52,units
+2026-03-01T10:09:00Z,WH-CHI,Chicago,door_opens,2,count
+2026-03-01T10:00:00Z,WH-DAL,Dallas,temperature,28.0,celsius
+2026-03-01T10:01:00Z,WH-DAL,Dallas,humidity,40.0,percent
+2026-03-01T10:02:00Z,WH-DAL,Dallas,stock_level,38,units
+2026-03-01T10:03:00Z,WH-DAL,Dallas,temperature,32.0,celsius
+2026-03-01T10:04:00Z,WH-DAL,Dallas,stock_level,35,units
+2026-03-01T10:05:00Z,WH-DAL,Dallas,humidity,38.0,percent
+2026-03-01T10:06:00Z,WH-DAL,Dallas,door_opens,8,count
+2026-03-01T10:07:00Z,WH-DAL,Dallas,temperature,35.0,celsius
+2026-03-01T10:08:00Z,WH-DAL,Dallas,stock_level,40,units
+2026-03-01T10:09:00Z,WH-DAL,Dallas,door_opens,6,count
+2026-03-01T10:00:00Z,WH-SEA,Seattle,temperature,18.0,celsius
+2026-03-01T10:01:00Z,WH-SEA,Seattle,humidity,70.0,percent
+2026-03-01T10:02:00Z,WH-SEA,Seattle,stock_level,30,units
+2026-03-01T10:03:00Z,WH-SEA,Seattle,temperature,17.5,celsius
+2026-03-01T10:04:00Z,WH-SEA,Seattle,stock_level,28,units
+2026-03-01T10:05:00Z,WH-SEA,Seattle,humidity,75.0,percent
+2026-03-01T10:06:00Z,WH-SEA,Seattle,door_opens,3,count
+2026-03-01T10:07:00Z,WH-SEA,Seattle,temperature,19.0,celsius
+2026-03-01T10:08:00Z,WH-SEA,Seattle,stock_level,25,units
+2026-03-01T10:09:00Z,WH-SEA,Seattle,door_opens,1,count

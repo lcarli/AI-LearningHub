@@ -65,72 +65,11 @@
 
 ## 3. Fabric IQ — Microsoft Fabric AI & Real-Time Intelligence
 
-### Lab 051: Fabric IQ — Real-Time Intelligence Agents with Microsoft Fabric
-> *Proposed by: Gemini + Claude Opus (consolidated)*
-
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Fabric / Enterprise |
-| **Time** | ~75 min |
-| **Cost** | Microsoft Fabric capacity (paid) |
-
-**What you'll learn:**
-- Set up Eventstreams to ingest real-time IoT / CDC / clickstream data into Fabric
-- Use KQL (Kusto Query Language) in Eventhouses for time-series analytics and anomaly detection
-- Configure Fabric Activator to trigger agent actions based on data patterns (anomaly → alert → agent)
-- Build real-time dashboards with Copilot-assisted KQL query generation
-- Chain an AI agent that reads Eventhouse data via MCP to answer natural-language questions about live streams
-
-**Why it's exciting:** Agents that don't just *chat*, but *react* to live business data in milliseconds are the next frontier of intelligent automation. Fabric RTI + AI = event-driven intelligence at enterprise scale.
-
-**Key technologies:** Microsoft Fabric Eventstreams, Eventhouse, KQL, Fabric Activator, Real-Time Hub, MCP integration
-
----
-
-### Lab 052: Fabric IQ — Conversational Data Agent (NL→SQL/DAX/KQL) over OneLake
-> *Proposed by: GPT-5.2*
-
-| | |
-|---|---|
-| **Level** | L200 — Intermediate |
-| **Category** | Fabric / Enterprise |
-| **Time** | ~75 min |
-| **Cost** | Microsoft Fabric capacity (paid, F2+) |
-
-**What you'll learn:**
-- Build a Fabric Data Agent that translates natural language to SQL/DAX/KQL
-- Enforce least-privilege answers — queries run under user's Entra identity
-- Connect multiple data sources: lakehouse, warehouse, semantic models, KQL database
-- Inspect generated queries for transparency and audit purposes
-- Share the agent for "self-serve analytics via chat" across the organization
-
-**Why it's exciting:** Fabric is becoming the "agentic BI plane" — data agents let non-technical users safely query governed enterprise data in natural language, with full auditability.
-
-**Key technologies:** Microsoft Fabric Data Agent, OneLake, Entra ID identity-bound access, Azure OpenAI (managed)
-
----
-
-### Lab 053: Fabric IQ — Batch AI Enrichment with Fabric AI Functions
-> *Proposed by: GPT-5.2*
-
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Fabric / Pro Code |
-| **Time** | ~90 min |
-| **Cost** | Microsoft Fabric capacity (paid) |
-
-**What you'll learn:**
-- Use `ai.embed()`, `ai.classify()`, `ai.extract()`, `ai.summarize()` in pandas/Spark pipelines
-- Tune concurrency and batch size for cost-optimal large-scale enrichment jobs
-- Swap providers/models (Azure OpenAI vs Foundry resources) without code changes
-- Apply reasoning-model options for higher-quality transformations on complex data
-- Build an end-to-end "AI ETL" pipeline: raw text → classified, enriched, embedded parquet
-
-**Why it's exciting:** "AI ETL" becomes normal in 2025-2026. Fabric AI Functions make LLM-powered enrichment feel like a native dataframe operation — no infrastructure, no API key management, just `ai.summarize(df.column)`.
-
-**Key technologies:** Fabric AI Functions (`ai.*`), Azure OpenAI, Foundry model catalog, Apache Spark, OneLake
+> ✅ **Labs 051, 052, and 053 have been implemented!**
+>
+> - [Lab 051: Fabric IQ — Real-Time Intelligence Agents](labs/lab-051-fabric-rti-agents.md) (L300)
+> - [Lab 052: Fabric IQ — Conversational Data Agent (NL→SQL)](labs/lab-052-fabric-conversational-agent.md) (L200)
+> - [Lab 053: Fabric IQ — Batch AI Enrichment with AI Functions](labs/lab-053-fabric-ai-functions.md) (L300)
 
 ---
 
@@ -639,9 +578,9 @@
 | ~~048~~ | ~~Work IQ — Custom Impact Analytics + Power BI~~ ✅ | L300 | Enterprise | 90m | Free |
 | ~~049~~ | ~~Foundry IQ — Agent Tracing with OpenTelemetry~~ ✅ | L300 | Foundry | 75m | Free |
 | ~~050~~ | ~~Foundry IQ — Multi-Agent Observability~~ ✅ | L400 | Foundry | 120m | Free |
-| 051 | Fabric IQ — Real-Time Intelligence Agents | L300 | Fabric | 75m | Fabric |
-| 052 | Fabric IQ — Conversational Data Agent (NL→SQL) | L200 | Fabric | 75m | Fabric |
-| 053 | Fabric IQ — Batch AI Enrichment with AI Functions | L300 | Fabric | 90m | Fabric |
+| ~~051~~ | ~~Fabric IQ — Real-Time Intelligence Agents~~ ✅ | L300 | Fabric | 75m | Free |
+| ~~052~~ | ~~Fabric IQ — Conversational Data Agent (NL→SQL)~~ ✅ | L200 | Fabric | 75m | Free |
+| ~~053~~ | ~~Fabric IQ — Batch AI Enrichment with AI Functions~~ ✅ | L300 | Fabric | 90m | Free |
 | 054 | A2A Protocol — Interoperable Multi-Agent Systems | L200 | Pro Code | 75m | Free |
 | 055 | A2A + MCP Full Stack (Capstone) | L400 | Pro Code | 120m | Azure |
 | 056 | Federated M365 Copilot Connectors with MCP | L300 | Copilot/MCP | 90m | M365 |

@@ -1,0 +1,21 @@
+review_id,product_id,product_name,category,rating,review_text
+R001,P001,Alpine Explorer Tent,Tents,5,Amazing tent! Held up perfectly in heavy rain. Setup was easy and spacious for two.
+R002,P001,Alpine Explorer Tent,Tents,4,Solid tent but a bit heavy for long hikes. Great for car camping though.
+R003,P001,Alpine Explorer Tent,Tents,5,Best tent I've ever owned. Worth every penny.
+R004,P001,Alpine Explorer Tent,Tents,3,Decent tent but nothing special at this price point. Expected more features.
+R005,P001,Alpine Explorer Tent,Tents,4,Good quality materials. Survived a storm with no issues.
+R006,P002,TrailMaster X4 Tent,Tents,4,Great ventilation and the zipper is smooth. Slightly cramped for two people.
+R007,P002,TrailMaster X4 Tent,Tents,2,Zipper broke after three uses. Disappointed with the quality.
+R008,P002,TrailMaster X4 Tent,Tents,4,Lightweight and easy to set up. Perfect for solo backpacking.
+R009,P004,Peak Performer Boots,Footwear,5,Incredible ankle support. Hiked 15 miles with zero blisters.
+R010,P004,Peak Performer Boots,Footwear,4,Comfortable from day one. No break-in period needed.
+R011,P004,Peak Performer Boots,Footwear,3,Good boots but they run a half size small. Order up.
+R012,P006,Explorer Pro Backpack,Backpacks,5,Perfect organization pockets. The hip belt distributes weight beautifully.
+R013,P006,Explorer Pro Backpack,Backpacks,4,Love the design. Only complaint is the water bottle pocket is too tight.
+R014,P006,Explorer Pro Backpack,Backpacks,2,Shoulder strap broke on my first trip. Terrible durability.
+R015,P007,DayTripper Pack,Backpacks,4,Great value for the price. Use it daily for commuting and weekend hikes.
+R016,P007,DayTripper Pack,Backpacks,3,It's fine for light use but not for serious hiking. Fabric feels thin.
+R017,P008,CozyNights Sleeping Bag,Sleeping Bags,5,Warm down to 20°F as advertised. Packs small and weighs nothing.
+R018,P008,CozyNights Sleeping Bag,Sleeping Bags,3,Adequate but the zipper snags sometimes. Not great for cold weather.
+R019,P010,Summit Water Bottle,Accessories,4,Keeps water cold for 24 hours. Durable and leak-proof.
+R020,P010,Summit Water Bottle,Accessories,1,Cap cracked on first drop. Cheap plastic construction.
