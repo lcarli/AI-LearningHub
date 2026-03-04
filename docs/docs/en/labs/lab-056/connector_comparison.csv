@@ -1,0 +1,21 @@
+query_id,query_text,connector_type,latency_ms,results_count,data_freshness_sec,data_size_kb,compliant
+Q01,Show all hiking boots,federated,450,5,0,12,true
+Q02,Show all hiking boots,synced,120,5,3600,12,true
+Q03,Find tents under $300,federated,520,3,0,8,true
+Q04,Find tents under $300,synced,95,3,7200,8,true
+Q05,Customer order history C001,federated,680,4,0,15,true
+Q06,Customer order history C001,synced,150,4,1800,15,true
+Q07,Inventory levels all warehouses,federated,380,25,0,45,true
+Q08,Inventory levels all warehouses,synced,110,25,900,45,true
+Q09,Patient medical records,federated,550,8,0,32,true
+Q10,Patient medical records,synced,130,8,3600,32,false
+Q11,Employee salary data,federated,420,12,0,28,true
+Q12,Employee salary data,synced,105,12,1800,28,false
+Q13,Product reviews search,federated,610,15,0,22,true
+Q14,Product reviews search,synced,88,15,14400,22,true
+Q15,Real-time stock prices,federated,290,10,0,5,true
+Q16,Real-time stock prices,synced,95,10,60,5,true
+Q17,Legal contract clauses,federated,480,6,0,18,true
+Q18,Legal contract clauses,synced,115,6,7200,18,false
+Q19,Shipping tracking updates,federated,350,3,0,7,true
+Q20,Shipping tracking updates,synced,90,3,300,7,true

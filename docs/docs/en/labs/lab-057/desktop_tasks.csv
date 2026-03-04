@@ -1,0 +1,11 @@
+task_id,task_description,app_type,difficulty,model,completed,time_sec,actions,screenshots,safety_risk
+T01,Open calculator and compute 15 × 23,desktop,easy,claude-3.5,true,12,5,4,low
+T02,Create a new text file on the desktop named notes.txt,desktop,easy,claude-3.5,true,18,7,6,low
+T03,Open browser and search for hiking boots on Google,browser,easy,claude-3.5,true,15,6,5,low
+T04,Fill out a contact form with name and email on a website,browser,medium,claude-3.5,true,28,12,10,medium
+T05,Navigate to Settings and change display brightness to 70%,desktop,medium,claude-3.5,true,22,9,8,low
+T06,Download a PDF from a website and save to Documents,browser,medium,claude-3.5,true,35,14,12,medium
+T07,Open Excel and create a formula SUM for cells A1 to A10,desktop,hard,claude-3.5,false,60,25,20,low
+T08,Log into a web application using credentials from a password manager,browser,hard,claude-3.5,false,55,22,18,high
+T09,Copy text from a PDF and paste into a Word document,desktop,medium,claude-3.5,true,30,11,9,low
+T10,Navigate a multi-step checkout process on an e-commerce site,browser,hard,claude-3.5,false,65,30,25,high

@@ -75,168 +75,29 @@
 
 ## 4. Agent Protocols & Interoperability (A2A + MCP)
 
-### Lab 054: A2A Protocol — Build Interoperable Multi-Agent Systems
-> *Proposed by: Claude Opus + Gemini (consolidated)*
-
-| | |
-|---|---|
-| **Level** | L200 — Intermediate |
-| **Category** | Pro Code / Multi-Agent / A2A |
-| **Time** | ~75 min |
-| **Cost** | Free (open-source SDKs) |
-
-**What you'll learn:**
-- Understand the A2A protocol specification (JSON-RPC 2.0 over HTTPS, now under Linux Foundation)
-- Create Agent Cards for agent capability discovery
-- Build an A2A server that exposes agent skills to other agents
-- Connect a client agent that discovers and delegates tasks via A2A
-- Compare A2A (agent-as-peer) vs MCP (agent-as-tool-user): when to use each
-
-**Why it's exciting:** Google's A2A protocol is the missing standard for agent-to-agent collaboration. Combined with MCP for tools, A2A enables true multi-vendor agent ecosystems where agents from different frameworks collaborate without exposing internal state.
-
-**Key technologies:** A2A Python/JS/.NET SDK, Agent Cards, JSON-RPC 2.0, SSE streaming, Linux Foundation A2A spec
-
----
-
-### Lab 055: A2A + MCP Full Stack — The Complete Agent Interoperability Architecture (Capstone)
-> *Proposed by: Claude Opus*
-
-| | |
-|---|---|
-| **Level** | L400 — Expert |
-| **Category** | Pro Code / Architecture |
-| **Time** | ~120 min |
-| **Cost** | Azure paid |
-
-**What you'll learn:**
-- Architect a system where agents use MCP for tools and A2A for peer collaboration
-- Build a "travel planner" system with 3 specialized agents (flights, hotels, itinerary) that discover each other via A2A Agent Cards
-- Each specialized agent uses MCP servers for its domain tools (booking APIs, calendar, maps)
-- Implement OAuth 2.0 delegation flows across A2A boundaries
-- Deploy the full system on Microsoft Foundry Agent Service with distributed tracing
-
-**Why it's exciting:** MCP + A2A together form the complete interoperability stack for the agentic era: MCP standardizes how agents use *tools*, A2A standardizes how agents talk to *each other*. This capstone builds the definitive reference architecture.
-
-**Key technologies:** A2A SDK, MCP SDK, Microsoft Foundry Agent Service, OAuth 2.0 delegation, OpenTelemetry, Python/C#
-
----
-
-### Lab 056: Federated M365 Copilot Connectors with MCP
-> *Proposed by: GPT-5.2*
-
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Copilot / MCP / Enterprise |
-| **Time** | ~90 min |
-| **Cost** | M365 Copilot license required |
-
-**What you'll learn:**
-- Understand synced (indexed) vs federated (real-time) M365 Copilot Connectors
-- Expose LOB system data through an MCP server as a federated connector
-- Design citations/links so M365 Copilot can safely reference real-time results
-- Handle OAuth auth patterns and regulated-data constraints
-- Avoid compliance issues by keeping sensitive data on-premises (federated = no indexing)
-
-**Why it's exciting:** Federated connectors are the "no-index RAG" path for regulated enterprises — real-time data, no copy to Microsoft servers, faster iteration, and fewer compliance headaches.
-
-**Key technologies:** Microsoft Graph Connectors API, Federated connector spec, MCP server resources, Entra ID OAuth
+> ✅ **Labs 054, 055, and 056 have been implemented!**
+>
+> - [Lab 054: A2A Protocol — Build Interoperable Multi-Agent Systems](labs/lab-054-a2a-protocol.md) (L200)
+> - [Lab 055: A2A + MCP Full Stack — Agent Interoperability Capstone](labs/lab-055-a2a-mcp-capstone.md) (L400)
+> - [Lab 056: Federated M365 Copilot Connectors with MCP](labs/lab-056-federated-connectors.md) (L300)
 
 ---
 
 ## 5. Agentic Apps — Computer Use, Browser & Voice Agents
 
-### Lab 057: Computer-Using Agents — Desktop Automation with Claude Computer Use
-> *Proposed by: Claude Opus + Gemini (consolidated)*
-
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Pro Code / Automation |
-| **Time** | ~90 min |
-| **Cost** | Anthropic API (paid) |
-
-**What you'll learn:**
-- Set up a sandboxed Docker container for safe computer-use agent execution
-- Configure the `computer_20251124` tool with screenshot capture, mouse, and keyboard control
-- Build an agent loop that observes screen state and takes goal-directed actions
-- Implement safety guardrails: domain allowlists, action confirmation, session isolation
-- Benchmark the agent on a defined web navigation or desktop task
-
-**Why it's exciting:** Computer-using agents represent the next frontier — AI that operates software the way humans do (clicking, typing, reading screens). This unlocks automation of legacy apps with no API and is state-of-the-art on WebArena benchmarks.
-
-**Key technologies:** Anthropic API, `computer_20251124` tool, Docker sandbox, Python agent loop, WebArena
-
----
-
-### Lab 058: Browser Automation Agents with OpenAI Computer-Using Agent (CUA)
-> *Proposed by: Claude Opus + Gemini (consolidated)*
-
-| | |
-|---|---|
-| **Level** | L300 — Advanced |
-| **Category** | Pro Code / Automation |
-| **Time** | ~90 min |
-| **Cost** | OpenAI API (paid) |
-
-**What you'll learn:**
-- Understand the CUA architecture: GPT-4o vision + cloud-hosted browser environment
-- Build an agent that navigates real websites, fills forms, and extracts data using screenshots
-- Implement safety boundaries: URL allowlists, action confirmation, and session limits
-- Compare CUA (cloud-hosted browser) vs Claude Computer Use (desktop VM) trade-offs
-- Measure task completion rates on standardized web benchmarks
-
-**Why it's exciting:** OpenAI's CUA operates a real browser via screenshots and clicks — enabling automation of any web-based workflow without APIs. It's the "Selenium replacement" powered by AI vision and reasoning.
-
-**Key technologies:** OpenAI CUA API, GPT-4o vision, headless browser, Playwright (for comparison), Python
-
----
-
-### Lab 059: Voice Agents with GPT Realtime API — Speech-to-Speech at 100ms Latency
-> *Proposed by: Gemini + Claude Opus (consolidated)*
-
-| | |
-|---|---|
-| **Level** | L200 — Intermediate |
-| **Category** | Pro Code / Multimodal / Voice |
-| **Time** | ~75 min |
-| **Cost** | Azure paid (GPT Realtime model deployment) |
-
-**What you'll learn:**
-- Deploy `gpt-4o-realtime` on Azure OpenAI with WebRTC (no transcoding required)
-- Build a browser-based voice assistant with ~100ms latency and natural interruptions
-- Handle session management, turn-taking, and "barge-in" behavior correctly
-- Integrate RAG (Azure AI Search) into the real-time audio pipeline for grounded voice answers
-- Explore SIP telephony integration for call center automation scenarios
-
-**Why it's exciting:** Voice agents are shifting from "turn-taking" (like old voice assistants) to "real-time conversational" — enabling true natural human-AI speech interactions, call center agents, and real-time translators at enterprise scale.
-
-**Key technologies:** Azure OpenAI Realtime API, WebRTC, WebSockets, SIP, Azure AI Search, JavaScript/Python
+> ✅ **Labs 057, 058, and 059 have been implemented!**
+>
+> - [Lab 057: Computer-Using Agents — Desktop Automation](labs/lab-057-computer-use-agents.md) (L300)
+> - [Lab 058: Browser Automation Agents with OpenAI CUA](labs/lab-058-browser-automation-cua.md) (L300)
+> - [Lab 059: Voice Agents with GPT Realtime API](labs/lab-059-voice-agents-realtime.md) (L200)
 
 ---
 
 ## 6. Reasoning Models & Small Language Models
 
-### Lab 060: Reasoning Models — Chain-of-Thought with o3 and DeepSeek R1
-> *Proposed by: Gemini + Claude Opus (consolidated)*
-
-| | |
-|---|---|
-| **Level** | L200 — Intermediate |
-| **Category** | Pro Code / Foundry |
-| **Time** | ~75 min |
-| **Cost** | Azure paid (o3 deployment) |
-
-**What you'll learn:**
-- Understand when to use "thinking" models (o3, DeepSeek R1) vs standard models (GPT-4o)
-- Deploy and compare Azure OpenAI o3 vs DeepSeek-R1 (via Foundry Model Catalog) on complex tasks
-- Implement "thinking budget" controls to balance cost vs reasoning depth
-- Build an agent that uses reasoning models for *planning* and cheaper models for *execution*
-- Evaluate reasoning quality with structured rubrics (math, code, multi-step logic)
-
-**Why it's exciting:** Reasoning models unlock dramatically better results on STEM, code, and multi-step planning — tasks where previous LLMs hallucinated or failed. This paradigm shift is reshaping how agents are designed.
-
-**Key technologies:** Azure OpenAI o3, DeepSeek R1 (Foundry Model Catalog), chain-of-thought prompting, reasoning budget controls
+> ✅ **Lab 060 has been implemented!**
+>
+> - [Lab 060: Reasoning Models — Chain-of-Thought with o3 and DeepSeek R1](labs/lab-060-reasoning-models.md) (L200)
 
 ---
 
@@ -581,13 +442,13 @@
 | ~~051~~ | ~~Fabric IQ — Real-Time Intelligence Agents~~ ✅ | L300 | Fabric | 75m | Free |
 | ~~052~~ | ~~Fabric IQ — Conversational Data Agent (NL→SQL)~~ ✅ | L200 | Fabric | 75m | Free |
 | ~~053~~ | ~~Fabric IQ — Batch AI Enrichment with AI Functions~~ ✅ | L300 | Fabric | 90m | Free |
-| 054 | A2A Protocol — Interoperable Multi-Agent Systems | L200 | Pro Code | 75m | Free |
-| 055 | A2A + MCP Full Stack (Capstone) | L400 | Pro Code | 120m | Azure |
-| 056 | Federated M365 Copilot Connectors with MCP | L300 | Copilot/MCP | 90m | M365 |
-| 057 | Computer-Using Agents — Claude Computer Use | L300 | Pro Code | 90m | Anthropic |
-| 058 | Browser Automation Agents — OpenAI CUA | L300 | Pro Code | 90m | OpenAI |
-| 059 | Voice Agents — GPT Realtime API | L200 | Multimodal | 75m | Azure |
-| 060 | Reasoning Models — o3 & DeepSeek R1 | L200 | Pro Code | 75m | Azure |
+| ~~054~~ | ~~A2A Protocol — Interoperable Multi-Agent Systems~~ ✅ | L200 | Pro Code | 75m | Free |
+| ~~055~~ | ~~A2A + MCP Full Stack (Capstone)~~ ✅ | L400 | Pro Code | 120m | Free |
+| ~~056~~ | ~~Federated M365 Copilot Connectors with MCP~~ ✅ | L300 | Copilot/MCP | 90m | Free |
+| ~~057~~ | ~~Computer-Using Agents — Claude Computer Use~~ ✅ | L300 | Pro Code | 90m | Free |
+| ~~058~~ | ~~Browser Automation Agents — OpenAI CUA~~ ✅ | L300 | Pro Code | 90m | Free |
+| ~~059~~ | ~~Voice Agents — GPT Realtime API~~ ✅ | L200 | Multimodal | 75m | Free |
+| ~~060~~ | ~~Reasoning Models — o3 & DeepSeek R1~~ ✅ | L200 | Pro Code | 75m | Free |
 | 061 | SLMs — Phi-4 Mini for Low-Cost Skills | L200 | Pro Code | 60m | Free |
 | 062 | On-Device Agents — Phi Silica + Windows AI | L300 | Edge AI | 90m | Free |
 | 063 | Agent Identity — Entra OBO & Sandboxing | L300 | Enterprise | 75m | Azure |

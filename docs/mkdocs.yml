@@ -67,6 +67,9 @@ nav:
           - "Lab 045: GitHub Copilot Workspace": labs/lab-045-copilot-workspace.md
           - "Lab 047: Work IQ — Copilot Analytics": labs/lab-047-work-iq-copilot-analytics.md
           - "Lab 052: Fabric IQ — Conversational Data Agent": labs/lab-052-fabric-conversational-agent.md
+          - "Lab 054: A2A Protocol": labs/lab-054-a2a-protocol.md
+          - "Lab 059: Voice Agents — Realtime API": labs/lab-059-voice-agents-realtime.md
+          - "Lab 060: Reasoning Models — o3 & DeepSeek R1": labs/lab-060-reasoning-models.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
@@ -86,6 +89,9 @@ nav:
           - "Lab 049: Foundry IQ — Agent Tracing": labs/lab-049-foundry-iq-agent-tracing.md
           - "Lab 051: Fabric IQ — Real-Time Intelligence": labs/lab-051-fabric-rti-agents.md
           - "Lab 053: Fabric IQ — AI Functions": labs/lab-053-fabric-ai-functions.md
+          - "Lab 056: Federated Copilot Connectors + MCP": labs/lab-056-federated-connectors.md
+          - "Lab 057: Computer-Using Agents": labs/lab-057-computer-use-agents.md
+          - "Lab 058: Browser Automation — OpenAI CUA": labs/lab-058-browser-automation-cua.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
@@ -93,6 +99,7 @@ nav:
           - "Lab 042: Enterprise RAG with Evaluations": labs/lab-042-enterprise-rag.md
           - "Lab 044: Phi-4 + Ollama in Production": labs/lab-044-phi4-ollama-production.md
           - "Lab 050: Multi-Agent Observability": labs/lab-050-multi-agent-observability.md
+          - "Lab 055: A2A + MCP Capstone": labs/lab-055-a2a-mcp-capstone.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
