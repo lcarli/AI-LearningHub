@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 480" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="480" fill="#f8f9fa" rx="12"/>
+  <text x="350" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">What's your primary goal?</text>
+
+  <!-- Row 1 -->
+  <rect x="30" y="50" width="300" height="40" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="180" y="75" text-anchor="middle" font-size="11" fill="#1e40af">Build an agent for Microsoft Teams</text>
+  <line x1="330" y1="70" x2="385" y2="70" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="390" y="50" width="280" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="530" y="75" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">→ Copilot Studio / Teams AI Library</text>
+
+  <!-- Row 2 -->
+  <rect x="30" y="100" width="300" height="40" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="180" y="125" text-anchor="middle" font-size="11" fill="#16a34a">Add AI to VS Code or GitHub workflow</text>
+  <line x1="330" y1="120" x2="385" y2="120" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="390" y="100" width="280" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="530" y="125" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">→ Chat Participant / Copilot Extensions</text>
+
+  <!-- Row 3 -->
+  <rect x="30" y="150" width="300" height="40" rx="8" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="180" y="175" text-anchor="middle" font-size="11" fill="#a16207">Production agent on Azure with security</text>
+  <line x1="330" y1="170" x2="385" y2="170" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="390" y="150" width="280" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="530" y="175" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">→ Microsoft Foundry Agent Service</text>
+
+  <!-- Row 4 -->
+  <rect x="30" y="200" width="300" height="40" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="180" y="225" text-anchor="middle" font-size="11" fill="#6d28d9">Sophisticated agent in Python/C#</text>
+  <line x1="330" y1="220" x2="385" y2="220" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="390" y="200" width="280" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="530" y="225" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">→ Agent Framework (SK)</text>
+
+  <!-- Row 5 -->
+  <rect x="30" y="250" width="300" height="40" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="180" y="275" text-anchor="middle" font-size="11" fill="#be185d">Orchestrate multiple agents</text>
+  <line x1="330" y1="270" x2="385" y2="270" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="390" y="250" width="280" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="530" y="275" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">→ Agent Framework (Graph Workflows)</text>
+
+  <!-- Row 6 -->
+  <rect x="30" y="300" width="300" height="40" rx="8" fill="#ffedd5" stroke="#f97316" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="180" y="325" text-anchor="middle" font-size="11" fill="#c2410c">Connect existing tool/DB/API to agents</text>
+  <line x1="330" y1="320" x2="385" y2="320" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="390" y="300" width="280" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="530" y="325" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">→ Build an MCP Server</text>
+
+  <!-- Row 7 -->
+  <rect x="30" y="350" width="300" height="40" rx="8" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="180" y="375" text-anchor="middle" font-size="11" fill="#475569">Just experiment / learn for free</text>
+  <line x1="330" y1="370" x2="385" y2="370" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="390" y="350" width="280" height="40" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="530" y="375" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">→ GitHub Models + Agent Framework</text>
+
+  <!-- Footer -->
+  <text x="350" y="420" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">Choose your goal → follow the recommended tool → start with the linked lab</text>
+</svg>
