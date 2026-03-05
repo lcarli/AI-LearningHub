@@ -116,22 +116,7 @@ There's no "better" end — it depends on your use case, team skills, and govern
 
 **Model Context Protocol (MCP)** is not a platform — it's a **connector standard**. Think of it as the USB-C of AI tools: one standard interface that any agent can use to plug in to any data source or tool.
 
-```
-┌─────────────────────────────────────────────────┐
-│              Any AI Agent                        │
-│  (Foundry / SK / Copilot / Claude / ChatGPT)    │
-└──────────────────┬──────────────────────────────┘
-                   │  MCP Protocol
-         ┌─────────▼──────────┐
-         │    MCP Server      │
-         │  (your tool)       │
-         └─────────┬──────────┘
-                   │
-    ┌──────────────▼──────────────┐
-    │  PostgreSQL / REST API /    │
-    │  File System / IoT / etc.   │
-    └─────────────────────────────┘
-```
+![Where MCP Fits](../../assets/diagrams/mcp-fit-overview.svg)
 
 MCP works with **all the platforms above** — and also with Claude Desktop, OpenAI, and any other MCP-compatible host.
 

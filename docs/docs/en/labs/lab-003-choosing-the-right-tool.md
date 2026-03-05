@@ -28,30 +28,7 @@ Use the decision flowchart and role-based guides below to find your path.
 
 ## Decision Flowchart
 
-```
-START: What's your primary goal?
-         │
-         ├── "Build an agent for Microsoft Teams"
-         │      └── Copilot Studio (no-code) or Teams AI Library (code)
-         │
-         ├── "Add AI to my VS Code extension or GitHub workflow"
-         │      └── VS Code Chat Participant API / GitHub Copilot Extensions
-         │
-         ├── "Production AI agent on Azure with monitoring & security"
-         │      └── Microsoft Foundry Agent Service
-         │
-         ├── "Build a sophisticated agent in Python/C# with full control"
-         │      └── Semantic Kernel
-         │
-         ├── "Orchestrate multiple AI agents for complex tasks"
-         │      └── AutoGen (+ Semantic Kernel for agent logic)
-         │
-         ├── "Connect my existing tool/database/API to AI agents"
-         │      └── Build an MCP Server
-         │
-         └── "Just experiment / learn for free"
-                └── GitHub Models + Semantic Kernel
-```
+![Decision Flowchart](../../assets/diagrams/decision-flowchart.svg)
 
 ??? question "🤔 Check Your Understanding"
     According to the decision flowchart, what tool should you use if your primary goal is to connect an existing database or API to AI agents?
@@ -127,15 +104,7 @@ Recommended path:
 
 ## The Two Key Trade-offs
 
-### 1. Control vs. Simplicity
-
-```
-More control                           More simplicity
-     │                                        │
-     ▼                                        ▼
-AutoGen          SK         Foundry    Copilot Studio
-LangChain    (SDK)       (managed)    (no-code GUI)
-```
+![Control vs Simplicity, Free vs Paid](../../assets/diagrams/tradeoffs-control-cost.svg)
 
 More control = more flexibility + more responsibility.  
 More simplicity = faster to build + less customizable.
@@ -148,14 +117,7 @@ More simplicity = faster to build + less customizable.
 
 ### 2. Free vs. Paid
 
-```
-Always free:         GitHub free:         Azure sub needed:
-─────────────        ────────────         ─────────────────
-L50 labs             GitHub Models        Foundry Agent Svc
-(conceptual)         SK with free LLMs    Azure PostgreSQL
-                     Local MCP servers    App Insights
-                     VS Code extensions   L300+ labs
-```
+The SVG above includes the full Free vs. Paid comparison. Start free → add Azure only when you need production features.
 
 ---
 
