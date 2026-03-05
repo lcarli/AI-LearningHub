@@ -1,5 +1,5 @@
 ---
-tags: [browser-automation, cua, openai, playwright, python, safety]
+tags: [browser-automation, cua, openai, playwright, python, safety, persona-developer]
 ---
 # Lab 058: Browser Automation Agents with OpenAI CUA
 

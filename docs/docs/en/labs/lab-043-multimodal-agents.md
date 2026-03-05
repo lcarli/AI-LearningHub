@@ -1,5 +1,5 @@
 ---
-tags: [multimodal, gpt-4o, vision, python, github-models, L300]
+tags: [multimodal, gpt-4o, vision, python, github-models, L300, persona-developer]
 ---
 # Lab 043: Multimodal Agents with GPT-4o Vision
 

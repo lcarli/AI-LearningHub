@@ -1,5 +1,5 @@
 ---
-tags: [observability, opentelemetry, python, free]
+tags: [observability, opentelemetry, python, free, persona-developer, persona-architect]
 ---
 # Lab 033: Agent Observability with Application Insights
 

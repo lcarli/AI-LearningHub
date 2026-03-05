@@ -1,5 +1,5 @@
 ---
-tags: [foundry-local, local-inference, free, ollama-alternative, python]
+tags: [foundry-local, local-inference, free, ollama-alternative, python, persona-developer, persona-student]
 ---
 # Lab 078: Foundry Local — Run AI Models Offline
 

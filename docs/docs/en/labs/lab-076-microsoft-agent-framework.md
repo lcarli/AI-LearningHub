@@ -1,5 +1,5 @@
 ---
-tags: [agent-framework, semantic-kernel, autogen, migration, python, dotnet]
+tags: [agent-framework, semantic-kernel, autogen, migration, python, dotnet, persona-developer, persona-architect]
 ---
 # Lab 076: Microsoft Agent Framework — From SK to MAF
 

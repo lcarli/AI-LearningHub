@@ -1,5 +1,5 @@
 ---
-tags: [search, rag, bm25, vector, semantic-ranker, python]
+tags: [search, rag, bm25, vector, semantic-ranker, python, persona-developer]
 ---
 # Lab 068: Hybrid Search — Vector + BM25 + Semantic Ranker
 

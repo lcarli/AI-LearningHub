@@ -1,5 +1,5 @@
 ---
-tags: [security, apim, mcp, oauth, enterprise, governance]
+tags: [security, apim, mcp, oauth, enterprise, governance, persona-architect, persona-admin, persona-engineer]
 ---
 # Lab 064: Securing MCP at Scale with Azure API Management
 

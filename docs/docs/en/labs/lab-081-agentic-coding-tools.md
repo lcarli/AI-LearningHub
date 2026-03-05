@@ -1,5 +1,5 @@
 ---
-tags: [claude-code, copilot-cli, coding-tools, developer-experience, comparison]
+tags: [claude-code, copilot-cli, coding-tools, developer-experience, comparison, persona-developer, persona-student]
 ---
 # Lab 081: Agentic Coding Tools — Claude Code vs Copilot CLI
 

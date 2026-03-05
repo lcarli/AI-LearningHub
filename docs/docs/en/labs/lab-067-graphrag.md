@@ -1,5 +1,5 @@
 ---
-tags: [graphrag, knowledge-graph, rag, python]
+tags: [graphrag, knowledge-graph, rag, python, persona-developer, persona-architect]
 ---
 # Lab 067: GraphRAG — Knowledge Graphs for Cross-Document Retrieval
 

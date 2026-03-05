@@ -1,5 +1,5 @@
 ---
-tags: [python, free, github-models, streaming]
+tags: [python, free, github-models, streaming, persona-developer]
 ---
 # Lab 019: Streaming Responses in Agents
 

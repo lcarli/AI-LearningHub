@@ -1,5 +1,5 @@
 ---
-tags: [declarative-agents, m365-copilot, teams, manifest, low-code]
+tags: [declarative-agents, m365-copilot, teams, manifest, low-code, persona-analyst, persona-admin]
 ---
 # Lab 069: Declarative Agents for Microsoft 365 Copilot
 

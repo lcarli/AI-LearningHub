@@ -1,5 +1,5 @@
 ---
-tags: [github-copilot, free, foundations]
+tags: [github-copilot, free, foundations, persona-developer, persona-student]
 ---
 # Lab 010: GitHub Copilot — First Steps
 

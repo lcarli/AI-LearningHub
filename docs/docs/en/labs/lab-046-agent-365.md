@@ -1,5 +1,5 @@
 ---
-tags: [enterprise, microsoft-365, agent-governance, pro-code, mcp, observability]
+tags: [enterprise, microsoft-365, agent-governance, pro-code, mcp, observability, persona-architect, persona-admin]
 ---
 # Lab 046: Microsoft Agent 365 — Enterprise Agent Governance
 

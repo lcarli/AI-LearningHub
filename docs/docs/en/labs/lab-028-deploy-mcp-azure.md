@@ -1,5 +1,5 @@
 ---
-tags: [mcp, azure, container-apps, bicep, azure-required]
+tags: [mcp, azure, container-apps, bicep, azure-required, persona-developer, persona-engineer]
 ---
 # Lab 028: Deploy MCP Server to Azure Container Apps
 

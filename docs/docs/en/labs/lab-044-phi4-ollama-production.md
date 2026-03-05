@@ -1,5 +1,5 @@
 ---
-tags: [phi4, ollama, local-llm, free, python]
+tags: [phi4, ollama, local-llm, free, python, persona-developer]
 ---
 # Lab 044: Phi-4 + Ollama in Production
 

@@ -1,5 +1,5 @@
 ---
-tags: [markitdown, mcp, document-ingestion, pdf, python]
+tags: [markitdown, mcp, document-ingestion, pdf, python, persona-developer, persona-engineer]
 ---
 # Lab 080: MarkItDown + MCP — Document Ingestion for Agents
 

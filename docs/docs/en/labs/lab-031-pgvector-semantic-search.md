@@ -1,5 +1,5 @@
 ---
-tags: [pgvector, rag, azure, azure-required]
+tags: [pgvector, rag, azure, azure-required, persona-developer, persona-engineer]
 ---
 # Lab 031: pgvector Semantic Search on Azure
 

@@ -1,5 +1,5 @@
 ---
-tags: [cost-optimization, azure, production, monitoring, L300]
+tags: [cost-optimization, azure, production, monitoring, L300, persona-developer, persona-architect]
 ---
 # Lab 038: AI Cost Optimization
 

@@ -1,5 +1,5 @@
 ---
-tags: [free, beginner, no-account-needed, prompt-engineering]
+tags: [free, beginner, no-account-needed, prompt-engineering, persona-student, persona-developer, persona-analyst]
 ---
 # Lab 005: Prompt Engineering
 

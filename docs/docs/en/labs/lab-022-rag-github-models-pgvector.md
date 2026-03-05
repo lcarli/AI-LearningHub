@@ -1,5 +1,5 @@
 ---
-tags: [rag, pgvector, python, free, github-models]
+tags: [rag, pgvector, python, free, github-models, persona-developer, persona-student]
 ---
 # Lab 022: RAG Pipeline with GitHub Models + pgvector
 

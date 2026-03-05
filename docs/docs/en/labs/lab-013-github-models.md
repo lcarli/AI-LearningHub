@@ -1,5 +1,5 @@
 ---
-tags: [github-models, free, python, llm]
+tags: [github-models, free, python, llm, persona-developer, persona-student]
 ---
 # Lab 013: GitHub Models — Free LLM Inference
 

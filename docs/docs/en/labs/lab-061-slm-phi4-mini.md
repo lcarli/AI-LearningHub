@@ -1,5 +1,5 @@
 ---
-tags: [slm, phi-4, onnx, privacy, local-inference, python]
+tags: [slm, phi-4, onnx, privacy, local-inference, python, persona-developer]
 ---
 # Lab 061: SLMs — Phi-4 Mini for Low-Cost Agent Skills
 

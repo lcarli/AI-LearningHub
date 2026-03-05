@@ -1,5 +1,5 @@
 ---
-tags: [mcp, csharp, free, github-models]
+tags: [mcp, csharp, free, github-models, persona-developer, persona-engineer]
 ---
 # Lab 021: Build an MCP Server in C#
 

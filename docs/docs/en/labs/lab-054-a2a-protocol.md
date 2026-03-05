@@ -1,5 +1,5 @@
 ---
-tags: [a2a, protocol, multi-agent, interoperability, python, free]
+tags: [a2a, protocol, multi-agent, interoperability, python, free, persona-developer, persona-architect]
 ---
 # Lab 054: A2A Protocol — Build Interoperable Multi-Agent Systems
 

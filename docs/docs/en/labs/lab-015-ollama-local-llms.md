@@ -1,5 +1,5 @@
 ---
-tags: [ollama, local-llm, free, python]
+tags: [ollama, local-llm, free, python, persona-developer, persona-student]
 ---
 # Lab 015: Ollama — Run LLMs Locally for Free
 

@@ -1,5 +1,5 @@
 ---
-tags: [security, prompt-injection, python, free]
+tags: [security, prompt-injection, python, free, persona-developer, persona-admin]
 ---
 # Lab 036: Prompt Injection Defense & Agent Security
 

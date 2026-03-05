@@ -1,5 +1,5 @@
 ---
-tags: [semantic-kernel, free, python, github-models]
+tags: [semantic-kernel, free, python, github-models, persona-developer, persona-student]
 ---
 # Lab 014: Semantic Kernel — Hello Agent
 

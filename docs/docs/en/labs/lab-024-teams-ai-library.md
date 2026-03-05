@@ -1,5 +1,5 @@
 ---
-tags: [teams, javascript, free, github-models]
+tags: [teams, javascript, free, github-models, persona-developer]
 ---
 # Lab 024: Teams AI Library Bot
 

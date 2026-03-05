@@ -153,6 +153,22 @@ plugins:
         - locale: pt
           name: Português
           site_name: AI Agents Learning Hub
+          nav_translations:
+            Home: Início
+            How to Use This Hub: Como Usar Este Hub
+            Prerequisites & Accounts: Pré-requisitos e Contas
+            Learning Paths: Trilhas de Aprendizado
+            All Paths: Todas as Trilhas
+            Labs: Laboratórios
+            All Labs: Todos os Labs
+            "L50 — Awareness": "L50 — Conscientização"
+            "L100 — Foundations": "L100 — Fundamentos"
+            "L200 — Intermediate": "L200 — Intermediário"
+            "L300 — Advanced": "L300 — Avançado"
+            "L400 — Expert": "L400 — Especialista"
+            Glossary: Glossário
+            What's New: Novidades
+            Tags: Tags
           admonition_translations:
             tip: Dica
             warning: Aviso
@@ -164,6 +180,22 @@ plugins:
         - locale: fr
           name: Français
           site_name: AI Agents Learning Hub
+          nav_translations:
+            Home: Accueil
+            How to Use This Hub: Comment Utiliser Ce Hub
+            Prerequisites & Accounts: Prérequis et Comptes
+            Learning Paths: Parcours d'Apprentissage
+            All Paths: Tous les Parcours
+            Labs: Laboratoires
+            All Labs: Tous les Labs
+            "L50 — Awareness": "L50 — Sensibilisation"
+            "L100 — Foundations": "L100 — Fondamentaux"
+            "L200 — Intermediate": "L200 — Intermédiaire"
+            "L300 — Advanced": "L300 — Avancé"
+            "L400 — Expert": "L400 — Expert"
+            Glossary: Glossaire
+            What's New: Nouveautés
+            Tags: Tags
           admonition_translations:
             tip: Astuce
             warning: Avertissement

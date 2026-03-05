@@ -1,5 +1,5 @@
 ---
-tags: [security, postgresql, python, free]
+tags: [security, postgresql, python, free, persona-developer, persona-engineer, persona-admin]
 ---
 # Lab 032: Row Level Security for Agents
 

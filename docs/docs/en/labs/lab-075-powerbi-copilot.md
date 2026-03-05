@@ -1,5 +1,5 @@
 ---
-tags: [power-bi, copilot, fabric, dax, analytics, low-code]
+tags: [power-bi, copilot, fabric, dax, analytics, low-code, persona-analyst]
 ---
 # Lab 075: Power BI Copilot — Autonomous Analytics & Data Storytelling
 

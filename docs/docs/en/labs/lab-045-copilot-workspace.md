@@ -1,5 +1,5 @@
 ---
-tags: [github-copilot, free, vscode, agentic]
+tags: [github-copilot, free, vscode, agentic, persona-developer, persona-student]
 ---
 # Lab 045: GitHub Copilot Workspace
 

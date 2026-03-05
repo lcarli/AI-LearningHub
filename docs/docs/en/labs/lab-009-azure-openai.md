@@ -1,5 +1,5 @@
 ---
-tags: [azure, foundry, free, python, llm, azure-required]
+tags: [azure, foundry, free, python, llm, azure-required, persona-developer, persona-architect]
 ---
 # Lab 009: Azure OpenAI Service Quickstart
 

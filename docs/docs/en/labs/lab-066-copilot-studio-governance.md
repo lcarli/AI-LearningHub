@@ -1,5 +1,5 @@
 ---
-tags: [copilot-studio, governance, dlp, power-platform, enterprise]
+tags: [copilot-studio, governance, dlp, power-platform, enterprise, persona-admin]
 ---
 # Lab 066: Copilot Studio Enterprise Governance
 

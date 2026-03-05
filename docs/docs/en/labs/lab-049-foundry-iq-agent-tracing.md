@@ -1,5 +1,5 @@
 ---
-tags: [observability, opentelemetry, azure-monitor, foundry, python, tracing]
+tags: [observability, opentelemetry, azure-monitor, foundry, python, tracing, persona-developer, persona-architect]
 ---
 # Lab 049: Foundry IQ — Agent Tracing with OpenTelemetry
 

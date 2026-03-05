@@ -1,5 +1,5 @@
 ---
-tags: [free, beginner, no-account-needed, awareness]
+tags: [free, beginner, no-account-needed, awareness, persona-student, persona-developer, persona-analyst, persona-architect, persona-admin]
 ---
 # Lab 003: Choosing the Right Tool
 
@@ -44,9 +44,9 @@ Use the decision flowchart and role-based guides below to find your path.
 **Goal:** Automate workflows, create agents without writing code.
 
 Recommended path:
-1. [Lab 001](lab-001-what-are-ai-agents.md) → [Lab 011](lab-011-copilot-studio-first-agent.md) → [Lab 024](lab-024-teams-ai-library.md)
+1. [Lab 001](lab-001-what-are-ai-agents.md) → [Lab 011](lab-011-copilot-studio-first-agent.md) → [Lab 069](lab-069-declarative-agents.md) → [Lab 075](lab-075-powerbi-copilot.md)
 
-**Tools:** Copilot Studio, Power Automate, M365 Copilot
+**Tools:** Copilot Studio, Declarative Agents, Power BI Copilot, M365 Copilot
 
 ---
 
@@ -54,9 +54,9 @@ Recommended path:
 **Goal:** Write agents in code, integrate with existing systems.
 
 Recommended path:
-1. [Lab 013](lab-013-github-models.md) → [Lab 014](lab-014-sk-hello-agent.md) → [Lab 020](lab-020-mcp-server-python.md) → [Lab 030](lab-030-foundry-agent-mcp.md)
+1. [Lab 013](lab-013-github-models.md) → [Lab 076](lab-076-microsoft-agent-framework.md) → [Lab 020](lab-020-mcp-server-python.md) → [Lab 082](lab-082-agent-guardrails.md) → [Lab 084](lab-084-capstone-outdoorgear-agent.md)
 
-**Tools:** Semantic Kernel, Microsoft Foundry, MCP
+**Tools:** Agent Framework (SK), MCP, Guardrails, GitHub Models
 
 ---
 
@@ -64,19 +64,39 @@ Recommended path:
 **Goal:** Expose existing systems (databases, APIs) to AI agents.
 
 Recommended path:
-1. [Lab 012](lab-012-what-is-mcp.md) → [Lab 020](lab-020-mcp-server-python.md) → [Lab 031](lab-031-pgvector-semantic-search.md) → [Lab 032](lab-032-row-level-security.md)
+1. [Lab 012](lab-012-what-is-mcp.md) → [Lab 020](lab-020-mcp-server-python.md) → [Lab 031](lab-031-pgvector-semantic-search.md) → [Lab 054](lab-054-a2a-protocol.md) → [Lab 064](lab-064-securing-mcp-apim.md)
 
-**Tools:** MCP, PostgreSQL + pgvector, Row Level Security
+**Tools:** MCP, A2A Protocol, pgvector, Azure API Management
 
 ---
 
-### 🏗️ Solution Architect / Senior Engineer
+### 🏗️ Solution Architect
 **Goal:** Design production multi-agent systems with governance and observability.
 
 Recommended path:
-1. [Lab 030](lab-030-foundry-agent-mcp.md) → [Lab 033](lab-033-agent-observability.md) → [Lab 034](lab-034-multi-agent-sk.md) → [Lab 040](lab-040-autogen-multi-agent.md)
+1. [Lab 076](lab-076-microsoft-agent-framework.md) → [Lab 049](lab-049-foundry-iq-agent-tracing.md) → [Lab 050](lab-050-multi-agent-observability.md) → [Lab 074](lab-074-foundry-agent-service.md) → [Lab 084](lab-084-capstone-outdoorgear-agent.md)
 
-**Tools:** Foundry, Semantic Kernel, AutoGen, App Insights
+**Tools:** Agent Framework, Foundry Agent Service, OpenTelemetry, A2A + MCP
+
+---
+
+### 📊 Data Engineer / Analyst
+**Goal:** Build AI-powered analytics, data agents, and enrichment pipelines.
+
+Recommended path:
+1. [Lab 047](lab-047-work-iq-copilot-analytics.md) → [Lab 052](lab-052-fabric-conversational-agent.md) → [Lab 053](lab-053-fabric-ai-functions.md) → [Lab 067](lab-067-graphrag.md) → [Lab 075](lab-075-powerbi-copilot.md)
+
+**Tools:** Fabric IQ, Work IQ, GraphRAG, Power BI Copilot
+
+---
+
+### 🔒 Enterprise Admin / IT Governance
+**Goal:** Govern, secure, and monitor AI agent deployments across the organization.
+
+Recommended path:
+1. [Lab 063](lab-063-agent-identity-entra.md) → [Lab 065](lab-065-purview-dspm-ai.md) → [Lab 066](lab-066-copilot-studio-governance.md) → [Lab 064](lab-064-securing-mcp-apim.md) → [Lab 046](lab-046-agent-365.md)
+
+**Tools:** Entra ID, Purview DSPM, Copilot Studio Governance, APIM, Agent 365
 
 ---
 
@@ -84,9 +104,9 @@ Recommended path:
 **Goal:** Understand AI agents and build something real, for free.
 
 Recommended path:
-1. [Lab 001](lab-001-what-are-ai-agents.md) → [Lab 002](lab-002-agent-landscape.md) → [Lab 013](lab-013-github-models.md) → [Lab 014](lab-014-sk-hello-agent.md) → [Lab 022](lab-022-rag-github-models-pgvector.md)
+1. [Lab 001](lab-001-what-are-ai-agents.md) → [Lab 004](lab-004-how-llms-work.md) → [Lab 013](lab-013-github-models.md) → [Lab 078](lab-078-foundry-local.md) → [Lab 076](lab-076-microsoft-agent-framework.md) → [Lab 022](lab-022-rag-github-models-pgvector.md)
 
-**Tools:** GitHub Models, Semantic Kernel — everything free!
+**Tools:** GitHub Models, Foundry Local, Agent Framework — everything free!
 
 ??? question "🤔 Check Your Understanding"
     A solution architect needs to design a production multi-agent system with observability and governance. Which combination of tools does this lab recommend?

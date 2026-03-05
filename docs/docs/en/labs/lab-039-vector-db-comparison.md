@@ -1,5 +1,5 @@
 ---
-tags: [vector-db, rag, azure, production, L300]
+tags: [vector-db, rag, azure, production, L300, persona-developer, persona-architect]
 ---
 # Lab 039: Vector Database Comparison
 

@@ -1,5 +1,5 @@
 ---
-tags: [multimodal, rag, images, tables, gpt4o-vision, python]
+tags: [multimodal, rag, images, tables, gpt4o-vision, python, persona-developer, persona-architect]
 ---
 # Lab 083: Multi-Modal RAG — Images, Tables & Charts in Documents
 

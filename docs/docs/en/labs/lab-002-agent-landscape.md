@@ -1,5 +1,5 @@
 ---
-tags: [free, beginner, no-account-needed, awareness]
+tags: [free, beginner, no-account-needed, awareness, persona-student, persona-developer, persona-analyst, persona-architect, persona-admin]
 ---
 # Lab 002: AI Agent Landscape 2025
 

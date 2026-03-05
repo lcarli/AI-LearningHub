@@ -1,5 +1,5 @@
 ---
-tags: [a2a, mcp, multi-agent, architecture, capstone, python]
+tags: [a2a, mcp, multi-agent, architecture, capstone, python, persona-developer, persona-architect]
 ---
 # Lab 055: A2A + MCP Full Stack — Agent Interoperability Capstone
 

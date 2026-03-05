@@ -1,5 +1,5 @@
 ---
-tags: [enterprise, work-iq, copilot-analytics, python, power-bi, viva-insights, roi]
+tags: [enterprise, work-iq, copilot-analytics, python, power-bi, viva-insights, roi, persona-analyst, persona-admin]
 ---
 # Lab 048: Work IQ — Copilot Impact Analytics & Power BI
 

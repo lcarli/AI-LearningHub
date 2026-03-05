@@ -1,5 +1,5 @@
 ---
-tags: [foundry, mcp, azure, azure-required]
+tags: [foundry, mcp, azure, azure-required, persona-developer, persona-architect]
 ---
 # Lab 030: Microsoft Foundry Agent Service + MCP
 

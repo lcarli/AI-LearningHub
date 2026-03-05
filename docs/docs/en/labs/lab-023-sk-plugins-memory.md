@@ -1,5 +1,5 @@
 ---
-tags: [semantic-kernel, python, free, github-models]
+tags: [semantic-kernel, python, free, github-models, persona-developer]
 ---
 # Lab 023: Semantic Kernel — Plugins, Memory & Planners
 

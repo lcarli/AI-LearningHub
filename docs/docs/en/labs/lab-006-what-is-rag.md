@@ -1,5 +1,5 @@
 ---
-tags: [free, beginner, no-account-needed, rag]
+tags: [free, beginner, no-account-needed, rag, persona-student, persona-developer, persona-analyst]
 ---
 # Lab 006: What is RAG?
 

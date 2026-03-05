@@ -1,5 +1,5 @@
 ---
-tags: [security, entra-id, obo, identity, oauth, enterprise]
+tags: [security, entra-id, obo, identity, oauth, enterprise, persona-developer, persona-admin, persona-architect]
 ---
 # Lab 063: Agent Identity — Entra OBO Flow & Least Privilege
 
