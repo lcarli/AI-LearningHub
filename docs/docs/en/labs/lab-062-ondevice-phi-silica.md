@@ -50,6 +50,18 @@ This lab analyzes pre-computed benchmark results — no NPU hardware, Windows AI
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-062/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_ondevice.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/broken_ondevice.py) |
+| `ondevice_tasks.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv) |
+
+---
+
 ## Part 1: Understanding On-Device Inference
 
 ### Step 1: NPU architecture
@@ -83,7 +95,7 @@ Key concepts:
 
 ## Part 2: Load Benchmark Data
 
-### Step 2: Load `ondevice_tasks.csv`
+### Step 2: Load [📥 `ondevice_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv)
 
 The benchmark dataset contains results from running 15 tasks through NPU and cloud inference:
 
@@ -350,31 +362,6 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_ondevice.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/broken_ondevice.py)
-- 📥 [ondevice_tasks.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv)
-
-```
-lab-062/
-├── ondevice_tasks.csv     ← 15 tasks × NPU/cloud (availability, quality, latency)
-└── broken_ondevice.py     ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Follow along with the lab steps
-python -c "import pandas; print('ready!')"
-
-# Or fix the bugs
-python lab-062/broken_ondevice.py
-```
-
----
 
 ## 🧠 Knowledge Check
 

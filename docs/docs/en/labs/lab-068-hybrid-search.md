@@ -52,6 +52,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-068/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_search.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/broken_search.py) |
+| `search_comparison.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/search_comparison.csv) |
+
+---
+
 ## Step 1: Understanding Search Strategies
 
 Each search strategy processes queries differently:
@@ -211,24 +223,6 @@ python lab-068/broken_search.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_search.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/broken_search.py)
-- 📥 [search_comparison.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/search_comparison.csv)
-
-```
-lab-068/
-├── search_comparison.csv    ← 20 queries with recall/precision across 4 strategies
-└── broken_search.py         ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-python lab-068/broken_search.py    # Bug-fix exercise
-```
-
----
 
 ## 🧠 Knowledge Check
 

@@ -63,6 +63,17 @@ az deployment group show \
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-031/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `migrations` | Database migration files | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-031/migrations) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Set connection environment variables
@@ -261,27 +272,6 @@ az group delete --name rg-ai-labs-rag --yes --no-wait
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [migrations](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-031/migrations)
-
-This lab includes a complete SQL migration you can run directly on your Azure PostgreSQL instance:
-
-```
-lab-031/
-└── migrations/
-    └── 001_init.sql    ← Full schema: products, embeddings, IVFFlat index, seed data, helper function
-```
-
-**Run it against your database:**
-```bash
-psql "host=$PG_HOST port=5432 dbname=$PG_DATABASE user=$PG_USER password=$PG_PASSWORD sslmode=require" \
-    -f lab-031/migrations/001_init.sql
-```
-
-The migration creates the `products` table with the 7 OutdoorGear products, the `product_embeddings` table with a `vector(1536)` column, an IVFFlat index for fast similarity search, and a `search_products_by_vector()` helper function.
-
----
 
 ## 🧠 Knowledge Check
 

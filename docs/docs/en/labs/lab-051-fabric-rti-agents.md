@@ -53,6 +53,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-051/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_alerting.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/broken_alerting.py) |
+| `sensor_events.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/sensor_events.csv) |
+
+---
+
 ## Step 1: Understanding Fabric Real-Time Intelligence
 
 Before writing code, understand the four RTI components that form the end-to-end pipeline:
@@ -350,31 +362,6 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_alerting.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/broken_alerting.py)
-- 📥 [sensor_events.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/sensor_events.csv)
-
-```
-lab-051/
-├── sensor_events.csv      ← 50 sensor events (5 warehouses × 4 sensor types)
-└── broken_alerting.py     ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Follow along with the lab steps
-python -c "import pandas; print('ready!')"
-
-# Or fix the bugs
-python lab-051/broken_alerting.py
-```
-
----
 
 ## 🧠 Knowledge Check
 

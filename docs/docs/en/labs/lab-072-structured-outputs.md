@@ -52,6 +52,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-072/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_structured.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/broken_structured.py) |
+| `structured_outputs.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) |
+
+---
+
 ## Step 1: Understand Structured Outputs
 
 Structured Outputs work by providing a **JSON Schema** alongside your prompt. The model's decoder is constrained to only produce tokens that result in valid JSON matching the schema.
@@ -257,31 +269,6 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_structured.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/broken_structured.py)
-- 📥 [structured_outputs.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv)
-
-```
-lab-072/
-├── structured_outputs.csv     ← 15 extraction tests (10 schema + 5 no-schema)
-└── broken_structured.py       ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-072/broken_structured.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -311,7 +298,7 @@ python lab-072/broken_structured.py
 
 ??? question "**Q3 (Run the Lab):** What is the schema validity rate for schema-enforced extraction tests?"
 
-    Run the Step 3 analysis on `structured_outputs.csv` and check the results.
+    Run the Step 3 analysis on [📥 `structured_outputs.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) and check the results.
 
     ??? success "✅ Reveal Answer"
         **100%**

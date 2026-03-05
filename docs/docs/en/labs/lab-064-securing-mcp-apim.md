@@ -55,6 +55,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-064/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_apim.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/broken_apim.py) |
+| `mcp_servers.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/mcp_servers.csv) |
+
+---
+
 ## Step 1: Understanding the APIM Security Model
 
 When APIM sits in front of MCP servers, every tool call flows through a policy pipeline:
@@ -285,24 +297,6 @@ python lab-064/broken_apim.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_apim.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/broken_apim.py)
-- 📥 [mcp_servers.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/mcp_servers.csv)
-
-```
-lab-064/
-├── mcp_servers.csv     ← 10 MCP servers across 6 teams (fleet inventory)
-└── broken_apim.py      ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-python lab-064/broken_apim.py    # Bug-fix exercise
-```
-
----
 
 ## 🧠 Knowledge Check
 

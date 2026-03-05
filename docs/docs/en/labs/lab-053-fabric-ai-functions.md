@@ -53,6 +53,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-053/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_pipeline.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/broken_pipeline.py) |
+| `product_reviews.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/product_reviews.csv) |
+
+---
+
 ## Step 1: Understanding Fabric AI Functions
 
 Fabric AI Functions are native operations that apply LLM capabilities to DataFrame columns. They abstract away prompt engineering, batching, and API management:
@@ -397,31 +409,6 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_pipeline.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/broken_pipeline.py)
-- 📥 [product_reviews.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/product_reviews.csv)
-
-```
-lab-053/
-├── product_reviews.csv    ← 20 product reviews (7 products, ratings 1–5)
-└── broken_pipeline.py     ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-053/broken_pipeline.py
-```
-
----
 
 ## 🧠 Knowledge Check
 

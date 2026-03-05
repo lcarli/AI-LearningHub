@@ -60,6 +60,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-065/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `ai_interactions.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-065/ai_interactions.csv) |
+| `broken_dspm.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-065/broken_dspm.py) |
+
+---
+
 ## Step 1: Understanding DSPM for AI
 
 Purview DSPM for AI monitors every AI interaction through a policy evaluation pipeline:
@@ -289,24 +301,6 @@ python lab-065/broken_dspm.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [ai_interactions.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-065/ai_interactions.csv)
-- 📥 [broken_dspm.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-065/broken_dspm.py)
-
-```
-lab-065/
-├── ai_interactions.csv    ← 20 AI interactions across departments
-└── broken_dspm.py         ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-python lab-065/broken_dspm.py    # Bug-fix exercise
-```
-
----
 
 ## 🧠 Knowledge Check
 

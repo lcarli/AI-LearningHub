@@ -68,6 +68,19 @@ Agent 365 SDK sits *above* your agent framework. It does **not** replace it — 
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-046/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `a365.config.sample.json` | Configuration / data file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/a365.config.sample.json) |
+| `broken_observability.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/broken_observability.py) |
+| `outdoorgear_a365_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/outdoorgear_a365_starter.py) |
+
+---
+
 ## Step 1: Install the Agent 365 CLI
 
 The Agent 365 CLI (`a365`) is the command-line backbone for the entire agent development lifecycle.
@@ -357,35 +370,6 @@ python lab-046/broken_observability.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [a365.config.sample.json](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/a365.config.sample.json)
-- 📥 [broken_observability.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/broken_observability.py)
-- 📥 [outdoorgear_a365_starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/outdoorgear_a365_starter.py)
-
-```
-lab-046/
-├── outdoorgear_a365_starter.py   ← Starter agent with 5 TODOs + Agent 365 integration points
-├── a365.config.sample.json       ← Sample config to copy and fill in
-└── broken_observability.py       ← 3 intentional bugs to find and fix
-```
-
-**Use the starter file:**
-```bash
-# Install dependencies
-pip install openai \
-  microsoft-agents-a365-observability-core \
-  microsoft-agents-a365-observability-extensions-openai \
-  microsoft-agents-a365-notifications \
-  microsoft-agents-a365-tooling
-
-# Run in mock mode (no Frontier access required)
-AGENT_365_MOCK=true python lab-046/outdoorgear_a365_starter.py
-```
-
-The starter file runs in **mock mode** when `AGENT_365_MOCK=true` — you can complete all TODOs and see the agent structure without a real M365 tenant.
-
----
 
 ## 🧠 Knowledge Check
 

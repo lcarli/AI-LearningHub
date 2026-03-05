@@ -51,6 +51,18 @@ This lab analyzes pre-computed benchmark results — no API key, GPU, or ONNX Ru
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-061/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_slm.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/broken_slm.py) |
+| `slm_benchmark.csv` | Benchmark dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv) |
+
+---
+
 ## Part 1: Understanding SLMs
 
 ### Step 1: SLMs vs frontier models
@@ -81,7 +93,7 @@ Key concepts:
 
 ## Part 2: Load Benchmark Data
 
-### Step 2: Load `slm_benchmark.csv`
+### Step 2: Load [📥 `slm_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv)
 
 The benchmark dataset contains results from running all 15 tasks through both models:
 
@@ -299,31 +311,6 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_slm.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/broken_slm.py)
-- 📥 [slm_benchmark.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv)
-
-```
-lab-061/
-├── slm_benchmark.csv    ← 15 tasks × 2 models (accuracy, latency, cost)
-└── broken_slm.py        ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Follow along with the lab steps
-python -c "import pandas; print('ready!')"
-
-# Or fix the bugs
-python lab-061/broken_slm.py
-```
-
----
 
 ## 🧠 Knowledge Check
 

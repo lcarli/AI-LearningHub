@@ -65,6 +65,18 @@ Make sure `GITHUB_TOKEN` is set (see [Lab 013](lab-013-github-models.md#prerequi
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-014/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `hello_agent_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/hello_agent_starter.py) |
+| `requirements.txt` | Python dependencies | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/requirements.txt) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Create a basic Kernel
@@ -301,14 +313,6 @@ Let's make it interactive:
         history.add_assistant_message(str(result))
         print(f"Agent: {result}\n")
     ```
-
----
-
-
-## 📥 Download Supporting Files
-
-- [📥 hello_agent_starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/hello_agent_starter.py)
-- [📥 requirements.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/requirements.txt)
 
 ---
 

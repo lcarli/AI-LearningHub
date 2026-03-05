@@ -45,6 +45,17 @@ GitHub Copilot in VS Code has three modes:
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-016/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `outdoorgear_api.py` | Python script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Activate agent mode
@@ -66,7 +77,7 @@ This exercise gives you a **real broken Python project** to fix using agent mode
 cd AI-LearningHub/docs/docs/en/labs/lab-016
 ```
 
-Or copy the file `outdoorgear_api.py` below:
+Or copy the file [📥 `outdoorgear_api.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) below:
 
 ```python title="lab-016/outdoorgear_api.py — 5 bugs, 1 missing feature, no tests"
 --8<-- "labs/lab-016/outdoorgear_api.py"
@@ -257,13 +268,6 @@ Your request: "Fix all bugs"
         ▼
 ✅ All 6 tests pass
 ```
-
----
-
-
-## 📥 Download Supporting Files
-
-- [📥 outdoorgear_api.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py)
 
 ---
 

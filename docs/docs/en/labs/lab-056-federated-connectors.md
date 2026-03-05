@@ -62,6 +62,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-056/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_connector.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/broken_connector.py) |
+| `connector_comparison.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) |
+
+---
+
 ## Step 1: Understanding Connector Types
 
 ### Synced (Indexed) Connectors
@@ -319,31 +331,6 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_connector.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/broken_connector.py)
-- 📥 [connector_comparison.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv)
-
-```
-lab-056/
-├── connector_comparison.csv    ← 20 queries (10 federated + 10 synced)
-└── broken_connector.py         ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-056/broken_connector.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -373,7 +360,7 @@ python lab-056/broken_connector.py
 
 ??? question "**Q3 (Run the Lab):** What is the average latency for federated connector queries?"
 
-    Filter `connector_comparison.csv` by `connector_type == "federated"` and compute `latency_ms.mean()`.
+    Filter [📥 `connector_comparison.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) by `connector_type == "federated"` and compute `latency_ms.mean()`.
 
     ??? success "✅ Reveal Answer"
         **473 ms**

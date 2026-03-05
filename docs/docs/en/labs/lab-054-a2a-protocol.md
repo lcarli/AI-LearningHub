@@ -54,6 +54,18 @@ No external packages are required — this lab uses only the Python standard lib
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-054/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `agent_cards.json` | Configuration / data file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json) |
+| `broken_a2a.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/broken_a2a.py) |
+
+---
+
 ## Step 1: Understanding the A2A Protocol
 
 A2A defines a standard for **peer-to-peer agent communication**. The protocol specifies:
@@ -387,30 +399,6 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [agent_cards.json](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json)
-- 📥 [broken_a2a.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/broken_a2a.py)
-
-```
-lab-054/
-├── agent_cards.json    ← 3 OutdoorGear agent cards (skills, capabilities, auth)
-└── broken_a2a.py       ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import json; print('Ready!')"
-
-# Option B: Fix the bugs
-python lab-054/broken_a2a.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -440,7 +428,7 @@ python lab-054/broken_a2a.py
 
 ??? question "**Q3 (Run the Lab):** How many total skills exist across all 3 OutdoorGear agents?"
 
-    Sum the skills arrays from all agent cards in `agent_cards.json`.
+    Sum the skills arrays from all agent cards in [📥 `agent_cards.json`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json).
 
     ??? success "✅ Reveal Answer"
         **7**

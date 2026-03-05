@@ -44,6 +44,20 @@ Your mission: **prove (or disprove) that Copilot is driving measurable business 
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-048/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_roi_calculator.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/broken_roi_calculator.py) |
+| `business_outcomes.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv) |
+| `copilot_quarterly_summary.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv) |
+| `impact_analyzer.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/impact_analyzer.py) |
+
+---
+
 ## Step 1: Understand Impact Analytics
 
 Before coding, understand the three pillars of impact analytics:
@@ -74,7 +88,7 @@ In this lab, we simulate these capabilities with Python and CSV exports.
 
 You have two datasets to work with:
 
-**`copilot_quarterly_summary.csv`** — Aggregated usage data (21 rows: 7 departments × 3 months)
+**[📥 `copilot_quarterly_summary.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv)** — Aggregated usage data (21 rows: 7 departments × 3 months)
 
 | Column | Description |
 |--------|-------------|
@@ -85,7 +99,7 @@ You have two datasets to work with:
 | `total_meetings` / `total_emails` / `total_docs` / `total_chats` | Feature totals |
 | `total_time_saved_min` | Estimated minutes saved |
 
-**`business_outcomes.csv`** — Department KPIs (21 rows: 7 departments × 3 months)
+**[📥 `business_outcomes.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv)** — Department KPIs (21 rows: 7 departments × 3 months)
 
 | Column | Description |
 |--------|-------------|
@@ -398,38 +412,6 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_roi_calculator.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/broken_roi_calculator.py)
-- 📥 [business_outcomes.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv)
-- 📥 [copilot_quarterly_summary.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv)
-- 📥 [impact_analyzer.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/impact_analyzer.py)
-
-```
-lab-048/
-├── copilot_quarterly_summary.csv  ← 21-row aggregated usage data (7 depts × 3 months)
-├── business_outcomes.csv          ← 21-row business KPIs (revenue, satisfaction, etc.)
-├── impact_analyzer.py             ← Starter script with 5 TODOs
-└── broken_roi_calculator.py       ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Follow along with the lab steps
-python -c "import pandas; print('ready!')"
-
-# Or complete the TODOs
-python lab-048/impact_analyzer.py
-
-# Or fix the bugs
-python lab-048/broken_roi_calculator.py
-```
-
----
 
 ## 🧠 Knowledge Check
 

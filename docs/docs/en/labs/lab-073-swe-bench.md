@@ -53,6 +53,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-073/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_benchmark.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/broken_benchmark.py) |
+| `swe_bench_results.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/swe_bench_results.csv) |
+
+---
+
 ## Step 1: Understand Agent Strategies
 
 Before analyzing results, understand the four strategies being benchmarked:
@@ -258,31 +270,6 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_benchmark.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/broken_benchmark.py)
-- 📥 [swe_bench_results.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/swe_bench_results.csv)
-
-```
-lab-073/
-├── swe_bench_results.csv     ← 8 agent configs (3 models × multiple strategies)
-└── broken_benchmark.py       ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-073/broken_benchmark.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -312,7 +299,7 @@ python lab-073/broken_benchmark.py
 
 ??? question "**Q3 (Run the Lab):** Which agent configuration has the highest resolve rate?"
 
-    Run the Step 3 analysis on `swe_bench_results.csv` and check the ranking.
+    Run the Step 3 analysis on [📥 `swe_bench_results.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/swe_bench_results.csv) and check the ranking.
 
     ??? success "✅ Reveal Answer"
         **Agentic o3 — 65%**

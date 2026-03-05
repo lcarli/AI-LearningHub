@@ -40,6 +40,17 @@ CI/CD for AI agents needs:
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-037/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `ai-agent-ci.yml` | CI/CD workflow template | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Create a testable agent module
@@ -348,26 +359,6 @@ jobs:
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [ai-agent-ci.yml](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml)
-
-```
-lab-037/
-└── ai-agent-ci.yml    ← Complete GitHub Actions CI/CD workflow for AI agents
-```
-
-This is a **production-ready workflow** you can copy directly into `.github/workflows/` in your project. It includes all 7 jobs: unit tests, integration tests, security scan, agent evaluation, Docker build, staging deploy, and production deploy with manual approval gate.
-
-**Copy to your project:**
-```bash
-mkdir -p .github/workflows
-cp lab-037/ai-agent-ci.yml .github/workflows/ai-agent-ci.yml
-```
-
-Then customize the environment variables at the top (`AGENT_SERVICE_NAME`, `STAGING_URL`) and add the required secrets in your GitHub repository settings.
-
----
 
 ## 🧠 Knowledge Check
 
@@ -380,7 +371,7 @@ Then customize the environment variables at the top (`AGENT_SERVICE_NAME`, `STAG
 
         The workflow defines: `unit-tests`, `integration-tests`, `security-scan`, `agent-evaluation`, `docker-build`, `deploy-staging`, and `deploy-production`. Each job has a distinct responsibility in the agent deployment pipeline.
 
-??? question "**Q2 (Run the Lab):** Which job in `ai-agent-ci.yml` does NOT run on pull requests — only on pushes to the `main` branch?"
+??? question "**Q2 (Run the Lab):** Which job in [📥 `ai-agent-ci.yml`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) does NOT run on pull requests — only on pushes to the `main` branch?"
 
     Look at the `if:` condition on each job, or the workflow-level trigger vs per-job conditions.
 

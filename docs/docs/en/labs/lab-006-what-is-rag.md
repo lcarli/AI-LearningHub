@@ -32,6 +32,21 @@ The LLM doesn't know. Its training data has a cutoff date. And even if the infor
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-006/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `faq_backpacks.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_backpacks.txt) |
+| `faq_clothing.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_clothing.txt) |
+| `faq_footwear.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_footwear.txt) |
+| `faq_sleeping_bags.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_sleeping_bags.txt) |
+| `faq_tents.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_tents.txt) |
+
+---
+
 ## Part 1: The Core Problem
 
 LLMs have two knowledge limitations:
@@ -205,30 +220,6 @@ User → Retrieve → Grade relevance → If poor: web search fallback
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [faq_backpacks.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_backpacks.txt)
-- 📥 [faq_clothing.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_clothing.txt)
-- 📥 [faq_footwear.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_footwear.txt)
-- 📥 [faq_sleeping_bags.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_sleeping_bags.txt)
-- 📥 [faq_tents.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_tents.txt)
-
-This lab includes a sample knowledge base you can use to practice RAG concepts:
-
-```
-lab-006/
-├── faq_tents.txt          ← OutdoorGear tent FAQs (5 Q&A pairs)
-├── faq_sleeping_bags.txt  ← Sleeping bag FAQs (5 Q&A pairs)
-├── faq_backpacks.txt      ← Backpack FAQs (5 Q&A pairs)
-├── faq_clothing.txt       ← Clothing & layering FAQs (5 Q&A pairs)
-└── faq_footwear.txt       ← Footwear FAQs (5 Q&A pairs)
-```
-
-These 5 files form a mini OutdoorGear knowledge base — exactly the kind of document set a RAG system would ingest. In [Lab 022](lab-022-rag-github-models-pgvector.md) you'll use these same files to build a working RAG application.
-
-**Try it now:** Open any `.txt` file and notice how it's structured. Think about how you would chunk it — by Q&A pair? By paragraph? This decision directly affects retrieval quality.
-
----
 
 ## 🧠 Knowledge Check
 
@@ -263,7 +254,7 @@ These 5 files form a mini OutdoorGear knowledge base — exactly the kind of doc
     ??? success "✅ Reveal Answer"
         **5 Q&A pairs. The last question is: "Can I use a 2-person tent solo?"**
 
-        `faq_tents.txt` contains exactly 5 Q&A pairs covering: solo backpacking tent choice, 3-season vs 4-season, waterproofing, pole materials, and using a 2P tent solo. This is the kind of knowledge base a RAG system would ingest — each Q&A pair is a natural chunk for embedding.
+        [📥 `faq_tents.txt`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_tents.txt) contains exactly 5 Q&A pairs covering: solo backpacking tent choice, 3-season vs 4-season, waterproofing, pole materials, and using a 2P tent solo. This is the kind of knowledge base a RAG system would ingest — each Q&A pair is a natural chunk for embedding.
 
 ---
 

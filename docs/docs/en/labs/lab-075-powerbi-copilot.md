@@ -57,6 +57,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-075/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_powerbi.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/broken_powerbi.py) |
+| `powerbi_reports.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) |
+
+---
+
 ## Step 1: Understand the Metrics
 
 Before analyzing, understand what each column in the dataset measures:
@@ -289,31 +301,6 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_powerbi.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/broken_powerbi.py)
-- 📥 [powerbi_reports.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv)
-
-```
-lab-075/
-├── powerbi_reports.csv     ← 10 reports (2 manual + 4 assisted + 4 generated)
-└── broken_powerbi.py       ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-075/broken_powerbi.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -343,7 +330,7 @@ python lab-075/broken_powerbi.py
 
 ??? question "**Q3 (Run the Lab):** How many reports were created using Copilot (either assisted or generated)?"
 
-    Run the Step 3 analysis on `powerbi_reports.csv` and count copilot reports.
+    Run the Step 3 analysis on [📥 `powerbi_reports.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) and count copilot reports.
 
     ??? success "✅ Reveal Answer"
         **8 reports**

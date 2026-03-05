@@ -51,6 +51,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-058/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_cua.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/broken_cua.py) |
+| `browser_tasks.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/browser_tasks.csv) |
+
+---
+
 ## Step 1: Understanding CUA vs Playwright
 
 ### CUA Architecture
@@ -324,31 +336,6 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_cua.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/broken_cua.py)
-- 📥 [browser_tasks.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/browser_tasks.csv)
-
-```
-lab-058/
-├── browser_tasks.csv     ← 10 benchmark tasks (CUA + Playwright results, screenshots, risk)
-└── broken_cua.py         ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-058/broken_cua.py
-```
-
----
 
 ## 🧠 Knowledge Check
 

@@ -53,6 +53,19 @@ Non-technical users — store managers, marketing analysts, supply-chain planner
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-052/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_query_gen.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/broken_query_gen.py) |
+| `orders.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/orders.csv) |
+| `products.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/products.csv) |
+
+---
+
 ## Step 1: Understanding Fabric Data Agents
 
 A Fabric Data Agent sits between the user and the data. When a user types a question the agent:
@@ -461,15 +474,6 @@ if __name__ == "__main__":
     print("--- Most ordered product ---")
     run(most_ordered_product)
 ```
-
----
-
-
-## 📥 Download Supporting Files
-
-- [📥 broken_query_gen.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/broken_query_gen.py)
-- [📥 orders.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/orders.csv)
-- [📥 products.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/products.csv)
 
 ---
 

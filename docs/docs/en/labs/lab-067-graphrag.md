@@ -55,6 +55,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-067/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_graphrag.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/broken_graphrag.py) |
+| `knowledge_graph.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/knowledge_graph.csv) |
+
+---
+
 ## Step 1: Understanding GraphRAG Architecture
 
 GraphRAG extends the RAG pipeline with graph construction and community detection:
@@ -225,24 +237,6 @@ python lab-067/broken_graphrag.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_graphrag.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/broken_graphrag.py)
-- 📥 [knowledge_graph.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/knowledge_graph.csv)
-
-```
-lab-067/
-├── knowledge_graph.csv     ← 15 entities with relationships and communities
-└── broken_graphrag.py      ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-python lab-067/broken_graphrag.py    # Bug-fix exercise
-```
-
----
 
 ## 🧠 Knowledge Check
 

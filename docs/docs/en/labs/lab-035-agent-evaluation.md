@@ -43,6 +43,17 @@ This lab builds an automated evaluation pipeline for the OutdoorGear assistant.
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-035/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `eval_dataset.jsonl` | Evaluation dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Install the evaluation SDK
@@ -53,7 +64,7 @@ pip install azure-ai-evaluation openai
 
 ### Step 2: Create a golden dataset
 
-A **golden dataset** is a set of test questions with known-good answers. Create `eval_dataset.jsonl`:
+A **golden dataset** is a set of test questions with known-good answers. Create [📥 `eval_dataset.jsonl`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl):
 
 ```jsonl
 {"query": "What is the return policy?", "response": "We offer a 60-day return window. Items must be unused in original packaging.", "context": "60-day return window. Items must be unused in original packaging. Worn footwear non-refundable unless defective."}
@@ -237,31 +248,6 @@ Scores are 1–5. Below 3.0 on groundedness usually indicates hallucination.
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [eval_dataset.jsonl](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl)
-
-```
-lab-035/
-└── eval_dataset.jsonl    ← 20 OutdoorGear Q&A pairs for evaluation
-```
-
-Each line is a JSON object with `query`, `ground_truth`, `category`, and `product_ids`. The dataset covers product recommendations, pricing, comparisons, and an out-of-scope test case.
-
-**Load it in Python:**
-```python
-import json
-
-with open("lab-035/eval_dataset.jsonl") as f:
-    dataset = [json.loads(line) for line in f]
-
-print(f"Loaded {len(dataset)} evaluation examples")
-# Categories: tents, sleeping_bags, backpacks, pricing, recommendations, out_of_scope
-categories = set(d["category"] for d in dataset)
-print(f"Categories: {categories}")
-```
-
----
 
 ## 🧠 Knowledge Check
 

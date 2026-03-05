@@ -54,6 +54,19 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-047/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_scorecard.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/broken_scorecard.py) |
+| `copilot_usage_data.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) |
+| `scorecard_builder.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/scorecard_builder.py) |
+
+---
+
 ## Step 1: Understand the Key Metrics
 
 Before touching data, you need to understand what Work IQ measures. These are the same metrics tracked by Viva Insights and the M365 Admin Center:
@@ -322,36 +335,6 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_scorecard.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/broken_scorecard.py)
-- 📥 [copilot_usage_data.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv)
-- 📥 [scorecard_builder.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/scorecard_builder.py)
-
-```
-lab-047/
-├── copilot_usage_data.csv     ← 52-user mock dataset (7 departments)
-├── scorecard_builder.py       ← Starter script with 5 TODOs
-└── broken_scorecard.py        ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Complete the TODOs in the starter script
-python lab-047/scorecard_builder.py
-
-# Option C: Fix the bugs
-python lab-047/broken_scorecard.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -381,7 +364,7 @@ python lab-047/broken_scorecard.py
 
 ??? question "**Q3 (Run the Lab):** Which department has the highest Copilot adoption rate (active ÷ enabled × 100)?"
 
-    Run the Step 3 analysis on `copilot_usage_data.csv` and check the results.
+    Run the Step 3 analysis on [📥 `copilot_usage_data.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) and check the results.
 
     ??? success "✅ Reveal Answer"
         **Finance — 100.0%**

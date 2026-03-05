@@ -52,6 +52,18 @@ This lab analyzes pre-computed scenario data — no Entra ID tenant, Azure subsc
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-063/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_identity.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/broken_identity.py) |
+| `identity_scenarios.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv) |
+
+---
+
 ## Part 1: Understanding OBO Flow
 
 ### Step 1: OBO vs client_credentials
@@ -85,7 +97,7 @@ Key concepts:
 
 ## Part 2: Load Scenario Data
 
-### Step 2: Load `identity_scenarios.csv`
+### Step 2: Load [📥 `identity_scenarios.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv)
 
 The scenario dataset contains 15 identity configurations across 4 agents:
 
@@ -308,31 +320,6 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_identity.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/broken_identity.py)
-- 📥 [identity_scenarios.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv)
-
-```
-lab-063/
-├── identity_scenarios.csv  ← 15 scenarios × 4 agents (auth flow, risk, compliance)
-└── broken_identity.py      ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Follow along with the lab steps
-python -c "import pandas; print('ready!')"
-
-# Or fix the bugs
-python lab-063/broken_identity.py
-```
-
----
 
 ## 🧠 Knowledge Check
 

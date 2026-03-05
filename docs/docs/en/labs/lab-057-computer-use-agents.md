@@ -47,6 +47,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-057/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_safety.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/broken_safety.py) |
+| `desktop_tasks.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) |
+
+---
+
 ## Step 1: Understanding Computer Use
 
 Computer-use agents follow a simple but powerful loop:
@@ -283,31 +295,6 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_safety.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/broken_safety.py)
-- 📥 [desktop_tasks.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv)
-
-```
-lab-057/
-├── desktop_tasks.csv     ← 10 benchmark tasks (desktop + browser, with completion/risk data)
-└── broken_safety.py      ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-057/broken_safety.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -337,7 +324,7 @@ python lab-057/broken_safety.py
 
 ??? question "**Q3 (Run the Lab):** What is the overall task completion rate?"
 
-    Load `desktop_tasks.csv` and calculate `completed.sum() / total`.
+    Load [📥 `desktop_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) and calculate `completed.sum() / total`.
 
     ??? success "✅ Reveal Answer"
         **70%**

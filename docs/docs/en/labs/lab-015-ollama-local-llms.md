@@ -53,6 +53,18 @@ Ollama runs as a background service on `http://localhost:11434`.
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-015/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `Modelfile` | Ollama model configuration | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) |
+| `chat_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Run your first model
@@ -244,7 +256,7 @@ ollama create outdoorgear -f Modelfile
 ollama run outdoorgear
 ```
 
-The `Modelfile` creates a custom **OutdoorGear Advisor** persona on top of Phi-4. The `chat_starter.py` has 5 exercises covering basic completion, custom models, comparison, and streaming.
+The [📥 `Modelfile`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) creates a custom **OutdoorGear Advisor** persona on top of Phi-4. The [📥 `chat_starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) has 5 exercises covering basic completion, custom models, comparison, and streaming.
 
 ---
 
@@ -258,14 +270,6 @@ The `Modelfile` creates a custom **OutdoorGear Advisor** persona on top of Phi-4
 | `phi4` | 9.1GB | 12GB | ⚡ Moderate | Excellent |
 | `mistral` | 4.1GB | 8GB | ⚡⚡ Fast | Very good |
 | `deepseek-r1` | 4.7GB | 8GB | ⚡ Moderate | Best reasoning |
-
----
-
-
-## 📥 Download Supporting Files
-
-- [📥 Modelfile](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile)
-- [📥 chat_starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py)
 
 ---
 

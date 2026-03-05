@@ -36,6 +36,17 @@ When your agent queries the database, it might be serving Customer A — but the
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-032/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `migrations` | Database migration files | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-032/migrations) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Start PostgreSQL with Docker
@@ -297,25 +308,6 @@ docker stop pg-rls-demo && docker rm pg-rls-demo
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [migrations](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-032/migrations)
-
-```
-lab-032/
-└── migrations/
-    └── 002_rls.sql    ← Tenants table, agent_sessions, conversation_messages, RLS policies, roles
-```
-
-**Apply after migration 001:**
-```bash
-psql "host=$PG_HOST port=5432 dbname=$PG_DATABASE user=$PG_USER password=$PG_PASSWORD sslmode=require" \
-    -f lab-032/migrations/002_rls.sql
-```
-
-The migration creates the tenant tables, enables RLS on all tenant-scoped tables, creates `agent_app` and `agent_admin` roles with correct permissions, and seeds two demo tenants.
-
----
 
 ## Next Steps
 

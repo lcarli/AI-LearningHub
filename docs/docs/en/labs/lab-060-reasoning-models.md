@@ -50,6 +50,18 @@ This lab analyzes pre-computed benchmark results — no API key or Azure subscri
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-060/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_reasoning.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/broken_reasoning.py) |
+| `reasoning_benchmark.csv` | Benchmark dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv) |
+
+---
+
 ## Part 1: Understanding Reasoning Models
 
 ### Step 1: How reasoning models work
@@ -80,7 +92,7 @@ Key concepts:
 
 ## Part 2: Load Benchmark Data
 
-### Step 2: Load `reasoning_benchmark.csv`
+### Step 2: Load [📥 `reasoning_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv)
 
 The benchmark dataset contains results from running all 12 problems through each model:
 
@@ -391,31 +403,6 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_reasoning.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/broken_reasoning.py)
-- 📥 [reasoning_benchmark.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv)
-
-```
-lab-060/
-├── reasoning_benchmark.csv    ← 12 problems × 3 models (accuracy, time, tokens)
-└── broken_reasoning.py        ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Follow along with the lab steps
-python -c "import pandas; print('ready!')"
-
-# Or fix the bugs
-python lab-060/broken_reasoning.py
-```
-
----
 
 ## 🧠 Knowledge Check
 

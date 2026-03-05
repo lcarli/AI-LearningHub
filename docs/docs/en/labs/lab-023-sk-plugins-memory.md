@@ -43,6 +43,17 @@ Set `GITHUB_TOKEN`.
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-023/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_plugin.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Create a multi-plugin agent
@@ -244,8 +255,6 @@ kernel.add_filter("function_invocation", log_function_calls)
 
 ---
 
----
-
 ## 🐛 Bug-Fix Exercise: Fix the Broken SK Plugin
 
 This lab includes a deliberately broken Semantic Kernel plugin. Find and fix 3 bugs!
@@ -283,18 +292,11 @@ python lab-023/broken_plugin.py
 
 ---
 
-
-## 📥 Download Supporting Files
-
-- [📥 broken_plugin.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py)
-
----
-
 ## 🧠 Knowledge Check
 
 ??? question "**Q1 (Run the Lab):** After fixing bug #2, what does `get_cart_total()` return when the cart contains P001 (×1) at $249.99 and P007 (×1) at $89.99?"
 
-    Fix bug #2 in `broken_plugin.py` and run it, or calculate manually: P001 price × 1 + P007 price × 1.
+    Fix bug #2 in [📥 `broken_plugin.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py) and run it, or calculate manually: P001 price × 1 + P007 price × 1.
 
     ??? success "✅ Reveal Answer"
         **$339.98**

@@ -51,6 +51,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-074/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_foundry.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/broken_foundry.py) |
+| `foundry_agents.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) |
+
+---
+
 ## Step 1: Understand the Fleet Architecture
 
 Before analyzing data, understand how the agents fit together:
@@ -287,31 +299,6 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_foundry.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/broken_foundry.py)
-- 📥 [foundry_agents.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv)
-
-```
-lab-074/
-├── foundry_agents.csv     ← 8-agent fleet (2 orchestrators + 6 specialists)
-└── broken_foundry.py      ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-074/broken_foundry.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -341,7 +328,7 @@ python lab-074/broken_foundry.py
 
 ??? question "**Q3 (Run the Lab):** What is the total number of requests across the entire fleet in the last 24 hours?"
 
-    Run the Step 3 analysis on `foundry_agents.csv` and check the results.
+    Run the Step 3 analysis on [📥 `foundry_agents.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) and check the results.
 
     ??? success "✅ Reveal Answer"
         **9,380 requests**

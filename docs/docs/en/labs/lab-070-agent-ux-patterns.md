@@ -54,6 +54,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-070/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_ux.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/broken_ux.py) |
+| `ux_patterns.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/ux_patterns.csv) |
+
+---
+
 ## Step 1: Understanding Agent UX Principles
 
 Effective agent UX follows a layered approach:
@@ -211,24 +223,6 @@ python lab-070/broken_ux.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_ux.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/broken_ux.py)
-- 📥 [ux_patterns.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/ux_patterns.csv)
-
-```
-lab-070/
-├── ux_patterns.csv          ← 12 UX patterns with satisfaction scores
-└── broken_ux.py             ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-python lab-070/broken_ux.py    # Bug-fix exercise
-```
-
----
 
 ## 🧠 Knowledge Check
 

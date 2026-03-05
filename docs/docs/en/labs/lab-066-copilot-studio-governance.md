@@ -60,6 +60,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-066/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_governance.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/broken_governance.py) |
+| `studio_agents.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/studio_agents.csv) |
+
+---
+
 ## Step 1: Understanding Copilot Studio Governance
 
 Copilot Studio governance operates through multiple layers:
@@ -223,24 +235,6 @@ python lab-066/broken_governance.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_governance.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/broken_governance.py)
-- 📥 [studio_agents.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/studio_agents.csv)
-
-```
-lab-066/
-├── studio_agents.csv       ← 12 Copilot Studio agents across environments
-└── broken_governance.py    ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-python lab-066/broken_governance.py    # Bug-fix exercise
-```
-
----
 
 ## 🧠 Knowledge Check
 

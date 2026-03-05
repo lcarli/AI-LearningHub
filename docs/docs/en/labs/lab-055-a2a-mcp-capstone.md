@@ -74,6 +74,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-055/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_delegation.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/broken_delegation.py) |
+| `delegation_traces.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv) |
+
+---
+
 ## Step 1: Understanding the Architecture
 
 Before diving into data, understand what each component does:
@@ -365,31 +377,6 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_delegation.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/broken_delegation.py)
-- 📥 [delegation_traces.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv)
-
-```
-lab-055/
-├── delegation_traces.csv    ← 20 trace events (8 A2A + 12 MCP calls)
-└── broken_delegation.py     ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-055/broken_delegation.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -419,7 +406,7 @@ python lab-055/broken_delegation.py
 
 ??? question "**Q3 (Run the Lab):** How many A2A calls are in the delegation traces?"
 
-    Filter `delegation_traces.csv` by `protocol == "A2A"` and count the rows.
+    Filter [📥 `delegation_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv) by `protocol == "A2A"` and count the rows.
 
     ??? success "✅ Reveal Answer"
         **8**

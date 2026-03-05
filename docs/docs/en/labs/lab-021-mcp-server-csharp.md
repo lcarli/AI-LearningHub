@@ -33,6 +33,17 @@ Python is great for rapid MCP prototyping, but .NET is common in enterprise envi
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-021/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `BrokenMcpServer.cs` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Create the project
@@ -193,8 +204,6 @@ Enable Agent Mode in VS Code, then ask: *"What camping products are in stock?"*
 
 ---
 
----
-
 ## 🐛 Bug-Fix Exercise: Fix the Broken MCP Server
 
 This lab includes a deliberately broken C# MCP server file. Your challenge: find and fix 3 bugs.
@@ -233,13 +242,6 @@ dotnet run
 
 ---
 
-
-## 📥 Download Supporting Files
-
-- [📥 BrokenMcpServer.cs](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs)
-
----
-
 ## 🧠 Knowledge Check
 
 ??? question "**Q1 (Run the Lab):** After fixing all 3 bugs and calling `list_categories()`, what does the tool return? List the categories in the order they appear in the output."
@@ -253,7 +255,7 @@ dotnet run
 
 ??? question "**Q2 (Run the Lab):** After fixing bug #3 (the case-sensitive comparison bug), what `StringComparison` value replaces `StringComparison.Ordinal` in the fix?"
 
-    Read the bug #3 description carefully, then look at the fix you applied in `BrokenMcpServer.cs`.
+    Read the bug #3 description carefully, then look at the fix you applied in [📥 `BrokenMcpServer.cs`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs).
 
     ??? success "✅ Reveal Answer"
         **`StringComparison.OrdinalIgnoreCase`**

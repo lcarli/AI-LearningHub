@@ -50,6 +50,18 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-071/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_cache.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/broken_cache.py) |
+| `cache_benchmark.csv` | Benchmark dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) |
+
+---
+
 ## Step 1: Understand Context Caching Mechanics
 
 Before analyzing data, understand the key concepts:
@@ -284,31 +296,6 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_cache.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/broken_cache.py)
-- 📥 [cache_benchmark.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv)
-
-```
-lab-071/
-├── cache_benchmark.csv     ← 15-request benchmark (3 providers × 5 requests)
-└── broken_cache.py         ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Option A: Follow along with the lab steps (copy-paste code)
-python -c "import pandas; print('pandas ready!')"
-
-# Option B: Fix the bugs
-python lab-071/broken_cache.py
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -338,7 +325,7 @@ python lab-071/broken_cache.py
 
 ??? question "**Q3 (Run the Lab):** What is the average TTFT for cache **hits** across all providers?"
 
-    Run the Step 3 analysis on `cache_benchmark.csv` and check the results.
+    Run the Step 3 analysis on [📥 `cache_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) and check the results.
 
     ??? success "✅ Reveal Answer"
         **217 ms**

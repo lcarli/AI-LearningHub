@@ -55,6 +55,18 @@ No additional packages required — the `json` module is included with Python.
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-069/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_manifest.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/broken_manifest.py) |
+| `declarative_agent.json` | Configuration / data file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/declarative_agent.json) |
+
+---
+
 ## Step 1: Understanding Declarative Agent Architecture
 
 Declarative agents sit between the user and Microsoft 365 Copilot, customizing its behavior:
@@ -224,23 +236,6 @@ python lab-069/broken_manifest.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_manifest.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/broken_manifest.py)
-- 📥 [declarative_agent.json](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/declarative_agent.json)
-
-```
-lab-069/
-├── declarative_agent.json   ← Complete declarative agent manifest
-└── broken_manifest.py       ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-```bash
-cd docs/docs/en/labs
-python lab-069/broken_manifest.py    # Bug-fix exercise
-```
-
----
 
 ## 🧠 Knowledge Check
 

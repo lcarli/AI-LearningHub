@@ -53,6 +53,20 @@ Or copy each file directly from the sections below.
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-010/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `exercise1_fibonacci.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py) |
+| `exercise2_shopping_cart.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py) |
+| `exercise3_product_search.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py) |
+| `exercise4_refactor_me.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py) |
+
+---
+
 ## Exercise 1 — Inline Completion: Write Code from Comments
 
 **Goal:** Learn how Copilot completes code as you type.
@@ -91,7 +105,7 @@ Create a new file `practice.py` and type each comment below. After each comment,
 
 **Goal:** Use Copilot Chat to find, understand, and fix real bugs.
 
-### File: `exercise1_fibonacci.py`
+### File: [📥 `exercise1_fibonacci.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py)
 
 ```python title="exercise1_fibonacci.py — 3 bugs hidden inside"
 --8<-- "labs/lab-010/exercise1_fibonacci.py"
@@ -117,7 +131,7 @@ Run `python exercise1_fibonacci.py` — you should see: `✅ All tests passed!`
 
 ---
 
-### File: `exercise2_shopping_cart.py`
+### File: [📥 `exercise2_shopping_cart.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py)
 
 ```python title="exercise2_shopping_cart.py — 4 bugs hidden inside"
 --8<-- "labs/lab-010/exercise2_shopping_cart.py"
@@ -150,7 +164,7 @@ Unique items: 2
 
 **Goal:** Fix bugs AND add a new feature using inline chat (`Ctrl+I`).
 
-### File: `exercise3_product_search.py`
+### File: [📥 `exercise3_product_search.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py)
 
 ```python title="exercise3_product_search.py — 2 bugs + 1 missing feature"
 --8<-- "labs/lab-010/exercise3_product_search.py"
@@ -182,7 +196,7 @@ The file mentions a `sort_by_price()` function that doesn't exist yet.
 
 **Goal:** Use Copilot Edits to improve code quality with natural language instructions — without changing behavior.
 
-### File: `exercise4_refactor_me.py`
+### File: [📥 `exercise4_refactor_me.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
 
 ```python title="exercise4_refactor_me.py — works, but needs improvement"
 --8<-- "labs/lab-010/exercise4_refactor_me.py"
@@ -252,16 +266,6 @@ Is there a more Pythonic way to write this?
 | Chat `/fix` | Exercise 2 | Understand and fix bugs |
 | Inline chat `Ctrl+I` | Exercise 3 | Fix + extend in-place |
 | Copilot Edits | Exercise 4 | Refactor entire files |
-
----
-
-
-## 📥 Download Supporting Files
-
-- [📥 exercise1_fibonacci.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py)
-- [📥 exercise2_shopping_cart.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py)
-- [📥 exercise3_product_search.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py)
-- [📥 exercise4_refactor_me.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
 
 ---
 

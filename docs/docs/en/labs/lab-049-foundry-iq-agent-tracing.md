@@ -60,6 +60,19 @@ pip install azure-ai-projects azure-monitor-opentelemetry opentelemetry-instrume
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-049/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_tracing.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/broken_tracing.py) |
+| `sample_traces.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) |
+| `traced_agent.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/traced_agent.py) |
+
+---
+
 ## Step 1: Understanding OpenTelemetry for AI
 
 OpenTelemetry defines three signal types. For agent tracing, we focus on **traces**:
@@ -264,27 +277,6 @@ python lab-049/broken_tracing.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_tracing.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/broken_tracing.py)
-- 📥 [sample_traces.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv)
-- 📥 [traced_agent.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/traced_agent.py)
-
-```
-lab-049/
-├── sample_traces.csv     ← 10 traces with latency, tokens, status
-├── traced_agent.py       ← Starter script with 5 TODOs
-└── broken_tracing.py     ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-```bash
-pip install pandas opentelemetry-api opentelemetry-sdk
-cd docs/docs/en/labs
-python lab-049/broken_tracing.py     # Bug-fix exercise
-python lab-049/traced_agent.py       # Instrumentation exercise
-```
-
----
 
 ## 🧠 Knowledge Check
 
@@ -314,7 +306,7 @@ python lab-049/traced_agent.py       # Instrumentation exercise
 
 ??? question "**Q3 (Run the Lab):** What is the average trace duration across all 10 sample traces?"
 
-    Load `sample_traces.csv` and calculate `traces["duration_ms"].mean()`.
+    Load [📥 `sample_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) and calculate `traces["duration_ms"].mean()`.
 
     ??? success "✅ Reveal Answer"
         **3,150.0 ms (3.15 seconds)**

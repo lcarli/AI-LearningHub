@@ -31,6 +31,17 @@ A well-crafted prompt can turn a mediocre response into an excellent one without
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-005/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `prompt_challenges.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-005/prompt_challenges.py) |
+
+---
+
 ## Part 1: Anatomy of a Prompt
 
 Every LLM API call has up to three message types:
@@ -436,13 +447,6 @@ Or copy it from below:
 
 !!! tip "There's no single right answer"
     The goal is to get output that meets the target spec. How you phrase the prompt is up to you — compare approaches with a colleague!
-
----
-
-
-## 📥 Download Supporting Files
-
-- [📥 prompt_challenges.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-005/prompt_challenges.py)
 
 ---
 

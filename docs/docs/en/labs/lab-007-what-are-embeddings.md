@@ -28,6 +28,17 @@ The key idea is simple: **convert any piece of text into a list of numbers (a ve
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-007/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `embedding_explorer.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-007/embedding_explorer.py) |
+
+---
+
 ## Part 1: Text as a Point in Space
 
 Imagine a 2D map where every word is placed based on its meaning:
@@ -204,13 +215,6 @@ python lab-007/embedding_explorer.py
 3. **Similarity matrix:** See that two tent descriptions score higher similarity to each other than a tent vs. a sleeping bag
 
 This directly illustrates why RAG works: the embedding of a *question* and the embedding of its *answer document* land close together in vector space.
-
----
-
-
-## 📥 Download Supporting Files
-
-- [📥 embedding_explorer.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-007/embedding_explorer.py)
 
 ---
 

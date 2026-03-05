@@ -64,6 +64,19 @@ pip install pandas
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-050/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_conventions.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/broken_conventions.py) |
+| `dashboard_builder.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/dashboard_builder.py) |
+| `multi_agent_spans.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/multi_agent_spans.csv) |
+
+---
+
 ## Step 1: Understanding Multi-Agent Trace Structure
 
 In a multi-agent system, the trace forms a **tree**:
@@ -300,27 +313,6 @@ python lab-050/broken_conventions.py
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_conventions.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/broken_conventions.py)
-- 📥 [dashboard_builder.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/dashboard_builder.py)
-- 📥 [multi_agent_spans.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/multi_agent_spans.csv)
-
-```
-lab-050/
-├── multi_agent_spans.csv    ← 46 spans across 5 traces (hierarchical)
-├── dashboard_builder.py     ← Starter script with 5 TODOs
-└── broken_conventions.py    ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-python lab-050/broken_conventions.py    # Bug-fix exercise
-python lab-050/dashboard_builder.py     # Dashboard builder TODOs
-```
-
----
 
 ## 🧠 Knowledge Check
 

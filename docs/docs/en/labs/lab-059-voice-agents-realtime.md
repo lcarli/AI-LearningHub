@@ -61,6 +61,18 @@ This lab analyzes pre-recorded session data — no API key or Azure subscription
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-059/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `broken_voice.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/broken_voice.py) |
+| `voice_sessions.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv) |
+
+---
+
 ## Part 1: Understanding Realtime API Architecture
 
 ### Step 1: How the Realtime API differs from Chat Completions
@@ -82,7 +94,7 @@ The ~100 ms target latency makes voice conversations feel natural — comparable
 
 ## Part 2: Load and Explore Voice Session Data
 
-### Step 2: Load `voice_sessions.csv`
+### Step 2: Load [📥 `voice_sessions.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv)
 
 OutdoorGear recorded **15 voice sessions** during a pilot test of their Realtime API integration. Each session captures a customer interaction:
 
@@ -347,31 +359,6 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ---
 
-## 📁 Supporting Files
-
-- 📥 [broken_voice.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/broken_voice.py)
-- 📥 [voice_sessions.csv](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv)
-
-```
-lab-059/
-├── voice_sessions.csv    ← 15 voice sessions with latency, sentiment, and RAG data
-└── broken_voice.py       ← Bug-fix exercise (3 bugs + self-tests)
-```
-
-**Quick start:**
-
-```bash
-pip install pandas
-cd docs/docs/en/labs
-
-# Follow along with the lab steps
-python -c "import pandas; print('ready!')"
-
-# Or fix the bugs
-python lab-059/broken_voice.py
-```
-
----
 
 ## 🧠 Knowledge Check
 

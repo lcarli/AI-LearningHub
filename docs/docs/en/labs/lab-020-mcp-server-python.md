@@ -43,6 +43,17 @@ python --version
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-020/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `outdoorgear_mcp_server_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-020/outdoorgear_mcp_server_starter.py) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Create the project
@@ -241,8 +252,6 @@ def get_product_catalog() -> str:
 
 ---
 
----
-
 ## 📁 Starter File
 
 This lab includes a starter file with TODO markers to guide you through building the server:
@@ -289,13 +298,6 @@ Test it in the MCP Inspector by asking:
 > *"Compare the TrailBlazer Tent 2P and the TrailBlazer Solo. Which is lighter?"*
 
 The agent should call `compare_products(["P001", "P003"])` and return a structured comparison.
-
----
-
-
-## 📥 Download Supporting Files
-
-- [📥 outdoorgear_mcp_server_starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-020/outdoorgear_mcp_server_starter.py)
 
 ---
 

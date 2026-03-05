@@ -58,6 +58,18 @@ This is the LLM backend used in all **L200 labs** in this hub.
 
 ---
 
+## 📦 Supporting Files
+
+!!! note "Download these files before starting the lab"
+    Save all files to a `lab-013/` folder in your working directory.
+
+| File | Description | Download |
+|------|-------------|----------|
+| `requirements.txt` | Python dependencies | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/requirements.txt) |
+| `starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) |
+
+---
+
 ## Lab Exercise
 
 ### Step 1: Explore the Playground
@@ -215,7 +227,7 @@ pip install -r requirements.txt
 python starter.py
 ```
 
-The `starter.py` contains 4 exercises with `TODO` comments. Complete each TODO to build a working GitHub Models client.
+The [📥 `starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) contains 4 exercises with `TODO` comments. Complete each TODO to build a working GitHub Models client.
 
 ---
 
@@ -229,14 +241,6 @@ GitHub Models is free but rate-limited:
 | Copilot Pro/Business | Higher | Higher |
 
 For lab purposes, these limits are more than sufficient. If you hit a limit, wait 1 minute.
-
----
-
-
-## 📥 Download Supporting Files
-
-- [📥 requirements.txt](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/requirements.txt)
-- [📥 starter.py](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py)
 
 ---
 
