@@ -28,22 +28,7 @@ Semantic Kernel (SK) is Microsoft's open-source SDK for building AI agents and a
 
 ## Semantic Kernel Building Blocks
 
-```
-┌─────────────────────────────────────────────────┐
-│                 Semantic Kernel                 │
-│                                                 │
-│  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │
-│  │  Kernel  │  │ Plugins  │  │ Vector Store │  │
-│  │ (LLM +  │  │(functions│  │  (memory)    │  │
-│  │ services)│  │+ prompts)│  │              │  │
-│  └──────────┘  └──────────┘  └──────────────┘  │
-│                                                 │
-│  ┌──────────────────────────────────────────┐   │
-│  │         Auto Function Calling            │   │
-│  │  (LLM decides which plugins to invoke)   │   │
-│  └──────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────┘
-```
+![Semantic Kernel Architecture](../../assets/diagrams/semantic-kernel-architecture.svg)
 
 ---
 

@@ -32,27 +32,7 @@
 
 ## The RAG Pipeline
 
-```
-Documents
-   │
-   ▼
-[Chunking]  ─── split into ~512-token pieces
-   │
-   ▼
-[Embedding] ─── text-embedding-3-small → float[]
-   │
-   ▼
-[Vector Store] ─ pgvector / Azure AI Search
-   │
-   ▼  ◄──── User Query (also embedded)
-[Retrieval] ─── top-k cosine similarity
-   │
-   ▼
-[LLM + Context] ── "Answer based on these docs: ..."
-   │
-   ▼
-Response
-```
+![RAG Pipeline](../../assets/diagrams/rag-pipeline.svg)
 
 ---
 

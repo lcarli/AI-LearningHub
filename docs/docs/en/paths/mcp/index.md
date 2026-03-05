@@ -34,17 +34,8 @@ By the end of this path you will have:
 ## Key Concepts
 
 ### MCP Architecture
-```
-┌──────────────┐      MCP Protocol      ┌──────────────┐
-│  AI Agent    │ ◄───────────────────► │  MCP Server  │
-│ (LLM Host)   │   JSON-RPC over        │  (your code) │
-└──────────────┘   stdio / HTTP/SSE     └──────────────┘
-                                              │
-                                        ┌─────▼──────┐
-                                        │  Database  │
-                                        │  APIs, etc.│
-                                        └────────────┘
-```
+
+![MCP Architecture](../../assets/diagrams/mcp-architecture.svg)
 
 ### Three primitives in MCP
 
