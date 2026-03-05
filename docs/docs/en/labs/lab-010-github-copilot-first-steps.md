@@ -77,7 +77,9 @@ Or copy each file directly from the sections below.
 
 **Goal:** Learn how Copilot completes code as you type.
 
-Create a new file `practice.py` and type each comment below. After each comment, **stop typing** and wait for Copilot's suggestion. Press `Tab` to accept.
+Create a new file `practice.py` and type each comment below. After each comment, **stop typing** and wait for Copilot's suggestion. Press `Tab` to accept, you can keep pressing tab until copilot stops suggesting more completions.
+
+!!! tip "We will not execute this code, so don't worry about syntax errors or missing imports — just focus on the suggestions Copilot gives you based on the comments."
 
 ```python
 # Function that takes a list of prices and returns the average:
