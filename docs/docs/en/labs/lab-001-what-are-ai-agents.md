@@ -47,6 +47,12 @@ The agent *does something*: calls an API, queries a database, writes a file, sen
 
 ![AI Agent Loop — Perceive, Reason, Act, Observe](../../assets/diagrams/agent-loop-cycle.svg)
 
+??? question "🤔 Check Your Understanding"
+    In the agent loop, what happens after the agent **acts** (e.g., calls an API)?
+
+    ??? success "Answer"
+        The agent **observes** the result — the tool output is fed back into context so the LLM can reason over the new information and decide the next step. This closes the loop: perceive → reason → act → observe → reason again.
+
 ---
 
 ## Agent vs. Chatbot vs. Traditional Software
@@ -62,6 +68,18 @@ The agent *does something*: calls an API, queries a database, writes a file, sen
 !!! tip "When NOT to use an agent"
     Agents are powerful but complex. Use a **simple LLM call** for single-turn Q&A. Use an **agent** only when the task requires multi-step reasoning, tool use, or dynamic decision-making.
 
+??? question "🤔 Check Your Understanding"
+    A traditional chatbot follows a pre-programmed decision tree. How does an AI agent differ when it encounters a situation the developer didn't anticipate?
+
+    ??? success "Answer"
+        An AI agent uses the LLM to **adapt dynamically at runtime** — it reasons about the new situation and decides what to do, even if that exact scenario was never coded. A traditional chatbot can only handle what was explicitly programmed.
+
+??? question "🤔 Check Your Understanding"
+    When should you use a simple LLM call instead of building a full AI agent?
+
+    ??? success "Answer"
+        Use a simple LLM call for **single-turn Q&A** tasks that don't require multi-step reasoning, tool use, or dynamic decision-making. Agents add complexity and should only be used when the task truly needs autonomy.
+
 ---
 
 ## Real-World Examples
@@ -72,6 +90,12 @@ The agent *does something*: calls an API, queries a database, writes a file, sen
 | **Zava Sales Agent** *(this repo's workshop)* | Queries PostgreSQL, generates charts, interprets sales trends |
 | **Microsoft 365 Copilot** | Reads emails, calendar, files, drafts replies, summarizes meetings |
 | **AutoGen research agent** | Spawns sub-agents to search, synthesize, and write a report |
+
+??? question "🤔 Check Your Understanding"
+    Which of the four core agent properties (perception, memory, reasoning, action) is primarily responsible for the agent deciding *what to do next*?
+
+    ??? success "Answer"
+        **Reasoning.** The LLM uses reasoning to decide the next step — whether to answer directly, call a tool, ask a clarifying question, or break the goal into sub-steps. Perception handles input, memory stores context, and action executes the decision.
 
 ---
 

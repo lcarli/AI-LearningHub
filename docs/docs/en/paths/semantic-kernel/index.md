@@ -16,13 +16,13 @@ Semantic Kernel (SK) is Microsoft's open-source SDK for building AI agents and a
 
 ---
 
-## Path Labs
+## Path Labs (3 labs, ~135 min total)
 
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|
-| [Lab 014](../../labs/lab-014-sk-hello-agent.md) | SK Hello Agent | <span class="level-badge level-100">L100</span> | ✅ Free (GitHub Models) |
-| [Lab 023](../../labs/lab-023-sk-plugins-memory.md) | SK Plugins, Memory & Planners | <span class="level-badge level-200">L200</span> | ✅ Free (GitHub Models) |
-| [Lab 034](../../labs/lab-034-multi-agent-sk.md) | Multi-Agent Orchestration with SK | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |
+| [Lab 014](../../labs/lab-014-sk-hello-agent.md) | Semantic Kernel — Hello Agent | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
+| [Lab 023](../../labs/lab-023-sk-plugins-memory.md) | Semantic Kernel — Plugins, Memory & Planners | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
+| [Lab 034](../../labs/lab-034-multi-agent-sk.md) | Multi-Agent Orchestration with Semantic Kernel | <span class="level-badge level-300">L300</span> | ✅ GitHub Free |
 
 ---
 

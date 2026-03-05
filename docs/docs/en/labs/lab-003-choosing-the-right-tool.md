@@ -53,6 +53,12 @@ START: What's your primary goal?
                 └── GitHub Models + Semantic Kernel
 ```
 
+??? question "🤔 Check Your Understanding"
+    According to the decision flowchart, what tool should you use if your primary goal is to connect an existing database or API to AI agents?
+
+    ??? success "Answer"
+        You should **build an MCP Server**. MCP (Model Context Protocol) provides a universal connector standard so any MCP-compatible AI agent can access your tool or data source through a common interface.
+
 ---
 
 ## By Role
@@ -105,6 +111,18 @@ Recommended path:
 
 **Tools:** GitHub Models, Semantic Kernel — everything free!
 
+??? question "🤔 Check Your Understanding"
+    A solution architect needs to design a production multi-agent system with observability and governance. Which combination of tools does this lab recommend?
+
+    ??? success "Answer"
+        **Foundry, Semantic Kernel, AutoGen, and App Insights.** The recommended learning path is: Foundry Agent MCP → Agent Observability → Multi-Agent SK → AutoGen Multi-Agent. This covers managed runtime, agent logic, multi-agent orchestration, and monitoring.
+
+??? question "🤔 Check Your Understanding"
+    What does "more control = more responsibility" mean in the control vs. simplicity trade-off?
+
+    ??? success "Answer"
+        Pro-code tools like AutoGen and Semantic Kernel give you **full flexibility** over agent logic, but you must handle more yourself — error handling, deployment, security, scaling. No-code tools like Copilot Studio are **faster to build** but less customizable. The right choice depends on your team's skills and requirements.
+
 ---
 
 ## The Two Key Trade-offs
@@ -121,6 +139,12 @@ LangChain    (SDK)       (managed)    (no-code GUI)
 
 More control = more flexibility + more responsibility.  
 More simplicity = faster to build + less customizable.
+
+??? question "🤔 Check Your Understanding"
+    Can a student with no Azure subscription and no budget still build a working AI agent using the tools in this hub?
+
+    ??? success "Answer"
+        **Yes!** GitHub Models and Semantic Kernel are completely free. The L50 conceptual labs and L100–L200 labs using GitHub Models require no Azure subscription. Students can build real agents, run MCP servers locally, and learn the full agent development lifecycle at zero cost.
 
 ### 2. Free vs. Paid
 

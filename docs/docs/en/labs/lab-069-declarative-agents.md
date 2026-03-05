@@ -55,6 +55,12 @@ No additional packages required — the `json` module is included with Python.
 
 ---
 
+!!! tip "Quick Start with GitHub Codespaces"
+    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
+
+    All dependencies are pre-installed in the devcontainer.
+
+
 ## 📦 Supporting Files
 
 !!! note "Download these files before starting the lab"

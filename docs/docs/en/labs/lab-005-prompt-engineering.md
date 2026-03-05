@@ -75,6 +75,12 @@ The system message is the most important part of agent design. It:
 - Provides **domain context** the model wouldn't otherwise have
 - Handles **edge cases** ("if asked out-of-scope questions, say...")
 
+??? question "🤔 Check Your Understanding"
+    What are the three message roles in an LLM API call, and which one is invisible to the end user?
+
+    ??? success "Answer"
+        The three roles are **system**, **user**, and **assistant**. The **system message** is invisible to end users — it's set by the developer and defines the agent's persona, rules, scope, and behavior. The user sees their own messages and the assistant's responses.
+
 ---
 
 ## Part 2: Core Techniques
@@ -144,6 +150,18 @@ Final answer: $634.95
 - "Explain your reasoning before answering"
 
 **When to use:** Math, logic, multi-step reasoning, debugging, complex decisions.
+
+??? question "🤔 Check Your Understanding"
+    Why does adding "Think step by step" to a math prompt improve accuracy, even though the model has the same knowledge either way?
+
+    ??? success "Answer"
+        Chain-of-thought prompting forces the model to **generate intermediate reasoning steps** before producing a final answer. This reduces errors because the model can catch mistakes in earlier steps. Without CoT, the model may "rush" to a final answer and skip critical calculations.
+
+??? question "🤔 Check Your Understanding"
+    When would you choose few-shot prompting over zero-shot prompting?
+
+    ??? success "Answer"
+        Use **few-shot** when you need a **specific format, tone, or classification scheme** that the model might not infer from instructions alone. Providing 2–5 examples dramatically improves consistency. Zero-shot works for simple, well-defined tasks where the model can infer the expected output format.
 
 ---
 
@@ -400,6 +418,12 @@ Only use verified tool outputs. Never invent data.
 {scope_definition}
 For out-of-scope questions: "{out_of_scope_response}"
 ```
+
+??? question "🤔 Check Your Understanding"
+    Why is it important for an agent's system prompt to define what the agent should do when it *can't* answer a question?
+
+    ??? success "Answer"
+        Without an explicit fallback instruction, the LLM will try to answer anyway — often **hallucinating** a plausible-sounding but incorrect response. Defining out-of-scope behavior (e.g., "say 'I can only help with X'") prevents the agent from inventing data and sets clear user expectations.
 
 ---
 

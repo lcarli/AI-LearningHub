@@ -14,7 +14,7 @@ Build AI agents that extend **Visual Studio Code** — turning Copilot Chat into
 
 ---
 
-## Path Labs
+## Path Labs (1 labs, ~45 min total)
 
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|

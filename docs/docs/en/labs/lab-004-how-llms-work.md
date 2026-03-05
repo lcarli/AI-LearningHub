@@ -75,6 +75,12 @@ Input: "The capital of France is"
 
 The LLM doesn't "know" facts — it has learned **statistical patterns** from text. When it says "Paris," it's because "Paris" almost always follows that phrase in its training data.
 
+??? question "🤔 Check Your Understanding"
+    An LLM correctly answers "The capital of France is Paris." Does the model *know* this fact the way a human does?
+
+    ??? success "Answer"
+        No. The LLM has learned **statistical patterns** from its training data — "Paris" almost always follows "The capital of France is" in the text it was trained on. It predicts the most likely next token, not verified facts. This is why LLMs can also confidently produce wrong answers (hallucinations).
+
 ---
 
 ## Part 2: Training an LLM
@@ -105,6 +111,12 @@ This is why ChatGPT feels more polished and aligned than a raw base model.
 Base model → SFT → RLHF → "Assistant" model
    (completes text)        (answers helpfully)
 ```
+
+??? question "🤔 Check Your Understanding"
+    What is the purpose of RLHF (Reinforcement Learning from Human Feedback) in LLM training, and why can't pre-training alone achieve the same result?
+
+    ??? success "Answer"
+        RLHF aligns the model with **human preferences** — making responses more helpful, safe, and conversational. Pre-training only teaches the model to predict the next token from text patterns. Without RLHF, the model might produce technically correct but unhelpful, unsafe, or oddly formatted responses.
 
 ---
 
@@ -157,6 +169,12 @@ An alternative to temperature. Only sample from the smallest set of tokens whose
 
 - `top_p=0.1` → very conservative
 - `top_p=0.9` → allows diverse outputs
+
+??? question "🤔 Check Your Understanding"
+    You're building an agent that generates SQL queries from natural language. Should you use a high or low temperature, and why?
+
+    ??? success "Answer"
+        Use **low temperature (0.0)**. SQL queries need to be deterministic and syntactically correct. High temperature introduces randomness that could produce invalid or inconsistent SQL. For structured output tasks like code generation, data extraction, and SQL, always prefer temperature=0.
 
 ---
 
@@ -212,6 +230,12 @@ When processing "bank", the model attends strongly to "river"
 ```
 
 This is why LLMs understand context so well — every word is interpreted in relation to every other word.
+
+??? question "🤔 Check Your Understanding"
+    In the sentence "The bank by the river was steep," how does the self-attention mechanism help the model understand that "bank" means a riverbank and not a financial institution?
+
+    ??? success "Answer"
+        Self-attention computes how much "attention" each token should pay to every other token. When processing "bank," the model attends strongly to "river" — the contextual relationship between these words shifts the interpretation toward **riverbank** rather than financial institution. Every word is interpreted in relation to every other word in the context.
 
 ---
 

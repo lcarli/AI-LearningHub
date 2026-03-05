@@ -14,12 +14,12 @@ Build AI agents that live inside **Microsoft Teams** — the daily hub for milli
 
 ---
 
-## Path Labs
+## Path Labs (2 labs, ~90 min total)
 
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|
-| [Lab 011](../../labs/lab-011-copilot-studio-first-agent.md) | Copilot Studio: First Agent | <span class="level-badge level-100">L100</span> | ✅ Free trial |
-| [Lab 024](../../labs/lab-024-teams-ai-library.md) | Teams AI Library Bot | <span class="level-badge level-200">L200</span> | ⚠️ M365 Dev tenant |
+| [Lab 011](../../labs/lab-011-copilot-studio-first-agent.md) | Copilot Studio — First Agent | <span class="level-badge level-100">L100</span> | ✅ Free |
+| [Lab 024](../../labs/lab-024-teams-ai-library.md) | Teams AI Library Bot | <span class="level-badge level-200">L200</span> | ✅ Free |
 
 ---
 

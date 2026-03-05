@@ -59,6 +59,12 @@ Words with similar meanings cluster together. "Dog" is near "Cat" and "Pet". "Py
 
 Real embedding models don't use 2 dimensions — they use **1,536** (OpenAI) or **3,072** dimensions. But the principle is the same: similar meaning = nearby point in space.
 
+??? question "🤔 Check Your Understanding"
+    Why do embedding models use 1,536 dimensions instead of just 2 or 3?
+
+    ??? success "Answer"
+        Human language has enormous complexity — synonyms, context, tone, domain-specific meaning. Two or three dimensions can't capture all these nuances. **Higher dimensions** allow the model to encode many different aspects of meaning simultaneously, so that subtle distinctions (like "Python the language" vs. "python the snake") can be represented as different directions in the vector space.
+
 ---
 
 ## Part 2: What an Embedding Actually Looks Like
@@ -95,6 +101,14 @@ Cosine similarity ranges from **-1 to 1**:
 - `-1.0` = opposite meaning
 
 In practice, most similar documents score between **0.7 and 0.95**.
+
+??? question "🤔 Check Your Understanding"
+    Two texts have a cosine similarity of 0.05. What does this tell you about their relationship?
+
+    ??? success "Answer"
+        A cosine similarity of 0.05 means the texts are **essentially unrelated** — their vectors point in almost perpendicular directions. On the scale from -1 to 1, a score near 0 indicates no meaningful semantic connection. Similar documents typically score between 0.7 and 0.95.
+
+---
 
 ```python
 # Simplified cosine similarity
@@ -157,6 +171,12 @@ Group documents automatically by meaning without predefined categories.
 | `text-embedding-ada-002` (OpenAI) | 1,536 | 8,191 tokens | Low | Legacy |
 | `nomic-embed-text` (Ollama) | 768 | 8,192 tokens | **Free (local)** | Offline/private |
 | `mxbai-embed-large` (Ollama) | 1,024 | 512 tokens | **Free (local)** | Local production |
+
+??? question "🤔 Check Your Understanding"
+    Your RAG system ingested all documents using `text-embedding-3-small`. You later switch to `text-embedding-3-large` for querying. Will the system still work correctly?
+
+    ??? success "Answer"
+        **No.** Vectors from different embedding models are **incompatible** — they map to different vector spaces with different dimensions (1,536 vs. 3,072). Comparing them would produce meaningless similarity scores. You must **always use the same model** for both ingestion and querying, or re-embed all documents with the new model.
 
 !!! tip "Use text-embedding-3-small via GitHub Models (free)"
     In this hub's L200 labs, we use `text-embedding-3-small` via the GitHub Models API — free, no credit card, same quality as paid Azure OpenAI.

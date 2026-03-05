@@ -104,6 +104,12 @@ There's no "better" end — it depends on your use case, team skills, and govern
 | **Skill needed** | Medium — Node.js or C# |
 | **Cost** | Free SDK; requires M365 tenant |
 
+??? question "🤔 Check Your Understanding"
+    What is the key difference between Copilot Studio and Semantic Kernel in terms of who should use them?
+
+    ??? success "Answer"
+        **Copilot Studio** is designed for **citizen developers and business analysts** who need no-code/low-code agent building. **Semantic Kernel** is designed for **professional developers** (Python/C#) who want full code control over agent logic, plugins, and memory.
+
 ---
 
 ## Where Does MCP Fit?
@@ -129,6 +135,12 @@ There's no "better" end — it depends on your use case, team skills, and govern
 
 MCP works with **all the platforms above** — and also with Claude Desktop, OpenAI, and any other MCP-compatible host.
 
+??? question "🤔 Check Your Understanding"
+    MCP is described as "USB-C for AI tools." What specific problem does this analogy highlight that MCP solves?
+
+    ??? success "Answer"
+        MCP solves the **N×M integration problem**. Without MCP, connecting 5 agents to 5 tools requires 25 custom integrations. With MCP as a universal standard, each tool publishes one MCP server and every MCP-compatible agent can connect to it — reducing integrations to N+M.
+
 ---
 
 ## Decision Cheat Sheet
@@ -142,6 +154,12 @@ MCP works with **all the platforms above** — and also with Claude Desktop, Ope
 | "I want multiple AI agents collaborating on complex tasks" | AutoGen |
 | "I want to connect my existing tool/API to any AI agent" | Build an MCP Server |
 | "I just want to experiment with LLMs for free" | GitHub Models |
+
+??? question "🤔 Check Your Understanding"
+    A developer wants to build a system where a "researcher" agent, a "writer" agent, and a "reviewer" agent collaborate on producing a report. Which Microsoft tool is best suited for this?
+
+    ??? success "Answer"
+        **AutoGen.** It is specifically designed for orchestrating **multiple specialized agents** that collaborate on complex tasks through nested conversations. Semantic Kernel excels at building single sophisticated agents, while AutoGen excels at multi-agent coordination.
 
 ---
 

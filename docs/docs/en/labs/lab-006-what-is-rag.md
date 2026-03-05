@@ -110,6 +110,12 @@ User asks: "What is the return policy for outdoor equipment?"
                within 30 days with original receipt..."
 ```
 
+??? question "🤔 Check Your Understanding"
+    In the RAG pipeline, what is the difference between the **ingestion phase** and the **retrieval phase**, and how often does each run?
+
+    ??? success "Answer"
+        The **ingestion phase** (Load → Chunk → Embed → Store) runs **once** (or on a schedule) to prepare your documents. The **retrieval phase** (Embed query → Search → Augment → Generate) runs **on every user query** to find relevant chunks and generate an answer. Ingestion is a batch process; retrieval is real-time.
+
 ---
 
 ## Part 3: Chunking Strategies
@@ -130,6 +136,12 @@ Chunk 1: tokens 1–512
 Chunk 2: tokens 462–974   ← 50-token overlap
 Chunk 3: tokens 924–1436  ← 50-token overlap
 ```
+
+??? question "🤔 Check Your Understanding"
+    Why is it important to add **overlap** between chunks when splitting documents?
+
+    ??? success "Answer"
+        Without overlap, relevant information that spans a chunk boundary gets **split across two chunks** and may be lost during retrieval. Adding 50–100 token overlap ensures that context at the edges is preserved in both adjacent chunks, improving retrieval quality.
 
 ---
 
@@ -161,6 +173,12 @@ Final score = α × keyword_score + (1-α) × semantic_score
 ```
 
 Most production RAG systems use hybrid search because it handles both exact lookups ("SKU-12345") and semantic queries ("something for camping in the rain").
+
+??? question "🤔 Check Your Understanding"
+    A user searches for "rain-resistant coat" but the document only contains the phrase "waterproof jacket." Will keyword search find it? Will semantic search? Why?
+
+    ??? success "Answer"
+        **Keyword search will miss it** — there are no matching words between "rain-resistant coat" and "waterproof jacket." **Semantic search will find it** because it compares meaning via vector similarity, not exact words. Both phrases have very similar meanings and will have similar vector representations. This is why hybrid search (combining both) is preferred in production.
 
 ---
 

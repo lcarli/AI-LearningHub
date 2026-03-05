@@ -104,6 +104,12 @@ AI systems should have human oversight.
 - Never let agents make irreversible actions autonomously (send email, delete data)
 ```
 
+??? question "🤔 Check Your Understanding"
+    Which of the six Responsible AI principles requires that users know they are interacting with an AI and understand why the agent made a particular decision?
+
+    ??? success "Answer"
+        **Transparency.** This principle requires that AI systems be understandable — users should know they're talking to an AI, what it can and can't do, and why it made a decision. Practical implementations include AI disclosure labels, source citations, and clear scope explanations.
+
 ---
 
 ## Part 2: Risks Specific to AI Agents
@@ -149,6 +155,18 @@ Agent loop gone wrong:
 In multi-tenant systems, one user's agent session could expose another user's data.
 
 **Defense:** Strict Row Level Security; session isolation; never share agent instances between users.
+
+??? question "🤔 Check Your Understanding"
+    An agent has access to a tool that sends emails. A prompt injection attack causes the agent to loop through 10,000 customer complaints and email each one. Which agent-specific risk does this illustrate, and what defense would prevent it?
+
+    ??? success "Answer"
+        This illustrates **uncontrolled tool chaining** — the agent creates a chain of tool calls that was never intended. Defenses include setting **maximum tool call limits**, requiring **confirmation for bulk actions**, and implementing **logging and alerting** on unusual patterns (e.g., more than 5 emails in a single session).
+
+??? question "🤔 Check Your Understanding"
+    What is "excessive agency" in the context of AI agents, and how does the principle of least privilege address it?
+
+    ??? success "Answer"
+        Excessive agency means the agent has **more permissions than it needs** — for example, write access to an entire database when it only needs to read one table. The principle of least privilege addresses this by giving the agent the **minimum permissions required** for its task, so that even if the agent is compromised, the blast radius is contained.
 
 ---
 
@@ -202,6 +220,12 @@ if any(cat.severity >= 2 for cat in result.categories_analysis):
 ```
 
 → [Azure AI Content Safety Docs](https://learn.microsoft.com/azure/ai-services/content-safety/overview)
+
+??? question "🤔 Check Your Understanding"
+    Why should an agent's system prompt explicitly define what to do when the user asks an out-of-scope question, rather than leaving it up to the model?
+
+    ??? success "Answer"
+        Without explicit out-of-scope instructions, the LLM will attempt to answer anyway — often **hallucinating** plausible-sounding but incorrect information. By defining a specific response (e.g., "I'm specialized for X. I can't help with Y."), you prevent the agent from inventing data and set clear boundaries for user expectations.
 
 ---
 

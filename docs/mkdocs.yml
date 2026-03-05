@@ -123,6 +123,7 @@ nav:
           - "Lab 050: Multi-Agent Observability": labs/lab-050-multi-agent-observability.md
           - "Lab 055: A2A + MCP Capstone": labs/lab-055-a2a-mcp-capstone.md
           - "Lab 064: Securing MCP with APIM": labs/lab-064-securing-mcp-apim.md
+          - "Lab 084: Capstone — OutdoorGear Agent": labs/lab-084-capstone-outdoorgear-agent.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
@@ -201,6 +202,9 @@ markdown_extensions:
 
 extra_css:
   - css/custom.css
+
+extra_javascript:
+  - js/hub-features.js
 
 extra:
   social:

@@ -19,16 +19,17 @@ By the end of this path you will have:
 
 ---
 
-## Path Labs
+## Path Labs (7 labs, ~525 min total)
 
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|
-| [Lab 009](../../labs/lab-009-azure-openai.md) | Azure OpenAI Service Quickstart | <span class="level-badge level-100">L100</span> | ⚠️ Azure free |
-| [Lab 030](../../labs/lab-030-foundry-agent-mcp.md) | Foundry Agent Service + MCP | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |
-| [Lab 031](../../labs/lab-031-pgvector-semantic-search.md) | pgvector Semantic Search on Azure | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |
-| [Lab 032](../../labs/lab-032-row-level-security.md) | Row Level Security for Agents | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |
-| [Lab 033](../../labs/lab-033-agent-observability.md) | Agent Observability with App Insights | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |
-| [Lab 042](../../labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | <span class="level-badge level-400">L400</span> | 💰 Azure paid |
+| [Lab 009](../../labs/lab-009-azure-openai.md) | Azure OpenAI Service Quickstart | <span class="level-badge level-100">L100</span> | ⚠️ Azure |
+| [Lab 030](../../labs/lab-030-foundry-agent-mcp.md) | Microsoft Foundry Agent Service + MCP | <span class="level-badge level-300">L300</span> | Free |
+| [Lab 032](../../labs/lab-032-row-level-security.md) | Row Level Security for Agents | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 033](../../labs/lab-033-agent-observability.md) | Agent Observability with Application Insights | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 049](../../labs/lab-049-foundry-iq-agent-tracing.md) | Foundry IQ — Agent Tracing with OpenTelemetry | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 074](../../labs/lab-074-foundry-agent-service.md) | Foundry Agent Service — Production Multi-Agent Deployment | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 050](../../labs/lab-050-multi-agent-observability.md) | Multi-Agent Observability with GenAI Semantic Conventions | <span class="level-badge level-400">L400</span> | ✅ Free |
 
 ---
 

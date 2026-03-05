@@ -20,14 +20,14 @@ By the end of this path you will have:
 
 ---
 
-## Path Labs
+## Path Labs (4 labs, ~170 min total)
 
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|
-| [Lab 012](../../labs/lab-012-what-is-mcp.md) | What is MCP? Anatomy of the protocol | <span class="level-badge level-100">L100</span> | ✅ Free |
-| [Lab 020](../../labs/lab-020-mcp-server-python.md) | Build an MCP Server in Python | <span class="level-badge level-200">L200</span> | ✅ Free (local) |
-| [Lab 021](../../labs/lab-021-mcp-server-csharp.md) | Build an MCP Server in C# | <span class="level-badge level-200">L200</span> | ✅ Free (local) |
-| [Lab 030](../../labs/lab-030-foundry-agent-mcp.md) | Foundry Agent Service + MCP | <span class="level-badge level-300">L300</span> | ⚠️ Azure sub |
+| [Lab 012](../../labs/lab-012-what-is-mcp.md) | What is MCP? Anatomy of the Protocol | <span class="level-badge level-100">L100</span> | ✅ Free |
+| [Lab 020](../../labs/lab-020-mcp-server-python.md) | Build an MCP Server in Python | <span class="level-badge level-200">L200</span> | ✅ Free |
+| [Lab 021](../../labs/lab-021-mcp-server-csharp.md) | Build an MCP Server in C# | <span class="level-badge level-200">L200</span> | ✅ Free |
+| [Lab 028](../../labs/lab-028-deploy-mcp-azure.md) | Deploy MCP Server to Azure Container Apps | <span class="level-badge level-300">L300</span> | Free |
 
 ---
 

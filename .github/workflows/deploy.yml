@@ -36,6 +36,9 @@ jobs:
       - name: Generate What's New page
         run: python scripts/generate_whats_new.py
 
+      - name: Generate Labs Index
+        run: python scripts/generate_labs_index.py
+
       - name: Build MkDocs site
         run: |
           cd docs
