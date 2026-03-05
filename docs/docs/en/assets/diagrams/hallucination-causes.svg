@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 310" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="310" fill="#f8f9fa" rx="12"/>
+  <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Why LLMs Hallucinate — and How Agents Fix It</text>
+
+  <!-- Cause column -->
+  <text x="180" y="52" text-anchor="middle" font-size="12" font-weight="600" fill="#dc2626">❌ Why It Happens</text>
+
+  <rect x="30" y="65" width="300" height="38" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1" filter="url(#shadow)"/>
+  <text x="180" y="82" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">Predicts likely text, not true text</text>
+  <text x="180" y="96" text-anchor="middle" font-size="9" fill="#ef4444">"São Paulo 12M → invented city 2.3M" sounds right</text>
+
+  <rect x="30" y="112" width="300" height="38" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1" filter="url(#shadow)"/>
+  <text x="180" y="129" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">Training data has gaps &amp; noise</text>
+  <text x="180" y="143" text-anchor="middle" font-size="9" fill="#ef4444">Wrong info repeated on web → model learns it</text>
+
+  <rect x="30" y="159" width="300" height="38" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1" filter="url(#shadow)"/>
+  <text x="180" y="176" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">No external memory or fact-checking</text>
+  <text x="180" y="190" text-anchor="middle" font-size="9" fill="#ef4444">Can't "look up" facts — generates from patterns</text>
+
+  <!-- Arrows -->
+  <line x1="330" y1="84" x2="365" y2="84" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="330" y1="131" x2="365" y2="131" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="330" y1="178" x2="365" y2="178" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Solution column -->
+  <text x="530" y="52" text-anchor="middle" font-size="12" font-weight="600" fill="#16a34a">✅ How Agents Fix It</text>
+
+  <rect x="370" y="65" width="300" height="38" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="520" y="82" text-anchor="middle" font-size="10" font-weight="600" fill="#16a34a">📚 RAG — Retrieve real documents</text>
+  <text x="520" y="96" text-anchor="middle" font-size="9" fill="#22c55e">Give model verified data to cite</text>
+
+  <rect x="370" y="112" width="300" height="38" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="520" y="129" text-anchor="middle" font-size="10" font-weight="600" fill="#16a34a">🔧 Tool calling — Query APIs/DBs</text>
+  <text x="520" y="143" text-anchor="middle" font-size="9" fill="#22c55e">Real-time data instead of training memory</text>
+
+  <rect x="370" y="159" width="300" height="38" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="520" y="176" text-anchor="middle" font-size="10" font-weight="600" fill="#16a34a">🎯 Low temp + Structured Output</text>
+  <text x="520" y="190" text-anchor="middle" font-size="9" fill="#22c55e">Reduce randomness, force JSON schema</text>
+
+  <!-- Additional row -->
+  <rect x="370" y="206" width="300" height="38" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="520" y="223" text-anchor="middle" font-size="10" font-weight="600" fill="#16a34a">📏 Evaluation — Measure quality</text>
+  <text x="520" y="237" text-anchor="middle" font-size="9" fill="#22c55e">Groundedness, coherence, factuality scores</text>
+
+  <!-- Bottom key -->
+  <rect x="30" y="260" width="640" height="28" rx="6" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="278" text-anchor="middle" font-size="10" fill="#475569">💡 Hallucination is a fundamental property of LLMs — agents don't eliminate it, they <tspan font-weight="700">manage</tspan> it with tools and data</text>
+</svg>

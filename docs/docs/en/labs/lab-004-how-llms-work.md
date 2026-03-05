@@ -36,11 +36,7 @@ That's it. Everything else — reasoning, code generation, summarization, chat �
 
 A **token** is the basic unit an LLM processes. It's roughly ¾ of a word (about 4 characters).
 
-```
-"The quick brown fox" → ["The", " quick", " brown", " fox"]
-"Hello, world!"       → ["Hello", ",", " world", "!"]
-"OpenAI"              → ["Open", "AI"]
-```
+![Tokenization](../../assets/diagrams/tokenization.svg)
 
 !!! info "Why tokens matter for agents"
     - Context windows are measured in tokens, not words
@@ -117,6 +113,8 @@ The **context window** is how much text the model can "see" at once — its work
 | Llama 3.3 70B | 128,000 tokens |
 | Claude 3.5 Sonnet | 200,000 tokens |
 
+![Context Window Comparison](../../assets/diagrams/context-window.svg)
+
 !!! warning "Context window ≠ unlimited memory"
     The model reads the *entire* context window on every request. Longer context = slower + more expensive. Agents use RAG and summarization to manage long conversations.
 
@@ -124,11 +122,7 @@ The **context window** is how much text the model can "see" at once — its work
 
 **Temperature** controls how random the output is.
 
-| Temperature | Behavior | Use case |
-|-------------|----------|---------|
-| 0.0 | Deterministic — always picks highest probability token | Structured output, code, SQL |
-| 0.3–0.7 | Balanced — creative but coherent | General chat, summaries |
-| 1.0+ | Very creative/unpredictable | Creative writing, brainstorming |
+![Temperature Comparison](../../assets/diagrams/temperature-comparison.svg)
 
 ```python
 # Deterministic (good for structured data extraction)
@@ -162,6 +156,8 @@ An alternative to temperature. Only sample from the smallest set of tokens whose
 ---
 
 ## Part 4: Why LLMs Hallucinate
+
+![Hallucination Causes and Solutions](../../assets/diagrams/hallucination-causes.svg)
 
 Hallucination (generating confident-sounding false information) happens because:
 
