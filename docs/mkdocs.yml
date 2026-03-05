@@ -1,11 +1,12 @@
 site_name: AI Agents Learning Hub
+site_url: https://lcarli.github.io/AI-LearningHub/
 site_author: Community Contributors
 site_description: >-
   Step-by-step labs for building AI agents with Microsoft technologies.
   Learn GitHub Copilot, Microsoft Foundry, MCP, Semantic Kernel, RAG, and more.
 
-repo_name: ai-agents-learning-hub
-repo_url: https://github.com/YOUR_ORG/ai-agents-learning-hub
+repo_name: AI-LearningHub
+repo_url: https://github.com/lcarli/AI-LearningHub
 
 copyright: >
   Copyright &copy; 2025 - present · Community Contributors
