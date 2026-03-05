@@ -10,6 +10,9 @@ tags: [a2a, protocol, multi-agent, interoperability, python, free]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses local JSON data only</span>
 </div>
 
+!!! tip "The Three Agentic Protocols"
+    A2A is one of three open protocols for the agentic era: **MCP** (agent↔tools, [Lab 012](lab-012-what-is-mcp.md)), **A2A** (agent↔agent, this lab), and **AG-UI** (agent↔user, [Lab 077](lab-077-agui-protocol.md)). Together they form the complete interoperability stack.
+
 ## What You'll Learn
 
 - What the **A2A (Agent-to-Agent) protocol** is — JSON-RPC 2.0 over HTTPS, governed by the Linux Foundation

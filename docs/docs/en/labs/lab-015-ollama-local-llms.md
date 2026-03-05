@@ -10,6 +10,9 @@ tags: [ollama, local-llm, free, python]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Runs on your machine, no cloud, no API key</span>
 </div>
 
+!!! tip "Also try Foundry Local"
+    Microsoft **Foundry Local** is an alternative to Ollama with an OpenAI-compatible API. See **[Lab 078: Foundry Local](lab-078-foundry-local.md)** for a hands-on guide.
+
 ## What You'll Learn
 
 - Install and run **Ollama** to serve LLMs locally

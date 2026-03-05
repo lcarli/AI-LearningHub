@@ -1,0 +1,9 @@
+model_alias,model_name,size_gb,parameters,hardware_required,download_time_est,use_case,quality_vs_cloud
+phi-4-mini,Phi-4-mini-instruct,2.4,3.8B,CPU (8GB RAM),2 min,classify/extract/route,85% of GPT-3.5
+phi-4,Phi-4,8.5,14B,GPU recommended (16GB RAM),8 min,reasoning/code/summarize,90% of GPT-4o-mini
+qwen2.5-0.5b,Qwen2.5-0.5B-Instruct,0.4,0.5B,CPU (4GB RAM),30 sec,quick demos/testing,60% of GPT-3.5
+qwen2.5-7b,Qwen2.5-7B-Instruct,4.7,7B,CPU/GPU (16GB RAM),5 min,general assistant,80% of GPT-3.5
+mistral-small,Mistral-Small-24B,14.0,24B,GPU required (24GB RAM),15 min,production agent,85% of GPT-4o-mini
+deepseek-r1-7b,DeepSeek-R1-Distill-7B,4.9,7B,CPU/GPU (16GB RAM),5 min,reasoning tasks,75% of o3-mini
+llama3.2-3b,Llama-3.2-3B-Instruct,2.0,3B,CPU (8GB RAM),2 min,lightweight tasks,70% of GPT-3.5
+gemma3-4b,Gemma-3-4B-Instruct,2.8,4B,CPU (8GB RAM),3 min,multilingual tasks,75% of GPT-3.5

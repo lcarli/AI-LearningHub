@@ -9,6 +9,10 @@ tags: [autogen, multi-agent, python, free, github-models]
   <span><strong>Time:</strong> ~90 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — GitHub Models API</span>
 </div>
+!!! warning "AutoGen -> Microsoft Agent Framework"
+    AutoGen is now part of **Microsoft Agent Framework (MAF)**, which unifies SK and AutoGen into a single framework. See **[Lab 076: Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** for the migration guide.
+
+
 
 ## What You'll Learn
 

@@ -1,0 +1,16 @@
+feature,semantic_kernel,autogen,agent_framework,migration_effort
+Agent Abstraction,ChatCompletionAgent,AssistantAgent,Agent (unified),low
+Plugin System,KernelPlugin,Tools,AgentSkills (.md files),medium
+Multi-Agent,AgentGroupChat,GroupChat / Swarm,Graph Workflows,medium
+Orchestration,manual loop,round_robin / selector,DAG with data flows,high
+Streaming,IAsyncEnumerable / AsyncGenerator,streaming parameter,built-in with checkpointing,low
+Memory,SemanticTextMemory,ConversableAgent memory,pluggable memory providers,medium
+Human-in-the-Loop,manual implementation,human_input_mode,built-in graph nodes,low
+Observability,OpenTelemetry manual,logging,DevUI + OpenTelemetry built-in,low
+MCP Integration,via plugin,via tools,native MCP support,low
+A2A Integration,not supported,not supported,native A2A support,n/a
+AG-UI Integration,not supported,not supported,native AG-UI support,n/a
+Model Support,OpenAI/Azure/Ollama,OpenAI/Azure,OpenAI/Azure/Anthropic/GitHub/Local,low
+Language Support,.NET and Python,Python (.NET experimental),.NET and Python (stable both),low
+State Management,manual,manual,checkpointing + time-travel,medium
+DevUI,not available,AutoGen Studio,DevUI (built-in),low

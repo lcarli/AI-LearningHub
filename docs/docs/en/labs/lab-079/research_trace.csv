@@ -1,0 +1,15 @@
+step_id,agent,action,input_type,output_type,duration_sec,tokens_used,sources_found,sources_cited,quality_score
+S01,Planner,decompose_query,user_question,research_plan,3.2,280,0,0,0.95
+S02,Researcher,web_search,search_query_1,raw_results,5.8,0,12,0,0.90
+S03,Researcher,web_search,search_query_2,raw_results,4.5,0,8,0,0.88
+S04,Researcher,web_search,search_query_3,raw_results,6.2,0,15,0,0.92
+S05,Researcher,read_and_extract,url_1,extracted_facts,8.0,450,1,1,0.85
+S06,Researcher,read_and_extract,url_2,extracted_facts,7.5,420,1,1,0.88
+S07,Researcher,read_and_extract,url_3,extracted_facts,9.2,510,1,1,0.82
+S08,Researcher,read_and_extract,url_4,extracted_facts,6.8,380,1,1,0.90
+S09,Researcher,read_and_extract,url_5,extracted_facts,7.0,400,1,1,0.87
+S10,Writer,synthesize_report,all_facts,draft_report,15.0,1200,0,5,0.92
+S11,Reviewer,check_citations,draft_report,review_notes,8.5,600,0,5,0.88
+S12,Reviewer,check_accuracy,draft_report,accuracy_report,10.0,700,0,5,0.85
+S13,Writer,revise_report,review_notes,final_report,12.0,900,0,5,0.94
+S14,Planner,quality_gate,final_report,approval,2.0,150,0,0,0.96

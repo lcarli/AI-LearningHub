@@ -1,0 +1,13 @@
+event_type,direction,description,example_payload,use_case
+TextMessageStart,agent→frontend,Start of a text message stream,"{""messageId"":""m1""}",Chat response begins
+TextMessageContent,agent→frontend,Chunk of streaming text,"{""delta"":""Hello!""}",Streaming token display
+TextMessageEnd,agent→frontend,End of text message,"{""messageId"":""m1""}",Mark message complete
+ToolCallStart,agent→frontend,Agent begins a tool call,"{""toolCallId"":""tc1"",""name"":""search""}",Show tool execution UI
+ToolCallEnd,agent→frontend,Tool call completed,"{""toolCallId"":""tc1"",""result"":{}}",Display tool result
+StateUpdate,agent→frontend,Agent updates shared state,"{""key"":""cart"",""value"":[...]}",Sync UI state
+StateDelta,agent→frontend,Incremental state change,"{""op"":""add"",""path"":""/items/0""}",Efficient UI updates
+UserMessage,frontend→agent,User sends a message,"{""content"":""Find tents""}",Chat input
+UserAction,frontend→agent,User clicks a button/card,"{""action"":""buy"",""productId"":""P001""}",Interactive UI actions
+InterruptRequest,frontend→agent,User requests agent to stop,"{""reason"":""cancel""}",Cancel long operation
+RunStarted,agent→frontend,Agent run begins,"{""runId"":""r1"",""threadId"":""t1""}",Show loading state
+RunFinished,agent→frontend,Agent run ends,"{""runId"":""r1"",""status"":""complete""}",Hide loading state

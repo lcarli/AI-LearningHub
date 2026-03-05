@@ -57,6 +57,8 @@ nav:
           - "Lab 070: Agent UX Patterns": labs/lab-070-agent-ux-patterns.md
           - "Lab 072: Structured Outputs — Guaranteed JSON": labs/lab-072-structured-outputs.md
           - "Lab 075: Power BI Copilot — Analytics": labs/lab-075-powerbi-copilot.md
+          - "Lab 078: Foundry Local — Run Models Offline": labs/lab-078-foundry-local.md
+          - "Lab 081: Agentic Coding Tools": labs/lab-081-agentic-coding-tools.md
 
       - "L200 — Intermediate":
           - "Lab 020: MCP Server in Python": labs/lab-020-mcp-server-python.md
@@ -76,6 +78,9 @@ nav:
           - "Lab 060: Reasoning Models — o3 & DeepSeek R1": labs/lab-060-reasoning-models.md
           - "Lab 061: SLMs — Phi-4 Mini": labs/lab-061-slm-phi4-mini.md
           - "Lab 068: Hybrid Search — Vector + BM25": labs/lab-068-hybrid-search.md
+          - "Lab 076: Microsoft Agent Framework": labs/lab-076-microsoft-agent-framework.md
+          - "Lab 077: AG-UI Protocol": labs/lab-077-agui-protocol.md
+          - "Lab 080: MarkItDown + MCP": labs/lab-080-markitdown-mcp.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
@@ -106,6 +111,9 @@ nav:
           - "Lab 071: Context Caching": labs/lab-071-context-caching.md
           - "Lab 073: Agent Benchmarking — SWE-bench": labs/lab-073-swe-bench.md
           - "Lab 074: Foundry Agent Service": labs/lab-074-foundry-agent-service.md
+          - "Lab 079: Deep Research Agents": labs/lab-079-deep-research-agents.md
+          - "Lab 082: Agent Guardrails — NeMo & Content Safety": labs/lab-082-agent-guardrails.md
+          - "Lab 083: Multi-Modal RAG": labs/lab-083-multimodal-rag.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md

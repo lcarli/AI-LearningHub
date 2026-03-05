@@ -10,6 +10,9 @@ tags: [semantic-kernel, free, python, github-models]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account, no credit card</span>
 </div>
 
+!!! warning "Semantic Kernel → Microsoft Agent Framework"
+    Semantic Kernel is now part of **Microsoft Agent Framework (MAF)**, which unifies SK and AutoGen into a single framework. The concepts in this lab (Kernel, Plugins, function calling) still apply — MAF builds on top of them. See **[Lab 076: Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** for the migration guide.
+
 ## What You'll Learn
 
 - What Semantic Kernel (SK) is and its key building blocks

@@ -10,6 +10,9 @@ tags: [a2a, mcp, multi-agent, architecture, capstone, python]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock trace data (no cloud resources required)</span>
 </div>
 
+!!! tip "The Three Agentic Protocols"
+    This capstone covers A2A + MCP. The third protocol — **AG-UI** (agent↔user interaction) — is covered in **[Lab 077](lab-077-agui-protocol.md)**.
+
 ## What You'll Learn
 
 - How **A2A + MCP** work together in a full-stack multi-agent architecture
