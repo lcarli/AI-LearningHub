@@ -121,7 +121,7 @@ Create a new file `practice.py` and type each comment below. After each comment,
 
 **Steps:**
 
-1. Copy the code above into a new file (or open it from the cloned repo)
+1. Copy the code above into a new file (or open it from the downloaded exercises)
 2. Open **Copilot Chat** (`Ctrl+Shift+I`)
 3. Select **all the code** (`Ctrl+A`)
 4. Type: `/fix`
