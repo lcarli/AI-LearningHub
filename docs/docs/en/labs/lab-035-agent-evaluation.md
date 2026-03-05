@@ -1,5 +1,5 @@
 ---
-tags: [evaluation, python, free, github-models, persona-developer, persona-architect]
+tags: [evaluation, python, free, github-models]
 ---
 # Lab 035: Agent Evaluation with Azure AI Eval SDK
 

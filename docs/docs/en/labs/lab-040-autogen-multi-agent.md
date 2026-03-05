@@ -1,5 +1,5 @@
 ---
-tags: [autogen, multi-agent, python, free, github-models, persona-developer, persona-architect]
+tags: [autogen, multi-agent, python, free, github-models]
 ---
 # Lab 040: Production Multi-Agent with AutoGen
 

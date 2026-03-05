@@ -1,5 +1,5 @@
 ---
-tags: [swe-bench, benchmarking, evaluation, coding-agents, python, persona-developer, persona-architect]
+tags: [swe-bench, benchmarking, evaluation, coding-agents, python]
 ---
 # Lab 073: Agent Benchmarking with SWE-bench
 

@@ -1,5 +1,5 @@
 ---
-tags: [voice, realtime-api, webrtc, azure-openai, multimodal, python, persona-developer]
+tags: [voice, realtime-api, webrtc, azure-openai, multimodal, python]
 ---
 # Lab 059: Voice Agents with GPT Realtime API
 

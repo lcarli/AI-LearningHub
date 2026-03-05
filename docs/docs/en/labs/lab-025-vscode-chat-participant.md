@@ -1,5 +1,5 @@
 ---
-tags: [vscode, typescript, github-copilot, free, persona-developer]
+tags: [vscode, typescript, github-copilot, free]
 ---
 # Lab 025: VS Code Copilot Chat Participant
 

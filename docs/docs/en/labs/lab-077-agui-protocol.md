@@ -1,5 +1,5 @@
 ---
-tags: [ag-ui, protocol, frontend, copilotkit, events, python, persona-developer, persona-architect]
+tags: [ag-ui, protocol, frontend, copilotkit, events, python]
 ---
 # Lab 077: AG-UI Protocol — Connect Agents to User Interfaces
 

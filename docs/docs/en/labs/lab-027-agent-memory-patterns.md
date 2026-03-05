@@ -1,5 +1,5 @@
 ---
-tags: [memory, python, free, github-models, persona-developer, persona-architect]
+tags: [memory, python, free, github-models]
 ---
 # Lab 027: Agent Memory Patterns
 

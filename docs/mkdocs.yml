@@ -20,14 +20,21 @@ nav:
 
   - Learning Paths:
       - All Paths: paths/index.md
-      - 🤖 GitHub Copilot: paths/copilot/index.md
-      - 🏭 Microsoft Foundry: paths/foundry/index.md
-      - 🔌 Model Context Protocol (MCP): paths/mcp/index.md
-      - 🧠 Semantic Kernel: paths/semantic-kernel/index.md
-      - 📚 RAG: paths/rag/index.md
-      - 👥 Agent Builder — Teams: paths/agent-builder-teams/index.md
-      - 💻 Agent Builder — VS Code: paths/agent-builder-vscode/index.md
-      - ⚙️ Pro Code Agents: paths/pro-code/index.md
+      - By Technology:
+          - 🤖 GitHub Copilot: paths/copilot/index.md
+          - 🏭 Microsoft Foundry: paths/foundry/index.md
+          - 🔌 Model Context Protocol (MCP): paths/mcp/index.md
+          - 🧠 Semantic Kernel: paths/semantic-kernel/index.md
+          - 📚 RAG: paths/rag/index.md
+          - 👥 Agent Builder — Teams: paths/agent-builder-teams/index.md
+          - 💻 Agent Builder — VS Code: paths/agent-builder-vscode/index.md
+          - ⚙️ Pro Code Agents: paths/pro-code/index.md
+      - By Role:
+          - 👨‍💻 Developer: paths/roles/developer.md
+          - 🏗️ Solution Architect: paths/roles/architect.md
+          - 📊 Data Engineer / Analyst: paths/roles/data-engineer.md
+          - 🔒 Enterprise Admin: paths/roles/admin.md
+          - 🎓 Student / Learner: paths/roles/student.md
 
   - Labs:
       - All Labs: labs/index.md
@@ -159,6 +166,13 @@ plugins:
             Prerequisites & Accounts: Pré-requisitos e Contas
             Learning Paths: Trilhas de Aprendizado
             All Paths: Todas as Trilhas
+            By Technology: Por Tecnologia
+            By Role: Por Perfil
+            "👨‍💻 Developer": "👨‍💻 Desenvolvedor"
+            "🏗️ Solution Architect": "🏗️ Arquiteto de Soluções"
+            "📊 Data Engineer / Analyst": "📊 Engenheiro de Dados / Analista"
+            "🔒 Enterprise Admin": "🔒 Admin Corporativo"
+            "🎓 Student / Learner": "🎓 Estudante"
             Labs: Laboratórios
             All Labs: Todos os Labs
             "L50 — Awareness": "L50 — Conscientização"
@@ -186,6 +200,13 @@ plugins:
             Prerequisites & Accounts: Prérequis et Comptes
             Learning Paths: Parcours d'Apprentissage
             All Paths: Tous les Parcours
+            By Technology: Par Technologie
+            By Role: Par Rôle
+            "👨‍💻 Developer": "👨‍💻 Développeur"
+            "🏗️ Solution Architect": "🏗️ Architecte Solutions"
+            "📊 Data Engineer / Analyst": "📊 Ingénieur Données / Analyste"
+            "🔒 Enterprise Admin": "🔒 Admin Entreprise"
+            "🎓 Student / Learner": "🎓 Étudiant"
             Labs: Laboratoires
             All Labs: Tous les Labs
             "L50 — Awareness": "L50 — Sensibilisation"

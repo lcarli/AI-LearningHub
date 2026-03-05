@@ -1,5 +1,5 @@
 ---
-tags: [python, free, github-models, tool-calling, function-calling, persona-developer]
+tags: [python, free, github-models, tool-calling, function-calling]
 ---
 # Lab 018: Function Calling & Tool Use
 

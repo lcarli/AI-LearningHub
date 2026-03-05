@@ -1,5 +1,5 @@
 ---
-tags: [computer-use, automation, anthropic, desktop, python, safety, persona-developer]
+tags: [computer-use, automation, anthropic, desktop, python, safety]
 ---
 # Lab 057: Computer-Using Agents — Desktop Automation
 

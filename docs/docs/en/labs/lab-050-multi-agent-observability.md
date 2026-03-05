@@ -1,5 +1,5 @@
 ---
-tags: [observability, opentelemetry, multi-agent, genai-conventions, azure-monitor, foundry, python, persona-developer, persona-architect]
+tags: [observability, opentelemetry, multi-agent, genai-conventions, azure-monitor, foundry, python]
 ---
 # Lab 050: Multi-Agent Observability with GenAI Semantic Conventions
 

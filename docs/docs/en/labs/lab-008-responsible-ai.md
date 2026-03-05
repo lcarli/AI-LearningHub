@@ -1,5 +1,5 @@
 ---
-tags: [free, beginner, no-account-needed, responsible-ai, security, persona-student, persona-developer, persona-analyst, persona-architect, persona-admin]
+tags: [free, beginner, no-account-needed, responsible-ai, security]
 ---
 # Lab 008: Responsible AI for Agent Builders
 

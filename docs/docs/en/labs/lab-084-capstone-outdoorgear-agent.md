@@ -1,5 +1,5 @@
 ---
-tags: [capstone, full-stack, rag, mcp, guardrails, observability, production, persona-developer, persona-architect]
+tags: [capstone, full-stack, rag, mcp, guardrails, observability, production]
 ---
 # Lab 084: Capstone — Build the Complete OutdoorGear Agent
 

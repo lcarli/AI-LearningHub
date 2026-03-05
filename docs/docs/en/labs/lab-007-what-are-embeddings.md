@@ -1,5 +1,5 @@
 ---
-tags: [free, beginner, no-account-needed, embeddings, rag, persona-student, persona-developer, persona-analyst]
+tags: [free, beginner, no-account-needed, embeddings, rag]
 ---
 # Lab 007: What are Embeddings?
 

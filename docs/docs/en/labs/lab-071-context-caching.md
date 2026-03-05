@@ -1,5 +1,5 @@
 ---
-tags: [caching, cost-optimization, anthropic, google, openai, python, persona-developer, persona-architect]
+tags: [caching, cost-optimization, anthropic, google, openai, python]
 ---
 # Lab 071: Context Caching — Cutting Costs for Large-Document Agents
 

@@ -1,5 +1,5 @@
 ---
-tags: [fabric, real-time-intelligence, kql, eventstreams, iot, python, persona-developer, persona-analyst, persona-engineer]
+tags: [fabric, real-time-intelligence, kql, eventstreams, iot, python]
 ---
 # Lab 051: Fabric IQ — Real-Time Intelligence Agents
 

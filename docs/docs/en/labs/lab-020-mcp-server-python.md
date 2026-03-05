@@ -1,5 +1,5 @@
 ---
-tags: [mcp, python, free, github-models, persona-developer, persona-engineer]
+tags: [mcp, python, free, github-models]
 ---
 # Lab 020: Build an MCP Server in Python
 

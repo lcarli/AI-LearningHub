@@ -1,5 +1,5 @@
 ---
-tags: [connectors, mcp, m365, copilot, federation, enterprise, persona-developer, persona-engineer, persona-admin]
+tags: [connectors, mcp, m365, copilot, federation, enterprise]
 ---
 # Lab 056: Federated M365 Copilot Connectors with MCP
 

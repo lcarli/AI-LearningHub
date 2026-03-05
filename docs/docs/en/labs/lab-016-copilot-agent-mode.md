@@ -1,5 +1,5 @@
 ---
-tags: [github-copilot, free, vscode, persona-developer, persona-student]
+tags: [github-copilot, free, vscode]
 ---
 # Lab 016: GitHub Copilot Agent Mode
 

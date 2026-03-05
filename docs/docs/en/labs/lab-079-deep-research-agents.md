@@ -1,5 +1,5 @@
 ---
-tags: [deep-research, multi-agent, synthesis, citations, python, persona-developer, persona-architect]
+tags: [deep-research, multi-agent, synthesis, citations, python]
 ---
 # Lab 079: Deep Research Agents — Multi-Step Knowledge Synthesis
 

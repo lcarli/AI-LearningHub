@@ -1,5 +1,5 @@
 ---
-tags: [ux, adaptive-cards, teams, proactive, accessibility, python, persona-developer, persona-analyst]
+tags: [ux, adaptive-cards, teams, proactive, accessibility, python]
 ---
 # Lab 070: Agent UX Patterns — Chat, Adaptive Cards & Proactive Notifications
 

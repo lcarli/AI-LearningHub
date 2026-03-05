@@ -1,5 +1,5 @@
 ---
-tags: [fabric, ai-functions, batch-enrichment, etl, python, pandas, persona-developer, persona-analyst, persona-engineer]
+tags: [fabric, ai-functions, batch-enrichment, etl, python, pandas]
 ---
 # Lab 053: Fabric IQ — Batch AI Enrichment with AI Functions
 

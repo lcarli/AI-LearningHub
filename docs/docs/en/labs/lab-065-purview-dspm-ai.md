@@ -1,5 +1,5 @@
 ---
-tags: [purview, dspm, dlp, governance, compliance, enterprise, persona-admin]
+tags: [purview, dspm, dlp, governance, compliance, enterprise]
 ---
 # Lab 065: Purview DSPM for AI — Govern Agent Data Flows
 

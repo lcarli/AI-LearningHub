@@ -1,5 +1,5 @@
 ---
-tags: [foundry, agent-service, multi-agent, production, enterprise, python, persona-developer, persona-architect]
+tags: [foundry, agent-service, multi-agent, production, enterprise, python]
 ---
 # Lab 074: Foundry Agent Service — Production Multi-Agent Deployment
 

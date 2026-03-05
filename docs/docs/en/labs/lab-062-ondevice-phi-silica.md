@@ -1,5 +1,5 @@
 ---
-tags: [on-device, phi-silica, windows-ai, npu, edge-ai, csharp, persona-developer]
+tags: [on-device, phi-silica, windows-ai, npu, edge-ai, csharp]
 ---
 # Lab 062: On-Device Agents with Phi Silica — Windows AI APIs
 

@@ -1,5 +1,5 @@
 ---
-tags: [cicd, github-actions, python, free, persona-developer]
+tags: [cicd, github-actions, python, free]
 ---
 # Lab 037: CI/CD for AI Agents with GitHub Actions
 

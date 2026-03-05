@@ -1,5 +1,5 @@
 ---
-tags: [copilot-studio, teams, free-trial, no-code, persona-analyst, persona-admin]
+tags: [copilot-studio, teams, free-trial, no-code]
 ---
 # Lab 011: Copilot Studio — First Agent
 

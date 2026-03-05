@@ -1,5 +1,5 @@
 ---
-tags: [free, beginner, no-account-needed, awareness, persona-student, persona-developer, persona-analyst, persona-architect, persona-admin]
+tags: [free, beginner, no-account-needed, awareness]
 ---
 # Lab 001: What are AI Agents?
 

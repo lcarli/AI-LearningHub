@@ -1,5 +1,5 @@
 ---
-tags: [enterprise, work-iq, copilot-analytics, python, viva-insights, m365, persona-analyst, persona-admin]
+tags: [enterprise, work-iq, copilot-analytics, python, viva-insights, m365]
 ---
 # Lab 047: Work IQ — Copilot Adoption Analytics
 

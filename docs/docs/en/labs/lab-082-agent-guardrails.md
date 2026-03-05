@@ -1,5 +1,5 @@
 ---
-tags: [guardrails, safety, nemo, content-safety, pii, jailbreak, persona-developer, persona-architect]
+tags: [guardrails, safety, nemo, content-safety, pii, jailbreak]
 ---
 # Lab 082: Agent Guardrails — NeMo & Azure Content Safety
 

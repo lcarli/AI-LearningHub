@@ -1,5 +1,5 @@
 ---
-tags: [langchain, langgraph, python, free, github-models, agents, persona-developer]
+tags: [langchain, langgraph, python, free, github-models, agents]
 ---
 # Lab 029: LangChain & LangGraph Basics
 

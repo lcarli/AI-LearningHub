@@ -1,5 +1,5 @@
 ---
-tags: [reasoning, o3, deepseek-r1, chain-of-thought, benchmark, python, persona-developer, persona-architect]
+tags: [reasoning, o3, deepseek-r1, chain-of-thought, benchmark, python]
 ---
 # Lab 060: Reasoning Models — Chain-of-Thought with o3 and DeepSeek R1
 

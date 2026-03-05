@@ -1,5 +1,5 @@
 ---
-tags: [free, beginner, no-account-needed, llm, persona-student, persona-developer, persona-analyst, persona-architect]
+tags: [free, beginner, no-account-needed, llm]
 ---
 # Lab 004: How LLMs Work
 

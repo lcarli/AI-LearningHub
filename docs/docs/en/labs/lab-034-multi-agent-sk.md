@@ -1,5 +1,5 @@
 ---
-tags: [semantic-kernel, multi-agent, python, free, github-models, persona-developer, persona-architect]
+tags: [semantic-kernel, multi-agent, python, free, github-models]
 ---
 # Lab 034: Multi-Agent Orchestration with Semantic Kernel
 

@@ -1,5 +1,5 @@
 ---
-tags: [structured-outputs, json-schema, pydantic, reliability, python, persona-developer, persona-student]
+tags: [structured-outputs, json-schema, pydantic, reliability, python]
 ---
 # Lab 072: Structured Outputs — Guaranteed JSON for Agents
 

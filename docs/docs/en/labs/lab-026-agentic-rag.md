@@ -1,5 +1,5 @@
 ---
-tags: [rag, agentic-rag, python, free, github-models, persona-developer, persona-architect]
+tags: [rag, agentic-rag, python, free, github-models]
 ---
 # Lab 026: Agentic RAG Pattern
 
