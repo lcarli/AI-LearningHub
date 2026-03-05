@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="900" height="380" fill="#f8f9fa" rx="12"/>
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Foundry IQ — Agent Tracing Architecture</text>
+
+  <!-- Agent App -->
+  <rect x="30" y="60" width="200" height="100" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="130" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">🤖 AI Agent Application</text>
+  <text x="130" y="108" text-anchor="middle" font-size="9" fill="#3b82f6">OutdoorGear Agent</text>
+  <text x="130" y="126" text-anchor="middle" font-size="9" fill="#3b82f6">OpenAI SDK + Tools</text>
+  <text x="130" y="148" text-anchor="middle" font-size="10" font-weight="600" fill="#1e40af">opentelemetry-instrumentation</text>
+
+  <!-- Arrow to OTel Collector -->
+  <line x1="230" y1="110" x2="280" y2="110" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- OpenTelemetry -->
+  <rect x="285" y="60" width="180" height="100" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="375" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#a16207">🔭 OpenTelemetry SDK</text>
+  <text x="375" y="108" text-anchor="middle" font-size="9" fill="#ca8a04">TracerProvider</text>
+  <text x="375" y="124" text-anchor="middle" font-size="9" fill="#ca8a04">SpanProcessor</text>
+  <text x="375" y="140" text-anchor="middle" font-size="9" fill="#ca8a04">GenAI Semantic Conventions</text>
+
+  <!-- Arrow to Azure Monitor -->
+  <line x1="465" y1="90" x2="520" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Arrow to Foundry Portal -->
+  <line x1="465" y1="130" x2="520" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Azure Monitor -->
+  <rect x="525" y="55" width="170" height="50" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="610" y="76" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">📊 Azure Monitor</text>
+  <text x="610" y="94" text-anchor="middle" font-size="9" fill="#22c55e">Application Insights</text>
+
+  <!-- Foundry Portal -->
+  <rect x="525" y="115" width="170" height="50" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="610" y="136" text-anchor="middle" font-size="11" font-weight="600" fill="#6d28d9">🏭 Foundry Portal</text>
+  <text x="610" y="154" text-anchor="middle" font-size="9" fill="#8b5cf6">Tracing Dashboard</text>
+
+  <!-- Arrow to Alerts -->
+  <line x1="695" y1="80" x2="740" y2="80" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Alerts -->
+  <rect x="745" y="55" width="130" height="50" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="810" y="76" text-anchor="middle" font-size="11" font-weight="600" fill="#be185d">🔔 Alerts</text>
+  <text x="810" y="94" text-anchor="middle" font-size="9" fill="#ec4899">Latency · Cost · Errors</text>
+
+  <!-- Span details row -->
+  <text x="450" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#475569">What Each Span Captures (GenAI Semantic Conventions)</text>
+
+  <rect x="30" y="218" width="200" height="65" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="130" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">🏷️ Agent Span</text>
+  <text x="130" y="256" text-anchor="middle" font-size="9" fill="#64748b">gen_ai.agent.name</text>
+  <text x="130" y="270" text-anchor="middle" font-size="9" fill="#64748b">gen_ai.operation.name</text>
+
+  <rect x="250" y="218" width="200" height="65" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="350" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">🧠 Model Span</text>
+  <text x="350" y="256" text-anchor="middle" font-size="9" fill="#64748b">gen_ai.request.model · tokens</text>
+  <text x="350" y="270" text-anchor="middle" font-size="9" fill="#64748b">gen_ai.usage.input/output_tokens</text>
+
+  <rect x="470" y="218" width="200" height="65" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="570" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">🔧 Tool Span</text>
+  <text x="570" y="256" text-anchor="middle" font-size="9" fill="#64748b">gen_ai.tool.name</text>
+  <text x="570" y="270" text-anchor="middle" font-size="9" fill="#64748b">duration · status · error</text>
+
+  <rect x="690" y="218" width="180" height="65" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="780" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">📏 Metrics</text>
+  <text x="780" y="256" text-anchor="middle" font-size="9" fill="#64748b">token_consumption</text>
+  <text x="780" y="270" text-anchor="middle" font-size="9" fill="#64748b">latency · error_rate · cost</text>
+
+  <!-- Packages row -->
+  <rect x="30" y="310" width="840" height="40" rx="8" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+  <text x="450" y="328" text-anchor="middle" font-size="10" fill="#475569">
+    <tspan font-weight="600">pip install</tspan>  azure-ai-projects  azure-monitor-opentelemetry  opentelemetry-instrumentation-openai-v2
+  </text>
+  <text x="450" y="344" text-anchor="middle" font-size="9" fill="#94a3b8">Local mode: opentelemetry-sdk with ConsoleSpanExporter (no Azure needed)</text>
+</svg>

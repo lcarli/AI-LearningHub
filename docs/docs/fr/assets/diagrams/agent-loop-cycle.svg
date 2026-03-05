@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 540" width="780" height="540" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrowGray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/>
+    </marker>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#00000022"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="780" height="540" fill="#f8fafc" rx="14"/>
+
+  <!-- Title -->
+  <text x="390" y="36" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">The AI Agent Loop</text>
+  <text x="390" y="55" text-anchor="middle" font-size="12" fill="#64748b">Agents autonomously loop until the goal is achieved</text>
+
+  <!-- ── USER GOAL (top) ── -->
+  <rect x="280" y="72" width="220" height="50" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2" filter="url(#shadow)"/>
+  <text x="390" y="94" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e40af">🎯 User Goal</text>
+  <text x="390" y="112" text-anchor="middle" font-size="11" fill="#1e3a8a">"Find a tent under $300"</text>
+
+  <!-- Arrow: User Goal → Perceive -->
+  <line x1="390" y1="122" x2="390" y2="158" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- ── CENTER LOOP CONTAINER ── -->
+  <rect x="40" y="162" width="700" height="275" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="390" y="183" text-anchor="middle" font-size="11" font-weight="bold" fill="#94a3b8">AGENT LOOP (repeats until done)</text>
+
+  <!-- ── 1. PERCEIVE ── -->
+  <rect x="60" y="196" width="180" height="72" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" filter="url(#shadow)"/>
+  <text x="150" y="220" text-anchor="middle" font-size="20">🔍</text>
+  <text x="150" y="240" text-anchor="middle" font-size="13" font-weight="bold" fill="#075985">Perceive</text>
+  <text x="150" y="258" text-anchor="middle" font-size="10" fill="#374151">Receive input &amp; context</text>
+
+  <!-- Arrow: Perceive → Reason -->
+  <line x1="240" y1="232" x2="290" y2="232" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrowGray)"/>
+
+  <!-- ── 2. REASON ── -->
+  <rect x="295" y="196" width="180" height="72" rx="10" fill="#fef9c3" stroke="#ca8a04" stroke-width="2" filter="url(#shadow)"/>
+  <text x="385" y="220" text-anchor="middle" font-size="20">🧠</text>
+  <text x="385" y="240" text-anchor="middle" font-size="13" font-weight="bold" fill="#713f12">Reason</text>
+  <text x="385" y="258" text-anchor="middle" font-size="10" fill="#374151">LLM decides next step</text>
+
+  <!-- Arrow: Reason → Act -->
+  <line x1="475" y1="232" x2="530" y2="232" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrowGray)"/>
+
+  <!-- ── 3. ACT ── -->
+  <rect x="535" y="196" width="180" height="72" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
+  <text x="625" y="220" text-anchor="middle" font-size="20">⚡</text>
+  <text x="625" y="240" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">Act</text>
+  <text x="625" y="258" text-anchor="middle" font-size="10" fill="#374151">Call tool, query, or write</text>
+
+  <!-- Arrow: Act → down to Observe -->
+  <line x1="625" y1="268" x2="625" y2="326" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrowGray)"/>
+
+  <!-- ── 4. OBSERVE ── -->
+  <rect x="535" y="330" width="180" height="72" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" filter="url(#shadow)"/>
+  <text x="625" y="354" text-anchor="middle" font-size="20">👁️</text>
+  <text x="625" y="374" text-anchor="middle" font-size="13" font-weight="bold" fill="#4c1d95">Observe</text>
+  <text x="625" y="392" text-anchor="middle" font-size="10" fill="#374151">Read result, update state</text>
+
+  <!-- Arrow: Observe → back left to Perceive (loop) -->
+  <line x1="535" y1="366" x2="150" y2="366" stroke="#64748b" stroke-width="1.8" stroke-dasharray="6,3"/>
+  <line x1="150" y1="366" x2="150" y2="268" stroke="#64748b" stroke-width="1.8" stroke-dasharray="6,3" marker-end="url(#arrowGray)"/>
+
+  <!-- Loop label -->
+  <text x="340" y="385" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">← loop back if not done yet</text>
+
+  <!-- ── DONE? diamond ── -->
+  <polygon points="390,410 440,437 390,464 340,437" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="390" y="441" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">Done?</text>
+  <text x="450" y="430" font-size="10" fill="#16a34a" font-weight="bold">Yes ↓</text>
+
+  <!-- Arrow: Done → Goal Achieved -->
+  <line x1="390" y1="464" x2="390" y2="475" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- ── GOAL ACHIEVED ── -->
+  <rect x="280" y="478" width="220" height="40" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
+  <text x="390" y="498" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">✅ Goal Achieved</text>
+  <text x="390" y="512" text-anchor="middle" font-size="9" fill="#166534">Answer delivered to user</text>
+</svg>

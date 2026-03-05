@@ -1,0 +1,16 @@
+test_id,input_type,schema_fields,structured_output_valid,json_parse_success,field_accuracy_pct,model,time_ms,tokens
+T01,email,name;email;subject;urgency,true,true,100,gpt-4o,850,120
+T02,email,name;email;subject;urgency,true,true,100,gpt-4o,820,115
+T03,invoice,vendor;amount;date;line_items,true,true,100,gpt-4o,1100,180
+T04,invoice,vendor;amount;date;line_items,true,true,95,gpt-4o,1050,175
+T05,resume,name;skills;experience_years;education,true,true,100,gpt-4o,950,145
+T06,resume,name;skills;experience_years;education,true,true,90,gpt-4o,980,150
+T07,support_ticket,customer;issue;category;priority,true,true,100,gpt-4o,780,110
+T08,support_ticket,customer;issue;category;priority,true,true,100,gpt-4o,800,112
+T09,product_review,product;rating;pros;cons;summary,true,true,100,gpt-4o,900,135
+T10,product_review,product;rating;pros;cons;summary,true,true,95,gpt-4o,920,140
+T11,email,name;email;subject;urgency,false,false,60,gpt-4o-no-schema,600,100
+T12,invoice,vendor;amount;date;line_items,false,true,75,gpt-4o-no-schema,800,160
+T13,resume,name;skills;experience_years;education,false,true,70,gpt-4o-no-schema,700,130
+T14,support_ticket,customer;issue;category;priority,false,false,55,gpt-4o-no-schema,550,95
+T15,product_review,product;rating;pros;cons;summary,false,true,80,gpt-4o-no-schema,650,120

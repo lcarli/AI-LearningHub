@@ -1,0 +1,11 @@
+task_id,task_description,category,claude_code_time_sec,claude_code_success,copilot_cli_time_sec,copilot_cli_success,manual_time_sec,tool_advantage
+T01,Explain a complex function in the codebase,code_understanding,8,true,12,true,120,10x faster
+T02,Find all API endpoints in the project,codebase_search,5,true,8,true,300,40x faster
+T03,Write unit tests for a utility module,code_generation,25,true,30,true,600,20x faster
+T04,Fix a bug in error handling logic,debugging,18,true,22,true,900,45x faster
+T05,Refactor a class to use dependency injection,refactoring,35,true,40,true,1200,30x faster
+T06,Create a git commit with conventional message,git_workflow,4,true,3,true,30,8x faster
+T07,Review a PR and suggest improvements,code_review,15,true,20,true,600,35x faster
+T08,Set up a new MCP server from scratch,scaffolding,45,true,50,true,3600,75x faster
+T09,Convert a Python script to async,migration,30,true,35,true,1800,55x faster
+T10,Debug a failing CI pipeline,devops,20,true,25,false,900,45x faster

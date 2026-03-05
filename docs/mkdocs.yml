@@ -149,6 +149,28 @@ plugins:
             danger: Danger
             success: Success
             question: Question
+        - locale: pt
+          name: Português
+          site_name: AI Agents Learning Hub
+          admonition_translations:
+            tip: Dica
+            warning: Aviso
+            info: Informação
+            note: Nota
+            danger: Perigo
+            success: Sucesso
+            question: Pergunta
+        - locale: fr
+          name: Français
+          site_name: AI Agents Learning Hub
+          admonition_translations:
+            tip: Astuce
+            warning: Avertissement
+            info: Information
+            note: Note
+            danger: Danger
+            success: Succès
+            question: Question
 
 theme:
   name: material

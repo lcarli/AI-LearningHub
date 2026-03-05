@@ -1,0 +1,11 @@
+trace_id,timestamp,query_type,model,duration_ms,input_tokens,output_tokens,status,tool_calls,error_type
+t001,2026-03-01T10:00:00Z,product_search,gpt-4o,2500,150,85,OK,1,
+t002,2026-03-01T10:01:30Z,product_search,gpt-4o,1800,120,60,OK,0,
+t003,2026-03-01T10:03:00Z,order_status,gpt-4o,5200,350,200,OK,2,
+t004,2026-03-01T10:05:00Z,faq,gpt-4o-mini,1200,100,45,OK,0,
+t005,2026-03-01T10:06:30Z,recommendation,gpt-4o,3100,200,120,OK,1,
+t006,2026-03-01T10:08:00Z,order_status,gpt-4o,8500,500,300,ERROR,3,timeout
+t007,2026-03-01T10:10:00Z,faq,gpt-4o-mini,1500,130,55,OK,0,
+t008,2026-03-01T10:11:30Z,product_search,gpt-4o,2000,160,90,OK,1,
+t009,2026-03-01T10:13:00Z,recommendation,gpt-4o,4000,280,150,OK,2,
+t010,2026-03-01T10:14:30Z,faq,gpt-4o-mini,1700,110,50,OK,0,

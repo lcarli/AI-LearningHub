@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="900" height="300" fill="#f8f9fa" rx="12"/>
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Fabric IQ — AI ETL Pipeline (Batch Enrichment)</text>
+
+  <rect x="20" y="60" width="120" height="65" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="80" y="86" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">📄 Raw Reviews</text>
+  <text x="80" y="104" text-anchor="middle" font-size="9" fill="#64748b">20 text reviews</text>
+  <text x="80" y="116" text-anchor="middle" font-size="9" fill="#64748b">CSV input</text>
+
+  <line x1="140" y1="92" x2="168" y2="92" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="173" y="55" width="130" height="75" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="238" y="78" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">🏷️ ai.classify()</text>
+  <text x="238" y="96" text-anchor="middle" font-size="9" fill="#3b82f6">Sentiment detection</text>
+  <text x="238" y="112" text-anchor="middle" font-size="9" fill="#3b82f6">positive · neutral</text>
+  <text x="238" y="124" text-anchor="middle" font-size="9" fill="#3b82f6">negative</text>
+
+  <line x1="303" y1="92" x2="331" y2="92" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="336" y="55" width="130" height="75" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="401" y="78" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">📝 ai.summarize()</text>
+  <text x="401" y="96" text-anchor="middle" font-size="9" fill="#22c55e">One-line summary</text>
+  <text x="401" y="112" text-anchor="middle" font-size="9" fill="#22c55e">from each review</text>
+
+  <line x1="466" y1="92" x2="494" y2="92" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="499" y="55" width="130" height="75" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="564" y="78" text-anchor="middle" font-size="11" font-weight="600" fill="#6d28d9">🔍 ai.extract()</text>
+  <text x="564" y="96" text-anchor="middle" font-size="9" fill="#8b5cf6">Key phrases</text>
+  <text x="564" y="112" text-anchor="middle" font-size="9" fill="#8b5cf6">pros · cons · features</text>
+
+  <line x1="629" y1="92" x2="657" y2="92" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="662" y="55" width="110" height="75" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="717" y="78" text-anchor="middle" font-size="11" font-weight="600" fill="#a16207">🧮 ai.embed()</text>
+  <text x="717" y="96" text-anchor="middle" font-size="9" fill="#ca8a04">Vector embedding</text>
+  <text x="717" y="112" text-anchor="middle" font-size="9" fill="#ca8a04">for similarity</text>
+
+  <line x1="772" y1="92" x2="800" y2="92" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="805" y="60" width="75" height="65" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="843" y="86" text-anchor="middle" font-size="11" font-weight="600" fill="#c2410c">📦</text>
+  <text x="843" y="104" text-anchor="middle" font-size="10" font-weight="600" fill="#c2410c">Enriched</text>
+  <text x="843" y="118" text-anchor="middle" font-size="10" font-weight="600" fill="#c2410c">Parquet</text>
+
+  <!-- Mock mode note -->
+  <rect x="30" y="165" width="840" height="40" rx="8" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+  <text x="450" y="185" text-anchor="middle" font-size="10" fill="#475569"><tspan font-weight="600">This lab uses mock AI functions</tspan> — keyword-based heuristics that mimic Fabric's ai.*() API</text>
+  <text x="450" y="198" text-anchor="middle" font-size="9" fill="#94a3b8">No API keys needed · Same interface as production · Swap in real models later</text>
+
+  <text x="450" y="250" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">OutdoorGear Inc. — 20 product reviews → classified, summarized, extracted, embedded</text>
+</svg>

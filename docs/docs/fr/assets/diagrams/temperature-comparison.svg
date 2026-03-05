@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+  </defs>
+
+  <rect width="700" height="300" fill="#f8f9fa" rx="12"/>
+  <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Temperature: How It Changes Output</text>
+  <text x="350" y="42" text-anchor="middle" font-size="10" fill="#94a3b8">Prompt: "The capital of France is ___"</text>
+
+  <!-- Temperature 0.0 -->
+  <text x="30" y="75" font-size="12" font-weight="700" fill="#16a34a">temp = 0.0</text>
+  <text x="30" y="90" font-size="9" fill="#64748b">Deterministic</text>
+  <rect x="140" y="62" width="420" height="12" rx="3" fill="#e2e8f0"/>
+  <rect x="140" y="62" width="400" height="12" rx="3" fill="#16a34a"/>
+  <text x="145" y="72" font-size="9" fill="#fff" font-weight="600">Paris — 99.8%</text>
+  <rect x="140" y="78" width="420" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="140" y="78" width="4" height="8" rx="2" fill="#94a3b8"/>
+  <text x="150" y="85" font-size="7" fill="#94a3b8">Lyon 0.1%</text>
+  <text x="580" y="78" font-size="10" fill="#16a34a" font-weight="600">✅ Always "Paris"</text>
+
+  <!-- Temperature 0.5 -->
+  <text x="30" y="128" font-size="12" font-weight="700" fill="#2563eb">temp = 0.5</text>
+  <text x="30" y="143" font-size="9" fill="#64748b">Balanced</text>
+  <rect x="140" y="115" width="420" height="12" rx="3" fill="#e2e8f0"/>
+  <rect x="140" y="115" width="340" height="12" rx="3" fill="#2563eb"/>
+  <text x="145" y="125" font-size="9" fill="#fff" font-weight="600">Paris — 85%</text>
+  <rect x="140" y="131" width="420" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="140" y="131" width="40" height="8" rx="2" fill="#60a5fa"/>
+  <text x="185" y="138" font-size="7" fill="#64748b">Lyon 8%</text>
+  <rect x="140" y="143" width="420" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="140" y="143" width="20" height="8" rx="2" fill="#93c5fd"/>
+  <text x="165" y="150" font-size="7" fill="#94a3b8">Marseille 4%</text>
+  <text x="580" y="131" font-size="10" fill="#2563eb" font-weight="600">Usually "Paris"</text>
+
+  <!-- Temperature 1.0+ -->
+  <text x="30" y="183" font-size="12" font-weight="700" fill="#dc2626">temp = 1.0+</text>
+  <text x="30" y="198" font-size="9" fill="#64748b">Creative</text>
+  <rect x="140" y="170" width="420" height="12" rx="3" fill="#e2e8f0"/>
+  <rect x="140" y="170" width="180" height="12" rx="3" fill="#dc2626"/>
+  <text x="145" y="180" font-size="9" fill="#fff" font-weight="600">Paris — 45%</text>
+  <rect x="140" y="186" width="420" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="140" y="186" width="80" height="8" rx="2" fill="#f87171"/>
+  <text x="225" y="193" font-size="7" fill="#64748b">Lyon 18%</text>
+  <rect x="140" y="198" width="420" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="140" y="198" width="50" height="8" rx="2" fill="#fca5a5"/>
+  <text x="195" y="205" font-size="7" fill="#94a3b8">Marseille 12%</text>
+  <rect x="140" y="210" width="420" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="140" y="210" width="35" height="8" rx="2" fill="#fecaca"/>
+  <text x="180" y="217" font-size="7" fill="#94a3b8">a 8%</text>
+  <text x="580" y="186" font-size="10" fill="#dc2626" font-weight="600">⚠️ Unpredictable</text>
+
+  <!-- Usage guide -->
+  <rect x="30" y="238" width="200" height="35" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <text x="130" y="255" text-anchor="middle" font-size="10" font-weight="600" fill="#16a34a">🎯 Code / SQL / JSON</text>
+  <text x="130" y="268" text-anchor="middle" font-size="9" fill="#22c55e">Use temp = 0.0</text>
+
+  <rect x="250" y="238" width="200" height="35" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="350" y="255" text-anchor="middle" font-size="10" font-weight="600" fill="#1e40af">💬 Chat / Summaries</text>
+  <text x="350" y="268" text-anchor="middle" font-size="9" fill="#3b82f6">Use temp = 0.3–0.7</text>
+
+  <rect x="470" y="238" width="200" height="35" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+  <text x="570" y="255" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">✨ Creative Writing</text>
+  <text x="570" y="268" text-anchor="middle" font-size="9" fill="#ef4444">Use temp = 0.8–1.0</text>
+</svg>

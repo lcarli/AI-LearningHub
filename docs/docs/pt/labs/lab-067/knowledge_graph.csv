@@ -1,0 +1,16 @@
+entity_id,entity_name,entity_type,community_id,community_name,connections,importance_score,mentioned_in_docs
+E01,Alpine Explorer Tent,Product,C01,Premium Camping Gear,8,0.95,12
+E02,TrailMaster X4 Tent,Product,C01,Premium Camping Gear,6,0.82,9
+E03,Peak Performer Boots,Product,C02,Hiking Footwear,5,0.78,7
+E04,CozyNights Sleeping Bag,Product,C03,Sleep Systems,4,0.71,6
+E05,OutdoorGear Inc,Organization,C04,Company Info,12,0.98,18
+E06,Return Policy,Policy,C05,Customer Policies,7,0.88,10
+E07,Warranty Program,Policy,C05,Customer Policies,6,0.85,8
+E08,Waterproof Rating,Attribute,C01,Premium Camping Gear,5,0.72,7
+E09,Customer Satisfaction,Metric,C06,Business Metrics,9,0.91,14
+E10,Seattle Warehouse,Location,C07,Supply Chain,4,0.65,5
+E11,Dallas Warehouse,Location,C07,Supply Chain,4,0.63,5
+E12,Free Shipping,Policy,C05,Customer Policies,3,0.58,4
+E13,Hiking Trail Guide,Content,C08,Outdoor Education,6,0.75,8
+E14,Winter Camping Tips,Content,C08,Outdoor Education,5,0.70,6
+E15,Product Reviews,Content,C06,Business Metrics,8,0.89,11

@@ -1,0 +1,78 @@
+name: Translate Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/docs/en/**/*.md'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force re-translate all files'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install openai
+
+      - name: Get changed markdown files
+        id: changed
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            echo "files=--force" >> $GITHUB_OUTPUT
+          else
+            CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'docs/docs/en/**/*.md' | sed 's|docs/docs/en/||' | tr '\n' ' ')
+            if [ -z "$CHANGED" ]; then
+              echo "No markdown files changed"
+              echo "skip=true" >> $GITHUB_OUTPUT
+            else
+              echo "files=$CHANGED" >> $GITHUB_OUTPUT
+              echo "Changed files: $CHANGED"
+            fi
+          fi
+
+      - name: Translate to Portuguese and French
+        if: steps.changed.outputs.skip != 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            python scripts/translate_docs.py --lang pt,fr --force
+          else
+            for file in ${{ steps.changed.outputs.files }}; do
+              python scripts/translate_docs.py --lang pt,fr --file "$file" || true
+            done
+          fi
+
+      - name: Commit translations
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/docs/pt/ docs/docs/fr/ scripts/.translation-hashes.json
+          if git diff --cached --quiet; then
+            echo "No translation changes to commit"
+          else
+            git commit -m "Auto-translate: update PT/FR translations
+
+          Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+            git push
+          fi

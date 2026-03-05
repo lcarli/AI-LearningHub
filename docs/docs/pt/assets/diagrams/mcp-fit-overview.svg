@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="320" fill="#f8f9fa" rx="12"/>
+
+  <!-- Any AI Agent box -->
+  <rect x="100" y="25" width="400" height="60" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="50" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">🤖 Any AI Agent</text>
+  <text x="300" y="70" text-anchor="middle" font-size="10" fill="#3b82f6">Foundry · Semantic Kernel · Copilot · Claude · ChatGPT</text>
+
+  <!-- Arrow down -->
+  <line x1="300" y1="85" x2="300" y2="118" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="365" y="108" font-size="10" font-weight="600" fill="#64748b">MCP Protocol</text>
+
+  <!-- MCP Server box -->
+  <rect x="160" y="125" width="280" height="55" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">🔌 MCP Server</text>
+  <text x="300" y="168" text-anchor="middle" font-size="10" fill="#22c55e">Your tool (Python · C# · TypeScript)</text>
+
+  <!-- Arrow down -->
+  <line x1="300" y1="180" x2="300" y2="213" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Data sources box -->
+  <rect x="110" y="220" width="380" height="55" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="245" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">🗄️ Data Sources</text>
+  <text x="300" y="263" text-anchor="middle" font-size="10" fill="#8b5cf6">PostgreSQL · REST API · Files · IoT · SaaS</text>
+
+  <!-- Footer note -->
+  <text x="300" y="300" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">MCP = "USB-C for AI" — one standard interface for any agent + any tool</text>
+</svg>

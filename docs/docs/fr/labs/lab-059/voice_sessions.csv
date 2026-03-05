@@ -1,0 +1,16 @@
+session_id,scenario,duration_sec,latency_p50_ms,latency_p95_ms,interruptions,turns,sentiment,model,rag_used,language
+S01,product_inquiry,45,85,170,1,8,positive,gpt-4o-realtime,true,en
+S02,order_status,30,92,185,0,5,neutral,gpt-4o-realtime,true,en
+S03,complaint,120,88,195,3,18,negative,gpt-4o-realtime,true,en
+S04,product_inquiry,55,90,180,2,10,positive,gpt-4o-realtime,true,en
+S05,faq,20,78,155,0,4,positive,gpt-4o-realtime,false,en
+S06,return_request,65,95,210,1,12,negative,gpt-4o-realtime,true,en
+S07,product_inquiry,40,82,165,1,7,positive,gpt-4o-realtime,true,es
+S08,order_status,25,88,175,0,5,neutral,gpt-4o-realtime,true,en
+S09,complaint,90,105,240,4,15,negative,gpt-4o-realtime,true,en
+S10,faq,15,75,150,0,3,positive,gpt-4o-realtime,false,en
+S11,product_inquiry,50,87,178,1,9,positive,gpt-4o-realtime,true,fr
+S12,return_request,70,98,215,2,13,neutral,gpt-4o-realtime,true,en
+S13,order_status,35,91,188,0,6,positive,gpt-4o-realtime,true,en
+S14,complaint,105,110,255,5,16,negative,gpt-4o-realtime,true,en
+S15,faq,18,76,152,0,4,positive,gpt-4o-realtime,false,en

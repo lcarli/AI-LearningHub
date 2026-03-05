@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 240" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+  </defs>
+
+  <rect width="700" height="240" fill="#f8f9fa" rx="12"/>
+  <text x="350" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Self-Attention: How LLMs Understand Context</text>
+
+  <!-- Sentence tokens -->
+  <rect x="30" y="55" width="55" height="30" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="58" y="75" text-anchor="middle" font-size="11" fill="#1e40af">The</text>
+
+  <rect x="100" y="55" width="65" height="30" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="132" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#dc2626">bank</text>
+
+  <rect x="180" y="55" width="45" height="30" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="202" y="75" text-anchor="middle" font-size="11" fill="#1e40af">by</text>
+
+  <rect x="240" y="55" width="50" height="30" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="265" y="75" text-anchor="middle" font-size="11" fill="#1e40af">the</text>
+
+  <rect x="305" y="55" width="65" height="30" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
+  <text x="338" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#16a34a">river</text>
+
+  <rect x="385" y="55" width="55" height="30" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="412" y="75" text-anchor="middle" font-size="11" fill="#1e40af">was</text>
+
+  <rect x="455" y="55" width="65" height="30" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="488" y="75" text-anchor="middle" font-size="11" fill="#1e40af">steep</text>
+
+  <!-- Attention arcs from "bank" to other words -->
+  <!-- Strong attention to "river" -->
+  <path d="M 132 85 Q 235 140 338 85" stroke="#16a34a" stroke-width="3" fill="none" opacity="0.8"/>
+  <text x="235" y="132" text-anchor="middle" font-size="10" font-weight="700" fill="#16a34a">strong attention</text>
+
+  <!-- Weak attention to "the" -->
+  <path d="M 132 85 Q 90 110 58 85" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.4" stroke-dasharray="3,3"/>
+
+  <!-- Weak attention to "steep" -->
+  <path d="M 132 85 Q 310 120 488 85" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.3" stroke-dasharray="3,3"/>
+
+  <!-- Result box -->
+  <rect x="540" y="50" width="140" height="40" rx="8" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="610" y="68" text-anchor="middle" font-size="10" font-weight="600" fill="#a16207">🧠 Result:</text>
+  <text x="610" y="82" text-anchor="middle" font-size="10" fill="#a16207">"bank" = riverbank</text>
+
+  <!-- Explanation -->
+  <rect x="50" y="160" width="600" height="48" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="180" text-anchor="middle" font-size="11" fill="#475569">When processing <tspan font-weight="700" fill="#dc2626">"bank"</tspan>, the model pays <tspan font-weight="700" fill="#16a34a">strong attention to "river"</tspan></text>
+  <text x="350" y="198" text-anchor="middle" font-size="11" fill="#475569">→ understands it means <tspan font-weight="600">riverbank</tspan>, not financial institution</text>
+</svg>

@@ -1,0 +1,9 @@
+agent_id,agent_name,agent_type,model,tools_count,memory_type,deployment,status,requests_24h,avg_latency_ms,error_rate_pct,content_filter
+FA01,ProductAdvisor,specialist,gpt-4o,5,cosmos_db,container_apps,active,1250,320,1.2,enabled
+FA02,OrderProcessor,specialist,gpt-4o,8,cosmos_db,container_apps,active,890,450,2.1,enabled
+FA03,SupportRouter,orchestrator,gpt-4o-mini,3,session_only,container_apps,active,2100,180,0.5,enabled
+FA04,InventoryMonitor,specialist,gpt-4o-mini,4,ai_search,container_apps,active,560,220,0.8,enabled
+FA05,Coordinator,orchestrator,gpt-4o,2,cosmos_db,container_apps,active,3200,280,1.0,enabled
+FA06,QualityReviewer,specialist,gpt-4o,3,session_only,container_apps,active,780,350,1.5,enabled
+FA07,AnalyticsAgent,specialist,gpt-4o,6,ai_search,container_apps,degraded,420,850,8.5,enabled
+FA08,LegacyBridge,specialist,gpt-4o-mini,10,none,vm,active,180,1200,12.0,disabled

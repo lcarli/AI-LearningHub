@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="900" height="300" fill="#f8f9fa" rx="12"/>
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Fabric IQ — Conversational Data Agent (NL → SQL)</text>
+
+  <rect x="30" y="60" width="140" height="70" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="100" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">💬 User Query</text>
+  <text x="100" y="108" text-anchor="middle" font-size="9" fill="#3b82f6">"How many tents</text>
+  <text x="100" y="120" text-anchor="middle" font-size="9" fill="#3b82f6">are in stock?"</text>
+
+  <line x1="170" y1="95" x2="200" y2="95" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="205" y="60" width="140" height="70" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="275" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="#a16207">🧠 LLM Parser</text>
+  <text x="275" y="108" text-anchor="middle" font-size="9" fill="#ca8a04">NL → Intent + Entities</text>
+  <text x="275" y="120" text-anchor="middle" font-size="9" fill="#ca8a04">Schema-aware</text>
+
+  <line x1="345" y1="95" x2="375" y2="95" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="380" y="60" width="150" height="70" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="455" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">⚙️ SQL Generator</text>
+  <text x="455" y="106" text-anchor="middle" font-size="8" fill="#22c55e" font-family="Consolas">SELECT COUNT(*)</text>
+  <text x="455" y="118" text-anchor="middle" font-size="8" fill="#22c55e" font-family="Consolas">FROM products</text>
+  <text x="455" y="130" text-anchor="middle" font-size="8" fill="#22c55e" font-family="Consolas">WHERE category='Tents'</text>
+
+  <line x1="530" y1="95" x2="560" y2="95" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="565" y="60" width="130" height="70" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="630" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="#6d28d9">🗄️ Database</text>
+  <text x="630" y="106" text-anchor="middle" font-size="9" fill="#8b5cf6">SQLite / OneLake</text>
+  <text x="630" y="120" text-anchor="middle" font-size="9" fill="#8b5cf6">Entra identity-bound</text>
+
+  <line x1="695" y1="95" x2="725" y2="95" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="730" y="60" width="140" height="70" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="800" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="#c2410c">📊 Result</text>
+  <text x="800" y="108" text-anchor="middle" font-size="9" fill="#ea580c">"There are 2 tents</text>
+  <text x="800" y="120" text-anchor="middle" font-size="9" fill="#ea580c">currently in stock."</text>
+
+  <!-- Security layer -->
+  <rect x="30" y="165" width="840" height="45" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="450" y="185" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">🔒 Security Layer — Queries run under user's Entra ID (least-privilege)</text>
+  <text x="450" y="200" text-anchor="middle" font-size="9" fill="#64748b">Generated SQL is logged and inspectable · Row-level security enforced · No data leaks between users</text>
+
+  <text x="450" y="250" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">OutdoorGear Inc. — 10 products · 15 orders · Self-serve analytics via chat</text>
+</svg>

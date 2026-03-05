@@ -1,0 +1,16 @@
+task_id,task_type,input_text,phi4_mini_correct,phi4_mini_time_ms,phi4_mini_tokens,gpt4o_correct,gpt4o_time_ms,gpt4o_tokens,gpt4o_cost_usd
+T01,classify,"Customer wants to return a defective tent",true,45,28,true,820,35,0.0004
+T02,classify,"What are your business hours?",true,38,22,true,750,30,0.0003
+T03,classify,"I need to track order ORD-1234",true,42,25,true,790,32,0.0004
+T04,extract,"Ship to: John Smith, 123 Main St, Seattle WA 98101",true,65,40,true,880,45,0.0005
+T05,extract,"Invoice #INV-2024-089 Total: $1,249.99 Due: 2026-04-15",true,72,45,true,910,50,0.0006
+T06,summarize,"The Alpine Explorer Tent is our best-selling 4-season tent. It features a double-wall design with waterproof rating of 3000mm.",true,120,80,true,1200,90,0.0012
+T07,summarize,"Customer reported that the zipper on their TrailMaster X4 tent broke after three uses. They are requesting a full refund.",true,110,75,true,1150,85,0.0011
+T08,route,"My order hasn't arrived and it's been 2 weeks",true,35,20,true,720,28,0.0003
+T09,route,"Can you help me pick the right sleeping bag?",true,32,18,true,700,25,0.0003
+T10,draft,"Write a polite response to a customer asking about tent warranties",false,180,120,true,1500,150,0.0018
+T11,draft,"Compose an email summarizing Q1 sales performance for outdoor gear",false,200,140,true,1800,200,0.0025
+T12,classify,"Quiero devolver mi tienda de campaña",true,48,30,true,850,38,0.0005
+T13,extract,"Contact: Maria García, +34 612 345 678, maria@ejemplo.com",true,68,42,true,900,48,0.0006
+T14,summarize,"The product received overwhelmingly positive reviews with an average rating of 4.7/5 across 312 reviews. Main complaints were about weight.",false,150,95,true,1300,100,0.0013
+T15,route,"I want to speak to a manager about my experience",true,30,18,true,680,25,0.0003

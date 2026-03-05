@@ -1,0 +1,16 @@
+chunk_id,document,chunk_type,has_image,has_table,text_length,image_description,retrieval_score_text_only,retrieval_score_multimodal,query_id
+C01,quarterly_report.pdf,text,false,false,450,,0.85,0.85,Q1
+C02,quarterly_report.pdf,table,false,true,280,,0.72,0.88,Q1
+C03,quarterly_report.pdf,image,true,false,50,Bar chart showing Q1 revenue by region,0.15,0.82,Q1
+C04,product_catalog.docx,text,false,false,380,,0.90,0.90,Q2
+C05,product_catalog.docx,image,true,false,30,Photo of Alpine Explorer Tent with dimensions,0.10,0.91,Q2
+C06,product_catalog.docx,table,false,true,320,,0.78,0.89,Q2
+C07,training_manual.pdf,text,false,false,500,,0.88,0.88,Q3
+C08,training_manual.pdf,image,true,false,40,Diagram of tent assembly steps 1-5,0.12,0.85,Q3
+C09,training_manual.pdf,image,true,false,35,Photo showing correct stake placement,0.08,0.79,Q3
+C10,investor_deck.pptx,text,false,false,200,,0.75,0.75,Q4
+C11,investor_deck.pptx,image,true,false,45,Pie chart of market share by competitor,0.18,0.87,Q4
+C12,investor_deck.pptx,table,false,true,350,,0.80,0.90,Q4
+C13,sales_data.xlsx,table,false,true,600,,0.82,0.92,Q5
+C14,product_catalog.docx,text,false,false,420,,0.65,0.65,Q5
+C15,quarterly_report.pdf,image,true,false,55,Line graph of monthly active users trend,0.20,0.88,Q5

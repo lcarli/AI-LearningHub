@@ -1,0 +1,16 @@
+request_id,context_tokens,cache_status,ttft_ms,total_time_ms,input_cost_usd,cached_cost_usd,provider,model
+R01,150000,miss,2800,8500,0.4500,0.0000,anthropic,claude-3.5-sonnet
+R02,150000,hit,180,5200,0.0000,0.0450,anthropic,claude-3.5-sonnet
+R03,150000,hit,175,5100,0.0000,0.0450,anthropic,claude-3.5-sonnet
+R04,150000,hit,190,5300,0.0000,0.0450,anthropic,claude-3.5-sonnet
+R05,150000,miss,2750,8400,0.4500,0.0000,anthropic,claude-3.5-sonnet
+R06,200000,miss,3200,9800,0.2000,0.0000,google,gemini-1.5-pro
+R07,200000,hit,220,6100,0.0000,0.0500,google,gemini-1.5-pro
+R08,200000,hit,210,5900,0.0000,0.0500,google,gemini-1.5-pro
+R09,200000,hit,230,6200,0.0000,0.0500,google,gemini-1.5-pro
+R10,200000,miss,3100,9600,0.2000,0.0000,google,gemini-1.5-pro
+R11,100000,miss,1800,6200,0.2500,0.0000,openai,gpt-4o
+R12,100000,hit,250,4800,0.0000,0.0250,openai,gpt-4o
+R13,100000,hit,240,4700,0.0000,0.0250,openai,gpt-4o
+R14,100000,hit,260,4900,0.0000,0.0250,openai,gpt-4o
+R15,100000,miss,1850,6300,0.2500,0.0000,openai,gpt-4o

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 440" width="860" height="440" font-family="Segoe UI, Arial, sans-serif">
+  <!-- Definitions -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#888"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#00000022"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="440" fill="#f0f4f8" rx="14"/>
+
+  <!-- Title -->
+  <text x="430" y="36" text-anchor="middle" font-size="19" font-weight="bold" fill="#0f2d5e">Microsoft Agent 365 — Control Plane</text>
+  <text x="430" y="58" text-anchor="middle" font-size="12" fill="#6c757d">Works with any agent framework · Copilot Studio · Semantic Kernel · LangChain · OpenAI Agents SDK</text>
+
+  <!-- ── Outer container ── -->
+  <rect x="28" y="72" width="804" height="280" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2" filter="url(#shadow)"/>
+  <text x="430" y="96" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">Microsoft Agent 365</text>
+
+  <!-- Row 1: Registry, Access Control, Observability -->
+  <!-- Registry -->
+  <rect x="52" y="108" width="228" height="96" rx="10" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="76" y="130" font-size="20">🗂️</text>
+  <text x="108" y="133" font-size="13" font-weight="bold" fill="#1e3a8a">Registry</text>
+  <text x="68" y="152" font-size="11" fill="#374151">Complete view of ALL agents</text>
+  <text x="68" y="167" font-size="11" fill="#374151">in the organization — including</text>
+  <text x="68" y="182" font-size="11" fill="#374151">shadow agents &amp; unmanaged ones</text>
+
+  <!-- Access Control -->
+  <rect x="316" y="108" width="228" height="96" rx="10" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="340" y="130" font-size="20">🔐</text>
+  <text x="372" y="133" font-size="13" font-weight="bold" fill="#1e3a8a">Access Control</text>
+  <text x="332" y="152" font-size="11" fill="#374151">Entra Agent ID per agent</text>
+  <text x="332" y="167" font-size="11" fill="#374151">Risk-based conditional access</text>
+  <text x="332" y="182" font-size="11" fill="#374151">policies &amp; least privilege</text>
+
+  <!-- Observability -->
+  <rect x="580" y="108" width="228" height="96" rx="10" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="604" y="130" font-size="20">📊</text>
+  <text x="636" y="133" font-size="13" font-weight="bold" fill="#1e3a8a">Observability</text>
+  <text x="596" y="152" font-size="11" fill="#374151">OpenTelemetry traces for</text>
+  <text x="596" y="167" font-size="11" fill="#374151">every tool call, LLM inference,</text>
+  <text x="596" y="182" font-size="11" fill="#374151">and agent interaction</text>
+
+  <!-- Row 2: Blueprint, Notifications, Governed MCP -->
+  <!-- Blueprint -->
+  <rect x="52" y="224" width="228" height="96" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="76" y="246" font-size="20">📋</text>
+  <text x="108" y="249" font-size="13" font-weight="bold" fill="#4c1d95">Blueprint</text>
+  <text x="68" y="268" font-size="11" fill="#374151">IT-approved template defining</text>
+  <text x="68" y="283" font-size="11" fill="#374151">capabilities, MCP permissions,</text>
+  <text x="68" y="298" font-size="11" fill="#374151">governance &amp; compliance rules</text>
+
+  <!-- Notifications -->
+  <rect x="316" y="224" width="228" height="96" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="340" y="246" font-size="20">🔔</text>
+  <text x="372" y="249" font-size="13" font-weight="bold" fill="#4c1d95">Notifications</text>
+  <text x="332" y="268" font-size="11" fill="#374151">Receive @mentions in Teams</text>
+  <text x="332" y="283" font-size="11" fill="#374151">emails, Word comments — like</text>
+  <text x="332" y="298" font-size="11" fill="#374151">a human M365 participant</text>
+
+  <!-- Governed MCP Tools -->
+  <rect x="580" y="224" width="228" height="96" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="604" y="246" font-size="20">🔧</text>
+  <text x="636" y="249" font-size="13" font-weight="bold" fill="#4c1d95">Governed MCP Tools</text>
+  <text x="596" y="268" font-size="11" fill="#374151">Mail · Calendar · Teams</text>
+  <text x="596" y="283" font-size="11" fill="#374151">SharePoint — under IT</text>
+  <text x="596" y="298" font-size="11" fill="#374151">admin control via blueprint</text>
+
+  <!-- ── ANY AGENT label at bottom ── -->
+  <rect x="28" y="370" width="804" height="52" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="430" y="391" text-anchor="middle" font-size="12" font-weight="bold" fill="#0c4a6e">Works with ANY agent framework or platform</text>
+  <!-- Framework badges -->
+  <rect x="58"  y="400" width="118" height="16" rx="8" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="117" y="412" text-anchor="middle" font-size="10" fill="#1e3a8a">Copilot Studio</text>
+  <rect x="188" y="400" width="118" height="16" rx="8" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="247" y="412" text-anchor="middle" font-size="10" fill="#1e3a8a">Semantic Kernel</text>
+  <rect x="318" y="400" width="118" height="16" rx="8" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="377" y="412" text-anchor="middle" font-size="10" fill="#1e3a8a">OpenAI Agents SDK</text>
+  <rect x="448" y="400" width="88"  height="16" rx="8" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="492" y="412" text-anchor="middle" font-size="10" fill="#1e3a8a">LangChain</text>
+  <rect x="548" y="400" width="88"  height="16" rx="8" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="592" y="412" text-anchor="middle" font-size="10" fill="#1e3a8a">LangGraph</text>
+  <rect x="648" y="400" width="88"  height="16" rx="8" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="692" y="412" text-anchor="middle" font-size="10" fill="#1e3a8a">Azure AI Foundry</text>
+  <rect x="748" y="400" width="68"  height="16" rx="8" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="782" y="412" text-anchor="middle" font-size="10" fill="#1e3a8a">+ more...</text>
+</svg>

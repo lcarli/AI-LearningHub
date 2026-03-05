@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 490" width="860" height="490" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrowdown" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="arrowup" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#00000020"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="490" fill="#f8fafc" rx="14"/>
+
+  <!-- Title -->
+  <text x="430" y="36" text-anchor="middle" font-size="19" font-weight="bold" fill="#0f2d5e">Agent 365 Architecture — Layered Stack</text>
+  <text x="430" y="57" text-anchor="middle" font-size="12" fill="#6c757d">Agent 365 SDK adds enterprise capabilities on top of your existing agent</text>
+
+  <!-- ── LAYER 3: Enterprise Capabilities (top) ── -->
+  <rect x="40" y="80" width="780" height="108" rx="12" fill="#1e40af" stroke="#1d4ed8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="430" y="104" text-anchor="middle" font-size="12" font-weight="bold" fill="#93c5fd">LAYER 3 — ENTERPRISE CAPABILITIES</text>
+  <text x="430" y="120" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Agent 365 SDK</text>
+
+  <!-- 4 capability pills -->
+  <rect x="64"  y="132" width="168" height="40" rx="8" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+  <text x="148" y="148" text-anchor="middle" font-size="11" font-weight="bold" fill="#93c5fd">🔐 Entra Agent ID</text>
+  <text x="148" y="163" text-anchor="middle" font-size="10" fill="#bfdbfe">Unique identity per agent</text>
+
+  <rect x="248" y="132" width="168" height="40" rx="8" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+  <text x="332" y="148" text-anchor="middle" font-size="11" font-weight="bold" fill="#93c5fd">📊 Observability</text>
+  <text x="332" y="163" text-anchor="middle" font-size="10" fill="#bfdbfe">OpenTelemetry traces</text>
+
+  <rect x="432" y="132" width="168" height="40" rx="8" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+  <text x="516" y="148" text-anchor="middle" font-size="11" font-weight="bold" fill="#93c5fd">🔔 Notifications</text>
+  <text x="516" y="163" text-anchor="middle" font-size="10" fill="#bfdbfe">Teams · Outlook · Word</text>
+
+  <rect x="616" y="132" width="168" height="40" rx="8" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+  <text x="700" y="148" text-anchor="middle" font-size="11" font-weight="bold" fill="#93c5fd">🔧 Governed MCP</text>
+  <text x="700" y="163" text-anchor="middle" font-size="10" fill="#bfdbfe">Mail · Calendar · SharePoint</text>
+
+  <!-- Connector arrow layer 3 → layer 2 -->
+  <line x1="430" y1="188" x2="430" y2="214" stroke="#64748b" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowdown)"/>
+  <text x="460" y="205" font-size="10" fill="#94a3b8">wraps &amp; enhances</text>
+
+  <!-- ── LAYER 2: Agent Logic ── -->
+  <rect x="40" y="218" width="780" height="110" rx="12" fill="#059669" stroke="#047857" stroke-width="2" filter="url(#shadow)"/>
+  <text x="430" y="242" text-anchor="middle" font-size="12" font-weight="bold" fill="#a7f3d0">LAYER 2 — AGENT LOGIC</text>
+  <text x="430" y="258" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Your Code</text>
+
+  <!-- 4 logic pills -->
+  <rect x="64"  y="270" width="168" height="40" rx="8" fill="#047857" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="148" y="286" text-anchor="middle" font-size="11" font-weight="bold" fill="#a7f3d0">💬 Prompts</text>
+  <text x="148" y="301" text-anchor="middle" font-size="10" fill="#d1fae5">System + user messages</text>
+
+  <rect x="248" y="270" width="168" height="40" rx="8" fill="#047857" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="332" y="286" text-anchor="middle" font-size="11" font-weight="bold" fill="#a7f3d0">🔄 Workflows</text>
+  <text x="332" y="301" text-anchor="middle" font-size="10" fill="#d1fae5">Multi-step agent loops</text>
+
+  <rect x="432" y="270" width="168" height="40" rx="8" fill="#047857" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="516" y="286" text-anchor="middle" font-size="11" font-weight="bold" fill="#a7f3d0">🧠 Reasoning</text>
+  <text x="516" y="301" text-anchor="middle" font-size="10" fill="#d1fae5">Planning &amp; decisions</text>
+
+  <rect x="616" y="270" width="168" height="40" rx="8" fill="#047857" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="700" y="286" text-anchor="middle" font-size="11" font-weight="bold" fill="#a7f3d0">🛠️ Custom Tools</text>
+  <text x="700" y="301" text-anchor="middle" font-size="10" fill="#d1fae5">Your business functions</text>
+
+  <!-- Connector arrow layer 2 → layer 1 -->
+  <line x1="430" y1="328" x2="430" y2="354" stroke="#64748b" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowdown)"/>
+  <text x="460" y="345" font-size="10" fill="#94a3b8">built on top of</text>
+
+  <!-- ── LAYER 1: LLM Orchestrator ── -->
+  <rect x="40" y="358" width="780" height="80" rx="12" fill="#7c3aed" stroke="#6d28d9" stroke-width="2" filter="url(#shadow)"/>
+  <text x="430" y="382" text-anchor="middle" font-size="12" font-weight="bold" fill="#ddd6fe">LAYER 1 — LLM ORCHESTRATOR RUNTIME</text>
+  <text x="430" y="400" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Your Chosen Framework</text>
+
+  <!-- framework badges -->
+  <rect x="64"  y="410" width="118" height="20" rx="6" fill="#6d28d9" stroke="#a78bfa" stroke-width="1"/>
+  <text x="123" y="423" text-anchor="middle" font-size="10" fill="#ddd6fe">OpenAI Agents SDK</text>
+  <rect x="194" y="410" width="100" height="20" rx="6" fill="#6d28d9" stroke="#a78bfa" stroke-width="1"/>
+  <text x="244" y="423" text-anchor="middle" font-size="10" fill="#ddd6fe">Semantic Kernel</text>
+  <rect x="306" y="410" width="88"  height="20" rx="6" fill="#6d28d9" stroke="#a78bfa" stroke-width="1"/>
+  <text x="350" y="423" text-anchor="middle" font-size="10" fill="#ddd6fe">LangChain</text>
+  <rect x="406" y="410" width="118" height="20" rx="6" fill="#6d28d9" stroke="#a78bfa" stroke-width="1"/>
+  <text x="465" y="423" text-anchor="middle" font-size="10" fill="#ddd6fe">Azure AI Foundry</text>
+  <rect x="536" y="410" width="118" height="20" rx="6" fill="#6d28d9" stroke="#a78bfa" stroke-width="1"/>
+  <text x="595" y="423" text-anchor="middle" font-size="10" fill="#ddd6fe">Copilot Studio</text>
+  <rect x="666" y="410" width="118" height="20" rx="6" fill="#6d28d9" stroke="#a78bfa" stroke-width="1"/>
+  <text x="725" y="423" text-anchor="middle" font-size="10" fill="#ddd6fe">+ any other</text>
+
+  <!-- Key insight callout -->
+  <rect x="40" y="448" width="780" height="6" rx="3" fill="#e2e8f0"/>
+  <text x="430" y="460" text-anchor="middle" font-size="11" fill="#475569">⭐ Agent 365 SDK does NOT replace your framework — it enhances any agent at Layer 3</text>
+</svg>

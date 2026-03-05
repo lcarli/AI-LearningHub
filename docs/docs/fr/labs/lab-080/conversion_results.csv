@@ -1,0 +1,13 @@
+test_id,input_file,file_type,file_size_kb,conversion_success,output_chars,tables_found,images_found,headings_found,conversion_time_ms,quality_score
+D01,quarterly_report.pdf,pdf,2450,true,18500,6,3,12,1200,0.92
+D02,product_catalog.docx,docx,890,true,12000,2,8,15,450,0.95
+D03,sales_data.xlsx,xlsx,340,true,8500,5,0,3,280,0.98
+D04,investor_deck.pptx,pptx,5200,true,6800,1,22,18,1800,0.85
+D05,meeting_notes.html,html,120,true,3200,0,0,5,80,0.97
+D06,faq_document.pdf,pdf,180,true,4500,0,0,8,350,0.94
+D07,contract_v2.docx,docx,560,true,9200,1,0,10,380,0.96
+D08,inventory_export.csv,csv,45,true,2100,1,0,0,30,0.99
+D09,customer_feedback.json,json,85,true,3800,0,0,0,50,0.98
+D10,training_manual.pdf,pdf,12000,true,45000,15,28,32,4500,0.82
+D11,corrupted_file.pdf,pdf,0,false,0,0,0,0,100,0.00
+D12,scanned_receipt.png,image,450,true,280,0,1,0,2200,0.72

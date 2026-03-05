@@ -1,0 +1,54 @@
+[
+  {
+    "name": "ProductSearchAgent",
+    "description": "Searches the OutdoorGear product catalog by category, price range, and availability",
+    "url": "https://agents.outdoorgear.com/product-search",
+    "version": "1.0.0",
+    "provider": "OutdoorGear Inc.",
+    "capabilities": {
+      "streaming": true,
+      "pushNotifications": false,
+      "stateTransitionHistory": false
+    },
+    "skills": [
+      {"id": "search_products", "name": "Search Products", "description": "Search by category, price, and stock"},
+      {"id": "get_details", "name": "Get Product Details", "description": "Retrieve full specs for a product ID"}
+    ],
+    "authentication": {"type": "bearer", "required": true}
+  },
+  {
+    "name": "OrderManagementAgent",
+    "description": "Manages customer orders including status tracking, returns, and shipping updates",
+    "url": "https://agents.outdoorgear.com/order-mgmt",
+    "version": "2.1.0",
+    "provider": "OutdoorGear Inc.",
+    "capabilities": {
+      "streaming": false,
+      "pushNotifications": true,
+      "stateTransitionHistory": true
+    },
+    "skills": [
+      {"id": "track_order", "name": "Track Order", "description": "Get real-time order status"},
+      {"id": "process_return", "name": "Process Return", "description": "Initiate a product return"},
+      {"id": "update_shipping", "name": "Update Shipping", "description": "Change shipping address or speed"}
+    ],
+    "authentication": {"type": "bearer", "required": true}
+  },
+  {
+    "name": "CustomerSupportAgent",
+    "description": "Handles customer inquiries, complaints, and FAQ responses with sentiment awareness",
+    "url": "https://agents.outdoorgear.com/support",
+    "version": "1.3.0",
+    "provider": "OutdoorGear Inc.",
+    "capabilities": {
+      "streaming": true,
+      "pushNotifications": true,
+      "stateTransitionHistory": false
+    },
+    "skills": [
+      {"id": "answer_faq", "name": "Answer FAQ", "description": "Respond to common questions"},
+      {"id": "handle_complaint", "name": "Handle Complaint", "description": "Process and resolve complaints"}
+    ],
+    "authentication": {"type": "oauth2", "required": true}
+  }
+]

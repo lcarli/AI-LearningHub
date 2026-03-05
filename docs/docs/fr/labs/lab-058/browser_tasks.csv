@@ -1,0 +1,11 @@
+task_id,task_description,website_type,difficulty,cua_completed,cua_time_sec,cua_screenshots,playwright_completed,playwright_time_sec,safety_risk
+T01,Search for hiking boots and filter by price,e-commerce,easy,true,8,3,true,2,low
+T02,Add a product to cart and view cart total,e-commerce,easy,true,12,5,true,3,low
+T03,Fill out a shipping address form,e-commerce,medium,true,20,8,true,5,medium
+T04,Navigate to order history and find last order,e-commerce,medium,true,15,6,true,4,low
+T05,Search for flights from NYC to LAX on a travel site,travel,medium,true,25,10,true,6,low
+T06,Compare hotel prices across 3 tabs,travel,hard,false,45,18,true,8,low
+T07,Submit a support ticket with screenshot attachment,support,hard,true,35,14,false,0,medium
+T08,Complete a CAPTCHA-protected form submission,auth,hard,false,40,16,false,0,high
+T09,Extract product specs from 5 product pages into a table,data,hard,true,55,22,true,12,low
+T10,Navigate a dynamic SPA with client-side routing,webapp,hard,false,50,20,true,7,low

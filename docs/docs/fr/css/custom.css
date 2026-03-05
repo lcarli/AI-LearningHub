@@ -1,0 +1,264 @@
+/* ─────────────────────────────────────────────
+   Level Badges
+   ───────────────────────────────────────────── */
+
+.level-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.level-50  { background-color: #6c757d; } /* grey   — Awareness  */
+.level-100 { background-color: #0d6efd; } /* blue   — Foundations */
+.level-200 { background-color: #198754; } /* green  — Intermediate */
+.level-300 { background-color: #fd7e14; } /* orange — Advanced */
+.level-400 { background-color: #dc3545; } /* red    — Expert */
+
+/* ─────────────────────────────────────────────
+   Cost / Account Badges
+   ───────────────────────────────────────────── */
+
+.cost-free    { background-color: #198754; }
+.cost-github  { background-color: #24292e; }
+.cost-azure-free { background-color: #0078d4; }
+.cost-azure-paid { background-color: #dc3545; }
+
+/* ─────────────────────────────────────────────
+   Path color accents (left border on headings)
+   ───────────────────────────────────────────── */
+
+.path-copilot       { border-left: 4px solid #0d6efd; padding-left: 10px; }
+.path-foundry       { border-left: 4px solid #0078d4; padding-left: 10px; }
+.path-mcp           { border-left: 4px solid #6f42c1; padding-left: 10px; }
+.path-sk            { border-left: 4px solid #d63384; padding-left: 10px; }
+.path-rag           { border-left: 4px solid #fd7e14; padding-left: 10px; }
+.path-teams         { border-left: 4px solid #6610f2; padding-left: 10px; }
+.path-vscode        { border-left: 4px solid #0d6efd; padding-left: 10px; }
+.path-procode       { border-left: 4px solid #198754; padding-left: 10px; }
+
+/* ─────────────────────────────────────────────
+   Path cards on the home / paths overview page
+   ───────────────────────────────────────────── */
+
+.path-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+
+.path-card {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.path-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+.path-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+.path-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* ─────────────────────────────────────────────
+   Lab info box (used at top of every lab)
+   ───────────────────────────────────────────── */
+
+.lab-meta {
+  background: var(--md-code-bg-color);
+  border-radius: 6px;
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.lab-meta strong {
+  margin-right: 4px;
+}
+
+/* ─────────────────────────────────────────────
+   Lab Completion Checkbox
+   ───────────────────────────────────────────── */
+
+.lab-completion {
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+.completion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  background: var(--md-code-bg-color);
+  font-size: 0.85rem;
+  user-select: none;
+}
+
+.completion-toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #198754;
+}
+
+/* ─────────────────────────────────────────────
+   Progress Bars
+   ───────────────────────────────────────────── */
+
+.path-progress {
+  margin: 0.8rem 0 1.2rem 0;
+}
+
+.progress-bar-container {
+  position: relative;
+  height: 28px;
+  background: var(--md-default-fg-color--lightest);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #198754, #0d6efd);
+  border-radius: 14px;
+  transition: width 0.4s ease;
+  min-width: 0;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+}
+
+/* ─────────────────────────────────────────────
+   Lab Filters
+   ───────────────────────────────────────────── */
+
+.lab-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 0.6rem 1rem;
+  background: var(--md-code-bg-color);
+  border-radius: 8px;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.filter-btn {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 16px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: var(--md-primary-fg-color);
+}
+
+.filter-btn.active {
+  background: var(--md-primary-fg-color);
+  color: #fff;
+  border-color: var(--md-primary-fg-color);
+}
+
+/* ─────────────────────────────────────────────
+   Stats Dashboard
+   ───────────────────────────────────────────── */
+
+.hub-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--md-code-bg-color);
+  border-radius: 8px;
+}
+
+.stats-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.stats-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+}
+
+.stats-label {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hub-stats .progress-bar-container {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ─────────────────────────────────────────────
+   Certificate Button
+   ───────────────────────────────────────────── */
+
+.cert-button {
+  display: inline-block;
+  margin: 0.8rem 0;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #6d28d9, #0d6efd);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cert-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.3);
+}

@@ -1,0 +1,22 @@
+{
+  "_comment": "Copy this file to a365.config.json and fill in your values.",
+  "tenantId": "YOUR_ENTRA_TENANT_ID",
+  "subscriptionId": "YOUR_AZURE_SUBSCRIPTION_ID",
+  "resourceGroup": "rg-outdoorgear-agent",
+  "clientAppId": "YOUR_CLI_CLIENT_APP_ID",
+  "agentMessagingEndpoint": "https://outdoorgear-agent.azurewebsites.net/api/messages",
+  "agentBlueprintName": "OutdoorGearAgent",
+  "agentDisplayName": "OutdoorGear Assistant",
+  "agentDescription": "AI agent that helps employees find outdoor gear products, check inventory, and process orders.",
+  "mcpPermissions": [
+    "mail.read",
+    "calendar.readwrite",
+    "teams.message.send"
+  ],
+  "observability": {
+    "enabled": true,
+    "exporterEndpoint": "https://your-otel-collector.endpoint/v1/traces",
+    "serviceName": "OutdoorGearAgent",
+    "serviceVersion": "1.0.0"
+  }
+}

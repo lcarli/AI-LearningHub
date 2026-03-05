@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+  </defs>
+  <rect width="700" height="280" fill="#f8f9fa" rx="12"/>
+  <text x="350" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Semantic Kernel / Microsoft Agent Framework</text>
+
+  <!-- Outer box -->
+  <rect x="30" y="50" width="640" height="170" rx="12" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="350" y="72" text-anchor="middle" font-size="12" font-weight="600" fill="#6d28d9">Agent Framework (formerly Semantic Kernel)</text>
+
+  <!-- Kernel -->
+  <rect x="55" y="90" width="155" height="65" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="132" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">🧠 Kernel</text>
+  <text x="132" y="133" text-anchor="middle" font-size="9" fill="#3b82f6">LLM + AI Services</text>
+  <text x="132" y="147" text-anchor="middle" font-size="9" fill="#3b82f6">OpenAI · Azure · Local</text>
+
+  <!-- Plugins / Skills -->
+  <rect x="230" y="90" width="155" height="65" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="307" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">🔌 Agent Skills</text>
+  <text x="307" y="133" text-anchor="middle" font-size="9" fill="#22c55e">Functions + Prompts</text>
+  <text x="307" y="147" text-anchor="middle" font-size="9" fill="#22c55e">Portable .md packages</text>
+
+  <!-- Memory -->
+  <rect x="405" y="90" width="155" height="65" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="482" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#6d28d9">🗄️ Memory</text>
+  <text x="482" y="133" text-anchor="middle" font-size="9" fill="#8b5cf6">Vector Store</text>
+  <text x="482" y="147" text-anchor="middle" font-size="9" fill="#8b5cf6">Cosmos DB · AI Search</text>
+
+  <!-- Auto Function Calling bar -->
+  <rect x="55" y="170" width="505" height="35" rx="8" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="307" y="192" text-anchor="middle" font-size="11" font-weight="600" fill="#a16207">⚡ Auto Function Calling — LLM decides which skills to invoke</text>
+
+  <!-- Bottom note -->
+  <text x="350" y="250" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">Graph Workflows · DevUI · MCP + A2A + AG-UI native support · .NET + Python</text>
+</svg>

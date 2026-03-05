@@ -1,0 +1,16 @@
+task_id,task_type,input_text,npu_result,npu_time_ms,cloud_result,cloud_time_ms,npu_available,quality_match
+T01,summarize,"The Alpine Explorer Tent features double-wall construction with 3000mm waterproof rating and weighs 4.2 lbs.","Double-wall tent, 3000mm waterproof, 4.2 lbs",85,true,true,true,true
+T02,summarize,"Customer complaint: zipper broke on TrailMaster X4 after 3 uses. Wants full refund and replacement.","Zipper defect on TrailMaster X4, refund requested",92,true,true,true,true
+T03,classify,"I need to return my sleeping bag - it has a tear","return_request",28,true,true,true,true
+T04,classify,"What tents do you recommend for winter camping?","product_inquiry",25,true,true,true,true
+T05,classify,"My order ORD-5678 hasn't arrived yet","order_tracking",30,true,true,true,true
+T06,rewrite,"ur tent is gr8 but kinda heavy 4 backpaking","Your tent is great but somewhat heavy for backpacking",110,true,true,true,true
+T07,rewrite,"the product broke fast bad quality dont recommend","The product broke quickly. The quality is poor, and I do not recommend it.",125,true,true,true,false
+T08,text_to_table,"Products: Alpine Tent $349.99 10 in stock, TrailMaster Tent $249.99 5 in stock, Peak Boots $129.99 15 in stock","| Product | Price | Stock |\n|---|---|---|\n| Alpine Tent | $349.99 | 10 |",150,true,true,true,true
+T09,summarize,"OutdoorGear Q1 results: revenue up 12%, new customers +8%, returns down 3%. Top seller: Alpine Explorer Tent with 2,340 units.","Q1: +12% revenue, +8% customers, -3% returns. Top: Alpine Explorer (2340 units)",95,true,true,true,true
+T10,classify,"Estoy interesado en comprar botas de senderismo","product_inquiry",32,true,true,true,true
+T11,summarize,"Meeting notes from product review: decided to discontinue 3 slow-moving SKUs, launch 2 new tents in Q3, increase warranty to 3 years.","Discontinue 3 SKUs, launch 2 tents Q3, extend warranty to 3 years",100,true,true,false,false
+T12,classify,"Can I get a price match from your competitor?","pricing_inquiry",27,true,true,true,true
+T13,rewrite,"i luv this backpack its perfect 4 hiking n camping trips","I love this backpack. It is perfect for hiking and camping trips.",115,true,true,true,true
+T14,text_to_table,"Orders: ORD-001 Shipped $349.99, ORD-002 Processing $129.99, ORD-003 Delivered $89.99","| Order | Status | Total |\n|---|---|---|\n| ORD-001 | Shipped | $349.99 |",145,true,true,true,true
+T15,summarize,"The sleeping bag maintained warmth at 20°F as advertised. Zipper quality improved from last version. Weight reduced by 15%.","Warm to 20°F, improved zipper, 15% lighter",88,true,true,true,true

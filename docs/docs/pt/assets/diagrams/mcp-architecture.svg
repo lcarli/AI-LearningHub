@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" font-family="Segoe UI, Arial, sans-serif">
+  <!-- Background -->
+  <rect width="900" height="430" fill="#f8f9fa" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="36" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">MCP Architecture — Model Context Protocol</text>
+
+  <!-- ===== MCP HOST (left) ===== -->
+  <rect x="20" y="55" width="210" height="270" rx="10" fill="#e8f4fd" stroke="#4a90d9" stroke-width="2"/>
+  <text x="125" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a6eb5">🖥️ MCP Host</text>
+  <text x="125" y="93" text-anchor="middle" font-size="10" fill="#666">(Claude, Copilot, VS Code…)</text>
+
+  <!-- Client 1 -->
+  <rect x="35" y="103" width="180" height="45" rx="6" fill="#fff" stroke="#4a90d9" stroke-width="1"/>
+  <text x="125" y="122" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6eb5">MCP Client 1</text>
+  <text x="125" y="138" text-anchor="middle" font-size="9" fill="#555">maintains 1:1 connection</text>
+
+  <!-- Client 2 -->
+  <rect x="35" y="157" width="180" height="45" rx="6" fill="#fff" stroke="#4a90d9" stroke-width="1"/>
+  <text x="125" y="176" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6eb5">MCP Client 2</text>
+  <text x="125" y="192" text-anchor="middle" font-size="9" fill="#555">maintains 1:1 connection</text>
+
+  <!-- Client 3 -->
+  <rect x="35" y="211" width="180" height="45" rx="6" fill="#fff" stroke="#4a90d9" stroke-width="1"/>
+  <text x="125" y="230" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6eb5">MCP Client 3</text>
+  <text x="125" y="246" text-anchor="middle" font-size="9" fill="#555">maintains 1:1 connection</text>
+
+  <!-- LLM inside host -->
+  <rect x="35" y="268" width="180" height="45" rx="6" fill="#cfe2ff" stroke="#0d6efd" stroke-width="1"/>
+  <text x="125" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#0a3d8a">🤖 LLM (GPT-4o, etc.)</text>
+
+  <!-- ===== ARROWS (host → servers) ===== -->
+  <line x1="215" y1="125" x2="370" y2="125" stroke="#888" stroke-width="1.5" marker-end="url(#arrowBi)"/>
+  <text x="292" y="118" text-anchor="middle" font-size="9" fill="#888">JSON-RPC 2.0</text>
+  <text x="292" y="138" text-anchor="middle" font-size="9" fill="#888">stdio / SSE / HTTP</text>
+
+  <line x1="215" y1="180" x2="370" y2="180" stroke="#888" stroke-width="1.5"/>
+  <line x1="215" y1="233" x2="370" y2="233" stroke="#888" stroke-width="1.5"/>
+
+  <!-- ===== MCP SERVERS (right) ===== -->
+
+  <!-- Server 1: Products -->
+  <rect x="370" y="85" width="220" height="88" rx="10" fill="#d4edda" stroke="#28a745" stroke-width="1.5"/>
+  <text x="480" y="106" text-anchor="middle" font-size="12" font-weight="bold" fill="#155724">🔧 MCP Server 1</text>
+  <text x="480" y="121" text-anchor="middle" font-size="10" fill="#155724">Product Catalog</text>
+  <rect x="385" y="129" width="90" height="20" rx="4" fill="#fff" stroke="#28a745" stroke-width="1"/>
+  <text x="430" y="143" text-anchor="middle" font-size="9" fill="#155724">🔍 search</text>
+  <rect x="485" y="129" width="95" height="20" rx="4" fill="#fff" stroke="#28a745" stroke-width="1"/>
+  <text x="532" y="143" text-anchor="middle" font-size="9" fill="#155724">📋 details</text>
+  <text x="480" y="164" text-anchor="middle" font-size="9" fill="#666">Tools + Resources + Prompts</text>
+
+  <!-- Server 2: Orders -->
+  <rect x="370" y="183" width="220" height="70" rx="10" fill="#fff3cd" stroke="#f0ad4e" stroke-width="1.5"/>
+  <text x="480" y="204" text-anchor="middle" font-size="12" font-weight="bold" fill="#856404">🔧 MCP Server 2</text>
+  <text x="480" y="219" text-anchor="middle" font-size="10" fill="#856404">Order Management</text>
+  <rect x="385" y="227" width="90" height="20" rx="4" fill="#fff" stroke="#f0ad4e" stroke-width="1"/>
+  <text x="430" y="241" text-anchor="middle" font-size="9" fill="#856404">📦 get_order</text>
+  <rect x="485" y="227" width="95" height="20" rx="4" fill="#fff" stroke="#f0ad4e" stroke-width="1"/>
+  <text x="532" y="241" text-anchor="middle" font-size="9" fill="#856404">↩️ return</text>
+
+  <!-- Server 3: External APIs -->
+  <rect x="370" y="263" width="220" height="55" rx="10" fill="#f3d9fa" stroke="#9b59b6" stroke-width="1.5"/>
+  <text x="480" y="284" text-anchor="middle" font-size="12" font-weight="bold" fill="#6c3483">🔧 MCP Server 3</text>
+  <text x="480" y="300" text-anchor="middle" font-size="10" fill="#6c3483">External APIs (Weather, Maps…)</text>
+
+  <!-- ===== REAL DATA (far right) ===== -->
+  <rect x="620" y="85" width="260" height="233" rx="10" fill="#fff" stroke="#dee2e6" stroke-width="1.5"/>
+  <text x="750" y="108" text-anchor="middle" font-size="12" font-weight="bold" fill="#495057">💾 Real Data Sources</text>
+
+  <rect x="635" y="118" width="230" height="35" rx="6" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1"/>
+  <text x="750" y="140" text-anchor="middle" font-size="10" fill="#1a6eb5">🐘 PostgreSQL + pgvector</text>
+
+  <rect x="635" y="161" width="230" height="35" rx="6" fill="#d4edda" stroke="#28a745" stroke-width="1"/>
+  <text x="750" y="183" text-anchor="middle" font-size="10" fill="#155724">📁 Files / SharePoint</text>
+
+  <rect x="635" y="204" width="230" height="35" rx="6" fill="#fff3cd" stroke="#f0ad4e" stroke-width="1"/>
+  <text x="750" y="226" text-anchor="middle" font-size="10" fill="#856404">🌐 REST APIs / Webhooks</text>
+
+  <rect x="635" y="247" width="230" height="35" rx="6" fill="#f3d9fa" stroke="#9b59b6" stroke-width="1"/>
+  <text x="750" y="269" text-anchor="middle" font-size="10" fill="#6c3483">🐙 GitHub / Azure DevOps</text>
+
+  <!-- Arrows from servers to data -->
+  <line x1="590" y1="130" x2="630" y2="135" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="590" y1="218" x2="630" y2="218" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="590" y1="290" x2="630" y2="260" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- KEY POINT — positioned below all content with clear spacing -->
+  <rect x="20" y="375" width="860" height="30" rx="6" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1"/>
+  <text x="450" y="395" text-anchor="middle" font-size="11" fill="#1a6eb5">💡 Each MCP client maintains a 1:1 connection to one server. The host coordinates multiple clients/servers.</text>
+
+  <defs>
+    <marker id="arrowBi" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#888"/></marker>
+  </defs>
+</svg>

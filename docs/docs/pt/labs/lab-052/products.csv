@@ -1,0 +1,11 @@
+product_id,product_name,category,price,stock
+P001,Alpine Explorer Tent,Tents,349.99,10
+P002,TrailMaster X4 Tent,Tents,249.99,5
+P003,Summit Shelter 2,Tents,199.99,0
+P004,Peak Performer Boots,Footwear,129.99,15
+P005,TrailBlazer Boots,Footwear,99.99,20
+P006,Explorer Pro Backpack,Backpacks,189.99,8
+P007,DayTripper Pack,Backpacks,59.99,25
+P008,CozyNights Sleeping Bag,Sleeping Bags,89.99,12
+P009,Ultralight Sleeping Pad,Sleeping Bags,49.99,30
+P010,Summit Water Bottle,Accessories,24.99,50

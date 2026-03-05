@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 180" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="180" fill="#f8f9fa" rx="12"/>
+  <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">LLM Training Pipeline</text>
+
+  <!-- Stage 1: Pre-training -->
+  <rect x="20" y="50" width="150" height="70" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="95" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">📚 Pre-training</text>
+  <text x="95" y="90" text-anchor="middle" font-size="9" fill="#3b82f6">Trillions of tokens</text>
+  <text x="95" y="104" text-anchor="middle" font-size="9" fill="#3b82f6">Predict next token</text>
+  <text x="95" y="115" text-anchor="middle" font-size="8" fill="#64748b">→ Base Model</text>
+
+  <line x1="170" y1="85" x2="195" y2="85" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: SFT -->
+  <rect x="200" y="50" width="150" height="70" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="275" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#16a34a">💬 Fine-tuning (SFT)</text>
+  <text x="275" y="90" text-anchor="middle" font-size="9" fill="#22c55e">Conversation examples</text>
+  <text x="275" y="104" text-anchor="middle" font-size="9" fill="#22c55e">(prompt → ideal response)</text>
+  <text x="275" y="115" text-anchor="middle" font-size="8" fill="#64748b">→ Helpful Model</text>
+
+  <line x1="350" y1="85" x2="375" y2="85" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: RLHF -->
+  <rect x="380" y="50" width="150" height="70" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="455" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#a16207">👍 RLHF</text>
+  <text x="455" y="90" text-anchor="middle" font-size="9" fill="#ca8a04">Human raters compare</text>
+  <text x="455" y="104" text-anchor="middle" font-size="9" fill="#ca8a04">response pairs</text>
+  <text x="455" y="115" text-anchor="middle" font-size="8" fill="#64748b">→ Aligned Model</text>
+
+  <line x1="530" y1="85" x2="555" y2="85" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Result: Assistant -->
+  <rect x="560" y="50" width="120" height="70" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
+  <text x="620" y="75" text-anchor="middle" font-size="18">🤖</text>
+  <text x="620" y="95" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">Assistant</text>
+  <text x="620" y="112" text-anchor="middle" font-size="9" fill="#166534">ChatGPT, Copilot</text>
+
+  <!-- Bottom note -->
+  <text x="350" y="155" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">Each stage refines the model: raw text prediction → helpful conversation → aligned with human preferences</text>
+</svg>
