@@ -29,14 +29,7 @@ Este lab oferece um **mapa do panorama** para que você possa fazer escolhas inf
 
 ## O Espectro: No-Code → Pro-Code
 
-```
-No-Code ─────────────────────────────────────── Pro-Code
-   │                                                 │
-   ▼                                                 ▼
-Copilot      Copilot Studio    Foundry         Semantic Kernel
-Studio       + Custom Conn.    Agent Svc       AutoGen / LangChain
-(GUI only)   (some config)     (SDK + portal)  (full code control)
-```
+![Espectro No-Code a Pro-Code](../../assets/diagrams/nocode-procode-spectrum.svg)
 
 Não existe lado "melhor" — depende do seu caso de uso, habilidades da equipe e requisitos de governança.
 
