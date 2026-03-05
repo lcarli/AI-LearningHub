@@ -57,21 +57,7 @@ When you send a message, the LLM:
 4. Samples the next token based on that distribution
 5. Appends it to the sequence and repeats from step 2
 
-```
-Input: "The capital of France is"
-            ↓
-     [Token IDs: 464, 3361, 286, 4881, 318]
-            ↓
-     [Transformer: 96 layers × billions of params]
-            ↓
-     Probability distribution:
-       "Paris"    → 94.7%
-       "Lyon"     → 2.1%
-       "a"        → 1.3%
-       ...
-            ↓
-     Output: "Paris"
-```
+![LLM Prediction Loop](../../assets/diagrams/llm-prediction-loop.svg)
 
 The LLM doesn't "know" facts — it has learned **statistical patterns** from text. When it says "Paris," it's because "Paris" almost always follows that phrase in its training data.
 
@@ -107,10 +93,7 @@ Human raters compare pairs of responses and pick the better one. A **reward mode
 
 This is why ChatGPT feels more polished and aligned than a raw base model.
 
-```
-Base model → SFT → RLHF → "Assistant" model
-   (completes text)        (answers helpfully)
-```
+![LLM Training Pipeline](../../assets/diagrams/llm-training-pipeline.svg)
 
 ??? question "🤔 Check Your Understanding"
     What is the purpose of RLHF (Reinforcement Learning from Human Feedback) in LLM training, and why can't pre-training alone achieve the same result?
@@ -222,12 +205,7 @@ You don't need to understand the math, but knowing the key insight helps:
 
 **Self-attention** is the magic. For each token, the model computes how much "attention" to pay to every other token in the context.
 
-```
-"The bank by the river was steep"
-  ↑
-When processing "bank", the model attends strongly to "river"
-→ It understands "bank" means riverbank, not financial institution
-```
+![Self-Attention Mechanism](../../assets/diagrams/self-attention.svg)
 
 This is why LLMs understand context so well — every word is interpreted in relation to every other word.
 
