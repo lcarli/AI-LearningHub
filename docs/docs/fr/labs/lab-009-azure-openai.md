@@ -1,112 +1,107 @@
 ---
 tags: [azure, foundry, free, python, llm, azure-required]
 ---
-# Lab 009: Azure OpenAI Service Quickstart
+# Lab 009 : Démarrage rapide avec Azure OpenAI Service
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
-  <span><strong>Time:</strong> ~30 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-azure-free">Azure Free</span> — Azure free account, minimal usage</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Durée :</strong> ~30 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-azure-free">Azure Free</span> — Compte Azure gratuit, utilisation minimale</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What Azure OpenAI Service is and how it differs from OpenAI and GitHub Models
-- How to create an Azure OpenAI resource and deploy a model
-- How to call Azure OpenAI via the Python SDK and REST API
-- API key authentication vs. Microsoft Entra ID (managed identity)
-- When to use Azure OpenAI vs. GitHub Models vs. Ollama
+- Ce qu'est Azure OpenAI Service et en quoi il diffère d'OpenAI et de GitHub Models
+- Comment créer une ressource Azure OpenAI et déployer un modèle
+- Comment appeler Azure OpenAI via le SDK Python et l'API REST
+- L'authentification par clé API vs. Microsoft Entra ID (identité managée)
+- Quand utiliser Azure OpenAI vs. GitHub Models vs. Ollama
 
 ---
 
 ## Introduction
 
-**Azure OpenAI Service** provides access to OpenAI's models (GPT-4o, GPT-4o-mini, o1, and embeddings) through Azure infrastructure. This means:
+**Azure OpenAI Service** fournit l'accès aux modèles d'OpenAI (GPT-4o, GPT-4o-mini, o1 et embeddings) via l'infrastructure Azure. Cela signifie :
 
-- **Enterprise compliance**: Data stays in your Azure tenant, governed by your policies
-- **Private networking**: Deploy behind a VNet, no public internet exposure
-- **Azure integrations**: Works natively with Azure AI Search, Azure AI Foundry, Key Vault, and more
-- **SLAs**: Enterprise-grade uptime guarantees
+- **Conformité entreprise** : Les données restent dans votre tenant Azure, régies par vos politiques
+- **Réseau privé** : Déploiement derrière un VNet, sans exposition à Internet public
+- **Intégrations Azure** : Fonctionne nativement avec Azure AI Search, Azure AI Foundry, Key Vault, et plus encore
+- **SLA** : Garanties de disponibilité de niveau entreprise
 
 !!! info "Azure OpenAI vs. GitHub Models vs. OpenAI"
     | | GitHub Models | OpenAI (direct) | Azure OpenAI |
     |--|--------------|-----------------|--------------|
-    | **Cost** | Free tier | Pay-per-token | Pay-per-token |
-    | **Auth** | GitHub PAT | API key | API key or managed identity |
-    | **Data residency** | GitHub/Azure | OpenAI US | Your Azure region |
-    | **Enterprise features** | ❌ | Limited | ✅ Full |
-    | **Rate limits** | Low (dev only) | Standard | Configurable |
-    | **Best for** | Learning, dev | Consumer apps | Enterprise production |
+    | **Coût** | Niveau gratuit | Paiement par token | Paiement par token |
+    | **Authentification** | GitHub PAT | Clé API | Clé API ou identité managée |
+    | **Résidence des données** | GitHub/Azure | OpenAI US | Votre région Azure |
+    | **Fonctionnalités entreprise** | ❌ | Limitées | ✅ Complètes |
+    | **Limites de débit** | Faibles (dev uniquement) | Standard | Configurables |
+    | **Idéal pour** | Apprentissage, dev | Applications grand public | Production entreprise |
 
-For all **L200+ labs in this hub**, you can use GitHub Models (free). Azure OpenAI is the recommended path when moving to production.
-
----
-
-## Prerequisites Setup
-
-### Create an Azure Account
-
-→ [Azure Free Account](https://azure.microsoft.com/free/) — $200 credit, 12 months free services
-
-!!! warning "Free tier limitations"
-    Azure OpenAI in the free tier has very limited quota. For these exercises, a few API calls are all you need.
-
-### Request Azure OpenAI Access
-
-Azure OpenAI requires an application:
-1. Go to [aka.ms/oai/access](https://aka.ms/oai/access)
-2. Fill out the form with your use case
-3. Wait for approval (usually a few hours to 1 day)
-
-!!! tip "While waiting for approval"
-    Complete this lab's conceptual sections and use [GitHub Models](lab-013-github-models.md) for the hands-on exercises — the code is identical.
+Pour tous les **labs L200+ de ce hub**, vous pouvez utiliser GitHub Models (gratuit). Azure OpenAI est le parcours recommandé pour passer en production.
 
 ---
 
-## Step 1: Create an Azure OpenAI Resource
+## Configuration des prérequis
 
-1. In the [Azure Portal](https://portal.azure.com), search for **Azure OpenAI**
-2. Click **+ Create**
-3. Fill in:
-   - **Subscription**: your subscription
-   - **Resource group**: create new → `rg-learning-hub`
-   - **Region**: `East US 2` (best model availability)
-   - **Name**: `aoai-learning-hub-[yourname]` (must be globally unique)
-   - **Pricing tier**: Standard S0
-4. Click **Review + Create** → **Create**
+### Créer un compte Azure
 
----
+→ [Compte Azure gratuit](https://azure.microsoft.com/free/) — 200 $ de crédit, 12 mois de services gratuits
 
-## Step 2: Deploy a Model
+!!! warning "Limitations du niveau gratuit"
+    Azure OpenAI dans le niveau gratuit dispose d'un quota très limité. Pour ces exercices, quelques appels API suffisent.
 
-1. Open your Azure OpenAI resource
-2. Click **"Go to Azure OpenAI Studio"** → [oai.azure.com](https://oai.azure.com)
-3. Click **Deployments** → **+ Create new deployment**
-4. Configure:
-   - **Model**: `gpt-4o-mini`
-   - **Deployment name**: `gpt-4o-mini` (same as model name, easier to remember)
-   - **Tokens per minute**: 10K (enough for labs)
-5. Click **Deploy**
+### Demander l'accès à Azure OpenAI
 
-Also deploy an embedding model:
-- **Model**: `text-embedding-3-small`
-- **Deployment name**: `text-embedding-3-small`
+Azure OpenAI nécessite une demande :
+1. Rendez-vous sur [aka.ms/oai/access](https://aka.ms/oai/access)
+2. Remplissez le formulaire avec votre cas d'utilisation
+3. Attendez l'approbation (généralement quelques heures à 1 jour)
+
+!!! tip "En attendant l'approbation"
+    Complétez les sections conceptuelles de ce lab et utilisez [GitHub Models](lab-013-github-models.md) pour les exercices pratiques — le code est identique.
 
 ---
 
-## Step 3: Get Your Endpoint and Keys
+## Étape 1 : Créer une ressource Azure OpenAI
 
-From your Azure OpenAI resource:
-1. Click **Keys and Endpoint** in the left menu
-2. Copy **KEY 1** and the **Endpoint** URL
+1. Dans le [Portail Azure](https://portal.azure.com), recherchez **Azure OpenAI**
+2. Cliquez sur **+ Créer**
+3. Remplissez :
+   - **Abonnement** : votre abonnement
+   - **Groupe de ressources** : créer nouveau → `rg-learning-hub`
+   - **Région** : `East US 2` (meilleure disponibilité des modèles)
+   - **Nom** : `aoai-learning-hub-[votrenom]` (doit être unique à l'échelle mondiale)
+   - **Niveau tarifaire** : Standard S0
+4. Cliquez sur **Vérifier + Créer** → **Créer**
 
-Store them as environment variables:
+---
+
+## Étape 2 : Déployer un modèle
+
+1. Ouvrez votre ressource Azure OpenAI
+2. Cliquez sur **"Accéder à Azure OpenAI Studio"** → [oai.azure.com](https://oai.azure.com)
+3. Cliquez sur **Déploiements** → **+ Créer un nouveau déploiement**
+4. Configurez :
+   - **Modèle** : `gpt-4o-mini`
+   - **Nom du déploiement** : `gpt-4o-mini` (même nom que le modèle, plus facile à retenir)
+   - **Tokens par minute** : 10K (suffisant pour les labs)
+5. Cliquez sur **Déployer**
+
+Déployez également un modèle d'embedding :
+- **Modèle** : `text-embedding-3-small`
+- **Nom du déploiement** : `text-embedding-3-small`
+
+---
+
+## Étape 3 : Obtenir votre point de terminaison et vos clés
+
+Depuis votre ressource Azure OpenAI :
+1. Cliquez sur **Clés et point de terminaison** dans le menu de gauche
+2. Copiez la **CLÉ 1** et l'URL du **Point de terminaison**
+
+Stockez-les comme variables d'environnement :
 
 === "Windows (PowerShell)"
     ```powershell
@@ -122,12 +117,12 @@ Store them as environment variables:
     export AZURE_OPENAI_DEPLOYMENT="gpt-4o-mini"
     ```
 
-!!! danger "Never commit API keys"
-    Use environment variables, Azure Key Vault, or `.env` files (add `.env` to `.gitignore`). Never hardcode API keys in source code.
+!!! danger "Ne commitez jamais de clés API"
+    Utilisez des variables d'environnement, Azure Key Vault ou des fichiers `.env` (ajoutez `.env` à `.gitignore`). Ne codez jamais de clés API en dur dans le code source.
 
 ---
 
-## Step 4: Your First Chat Completion
+## Étape 4 : Votre première complétion de chat
 
 ```bash
 pip install openai
@@ -158,12 +153,12 @@ print(response.choices[0].message.content)
 print(f"\nTokens used: {response.usage.total_tokens}")
 ```
 
-!!! tip "Same API, different client"
-    The code is identical to OpenAI — just use `AzureOpenAI` instead of `OpenAI`, add `azure_endpoint` and `api_version`. That's it.
+!!! tip "Même API, client différent"
+    Le code est identique à OpenAI — il suffit d'utiliser `AzureOpenAI` au lieu de `OpenAI`, d'ajouter `azure_endpoint` et `api_version`. C'est tout.
 
 ---
 
-## Step 5: Embeddings with Azure OpenAI
+## Étape 5 : Embeddings avec Azure OpenAI
 
 ```python
 import os
@@ -193,9 +188,9 @@ for i, embedding in enumerate(response.data):
 
 ---
 
-## Step 6: Switch Between Backends with One Variable
+## Étape 6 : Basculer entre les backends avec une seule variable
 
-This pattern lets you write code once and run it against GitHub Models (free) in development and Azure OpenAI in production:
+Ce pattern vous permet d'écrire le code une seule fois et de l'exécuter avec GitHub Models (gratuit) en développement et Azure OpenAI en production :
 
 ```python
 import os
@@ -229,7 +224,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-Usage:
+Utilisation :
 ```bash
 # Development (free):
 LLM_BACKEND=github python app.py
@@ -240,9 +235,9 @@ LLM_BACKEND=azure python app.py
 
 ---
 
-## Step 7: Managed Identity (Production Best Practice)
+## Étape 7 : Identité managée (bonne pratique de production)
 
-In production, **never use API keys**. Use Managed Identity instead:
+En production, **n'utilisez jamais de clés API**. Utilisez plutôt l'identité managée :
 
 ```python
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
@@ -266,51 +261,51 @@ client = AzureOpenAI(
 pip install azure-identity
 ```
 
-Assign your app the **Cognitive Services OpenAI User** role in Azure RBAC.
+Attribuez à votre application le rôle **Cognitive Services OpenAI User** dans Azure RBAC.
 
 ---
 
-## Azure OpenAI in Azure AI Foundry
+## Azure OpenAI dans Azure AI Foundry
 
-Azure AI Foundry provides a unified portal for managing Azure OpenAI and other AI services:
+Azure AI Foundry fournit un portail unifié pour gérer Azure OpenAI et d'autres services d'IA :
 
-1. Go to [ai.azure.com](https://ai.azure.com)
-2. Create a **Hub** (once per organization) and a **Project** (once per application)
-3. Deploy models through the **Model Catalog**
-4. Use the **Playground** to test interactively
-5. Access **Evaluation** and **Monitoring** tools
+1. Rendez-vous sur [ai.azure.com](https://ai.azure.com)
+2. Créez un **Hub** (une fois par organisation) et un **Projet** (une fois par application)
+3. Déployez des modèles via le **Catalogue de modèles**
+4. Utilisez le **Playground** pour tester de manière interactive
+5. Accédez aux outils d'**Évaluation** et de **Surveillance**
 
-→ See [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md) for a full Foundry walkthrough.
-
----
-
-## 🧠 Knowledge Check
-
-??? question "1. What is the key code difference between using OpenAI directly and Azure OpenAI?"
-    Use `AzureOpenAI` instead of `OpenAI`, and provide `azure_endpoint` and `api_version`. The `model` parameter takes your **deployment name**, not the model name. Everything else (messages, temperature, etc.) is identical.
-
-??? question "2. Why should you use Managed Identity instead of API keys in production?"
-    API keys are static secrets that can be leaked, stolen, or accidentally committed to source control. Managed Identity uses Azure's built-in identity system — no secret is ever stored in code or config files. Access is controlled through Azure RBAC, is automatically rotated, and leaves audit trails.
-
-??? question "3. When would you choose GitHub Models over Azure OpenAI?"
-    **GitHub Models** is ideal for development, learning, and prototyping — it's free with just a GitHub account, no Azure subscription needed, no deployment to configure. Choose **Azure OpenAI** when you need: data residency requirements, private networking, enterprise SLAs, integration with Azure AI Search or Foundry, or production-grade reliability.
+→ Consultez le [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md) pour un guide complet de Foundry.
 
 ---
 
-## Summary
+## 🧠 Vérification des connaissances
 
-| Concept | Key takeaway |
-|---------|-------------|
-| **AzureOpenAI client** | Same API as OpenAI, just different constructor parameters |
-| **Deployment name** | You deploy a model with a name — use that name, not the model name |
-| **API version** | Required parameter — check the latest at aka.ms/oai/docs |
-| **Managed identity** | Use in production — no static secrets |
-| **Foundry** | The portal that wraps Azure OpenAI with eval, monitoring, and agent tools |
+??? question "1. Quelle est la différence de code principale entre l'utilisation directe d'OpenAI et Azure OpenAI ?"
+    Utilisez `AzureOpenAI` au lieu de `OpenAI`, et fournissez `azure_endpoint` et `api_version`. Le paramètre `model` prend le **nom de votre déploiement**, pas le nom du modèle. Tout le reste (messages, temperature, etc.) est identique.
+
+??? question "2. Pourquoi devriez-vous utiliser l'identité managée plutôt que les clés API en production ?"
+    Les clés API sont des secrets statiques qui peuvent être divulgués, volés ou accidentellement commitées dans le contrôle de source. L'identité managée utilise le système d'identité intégré d'Azure — aucun secret n'est jamais stocké dans le code ou les fichiers de configuration. L'accès est contrôlé via Azure RBAC, est automatiquement renouvelé et laisse des traces d'audit.
+
+??? question "3. Quand choisiriez-vous GitHub Models plutôt qu'Azure OpenAI ?"
+    **GitHub Models** est idéal pour le développement, l'apprentissage et le prototypage — c'est gratuit avec juste un compte GitHub, sans abonnement Azure nécessaire, sans déploiement à configurer. Choisissez **Azure OpenAI** quand vous avez besoin de : exigences de résidence des données, réseau privé, SLA entreprise, intégration avec Azure AI Search ou Foundry, ou fiabilité de niveau production.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **Build a full agent with Foundry:** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)
-- **Add RAG to your Azure OpenAI app:** → [Lab 031 — pgvector Semantic Search on Azure](lab-031-pgvector-semantic-search.md)
-- **Free alternative for labs:** → [Lab 013 — GitHub Models](lab-013-github-models.md)
+| Concept | Point clé |
+|---------|-----------|
+| **Client AzureOpenAI** | Même API qu'OpenAI, juste des paramètres de constructeur différents |
+| **Nom du déploiement** | Vous déployez un modèle avec un nom — utilisez ce nom, pas le nom du modèle |
+| **Version de l'API** | Paramètre obligatoire — vérifiez la dernière version sur aka.ms/oai/docs |
+| **Identité managée** | À utiliser en production — pas de secrets statiques |
+| **Foundry** | Le portail qui englobe Azure OpenAI avec des outils d'évaluation, de surveillance et d'agents |
+
+---
+
+## Prochaines étapes
+
+- **Construire un agent complet avec Foundry :** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)
+- **Ajouter le RAG à votre application Azure OpenAI :** → [Lab 031 — Recherche sémantique pgvector sur Azure](lab-031-pgvector-semantic-search.md)
+- **Alternative gratuite pour les labs :** → [Lab 013 — GitHub Models](lab-013-github-models.md)

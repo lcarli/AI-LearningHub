@@ -4,45 +4,40 @@ tags: [foundry, mcp, azure, azure-required]
 # Lab 030: Microsoft Foundry Agent Service + MCP
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">Foundry + MCP</a></span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> Azure subscription — gpt-4o-mini token costs</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/foundry/">Foundry + MCP</a></span>
+  <span><strong>Tempo:</strong> ~90 min</span>
+  <span><strong>💰 Custo:</strong> Assinatura Azure — custos de token gpt-4o-mini</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+!!! warning "Assinatura Azure necessária"
+    Este lab requer uma assinatura Azure. → [Guia de pré-requisitos](../prerequisites.md)
 
+## O que Você Vai Aprender
 
-
-!!! warning "Azure subscription required"
-    This lab requires an Azure subscription. → [Prerequisites guide](../prerequisites.md)
-
-## What You'll Learn
-
-- Deploy **Azure AI Foundry** Hub + Project with one click
-- Deploy a **gpt-4o-mini** model endpoint
-- Create an **Agent** in the Foundry Agent Service
-- Connect your MCP server as a tool for the agent
-- Run an end-to-end agent conversation with tool calls
+- Implantar o **Azure AI Foundry** Hub + Projeto com um clique
+- Implantar um endpoint de modelo **gpt-4o-mini**
+- Criar um **Agente** no Foundry Agent Service
+- Conectar seu servidor MCP como uma ferramenta para o agente
+- Executar uma conversa completa do agente com chamadas de ferramentas
 
 ---
 
-## Deploy Infrastructure
+## Implantar Infraestrutura
 
-### Option A — Deploy to Azure (one click)
+### Opção A — Implantar no Azure (um clique)
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flcarli%2FAI-LearningHub%2Fmain%2Finfra%2Flab-030-foundry%2Fazuredeploy.json)
 
-This deploys:
+Isto implanta:
 - Azure AI Foundry Hub
 - AI Project (OutdoorGear Agent Project)
-- Storage Account + Key Vault (required by Foundry)
+- Storage Account + Key Vault (necessários pelo Foundry)
 
-!!! tip "Recommended location"
-    Use **East US** or **Sweden Central** for best model availability.
+!!! tip "Localização recomendada"
+    Use **East US** ou **Sweden Central** para melhor disponibilidade de modelos.
 
-### Option B — Azure CLI (Bicep)
+### Opção B — Azure CLI (Bicep)
 
 ```bash
 git clone https://github.com/lcarli/AI-LearningHub.git && cd AI-LearningHub
@@ -60,24 +55,24 @@ az deployment group create \
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Deploy gpt-4o-mini in Foundry
+### Passo 1: Implantar gpt-4o-mini no Foundry
 
-1. Go to [ai.azure.com](https://ai.azure.com) → your project
+1. Acesse [ai.azure.com](https://ai.azure.com) → seu projeto
 2. **Model catalog** → search `gpt-4o-mini` → **Deploy**
 3. Name: `gpt-4o-mini` — keep defaults
-4. Copy your **endpoint URL** and **API key** from the deployment page
+4. Copie a **URL do endpoint** e a **chave de API** da página de implantação
 
-### Step 2: Start your MCP server
+### Passo 2: Iniciar seu servidor MCP
 
-Use the server from [Lab 020](lab-020-mcp-server-python.md) or [Lab 028](lab-028-deploy-mcp-azure.md). For local testing:
+Use o servidor do [Lab 020](lab-020-mcp-server-python.md) ou [Lab 028](lab-028-deploy-mcp-azure.md). Para testes locais:
 
 ```bash
 python mcp_product_server.py  # starts on stdio or SSE
 ```
 
-### Step 3: Create an agent with Foundry SDK
+### Passo 3: Criar um agente com o SDK do Foundry
 
 ```bash
 pip install azure-ai-projects azure-identity
@@ -110,7 +105,7 @@ agent = client.agents.create_agent(
 print(f"Created agent: {agent.id}")
 ```
 
-### Step 4: Run a conversation
+### Passo 4: Executar uma conversa
 
 ```python
 # Create a thread (conversation session)
@@ -140,7 +135,7 @@ for msg in messages.data:
                 print(f"\n🤖 {content.text.value}")
 ```
 
-### Step 5: Add MCP tools to the agent
+### Passo 5: Adicionar ferramentas MCP ao agente
 
 ```python
 # For Cloud MCP server (deployed via Lab 028):
@@ -179,7 +174,7 @@ for msg in messages2.data:
 
 ---
 
-## Cleanup
+## Limpeza
 
 ```bash
 az group delete --name rg-ai-labs-foundry --yes --no-wait
@@ -187,7 +182,7 @@ az group delete --name rg-ai-labs-foundry --yes --no-wait
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Add pgvector for RAG:** → [Lab 031 — pgvector on Azure](lab-031-pgvector-semantic-search.md)
+- **Adicionar pgvector para RAG:** → [Lab 031 — pgvector on Azure](lab-031-pgvector-semantic-search.md)
 - **Row Level Security:** → [Lab 032 — RLS for Agents](lab-032-row-level-security.md)

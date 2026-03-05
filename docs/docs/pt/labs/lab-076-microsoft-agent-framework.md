@@ -1,65 +1,60 @@
 ---
 tags: [agent-framework, semantic-kernel, autogen, migration, python, dotnet]
 ---
-# Lab 076: Microsoft Agent Framework — From SK to MAF
+# Lab 076: Microsoft Agent Framework — De SK para MAF
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~75 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock migration data</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> Todas as trilhas</span>
+  <span><strong>Tempo:</strong> ~75 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados simulados de migração</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- Como **Semantic Kernel** e **AutoGen** são unificados no **Microsoft Agent Framework (MAF)**
+- O que são **Agent Skills** (pacotes portáteis de habilidades em `.md`) e como eles permitem reutilização
+- Como **Graph Workflows** (DAG com checkpointing) substituem pipelines lineares
+- Analisar uma **matriz de migração** comparando 15 funcionalidades entre SK, AutoGen e MAF
+- Identificar níveis de esforço de migração e capacidades exclusivas do MAF
 
+## Introdução
 
-## What You'll Learn
+O **Microsoft Agent Framework (MAF)** unifica Semantic Kernel e AutoGen em uma única plataforma coesa para construção de agentes de IA. Lançado como **Release Candidate em fevereiro de 2026**, o MAF reúne o melhor dos dois mundos:
 
-- How **Semantic Kernel** and **AutoGen** are unified into the **Microsoft Agent Framework (MAF)**
-- What **Agent Skills** (portable `.md` skill packages) are and how they enable reuse
-- How **Graph Workflows** (DAG with checkpointing) replace linear pipelines
-- Analyze a **migration matrix** comparing 15 features across SK, AutoGen, and MAF
-- Identify migration effort levels and MAF-exclusive capabilities
+- O sistema de plugins, planejadores e conectores empresariais do **Semantic Kernel**
+- As conversas multi-agente, execução de código e padrões de chat em grupo do **AutoGen**
 
-## Introduction
-
-The **Microsoft Agent Framework (MAF)** unifies Semantic Kernel and AutoGen into a single, cohesive platform for building AI agents. Released as a **Release Candidate in February 2026**, MAF brings together the best of both worlds:
-
-- **Semantic Kernel's** plugin system, planners, and enterprise connectors
-- **AutoGen's** multi-agent conversations, code execution, and group chat patterns
-
-### Installation
+### Instalação
 
 ```bash
 pip install agent-framework
 ```
 
-### Key Concepts
+### Conceitos-Chave
 
-| Concept | Description |
-|---------|------------|
-| **Agent Skills** | Portable `.md` skill packages that define agent capabilities, inputs, outputs, and dependencies — shareable across teams and projects |
-| **Graph Workflows** | DAG-based orchestration with checkpointing, retry, and branching — replacing linear pipelines |
-| **DevUI** | Built-in development UI for debugging agent conversations, inspecting skill execution, and visualizing workflows |
-| **Unified API** | Single API surface that replaces SK's `Kernel` and AutoGen's `AssistantAgent` with a common `Agent` class |
+| Conceito | Descrição |
+|----------|-----------|
+| **Agent Skills** | Pacotes portáteis de habilidades em `.md` que definem capacidades do agente, entradas, saídas e dependências — compartilháveis entre equipes e projetos |
+| **Graph Workflows** | Orquestração baseada em DAG com checkpointing, retry e ramificação — substituindo pipelines lineares |
+| **DevUI** | Interface de desenvolvimento integrada para depuração de conversas de agentes, inspeção de execução de habilidades e visualização de workflows |
+| **API Unificada** | Superfície de API única que substitui o `Kernel` do SK e o `AssistantAgent` do AutoGen por uma classe `Agent` comum |
 
-### The Scenario
+### O Cenário
 
-You are a **Platform Engineer** at a company that has built agents using both Semantic Kernel and AutoGen. Leadership has decided to migrate to MAF. You have a **migration matrix** (`migration_matrix.csv`) that maps 15 features across the three frameworks — tracking availability, migration effort, and MAF-exclusive features.
+Você é um **Engenheiro de Plataforma** em uma empresa que construiu agentes usando tanto Semantic Kernel quanto AutoGen. A liderança decidiu migrar para o MAF. Você tem uma **matriz de migração** (`migration_matrix.csv`) que mapeia 15 funcionalidades nos três frameworks — rastreando disponibilidade, esforço de migração e funcionalidades exclusivas do MAF.
 
-Your job: analyze the matrix, identify quick wins, flag challenges, and build a migration plan.
+Seu trabalho: analisar a matriz, identificar ganhos rápidos, sinalizar desafios e construir um plano de migração.
 
-!!! info "Mock Data"
-    This lab uses a mock migration matrix CSV. The data reflects the actual feature mapping between Semantic Kernel, AutoGen, and MAF as documented in the migration guides.
+!!! info "Dados Simulados"
+    Este laboratório usa um CSV de matriz de migração simulado. Os dados refletem o mapeamento real de funcionalidades entre Semantic Kernel, AutoGen e MAF conforme documentado nos guias de migração.
 
-## Prerequisites
+## Pré-requisitos
 
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run the analysis scripts |
-| `pandas` library | Data manipulation |
+| Python 3.10+ | Executar os scripts de análise |
+| Biblioteca `pandas` | Manipulação de dados |
 
 ```bash
 pip install pandas
@@ -67,40 +62,40 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-076/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o laboratório"
+    Salve todos os arquivos em uma pasta `lab-076/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_migration.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/broken_migration.py) |
-| `migration_matrix.csv` | 15-feature comparison: SK vs AutoGen vs MAF | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/migration_matrix.csv) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_migration.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/broken_migration.py) |
+| `migration_matrix.csv` | Comparação de 15 funcionalidades: SK vs AutoGen vs MAF | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/migration_matrix.csv) |
 
 ---
 
-## Step 1: Understand the Migration Matrix
+## Etapa 1: Entenda a Matriz de Migração
 
-The migration matrix maps 15 features across three frameworks. Each row represents a capability:
+A matriz de migração mapeia 15 funcionalidades em três frameworks. Cada linha representa uma capacidade:
 
-| Column | Description |
+| Coluna | Descrição |
 |--------|-----------|
-| **feature** | The capability being compared (e.g., `plugins`, `multi_agent_chat`) |
-| **sk_support** | Whether Semantic Kernel supports this feature: `yes`, `partial`, or `no` |
-| **autogen_support** | Whether AutoGen supports this feature: `yes`, `partial`, or `no` |
-| **maf_support** | Whether MAF supports this feature: `yes`, `partial`, or `no` |
-| **migration_effort** | Effort to migrate from SK/AutoGen to MAF: `low`, `medium`, or `high` |
-| **category** | Feature category: `core`, `orchestration`, `tooling`, or `integration` |
+| **feature** | A capacidade sendo comparada (ex.: `plugins`, `multi_agent_chat`) |
+| **sk_support** | Se Semantic Kernel suporta esta funcionalidade: `yes`, `partial` ou `no` |
+| **autogen_support** | Se AutoGen suporta esta funcionalidade: `yes`, `partial` ou `no` |
+| **maf_support** | Se MAF suporta esta funcionalidade: `yes`, `partial` ou `no` |
+| **migration_effort** | Esforço para migrar de SK/AutoGen para MAF: `low`, `medium` ou `high` |
+| **category** | Categoria da funcionalidade: `core`, `orchestration`, `tooling` ou `integration` |
 
 ---
 
-## Step 2: Load and Explore the Matrix
+## Etapa 2: Carregue e Explore a Matriz
 
 ```python
 import pandas as pd
@@ -114,7 +109,7 @@ print(f"\nFull matrix:")
 print(df[["feature", "sk_support", "autogen_support", "maf_support", "migration_effort"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total features: 15
@@ -124,9 +119,9 @@ Migration effort: {'low': 7, 'medium': 5, 'high': 3}
 
 ---
 
-## Step 3: Identify Quick Wins (Low Migration Effort)
+## Etapa 3: Identifique Ganhos Rápidos (Baixo Esforço de Migração)
 
-Features with `low` migration effort are your quick wins — start here:
+Funcionalidades com esforço de migração `low` são seus ganhos rápidos — comece por aqui:
 
 ```python
 low_effort = df[df["migration_effort"] == "low"]
@@ -135,14 +130,14 @@ for _, row in low_effort.iterrows():
     print(f"  {row['feature']:>25s}  SK={row['sk_support']:<8s} AutoGen={row['autogen_support']:<8s} MAF={row['maf_support']}")
 ```
 
-!!! tip "Migration Strategy"
-    **Start with low-effort features** to build team confidence and demonstrate MAF's unified API. These typically have direct equivalents in SK or AutoGen, making the migration straightforward.
+!!! tip "Estratégia de Migração"
+    **Comece pelas funcionalidades de baixo esforço** para construir a confiança da equipe e demonstrar a API unificada do MAF. Estas geralmente possuem equivalentes diretos no SK ou AutoGen, tornando a migração simples.
 
 ---
 
-## Step 4: Find MAF-Exclusive Features
+## Etapa 4: Encontre Funcionalidades Exclusivas do MAF
 
-Which features exist in MAF but not in Semantic Kernel?
+Quais funcionalidades existem no MAF mas não no Semantic Kernel?
 
 ```python
 maf_only_vs_sk = df[(df["maf_support"] == "yes") & (df["sk_support"] == "no")]
@@ -161,9 +156,9 @@ for _, row in maf_exclusive.iterrows():
 
 ---
 
-## Step 5: Analyze High-Effort Migrations
+## Etapa 5: Analise as Migrações de Alto Esforço
 
-These features need the most planning:
+Estas funcionalidades precisam de mais planejamento:
 
 ```python
 high_effort = df[df["migration_effort"] == "high"]
@@ -175,12 +170,12 @@ for _, row in high_effort.iterrows():
     print()
 ```
 
-!!! warning "Migration Risk"
-    High-effort features often involve **architectural changes** — e.g., replacing custom orchestration with Graph Workflows or converting proprietary plugins to Agent Skills. Plan 2–4 weeks per high-effort feature.
+!!! warning "Risco de Migração"
+    Funcionalidades de alto esforço frequentemente envolvem **mudanças arquiteturais** — por exemplo, substituir orquestração customizada por Graph Workflows ou converter plugins proprietários em Agent Skills. Planeje de 2 a 4 semanas por funcionalidade de alto esforço.
 
 ---
 
-## Step 6: Build the Migration Plan
+## Etapa 6: Construa o Plano de Migração
 
 ```python
 report = f"""# 📋 MAF Migration Plan
@@ -222,100 +217,100 @@ print("💾 Saved to lab-076/migration_plan.md")
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-076/broken_migration.py` contains **3 bugs** that produce incorrect migration analysis. Can you find and fix them all?
+O arquivo `lab-076/broken_migration.py` contém **3 bugs** que produzem análise de migração incorreta. Você consegue encontrar e corrigir todos?
 
-Run the self-tests to see which ones fail:
+Execute os autotestes para ver quais falham:
 
 ```bash
 python lab-076/broken_migration.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Você deverá ver **3 testes falhando**. Cada teste corresponde a um bug:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Low-effort feature count | Should filter `migration_effort == "low"`, not `"high"` |
-| Test 2 | MAF-only vs SK count | Should check `sk_support == "no"`, not `"yes"` |
-| Test 3 | Total feature count | Should use `len(df)`, not `len(df.columns)` |
+| Teste | O que verifica | Dica |
+|-------|---------------|------|
+| Teste 1 | Contagem de funcionalidades de baixo esforço | Deve filtrar `migration_effort == "low"`, não `"high"` |
+| Teste 2 | Contagem de MAF-only vs SK | Deve verificar `sk_support == "no"`, não `"yes"` |
+| Teste 3 | Contagem total de funcionalidades | Deve usar `len(df)`, não `len(df.columns)` |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
-
----
-
-
-## 🧠 Knowledge Check
-
-??? question "**Q1 (Multiple Choice):** What is the Microsoft Agent Framework (MAF)?"
-
-    - A) A new version of AutoGen with a different name
-    - B) A unified framework combining Semantic Kernel and AutoGen into a single platform
-    - C) A cloud-only service for running agents on Azure
-    - D) A replacement for LangChain
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) A unified framework combining Semantic Kernel and AutoGen into a single platform**
-
-        MAF merges the strengths of both frameworks: SK's enterprise plugin system and planners with AutoGen's multi-agent conversations and code execution. It provides a single `Agent` class, portable Agent Skills, and DAG-based Graph Workflows.
-
-??? question "**Q2 (Multiple Choice):** What are Agent Skills in MAF?"
-
-    - A) Python functions decorated with `@skill`
-    - B) Portable `.md` skill packages that define capabilities, inputs, outputs, and dependencies
-    - C) Pre-trained model weights for specific tasks
-    - D) Azure Functions that agents can call
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Portable `.md` skill packages that define capabilities, inputs, outputs, and dependencies**
-
-        Agent Skills are markdown-based packages that describe what an agent can do, what inputs it needs, what outputs it produces, and what dependencies are required. They're shareable across teams and projects, enabling a marketplace of reusable agent capabilities.
-
-??? question "**Q3 (Run the Lab):** How many features have a 'low' migration effort?"
-
-    Run the Step 3 analysis on [📥 `migration_matrix.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/migration_matrix.csv) and count the low-effort features.
-
-    ??? success "✅ Reveal Answer"
-        **7 features**
-
-        Of the 15 features in the migration matrix, **7 have `migration_effort = "low"`**. These are the quick wins for Phase 1 of the migration — typically features with direct equivalents between SK/AutoGen and MAF.
-
-??? question "**Q4 (Run the Lab):** How many features are available in MAF but NOT in Semantic Kernel?"
-
-    Run the Step 4 analysis to find features where `maf_support = "yes"` and `sk_support = "no"`.
-
-    ??? success "✅ Reveal Answer"
-        **The count of features where MAF has `yes` support but SK has `no` support.**
-
-        These represent capabilities that teams gain by migrating from SK to MAF — such as multi-agent chat patterns, code execution sandboxes, and other features that originated in AutoGen and are now available in the unified framework.
-
-??? question "**Q5 (Run the Lab):** How many total features are tracked in the migration matrix?"
-
-    Load the CSV and check the total row count.
-
-    ??? success "✅ Reveal Answer"
-        **15 features**
-
-        The migration matrix tracks **15 features** across 4 categories: core (5), orchestration (4), tooling (3), and integration (3). Each feature is evaluated for support in SK, AutoGen, and MAF, along with migration effort.
+Corrija todos os 3 bugs e execute novamente. Quando você ver `All passed!`, está pronto!
 
 ---
 
-## Summary
 
-| Topic | What You Learned |
-|-------|-----------------|
-| Microsoft Agent Framework | Unified platform merging Semantic Kernel and AutoGen (RC Feb 2026) |
-| Agent Skills | Portable `.md` skill packages for reusable agent capabilities |
-| Graph Workflows | DAG-based orchestration with checkpointing, replacing linear pipelines |
-| Migration Matrix | 15 features compared across SK, AutoGen, and MAF |
-| Migration Strategy | Start with low-effort (7 features), plan for high-effort (3 features) |
-| DevUI | Built-in development UI for debugging and visualizing agent workflows |
+## 🧠 Verificação de Conhecimento
+
+??? question "**Q1 (Múltipla Escolha):** O que é o Microsoft Agent Framework (MAF)?"
+
+    - A) Uma nova versão do AutoGen com um nome diferente
+    - B) Um framework unificado que combina Semantic Kernel e AutoGen em uma única plataforma
+    - C) Um serviço exclusivo de nuvem para executar agentes no Azure
+    - D) Um substituto para o LangChain
+
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Um framework unificado que combina Semantic Kernel e AutoGen em uma única plataforma**
+
+        O MAF une os pontos fortes de ambos os frameworks: o sistema de plugins empresariais e planejadores do SK com as conversas multi-agente e execução de código do AutoGen. Ele fornece uma única classe `Agent`, Agent Skills portáteis e Graph Workflows baseados em DAG.
+
+??? question "**Q2 (Múltipla Escolha):** O que são Agent Skills no MAF?"
+
+    - A) Funções Python decoradas com `@skill`
+    - B) Pacotes portáteis de habilidades em `.md` que definem capacidades, entradas, saídas e dependências
+    - C) Pesos de modelo pré-treinados para tarefas específicas
+    - D) Azure Functions que os agentes podem chamar
+
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Pacotes portáteis de habilidades em `.md` que definem capacidades, entradas, saídas e dependências**
+
+        Agent Skills são pacotes baseados em markdown que descrevem o que um agente pode fazer, quais entradas ele precisa, quais saídas ele produz e quais dependências são necessárias. Eles são compartilháveis entre equipes e projetos, permitindo um marketplace de capacidades reutilizáveis de agentes.
+
+??? question "**Q3 (Execute o Laboratório):** Quantas funcionalidades têm esforço de migração 'low'?"
+
+    Execute a análise da Etapa 3 no [📥 `migration_matrix.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/migration_matrix.csv) e conte as funcionalidades de baixo esforço.
+
+    ??? success "✅ Revelar Resposta"
+        **7 funcionalidades**
+
+        Das 15 funcionalidades na matriz de migração, **7 têm `migration_effort = "low"`**. Estes são os ganhos rápidos para a Fase 1 da migração — geralmente funcionalidades com equivalentes diretos entre SK/AutoGen e MAF.
+
+??? question "**Q4 (Execute o Laboratório):** Quantas funcionalidades estão disponíveis no MAF mas NÃO no Semantic Kernel?"
+
+    Execute a análise da Etapa 4 para encontrar funcionalidades onde `maf_support = "yes"` e `sk_support = "no"`.
+
+    ??? success "✅ Revelar Resposta"
+        **A contagem de funcionalidades onde MAF tem suporte `yes` mas SK tem suporte `no`.**
+
+        Estas representam capacidades que as equipes ganham ao migrar do SK para o MAF — como padrões de chat multi-agente, sandboxes de execução de código e outras funcionalidades que originaram no AutoGen e agora estão disponíveis no framework unificado.
+
+??? question "**Q5 (Execute o Laboratório):** Quantas funcionalidades no total são rastreadas na matriz de migração?"
+
+    Carregue o CSV e verifique a contagem total de linhas.
+
+    ??? success "✅ Revelar Resposta"
+        **15 funcionalidades**
+
+        A matriz de migração rastreia **15 funcionalidades** em 4 categorias: core (5), orchestration (4), tooling (3) e integration (3). Cada funcionalidade é avaliada quanto ao suporte em SK, AutoGen e MAF, junto com o esforço de migração.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agent with Semantic Kernel (understand what you're migrating from)
-- **[Lab 036](lab-036-autogen-basics.md)** — AutoGen Basics (understand AutoGen patterns before MAF)
-- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (deploy MAF agents to production)
-- **[Lab 073](lab-073-swe-bench.md)** — SWE-Bench (evaluate MAF agents on real-world coding tasks)
+| Tópico | O que Você Aprendeu |
+|--------|---------------------|
+| Microsoft Agent Framework | Plataforma unificada que une Semantic Kernel e AutoGen (RC Fev 2026) |
+| Agent Skills | Pacotes portáteis de habilidades em `.md` para capacidades reutilizáveis de agentes |
+| Graph Workflows | Orquestração baseada em DAG com checkpointing, substituindo pipelines lineares |
+| Matriz de Migração | 15 funcionalidades comparadas entre SK, AutoGen e MAF |
+| Estratégia de Migração | Comece pelo baixo esforço (7 funcionalidades), planeje para alto esforço (3 funcionalidades) |
+| DevUI | Interface de desenvolvimento integrada para depuração e visualização de workflows de agentes |
+
+---
+
+## Próximos Passos
+
+- **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agente com Semantic Kernel (entenda de onde você está migrando)
+- **[Lab 036](lab-036-autogen-basics.md)** — Fundamentos do AutoGen (entenda os padrões do AutoGen antes do MAF)
+- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (implante agentes MAF em produção)
+- **[Lab 073](lab-073-swe-bench.md)** — SWE-Bench (avalie agentes MAF em tarefas de codificação do mundo real)

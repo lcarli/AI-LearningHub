@@ -1,46 +1,41 @@
-# Lab 012: What is MCP? Anatomy of the Protocol
+# Lab 012: O que é MCP? Anatomia do Protocolo
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/mcp/">🔌 MCP</a></span>
-  <span><strong>Time:</strong> ~20 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — No account needed</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/mcp/">🔌 MCP</a></span>
+  <span><strong>Tempo:</strong> ~20 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Nenhuma conta necessária</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- What MCP is and why it was created
-- The three MCP primitives: **Tools**, **Resources**, and **Prompts**
-- MCP transport options: **stdio** vs **HTTP/SSE**
-- How to explore MCP servers with the **MCP Inspector**
-- How MCP integrates with GitHub Copilot, Foundry, Claude, and other agents
+- O que é MCP e por que foi criado
+- Os três primitivos do MCP: **Tools**, **Resources** e **Prompts**
+- Opções de transporte do MCP: **stdio** vs **HTTP/SSE**
+- Como explorar servidores MCP com o **MCP Inspector**
+- Como o MCP se integra com GitHub Copilot, Foundry, Claude e outros agentes
 
 ---
 
-## Introduction
+## Introdução
 
-### The problem MCP solves
+### O problema que o MCP resolve
 
-Before MCP, if you wanted to connect an AI agent to a database, you had to write custom integration code for every combination of agent + data source. N agents × M data sources = N×M custom integrations.
+Antes do MCP, se você quisesse conectar um agente de IA a um banco de dados, era necessário escrever código de integração personalizado para cada combinação de agente + fonte de dados. N agentes × M fontes de dados = N×M integrações personalizadas.
 
-**MCP solves this with a standard protocol:**
+**O MCP resolve isso com um protocolo padrão:**
 
-![MCP Architecture](../../assets/diagrams/mcp-architecture.svg)
+![Arquitetura MCP](../../assets/diagrams/mcp-architecture.svg)
 
-MCP was created by Anthropic in 2024 and quickly adopted by Microsoft, OpenAI, Google, and others as the industry standard.
+O MCP foi criado pela Anthropic em 2024 e rapidamente adotado pela Microsoft, OpenAI, Google e outros como o padrão da indústria.
 
 ---
 
-## The Three MCP Primitives
+## Os Três Primitivos do MCP
 
 ### 1. 🔧 Tools
 
-Functions the LLM can **call** — the most common primitive.
+Funções que o LLM pode **chamar** — o primitivo mais comum.
 
 ```json
 {
@@ -57,11 +52,11 @@ Functions the LLM can **call** — the most common primitive.
 }
 ```
 
-The LLM reads the `description` and decides when to call this tool.
+O LLM lê a `description` e decide quando chamar essa ferramenta.
 
 ### 2. 📁 Resources
 
-Data the LLM can **read** — like files, URLs, or database records.
+Dados que o LLM pode **ler** — como arquivos, URLs ou registros de banco de dados.
 
 ```json
 {
@@ -73,7 +68,7 @@ Data the LLM can **read** — like files, URLs, or database records.
 
 ### 3. 💬 Prompts
 
-Reusable **prompt templates** the LLM can use.
+**Modelos de prompt** reutilizáveis que o LLM pode usar.
 
 ```json
 {
@@ -87,83 +82,83 @@ Reusable **prompt templates** the LLM can use.
 
 ---
 
-## Transport Options
+## Opções de Transporte
 
-MCP communicates over two transports:
+O MCP se comunica por dois transportes:
 
-| Transport | Use case | How it works |
+| Transporte | Caso de uso | Como funciona |
 |-----------|----------|-------------|
-| **stdio** | Local tools, CLI agents | Parent process spawns MCP server as child; communicates via stdin/stdout |
-| **HTTP/SSE** | Remote servers, cloud agents | MCP server exposes HTTP endpoints; agent connects via Server-Sent Events |
+| **stdio** | Ferramentas locais, agentes CLI | O processo pai inicia o servidor MCP como filho; comunica-se via stdin/stdout |
+| **HTTP/SSE** | Servidores remotos, agentes na nuvem | O servidor MCP expõe endpoints HTTP; o agente conecta via Server-Sent Events |
 
-In this hub's labs, we use **HTTP/SSE** so cloud-hosted agents (like Foundry Agent Service) can reach your MCP server.
-
----
-
-## MCP Message Flow
-
-When an agent calls a tool, here's what happens:
-
-```
-1. User asks: "Find me waterproof outdoor tools"
-       │
-       ▼
-2. LLM reads available tools from MCP server
-   (tools/list response)
-       │
-       ▼
-3. LLM decides to call: search_products("waterproof outdoor tools")
-       │
-       ▼
-4. Agent sends: tools/call { name: "search_products", arguments: {...} }
-       │
-       ▼
-5. MCP Server executes the function
-   (queries database, calls API, reads file...)
-       │
-       ▼
-6. MCP Server returns result as text/JSON
-       │
-       ▼
-7. LLM incorporates result into its response
-       │
-       ▼
-8. User sees: "Here are waterproof outdoor tools: ..."
-```
+Nos labs deste hub, usamos **HTTP/SSE** para que agentes hospedados na nuvem (como Foundry Agent Service) possam acessar seu servidor MCP.
 
 ---
 
-## Using the MCP Inspector
+## Fluxo de Mensagens do MCP
 
-The **MCP Inspector** is a browser-based tool for exploring any MCP server without writing code.
+Quando um agente chama uma ferramenta, eis o que acontece:
 
-!!! tip "Try it now — no install needed"
-    Run this command (requires Node.js):
+```
+1. Usuário pergunta: "Encontre ferramentas outdoor à prova d'água"
+       │
+       ▼
+2. LLM lê as ferramentas disponíveis do servidor MCP
+   (resposta tools/list)
+       │
+       ▼
+3. LLM decide chamar: search_products("waterproof outdoor tools")
+       │
+       ▼
+4. Agente envia: tools/call { name: "search_products", arguments: {...} }
+       │
+       ▼
+5. Servidor MCP executa a função
+   (consulta banco de dados, chama API, lê arquivo...)
+       │
+       ▼
+6. Servidor MCP retorna o resultado como texto/JSON
+       │
+       ▼
+7. LLM incorpora o resultado em sua resposta
+       │
+       ▼
+8. Usuário vê: "Aqui estão as ferramentas outdoor à prova d'água: ..."
+```
+
+---
+
+## Usando o MCP Inspector
+
+O **MCP Inspector** é uma ferramenta baseada em navegador para explorar qualquer servidor MCP sem escrever código.
+
+!!! tip "Experimente agora — sem instalação necessária"
+    Execute este comando (requer Node.js):
     ```bash
     npx @modelcontextprotocol/inspector
     ```
-    Or visit [inspector.modelcontextprotocol.io](https://inspector.modelcontextprotocol.io) in your browser.
+    Ou acesse [inspector.modelcontextprotocol.io](https://inspector.modelcontextprotocol.io) no seu navegador.
 
-With the inspector you can:
+Com o inspector você pode:
 
-- Connect to any MCP server (local or remote)
-- Browse available tools, resources, and prompts
-- Call tools manually and see the JSON responses
-- Debug your own MCP servers
+- Conectar a qualquer servidor MCP (local ou remoto)
+- Navegar pelas ferramentas, recursos e prompts disponíveis
+- Chamar ferramentas manualmente e ver as respostas JSON
+- Depurar seus próprios servidores MCP
 
 ---
 
-## MCP in the Microsoft Ecosystem
+## MCP no Ecossistema Microsoft
 
-| Product | MCP support |
+| Produto | Suporte a MCP |
 |---------|------------|
-| **GitHub Copilot (VS Code)** | ✅ Connect MCP servers in `.vscode/mcp.json` |
-| **Microsoft Foundry Agent Service** | ✅ Connect MCP servers as agent tools |
-| **Semantic Kernel** | ✅ MCP plugin adapter available |
-| **Claude Desktop** | ✅ Native MCP support |
-| **Azure MCP Server** | ✅ Microsoft-hosted MCP server for Azure services |
+| **GitHub Copilot (VS Code)** | ✅ Conecte servidores MCP em `.vscode/mcp.json` |
+| **Microsoft Foundry Agent Service** | ✅ Conecte servidores MCP como ferramentas do agente |
+| **Semantic Kernel** | ✅ Adaptador de plugin MCP disponível |
+| **Claude Desktop** | ✅ Suporte nativo a MCP |
+| **Azure MCP Server** | ✅ Servidor MCP hospedado pela Microsoft para serviços Azure |
 
-### VS Code MCP configuration (`.vscode/mcp.json`)
+### Configuração MCP no VS Code (`.vscode/mcp.json`)
 
 ```json
 {
@@ -176,19 +171,19 @@ With the inspector you can:
 }
 ```
 
-Once configured, GitHub Copilot in VS Code can call your MCP server's tools from chat.
+Uma vez configurado, o GitHub Copilot no VS Code pode chamar as ferramentas do seu servidor MCP a partir do chat.
 
 ---
 
-## Summary
+## Resumo
 
-MCP is an **open standard** that lets any AI agent connect to any tool or data source via a consistent protocol. It has three primitives (Tools, Resources, Prompts) and two transports (stdio and HTTP/SSE). The MCP Inspector lets you explore servers without writing code.
+O MCP é um **padrão aberto** que permite que qualquer agente de IA se conecte a qualquer ferramenta ou fonte de dados por meio de um protocolo consistente. Ele possui três primitivos (Tools, Resources, Prompts) e dois transportes (stdio e HTTP/SSE). O MCP Inspector permite explorar servidores sem escrever código.
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-Ready to build your own MCP server?
+Pronto para construir seu próprio servidor MCP?
 
-- **Python:** → [Lab 020 — Build an MCP Server in Python](lab-020-mcp-server-python.md)
-- **C#:** → [Lab 021 — Build an MCP Server in C#](lab-021-mcp-server-csharp.md)
+- **Python:** → [Lab 020 — Construa um Servidor MCP em Python](lab-020-mcp-server-python.md)
+- **C#:** → [Lab 021 — Construa um Servidor MCP em C#](lab-021-mcp-server-csharp.md)

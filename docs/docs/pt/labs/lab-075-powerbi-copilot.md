@@ -1,60 +1,55 @@
 ---
 tags: [power-bi, copilot, fabric, dax, analytics, low-code]
 ---
-# Lab 075: Power BI Copilot — Autonomous Analytics & Data Storytelling
+# Lab 075: Power BI Copilot — Análise Autônoma e Storytelling com Dados
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock report data</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Trilha:</strong> Todas as trilhas</span>
+  <span><strong>Tempo:</strong> ~45 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados fictícios de relatório</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- O que é o **Power BI Copilot** e como ele transforma a criação de relatórios com linguagem natural
+- Como relatórios assistidos e gerados pelo Copilot se comparam à criação manual
+- Analisar um conjunto de dados de relatórios para medir **economia de tempo**, **precisão** e **adoção** entre departamentos
+- Entender como a geração de medidas DAX funciona com o Copilot
+- Construir um **relatório de impacto** quantificando o valor do Copilot para a equipe de análise
 
+## Introdução
 
-## What You'll Learn
+O **Power BI Copilot** traz IA generativa diretamente para a experiência do Power BI dentro do Microsoft Fabric. Analistas e usuários de negócio podem:
 
-- What **Power BI Copilot** is and how it transforms report creation with natural language
-- How Copilot-assisted and Copilot-generated reports compare to manual creation
-- Analyze a report dataset to measure **time savings**, **accuracy**, and **adoption** across departments
-- Understand how DAX measure generation works with Copilot
-- Build an **impact report** quantifying Copilot's value for the analytics team
+- **Criar relatórios** descrevendo o que desejam em linguagem natural
+- **Gerar medidas DAX** sem memorizar sintaxe complexa
+- **Construir narrativas** que resumem automaticamente os principais insights
+- **Fazer perguntas** sobre seus dados usando consultas conversacionais
 
-## Introduction
+### Métodos de Criação
 
-**Power BI Copilot** brings generative AI directly into the Power BI experience within Microsoft Fabric. Analysts and business users can:
+| Método | Quem | Como Funciona | Tempo Típico |
+|--------|------|---------------|--------------|
+| **Manual** | Analista | Constrói cada visual manualmente, escreve DAX à mão | 2–4 horas |
+| **Assistido pelo Copilot** | Analista | Analista inicia; Copilot sugere visuais, gera DAX | 1–2 horas |
+| **Gerado pelo Copilot** | Usuário de Negócio | Descreve o relatório em linguagem natural; Copilot o constrói | 15–30 min |
 
-- **Create reports** by describing what they want in natural language
-- **Generate DAX measures** without memorizing complex syntax
-- **Build narratives** that automatically summarize key insights
-- **Ask questions** about their data using conversational queries
+### O Cenário
 
-### Creation Methods
+Você é um **Líder da Equipe de BI** em uma empresa de médio porte. Sua equipe vem testando o Power BI Copilot há 3 meses. Você tem **10 relatórios** em 4 departamentos — alguns manuais, alguns assistidos pelo Copilot e alguns totalmente gerados pelo Copilot. A liderança quer saber: _"O Copilot está realmente economizando tempo? A qualidade é aceitável?"_
 
-| Method | Who | How It Works | Typical Time |
-|--------|-----|-------------|-------------|
-| **Manual** | Analyst | Hand-builds every visual, writes DAX manually | 2–4 hours |
-| **Copilot-Assisted** | Analyst | Analyst starts; Copilot suggests visuals, generates DAX | 1–2 hours |
-| **Copilot-Generated** | Business User | Describes report in natural language; Copilot builds it | 15–30 min |
+Seu conjunto de dados (`powerbi_reports.csv`) tem as respostas. Seu trabalho: analisar os dados e construir um relatório de impacto convincente.
 
-### The Scenario
+!!! info "Dados Fictícios"
+    Este laboratório usa um conjunto de dados fictício de relatórios. Os dados refletem padrões do mundo real: relatórios gerados pelo Copilot são mais rápidos, mas ligeiramente menos precisos; relatórios assistidos pelo Copilot combinam velocidade com qualidade de nível analista.
 
-You are a **BI Team Lead** at a mid-sized company. Your team has been piloting Power BI Copilot for 3 months. You have **10 reports** across 4 departments — some manual, some Copilot-assisted, and some fully Copilot-generated. Leadership wants to know: _"Is Copilot actually saving time? Is the quality acceptable?"_
+## Pré-requisitos
 
-Your dataset (`powerbi_reports.csv`) has the answers. Your job: analyze the data and build a compelling impact report.
-
-!!! info "Mock Data"
-    This lab uses a mock report dataset. The data mirrors real-world patterns: Copilot-generated reports are faster but slightly less accurate; Copilot-assisted reports combine speed with analyst-level quality.
-
-## Prerequisites
-
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run the analysis scripts |
-| `pandas` library | Data manipulation |
+| Python 3.10+ | Executar os scripts de análise |
+| Biblioteca `pandas` | Manipulação de dados |
 
 ```bash
 pip install pandas
@@ -62,54 +57,54 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-075/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o laboratório"
+    Salve todos os arquivos em uma pasta `lab-075/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_powerbi.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/broken_powerbi.py) |
-| `powerbi_reports.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_powerbi.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/broken_powerbi.py) |
+| `powerbi_reports.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) |
 
 ---
 
-## Step 1: Understand the Metrics
+## Etapa 1: Entenda as Métricas
 
-Before analyzing, understand what each column in the dataset measures:
+Antes de analisar, entenda o que cada coluna no conjunto de dados mede:
 
-| Column | Description |
+| Coluna | Descrição |
 |--------|-----------|
-| **created_by** | `analyst` or `business_user` — who built the report |
-| **creation_method** | `manual`, `copilot_assisted`, or `copilot_generated` |
-| **pages** | Number of report pages |
-| **visuals** | Total visual elements (charts, tables, cards) |
-| **dax_measures** | Number of DAX measures in the data model |
-| **copilot_queries** | Number of Copilot interactions used during creation |
-| **time_saved_min** | Estimated minutes saved vs. fully manual creation |
-| **accuracy_score** | Quality score (0.0–1.0) based on data accuracy review |
+| **created_by** | `analyst` ou `business_user` — quem construiu o relatório |
+| **creation_method** | `manual`, `copilot_assisted` ou `copilot_generated` |
+| **pages** | Número de páginas do relatório |
+| **visuals** | Total de elementos visuais (gráficos, tabelas, cartões) |
+| **dax_measures** | Número de medidas DAX no modelo de dados |
+| **copilot_queries** | Número de interações com o Copilot usadas durante a criação |
+| **time_saved_min** | Minutos estimados economizados em comparação com a criação totalmente manual |
+| **accuracy_score** | Pontuação de qualidade (0.0–1.0) baseada em revisão de precisão dos dados |
 
-### Key Formulas
+### Fórmulas Principais
 
 ```
-Copilot Adoption Rate = (Copilot reports ÷ Total reports) × 100
+Taxa de Adoção do Copilot = (Relatórios com Copilot ÷ Total de relatórios) × 100
 
-Avg Time Saved = Sum(time_saved_min for copilot reports) ÷ Count(copilot reports)
+Tempo Médio Economizado = Soma(time_saved_min para relatórios com copilot) ÷ Contagem(relatórios com copilot)
 
-Quality Gap = Avg accuracy(manual) − Avg accuracy(copilot_generated)
+Diferença de Qualidade = Precisão média(manual) − Precisão média(copilot_generated)
 ```
 
 ---
 
-## Step 2: Load and Explore the Dataset
+## Etapa 2: Carregue e Explore o Conjunto de Dados
 
-The dataset has **10 reports** across 4 departments:
+O conjunto de dados tem **10 relatórios** em 4 departamentos:
 
 ```python
 import pandas as pd
@@ -123,7 +118,7 @@ print(f"\nAll reports:")
 print(df[["report_id", "report_name", "creation_method", "time_saved_min", "accuracy_score"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total reports: 10
@@ -133,9 +128,9 @@ Departments: ['Sales', 'Marketing', 'Operations', 'HR', 'Finance']
 
 ---
 
-## Step 3: Measure Copilot Adoption
+## Etapa 3: Meça a Adoção do Copilot
 
-How many reports used Copilot in some form?
+Quantos relatórios usaram o Copilot de alguma forma?
 
 ```python
 copilot_reports = df[df["creation_method"].isin(["copilot_assisted", "copilot_generated"])]
@@ -150,7 +145,7 @@ print(f"Manual reports:                     {len(manual_reports)}")
 print(f"Copilot adoption rate:              {adoption_rate:.0f}%")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Copilot-assisted/generated reports: 8
@@ -158,7 +153,7 @@ Manual reports:                     2
 Copilot adoption rate:              80%
 ```
 
-Break down by creation method:
+Detalhamento por método de criação:
 
 ```python
 for method, group in df.groupby("creation_method"):
@@ -170,13 +165,13 @@ for method, group in df.groupby("creation_method"):
 ```
 
 !!! tip "Insight"
-    **80% of reports** now use Copilot — a strong adoption signal. Manual reports tend to have more pages and visuals, suggesting complex dashboards are still built by hand. Copilot-generated reports are smaller but created by business users who couldn't build them at all before.
+    **80% dos relatórios** agora usam o Copilot — um forte sinal de adoção. Relatórios manuais tendem a ter mais páginas e visuais, sugerindo que dashboards complexos ainda são construídos manualmente. Relatórios gerados pelo Copilot são menores, mas criados por usuários de negócio que não conseguiriam criá-los de outra forma.
 
 ---
 
-## Step 4: Calculate Time Savings
+## Etapa 4: Calcule a Economia de Tempo
 
-The `time_saved_min` column estimates how much time Copilot saved compared to fully manual creation:
+A coluna `time_saved_min` estima quanto tempo o Copilot economizou em comparação com a criação totalmente manual:
 
 ```python
 total_time_saved = df["time_saved_min"].sum()
@@ -189,7 +184,7 @@ print(f"Avg time saved per copilot report:   {avg_time_saved:.1f} min")
 print(f"Total hours saved:                   {total_time_saved / 60:.1f} hours")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total time saved (all reports):      395 min
@@ -198,7 +193,7 @@ Avg time saved per copilot report:   49.4 min
 Total hours saved:                   6.6 hours
 ```
 
-Break down by method:
+Detalhamento por método:
 
 ```python
 for method in ["copilot_assisted", "copilot_generated"]:
@@ -210,9 +205,9 @@ for method in ["copilot_assisted", "copilot_generated"]:
 
 ---
 
-## Step 5: Assess Quality and Accuracy
+## Etapa 5: Avalie a Qualidade e Precisão
 
-Time savings are meaningless if quality suffers. Compare accuracy scores:
+Economia de tempo não tem sentido se a qualidade for prejudicada. Compare as pontuações de precisão:
 
 ```python
 for method in df["creation_method"].unique():
@@ -221,7 +216,7 @@ for method in df["creation_method"].unique():
     print(f"  {method:>20s}: avg accuracy = {avg_acc:.2f}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
               manual: avg accuracy = 0.96
@@ -239,12 +234,12 @@ print(f"\nQuality gap (manual vs. assisted):  {(manual_acc - assisted_acc) * 100
 print(f"Quality gap (manual vs. generated): {(manual_acc - generated_acc) * 100:.1f}pp")
 ```
 
-!!! warning "Quality Trade-off"
-    **Copilot-assisted reports** (analyst + Copilot) achieve **0.94 accuracy** — only 2pp below manual. **Copilot-generated reports** (business user + Copilot) score **0.85** — acceptable for exploration but may need analyst review before executive distribution.
+!!! warning "Compensação de Qualidade"
+    **Relatórios assistidos pelo Copilot** (analista + Copilot) alcançam **0.94 de precisão** — apenas 2pp abaixo do manual. **Relatórios gerados pelo Copilot** (usuário de negócio + Copilot) pontuam **0.85** — aceitável para exploração, mas pode necessitar de revisão do analista antes da distribuição executiva.
 
 ---
 
-## Step 6: Build the Impact Report
+## Etapa 6: Construa o Relatório de Impacto
 
 ```python
 total_copilot_queries = copilot_reports["copilot_queries"].sum()
@@ -290,100 +285,100 @@ print("💾 Saved to lab-075/impact_report.md")
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-075/broken_powerbi.py` contains **3 bugs** that produce incorrect Power BI metrics. Can you find and fix them all?
+O arquivo `lab-075/broken_powerbi.py` contém **3 bugs** que produzem métricas incorretas do Power BI. Você consegue encontrar e corrigir todos?
 
-Run the self-tests to see which ones fail:
+Execute os autotestes para ver quais falham:
 
 ```bash
 python lab-075/broken_powerbi.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Você deve ver **3 testes com falha**. Cada teste corresponde a um bug:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Copilot report count | Should count copilot methods, not `manual` |
-| Test 2 | Total time saved | Should sum `time_saved_min`, not average it |
-| Test 3 | Average accuracy by method | Should filter by method before averaging |
+| Teste | O que verifica | Dica |
+|-------|---------------|------|
+| Teste 1 | Contagem de relatórios do Copilot | Deve contar métodos do copilot, não `manual` |
+| Teste 2 | Tempo total economizado | Deve somar `time_saved_min`, não calcular a média |
+| Teste 3 | Precisão média por método | Deve filtrar por método antes de calcular a média |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
-
----
-
-
-## 🧠 Knowledge Check
-
-??? question "**Q1 (Multiple Choice):** What is the key difference between 'copilot_assisted' and 'copilot_generated' report creation?"
-
-    - A) Copilot-assisted uses a different model than copilot-generated
-    - B) Copilot-assisted is started by an analyst who uses Copilot for help; copilot-generated is created entirely from a natural language description
-    - C) Copilot-generated reports are always more accurate
-    - D) Copilot-assisted reports cannot include DAX measures
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Copilot-assisted is started by an analyst who uses Copilot for help; copilot-generated is created entirely from a natural language description**
-
-        In copilot-assisted mode, an analyst drives the process and uses Copilot to suggest visuals, generate DAX, or create narrative summaries. In copilot-generated mode, a business user describes the desired report in natural language and Copilot builds it from scratch — faster but with less human oversight.
-
-??? question "**Q2 (Multiple Choice):** Why might copilot-generated reports need a review step before executive distribution?"
-
-    - A) They use too many visuals
-    - B) They have lower accuracy scores due to less human oversight during creation
-    - C) They are generated too quickly
-    - D) They cannot include DAX measures
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) They have lower accuracy scores due to less human oversight during creation**
-
-        Copilot-generated reports average ~0.85 accuracy compared to ~0.96 for manual reports. Without an analyst validating data mappings, filter logic, and DAX calculations, there's a higher risk of subtle errors — especially for complex business metrics.
-
-??? question "**Q3 (Run the Lab):** How many reports were created using Copilot (either assisted or generated)?"
-
-    Run the Step 3 analysis on [📥 `powerbi_reports.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) and count copilot reports.
-
-    ??? success "✅ Reveal Answer"
-        **8 reports**
-
-        Of the 10 reports in the dataset, 4 are `copilot_assisted` (R02, R04, R07, R09) and 4 are `copilot_generated` (R03, R05, R08, R10). Only 2 are `manual` (R01, R06). Total copilot reports = **8**.
-
-??? question "**Q4 (Run the Lab):** What is the total time saved across all reports?"
-
-    Run the Step 4 analysis to calculate total time saved.
-
-    ??? success "✅ Reveal Answer"
-        **395 minutes**
-
-        Sum of all `time_saved_min` values: 0 + 45 + 60 + 30 + 50 + 0 + 55 + 65 + 35 + 55 = **395 minutes** (6.6 hours). Manual reports (R01, R06) have 0 time saved since they are the baseline.
-
-??? question "**Q5 (Run the Lab):** What is the average time saved per Copilot report?"
-
-    Divide total copilot time saved by the number of copilot reports.
-
-    ??? success "✅ Reveal Answer"
-        **49.4 minutes**
-
-        Total time saved by copilot reports = 45 + 60 + 30 + 50 + 55 + 65 + 35 + 55 = 395 min. Number of copilot reports = 8. Average = 395 ÷ 8 = **49.4 minutes** per report.
+Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, está feito!
 
 ---
 
-## Summary
 
-| Topic | What You Learned |
-|-------|-----------------|
-| Power BI Copilot | AI-powered report creation, DAX generation, and data narratives |
-| Creation Methods | Manual, Copilot-assisted (analyst+AI), Copilot-generated (business user+AI) |
-| Time Savings | 49.4 min average per Copilot report; 395 min total across pilot |
-| Quality Trade-off | Assisted=0.94 accuracy (near-manual); Generated=0.85 (needs review) |
-| Adoption | 80% of reports used Copilot — strong pilot adoption signal |
-| Self-Service BI | Copilot-generated enables business users to create their own reports |
+## 🧠 Verificação de Conhecimento
+
+??? question "**Q1 (Múltipla Escolha):** Qual é a principal diferença entre a criação de relatórios 'copilot_assisted' e 'copilot_generated'?"
+
+    - A) Copilot-assisted usa um modelo diferente do copilot-generated
+    - B) Copilot-assisted é iniciado por um analista que usa o Copilot como auxílio; copilot-generated é criado inteiramente a partir de uma descrição em linguagem natural
+    - C) Relatórios copilot-generated são sempre mais precisos
+    - D) Relatórios copilot-assisted não podem incluir medidas DAX
+
+    ??? success "✅ Revelar Resposta"
+        **Correta: B) Copilot-assisted é iniciado por um analista que usa o Copilot como auxílio; copilot-generated é criado inteiramente a partir de uma descrição em linguagem natural**
+
+        No modo copilot-assisted, um analista conduz o processo e usa o Copilot para sugerir visuais, gerar DAX ou criar resumos narrativos. No modo copilot-generated, um usuário de negócio descreve o relatório desejado em linguagem natural e o Copilot o constrói do zero — mais rápido, mas com menos supervisão humana.
+
+??? question "**Q2 (Múltipla Escolha):** Por que relatórios copilot-generated podem precisar de uma etapa de revisão antes da distribuição executiva?"
+
+    - A) Eles usam visuais demais
+    - B) Eles têm pontuações de precisão mais baixas devido à menor supervisão humana durante a criação
+    - C) Eles são gerados rápido demais
+    - D) Eles não podem incluir medidas DAX
+
+    ??? success "✅ Revelar Resposta"
+        **Correta: B) Eles têm pontuações de precisão mais baixas devido à menor supervisão humana durante a criação**
+
+        Relatórios copilot-generated têm em média ~0.85 de precisão comparado a ~0.96 para relatórios manuais. Sem um analista validando mapeamentos de dados, lógica de filtros e cálculos DAX, há um risco maior de erros sutis — especialmente para métricas de negócio complexas.
+
+??? question "**Q3 (Execute o Lab):** Quantos relatórios foram criados usando o Copilot (assistido ou gerado)?"
+
+    Execute a análise da Etapa 3 no [📥 `powerbi_reports.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) e conte os relatórios do Copilot.
+
+    ??? success "✅ Revelar Resposta"
+        **8 relatórios**
+
+        Dos 10 relatórios no conjunto de dados, 4 são `copilot_assisted` (R02, R04, R07, R09) e 4 são `copilot_generated` (R03, R05, R08, R10). Apenas 2 são `manual` (R01, R06). Total de relatórios com Copilot = **8**.
+
+??? question "**Q4 (Execute o Lab):** Qual é o tempo total economizado em todos os relatórios?"
+
+    Execute a análise da Etapa 4 para calcular o tempo total economizado.
+
+    ??? success "✅ Revelar Resposta"
+        **395 minutos**
+
+        Soma de todos os valores de `time_saved_min`: 0 + 45 + 60 + 30 + 50 + 0 + 55 + 65 + 35 + 55 = **395 minutos** (6,6 horas). Relatórios manuais (R01, R06) têm 0 de tempo economizado, pois são a linha de base.
+
+??? question "**Q5 (Execute o Lab):** Qual é o tempo médio economizado por relatório do Copilot?"
+
+    Divida o tempo total economizado pelo Copilot pelo número de relatórios do Copilot.
+
+    ??? success "✅ Revelar Resposta"
+        **49,4 minutos**
+
+        Tempo total economizado pelos relatórios do Copilot = 45 + 60 + 30 + 50 + 55 + 65 + 35 + 55 = 395 min. Número de relatórios do Copilot = 8. Média = 395 ÷ 8 = **49,4 minutos** por relatório.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **[Lab 048](lab-048-work-iq-power-bi.md)** — Work IQ Power BI dashboards (advanced analytics with Viva Insights)
-- **[Lab 047](lab-047-work-iq-copilot-analytics.md)** — Work IQ Copilot Adoption Analytics (measuring Copilot usage across M365)
-- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (deploying AI agents that feed data to Power BI)
-- **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (managing Copilot and AI costs)
+| Tópico | O que Você Aprendeu |
+|--------|---------------------|
+| Power BI Copilot | Criação de relatórios com IA, geração de DAX e narrativas de dados |
+| Métodos de Criação | Manual, Assistido pelo Copilot (analista+IA), Gerado pelo Copilot (usuário de negócio+IA) |
+| Economia de Tempo | 49,4 min em média por relatório do Copilot; 395 min no total durante o piloto |
+| Compensação de Qualidade | Assistido=0,94 de precisão (próximo do manual); Gerado=0,85 (necessita revisão) |
+| Adoção | 80% dos relatórios usaram o Copilot — forte sinal de adoção no piloto |
+| BI de Autoatendimento | Copilot-generated permite que usuários de negócio criem seus próprios relatórios |
+
+---
+
+## Próximos Passos
+
+- **[Lab 048](lab-048-work-iq-power-bi.md)** — Dashboards Work IQ Power BI (análises avançadas com Viva Insights)
+- **[Lab 047](lab-047-work-iq-copilot-analytics.md)** — Work IQ Copilot Adoption Analytics (medindo o uso do Copilot no M365)
+- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (implantando agentes de IA que alimentam dados para o Power BI)
+- **[Lab 038](lab-038-cost-optimization.md)** — Otimização de Custos de IA (gerenciando custos do Copilot e IA)

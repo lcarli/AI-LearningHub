@@ -1,49 +1,44 @@
 ---
 tags: [security, prompt-injection, python, free]
 ---
-# Lab 036: Prompt Injection Defense & Agent Security
+# Lab 036 : Défense contre l'injection de prompt et sécurité des agents
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
-  <span><strong>Time:</strong> ~40 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span></span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Durée :</strong> ~40 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span></span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What **prompt injection** is and why it's dangerous in agentic systems
-- The difference between **direct** and **indirect** injection attacks
-- Practical **defenses**: input sanitization, output validation, privilege separation
-- **Tool call guardrails** — preventing agents from taking destructive actions
-- Security checklist for production agents
+- Ce qu'est l'**injection de prompt** et pourquoi elle est dangereuse dans les systèmes agentiques
+- La différence entre les attaques par injection **directe** et **indirecte**
+- Les **défenses** pratiques : assainissement des entrées, validation des sorties, séparation des privilèges
+- Les **garde-fous des appels d'outils** — empêcher les agents d'effectuer des actions destructrices
+- Liste de contrôle de sécurité pour les agents en production
 
 ---
 
 ## Introduction
 
-A prompt injection attack manipulates an AI agent by embedding malicious instructions in content the agent processes. Unlike SQL injection (inject code into a query), prompt injection injects instructions into the LLM's context.
+Une attaque par injection de prompt manipule un agent IA en intégrant des instructions malveillantes dans le contenu que l'agent traite. Contrairement à l'injection SQL (injecter du code dans une requête), l'injection de prompt injecte des instructions dans le contexte du LLM.
 
-**Why agents are especially vulnerable:** They take actions (send emails, modify files, call APIs). A manipulated agent doesn't just produce bad text — it does bad things.
+**Pourquoi les agents sont particulièrement vulnérables :** Ils effectuent des actions (envoyer des e-mails, modifier des fichiers, appeler des API). Un agent manipulé ne produit pas seulement du mauvais texte — il fait de mauvaises choses.
 
 ---
 
-## Prerequisites
+## Prérequis
 
 - Python 3.11+
 - `pip install openai pydantic`
-- `GITHUB_TOKEN` set
+- `GITHUB_TOKEN` configuré
 
 ---
 
-## Lab Exercise
+## Exercice pratique
 
-### Step 1: Direct injection — understand the attack
+### Étape 1 : Injection directe — comprendre l'attaque
 
 ```python
 import os
@@ -80,9 +75,9 @@ print(vulnerable_agent(malicious))
 # ⚠️ May comply with the injected instructions!
 ```
 
-### Step 2: Indirect injection — the harder problem
+### Étape 2 : Injection indirecte — le problème le plus difficile
 
-Indirect injection occurs when malicious instructions are embedded in **data the agent reads** (web pages, documents, emails, database results).
+L'injection indirecte se produit lorsque des instructions malveillantes sont intégrées dans **les données que l'agent lit** (pages web, documents, e-mails, résultats de bases de données).
 
 ```python
 def email_summarizer_agent(email_content: str) -> str:
@@ -112,7 +107,7 @@ print(result)
 # ⚠️ The agent may process the hidden instruction!
 ```
 
-### Step 3: Defense 1 — Input sanitization
+### Étape 3 : Défense 1 — Assainissement des entrées
 
 ```python
 import re
@@ -162,9 +157,9 @@ print(f"Modified: {modified}")
 print(f"Clean email:\n{clean}")
 ```
 
-### Step 4: Defense 2 — Privilege separation
+### Étape 4 : Défense 2 — Séparation des privilèges
 
-The most effective defense: **agents should only have access to what they need**.
+La défense la plus efficace : **les agents ne devraient avoir accès qu'à ce dont ils ont besoin**.
 
 ```python
 from enum import Enum
@@ -209,7 +204,7 @@ print(read_only_agent.execute_tool(ToolCall(tool="search_products", arguments={"
 print(read_only_agent.execute_tool(ToolCall(tool="apply_refund", arguments={"amount": 500})))
 ```
 
-### Step 5: Defense 3 — Output validation
+### Étape 5 : Défense 3 — Validation des sorties
 
 ```python
 from pydantic import BaseModel
@@ -267,26 +262,26 @@ print(f"\nMalicious attempt result: {malicious_action.action_type}")
 
 ---
 
-## Agent Security Checklist
+## Liste de contrôle de sécurité des agents
 
-| ✅ | Defense | Implementation |
+| ✅ | Défense | Implémentation |
 |----|---------|----------------|
-| ☐ | **Input sanitization** | Scan for injection patterns, strip HTML comments |
-| ☐ | **Privilege separation** | Agents have only needed permissions |
-| ☐ | **Tool call allowlisting** | Validate every tool call against role |
-| ☐ | **Structured output** | Validate agent output shape before acting |
-| ☐ | **Human-in-the-loop** | Require confirmation for irreversible actions |
-| ☐ | **Audit logging** | Log all tool calls with user, timestamp, arguments |
-| ☐ | **Rate limiting** | Prevent agents from taking too many actions too fast |
-| ☐ | **Separation of data and instructions** | Use different prompt sections, mark user content |
-| ☐ | **Content filtering** | Use Azure Content Safety / Responsible AI APIs |
-| ☐ | **Least-privilege secrets** | Agent API keys have minimum necessary permissions |
+| ☐ | **Assainissement des entrées** | Rechercher les motifs d'injection, supprimer les commentaires HTML |
+| ☐ | **Séparation des privilèges** | Les agents n'ont que les permissions nécessaires |
+| ☐ | **Liste blanche des appels d'outils** | Valider chaque appel d'outil par rapport au rôle |
+| ☐ | **Sortie structurée** | Valider la forme de la sortie de l'agent avant d'agir |
+| ☐ | **Humain dans la boucle** | Exiger une confirmation pour les actions irréversibles |
+| ☐ | **Journalisation d'audit** | Enregistrer tous les appels d'outils avec utilisateur, horodatage, arguments |
+| ☐ | **Limitation de débit** | Empêcher les agents d'effectuer trop d'actions trop rapidement |
+| ☐ | **Séparation des données et des instructions** | Utiliser des sections de prompt différentes, marquer le contenu utilisateur |
+| ☐ | **Filtrage de contenu** | Utiliser les API Azure Content Safety / Responsible AI |
+| ☐ | **Secrets à moindre privilège** | Les clés API de l'agent ont les permissions minimales nécessaires |
 
 ---
 
-## Marking User Content Clearly
+## Marquage clair du contenu utilisateur
 
-A simple but effective technique: make the LLM distinguish user content from instructions.
+Une technique simple mais efficace : faire en sorte que le LLM distingue le contenu utilisateur des instructions.
 
 ```python
 SYSTEM = """
@@ -304,7 +299,7 @@ def safe_prompt(user_message: str) -> list[dict]:
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Evaluate your agent's robustness:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)
-- **Responsible AI fundamentals:** → [Lab 008 — Responsible AI for Agents](lab-008-responsible-ai.md)
+- **Évaluez la robustesse de votre agent :** → [Lab 035 — Évaluation des agents](lab-035-agent-evaluation.md)
+- **Fondamentaux de l'IA responsable :** → [Lab 008 — IA responsable pour les agents](lab-008-responsible-ai.md)

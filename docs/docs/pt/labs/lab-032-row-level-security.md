@@ -1,60 +1,55 @@
 ---
 tags: [security, postgresql, python, free]
 ---
-# Lab 032: Row Level Security for Agents
+# Lab 032: Row Level Security para Agentes
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">Foundry + Security</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free (local Docker)</span> or Azure PostgreSQL (~$15/mo)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/foundry/">Foundry + Security</a></span>
+  <span><strong>Tempo:</strong> ~45 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito (Docker local)</span> ou Azure PostgreSQL (~$15/mês)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Why agents need **data isolation** (multi-tenant risk)
-- Implement **PostgreSQL Row Level Security (RLS)** — the database enforces access, not your app
-- Create **database roles** for agent identities
-- Test that an agent literally cannot see another user's data — even with injection attacks
-- Apply RLS to the `orders.csv` sample dataset
+- Por que agentes precisam de **isolamento de dados** (risco multi-tenant)
+- Implementar **PostgreSQL Row Level Security (RLS)** — o banco de dados impõe o acesso, não sua aplicação
+- Criar **roles de banco de dados** para identidades de agentes
+- Testar que um agente literalmente não consegue ver os dados de outro usuário — mesmo com ataques de injeção
+- Aplicar RLS ao conjunto de dados de exemplo `orders.csv`
 
 ---
 
-## Introduction
+## Introdução
 
-When your agent queries the database, it might be serving Customer A — but the SQL query it generates could accidentally return Customer B's orders. Prompt injection attacks exploit exactly this.
+Quando seu agente consulta o banco de dados, ele pode estar atendendo o Cliente A — mas a consulta SQL que ele gera pode acidentalmente retornar os pedidos do Cliente B. Ataques de injeção de prompt exploram exatamente isso.
 
-**Row Level Security** moves access control into the database itself. Even if the agent generates `SELECT * FROM orders`, PostgreSQL automatically adds `WHERE customer_id = current_user_id` based on the session role. The agent cannot escape it.
+**Row Level Security** move o controle de acesso para dentro do próprio banco de dados. Mesmo que o agente gere `SELECT * FROM orders`, o PostgreSQL adiciona automaticamente `WHERE customer_id = current_user_id` com base no role da sessão. O agente não pode escapar disso.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-- Docker Desktop (free) OR Azure PostgreSQL from [Lab 031](lab-031-pgvector-semantic-search.md)
+- Docker Desktop (gratuito) OU Azure PostgreSQL do [Lab 031](lab-031-pgvector-semantic-search.md)
 - Python 3.11+, `pip install psycopg2-binary openai`
-- `GITHUB_TOKEN` set
+- `GITHUB_TOKEN` configurado
 
 ---
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-032/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-032/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `migrations` | Database migration files | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-032/migrations) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `migrations` | Arquivos de migração do banco de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-032/migrations) |
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Start PostgreSQL with Docker
+### Passo 1: Iniciar o PostgreSQL com Docker
 
 ```bash
 docker run -d \
@@ -65,7 +60,7 @@ docker run -d \
   postgres:16
 ```
 
-### Step 2: Load sample orders and set up RLS
+### Passo 2: Carregar pedidos de exemplo e configurar RLS
 
 ```python
 # setup_rls.py
@@ -128,7 +123,7 @@ conn.close()
 python setup_rls.py
 ```
 
-### Step 3: Enable Row Level Security
+### Passo 3: Habilitar Row Level Security
 
 ```python
 # enable_rls.py
@@ -168,7 +163,7 @@ conn.close()
 python enable_rls.py
 ```
 
-### Step 4: Test isolation — agents can't cross boundaries
+### Passo 4: Testar isolamento — agentes não conseguem cruzar limites
 
 ```python
 # test_isolation.py
@@ -211,7 +206,7 @@ c002_in_c001 = [o for o in injected if o[1] == "C002"]
 print(f"\n✅ C002 rows visible to C001: {len(c002_in_c001)}  ← should be 0")
 ```
 
-Expected output:
+Saída esperada:
 ```
 Alex sees 4 orders
 Jordan sees 4 orders
@@ -222,7 +217,7 @@ Alex's injection returned 4 rows (should only be Alex's)
 ✅ C002 rows visible to C001: 0
 ```
 
-### Step 5: Build an RLS-aware agent
+### Passo 5: Construir um agente com suporte a RLS
 
 ```python
 # rls_agent.py
@@ -294,18 +289,18 @@ print(order_agent("C002", "Show me my recent orders"))
 
 ---
 
-## Why This Matters
+## Por que Isso Importa
 
-| Without RLS | With RLS |
-|-------------|----------|
-| App must filter: `WHERE customer_id = ?` | Database filters automatically |
-| Prompt injection can bypass app filters | Database-level policy — cannot be bypassed |
-| Bug in agent = data leak | Bug in agent = still only sees own data |
-| Must trust every query the agent generates | Trust is in the database role |
+| Sem RLS | Com RLS |
+|---------|---------|
+| A aplicação deve filtrar: `WHERE customer_id = ?` | O banco de dados filtra automaticamente |
+| Injeção de prompt pode contornar filtros da aplicação | Política no nível do banco — não pode ser contornada |
+| Bug no agente = vazamento de dados | Bug no agente = ainda vê apenas seus próprios dados |
+| Precisa confiar em toda consulta que o agente gera | A confiança está no role do banco de dados |
 
 ---
 
-## Cleanup
+## Limpeza
 
 ```bash
 docker stop pg-rls-demo && docker rm pg-rls-demo
@@ -314,7 +309,7 @@ docker stop pg-rls-demo && docker rm pg-rls-demo
 ---
 
 
-## Next Steps
+## Próximos Passos
 
-- **Agent Observability:** → [Lab 033 — App Insights Tracing](lab-033-agent-observability.md)
-- **RLS on Azure PostgreSQL:** → [Lab 031 — pgvector on Azure](lab-031-pgvector-semantic-search.md)
+- **Observabilidade de Agentes:** → [Lab 033 — App Insights Tracing](lab-033-agent-observability.md)
+- **RLS no Azure PostgreSQL:** → [Lab 031 — pgvector on Azure](lab-031-pgvector-semantic-search.md)

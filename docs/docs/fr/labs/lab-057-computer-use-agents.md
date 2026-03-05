@@ -1,50 +1,45 @@
 ---
 tags: [computer-use, automation, anthropic, desktop, python, safety]
 ---
-# Lab 057: Computer-Using Agents — Desktop Automation
+# Lab 057 : Agents utilisant l'ordinateur — Automatisation du bureau
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses benchmark dataset; Anthropic API optional</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Durée :</strong> ~90 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise un jeu de données de benchmark ; API Anthropic optionnelle</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What **computer-using agents** are — AI that interacts with a desktop the way a human does (screenshot → reason → click/type)
-- The **screenshot–action loop**: the agent captures a screenshot, identifies UI elements, and executes mouse/keyboard actions
-- How to run agents in a **Docker sandbox** to isolate them from the host system
-- Design **safety guardrails** — domain allowlists, action confirmation prompts, and rate limits
-- Analyze **desktop automation benchmarks** to understand where computer-use agents succeed and fail
+- Ce que sont les **agents utilisant l'ordinateur** — une IA qui interagit avec un bureau comme le ferait un humain (capture d'écran → raisonnement → clic/saisie)
+- La **boucle capture d'écran–action** : l'agent capture une image de l'écran, identifie les éléments d'interface et exécute des actions souris/clavier
+- Comment exécuter des agents dans un **bac à sable Docker** pour les isoler du système hôte
+- Concevoir des **garde-fous de sécurité** — listes blanches de domaines, invites de confirmation d'action et limites de débit
+- Analyser des **benchmarks d'automatisation de bureau** pour comprendre où les agents utilisant l'ordinateur réussissent et échouent
 
 ## Introduction
 
-Traditional automation relies on APIs, scripts, or RPA bots that interact with structured interfaces. But what happens when the application has **no API**? Legacy desktop apps, mainframe terminals, and thick-client software often expose nothing but a graphical user interface.
+L'automatisation traditionnelle repose sur des API, des scripts ou des bots RPA qui interagissent avec des interfaces structurées. Mais que se passe-t-il lorsque l'application n'a **pas d'API** ? Les applications de bureau anciennes, les terminaux mainframe et les logiciels client lourd n'exposent souvent qu'une interface graphique.
 
-**Computer-using agents** solve this by operating the computer like a human would. The agent captures a **screenshot** of the current screen, sends it to a vision-language model (like Anthropic's `computer_20251124` tool), receives a structured action (move mouse, click, type text), executes it, and repeats. This screenshot→action loop lets the agent interact with *any* application that has a visual interface.
+Les **agents utilisant l'ordinateur** résolvent ce problème en opérant l'ordinateur comme le ferait un humain. L'agent capture une **image de l'écran** actuel, l'envoie à un modèle de vision-langage (comme l'outil `computer_20251124` d'Anthropic), reçoit une action structurée (déplacer la souris, cliquer, saisir du texte), l'exécute et recommence. Cette boucle capture d'écran → action permet à l'agent d'interagir avec *n'importe quelle* application disposant d'une interface visuelle.
 
-### The Scenario
+### Le scénario
 
-You are an **Automation Engineer** at OutdoorGear Inc. The company relies on a legacy inventory management system — a thick-client Windows application with no API and no plans for modernization. Management wants to automate repetitive tasks like filling expense forms, generating reports, and navigating the ERP system.
+Vous êtes **ingénieur en automatisation** chez OutdoorGear Inc. L'entreprise utilise un système de gestion des stocks ancien — une application Windows client lourd sans API et sans projet de modernisation. La direction souhaite automatiser les tâches répétitives comme le remplissage de formulaires de frais, la génération de rapports et la navigation dans le système ERP.
 
-Your job is to evaluate whether computer-use agents can handle these tasks reliably and safely, using a benchmark dataset of **10 desktop and browser tasks**.
+Votre mission est d'évaluer si les agents utilisant l'ordinateur peuvent gérer ces tâches de manière fiable et sécurisée, en utilisant un jeu de données de benchmark de **10 tâches de bureau et de navigateur**.
 
-!!! info "No Live Agent Required"
-    This lab analyzes a **pre-recorded benchmark dataset** of computer-use task results. You don't need an Anthropic API key or a running agent — all analysis is done locally with pandas. If you have API access, you can optionally extend the lab to run live tasks.
+!!! info "Aucun agent en direct requis"
+    Ce lab analyse un **jeu de données de benchmark pré-enregistré** de résultats de tâches d'utilisation de l'ordinateur. Vous n'avez pas besoin d'une clé API Anthropic ni d'un agent en cours d'exécution — toute l'analyse se fait localement avec pandas. Si vous avez accès à l'API, vous pouvez optionnellement étendre le lab pour exécuter des tâches en direct.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Pourquoi |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` library | DataFrame operations |
-| (Optional) Anthropic API key | For live computer-use experiments |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| Bibliothèque `pandas` | Opérations sur les DataFrames |
+| (Optionnel) Clé API Anthropic | Pour des expériences d'utilisation de l'ordinateur en direct |
 
 ```bash
 pip install pandas
@@ -52,27 +47,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-057/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-057/` dans votre répertoire de travail.
 
-| File | Description | Download |
+| Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `broken_safety.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/broken_safety.py) |
-| `desktop_tasks.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) |
+| `broken_safety.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/broken_safety.py) |
+| `desktop_tasks.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) |
 
 ---
 
-## Step 1: Understanding Computer Use
+## Étape 1 : Comprendre l'utilisation de l'ordinateur
 
-Computer-use agents follow a simple but powerful loop:
+Les agents utilisant l'ordinateur suivent une boucle simple mais puissante :
 
 ```
 ┌─────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -84,29 +79,29 @@ Computer-use agents follow a simple but powerful loop:
                     repeat until done
 ```
 
-The key components:
+Les composants clés :
 
-| Component | Description |
+| Composant | Description |
 |-----------|-------------|
-| **Screenshot capture** | Captures the current screen as an image (PNG) |
-| **Vision model** | Analyzes the screenshot to identify UI elements and decide the next action |
-| **Action executor** | Translates model output into OS-level mouse/keyboard events |
-| **Sandbox** | Docker container or VM that isolates the agent from the host |
+| **Capture d'écran** | Capture l'écran actuel sous forme d'image (PNG) |
+| **Modèle de vision** | Analyse la capture d'écran pour identifier les éléments d'interface et décider de l'action suivante |
+| **Exécuteur d'actions** | Traduit la sortie du modèle en événements souris/clavier au niveau du système d'exploitation |
+| **Bac à sable** | Conteneur Docker ou machine virtuelle qui isole l'agent du système hôte |
 
-Anthropic's `computer_20251124` tool provides three capabilities:
+L'outil `computer_20251124` d'Anthropic offre trois capacités :
 
-1. **Screenshot capture** — takes a picture of the current screen
-2. **Mouse control** — move, click, double-click, drag
-3. **Keyboard input** — type text, press key combinations
+1. **Capture d'écran** — prend une photo de l'écran actuel
+2. **Contrôle de la souris** — déplacer, cliquer, double-cliquer, glisser
+3. **Saisie clavier** — saisir du texte, appuyer sur des combinaisons de touches
 
-!!! tip "Why Screenshots?"
-    Unlike traditional web scraping (which reads HTML/DOM), computer-use agents see the screen as *pixels*. This means they can interact with any visual interface — desktop apps, remote desktops, terminal emulators, even games — without needing access to the underlying code or DOM.
+!!! tip "Pourquoi des captures d'écran ?"
+    Contrairement au web scraping traditionnel (qui lit le HTML/DOM), les agents utilisant l'ordinateur voient l'écran en *pixels*. Cela signifie qu'ils peuvent interagir avec n'importe quelle interface visuelle — applications de bureau, bureaux à distance, émulateurs de terminal, voire des jeux — sans avoir besoin d'accéder au code sous-jacent ou au DOM.
 
 ---
 
-## Step 2: Load the Benchmark Dataset
+## Étape 2 : Charger le jeu de données de benchmark
 
-The dataset contains **10 tasks** that a computer-use agent attempted, covering both desktop and browser scenarios:
+Le jeu de données contient **10 tâches** qu'un agent utilisant l'ordinateur a tentées, couvrant des scénarios de bureau et de navigateur :
 
 ```python
 import pandas as pd
@@ -119,7 +114,7 @@ print(f"\nDataset preview:")
 print(tasks[["task_id", "task_description", "app_type", "completed", "safety_risk"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total tasks: 10
@@ -137,9 +132,9 @@ Difficulty levels: ['easy', 'hard', 'medium']
 
 ---
 
-## Step 3: Analyze Completion Rates
+## Étape 3 : Analyser les taux de complétion
 
-Calculate overall and per-difficulty completion rates:
+Calculez les taux de complétion globaux et par niveau de difficulté :
 
 ```python
 completed = tasks["completed"].sum()
@@ -155,7 +150,7 @@ for diff in ["easy", "medium", "hard"]:
     print(f"  {diff}: {subset['completed'].sum()}/{len(subset)} = {diff_rate:.0f}%")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Completed: 7/10
@@ -167,14 +162,14 @@ By difficulty:
   hard: 1/4 = 25%
 ```
 
-!!! tip "Insight"
-    The agent handles **easy and medium** tasks reliably (100%) but struggles with **hard tasks** (25%). Hard tasks involve multi-step workflows, dynamic content, or security-sensitive operations — all challenging for screenshot-based navigation.
+!!! tip "Observation"
+    L'agent gère les tâches **faciles et moyennes** de manière fiable (100%) mais peine avec les **tâches difficiles** (25%). Les tâches difficiles impliquent des flux de travail à plusieurs étapes, du contenu dynamique ou des opérations sensibles en matière de sécurité — autant de défis pour la navigation basée sur les captures d'écran.
 
 ---
 
-## Step 4: Safety Risk Analysis
+## Étape 4 : Analyse des risques de sécurité
 
-Identify tasks with high safety risk:
+Identifiez les tâches présentant un risque de sécurité élevé :
 
 ```python
 print("Safety risk distribution:")
@@ -185,7 +180,7 @@ print(f"\nHigh-risk tasks: {len(high_risk)}")
 print(high_risk[["task_id", "task_description", "completed"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Safety risk distribution:
@@ -201,17 +196,17 @@ High-risk tasks: 2
 | T08 | Log into a web application using credentials | False |
 | T10 | Navigate a multi-step checkout process | False |
 
-Both high-risk tasks **failed**, which is actually a good outcome — it means the agent didn't successfully perform potentially dangerous actions without proper guardrails.
+Les deux tâches à haut risque ont **échoué**, ce qui est en réalité un bon résultat — cela signifie que l'agent n'a pas réussi à effectuer des actions potentiellement dangereuses sans garde-fous appropriés.
 
-!!! warning "Why These Are High-Risk"
-    - **T08 (Login with credentials)**: The agent would need to read passwords from a password manager — a significant security risk if the agent is compromised or the sandbox is breached.
-    - **T10 (Checkout process)**: Completing a purchase with real payment information could have financial consequences if the agent makes mistakes.
+!!! warning "Pourquoi ces tâches sont à haut risque"
+    - **T08 (Connexion avec des identifiants)** : L'agent devrait lire les mots de passe depuis un gestionnaire de mots de passe — un risque de sécurité significatif si l'agent est compromis ou si le bac à sable est violé.
+    - **T10 (Processus de paiement)** : Finaliser un achat avec de vraies informations de paiement pourrait avoir des conséquences financières si l'agent fait des erreurs.
 
 ---
 
-## Step 5: Desktop vs Browser Task Comparison
+## Étape 5 : Comparaison des tâches bureau vs navigateur
 
-Compare how the agent performs on desktop vs browser tasks:
+Comparez les performances de l'agent sur les tâches de bureau par rapport aux tâches de navigateur :
 
 ```python
 print("Performance by app type:")
@@ -227,7 +222,7 @@ for app in ["desktop", "browser"]:
     print(f"    Avg actions (completed): {avg_actions:.1f}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Performance by app type:
@@ -245,26 +240,26 @@ Performance by app type:
     Avg actions (completed): 10.7
 ```
 
-!!! tip "Insight"
-    Desktop tasks have a higher success rate (80% vs 60%) and require fewer actions on average. Browser tasks tend to involve more dynamic content and complex navigation, making them harder for screenshot-based agents.
+!!! tip "Observation"
+    Les tâches de bureau ont un taux de réussite plus élevé (80% vs 60%) et nécessitent en moyenne moins d'actions. Les tâches de navigateur tendent à impliquer plus de contenu dynamique et une navigation complexe, ce qui les rend plus difficiles pour les agents basés sur les captures d'écran.
 
 ---
 
-## Step 6: Safety Guardrail Design
+## Étape 6 : Conception des garde-fous de sécurité
 
-Based on the benchmark analysis, design guardrails for production deployment:
+Sur la base de l'analyse du benchmark, concevez des garde-fous pour le déploiement en production :
 
-### Recommended Guardrails
+### Garde-fous recommandés
 
-| Guardrail | Purpose | Implementation |
+| Garde-fou | Objectif | Implémentation |
 |-----------|---------|----------------|
-| **Domain allowlist** | Restrict which applications/sites the agent can access | Config file listing approved app names and URLs |
-| **Action confirmation** | Require human approval for high-risk actions | Prompt before clicks on buttons like "Submit", "Purchase", "Delete" |
-| **Session time limit** | Prevent runaway agents | Kill the agent after N minutes of inactivity |
-| **Screenshot logging** | Audit trail of every action | Save every screenshot with timestamp and action taken |
-| **Credential isolation** | Never expose passwords to the agent | Use environment variables or vault references, never screen-visible passwords |
+| **Liste blanche de domaines** | Restreindre les applications/sites auxquels l'agent peut accéder | Fichier de configuration listant les noms d'applications et URLs approuvés |
+| **Confirmation d'action** | Exiger l'approbation humaine pour les actions à haut risque | Demander confirmation avant les clics sur des boutons comme « Soumettre », « Acheter », « Supprimer » |
+| **Limite de durée de session** | Empêcher les agents incontrôlés | Arrêter l'agent après N minutes d'inactivité |
+| **Journalisation des captures d'écran** | Piste d'audit de chaque action | Enregistrer chaque capture d'écran avec horodatage et action effectuée |
+| **Isolation des identifiants** | Ne jamais exposer les mots de passe à l'agent | Utiliser des variables d'environnement ou des références de coffre-fort, jamais de mots de passe visibles à l'écran |
 
-### Guardrail Decision Matrix
+### Matrice de décision des garde-fous
 
 ```python
 print("Guardrail recommendations by risk level:")
@@ -279,103 +274,103 @@ for _, task in tasks.iterrows():
     print(f"  {task['task_id']} ({task['safety_risk']}): {', '.join(guardrails)}")
 ```
 
-!!! warning "Docker Sandbox is Essential"
-    **Never run a computer-use agent on your host machine.** Always use a Docker container or VM. If the agent misinterprets a screenshot and clicks "Delete All" instead of "Select All", the damage is contained to the sandbox. Anthropic's reference implementation uses a Docker container with a virtual display (Xvfb) specifically for this reason.
+!!! warning "Le bac à sable Docker est essentiel"
+    **N'exécutez jamais un agent utilisant l'ordinateur sur votre machine hôte.** Utilisez toujours un conteneur Docker ou une machine virtuelle. Si l'agent interprète mal une capture d'écran et clique sur « Tout supprimer » au lieu de « Tout sélectionner », les dégâts sont contenus dans le bac à sable. L'implémentation de référence d'Anthropic utilise un conteneur Docker avec un affichage virtuel (Xvfb) précisément pour cette raison.
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-057/broken_safety.py` has **3 bugs** in the safety analysis functions. Can you find and fix them all?
+Le fichier `lab-057/broken_safety.py` contient **3 bugs** dans les fonctions d'analyse de sécurité. Pouvez-vous les trouver et les corriger tous ?
 
-Run the self-tests to see which ones fail:
+Exécutez les auto-tests pour voir lesquels échouent :
 
 ```bash
 python lab-057/broken_safety.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Vous devriez voir **3 tests échoués**. Chaque test correspond à un bug :
 
-| Test | What it checks | Hint |
+| Test | Ce qu'il vérifie | Indice |
 |------|---------------|------|
-| Test 1 | Completion rate calculation | Denominator should be total tasks, not completed tasks |
-| Test 2 | High-risk task counting | Should check for `"high"`, not `"medium"` |
-| Test 3 | Average time for completed tasks | Must filter to completed tasks before computing mean |
+| Test 1 | Calcul du taux de complétion | Le dénominateur devrait être le nombre total de tâches, pas le nombre de tâches complétées |
+| Test 2 | Comptage des tâches à haut risque | Devrait vérifier `"high"`, pas `"medium"` |
+| Test 3 | Temps moyen pour les tâches complétées | Doit filtrer les tâches complétées avant de calculer la moyenne |
 
-Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done!
+Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, c'est terminé !
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What capabilities does Anthropic's `computer_20251124` tool provide?"
+??? question "**Q1 (Choix multiple) :** Quelles capacités l'outil `computer_20251124` d'Anthropic fournit-il ?"
 
-    - A) Only keyboard input for typing commands
-    - B) Screenshot capture, mouse control, and keyboard input
-    - C) Direct DOM access and HTML parsing
-    - D) API integration with desktop applications
+    - A) Uniquement la saisie clavier pour taper des commandes
+    - B) Capture d'écran, contrôle de la souris et saisie clavier
+    - C) Accès direct au DOM et analyse HTML
+    - D) Intégration API avec les applications de bureau
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Screenshot capture, mouse control, and keyboard input**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Capture d'écran, contrôle de la souris et saisie clavier**
 
-        The `computer_20251124` tool provides three core capabilities: (1) capturing screenshots of the current screen, (2) controlling the mouse (move, click, drag), and (3) sending keyboard input (typing text, pressing key combinations). It does *not* access the DOM or application APIs — it operates purely through the visual interface.
+        L'outil `computer_20251124` offre trois capacités principales : (1) capturer des images de l'écran actuel, (2) contrôler la souris (déplacer, cliquer, glisser) et (3) envoyer des entrées clavier (saisir du texte, appuyer sur des combinaisons de touches). Il n'accède *pas* au DOM ni aux API des applications — il opère uniquement via l'interface visuelle.
 
-??? question "**Q2 (Multiple Choice):** What is the primary purpose of running a computer-use agent inside a Docker sandbox?"
+??? question "**Q2 (Choix multiple) :** Quel est l'objectif principal de l'exécution d'un agent utilisant l'ordinateur dans un bac à sable Docker ?"
 
-    - A) To improve the agent's screenshot resolution
-    - B) To reduce API costs by batching requests
-    - C) To isolate the agent from the host system and contain potential damage
-    - D) To enable the agent to run multiple tasks in parallel
+    - A) Améliorer la résolution des captures d'écran de l'agent
+    - B) Réduire les coûts d'API en regroupant les requêtes
+    - C) Isoler l'agent du système hôte et contenir les dommages potentiels
+    - D) Permettre à l'agent d'exécuter plusieurs tâches en parallèle
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) To isolate the agent from the host system and contain potential damage**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C) Isoler l'agent du système hôte et contenir les dommages potentiels**
 
-        A Docker sandbox (or VM) creates a boundary between the agent and your real system. If the agent misinterprets a screenshot and performs an unintended action — like deleting files or clicking the wrong button — the damage is contained within the sandbox and doesn't affect your host machine, files, or accounts.
+        Un bac à sable Docker (ou une machine virtuelle) crée une frontière entre l'agent et votre système réel. Si l'agent interprète mal une capture d'écran et effectue une action non intentionnelle — comme supprimer des fichiers ou cliquer sur le mauvais bouton — les dommages sont contenus dans le bac à sable et n'affectent pas votre machine hôte, vos fichiers ou vos comptes.
 
-??? question "**Q3 (Run the Lab):** What is the overall task completion rate?"
+??? question "**Q3 (Exécuter le lab) :** Quel est le taux global de complétion des tâches ?"
 
-    Load [📥 `desktop_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) and calculate `completed.sum() / total`.
+    Chargez [📥 `desktop_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) et calculez `completed.sum() / total`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **70%**
 
-        7 out of 10 tasks were completed successfully. The 3 failed tasks (T07, T08, T10) were all **hard** difficulty — the agent struggled with complex multi-step workflows and security-sensitive operations.
+        7 tâches sur 10 ont été complétées avec succès. Les 3 tâches échouées (T07, T08, T10) étaient toutes de difficulté **difficile** — l'agent a eu du mal avec les flux de travail complexes à plusieurs étapes et les opérations sensibles en matière de sécurité.
 
-??? question "**Q4 (Run the Lab):** How many high-risk tasks are in the dataset?"
+??? question "**Q4 (Exécuter le lab) :** Combien de tâches à haut risque y a-t-il dans le jeu de données ?"
 
-    Filter tasks where `safety_risk == "high"` and count them.
+    Filtrez les tâches où `safety_risk == "high"` et comptez-les.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **2**
 
-        Tasks T08 (Log into a web application using credentials from a password manager) and T10 (Navigate a multi-step checkout process on an e-commerce site) are classified as high-risk. Both involve sensitive operations — credential handling and financial transactions — where agent errors could have serious consequences.
+        Les tâches T08 (Se connecter à une application web en utilisant des identifiants d'un gestionnaire de mots de passe) et T10 (Naviguer dans un processus de paiement à plusieurs étapes sur un site e-commerce) sont classées comme à haut risque. Les deux impliquent des opérations sensibles — gestion d'identifiants et transactions financières — où les erreurs de l'agent pourraient avoir des conséquences graves.
 
-??? question "**Q5 (Run the Lab):** What is the average number of actions for completed tasks only?"
+??? question "**Q5 (Exécuter le lab) :** Quel est le nombre moyen d'actions pour les tâches complétées uniquement ?"
 
-    Filter to `completed == True`, then compute `actions.mean()`.
+    Filtrez avec `completed == True`, puis calculez `actions.mean()`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **≈ 9.1**
 
-        Completed tasks: T01(5) + T02(7) + T03(6) + T04(12) + T05(9) + T06(14) + T09(11) = **64 actions** across **7 tasks**. Average = 64 ÷ 7 ≈ **9.14 actions per completed task**.
+        Tâches complétées : T01(5) + T02(7) + T03(6) + T04(12) + T05(9) + T06(14) + T09(11) = **64 actions** sur **7 tâches**. Moyenne = 64 ÷ 7 ≈ **9,14 actions par tâche complétée**.
 
 ---
 
-## Summary
+## Résumé
 
-| Topic | What You Learned |
+| Sujet | Ce que vous avez appris |
 |-------|-----------------|
-| Computer Use Concept | Screenshot→action loop: capture screen, reason with vision LLM, execute mouse/keyboard |
-| Benchmark Analysis | 70% completion rate; easy/medium tasks reliable, hard tasks challenging |
-| Safety Risks | High-risk tasks (credentials, payments) require extra guardrails |
-| Desktop vs Browser | Desktop tasks had higher success (80%) than browser tasks (60%) |
-| Guardrail Design | Domain allowlists, action confirmation, Docker sandboxing, credential isolation |
-| Docker Sandbox | Essential isolation layer — never run computer-use agents on your host |
+| Concept d'utilisation de l'ordinateur | Boucle capture d'écran → action : capturer l'écran, raisonner avec un LLM de vision, exécuter souris/clavier |
+| Analyse de benchmark | Taux de complétion de 70% ; tâches faciles/moyennes fiables, tâches difficiles problématiques |
+| Risques de sécurité | Les tâches à haut risque (identifiants, paiements) nécessitent des garde-fous supplémentaires |
+| Bureau vs navigateur | Les tâches de bureau ont un meilleur taux de réussite (80%) que les tâches de navigateur (60%) |
+| Conception des garde-fous | Listes blanches de domaines, confirmation d'action, bac à sable Docker, isolation des identifiants |
+| Bac à sable Docker | Couche d'isolation essentielle — n'exécutez jamais d'agents utilisant l'ordinateur sur votre hôte |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **[Lab 058](lab-058-browser-automation-cua.md)** — Browser Automation Agents with OpenAI CUA
-- Explore Anthropic's [computer-use reference implementation](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use) for live agent setup
+- **[Lab 058](lab-058-browser-automation-cua.md)** — Agents d'automatisation de navigateur avec OpenAI CUA
+- Explorez l'[implémentation de référence pour l'utilisation de l'ordinateur](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use) d'Anthropic pour la configuration d'un agent en direct

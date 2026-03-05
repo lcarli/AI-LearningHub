@@ -1,54 +1,49 @@
 ---
 tags: [claude-code, copilot-cli, coding-tools, developer-experience, comparison]
 ---
-# Lab 081: Agentic Coding Tools — Claude Code vs Copilot CLI
+# Lab 081: Ferramentas de Codificação Agênticas — Claude Code vs Copilot CLI
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span></span>
+  <span><strong>Nível:</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Trilha:</strong> Todas as trilhas</span>
+  <span><strong>Tempo:</strong> ~45 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span></span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- O que são **ferramentas de codificação agênticas** — assistentes de IA que operam diretamente no seu terminal com contexto completo da base de código
+- Comparar **Claude Code** e **GitHub Copilot CLI** em 10 tarefas reais de desenvolvimento
+- Entender como cada ferramenta lida com **compreensão de código**, **geração**, **depuração** e **fluxos de trabalho git**
+- Medir a **economia de tempo** em comparação com abordagens manuais para tarefas comuns de desenvolvimento
+- Depurar um script de análise comparativa quebrado corrigindo 3 bugs
 
+## Introdução
 
-## What You'll Learn
+Uma nova categoria de ferramentas para desenvolvedores surgiu: **assistentes de codificação agênticos** que rodam no seu terminal, leem toda a sua base de código e executam tarefas de múltiplas etapas de forma autônoma. Diferente dos copilots baseados em IDE que sugerem linhas ou blocos individuais, essas ferramentas podem pesquisar bases de código, escrever testes, criar commits, refatorar módulos e depurar pipelines com falhas — tudo a partir de um único prompt em linguagem natural.
 
-- What **agentic coding tools** are — AI assistants that operate directly in your terminal with full codebase context
-- Compare **Claude Code** and **GitHub Copilot CLI** across 10 real-world developer tasks
-- Understand how each tool handles **code understanding**, **generation**, **debugging**, and **git workflows**
-- Measure **time savings** versus manual approaches for common development tasks
-- Debug a broken comparison analysis script by fixing 3 bugs
+Duas ferramentas líderes neste espaço são:
 
-## Introduction
+| Ferramenta | Fornecedor | Como Funciona |
+|------------|-----------|---------------|
+| **Claude Code** | Anthropic | Agente de terminal que lê sua base de código, executa comandos e edita arquivos diretamente |
+| **GitHub Copilot CLI** | GitHub | Agente de terminal integrado ao ecossistema GitHub, executa comandos e edita arquivos |
 
-A new category of developer tools has emerged: **agentic coding assistants** that run in your terminal, read your entire codebase, and execute multi-step tasks autonomously. Unlike IDE-based copilots that suggest single lines or blocks, these tools can search codebases, write tests, create commits, refactor modules, and debug failing pipelines — all from a single natural-language prompt.
+Ambas as ferramentas compartilham um padrão comum: aceitam uma tarefa em linguagem natural, analisam sua base de código para contexto, planejam uma abordagem e a executam — frequentemente em uma única interação.
 
-Two leading tools in this space are:
+### O Cenário
 
-| Tool | Vendor | How It Works |
-|------|--------|-------------|
-| **Claude Code** | Anthropic | Terminal agent that reads your codebase, executes commands, and edits files directly |
-| **GitHub Copilot CLI** | GitHub | Terminal agent integrated with GitHub ecosystem, runs commands and edits files |
+Você é um **Tech Lead** na OutdoorGear Inc. avaliando assistentes de codificação baseados em terminal para sua equipe de engenharia. Você fez benchmark de ambas as ferramentas em **10 tarefas representativas de desenvolvimento** e agora precisa analisar os resultados para fazer uma recomendação.
 
-Both tools share a common pattern: they accept a natural-language task, analyze your codebase for context, plan an approach, and execute it — often in a single interaction.
+!!! info "Não é Necessário Instalar Ferramentas"
+    Este laboratório analisa um **dataset de benchmark pré-gravado** comparando tempos de conclusão de tarefas e taxas de sucesso. Você não precisa ter Claude Code ou Copilot CLI instalados — toda a análise é feita localmente com pandas.
 
-### The Scenario
+## Pré-requisitos
 
-You are a **Tech Lead** at OutdoorGear Inc. evaluating terminal-based coding assistants for your engineering team. You've benchmarked both tools across **10 representative developer tasks** and now need to analyze the results to make a recommendation.
-
-!!! info "No Tool Installation Required"
-    This lab analyzes a **pre-recorded benchmark dataset** comparing task completion times and success rates. You don't need Claude Code or Copilot CLI installed — all analysis is done locally with pandas.
-
-## Prerequisites
-
-| Requirement | Why |
-|---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` library | DataFrame operations |
+| Requisito | Por quê |
+|-----------|---------|
+| Python 3.10+ | Executar scripts de análise |
+| Biblioteca `pandas` | Operações com DataFrame |
 
 ```bash
 pip install pandas
@@ -56,27 +51,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-081/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o laboratório"
+    Salve todos os arquivos em uma pasta `lab-081/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_tools.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/broken_tools.py) |
-| `coding_tools_comparison.csv` | Dataset — 10 tasks compared across tools | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/coding_tools_comparison.csv) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_tools.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/broken_tools.py) |
+| `coding_tools_comparison.csv` | Dataset — 10 tarefas comparadas entre ferramentas | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/coding_tools_comparison.csv) |
 
 ---
 
-## Step 1: Understanding Agentic Coding Tools
+## Etapa 1: Entendendo Ferramentas de Codificação Agênticas
 
-Both Claude Code and Copilot CLI follow a similar agent loop:
+Tanto Claude Code quanto Copilot CLI seguem um loop de agente similar:
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -90,22 +85,22 @@ Both Claude Code and Copilot CLI follow a similar agent loop:
                      └──────────────┘
 ```
 
-Key capabilities shared by both tools:
+Capacidades principais compartilhadas por ambas as ferramentas:
 
-| Capability | Description |
-|-----------|-------------|
-| **Codebase understanding** | Read and reason about project structure, dependencies, and patterns |
-| **Code generation** | Write new code (functions, tests, modules) aligned with project conventions |
-| **Debugging** | Analyze errors, trace issues, and apply fixes |
-| **Git workflows** | Stage changes, create commits with conventional messages, manage branches |
-| **Refactoring** | Restructure code while preserving behavior |
-| **Code review** | Review changes and suggest improvements |
+| Capacidade | Descrição |
+|-----------|-----------|
+| **Compreensão de base de código** | Ler e raciocinar sobre estrutura do projeto, dependências e padrões |
+| **Geração de código** | Escrever novo código (funções, testes, módulos) alinhado com as convenções do projeto |
+| **Depuração** | Analisar erros, rastrear problemas e aplicar correções |
+| **Fluxos de trabalho git** | Preparar alterações, criar commits com mensagens convencionais, gerenciar branches |
+| **Refatoração** | Reestruturar código preservando o comportamento |
+| **Revisão de código** | Revisar alterações e sugerir melhorias |
 
 ---
 
-## Step 2: Load the Benchmark Dataset
+## Etapa 2: Carregar o Dataset de Benchmark
 
-The dataset contains **10 tasks** benchmarked across both tools and manual completion:
+O dataset contém **10 tarefas** com benchmark em ambas as ferramentas e conclusão manual:
 
 ```python
 import pandas as pd
@@ -117,7 +112,7 @@ print(f"\nDataset preview:")
 print(tasks[["task_id", "task_description", "category"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total tasks: 10
@@ -133,9 +128,9 @@ Categories: ['code_generation', 'code_review', 'code_understanding', 'codebase_s
 
 ---
 
-## Step 3: Compare Success Rates
+## Etapa 3: Comparar Taxas de Sucesso
 
-Calculate success rates for each tool:
+Calcule as taxas de sucesso para cada ferramenta:
 
 ```python
 for col in ["claude_code_success", "copilot_cli_success"]:
@@ -154,7 +149,7 @@ if len(failed_cp) > 0:
     print(failed_cp[["task_id", "task_description", "category"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Claude Code:  10/10 = 100%
@@ -166,13 +161,13 @@ Copilot CLI failures:
 ```
 
 !!! tip "Insight"
-    Claude Code completed all 10 tasks successfully (100%). Copilot CLI completed 9 out of 10 (90%), failing only on T10 — debugging a failing CI pipeline, which requires deep context about CI configuration, environment variables, and build systems.
+    Claude Code completou todas as 10 tarefas com sucesso (100%). Copilot CLI completou 9 de 10 (90%), falhando apenas na T10 — depurar um pipeline de CI com falha, que requer contexto profundo sobre configuração de CI, variáveis de ambiente e sistemas de build.
 
 ---
 
-## Step 4: Compare Completion Times
+## Etapa 4: Comparar Tempos de Conclusão
 
-Analyze how fast each tool completes tasks:
+Analise a velocidade de conclusão de cada ferramenta:
 
 ```python
 cc_avg = tasks["claude_code_time_sec"].mean()
@@ -189,7 +184,7 @@ print(f"  Claude Code:  {manual_avg/cc_avg:.0f}x faster")
 print(f"  Copilot CLI:  {manual_avg/cp_avg:.0f}x faster")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Average completion time:
@@ -211,13 +206,13 @@ for _, t in tasks.iterrows():
 ```
 
 !!! tip "Insight"
-    Claude Code is faster on average (20.5s vs 24.5s). The only task where Copilot CLI was faster is **T06 (git workflow)** — creating a conventional commit message — likely due to tighter GitHub integration.
+    Claude Code é mais rápido em média (20.5s vs 24.5s). A única tarefa onde Copilot CLI foi mais rápido é **T06 (git workflow)** — criar uma mensagem de commit convencional — provavelmente devido à integração mais próxima com o GitHub.
 
 ---
 
-## Step 5: Analyze by Task Category
+## Etapa 5: Analisar por Categoria de Tarefa
 
-Compare tool performance across different task types:
+Compare o desempenho das ferramentas em diferentes tipos de tarefa:
 
 ```python
 print("Performance by category:")
@@ -229,7 +224,7 @@ for _, row in tasks.iterrows():
           f"Advantage: {row['tool_advantage']}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
   code_understanding: CC ✅ ( 8s)  CP ✅ (12s)  Advantage: 10x faster
@@ -244,13 +239,13 @@ for _, row in tasks.iterrows():
              devops: CC ✅ (20s)  CP ❌ (25s)  Advantage: 45x faster
 ```
 
-Both tools provide **massive speedups** over manual work (8x to 75x faster), with the biggest gains in scaffolding and codebase search tasks.
+Ambas as ferramentas fornecem **ganhos massivos de velocidade** em relação ao trabalho manual (8x a 75x mais rápido), com os maiores ganhos em tarefas de scaffolding e busca na base de código.
 
 ---
 
-## Step 6: Making a Recommendation
+## Etapa 6: Fazendo uma Recomendação
 
-Summarize the comparison:
+Resuma a comparação:
 
 ```python
 print("=== Tool Comparison Summary ===\n")
@@ -262,102 +257,102 @@ print(f"{'Tasks Won (speed)':<30} {'9':>12} {'1':>12}")
 print(f"{'Manual Speedup':<30} {f'{manual_avg/cc_avg:.0f}x':>12} {f'{manual_avg/cp_avg:.0f}x':>12}")
 ```
 
-!!! tip "Recommendation"
-    Both tools deliver exceptional productivity gains. **Claude Code** edges ahead in this benchmark with perfect success rate and faster average times. **Copilot CLI** excels at git workflows and offers tighter GitHub integration. For teams already in the GitHub ecosystem, Copilot CLI is a natural choice; for maximum reliability across diverse tasks, Claude Code is the stronger option.
+!!! tip "Recomendação"
+    Ambas as ferramentas entregam ganhos excepcionais de produtividade. **Claude Code** se destaca neste benchmark com taxa de sucesso perfeita e tempos médios mais rápidos. **Copilot CLI** se sobressai em fluxos de trabalho git e oferece integração mais próxima com o GitHub. Para equipes já no ecossistema GitHub, Copilot CLI é uma escolha natural; para máxima confiabilidade em tarefas diversas, Claude Code é a opção mais forte.
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-081/broken_tools.py` has **3 bugs** in the analysis functions. Can you find and fix them all?
+O arquivo `lab-081/broken_tools.py` tem **3 bugs** nas funções de análise. Você consegue encontrar e corrigir todos?
 
-Run the self-tests to see which ones fail:
+Execute os auto-testes para ver quais falham:
 
 ```bash
 python lab-081/broken_tools.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Você deve ver **3 testes com falha**. Cada teste corresponde a um bug:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Average speedup calculation | Should compute speedup from Claude Code times, not Copilot CLI times |
-| Test 2 | Both-tools success rate | Should use AND (`&`) not OR (`|`) for "both succeeded" |
-| Test 3 | Fastest tool detection | Comparison operator is reversed |
+| Teste | O que verifica | Dica |
+|-------|---------------|------|
+| Teste 1 | Cálculo de speedup médio | Deve calcular o speedup a partir dos tempos do Claude Code, não do Copilot CLI |
+| Teste 2 | Taxa de sucesso de ambas as ferramentas | Deve usar AND (`&`) e não OR (`|`) para "ambas tiveram sucesso" |
+| Teste 3 | Detecção da ferramenta mais rápida | O operador de comparação está invertido |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
+Corrija todos os 3 bugs e execute novamente. Quando você ver `All passed!`, está pronto!
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What distinguishes agentic coding tools from traditional IDE-based copilots?"
+??? question "**Q1 (Múltipla Escolha):** O que distingue ferramentas de codificação agênticas dos copilots tradicionais baseados em IDE?"
 
-    - A) They only work with Python code
-    - B) They operate in the terminal, read entire codebases, and execute multi-step tasks autonomously
-    - C) They require a GPU to run locally
-    - D) They only suggest single-line completions
+    - A) Elas só funcionam com código Python
+    - B) Elas operam no terminal, leem bases de código inteiras e executam tarefas de múltiplas etapas de forma autônoma
+    - C) Elas requerem uma GPU para rodar localmente
+    - D) Elas só sugerem completamentos de uma única linha
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) They operate in the terminal, read entire codebases, and execute multi-step tasks autonomously**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Elas operam no terminal, leem bases de código inteiras e executam tarefas de múltiplas etapas de forma autônoma**
 
-        Unlike IDE-based copilots that suggest code completions within an editor, agentic coding tools like Claude Code and Copilot CLI run in the terminal, analyze your full project structure, and can perform complex multi-step tasks — searching codebases, writing tests, creating commits, and debugging pipelines — all from a single natural-language prompt.
+        Diferente dos copilots baseados em IDE que sugerem completamentos de código dentro de um editor, ferramentas de codificação agênticas como Claude Code e Copilot CLI rodam no terminal, analisam a estrutura completa do seu projeto e podem realizar tarefas complexas de múltiplas etapas — pesquisar bases de código, escrever testes, criar commits e depurar pipelines — tudo a partir de um único prompt em linguagem natural.
 
-??? question "**Q2 (Multiple Choice):** What is the primary advantage of agentic coding tools over manual development?"
+??? question "**Q2 (Múltipla Escolha):** Qual é a principal vantagem das ferramentas de codificação agênticas sobre o desenvolvimento manual?"
 
-    - A) They produce bug-free code every time
-    - B) They eliminate the need for code review
-    - C) They dramatically reduce time for common tasks (often 10x–75x faster)
-    - D) They replace the need for version control
+    - A) Elas produzem código sem bugs todas as vezes
+    - B) Elas eliminam a necessidade de revisão de código
+    - C) Elas reduzem drasticamente o tempo para tarefas comuns (frequentemente 10x–75x mais rápido)
+    - D) Elas substituem a necessidade de controle de versão
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) They dramatically reduce time for common tasks (often 10x–75x faster)**
+    ??? success "✅ Revelar Resposta"
+        **Correto: C) Elas reduzem drasticamente o tempo para tarefas comuns (frequentemente 10x–75x mais rápido)**
 
-        The benchmark shows speedups ranging from 8x (git workflows) to 75x (scaffolding) compared to manual completion. While the tools don't produce perfect code every time and code review remains important, the time savings for routine tasks are substantial.
+        O benchmark mostra acelerações variando de 8x (fluxos de trabalho git) a 75x (scaffolding) em comparação com a conclusão manual. Embora as ferramentas não produzam código perfeito todas as vezes e a revisão de código continue importante, a economia de tempo para tarefas rotineiras é substancial.
 
-??? question "**Q3 (Run the Lab):** What is Claude Code's success rate across all 10 tasks?"
+??? question "**Q3 (Execute o Laboratório):** Qual é a taxa de sucesso do Claude Code em todas as 10 tarefas?"
 
-    Load [📥 `coding_tools_comparison.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/coding_tools_comparison.csv) and count `claude_code_success == True`.
+    Carregue [📥 `coding_tools_comparison.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/coding_tools_comparison.csv) e conte `claude_code_success == True`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **100% (10/10)**
 
-        Claude Code successfully completed all 10 tasks in the benchmark, including code understanding, generation, debugging, refactoring, git workflows, code review, scaffolding, migration, and DevOps tasks.
+        Claude Code completou com sucesso todas as 10 tarefas no benchmark, incluindo compreensão de código, geração, depuração, refatoração, fluxos de trabalho git, revisão de código, scaffolding, migração e tarefas de DevOps.
 
-??? question "**Q4 (Run the Lab):** What is Copilot CLI's success rate, and which task did it fail?"
+??? question "**Q4 (Execute o Laboratório):** Qual é a taxa de sucesso do Copilot CLI, e em qual tarefa ele falhou?"
 
-    Count `copilot_cli_success == True` and identify the failed task.
+    Conte `copilot_cli_success == True` e identifique a tarefa que falhou.
 
-    ??? success "✅ Reveal Answer"
-        **90% (9/10) — failed T10 (Debug a failing CI pipeline)**
+    ??? success "✅ Revelar Resposta"
+        **90% (9/10) — falhou na T10 (Depurar um pipeline de CI com falha)**
 
-        Copilot CLI succeeded on 9 out of 10 tasks. The only failure was T10 — debugging a failing CI pipeline — which requires deep context about CI configuration, environment variables, and build system interactions.
+        Copilot CLI teve sucesso em 9 de 10 tarefas. A única falha foi na T10 — depurar um pipeline de CI com falha — que requer contexto profundo sobre configuração de CI, variáveis de ambiente e interações do sistema de build.
 
-??? question "**Q5 (Run the Lab):** Which tool is fastest overall based on average completion time?"
+??? question "**Q5 (Execute o Laboratório):** Qual ferramenta é a mais rápida no geral com base no tempo médio de conclusão?"
 
-    Compute `claude_code_time_sec.mean()` and `copilot_cli_time_sec.mean()`.
+    Calcule `claude_code_time_sec.mean()` e `copilot_cli_time_sec.mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **Claude Code (20.5s avg vs 24.5s avg)**
+    ??? success "✅ Revelar Resposta"
+        **Claude Code (20.5s média vs 24.5s média)**
 
-        Claude Code's average completion time is 20.5 seconds compared to Copilot CLI's 24.5 seconds. Claude Code was faster on 9 out of 10 tasks; Copilot CLI was faster only on T06 (git workflow, 3s vs 4s).
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| Agentic Coding Tools | Terminal-based AI assistants that read codebases and execute multi-step tasks |
-| Claude Code | 100% success rate, 20.5s average, strongest at complex tasks |
-| Copilot CLI | 90% success rate, 24.5s average, excels at git workflows |
-| Time Savings | Both tools provide 8x–75x speedup over manual development |
-| Task Categories | Both handle code understanding, generation, review, and refactoring well |
-| Recommendation | Claude Code for reliability; Copilot CLI for GitHub integration |
+        O tempo médio de conclusão do Claude Code é 20.5 segundos comparado com 24.5 segundos do Copilot CLI. Claude Code foi mais rápido em 9 de 10 tarefas; Copilot CLI foi mais rápido apenas na T06 (git workflow, 3s vs 4s).
 
 ---
 
-## Next Steps
+## Resumo
+
+| Tópico | O que Você Aprendeu |
+|--------|---------------------|
+| Ferramentas de Codificação Agênticas | Assistentes de IA baseados em terminal que leem bases de código e executam tarefas de múltiplas etapas |
+| Claude Code | 100% de taxa de sucesso, 20.5s em média, mais forte em tarefas complexas |
+| Copilot CLI | 90% de taxa de sucesso, 24.5s em média, se destaca em fluxos de trabalho git |
+| Economia de Tempo | Ambas as ferramentas fornecem aceleração de 8x–75x sobre o desenvolvimento manual |
+| Categorias de Tarefas | Ambas lidam bem com compreensão, geração, revisão e refatoração de código |
+| Recomendação | Claude Code para confiabilidade; Copilot CLI para integração com GitHub |
+
+---
+
+## Próximos Passos
 
 - **[Lab 082](lab-082-agent-guardrails.md)** — Agent Guardrails: NeMo & Azure Content Safety
-- Try both tools on your own codebase to see which fits your workflow best
+- Experimente ambas as ferramentas na sua própria base de código para ver qual se adapta melhor ao seu fluxo de trabalho

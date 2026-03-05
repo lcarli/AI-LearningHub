@@ -1,114 +1,109 @@
 ---
 tags: [on-device, phi-silica, windows-ai, npu, edge-ai, csharp]
 ---
-# Lab 062: On-Device Agents with Phi Silica — Windows AI APIs
+# Lab 062: Agentes On-Device com Phi Silica — Windows AI APIs
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock benchmark data (no NPU hardware required)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Caminho:</strong> Todos os caminhos</span>
+  <span><strong>Tempo:</strong> ~90 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados de benchmark simulados (nenhum hardware NPU necessário)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O Que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- How **Windows AI APIs** enable on-device inference using the Neural Processing Unit (NPU)
-- What **Phi Silica** is — a model optimized for Windows NPU hardware
-- Compare **NPU vs cloud** latency for agent skills (summarize, classify, rewrite, text_to_table)
-- Handle **NPU unavailability** gracefully with cloud fallback strategies
-- Measure **quality match rates** between on-device and cloud inference
-- Build agents that work **offline-first** with intelligent degradation
+- Como **Windows AI APIs** permitem inferência on-device usando a Neural Processing Unit (NPU)
+- O que é **Phi Silica** — um modelo otimizado para hardware NPU do Windows
+- Comparar latência **NPU vs nuvem** para habilidades de agentes (resumir, classificar, reescrever, texto_para_tabela)
+- Lidar com **indisponibilidade do NPU** de forma elegante com estratégias de fallback para a nuvem
+- Medir **taxas de correspondência de qualidade** entre inferência on-device e na nuvem
+- Construir agentes que funcionam **offline-first** com degradação inteligente
 
 ---
 
-## Introduction
+## Introdução
 
-Cloud-based AI is powerful, but it requires internet connectivity, introduces latency, and sends data off-device. **Windows AI APIs** with **Phi Silica** bring inference directly to the NPU (Neural Processing Unit) — a dedicated AI accelerator built into modern Windows devices.
+IA baseada em nuvem é poderosa, mas requer conectividade com a internet, introduz latência e envia dados para fora do dispositivo. **Windows AI APIs** com **Phi Silica** trazem a inferência diretamente para o NPU (Neural Processing Unit) — um acelerador de IA dedicado integrado em dispositivos Windows modernos.
 
-On-device inference means: zero network latency, full data privacy, offline capability, and no per-token cost. The trade-off is that not every task can run on the NPU, and quality may differ from cloud models. This lab measures exactly where on-device inference shines and where you need cloud fallback.
+Inferência on-device significa: zero latência de rede, privacidade total dos dados, capacidade offline e sem custo por token. O trade-off é que nem toda tarefa pode ser executada no NPU, e a qualidade pode diferir dos modelos na nuvem. Este lab mede exatamente onde a inferência on-device se destaca e onde você precisa de fallback para a nuvem.
 
-### The Benchmark
+### O Benchmark
 
-You'll analyze **15 tasks** across 4 categories, comparing NPU (Phi Silica) vs cloud inference:
+Você analisará **15 tarefas** em 4 categorias, comparando NPU (Phi Silica) vs inferência na nuvem:
 
-| Category | Count | Example |
-|----------|-------|---------|
-| **Summarize** | 4 | Meeting transcript, article, email thread, policy doc |
-| **Classify** | 4 | Sentiment, intent, priority, language detection |
-| **Rewrite** | 4 | Tone adjustment, simplification, formalization, translation |
-| **Text-to-table** | 3 | Extract structured data from unstructured text |
+| Categoria | Quantidade | Exemplo |
+|-----------|-----------|---------|
+| **Resumir** | 4 | Transcrição de reunião, artigo, thread de e-mail, documento de política |
+| **Classificar** | 4 | Sentimento, intenção, prioridade, detecção de idioma |
+| **Reescrever** | 4 | Ajuste de tom, simplificação, formalização, tradução |
+| **Texto-para-tabela** | 3 | Extrair dados estruturados de texto não estruturado |
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 ```bash
 pip install pandas
 ```
 
-This lab analyzes pre-computed benchmark results — no NPU hardware, Windows AI SDK, or C# toolchain required. To run live on-device inference, you would need a Copilot+ PC with NPU and the Windows AI APIs.
+Este lab analisa resultados de benchmark pré-computados — nenhum hardware NPU, Windows AI SDK ou toolchain C# é necessário. Para executar inferência on-device ao vivo, você precisaria de um Copilot+ PC com NPU e as Windows AI APIs.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-062/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-062/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_ondevice.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/broken_ondevice.py) |
-| `ondevice_tasks.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_ondevice.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/broken_ondevice.py) |
+| `ondevice_tasks.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv) |
 
 ---
 
-## Part 1: Understanding On-Device Inference
+## Parte 1: Entendendo Inferência On-Device
 
-### Step 1: NPU architecture
+### Etapa 1: Arquitetura NPU
 
-The Neural Processing Unit (NPU) is a dedicated AI accelerator designed for efficient matrix operations:
+A Neural Processing Unit (NPU) é um acelerador de IA dedicado projetado para operações eficientes de matrizes:
 
 ```
-Cloud Inference:
-  App → [Network] → [Cloud GPU] → [Network] → Response
-  Latency: ~800-1200ms
+Inferência na Nuvem:
+  App → [Rede] → [GPU na Nuvem] → [Rede] → Resposta
+  Latência: ~800-1200ms
 
-NPU Inference (Phi Silica):
-  App → [Local NPU] → Response
-  Latency: ~50-120ms
+Inferência NPU (Phi Silica):
+  App → [NPU Local] → Resposta
+  Latência: ~50-120ms
 ```
 
-Key concepts:
+Conceitos-chave:
 
-| Concept | Description |
-|---------|-------------|
-| **NPU** | Neural Processing Unit — dedicated AI hardware in modern CPUs |
-| **Phi Silica** | Microsoft's model optimized for Windows NPU execution |
-| **Windows AI APIs** | System-level APIs for on-device AI inference |
-| **Readiness check** | API to verify NPU availability before attempting inference |
-| **Graceful fallback** | Strategy to fall back to cloud when NPU is unavailable |
+| Conceito | Descrição |
+|----------|-----------|
+| **NPU** | Neural Processing Unit — hardware de IA dedicado em CPUs modernas |
+| **Phi Silica** | Modelo da Microsoft otimizado para execução no NPU do Windows |
+| **Windows AI APIs** | APIs de nível de sistema para inferência de IA on-device |
+| **Verificação de disponibilidade** | API para verificar disponibilidade do NPU antes de tentar inferência |
+| **Fallback elegante** | Estratégia de fallback para a nuvem quando o NPU não está disponível |
 
 !!! info "Phi Silica vs Phi-4 Mini"
-    Phi Silica is specifically optimized for Windows NPU hardware — it's not just a smaller model, but one designed for the NPU's architecture. Phi-4 Mini (Lab 061) runs via ONNX Runtime on CPU/GPU. Both offer on-device inference but target different hardware paths.
+    Phi Silica é especificamente otimizado para hardware NPU do Windows — não é apenas um modelo menor, mas um projetado para a arquitetura do NPU. Phi-4 Mini (Lab 061) executa via ONNX Runtime em CPU/GPU. Ambos oferecem inferência on-device, mas visam caminhos de hardware diferentes.
 
 ---
 
-## Part 2: Load Benchmark Data
+## Parte 2: Carregar Dados de Benchmark
 
-### Step 2: Load [📥 `ondevice_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv)
+### Etapa 2: Carregar [📥 `ondevice_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv)
 
-The benchmark dataset contains results from running 15 tasks through NPU and cloud inference:
+O conjunto de dados de benchmark contém resultados da execução de 15 tarefas através de inferência NPU e nuvem:
 
 ```python
 # ondevice_analysis.py
@@ -121,7 +116,7 @@ print(f"Categories: {bench['category'].unique().tolist()}")
 print(bench[["task_id", "category", "description", "npu_available"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Tasks: 15
@@ -147,9 +142,9 @@ task_id      category                      description  npu_available
 
 ---
 
-## Part 3: NPU Availability
+## Parte 3: Disponibilidade do NPU
 
-### Step 3: Check NPU readiness across tasks
+### Etapa 3: Verificar disponibilidade do NPU nas tarefas
 
 ```python
 # NPU availability
@@ -164,7 +159,7 @@ print("\nTasks without NPU support:")
 print(no_npu[["task_id", "category", "description"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 NPU available: 14/15
@@ -175,14 +170,14 @@ task_id category                   description
     T12  rewrite  Translation (EN→ES snippet)
 ```
 
-!!! warning "NPU Limitation"
-    Translation (T12) is not available on the NPU — Phi Silica is optimized for English-language tasks and does not support cross-language translation on-device. Your agent must detect this and fall back to cloud inference.
+!!! warning "Limitação do NPU"
+    Tradução (T12) não está disponível no NPU — Phi Silica é otimizado para tarefas em inglês e não suporta tradução entre idiomas on-device. Seu agente deve detectar isso e fazer fallback para inferência na nuvem.
 
 ---
 
-## Part 4: Quality Match Analysis
+## Parte 4: Análise de Correspondência de Qualidade
 
-### Step 4: Compare NPU vs cloud quality
+### Etapa 4: Comparar qualidade NPU vs nuvem
 
 ```python
 # Quality match for NPU-available tasks only
@@ -199,7 +194,7 @@ print("\nQuality mismatches (NPU available but lower quality):")
 print(mismatches[["task_id", "category", "description"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Quality match (NPU-available tasks): 13/14 = 93%
@@ -209,8 +204,8 @@ task_id      category              description
     T04     summarize  Policy doc summary
 ```
 
-!!! info "Quality Insight"
-    93% of NPU-available tasks match cloud quality. The only mismatch is T04 (policy document summary) — a complex document that pushes the on-device model's context limits. For 13 of 14 available tasks, NPU quality is indistinguishable from cloud.
+!!! info "Insight de Qualidade"
+    93% das tarefas disponíveis no NPU correspondem à qualidade da nuvem. A única incompatibilidade é T04 (resumo de documento de política) — um documento complexo que ultrapassa os limites de contexto do modelo on-device. Para 13 das 14 tarefas disponíveis, a qualidade do NPU é indistinguível da nuvem.
 
 ```python
 # Quality by category (NPU-available tasks only)
@@ -222,7 +217,7 @@ for cat in npu_tasks["category"].unique():
     print(f"  {cat:>13}: {matches}/{total}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Quality match by category:
@@ -234,9 +229,9 @@ Quality match by category:
 
 ---
 
-## Part 5: Latency Comparison
+## Parte 5: Comparação de Latência
 
-### Step 5: NPU vs cloud latency
+### Etapa 5: Latência NPU vs nuvem
 
 ```python
 # Average NPU latency (available tasks only)
@@ -250,7 +245,7 @@ print(f"Cloud avg latency: {cloud_avg:.1f}ms")
 print(f"Speedup:           {speedup:.0f}×")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 NPU avg latency:   83.1ms
@@ -267,16 +262,16 @@ for _, row in npu_tasks.iterrows():
           f"Cloud={row['cloud_latency_ms']:.0f}ms")
 ```
 
-!!! info "Latency Advantage"
-    NPU inference averages 83.1ms — over **10× faster** than cloud at 874.3ms. This is even faster than CPU-based ONNX Runtime (Lab 061's 82.3ms) because the NPU is purpose-built for AI workloads. For real-time agent experiences, this sub-100ms latency enables truly responsive interactions.
+!!! info "Vantagem de Latência"
+    Inferência NPU tem média de 83,1ms — mais de **10× mais rápido** que a nuvem com 874,3ms. Isso é ainda mais rápido que ONNX Runtime baseado em CPU (82,3ms do Lab 061) porque o NPU é construído especificamente para cargas de trabalho de IA. Para experiências de agentes em tempo real, esta latência abaixo de 100ms permite interações verdadeiramente responsivas.
 
 ---
 
-## Part 6: Graceful Fallback Strategy
+## Parte 6: Estratégia de Fallback Elegante
 
-### Step 6: Implement fallback logic
+### Etapa 6: Implementar lógica de fallback
 
-The correct pattern for on-device agents is: **check readiness → attempt NPU → fall back to cloud**:
+O padrão correto para agentes on-device é: **verificar disponibilidade → tentar NPU → fazer fallback para a nuvem**:
 
 ```csharp
 // C# — Windows AI API pattern
@@ -299,8 +294,8 @@ async Task<string> RunAgentSkill(string input, SkillType skill)
 }
 ```
 
-!!! warning "Anti-pattern: No Readiness Check"
-    Never assume the NPU is available. Always call `CheckReadinessAsync()` first. Some tasks (like translation) are not supported on-device, and NPU availability can change based on hardware and driver state.
+!!! warning "Anti-padrão: Sem Verificação de Disponibilidade"
+    Nunca assuma que o NPU está disponível. Sempre chame `CheckReadinessAsync()` primeiro. Algumas tarefas (como tradução) não são suportadas on-device, e a disponibilidade do NPU pode mudar com base no hardware e no estado do driver.
 
 ```python
 # Simulate fallback strategy
@@ -317,18 +312,18 @@ for _, row in bench.iterrows():
 
 ---
 
-## Part 7: Decision Framework
+## Parte 7: Framework de Decisão
 
-### Step 7: When to use on-device inference
+### Etapa 7: Quando usar inferência on-device
 
-| Scenario | Recommended | Why |
-|----------|------------|-----|
-| **Offline operation** | NPU | No internet required |
-| **Privacy-sensitive data** | NPU | Data never leaves device |
-| **Real-time agent UX** | NPU | Sub-100ms latency |
-| **Translation** | Cloud | NPU doesn't support cross-language |
-| **Complex documents** | Cloud (or NPU with fallback) | NPU may have quality gaps on complex inputs |
-| **Batch processing** | NPU | Zero per-token cost at scale |
+| Cenário | Recomendado | Por quê |
+|---------|------------|---------|
+| **Operação offline** | NPU | Sem necessidade de internet |
+| **Dados sensíveis à privacidade** | NPU | Dados nunca saem do dispositivo |
+| **UX de agente em tempo real** | NPU | Latência abaixo de 100ms |
+| **Tradução** | Nuvem | NPU não suporta tradução entre idiomas |
+| **Documentos complexos** | Nuvem (ou NPU com fallback) | NPU pode ter lacunas de qualidade em entradas complexas |
+| **Processamento em lote** | NPU | Zero custo por token em escala |
 
 ```python
 # Summary dashboard
@@ -353,97 +348,97 @@ print("""
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-062/broken_ondevice.py` has **3 bugs** in the on-device analysis functions. Run the self-tests:
+O arquivo `lab-062/broken_ondevice.py` tem **3 bugs** nas funções de análise on-device. Execute os autotestes:
 
 ```bash
 python lab-062/broken_ondevice.py
 ```
 
-You should see **3 failed tests**:
+Você deverá ver **3 testes falhando**:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | NPU availability count | Which column represents availability — `npu_available` or `quality_match`? |
-| Test 2 | Speedup calculation | Is the ratio `npu / cloud` or `cloud / npu`? |
-| Test 3 | Quality match filter | Are you filtering for `npu_available == True` before checking quality? |
+| Teste | O que verifica | Dica |
+|-------|---------------|------|
+| Teste 1 | Contagem de disponibilidade do NPU | Qual coluna representa disponibilidade — `npu_available` ou `quality_match`? |
+| Teste 2 | Cálculo de speedup | A proporção é `npu / cloud` ou `cloud / npu`? |
+| Teste 3 | Filtro de correspondência de qualidade | Você está filtrando por `npu_available == True` antes de verificar a qualidade? |
 
-Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
+Corrija todos os 3 bugs e execute novamente até ver `🎉 All 3 tests passed`.
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What is the primary advantage of NPU-based inference with Phi Silica?"
+??? question "**Q1 (Múltipla Escolha):** Qual é a principal vantagem da inferência baseada em NPU com Phi Silica?"
 
-    - A) Higher accuracy than all cloud models
-    - B) Fast inference without internet connectivity
-    - C) Support for all languages and modalities
-    - D) Unlimited context window size
+    - A) Maior precisão que todos os modelos na nuvem
+    - B) Inferência rápida sem conectividade com a internet
+    - C) Suporte para todos os idiomas e modalidades
+    - D) Tamanho ilimitado da janela de contexto
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Fast inference without internet connectivity**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Inferência rápida sem conectividade com a internet**
 
-        The NPU enables on-device inference at ~83ms average — no network round-trip, no internet dependency, and full data privacy. It doesn't claim higher accuracy than cloud models (quality match is 93%), and it has limitations (e.g., no translation support). The key advantage is the combination of speed, privacy, and offline capability.
+        O NPU permite inferência on-device com ~83ms em média — sem round-trip de rede, sem dependência de internet e privacidade total dos dados. Não afirma ter maior precisão que modelos na nuvem (correspondência de qualidade é 93%), e tem limitações (ex.: sem suporte a tradução). A vantagem principal é a combinação de velocidade, privacidade e capacidade offline.
 
-??? question "**Q2 (Multiple Choice):** What is the correct pattern for handling NPU unavailability in a production agent?"
+??? question "**Q2 (Múltipla Escolha):** Qual é o padrão correto para lidar com indisponibilidade do NPU em um agente de produção?"
 
-    - A) Crash with an error message telling the user to upgrade hardware
-    - B) Always use cloud inference to avoid NPU issues entirely
-    - C) Check NPU readiness first, then fall back to cloud if unavailable
-    - D) Retry NPU inference 10 times before giving up
+    - A) Falhar com uma mensagem de erro dizendo ao usuário para atualizar o hardware
+    - B) Sempre usar inferência na nuvem para evitar problemas com NPU
+    - C) Verificar a disponibilidade do NPU primeiro, depois fazer fallback para a nuvem se indisponível
+    - D) Tentar inferência no NPU 10 vezes antes de desistir
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) Check NPU readiness first, then fall back to cloud if unavailable**
+    ??? success "✅ Revelar Resposta"
+        **Correto: C) Verificar a disponibilidade do NPU primeiro, depois fazer fallback para a nuvem se indisponível**
 
-        The correct pattern is: check readiness → attempt NPU → fall back to cloud. This ensures the agent works on all hardware configurations and for all task types. Some tasks (like translation) are never available on NPU, and hardware availability can vary. A graceful fallback provides the best user experience — fast on-device when possible, reliable cloud when needed.
+        O padrão correto é: verificar disponibilidade → tentar NPU → fazer fallback para a nuvem. Isso garante que o agente funcione em todas as configurações de hardware e para todos os tipos de tarefas. Algumas tarefas (como tradução) nunca estão disponíveis no NPU, e a disponibilidade de hardware pode variar. Um fallback elegante proporciona a melhor experiência do usuário — rápido on-device quando possível, nuvem confiável quando necessário.
 
-??? question "**Q3 (Run the Lab):** How many tasks have NPU unavailable?"
+??? question "**Q3 (Execute o Lab):** Quantas tarefas têm NPU indisponível?"
 
-    Calculate `(bench["npu_available"] == False).sum()`.
+    Calcule `(bench["npu_available"] == False).sum()`.
 
-    ??? success "✅ Reveal Answer"
-        **1 task (T12 — Translation)**
+    ??? success "✅ Revelar Resposta"
+        **1 tarefa (T12 — Tradução)**
 
-        Only T12 (Translation EN→ES snippet) lacks NPU support. All other 14 tasks — summarize, classify, rewrite, and text_to_table — can run on the NPU via Phi Silica. This means 93% of the benchmark tasks can run entirely on-device.
+        Apenas T12 (Tradução EN→ES snippet) não tem suporte NPU. Todas as outras 14 tarefas — resumir, classificar, reescrever e texto_para_tabela — podem ser executadas no NPU via Phi Silica. Isso significa que 93% das tarefas do benchmark podem ser executadas inteiramente on-device.
 
-??? question "**Q4 (Run the Lab):** What is the quality match rate for NPU-available tasks?"
+??? question "**Q4 (Execute o Lab):** Qual é a taxa de correspondência de qualidade para tarefas disponíveis no NPU?"
 
-    Filter for `npu_available == True`, then calculate `quality_match.sum() / len(filtered) * 100`.
+    Filtre por `npu_available == True`, depois calcule `quality_match.sum() / len(filtered) * 100`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **93% (13/14)**
 
-        Of the 14 tasks where NPU is available, 13 produce quality that matches cloud inference — a 93% match rate. The only mismatch is T04 (policy document summary), where the complex document exceeds the on-device model's effective context capacity. For the vast majority of tasks, on-device quality is indistinguishable from cloud.
+        Das 14 tarefas onde o NPU está disponível, 13 produzem qualidade que corresponde à inferência na nuvem — uma taxa de correspondência de 93%. A única incompatibilidade é T04 (resumo de documento de política), onde o documento complexo excede a capacidade efetiva de contexto do modelo on-device. Para a grande maioria das tarefas, a qualidade on-device é indistinguível da nuvem.
 
-??? question "**Q5 (Run the Lab):** What is the average NPU latency for available tasks?"
+??? question "**Q5 (Execute o Lab):** Qual é a latência média do NPU para tarefas disponíveis?"
 
-    Filter for `npu_available == True`, then calculate `npu_latency_ms.mean()`.
+    Filtre por `npu_available == True`, depois calcule `npu_latency_ms.mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **83.1ms**
+    ??? success "✅ Revelar Resposta"
+        **83,1ms**
 
-        The average NPU latency across 14 available tasks is 83.1ms. Compared to the cloud average of 874.3ms, this represents a 10×+ speedup. Sub-100ms latency enables real-time agent interactions — the user perceives the response as instant. This latency advantage is the strongest argument for on-device inference in interactive agent experiences.
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| Windows AI APIs | System-level APIs for on-device NPU inference |
-| Phi Silica | Model optimized for Windows NPU hardware |
-| NPU Availability | 14/15 tasks supported; translation requires cloud fallback |
-| Quality Match | 93% of NPU-available tasks match cloud quality |
-| Latency | NPU avg 83.1ms vs cloud 874.3ms — 10×+ faster |
-| Fallback Pattern | Check readiness → NPU → cloud fallback |
+        A latência média do NPU em 14 tarefas disponíveis é 83,1ms. Comparado à média da nuvem de 874,3ms, isso representa um speedup de 10×+. Latência abaixo de 100ms permite interações de agentes em tempo real — o usuário percebe a resposta como instantânea. Esta vantagem de latência é o argumento mais forte para inferência on-device em experiências interativas de agentes.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **[Lab 061](lab-061-slm-phi4-mini.md)** — SLMs with Phi-4 Mini (CPU/GPU-based local inference via ONNX Runtime)
-- **[Lab 063](lab-063-agent-identity-entra.md)** — Agent Identity with Entra (securing agents that access cloud resources)
-- **[Lab 043](lab-043-multimodal-agents.md)** — Multimodal Agents (extending agent capabilities beyond text)
+| Tópico | O Que Você Aprendeu |
+|--------|---------------------|
+| Windows AI APIs | APIs de nível de sistema para inferência NPU on-device |
+| Phi Silica | Modelo otimizado para hardware NPU do Windows |
+| Disponibilidade do NPU | 14/15 tarefas suportadas; tradução requer fallback para a nuvem |
+| Correspondência de Qualidade | 93% das tarefas disponíveis no NPU correspondem à qualidade da nuvem |
+| Latência | NPU média 83,1ms vs nuvem 874,3ms — 10×+ mais rápido |
+| Padrão de Fallback | Verificar disponibilidade → NPU → fallback para a nuvem |
+
+---
+
+## Próximos Passos
+
+- **[Lab 061](lab-061-slm-phi4-mini.md)** — SLMs com Phi-4 Mini (inferência local baseada em CPU/GPU via ONNX Runtime)
+- **[Lab 063](lab-063-agent-identity-entra.md)** — Identidade de Agente com Entra (protegendo agentes que acessam recursos na nuvem)
+- **[Lab 043](lab-043-multimodal-agents.md)** — Agentes Multimodais (estendendo capacidades de agentes além de texto)

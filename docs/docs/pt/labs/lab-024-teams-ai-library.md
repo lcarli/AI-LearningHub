@@ -1,53 +1,48 @@
 ---
 tags: [teams, javascript, free, github-models]
 ---
-# Lab 024: Teams AI Library Bot
+# Lab 024: Bot com Teams AI Library
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/agent-builder-teams/">Agent Builder — Teams</a></span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Microsoft 365 Developer Program (free) + GitHub Models</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/agent-builder-teams/">Agent Builder — Teams</a></span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Microsoft 365 Developer Program (gratuito) + GitHub Models</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Build a **code-first Teams bot** with the Teams AI Library (JavaScript)
-- Connect the bot to **GitHub Models** (no Azure OpenAI needed)
-- Run locally with the **Teams Toolkit** and Teams App Test Tool
-- Handle user messages, adaptive cards, and actions
-- Add AI-powered responses using the AI module
+- Construir um **bot de Teams code-first** com a Teams AI Library (JavaScript)
+- Conectar o bot ao **GitHub Models** (sem necessidade de Azure OpenAI)
+- Executar localmente com o **Teams Toolkit** e o Teams App Test Tool
+- Lidar com mensagens de usuários, adaptive cards e ações
+- Adicionar respostas com IA usando o módulo AI
 
 ---
 
-## Introduction
+## Introdução
 
-The **Teams AI Library** is a JavaScript/TypeScript SDK for building AI-powered bots that run natively in Microsoft Teams. Unlike Copilot Studio (no-code), Teams AI Library gives you full programmatic control — custom logic, webhook integrations, complex state management.
+A **Teams AI Library** é um SDK em JavaScript/TypeScript para construir bots com IA que rodam nativamente no Microsoft Teams. Diferente do Copilot Studio (sem código), a Teams AI Library oferece controle programático completo — lógica personalizada, integrações com webhooks, gerenciamento de estado complexo.
 
-This lab builds the OutdoorGear customer service bot for Teams.
+Este lab constrói o bot de atendimento ao cliente OutdoorGear para o Teams.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 - Node.js 18+ (`node --version`)
-- **Teams Toolkit VS Code extension** (install from VS Code marketplace)
-- **Microsoft 365 Developer Program** tenant (free at [developer.microsoft.com/microsoft-365/dev-program](https://developer.microsoft.com/microsoft-365/dev-program))
-- `GITHUB_TOKEN` set
+- **Extensão Teams Toolkit para VS Code** (instale pelo marketplace do VS Code)
+- **Tenant do Microsoft 365 Developer Program** (gratuito em [developer.microsoft.com/microsoft-365/dev-program](https://developer.microsoft.com/microsoft-365/dev-program))
+- `GITHUB_TOKEN` configurado
 
-!!! tip "Free M365 Developer tenant"
-    The M365 Developer Program gives you a free 90-day sandbox tenant with Teams, SharePoint, and all Microsoft 365 apps — renewable if active.
+!!! tip "Tenant M365 Developer gratuito"
+    O M365 Developer Program oferece um tenant sandbox gratuito de 90 dias com Teams, SharePoint e todos os apps do Microsoft 365 — renovável se ativo.
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Create the project
+### Passo 1: Criar o projeto
 
 ```bash
 # Install Teams Toolkit CLI
@@ -59,31 +54,31 @@ teamsapp new
 # Select: Bot → AI Bot → JavaScript → Teams AI Library
 ```
 
-Or use VS Code:
-1. Open VS Code → Teams Toolkit extension (left sidebar)
-2. Click **Create a New App** → **Bot** → **AI Bot** → **JavaScript**
-3. Name: `OutdoorGearBot`
+Ou use o VS Code:
+1. Abra o VS Code → extensão Teams Toolkit (barra lateral esquerda)
+2. Clique em **Create a New App** → **Bot** → **AI Bot** → **JavaScript**
+3. Nome: `OutdoorGearBot`
 
-### Step 2: Project structure
+### Passo 2: Estrutura do projeto
 
 ```
 OutdoorGearBot/
 ├── src/
-│   ├── app.js          ← Bot application entry point
-│   ├── config.js       ← Configuration (model, storage)
+│   ├── app.js          ← Ponto de entrada da aplicação do bot
+│   ├── config.js       ← Configuração (modelo, armazenamento)
 │   └── prompts/
 │       └── chat/
-│           ├── skprompt.txt    ← System prompt
-│           └── config.json     ← Model parameters
+│           ├── skprompt.txt    ← Prompt do sistema
+│           └── config.json     ← Parâmetros do modelo
 ├── appPackage/
-│   ├── manifest.json   ← Teams app manifest
+│   ├── manifest.json   ← Manifesto do app Teams
 │   └── ...
-└── teamsapp.yml        ← Teams Toolkit config
+└── teamsapp.yml        ← Configuração do Teams Toolkit
 ```
 
-### Step 3: Configure GitHub Models
+### Passo 3: Configurar o GitHub Models
 
-Edit `src/config.js`:
+Edite `src/config.js`:
 
 ```javascript
 const config = {
@@ -99,7 +94,7 @@ const config = {
 module.exports = config;
 ```
 
-Edit `src/app.js`:
+Edite `src/app.js`:
 
 ```javascript
 const { Application, AI, preview } = require("@microsoft/teams-ai");
@@ -141,9 +136,9 @@ app.message("/reset", async (context, state) => {
 module.exports = { app };
 ```
 
-### Step 4: Write the system prompt
+### Passo 4: Escrever o prompt do sistema
 
-Edit `src/prompts/chat/skprompt.txt`:
+Edite `src/prompts/chat/skprompt.txt`:
 
 ```
 You are OutdoorGear Assistant — a friendly customer service bot for OutdoorGear Inc.
@@ -169,7 +164,7 @@ Conversation history:
 {{$conversation}}
 ```
 
-Edit `src/prompts/chat/config.json`:
+Edite `src/prompts/chat/config.json`:
 
 ```json
 {
@@ -188,24 +183,24 @@ Edit `src/prompts/chat/config.json`:
 }
 ```
 
-### Step 5: Run locally with Teams App Test Tool
+### Passo 5: Executar localmente com o Teams App Test Tool
 
 ```bash
 npm install
 teamsapp preview --env local
 ```
 
-This opens the **Teams App Test Tool** — a browser-based simulator that lets you test your bot without deploying to real Teams.
+Isso abre o **Teams App Test Tool** — um simulador baseado em navegador que permite testar seu bot sem implantá-lo no Teams real.
 
-Try:
+Experimente:
 - `What boots do you have?`
 - `Tell me about your return policy`
 - `I need a tent for 2 people in winter`
 - `/reset`
 
-### Step 6: Add an Adaptive Card response
+### Passo 6: Adicionar uma resposta com Adaptive Card
 
-Adaptive Cards make bot responses rich and interactive:
+Adaptive Cards tornam as respostas do bot ricas e interativas:
 
 ```javascript
 // In app.js — add after planner setup:
@@ -236,7 +231,7 @@ app.message("show products", async (context, state) => {
 
 ---
 
-## Architecture
+## Arquitetura
 
 ```
 Teams Client
@@ -254,7 +249,7 @@ Teams AI Library Application
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **No-code Teams agent:** → [Lab 011 — Copilot Studio](lab-011-copilot-studio-first-agent.md)
-- **Deploy to Azure:** → [Lab 028 — Deploy to Container Apps](lab-028-deploy-mcp-azure.md)
+- **Agente Teams sem código:** → [Lab 011 — Copilot Studio](lab-011-copilot-studio-first-agent.md)
+- **Implantar no Azure:** → [Lab 028 — Implantar no Container Apps](lab-028-deploy-mcp-azure.md)

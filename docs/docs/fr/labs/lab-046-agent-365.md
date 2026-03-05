@@ -1,100 +1,95 @@
 ---
 tags: [enterprise, microsoft-365, agent-governance, pro-code, mcp, observability]
 ---
-# Lab 046: Microsoft Agent 365 — Enterprise Agent Governance
+# Lab 046 : Microsoft Agent 365 — Gouvernance des agents en entreprise
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
-  <span><strong>Time:</strong> ~75 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-azure">Paid — Microsoft 365 Copilot license + Azure subscription + Frontier program</span></span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Durée :</strong> ~75 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-azure">Payant — Licence Microsoft 365 Copilot + abonnement Azure + programme Frontier</span></span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What Microsoft Agent 365 is and how it differs from agent *frameworks*
-- How Agent 365 gives every AI agent its own **Entra Agent Identity**
-- How to install and configure the **Agent 365 CLI**
-- How to create an **Agent Blueprint** (the enterprise governance template)
-- How to add **observability (OpenTelemetry)** to an existing Python agent using the Agent 365 SDK
-- How to **publish an agent** to the Microsoft 365 Admin Center
-- How to create an **agent instance** that appears in the org chart in Teams
+- Ce qu'est Microsoft Agent 365 et en quoi il diffère des *frameworks* d'agents
+- Comment Agent 365 attribue à chaque agent IA sa propre **Entra Agent Identity**
+- Comment installer et configurer le **CLI Agent 365**
+- Comment créer un **Agent Blueprint** (le modèle de gouvernance d'entreprise)
+- Comment ajouter l'**observabilité (OpenTelemetry)** à un agent Python existant avec le SDK Agent 365
+- Comment **publier un agent** dans le Centre d'administration Microsoft 365
+- Comment créer une **instance d'agent** qui apparaît dans l'organigramme dans Teams
 
 ---
 
 ## Introduction
 
-Most AI agent frameworks focus on *building* agents — how they reason, call tools, and remember context. **Microsoft Agent 365** solves a different problem: **how do enterprises govern, secure, and manage agents at scale?**
+La plupart des frameworks d'agents IA se concentrent sur la *construction* d'agents — comment ils raisonnent, appellent des outils et mémorisent le contexte. **Microsoft Agent 365** résout un problème différent : **comment les entreprises gouvernent, sécurisent et gèrent les agents à grande échelle ?**
 
-Think of Agent 365 as the *control plane* for AI agents in your Microsoft 365 tenant:
+Considérez Agent 365 comme le *plan de contrôle* des agents IA dans votre tenant Microsoft 365 :
 
-![Agent 365 Control Plane](../../assets/diagrams/agent-365-control-plane.svg)
+![Plan de contrôle Agent 365](../../assets/diagrams/agent-365-control-plane.svg)
 
-An agent enhanced with Agent 365 gets:
+Un agent amélioré avec Agent 365 obtient :
 
-| Capability | What it means |
+| Capacité | Ce que cela signifie |
 |-----------|--------------|
-| **Entra Agent ID** | Its own identity in Azure AD — like a user account, but for an agent |
-| **Blueprint** | IT-approved template defining capabilities, MCP permissions, and governance policies |
-| **Notifications** | Can receive and respond to @mentions in Teams, emails, Word comments |
-| **Governed MCP Tools** | Access to Mail, Calendar, Teams, SharePoint under admin control |
-| **Observability** | Full OpenTelemetry traces of every tool call and LLM inference |
+| **Entra Agent ID** | Sa propre identité dans Azure AD — comme un compte utilisateur, mais pour un agent |
+| **Blueprint** | Modèle approuvé par l'IT définissant les capacités, les permissions MCP et les politiques de gouvernance |
+| **Notifications** | Peut recevoir et répondre aux @mentions dans Teams, aux e-mails, aux commentaires Word |
+| **Outils MCP gouvernés** | Accès à Mail, Calendrier, Teams, SharePoint sous contrôle administrateur |
+| **Observabilité** | Traces OpenTelemetry complètes de chaque appel d'outil et inférence LLM |
 
-!!! warning "Preview program required"
-    Microsoft Agent 365 is in **Frontier preview**. You need to join the [Microsoft Copilot Frontier Program](https://adoption.microsoft.com/copilot/frontier-program/) and have at least one **Microsoft 365 Copilot** license in your tenant.
-
----
-
-## Architecture: Agent 365 Layers
-
-![Agent 365 Layered Architecture](../../assets/diagrams/agent-365-layers.svg)
-
-Agent 365 SDK sits *above* your agent framework. It does **not** replace it — it wraps and enhances it.
+!!! warning "Programme Preview requis"
+    Microsoft Agent 365 est en **preview Frontier**. Vous devez rejoindre le [Microsoft Copilot Frontier Program](https://adoption.microsoft.com/copilot/frontier-program/) et disposer d'au moins une licence **Microsoft 365 Copilot** dans votre tenant.
 
 ---
 
-## Prerequisites
+## Architecture : couches d'Agent 365
 
-- [ ] **Microsoft 365 Copilot license** (at least 1 in your tenant)
-- [ ] **Frontier program access** — [enroll here](https://adoption.microsoft.com/copilot/frontier-program/)
-- [ ] **Azure subscription** — resource creation rights
-- [ ] **Entra ID permissions** — Global Admin, Agent ID Administrator, or Agent ID Developer role
-- [ ] **.NET 8.0 or later** — for the Agent 365 CLI
-- [ ] **Python 3.11+** and pip
-- [ ] **GitHub Models token** (free) — for the OutdoorGear agent we'll enhance
+![Architecture en couches d'Agent 365](../../assets/diagrams/agent-365-layers.svg)
 
-!!! tip "No Frontier access? Follow along anyway"
-    If you don't have Frontier access yet, you can still follow Steps 1–4 locally with mock tooling. The starter file includes a mock mode. Steps 5–7 require a real tenant.
+Le SDK Agent 365 se situe *au-dessus* de votre framework d'agent. Il ne le **remplace pas** — il l'enveloppe et l'améliore.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
-    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
+## Prérequis
 
-    All dependencies are pre-installed in the devcontainer.
+- [ ] **Licence Microsoft 365 Copilot** (au moins 1 dans votre tenant)
+- [ ] **Accès au programme Frontier** — [inscrivez-vous ici](https://adoption.microsoft.com/copilot/frontier-program/)
+- [ ] **Abonnement Azure** — droits de création de ressources
+- [ ] **Permissions Entra ID** — Rôle Administrateur global, Administrateur Agent ID ou Développeur Agent ID
+- [ ] **.NET 8.0 ou ultérieur** — pour le CLI Agent 365
+- [ ] **Python 3.11+** et pip
+- [ ] **Jeton GitHub Models** (gratuit) — pour l'agent OutdoorGear que nous améliorerons
+
+!!! tip "Pas d'accès Frontier ? Suivez quand même"
+    Si vous n'avez pas encore accès à Frontier, vous pouvez toujours suivre les étapes 1–4 localement avec des outils simulés. Le fichier de démarrage inclut un mode simulé. Les étapes 5–7 nécessitent un vrai tenant.
+
+---
+
+!!! tip "Démarrage rapide avec GitHub Codespaces"
+    [![Ouvrir dans GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
+
+    Toutes les dépendances sont préinstallées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers d'accompagnement
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-046/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-046/` dans votre répertoire de travail.
 
-| File | Description | Download |
+| Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `a365.config.sample.json` | Configuration / data file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/a365.config.sample.json) |
-| `broken_observability.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/broken_observability.py) |
-| `outdoorgear_a365_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/outdoorgear_a365_starter.py) |
+| `a365.config.sample.json` | Fichier de configuration / données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/a365.config.sample.json) |
+| `broken_observability.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/broken_observability.py) |
+| `outdoorgear_a365_starter.py` | Script de démarrage avec TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/outdoorgear_a365_starter.py) |
 
 ---
 
-## Step 1: Install the Agent 365 CLI
+## Étape 1 : Installer le CLI Agent 365
 
-The Agent 365 CLI (`a365`) is the command-line backbone for the entire agent development lifecycle.
+Le CLI Agent 365 (`a365`) est l'épine dorsale en ligne de commande pour l'ensemble du cycle de vie de développement des agents.
 
 ```bash
 # Install (requires .NET 8.0+)
@@ -104,7 +99,7 @@ dotnet tool install --global Microsoft.Agents.A365.DevTools.Cli --prerelease
 a365 -h
 ```
 
-Expected output:
+Sortie attendue :
 ```
 Microsoft Agent 365 CLI
 Version: x.x.x-preview
@@ -119,27 +114,27 @@ Commands:
   ...
 ```
 
-!!! note "Always use --prerelease"
-    Until Agent 365 is GA, always include `--prerelease` in install/update commands. Without it, the package won't be found in NuGet feeds.
+!!! note "Utilisez toujours --prerelease"
+    Tant qu'Agent 365 n'est pas en GA, incluez toujours `--prerelease` dans les commandes d'installation/mise à jour. Sans cela, le package ne sera pas trouvé dans les flux NuGet.
 
 ---
 
-## Step 2: Register a Custom Client App in Entra ID
+## Étape 2 : Enregistrer une application cliente personnalisée dans Entra ID
 
-The CLI needs its own Entra app registration to authenticate against your tenant.
+Le CLI a besoin de son propre enregistrement d'application Entra pour s'authentifier auprès de votre tenant.
 
-**In Azure Portal → Entra ID → App registrations:**
+**Dans le portail Azure → Entra ID → Inscriptions d'applications :**
 
-1. Click **New registration**
-2. Name: `Agent365-CLI-App`
-3. Supported account types: **Accounts in this organizational directory only**
-4. Click **Register**
-5. Copy the **Application (client) ID** — you'll need it in Step 3
-6. Go to **API Permissions → Add a permission → Microsoft Graph**
-7. Add these **Application permissions**:
+1. Cliquez sur **Nouvelle inscription**
+2. Nom : `Agent365-CLI-App`
+3. Types de comptes pris en charge : **Comptes dans cet annuaire organisationnel uniquement**
+4. Cliquez sur **Inscrire**
+5. Copiez l'**ID d'application (client)** — vous en aurez besoin à l'étape 3
+6. Allez dans **Permissions d'API → Ajouter une permission → Microsoft Graph**
+7. Ajoutez ces **Permissions d'application** :
    - `AgentLifecycle.ReadWrite.All`
    - `Application.ReadWrite.All`
-8. Click **Grant admin consent**
+8. Cliquez sur **Accorder le consentement administrateur**
 
 ```bash
 # Verify you can authenticate
@@ -148,21 +143,21 @@ az login --tenant YOUR_TENANT_ID
 
 ---
 
-## Step 3: Initialize Agent 365 Configuration
+## Étape 3 : Initialiser la configuration Agent 365
 
 ```bash
 # Create a new Agent 365 config
 a365 config init
 ```
 
-The CLI will prompt for:
-- Tenant ID
-- Azure subscription ID
-- Resource group name
-- The client app ID from Step 2
-- Your agent's messaging endpoint URL
+Le CLI vous demandera :
+- L'ID du tenant
+- L'ID de l'abonnement Azure
+- Le nom du groupe de ressources
+- L'ID de l'application cliente de l'étape 2
+- L'URL du point de terminaison de messagerie de votre agent
 
-This creates an `a365.config.json` file in your project directory:
+Cela crée un fichier `a365.config.json` dans le répertoire de votre projet :
 
 ```json
 {
@@ -180,14 +175,14 @@ This creates an `a365.config.json` file in your project directory:
 }
 ```
 
-!!! tip "Use the sample config"
-    The lab includes `lab-046/a365.config.sample.json` as a reference. Copy it, fill in your values, rename to `a365.config.json`.
+!!! tip "Utilisez l'exemple de configuration"
+    Le lab inclut `lab-046/a365.config.sample.json` comme référence. Copiez-le, remplissez vos valeurs, renommez-le en `a365.config.json`.
 
 ---
 
-## Step 4: Add Agent 365 SDK to Your Python Agent
+## Étape 4 : Ajouter le SDK Agent 365 à votre agent Python
 
-Install the Agent 365 SDK packages:
+Installez les packages du SDK Agent 365 :
 
 ```bash
 pip install openai \
@@ -198,9 +193,9 @@ pip install openai \
   microsoft-agents-a365-tooling-extensions-openai
 ```
 
-### 4a. Add Observability (OpenTelemetry)
+### 4a. Ajouter l'observabilité (OpenTelemetry)
 
-The SDK instruments your agent automatically for the OpenAI Agents SDK:
+Le SDK instrumente automatiquement votre agent pour le SDK OpenAI Agents :
 
 ```python
 from openai import AsyncOpenAI
@@ -222,9 +217,9 @@ instrumentation.instrument()
 # Every agent run is now traced automatically!
 ```
 
-### 4b. Add Governed MCP Tooling
+### 4b. Ajouter les outils MCP gouvernés
 
-Connect to Microsoft 365 MCP servers (Mail, Calendar, Teams) under admin control:
+Connectez-vous aux serveurs MCP Microsoft 365 (Mail, Calendrier, Teams) sous contrôle administrateur :
 
 ```python
 from microsoft.agents.a365.tooling import A365ToolingClient
@@ -249,9 +244,9 @@ async def setup_m365_tools(agent: Agent) -> Agent:
     return agent
 ```
 
-### 4c. Add Notifications (Teams / Outlook)
+### 4c. Ajouter les notifications (Teams / Outlook)
 
-Make your agent respond to @mentions and emails:
+Faites en sorte que votre agent réponde aux @mentions et aux e-mails :
 
 ```python
 from microsoft.agents.a365.notifications import A365NotificationHandler
@@ -283,19 +278,19 @@ class OutdoorGearNotificationHandler(A365NotificationHandler):
 
 ---
 
-## Step 5: Create the Agent Blueprint
+## Étape 5 : Créer l'Agent Blueprint
 
-The blueprint is the IT-approved enterprise template for your agent. Create it with one CLI command:
+Le blueprint est le modèle d'entreprise approuvé par l'IT pour votre agent. Créez-le avec une seule commande CLI :
 
 ```bash
 a365 setup
 ```
 
-This command:
-1. Creates an **Azure Entra Agent ID** (service principal for your agent)
-2. Registers the agent's **MCP tool permissions** as defined in `a365.config.json`
-3. Creates the **Agent Blueprint** in Azure
-4. Outputs a `blueprintId` you'll need for publishing
+Cette commande :
+1. Crée un **Azure Entra Agent ID** (principal de service pour votre agent)
+2. Enregistre les **permissions d'outils MCP** de l'agent telles que définies dans `a365.config.json`
+3. Crée l'**Agent Blueprint** dans Azure
+4. Génère un `blueprintId` dont vous aurez besoin pour la publication
 
 ```
 ✅ Agent identity created: OutdoorGearAgent (ID: agt-12345-...)
@@ -306,9 +301,9 @@ This command:
 
 ---
 
-## Step 6: Deploy Agent Code to Azure
+## Étape 6 : Déployer le code de l'agent sur Azure
 
-If you don't have an existing Azure deployment:
+Si vous n'avez pas de déploiement Azure existant :
 
 ```bash
 # Deploy to Azure App Service
@@ -318,42 +313,42 @@ a365 deploy --target azure-app-service --resource-group rg-outdoorgear-agent
 a365 deploy --target azure-container-apps --resource-group rg-outdoorgear-agent
 ```
 
-Your agent must be reachable at the messaging endpoint URL you set in `a365.config.json`.
+Votre agent doit être accessible à l'URL du point de terminaison de messagerie que vous avez définie dans `a365.config.json`.
 
 ---
 
-## Step 7: Publish to Microsoft 365 Admin Center
+## Étape 7 : Publier dans le Centre d'administration Microsoft 365
 
 ```bash
 a365 publish --blueprint-id bpnt-67890-...
 ```
 
-After publishing:
+Après la publication :
 
-1. Go to [Microsoft 365 Admin Center](https://admin.microsoft.com) → **Agents**
-2. Find **OutdoorGearAgent** in the registry
-3. Click **Create instance** to instantiate the agent for your organization
-4. The agent gets:
-   - Its own entry in your org chart
-   - An email address (`outdoorgear-agent@yourorg.com`)
-   - Ability to be @mentioned in Teams
-   - Visibility in the **Agent Map** (who uses it, what data it accesses)
+1. Allez dans le [Centre d'administration Microsoft 365](https://admin.microsoft.com) → **Agents**
+2. Trouvez **OutdoorGearAgent** dans le registre
+3. Cliquez sur **Créer une instance** pour instancier l'agent pour votre organisation
+4. L'agent obtient :
+   - Sa propre entrée dans votre organigramme
+   - Une adresse e-mail (`outdoorgear-agent@yourorg.com`)
+   - La possibilité d'être @mentionné dans Teams
+   - Une visibilité dans la **carte des agents** (qui l'utilise, quelles données il accède)
 
-!!! info "Agent shows in Teams within minutes"
-    After creating an instance, your agent appears in Teams search. Users can @mention it in chats and channels. It also appears in Outlook contacts.
+!!! info "L'agent apparaît dans Teams en quelques minutes"
+    Après la création d'une instance, votre agent apparaît dans la recherche Teams. Les utilisateurs peuvent le @mentionner dans les conversations et les canaux. Il apparaît également dans les contacts Outlook.
 
 ---
 
-## 🐛 Bug-Fix Exercise: Fix the Broken Observability Setup
+## 🐛 Exercice de correction de bugs : Corriger la configuration d'observabilité cassée
 
-The lab includes a broken observability configuration. Find and fix 3 bugs!
+Le lab inclut une configuration d'observabilité cassée. Trouvez et corrigez 3 bugs !
 
 ```
 lab-046/
-└── broken_observability.py    ← 3 intentional bugs to find and fix
+└── broken_observability.py    ← 3 bugs intentionnels à trouver et corriger
 ```
 
-**Setup:**
+**Installation :**
 ```bash
 pip install microsoft-agents-a365-observability-core \
             microsoft-agents-a365-observability-extensions-openai
@@ -361,15 +356,15 @@ pip install microsoft-agents-a365-observability-core \
 python lab-046/broken_observability.py
 ```
 
-**The 3 bugs:**
+**Les 3 bugs :**
 
-| # | Component | Symptom | Type |
+| # | Composant | Symptôme | Type |
 |---|-----------|---------|------|
-| 1 | `A365ObservabilityProvider` | `TypeError: missing required argument 'service_name'` | Missing required parameter |
-| 2 | `OpenAIAgentInstrumentation` | Traces show `service_name: unknown` instead of `OutdoorGearAgent` | Provider not passed to instrumentation |
-| 3 | Exporter endpoint | `ConnectionRefusedError: localhost:4317` | Wrong endpoint — should use HTTPS collector |
+| 1 | `A365ObservabilityProvider` | `TypeError: missing required argument 'service_name'` | Paramètre requis manquant |
+| 2 | `OpenAIAgentInstrumentation` | Les traces affichent `service_name: unknown` au lieu de `OutdoorGearAgent` | Provider non passé à l'instrumentation |
+| 3 | Point de terminaison de l'exporteur | `ConnectionRefusedError: localhost:4317` | Mauvais point de terminaison — devrait utiliser un collecteur HTTPS |
 
-**Verify your fixes:** After fixing all 3 bugs, run:
+**Vérifiez vos corrections :** Après avoir corrigé les 3 bugs, exécutez :
 ```bash
 python lab-046/broken_observability.py
 # Expected:
@@ -382,77 +377,77 @@ python lab-046/broken_observability.py
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Quiz de connaissances
 
-??? question "**Q1 (Multiple Choice):** An agent built with LangChain wants to use Microsoft Agent 365. What does Agent 365 provide that LangChain does NOT?"
+??? question "**Q1 (Choix multiple) :** Un agent construit avec LangChain souhaite utiliser Microsoft Agent 365. Qu'est-ce qu'Agent 365 fournit que LangChain ne fournit PAS ?"
 
-    - A) The ability to call external APIs and tools
-    - B) Multi-step reasoning and planning
-    - C) Entra-backed identity, governed MCP tools, observability, and enterprise governance/compliance
-    - D) A better LLM model for reasoning
+    - A) La capacité d'appeler des API et des outils externes
+    - B) Le raisonnement et la planification en plusieurs étapes
+    - C) Une identité Entra, des outils MCP gouvernés, l'observabilité et la gouvernance/conformité d'entreprise
+    - D) Un meilleur modèle LLM pour le raisonnement
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C**
 
-        Agent 365 is NOT an agent framework — it doesn't help you build reasoning logic. LangChain already handles tool calling, multi-step reasoning, and planning. What Agent 365 adds is the **enterprise layer**: a unique Entra identity for the agent, IT-approved governed MCP access to M365 workloads, OpenTelemetry observability, blueprint-based governance, and the ability for IT admins to see, monitor, and control the agent from the M365 Admin Center.
+        Agent 365 n'est PAS un framework d'agent — il n'aide pas à construire la logique de raisonnement. LangChain gère déjà l'appel d'outils, le raisonnement en plusieurs étapes et la planification. Ce qu'Agent 365 ajoute, c'est la **couche entreprise** : une identité Entra unique pour l'agent, un accès MCP gouverné approuvé par l'IT aux charges de travail M365, l'observabilité OpenTelemetry, la gouvernance basée sur les blueprints, et la capacité pour les administrateurs IT de voir, surveiller et contrôler l'agent depuis le Centre d'administration M365.
 
-??? question "**Q2 (Multiple Choice):** What is an Agent Blueprint in Microsoft Agent 365?"
+??? question "**Q2 (Choix multiple) :** Qu'est-ce qu'un Agent Blueprint dans Microsoft Agent 365 ?"
 
-    - A) A Bicep/ARM template for deploying Azure resources
-    - B) An IT-approved, pre-configured template defining an agent's capabilities, MCP permissions, governance policies, and compliance constraints
-    - C) A Python class that all Agent 365 agents must inherit from
-    - D) A diagram of the agent's tool call flow
+    - A) Un modèle Bicep/ARM pour déployer des ressources Azure
+    - B) Un modèle préconfiguré approuvé par l'IT définissant les capacités d'un agent, les permissions MCP, les politiques de gouvernance et les contraintes de conformité
+    - C) Une classe Python dont tous les agents Agent 365 doivent hériter
+    - D) Un diagramme du flux d'appels d'outils de l'agent
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B**
 
-        A blueprint comes from Microsoft Entra and is the *enterprise template* from which compliant agent instances are created. It defines what the agent can do (capabilities), what M365 data it can access (MCP permissions), how it's governed (DLP policies, external access restrictions, logging rules), and lifecycle metadata. Every agent instance created from the blueprint inherits all these rules — ensuring no "shadow agents" with uncontrolled access.
+        Un blueprint provient de Microsoft Entra et constitue le *modèle d'entreprise* à partir duquel des instances d'agents conformes sont créées. Il définit ce que l'agent peut faire (capacités), quelles données M365 il peut accéder (permissions MCP), comment il est gouverné (politiques DLP, restrictions d'accès externe, règles de journalisation) et les métadonnées de cycle de vie. Chaque instance d'agent créée à partir du blueprint hérite de toutes ces règles — garantissant qu'aucun « agent fantôme » n'a un accès non contrôlé.
 
-??? question "**Q3 (Run the Lab):** Open `lab-046/outdoorgear_a365_starter.py`. How many TODO comments are in the file?"
+??? question "**Q3 (Exécutez le lab) :** Ouvrez `lab-046/outdoorgear_a365_starter.py`. Combien de commentaires TODO y a-t-il dans le fichier ?"
 
-    Open the starter file and count the `# TODO` markers.
+    Ouvrez le fichier de démarrage et comptez les marqueurs `# TODO`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **5 TODOs**
 
-        The starter file has 5 integration points for you to complete:
-        1. TODO 1: Initialize `A365ObservabilityProvider` with service name and version
-        2. TODO 2: Apply `OpenAIAgentInstrumentation` to auto-instrument traces
-        3. TODO 3: Implement `on_teams_mention` handler
-        4. TODO 4: Connect to governed MCP tooling servers
-        5. TODO 5: Register the agent's Entra Agent ID
+        Le fichier de démarrage comporte 5 points d'intégration à compléter :
+        1. TODO 1 : Initialiser `A365ObservabilityProvider` avec le nom et la version du service
+        2. TODO 2 : Appliquer `OpenAIAgentInstrumentation` pour auto-instrumenter les traces
+        3. TODO 3 : Implémenter le gestionnaire `on_teams_mention`
+        4. TODO 4 : Se connecter aux serveurs d'outils MCP gouvernés
+        5. TODO 5 : Enregistrer l'Entra Agent ID de l'agent
 
-??? question "**Q4 (Multiple Choice):** A user @mentions your OutdoorGear Agent in a Teams channel. Which Agent 365 SDK component receives and routes this notification to your agent code?"
+??? question "**Q4 (Choix multiple) :** Un utilisateur @mentionne votre agent OutdoorGear dans un canal Teams. Quel composant du SDK Agent 365 reçoit et achemine cette notification vers votre code d'agent ?"
 
     - A) `A365ObservabilityProvider`
     - B) `A365ToolingClient`
     - C) `A365NotificationHandler`
     - D) `OpenAIMcpRegistrationService`
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C — `A365NotificationHandler`**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C — `A365NotificationHandler`**
 
-        The `A365NotificationHandler` receives events from Microsoft 365 applications — Teams @mentions, incoming emails to the agent's mailbox, Word comment notifications, and more. You subclass it and override methods like `on_teams_mention()` and `on_email_received()`. The `A365ObservabilityProvider` handles telemetry, `A365ToolingClient` manages MCP tool access, and `OpenAIMcpRegistrationService` registers MCP servers with the OpenAI Agents SDK.
+        Le `A365NotificationHandler` reçoit les événements des applications Microsoft 365 — @mentions Teams, e-mails entrants dans la boîte aux lettres de l'agent, notifications de commentaires Word, et plus encore. Vous le sous-classez et redéfinissez des méthodes comme `on_teams_mention()` et `on_email_received()`. Le `A365ObservabilityProvider` gère la télémétrie, `A365ToolingClient` gère l'accès aux outils MCP, et `OpenAIMcpRegistrationService` enregistre les serveurs MCP avec le SDK OpenAI Agents.
 
 ---
 
-## Summary
+## Résumé
 
-| Concept | Key takeaway |
+| Concept | Point clé |
 |---------|-------------|
-| **Agent 365 ≠ agent framework** | It adds *enterprise capabilities* on top of your existing agent — doesn't replace SK, LangChain, etc. |
-| **Entra Agent ID** | Every agent gets its own identity — like a user account but for an agent |
-| **Blueprint** | IT-approved template; all instances inherit its governance rules |
-| **Observability** | OpenTelemetry auto-instrumentation — every tool call and LLM inference is traced |
-| **Governed MCP** | M365 tools (Mail, Calendar, Teams, SharePoint) accessible under IT control |
-| **Notifications** | Agents can be @mentioned in Teams, receive emails, respond to Word comments |
-| **Frontier required** | Still in preview — needs M365 Copilot license + Frontier program enrollment |
+| **Agent 365 ≠ framework d'agent** | Il ajoute des *capacités d'entreprise* par-dessus votre agent existant — ne remplace pas SK, LangChain, etc. |
+| **Entra Agent ID** | Chaque agent obtient sa propre identité — comme un compte utilisateur mais pour un agent |
+| **Blueprint** | Modèle approuvé par l'IT ; toutes les instances héritent de ses règles de gouvernance |
+| **Observabilité** | Auto-instrumentation OpenTelemetry — chaque appel d'outil et inférence LLM est tracé |
+| **MCP gouverné** | Outils M365 (Mail, Calendrier, Teams, SharePoint) accessibles sous contrôle IT |
+| **Notifications** | Les agents peuvent être @mentionnés dans Teams, recevoir des e-mails, répondre aux commentaires Word |
+| **Frontier requis** | Encore en preview — nécessite une licence M365 Copilot + inscription au programme Frontier |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Build the underlying agent first:** → [Lab 016 — OpenAI Agents SDK](lab-016-openai-agents-sdk.md)
-- **Add MCP tools to your agent:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
-- **Observability deep dive:** → [Lab 033 — Agent Observability with App Insights](lab-033-agent-observability.md)
-- **Enterprise RAG pipeline:** → [Lab 042 — Enterprise RAG with Evaluations](lab-042-enterprise-rag.md)
+- **Construisez d'abord l'agent sous-jacent :** → [Lab 016 — OpenAI Agents SDK](lab-016-openai-agents-sdk.md)
+- **Ajoutez des outils MCP à votre agent :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)
+- **Approfondissement de l'observabilité :** → [Lab 033 — Observabilité des agents avec App Insights](lab-033-agent-observability.md)
+- **Pipeline RAG d'entreprise :** → [Lab 042 — RAG d'entreprise avec évaluations](lab-042-enterprise-rag.md)

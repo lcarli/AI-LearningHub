@@ -1,58 +1,53 @@
 ---
 tags: [graphrag, knowledge-graph, rag, python]
 ---
-# Lab 067: GraphRAG — Knowledge Graphs for Cross-Document Retrieval
+# Lab 067 : GraphRAG — Graphes de connaissances pour la recherche inter-documents
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Mock data (no Azure OpenAI or graph DB required)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~90 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Données simulées (aucun Azure OpenAI ni base de données graphe requis)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
+- Ce qu'est **GraphRAG** et en quoi il diffère du RAG traditionnel basé uniquement sur les vecteurs
+- Construire un **graphe de connaissances** à partir de l'extraction d'entités et de relations
+- Détecter des **communautés** à l'aide d'algorithmes de clustering de graphes
+- Exécuter des **requêtes globales** qui synthétisent l'information à travers tous les documents
+- Exécuter des **requêtes locales** qui suivent des sous-graphes centrés sur les entités
+- Évaluer la qualité de la recherche à l'aide du **score d'importance** et de la couverture des communautés
 
-
-## What You'll Learn
-
-- What **GraphRAG** is and how it differs from traditional vector-only RAG
-- Build a **knowledge graph** from entity and relationship extraction
-- Detect **communities** using graph clustering algorithms
-- Execute **global queries** that synthesize across all documents
-- Execute **local queries** that follow entity-centric subgraphs
-- Evaluate retrieval quality using **importance scoring** and community coverage
-
-!!! abstract "Prerequisite"
-    Complete **[Lab 009: Retrieval-Augmented Generation](lab-009-rag-basic.md)** first. This lab assumes familiarity with basic RAG concepts including chunking, embedding, and vector search.
+!!! abstract "Prérequis"
+    Complétez d'abord le **[Lab 009 : Génération augmentée par la recherche](lab-009-rag-basic.md)**. Ce lab suppose une familiarité avec les concepts de base du RAG, notamment le découpage, l'embedding et la recherche vectorielle.
 
 ## Introduction
 
-Traditional RAG retrieves individual chunks by semantic similarity. This works well for **local queries** ("What is the return policy?") but fails for **global queries** that require synthesizing information across many documents ("What are the major themes in Q3 earnings across all portfolio companies?").
+Le RAG traditionnel récupère des segments individuels par similarité sémantique. Cela fonctionne bien pour les **requêtes locales** (« Quelle est la politique de retour ? ») mais échoue pour les **requêtes globales** qui nécessitent la synthèse d'informations provenant de nombreux documents (« Quels sont les thèmes majeurs des résultats du T3 pour toutes les entreprises du portefeuille ? »).
 
-**GraphRAG** solves this by building a **knowledge graph** from extracted entities and relationships, then clustering the graph into **communities** that represent thematic groups:
+**GraphRAG** résout ce problème en construisant un **graphe de connaissances** à partir d'entités et de relations extraites, puis en regroupant le graphe en **communautés** qui représentent des groupes thématiques :
 
-| Approach | Retrieval Method | Best For | Weakness |
-|----------|-----------------|----------|----------|
-| **Vector RAG** | Cosine similarity on embeddings | Local, specific queries | Cannot synthesize across documents |
-| **GraphRAG Local** | Entity-centric subgraph traversal | Queries about specific entities | Misses global themes |
-| **GraphRAG Global** | Community summaries + map-reduce | Broad, cross-document queries | Higher latency and cost |
+| Approche | Méthode de recherche | Idéal pour | Faiblesse |
+|----------|---------------------|------------|-----------|
+| **Vector RAG** | Similarité cosinus sur les embeddings | Requêtes locales et spécifiques | Ne peut pas synthétiser entre documents |
+| **GraphRAG Local** | Parcours de sous-graphe centré sur les entités | Requêtes sur des entités spécifiques | Manque les thèmes globaux |
+| **GraphRAG Global** | Résumés de communautés + map-reduce | Requêtes larges et inter-documents | Latence et coût plus élevés |
 
-### The Scenario
+### Le scénario
 
-You are building a **market intelligence system** for an outdoor gear company. Your corpus contains product reviews, supplier reports, and competitor analysis documents. You will extract entities, build a knowledge graph, detect communities, and compare local vs global query performance.
+Vous construisez un **système de veille de marché** pour une entreprise d'équipement outdoor. Votre corpus contient des avis produits, des rapports fournisseurs et des documents d'analyse concurrentielle. Vous allez extraire des entités, construire un graphe de connaissances, détecter des communautés et comparer les performances des requêtes locales et globales.
 
-The knowledge graph contains **15 entities** organized into **8 communities**.
+Le graphe de connaissances contient **15 entités** organisées en **8 communautés**.
 
 ---
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Pourquoi |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` | Analyze knowledge graph data |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| `pandas` | Analyser les données du graphe de connaissances |
 
 ```bash
 pip install pandas
@@ -60,27 +55,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-067/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-067/` de votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_graphrag.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/broken_graphrag.py) |
-| `knowledge_graph.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/knowledge_graph.csv) |
+| Fichier | Description | Téléchargement |
+|---------|-------------|----------------|
+| `broken_graphrag.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/broken_graphrag.py) |
+| `knowledge_graph.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/knowledge_graph.csv) |
 
 ---
 
-## Step 1: Understanding GraphRAG Architecture
+## Étape 1 : Comprendre l'architecture GraphRAG
 
-GraphRAG extends the RAG pipeline with graph construction and community detection:
+GraphRAG étend le pipeline RAG avec la construction de graphes et la détection de communautés :
 
 ```
 Documents → [Entity Extraction] → [Relationship Extraction] → Knowledge Graph
@@ -90,22 +85,22 @@ Query → [Community Detection] → [Community Summaries] → [Map-Reduce Answer
                               [Local Subgraph] → [Entity-Centric Answer]
 ```
 
-Key concepts:
+Concepts clés :
 
-1. **Entities** — People, organizations, products, and concepts extracted from text
-2. **Relationships** — Connections between entities (e.g., "CompanyA *supplies* CompanyB")
-3. **Communities** — Clusters of densely connected entities discovered by graph algorithms
-4. **Community Summaries** — LLM-generated descriptions of each community's theme
-5. **Importance Score** — Centrality metric (0–1) indicating an entity's significance
+1. **Entités** — Personnes, organisations, produits et concepts extraits du texte
+2. **Relations** — Connexions entre entités (ex. : « EntrepriseA *fournit* EntrepriseB »)
+3. **Communautés** — Groupes d'entités densément connectées découvertes par des algorithmes de graphes
+4. **Résumés de communautés** — Descriptions générées par le LLM du thème de chaque communauté
+5. **Score d'importance** — Métrique de centralité (0–1) indiquant la signification d'une entité
 
-!!! info "Why Communities Matter"
-    Communities group related entities that frequently co-occur. A global query like "What are the market trends?" can be answered by synthesizing community summaries rather than scanning every document chunk — dramatically reducing token usage while improving coverage.
+!!! info "Pourquoi les communautés sont importantes"
+    Les communautés regroupent des entités liées qui co-apparaissent fréquemment. Une requête globale comme « Quelles sont les tendances du marché ? » peut être répondue en synthétisant les résumés de communautés plutôt qu'en parcourant chaque segment de document — réduisant drastiquement l'utilisation de tokens tout en améliorant la couverture.
 
 ---
 
-## Step 2: Load and Explore the Knowledge Graph
+## Étape 2 : Charger et explorer le graphe de connaissances
 
-The dataset contains **15 entities** with relationships and community assignments:
+Le jeu de données contient **15 entités** avec des relations et des affectations de communautés :
 
 ```python
 import pandas as pd
@@ -119,7 +114,7 @@ print(f"\nEntities per community:")
 print(kg.groupby("community_id")["entity_id"].count().sort_values(ascending=False))
 ```
 
-**Expected:**
+**Résultat attendu :**
 
 ```
 Total entities: 15
@@ -129,9 +124,9 @@ Number of communities: 8
 
 ---
 
-## Step 3: Entity Importance Analysis
+## Étape 3 : Analyse de l'importance des entités
 
-Analyze entity importance scores to identify key nodes in the graph:
+Analysez les scores d'importance des entités pour identifier les nœuds clés du graphe :
 
 ```python
 print("Top entities by importance score:")
@@ -144,20 +139,20 @@ print(f"\nHighest importance entity: {kg.loc[kg['importance_score'].idxmax(), 'e
 print(f"Average importance score: {kg['importance_score'].mean():.2f}")
 ```
 
-**Expected:**
+**Résultat attendu :**
 
 ```
 Highest importance entity: OutdoorGear Inc (0.98)
 ```
 
-!!! tip "Centrality and Importance"
-    The importance score reflects how central an entity is in the knowledge graph. Entities with high scores (like OutdoorGear Inc at 0.98) connect many other entities and communities. Queries that involve these hub entities will traverse more of the graph, providing richer context.
+!!! tip "Centralité et importance"
+    Le score d'importance reflète le degré de centralité d'une entité dans le graphe de connaissances. Les entités avec des scores élevés (comme OutdoorGear Inc à 0,98) connectent de nombreuses autres entités et communautés. Les requêtes impliquant ces entités pivots parcourront davantage le graphe, fournissant un contexte plus riche.
 
 ---
 
-## Step 4: Community Structure Analysis
+## Étape 4 : Analyse de la structure des communautés
 
-Examine the community structure and themes:
+Examinez la structure et les thèmes des communautés :
 
 ```python
 print(f"Total communities: {kg['community_id'].nunique()}")
@@ -170,20 +165,20 @@ community_sizes = kg.groupby("community_id").agg(
 print(community_sizes.to_string())
 ```
 
-**Expected:**
+**Résultat attendu :**
 
 ```
 Total communities: 8
 ```
 
-!!! info "Community Detection"
-    Communities are detected using the Leiden algorithm, which identifies densely connected subgraphs. Each community represents a thematic cluster — for example, one community might contain supplier-related entities while another groups competitor entities. The number and size of communities depend on the graph's connectivity structure.
+!!! info "Détection de communautés"
+    Les communautés sont détectées à l'aide de l'algorithme de Leiden, qui identifie les sous-graphes densément connectés. Chaque communauté représente un groupe thématique — par exemple, une communauté peut contenir des entités liées aux fournisseurs tandis qu'une autre regroupe les entités concurrentes. Le nombre et la taille des communautés dépendent de la structure de connectivité du graphe.
 
 ---
 
-## Step 5: Local vs Global Query Simulation
+## Étape 5 : Simulation de requêtes locales vs globales
 
-Simulate how local and global queries traverse the graph differently:
+Simulez la manière dont les requêtes locales et globales parcourent le graphe différemment :
 
 ```python
 # Local query: find entities related to a specific entity
@@ -204,9 +199,9 @@ for cid in sorted(kg["community_id"].unique()):
 
 ---
 
-## Step 6: Graph Quality Metrics
+## Étape 6 : Métriques de qualité du graphe
 
-Evaluate the quality of the knowledge graph:
+Évaluez la qualité du graphe de connaissances :
 
 ```python
 total_entities = len(kg)
@@ -232,93 +227,93 @@ print(report)
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-067/broken_graphrag.py` has **3 bugs** in how it processes the knowledge graph:
+Le fichier `lab-067/broken_graphrag.py` contient **3 bugs** dans la manière dont il traite le graphe de connaissances :
 
 ```bash
 python lab-067/broken_graphrag.py
 ```
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Entity count | Should count all rows in the DataFrame, not unique community IDs |
-| Test 2 | Community count | Should use `nunique()` on `community_id`, not `count()` |
-| Test 3 | Highest importance entity | Should use `idxmax()` on `importance_score`, not `idxmin()` |
+| Test | Ce qu'il vérifie | Indice |
+|------|-----------------|--------|
+| Test 1 | Nombre d'entités | Devrait compter toutes les lignes du DataFrame, pas les ID de communauté uniques |
+| Test 2 | Nombre de communautés | Devrait utiliser `nunique()` sur `community_id`, pas `count()` |
+| Test 3 | Entité la plus importante | Devrait utiliser `idxmax()` sur `importance_score`, pas `idxmin()` |
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What problem does GraphRAG solve that traditional vector RAG cannot?"
+??? question "**Q1 (Choix multiple) :** Quel problème GraphRAG résout-il que le RAG vectoriel traditionnel ne peut pas résoudre ?"
 
-    - A) Faster embedding generation
-    - B) Cross-document synthesis for global queries by using community-level summaries
-    - C) Lower storage costs for embeddings
-    - D) Better tokenization of source documents
+    - A) Génération d'embeddings plus rapide
+    - B) Synthèse inter-documents pour les requêtes globales en utilisant des résumés au niveau des communautés
+    - C) Coûts de stockage réduits pour les embeddings
+    - D) Meilleure tokenisation des documents sources
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Cross-document synthesis for global queries by using community-level summaries**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Synthèse inter-documents pour les requêtes globales en utilisant des résumés au niveau des communautés**
 
-        Traditional vector RAG retrieves individual chunks by similarity, which works for local queries but fails when the answer requires synthesizing information scattered across many documents. GraphRAG builds a knowledge graph, detects communities of related entities, and uses community summaries to answer global queries via map-reduce.
+        Le RAG vectoriel traditionnel récupère des segments individuels par similarité, ce qui fonctionne pour les requêtes locales mais échoue lorsque la réponse nécessite la synthèse d'informations dispersées dans de nombreux documents. GraphRAG construit un graphe de connaissances, détecte des communautés d'entités liées et utilise les résumés de communautés pour répondre aux requêtes globales via map-reduce.
 
-??? question "**Q2 (Multiple Choice):** What is a 'community' in the context of GraphRAG?"
+??? question "**Q2 (Choix multiple) :** Qu'est-ce qu'une « communauté » dans le contexte de GraphRAG ?"
 
-    - A) A group of users who share the same agent
-    - B) A cluster of densely connected entities in the knowledge graph that represent a thematic group
-    - C) A type of vector index partition
-    - D) A chat thread with multiple participants
+    - A) Un groupe d'utilisateurs partageant le même agent
+    - B) Un groupe d'entités densément connectées dans le graphe de connaissances qui représentent un groupe thématique
+    - C) Un type de partition d'index vectoriel
+    - D) Un fil de discussion avec plusieurs participants
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) A cluster of densely connected entities in the knowledge graph that represent a thematic group**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Un groupe d'entités densément connectées dans le graphe de connaissances qui représentent un groupe thématique**
 
-        Communities are discovered by graph clustering algorithms like Leiden. Entities within a community are more densely connected to each other than to entities outside the community. Each community gets an LLM-generated summary that captures its theme, enabling efficient global query answering.
+        Les communautés sont découvertes par des algorithmes de clustering de graphes comme Leiden. Les entités au sein d'une communauté sont plus densément connectées entre elles qu'aux entités extérieures à la communauté. Chaque communauté reçoit un résumé généré par le LLM qui capture son thème, permettant de répondre efficacement aux requêtes globales.
 
-??? question "**Q3 (Run the Lab):** How many total entities are in the knowledge graph?"
+??? question "**Q3 (Exécuter le lab) :** Combien d'entités au total se trouvent dans le graphe de connaissances ?"
 
-    Load the knowledge graph CSV and count the total rows.
+    Chargez le fichier CSV du graphe de connaissances et comptez le nombre total de lignes.
 
-    ??? success "✅ Reveal Answer"
-        **15 entities**
+    ??? success "✅ Révéler la réponse"
+        **15 entités**
 
-        The knowledge graph contains 15 entities spanning multiple types (organizations, products, people, concepts). These entities are connected through relationships extracted from the source documents.
+        Le graphe de connaissances contient 15 entités couvrant plusieurs types (organisations, produits, personnes, concepts). Ces entités sont connectées par des relations extraites des documents sources.
 
-??? question "**Q4 (Run the Lab):** How many communities were detected in the knowledge graph?"
+??? question "**Q4 (Exécuter le lab) :** Combien de communautés ont été détectées dans le graphe de connaissances ?"
 
-    Use `nunique()` on the `community_id` column.
+    Utilisez `nunique()` sur la colonne `community_id`.
 
-    ??? success "✅ Reveal Answer"
-        **8 communities**
+    ??? success "✅ Révéler la réponse"
+        **8 communautés**
 
-        The 15 entities are organized into 8 communities by the Leiden clustering algorithm. Each community represents a thematic group of related entities — for example, supplier relationships, competitor landscape, or product categories.
+        Les 15 entités sont organisées en 8 communautés par l'algorithme de clustering de Leiden. Chaque communauté représente un groupe thématique d'entités liées — par exemple, les relations fournisseurs, le paysage concurrentiel ou les catégories de produits.
 
-??? question "**Q5 (Run the Lab):** Which entity has the highest importance score, and what is the score?"
+??? question "**Q5 (Exécuter le lab) :** Quelle entité a le score d'importance le plus élevé, et quel est ce score ?"
 
-    Sort by `importance_score` descending and check the top entity.
+    Triez par `importance_score` décroissant et vérifiez l'entité en tête.
 
-    ??? success "✅ Reveal Answer"
-        **OutdoorGear Inc with an importance score of 0.98**
+    ??? success "✅ Révéler la réponse"
+        **OutdoorGear Inc avec un score d'importance de 0,98**
 
-        OutdoorGear Inc is the most central entity in the knowledge graph, connecting to entities across multiple communities. Its high importance score (0.98) reflects its role as a hub — queries involving this entity will traverse more of the graph and provide richer cross-document context.
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| GraphRAG | Extends RAG with knowledge graphs for cross-document synthesis |
-| Entity Extraction | Identify people, organizations, and concepts from documents |
-| Community Detection | Cluster related entities to discover thematic groups |
-| Local Queries | Traverse entity-centric subgraphs for specific answers |
-| Global Queries | Synthesize community summaries via map-reduce for broad answers |
-| Importance Scoring | Rank entities by graph centrality to identify key nodes |
+        OutdoorGear Inc est l'entité la plus centrale du graphe de connaissances, connectée à des entités de plusieurs communautés. Son score d'importance élevé (0,98) reflète son rôle de pivot — les requêtes impliquant cette entité parcourront davantage le graphe et fourniront un contexte inter-documents plus riche.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **[Lab 009](lab-009-rag-basic.md)** — RAG Basics (foundational retrieval patterns)
-- **[Lab 068](lab-068-hybrid-search.md)** — Hybrid Search (complementary retrieval strategies)
-- **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (governance for RAG pipelines)
+| Sujet | Ce que vous avez appris |
+|-------|------------------------|
+| GraphRAG | Étend le RAG avec des graphes de connaissances pour la synthèse inter-documents |
+| Extraction d'entités | Identifier les personnes, organisations et concepts à partir des documents |
+| Détection de communautés | Regrouper les entités liées pour découvrir des groupes thématiques |
+| Requêtes locales | Parcourir des sous-graphes centrés sur les entités pour des réponses spécifiques |
+| Requêtes globales | Synthétiser les résumés de communautés via map-reduce pour des réponses larges |
+| Score d'importance | Classer les entités par centralité dans le graphe pour identifier les nœuds clés |
+
+---
+
+## Prochaines étapes
+
+- **[Lab 009](lab-009-rag-basic.md)** — Les bases du RAG (schémas fondamentaux de recherche)
+- **[Lab 068](lab-068-hybrid-search.md)** — Recherche hybride (stratégies de recherche complémentaires)
+- **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (gouvernance pour les pipelines RAG)

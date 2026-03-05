@@ -1,31 +1,26 @@
-# Lab 041: Custom GitHub Copilot Extension
+# Lab 041 : Extension GitHub Copilot personnalisée
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/copilot/">GitHub Copilot</a></span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-azure-paid">Azure paid</span></span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/copilot/">GitHub Copilot</a></span>
+  <span><strong>Durée :</strong> ~90 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-azure-paid">Azure payant</span></span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+!!! danger "Avertissement de coût"
+    Ce lab nécessite des ressources Azure payantes. Coût estimé : 10 à 50 $ selon l'utilisation.
+    Configurez toujours des alertes de budget avant de commencer.
 
+## Ce que vous apprendrez
 
-
-!!! danger "Cost warning"
-    This lab requires Azure paid resources. Estimated cost: $10-$50 depending on usage.
-    Always set budget alerts before starting.
-
-## What You'll Learn
-
-> 🚧 **This lab is coming soon.** Content is being developed.
+> 🚧 **Ce lab sera bientôt disponible.** Le contenu est en cours de développement.
 >
-> **Overview:** Build and publish a GitHub Copilot Extension (GitHub App + agent backend) to the GitHub Marketplace.
+> **Aperçu :** Créer et publier une extension GitHub Copilot (GitHub App + backend agent) sur le GitHub Marketplace.
 
-## Prerequisites
+## Prérequis
 
-See [Prerequisites & Accounts](../prerequisites.md) for setup instructions.
+Consultez [Prérequis et comptes](../prerequisites.md) pour les instructions de configuration.
 
 ---
 
-*Check back soon, or [contribute to this lab](https://github.com/YOUR_ORG/ai-agents-learning-hub)!*
+*Revenez bientôt, ou [contribuez à ce lab](https://github.com/YOUR_ORG/ai-agents-learning-hub) !*

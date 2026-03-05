@@ -1,54 +1,49 @@
 ---
 tags: [browser-automation, cua, openai, playwright, python, safety]
 ---
-# Lab 058: Browser Automation Agents with OpenAI CUA
+# Lab 058: Agentes de Automação de Navegador com OpenAI CUA
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses benchmark dataset; OpenAI API optional</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Caminho:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Tempo:</strong> ~90 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dataset de benchmark; API da OpenAI opcional</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O Que Você Vai Aprender
 
+- O que é o **OpenAI CUA** (Computer-Using Agent) — GPT-4o vision controlando um navegador real na nuvem via capturas de tela
+- A diferença arquitetural entre **CUA** (baseado em capturas de tela) e **Playwright** (seletores baseados em código)
+- Quando usar CUA vs Playwright — sites dinâmicos sem seletores estáveis vs páginas estruturadas e conhecidas
+- Projetar **limites de segurança** — listas de URLs permitidas, limites de tempo de sessão e confirmação de ação
+- Analisar **benchmarks de automação web** comparando CUA e Playwright em diferentes níveis de dificuldade
 
+## Introdução
 
-## What You'll Learn
+O **OpenAI CUA** opera um navegador real através de capturas de tela. O agente vê a página renderizada como uma imagem, raciocina sobre o que fazer em seguida e envia ações estruturadas (coordenadas de clique, digitar texto, rolar). Isso é fundamentalmente diferente do **Playwright**, que interage com a página através de código — seletores CSS, consultas XPath e chamadas de API programáticas.
 
-- What **OpenAI CUA** (Computer-Using Agent) is — GPT-4o vision driving a real cloud browser via screenshots
-- The architectural difference between **CUA** (screenshot-based) and **Playwright** (code-based selectors)
-- When to use CUA vs Playwright — dynamic sites without stable selectors vs structured, well-known pages
-- Design **safety boundaries** — URL allowlists, session time limits, and action confirmation
-- Analyze **web automation benchmarks** comparing CUA and Playwright across difficulty levels
-
-## Introduction
-
-**OpenAI CUA** operates a real browser through screenshots. The agent sees the rendered page as an image, reasons about what to do next, and sends structured actions (click coordinates, type text, scroll). This is fundamentally different from **Playwright**, which interacts with the page through code — CSS selectors, XPath queries, and programmatic API calls.
-
-| Approach | How It "Sees" the Page | Interaction Method | Brittleness |
+| Abordagem | Como "Vê" a Página | Método de Interação | Fragilidade |
 |----------|----------------------|-------------------|-------------|
-| **CUA** | Screenshots (pixels) | Click coordinates, keyboard input | Resilient to DOM changes; struggles with dynamic SPAs |
-| **Playwright** | DOM / HTML structure | CSS selectors, XPath, API calls | Breaks when selectors change; fast and precise |
+| **CUA** | Capturas de tela (pixels) | Coordenadas de clique, entrada de teclado | Resiliente a mudanças no DOM; tem dificuldade com SPAs dinâmicas |
+| **Playwright** | DOM / estrutura HTML | Seletores CSS, XPath, chamadas de API | Quebra quando os seletores mudam; rápido e preciso |
 
-### The Scenario
+### O Cenário
 
-You are a **Web Automation Engineer** at OutdoorGear Inc. The team needs to automate tasks across multiple web properties — the e-commerce storefront, travel booking partners, support portal, and internal analytics dashboards. Some sites have stable, well-structured HTML; others are dynamic single-page applications with constantly changing selectors.
+Você é um **Engenheiro de Automação Web** na OutdoorGear Inc. A equipe precisa automatizar tarefas em várias propriedades web — a loja de e-commerce, parceiros de reserva de viagens, portal de suporte e dashboards de análise internos. Alguns sites têm HTML estável e bem estruturado; outros são aplicações de página única dinâmicas com seletores em constante mudança.
 
-Your job is to evaluate **CUA vs Playwright** using a benchmark dataset of **10 tasks** attempted by both methods, and recommend which approach to use for each scenario.
+Seu trabalho é avaliar **CUA vs Playwright** usando um dataset de benchmark de **10 tarefas** tentadas por ambos os métodos, e recomendar qual abordagem usar para cada cenário.
 
-!!! info "No Live Agent Required"
-    This lab analyzes a **pre-recorded benchmark dataset** comparing CUA and Playwright results. You don't need an OpenAI API key or Playwright installation — all analysis is done locally with pandas. If you have API access, you can optionally extend the lab to run live CUA tasks.
+!!! info "Agente ao Vivo Não Necessário"
+    Este lab analisa um **dataset de benchmark pré-gravado** comparando resultados de CUA e Playwright. Você não precisa de uma chave de API da OpenAI ou instalação do Playwright — toda a análise é feita localmente com pandas. Se você tiver acesso à API, pode opcionalmente estender o lab para executar tarefas CUA ao vivo.
 
-## Prerequisites
+## Pré-requisitos
 
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` library | DataFrame operations |
-| (Optional) OpenAI API key | For live CUA experiments |
-| (Optional) Playwright | For live browser automation comparison |
+| Python 3.10+ | Executar scripts de análise |
+| Biblioteca `pandas` | Operações com DataFrame |
+| (Opcional) Chave de API da OpenAI | Para experimentos ao vivo com CUA |
+| (Opcional) Playwright | Para comparação ao vivo de automação de navegador |
 
 ```bash
 pip install pandas
@@ -56,27 +51,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-058/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-058/` no seu diretório de trabalho.
 
-| File | Description | Download |
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_cua.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/broken_cua.py) |
+| `broken_cua.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/broken_cua.py) |
 | `browser_tasks.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/browser_tasks.csv) |
 
 ---
 
-## Step 1: Understanding CUA vs Playwright
+## Etapa 1: Entendendo CUA vs Playwright
 
-### CUA Architecture
+### Arquitetura do CUA
 
 ```
 ┌─────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -89,9 +84,9 @@ pip install pandas
                     repeat until done
 ```
 
-CUA sends screenshots to GPT-4o, which returns structured actions. The browser executes the action, takes a new screenshot, and the loop continues until the task is complete.
+O CUA envia capturas de tela para o GPT-4o, que retorna ações estruturadas. O navegador executa a ação, tira uma nova captura de tela, e o loop continua até que a tarefa seja concluída.
 
-### Playwright Architecture
+### Arquitetura do Playwright
 
 ```
 ┌─────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -100,26 +95,26 @@ CUA sends screenshots to GPT-4o, which returns structured actions. The browser e
 └─────────────┘     └──────────────┘     └──────────────┘
 ```
 
-Playwright executes pre-written code that targets specific HTML elements using CSS selectors, XPath, or ARIA roles. It's fast, precise, and deterministic — but breaks when the page structure changes.
+O Playwright executa código pré-escrito que direciona elementos HTML específicos usando seletores CSS, XPath ou roles ARIA. É rápido, preciso e determinístico — mas quebra quando a estrutura da página muda.
 
-### When to Use Each
+### Quando Usar Cada Um
 
-| Scenario | Best Approach | Why |
+| Cenário | Melhor Abordagem | Por quê |
 |----------|--------------|-----|
-| Stable, well-structured site | **Playwright** | Selectors are reliable; faster and cheaper |
-| Dynamic SPA with changing selectors | **CUA** | Vision-based; doesn't depend on DOM structure |
-| CAPTCHA-protected pages | **CUA** | Can "see" and reason about CAPTCHAs |
-| High-volume, repetitive tasks | **Playwright** | Faster execution; no API cost per action |
-| Unknown/new site exploration | **CUA** | No pre-written selectors needed |
+| Site estável e bem estruturado | **Playwright** | Seletores são confiáveis; mais rápido e mais barato |
+| SPA dinâmica com seletores mutáveis | **CUA** | Baseado em visão; não depende da estrutura do DOM |
+| Páginas protegidas por CAPTCHA | **CUA** | Pode "ver" e raciocinar sobre CAPTCHAs |
+| Tarefas repetitivas de alto volume | **Playwright** | Execução mais rápida; sem custo de API por ação |
+| Exploração de site desconhecido/novo | **CUA** | Não precisa de seletores pré-escritos |
 
-!!! tip "Key Difference"
-    CUA uses **vision and screenshots** to understand the page — like a human looking at a screen. Playwright uses **code and selectors** — like a developer inspecting the HTML source. CUA is more flexible; Playwright is more reliable on known pages.
+!!! tip "Diferença Principal"
+    O CUA usa **visão e capturas de tela** para entender a página — como um humano olhando para uma tela. O Playwright usa **código e seletores** — como um desenvolvedor inspecionando o código-fonte HTML. O CUA é mais flexível; o Playwright é mais confiável em páginas conhecidas.
 
 ---
 
-## Step 2: Load the Benchmark Dataset
+## Etapa 2: Carregar o Dataset de Benchmark
 
-The dataset contains **10 tasks**, each attempted by both CUA and Playwright:
+O dataset contém **10 tarefas**, cada uma tentada tanto pelo CUA quanto pelo Playwright:
 
 ```python
 import pandas as pd
@@ -134,7 +129,7 @@ print(tasks[["task_id", "task_description", "difficulty",
              "cua_completed", "playwright_completed"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total rows: 10
@@ -145,17 +140,17 @@ Difficulty levels: ['easy', 'hard', 'medium']
 
 | task_id | task_description | difficulty | cua | playwright |
 |---------|-----------------|------------|-----|------------|
-| T01 | Search for hiking boots and filter by price | easy | ✓ | ✓ |
-| T02 | Add a product to cart and view cart total | easy | ✓ | ✓ |
-| T03 | Fill out a shipping address form | medium | ✓ | ✓ |
+| T01 | Pesquisar botas de trilha e filtrar por preço | easy | ✓ | ✓ |
+| T02 | Adicionar um produto ao carrinho e ver o total | easy | ✓ | ✓ |
+| T03 | Preencher um formulário de endereço de entrega | medium | ✓ | ✓ |
 | ... | ... | ... | ... | ... |
-| T10 | Navigate a dynamic SPA with client-side routing | hard | ✗ | ✓ |
+| T10 | Navegar em uma SPA dinâmica com roteamento client-side | hard | ✗ | ✓ |
 
 ---
 
-## Step 3: Compare CUA vs Playwright Success Rates
+## Etapa 3: Comparar Taxas de Sucesso CUA vs Playwright
 
-Calculate and compare completion rates for both methods:
+Calcule e compare as taxas de conclusão de ambos os métodos:
 
 ```python
 cua_completed = tasks["cua_completed"].sum()
@@ -167,10 +162,10 @@ pw_rate = (pw_completed / total) * 100
 
 print(f"CUA:        {cua_completed}/{total} = {cua_rate:.0f}%")
 print(f"Playwright: {pw_completed}/{total} = {pw_rate:.0f}%")
-print(f"Difference: {pw_rate - cua_rate:.0f} percentage points in Playwright's favor")
+print(f"Difference: {pw_rate - cua_rate:.0f} percentage points in Playwright\'s favor")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 CUA:        7/10 = 70%
@@ -178,7 +173,7 @@ Playwright: 8/10 = 80%
 Difference: 10 percentage points in Playwright's favor
 ```
 
-### Where Each Method Excels
+### Onde Cada Método se Destaca
 
 ```python
 # Tasks where CUA succeeded but Playwright failed
@@ -192,19 +187,19 @@ print(f"\nPlaywright succeeded, CUA failed ({len(pw_only)}):")
 print(pw_only[["task_id", "task_description"]].to_string(index=False))
 ```
 
-**Expected:**
+**Esperado:**
 
-- **CUA only**: T07 (Submit a support ticket with screenshot attachment) — dynamic form with file upload that's hard to script with selectors
-- **Playwright only**: T06 (Compare hotel prices across 3 tabs), T10 (Navigate a dynamic SPA) — structured tasks where code-based navigation is more reliable
+- **Apenas CUA**: T07 (Enviar um ticket de suporte com anexo de captura de tela) — formulário dinâmico com upload de arquivo que é difícil de automatizar com seletores
+- **Apenas Playwright**: T06 (Comparar preços de hotéis em 3 abas), T10 (Navegar em uma SPA dinâmica) — tarefas estruturadas onde navegação baseada em código é mais confiável
 
 !!! tip "Insight"
-    Playwright has a higher overall success rate (80% vs 70%), but CUA wins on tasks that involve **dynamic content** or **visual reasoning** (like attaching screenshots to support tickets). Playwright excels at **structured, multi-tab** workflows where precise selector-based navigation is needed.
+    O Playwright tem uma taxa de sucesso geral mais alta (80% vs 70%), mas o CUA vence em tarefas que envolvem **conteúdo dinâmico** ou **raciocínio visual** (como anexar capturas de tela a tickets de suporte). O Playwright se destaca em fluxos de trabalho **estruturados e multi-abas** onde é necessária navegação precisa baseada em seletores.
 
 ---
 
-## Step 4: Analyze by Difficulty
+## Etapa 4: Analisar por Dificuldade
 
-Break down success rates by difficulty level:
+Divida as taxas de sucesso por nível de dificuldade:
 
 ```python
 print("Success rates by difficulty:\n")
@@ -218,7 +213,7 @@ for diff in ["easy", "medium", "hard"]:
     print()
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Success rates by difficulty:
@@ -237,13 +232,13 @@ Success rates by difficulty:
 ```
 
 !!! tip "Insight"
-    Both methods handle **easy and medium** tasks perfectly (100%). The gap appears in **hard tasks** where Playwright's selector-based approach has a slight edge (60% vs 40%). However, the tasks where CUA wins (T07) are precisely the ones where Playwright's selectors can't handle dynamic, visual content.
+    Ambos os métodos lidam com tarefas **fáceis e médias** perfeitamente (100%). A diferença aparece nas **tarefas difíceis** onde a abordagem baseada em seletores do Playwright tem uma leve vantagem (60% vs 40%). No entanto, as tarefas onde o CUA vence (T07) são precisamente aquelas onde os seletores do Playwright não conseguem lidar com conteúdo dinâmico e visual.
 
 ---
 
-## Step 5: Screenshot Analysis
+## Etapa 5: Análise de Capturas de Tela
 
-CUA takes screenshots at every step — more screenshots generally means a harder or longer task:
+O CUA tira capturas de tela a cada etapa — mais capturas geralmente significam uma tarefa mais difícil ou mais longa:
 
 ```python
 total_screenshots = tasks["cua_screenshots"].sum()
@@ -258,7 +253,7 @@ print(f"\nAverage screenshots by difficulty:")
 print(avg_by_diff.to_string())
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total CUA screenshots across all tasks: 122
@@ -284,16 +279,16 @@ medium     8.0
 hard      18.0
 ```
 
-!!! tip "Screenshot Cost"
-    Each screenshot is sent to GPT-4o as an image token — at ~765 tokens per screenshot (typical web page), 122 screenshots ≈ 93,000 tokens. At GPT-4o pricing, this is roughly **$0.47 in input tokens** for the entire benchmark run. CUA is cost-effective for moderate workloads but can add up for high-volume tasks.
+!!! tip "Custo de Capturas de Tela"
+    Cada captura de tela é enviada ao GPT-4o como um token de imagem — a ~765 tokens por captura de tela (página web típica), 122 capturas ≈ 93.000 tokens. Com os preços do GPT-4o, isso é aproximadamente **$0,47 em tokens de entrada** para toda a execução do benchmark. O CUA é econômico para cargas de trabalho moderadas, mas pode acumular custos para tarefas de alto volume.
 
 ---
 
-## Step 6: Safety Considerations
+## Etapa 6: Considerações de Segurança
 
-### URL Allowlist
+### Lista de URLs Permitidas
 
-Restrict CUA to approved domains:
+Restrinja o CUA a domínios aprovados:
 
 ```python
 # Analyze domain patterns in the dataset
@@ -310,114 +305,114 @@ print(f"\nHigh-risk tasks: {len(high_risk)}")
 print(high_risk[["task_id", "task_description", "safety_risk", "url_pattern"]].to_string(index=False))
 ```
 
-### Recommended Safety Boundaries
+### Limites de Segurança Recomendados
 
-| Boundary | Purpose | Implementation |
+| Limite | Propósito | Implementação |
 |----------|---------|----------------|
-| **URL allowlist** | Restrict which sites CUA can visit | `allowed_domains = ["*.outdoorgear.com"]` |
-| **Session time limit** | Prevent runaway agents | Kill session after 5 minutes of inactivity |
-| **Action confirmation** | Human approval for risky actions | Prompt before form submissions on payment pages |
-| **Screenshot retention** | Audit trail | Save all screenshots with timestamps for review |
-| **Credential handling** | Never expose passwords in screenshots | Use browser-level autofill; keep passwords out of visible fields |
+| **Lista de URLs permitidas** | Restringir quais sites o CUA pode visitar | `allowed_domains = ["*.outdoorgear.com"]` |
+| **Limite de tempo da sessão** | Evitar agentes descontrolados | Encerrar sessão após 5 minutos de inatividade |
+| **Confirmação de ação** | Aprovação humana para ações arriscadas | Prompt antes de envios de formulário em páginas de pagamento |
+| **Retenção de capturas de tela** | Trilha de auditoria | Salvar todas as capturas de tela com timestamps para revisão |
+| **Tratamento de credenciais** | Nunca expor senhas em capturas de tela | Usar preenchimento automático do navegador; manter senhas fora de campos visíveis |
 
-!!! warning "External Sites"
-    Task T10 targets an external domain (`external`). In production, CUA should **never** be pointed at external sites without explicit allowlisting. An unconstrained agent could navigate to phishing sites, download malware, or leak sensitive data through form submissions on untrusted domains.
+!!! warning "Sites Externos"
+    A tarefa T10 tem como alvo um domínio externo (`external`). Em produção, o CUA **nunca** deve ser direcionado a sites externos sem lista de permissões explícita. Um agente sem restrições poderia navegar para sites de phishing, baixar malware ou vazar dados sensíveis através de envios de formulário em domínios não confiáveis.
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-058/broken_cua.py` has **3 bugs** in the CUA analysis functions. Can you find and fix them all?
+O arquivo `lab-058/broken_cua.py` tem **3 bugs** nas funções de análise do CUA. Você consegue encontrar e corrigir todos?
 
-Run the self-tests to see which ones fail:
+Execute os auto-testes para ver quais falham:
 
 ```bash
 python lab-058/broken_cua.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Você deve ver **3 testes falhando**. Cada teste corresponde a um bug:
 
-| Test | What it checks | Hint |
+| Teste | O que verifica | Dica |
 |------|---------------|------|
-| Test 1 | CUA success rate | Should use `cua_completed` column, not `playwright_completed` |
-| Test 2 | Total CUA screenshots | Should use `sum()`, not `max()` |
-| Test 3 | CUA success rate by difficulty | Must filter by the `difficulty` parameter before computing rate |
+| Teste 1 | Taxa de sucesso do CUA | Deve usar a coluna `cua_completed`, não `playwright_completed` |
+| Teste 2 | Total de capturas de tela do CUA | Deve usar `sum()`, não `max()` |
+| Teste 3 | Taxa de sucesso do CUA por dificuldade | Deve filtrar pelo parâmetro `difficulty` antes de calcular a taxa |
 
-Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done!
+Corrija todos os 3 bugs e execute novamente. Quando você vir `🎉 All 3 tests passed`, está pronto!
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What is the key difference between CUA and Playwright for browser automation?"
+??? question "**Q1 (Múltipla Escolha):** Qual é a principal diferença entre CUA e Playwright para automação de navegador?"
 
-    - A) CUA is faster because it skips page rendering
-    - B) CUA uses vision/screenshots to understand pages, while Playwright uses code-based CSS selectors
-    - C) Playwright can handle CAPTCHAs but CUA cannot
-    - D) CUA requires access to the page's HTML source code
+    - A) O CUA é mais rápido porque pula a renderização da página
+    - B) O CUA usa visão/capturas de tela para entender páginas, enquanto o Playwright usa seletores CSS baseados em código
+    - C) O Playwright pode lidar com CAPTCHAs, mas o CUA não
+    - D) O CUA requer acesso ao código-fonte HTML da página
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) CUA uses vision/screenshots to understand pages, while Playwright uses code-based CSS selectors**
+    ??? success "✅ Revelar Resposta"
+        **Correta: B) O CUA usa visão/capturas de tela para entender páginas, enquanto o Playwright usa seletores CSS baseados em código**
 
-        CUA sends screenshots to a vision-language model (GPT-4o) and receives click/type actions based on what it "sees" — just like a human looking at a screen. Playwright interacts with the DOM directly using CSS selectors, XPath, or ARIA roles. This fundamental difference means CUA is more flexible (works on any visual interface) while Playwright is more precise (direct DOM access).
+        O CUA envia capturas de tela para um modelo de visão-linguagem (GPT-4o) e recebe ações de clicar/digitar baseadas no que ele "vê" — assim como um humano olhando para uma tela. O Playwright interage com o DOM diretamente usando seletores CSS, XPath ou roles ARIA. Essa diferença fundamental significa que o CUA é mais flexível (funciona em qualquer interface visual) enquanto o Playwright é mais preciso (acesso direto ao DOM).
 
-??? question "**Q2 (Multiple Choice):** When is CUA a better choice than Playwright?"
+??? question "**Q2 (Múltipla Escolha):** Quando o CUA é uma escolha melhor que o Playwright?"
 
-    - A) For high-volume, repetitive tasks on stable pages
-    - B) For dynamic sites without stable CSS selectors
-    - C) When you need deterministic, reproducible test results
-    - D) When the page has a well-documented API
+    - A) Para tarefas repetitivas de alto volume em páginas estáveis
+    - B) Para sites dinâmicos sem seletores CSS estáveis
+    - C) Quando você precisa de resultados de teste determinísticos e reproduzíveis
+    - D) Quando a página tem uma API bem documentada
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) For dynamic sites without stable CSS selectors**
+    ??? success "✅ Revelar Resposta"
+        **Correta: B) Para sites dinâmicos sem seletores CSS estáveis**
 
-        CUA excels on sites where the DOM structure changes frequently — dynamic SPAs, sites with A/B testing, or pages with randomized element IDs. Because CUA "sees" the page visually, it doesn't depend on CSS selectors that might break with every deployment. Playwright is better for stable, well-structured sites where selectors are reliable.
+        O CUA se destaca em sites onde a estrutura do DOM muda frequentemente — SPAs dinâmicas, sites com testes A/B ou páginas com IDs de elementos aleatórios. Como o CUA "vê" a página visualmente, ele não depende de seletores CSS que podem quebrar a cada implantação. O Playwright é melhor para sites estáveis e bem estruturados onde os seletores são confiáveis.
 
-??? question "**Q3 (Run the Lab):** What is the CUA success rate?"
+??? question "**Q3 (Execute o Lab):** Qual é a taxa de sucesso do CUA?"
 
-    Count tasks where `cua_completed == True` and divide by total tasks.
+    Conte tarefas onde `cua_completed == True` e divida pelo total de tarefas.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **70%**
 
-        7 out of 10 tasks were completed successfully by CUA. The 3 failures (T06, T08, T10) were all **hard** difficulty tasks involving multi-tab comparison, CAPTCHA handling, and dynamic SPA navigation.
+        7 de 10 tarefas foram concluídas com sucesso pelo CUA. As 3 falhas (T06, T08, T10) eram todas tarefas de dificuldade **difícil** envolvendo comparação multi-abas, tratamento de CAPTCHA e navegação de SPA dinâmica.
 
-??? question "**Q4 (Run the Lab):** What is the Playwright success rate?"
+??? question "**Q4 (Execute o Lab):** Qual é a taxa de sucesso do Playwright?"
 
-    Count tasks where `playwright_completed == True` and divide by total tasks.
+    Conte tarefas onde `playwright_completed == True` e divida pelo total de tarefas.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **80%**
 
-        8 out of 10 tasks were completed successfully by Playwright. The 2 failures (T07, T08) involved a screenshot-attachment upload (which requires visual reasoning beyond selectors) and a CAPTCHA-protected form (which neither method could handle).
+        8 de 10 tarefas foram concluídas com sucesso pelo Playwright. As 2 falhas (T07, T08) envolveram um upload de anexo de captura de tela (que requer raciocínio visual além de seletores) e um formulário protegido por CAPTCHA (que nenhum dos métodos conseguiu resolver).
 
-??? question "**Q5 (Run the Lab):** What is the total number of CUA screenshots across all tasks?"
+??? question "**Q5 (Execute o Lab):** Qual é o número total de capturas de tela do CUA em todas as tarefas?"
 
-    Compute `tasks["cua_screenshots"].sum()`.
+    Calcule `tasks["cua_screenshots"].sum()`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **122**
 
-        Sum of all screenshots: 3 + 5 + 8 + 6 + 10 + 18 + 14 + 16 + 22 + 20 = **122 screenshots**. Hard tasks required significantly more screenshots (avg 18) compared to easy tasks (avg 4), reflecting the additional reasoning steps needed for complex workflows.
+        Soma de todas as capturas de tela: 3 + 5 + 8 + 6 + 10 + 18 + 14 + 16 + 22 + 20 = **122 capturas de tela**. Tarefas difíceis exigiram significativamente mais capturas (média de 18) comparado com tarefas fáceis (média de 4), refletindo as etapas adicionais de raciocínio necessárias para fluxos de trabalho complexos.
 
 ---
 
-## Summary
+## Resumo
 
-| Topic | What You Learned |
+| Tópico | O Que Você Aprendeu |
 |-------|-----------------|
-| CUA Architecture | GPT-4o vision drives a cloud browser via screenshot→action loop |
-| Playwright Architecture | Code-based selectors interact directly with the DOM |
-| CUA vs Playwright | CUA: 70% success, flexible; Playwright: 80% success, precise |
-| Difficulty Impact | Both methods ace easy/medium; hard tasks reveal their differences |
-| Screenshot Overhead | 122 total screenshots; hard tasks require 4× more than easy |
-| Safety Design | URL allowlists, session limits, credential isolation, audit trails |
+| Arquitetura do CUA | GPT-4o vision controla um navegador na nuvem via loop captura de tela→ação |
+| Arquitetura do Playwright | Seletores baseados em código interagem diretamente com o DOM |
+| CUA vs Playwright | CUA: 70% de sucesso, flexível; Playwright: 80% de sucesso, preciso |
+| Impacto da Dificuldade | Ambos os métodos acertam fácil/médio; tarefas difíceis revelam suas diferenças |
+| Overhead de Capturas de Tela | 122 capturas no total; tarefas difíceis requerem 4× mais que as fáceis |
+| Design de Segurança | Listas de URLs permitidas, limites de sessão, isolamento de credenciais, trilhas de auditoria |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 057](lab-057-computer-use-agents.md)** — Computer-Using Agents for Desktop Automation
-- Explore OpenAI's [CUA documentation](https://platform.openai.com/docs/guides/computer-using-agent) for live agent setup
-- Try [Playwright](https://playwright.dev/) for code-based browser automation
+- **[Lab 057](lab-057-computer-use-agents.md)** — Agentes de Uso de Computador para Automação de Desktop
+- Explore a [documentação do CUA](https://platform.openai.com/docs/guides/computer-using-agent) da OpenAI para configuração de agente ao vivo
+- Experimente o [Playwright](https://playwright.dev/) para automação de navegador baseada em código

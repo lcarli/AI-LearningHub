@@ -1,48 +1,43 @@
 ---
 tags: [markitdown, mcp, document-ingestion, pdf, python]
 ---
-# Lab 080: MarkItDown + MCP — Document Ingestion for Agents
+# Lab 080: MarkItDown + MCP — Ingestão de Documentos para Agentes
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span></span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> Todas as trilhas</span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span></span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- O que é o **Microsoft MarkItDown** — uma biblioteca que converte PDF, Word, Excel, PowerPoint, HTML e imagens em Markdown limpo para consumo por LLMs
+- Como o **servidor MCP** do MarkItDown expõe a conversão de documentos como uma ferramenta que qualquer agente compatível com MCP pode chamar
+- Analisar a **qualidade de conversão** em diferentes tipos de arquivo para entender pontos fortes e limitações
+- Medir a **velocidade de conversão** e identificar quais formatos são mais rápidos de processar
+- Depurar um script de análise do MarkItDown com falhas corrigindo 3 bugs
 
+## Introdução
 
-## What You'll Learn
+Modelos de Linguagem de Grande Escala funcionam melhor com **texto puro**, mas documentos empresariais vêm em dezenas de formatos — PDFs com tabelas, documentos Word com imagens incorporadas, planilhas Excel, apresentações PowerPoint e páginas HTML. Converter manualmente esses arquivos para texto perde a estrutura, e abordagens baseadas em OCR são lentas e propensas a erros.
 
-- What **Microsoft MarkItDown** is — a library that converts PDF, Word, Excel, PowerPoint, HTML, and images into clean Markdown for LLM consumption
-- How MarkItDown's **MCP server** exposes document conversion as a tool that any MCP-compatible agent can call
-- Analyze **conversion quality** across different file types to understand strengths and limitations
-- Measure **conversion speed** and identify which formats are fastest to process
-- Debug a broken MarkItDown analysis script by fixing 3 bugs
+O **Microsoft MarkItDown** resolve isso convertendo documentos ricos em **Markdown bem estruturado** que preserva tabelas, títulos, listas e referências de imagens. Ele suporta PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON e até imagens (via OCR/legendagem). Quando combinado com seu **servidor MCP**, qualquer agente pode chamar `convert_to_markdown` como uma ferramenta — possibilitando fluxos de trabalho de ingestão de documentos de forma transparente.
 
-## Introduction
+### O Cenário
 
-Large Language Models work best with **plain text**, but enterprise documents come in dozens of formats — PDFs with tables, Word documents with embedded images, Excel spreadsheets, PowerPoint decks, and HTML pages. Manually converting these to text loses structure, and OCR-based approaches are slow and error-prone.
+Você é um **Engenheiro de Plataforma** na OutdoorGear Inc. A empresa possui um corpus de documentos crescente — relatórios trimestrais, catálogos de produtos, manuais de treinamento e contratos — que os agentes precisam pesquisar e raciocinar sobre. Você avaliará a qualidade de conversão do MarkItDown em **12 conversões de arquivos** cobrindo 7 tipos de arquivo diferentes.
 
-**Microsoft MarkItDown** solves this by converting rich documents into **well-structured Markdown** that preserves tables, headings, lists, and image references. It supports PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON, and even images (via OCR/captioning). When combined with its **MCP server**, any agent can call `convert_to_markdown` as a tool — enabling seamless document ingestion workflows.
+!!! info "Instalação do MarkItDown Não Necessária"
+    Este laboratório analisa um **conjunto de dados de benchmark pré-gravado** de resultados de conversão. Você não precisa instalar o MarkItDown — toda a análise é feita localmente com pandas. Se você quiser executar conversões ao vivo, instale com `pip install markitdown`.
 
-### The Scenario
+## Pré-requisitos
 
-You are a **Platform Engineer** at OutdoorGear Inc. The company has a growing document corpus — quarterly reports, product catalogs, training manuals, and contracts — that agents need to search and reason over. You will evaluate MarkItDown's conversion quality across **12 file conversions** covering 7 different file types.
-
-!!! info "No MarkItDown Installation Required"
-    This lab analyzes a **pre-recorded benchmark dataset** of conversion results. You don't need to install MarkItDown — all analysis is done locally with pandas. If you want to run live conversions, install with `pip install markitdown`.
-
-## Prerequisites
-
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` library | DataFrame operations |
-| (Optional) `markitdown` | For live document conversions |
+| Python 3.10+ | Executar scripts de análise |
+| Biblioteca `pandas` | Operações com DataFrame |
+| (Opcional) `markitdown` | Para conversões de documentos ao vivo |
 
 ```bash
 pip install pandas
@@ -50,50 +45,51 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-080/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o laboratório"
+    Salve todos os arquivos em uma pasta `lab-080/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_markitdown.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/broken_markitdown.py) |
-| `conversion_results.csv` | Dataset — 12 file conversions across 7 formats | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_markitdown.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/broken_markitdown.py) |
+| `conversion_results.csv` | Dataset — 12 conversões de arquivos em 7 formatos | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) |
 
 ---
 
-## Step 1: Understanding MarkItDown
+## Etapa 1: Entendendo o MarkItDown
 
-MarkItDown follows a simple pipeline — detect the file type, apply the appropriate converter, and produce structured Markdown:
+O MarkItDown segue um pipeline simples — detecta o tipo de arquivo, aplica o conversor apropriado e produz Markdown estruturado:
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│  Input File  │────▶│  Converter   │────▶│  Markdown    │
-│  (PDF/DOCX…) │     │  (per-type)  │     │  (structured)│
+│  Arquivo de  │────▶│  Conversor   │────▶│  Markdown    │
+│  Entrada     │     │  (por tipo)  │     │  (estrutur.) │
+│  (PDF/DOCX…) │     │              │     │              │
 └──────────────┘     └──────────────┘     └──────────────┘
 ```
 
-Supported converters:
+Conversores suportados:
 
-| Format | Converter | Preserves |
-|--------|-----------|-----------|
-| **PDF** | `pdfminer` | Text, headings, tables (limited) |
-| **DOCX** | `python-docx` | Headings, tables, lists, styles |
-| **XLSX** | `openpyxl` | Sheet data as Markdown tables |
-| **PPTX** | `python-pptx` | Slide text, speaker notes, images |
-| **HTML** | `BeautifulSoup` | Structure, links, tables |
-| **CSV/JSON** | Built-in | Tabular data |
-| **Images** | OCR / LLM captioning | Extracted text or descriptions |
+| Formato | Conversor | Preserva |
+|---------|-----------|----------|
+| **PDF** | `pdfminer` | Texto, títulos, tabelas (limitado) |
+| **DOCX** | `python-docx` | Títulos, tabelas, listas, estilos |
+| **XLSX** | `openpyxl` | Dados de planilha como tabelas Markdown |
+| **PPTX** | `python-pptx` | Texto de slides, notas do apresentador, imagens |
+| **HTML** | `BeautifulSoup` | Estrutura, links, tabelas |
+| **CSV/JSON** | Integrado | Dados tabulares |
+| **Imagens** | OCR / legendagem por LLM | Texto extraído ou descrições |
 
-### MCP Server Integration
+### Integração com Servidor MCP
 
-MarkItDown ships with an **MCP server** that exposes conversion as a tool:
+O MarkItDown vem com um **servidor MCP** que expõe a conversão como uma ferramenta:
 
 ```json
 {
@@ -112,13 +108,13 @@ MarkItDown ships with an **MCP server** that exposes conversion as a tool:
 }
 ```
 
-Any MCP-compatible agent (GitHub Copilot, Claude Desktop, custom agents) can call this tool to ingest documents on the fly.
+Qualquer agente compatível com MCP (GitHub Copilot, Claude Desktop, agentes personalizados) pode chamar esta ferramenta para ingerir documentos em tempo real.
 
 ---
 
-## Step 2: Load the Conversion Results
+## Etapa 2: Carregar os Resultados de Conversão
 
-The dataset contains **12 file conversions** across 7 different formats:
+O dataset contém **12 conversões de arquivos** em 7 formatos diferentes:
 
 ```python
 import pandas as pd
@@ -130,7 +126,7 @@ print(f"\nDataset preview:")
 print(results[["test_id", "input_file", "file_type", "conversion_success", "quality_score"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total conversions: 12
@@ -147,9 +143,9 @@ File types: ['csv', 'docx', 'html', 'image', 'json', 'pdf', 'pptx', 'xlsx']
 
 ---
 
-## Step 3: Analyze Conversion Success
+## Etapa 3: Analisar o Sucesso da Conversão
 
-Calculate overall success rate and identify failures:
+Calcule a taxa geral de sucesso e identifique falhas:
 
 ```python
 successful = results[results["conversion_success"] == True]
@@ -163,7 +159,7 @@ if len(failed) > 0:
     print(failed[["test_id", "input_file", "file_type"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Successful conversions: 11/12
@@ -175,13 +171,13 @@ Failed conversions:
 ```
 
 !!! tip "Insight"
-    The only failure is a **corrupted PDF** (D11, file_size_kb = 0). MarkItDown handles all 7 supported formats successfully when the input file is valid.
+    A única falha é um **PDF corrompido** (D11, file_size_kb = 0). O MarkItDown lida com todos os 7 formatos suportados com sucesso quando o arquivo de entrada é válido.
 
 ---
 
-## Step 4: Analyze Conversion Quality
+## Etapa 4: Analisar a Qualidade da Conversão
 
-Compare quality scores across file types:
+Compare as pontuações de qualidade entre os tipos de arquivo:
 
 ```python
 print("Quality scores by file type (successful only):")
@@ -193,7 +189,7 @@ avg_quality = successful["quality_score"].mean()
 print(f"\nOverall average quality: {avg_quality:.3f}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Quality scores by file type (successful only):
@@ -211,13 +207,13 @@ Overall average quality: ≈ 0.916
 ```
 
 !!! tip "Insight"
-    Structured formats (CSV, JSON, XLSX) achieve near-perfect quality (≥0.98), while **images** have the lowest quality (0.72) — OCR/captioning is inherently lossy. PDFs vary based on complexity; the large training manual (D10, 12 MB) scored 0.82.
+    Formatos estruturados (CSV, JSON, XLSX) alcançam qualidade quase perfeita (≥0.98), enquanto **imagens** têm a menor qualidade (0.72) — OCR/legendagem é inerentemente com perdas. PDFs variam com base na complexidade; o manual de treinamento grande (D10, 12 MB) obteve 0.82.
 
 ---
 
-## Step 5: Analyze Conversion Speed
+## Etapa 5: Analisar a Velocidade de Conversão
 
-Measure conversion times and identify bottlenecks:
+Meça os tempos de conversão e identifique gargalos:
 
 ```python
 print("Conversion time by file type (successful only):")
@@ -226,7 +222,7 @@ for _, row in successful.sort_values("conversion_time_ms", ascending=False).iter
           f"({row['file_size_kb']:,} KB)")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
   D10 (  pdf): 4,500ms (12,000 KB)
@@ -248,7 +244,7 @@ print(f"  Images found:   {total_images}")
 print(f"  Headings found: {total_headings}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Extracted elements (successful conversions):
@@ -258,25 +254,25 @@ Extracted elements (successful conversions):
 ```
 
 !!! tip "Insight"
-    Large PDFs and images are the slowest to convert. The **training manual** (D10, 12 MB) took 4.5 seconds but extracted 15 tables, 28 images, and 32 headings — a rich document that would be extremely tedious to process manually.
+    PDFs grandes e imagens são os mais lentos para converter. O **manual de treinamento** (D10, 12 MB) levou 4,5 segundos, mas extraiu 15 tabelas, 28 imagens e 32 títulos — um documento rico que seria extremamente tedioso de processar manualmente.
 
 ---
 
-## Step 6: MCP Server Architecture
+## Etapa 6: Arquitetura do Servidor MCP
 
-When MarkItDown runs as an MCP server, agents can convert documents on demand:
+Quando o MarkItDown roda como um servidor MCP, agentes podem converter documentos sob demanda:
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│   Agent      │────▶│  MCP Server  │────▶│  MarkItDown  │
-│  (Copilot,   │     │  (stdio/SSE) │     │  (converter) │
-│   Claude)    │◀────│              │◀────│              │
+│   Agente     │────▶│  Servidor    │────▶│  MarkItDown  │
+│  (Copilot,   │     │  MCP         │     │  (conversor) │
+│   Claude)    │◀────│  (stdio/SSE) │◀────│              │
 └──────────────┘     └──────────────┘     └──────────────┘
-     request              route              convert
-     markdown             return             to .md
+     requisição           rota              converter
+     markdown             retorno           para .md
 ```
 
-To start the MCP server locally:
+Para iniciar o servidor MCP localmente:
 
 ```bash
 # Install MarkItDown with MCP support
@@ -286,7 +282,7 @@ pip install 'markitdown[mcp]'
 markitdown --mcp
 ```
 
-Then add it to your MCP client configuration:
+Em seguida, adicione-o à configuração do seu cliente MCP:
 
 ```json
 {
@@ -301,97 +297,97 @@ Then add it to your MCP client configuration:
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-080/broken_markitdown.py` has **3 bugs** in the analysis functions. Can you find and fix them all?
+O arquivo `lab-080/broken_markitdown.py` tem **3 bugs** nas funções de análise. Você consegue encontrar e corrigir todos?
 
-Run the self-tests to see which ones fail:
+Execute os autotestes para ver quais falham:
 
 ```bash
 python lab-080/broken_markitdown.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Você deverá ver **3 testes falhando**. Cada teste corresponde a um bug:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Success rate calculation | Should count `True`, not `False` |
-| Test 2 | Average quality calculation | Must filter to successful conversions first |
-| Test 3 | Total tables found | Should sum `tables_found`, not `images_found` |
+| Teste | O que verifica | Dica |
+|-------|---------------|------|
+| Teste 1 | Cálculo da taxa de sucesso | Deve contar `True`, não `False` |
+| Teste 2 | Cálculo da qualidade média | Deve filtrar apenas conversões bem-sucedidas primeiro |
+| Teste 3 | Total de tabelas encontradas | Deve somar `tables_found`, não `images_found` |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
+Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, está feito!
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What formats does MarkItDown support for conversion to Markdown?"
+??? question "**Q1 (Múltipla Escolha):** Quais formatos o MarkItDown suporta para conversão em Markdown?"
 
-    - A) Only PDF and Word documents
-    - B) PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON, and images
-    - C) Only text-based formats like HTML and CSV
-    - D) Any format, including video and audio files
+    - A) Apenas documentos PDF e Word
+    - B) PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON e imagens
+    - C) Apenas formatos baseados em texto como HTML e CSV
+    - D) Qualquer formato, incluindo arquivos de vídeo e áudio
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON, and images**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON e imagens**
 
-        MarkItDown supports a wide range of document formats including PDF (via pdfminer), Word documents (python-docx), Excel spreadsheets (openpyxl), PowerPoint presentations (python-pptx), HTML (BeautifulSoup), CSV, JSON, and images (via OCR or LLM captioning). It does not support audio or video files.
+        O MarkItDown suporta uma ampla variedade de formatos de documentos incluindo PDF (via pdfminer), documentos Word (python-docx), planilhas Excel (openpyxl), apresentações PowerPoint (python-pptx), HTML (BeautifulSoup), CSV, JSON e imagens (via OCR ou legendagem por LLM). Ele não suporta arquivos de áudio ou vídeo.
 
-??? question "**Q2 (Multiple Choice):** How does MarkItDown's MCP server enable agent-based document ingestion?"
+??? question "**Q2 (Múltipla Escolha):** Como o servidor MCP do MarkItDown possibilita a ingestão de documentos baseada em agentes?"
 
-    - A) It converts documents to embeddings directly
-    - B) It exposes a `convert_to_markdown` tool that any MCP-compatible agent can call
-    - C) It requires agents to download and parse files themselves
-    - D) It stores converted documents in a vector database automatically
+    - A) Ele converte documentos diretamente em embeddings
+    - B) Ele expõe uma ferramenta `convert_to_markdown` que qualquer agente compatível com MCP pode chamar
+    - C) Ele exige que os agentes baixem e analisem os arquivos por conta própria
+    - D) Ele armazena documentos convertidos em um banco de dados vetorial automaticamente
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It exposes a `convert_to_markdown` tool that any MCP-compatible agent can call**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Ele expõe uma ferramenta `convert_to_markdown` que qualquer agente compatível com MCP pode chamar**
 
-        The MarkItDown MCP server runs as a standard MCP tool server (via stdio or SSE transport). It exposes a `convert_to_markdown` tool that accepts a file URI and returns the converted Markdown. Any MCP-compatible client — GitHub Copilot, Claude Desktop, or custom agents — can call this tool to ingest documents on the fly without any custom integration code.
+        O servidor MCP do MarkItDown funciona como um servidor de ferramentas MCP padrão (via transporte stdio ou SSE). Ele expõe uma ferramenta `convert_to_markdown` que aceita um URI de arquivo e retorna o Markdown convertido. Qualquer cliente compatível com MCP — GitHub Copilot, Claude Desktop ou agentes personalizados — pode chamar essa ferramenta para ingerir documentos em tempo real sem nenhum código de integração personalizado.
 
-??? question "**Q3 (Run the Lab):** How many of the 12 file conversions were successful?"
+??? question "**Q3 (Execute o Laboratório):** Quantas das 12 conversões de arquivos foram bem-sucedidas?"
 
-    Load [📥 `conversion_results.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) and count rows where `conversion_success == True`.
+    Carregue [📥 `conversion_results.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) e conte as linhas onde `conversion_success == True`.
 
-    ??? success "✅ Reveal Answer"
-        **11 of 12**
+    ??? success "✅ Revelar Resposta"
+        **11 de 12**
 
-        All conversions succeeded except D11 (`corrupted_file.pdf`), which was a corrupted PDF with 0 KB file size. MarkItDown reliably handles valid files across all 7 tested formats.
+        Todas as conversões foram bem-sucedidas exceto D11 (`corrupted_file.pdf`), que era um PDF corrompido com tamanho de arquivo de 0 KB. O MarkItDown lida de forma confiável com arquivos válidos em todos os 7 formatos testados.
 
-??? question "**Q4 (Run the Lab):** What is the total number of tables found across all successful conversions?"
+??? question "**Q4 (Execute o Laboratório):** Qual é o número total de tabelas encontradas em todas as conversões bem-sucedidas?"
 
-    Filter to successful conversions and compute `tables_found.sum()`.
+    Filtre para conversões bem-sucedidas e calcule `tables_found.sum()`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **31**
 
-        Sum of `tables_found` across the 11 successful conversions: D01(6) + D02(2) + D03(5) + D04(1) + D05(0) + D06(0) + D07(1) + D08(1) + D09(0) + D10(15) + D12(0) = **31 tables**.
+        Soma de `tables_found` nas 11 conversões bem-sucedidas: D01(6) + D02(2) + D03(5) + D04(1) + D05(0) + D06(0) + D07(1) + D08(1) + D09(0) + D10(15) + D12(0) = **31 tabelas**.
 
-??? question "**Q5 (Run the Lab):** What is the average quality score for successful conversions?"
+??? question "**Q5 (Execute o Laboratório):** Qual é a pontuação média de qualidade para conversões bem-sucedidas?"
 
-    Filter to `conversion_success == True`, then compute `quality_score.mean()`.
+    Filtre para `conversion_success == True`, depois calcule `quality_score.mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **≈ 0.916**
+    ??? success "✅ Revelar Resposta"
+        **≈ 0,916**
 
-        Quality scores for the 11 successful conversions: 0.92 + 0.95 + 0.98 + 0.85 + 0.97 + 0.94 + 0.96 + 0.99 + 0.98 + 0.82 + 0.72 = **10.08**. Average = 10.08 ÷ 11 ≈ **0.916**.
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| MarkItDown | Converts PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON, and images to structured Markdown |
-| MCP Integration | MCP server exposes `convert_to_markdown` tool for any compatible agent |
-| Quality Analysis | Structured formats (CSV, JSON, XLSX) achieve ≥0.98 quality; images lowest at 0.72 |
-| Speed Analysis | Large PDFs and images are slowest; CSV/JSON convert in under 50ms |
-| Success Rate | 11/12 conversions succeeded — only corrupted files fail |
-| Element Extraction | 31 tables, 62 images, 103 headings extracted across successful conversions |
+        Pontuações de qualidade para as 11 conversões bem-sucedidas: 0,92 + 0,95 + 0,98 + 0,85 + 0,97 + 0,94 + 0,96 + 0,99 + 0,98 + 0,82 + 0,72 = **10,08**. Média = 10,08 ÷ 11 ≈ **0,916**.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **[Lab 081](lab-081-agentic-coding-tools.md)** — Agentic Coding Tools: Claude Code vs Copilot CLI
-- Explore the [MarkItDown GitHub repository](https://github.com/microsoft/markitdown) for advanced configuration and custom converters
+| Tópico | O que Você Aprendeu |
+|--------|---------------------|
+| MarkItDown | Converte PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON e imagens em Markdown estruturado |
+| Integração MCP | O servidor MCP expõe a ferramenta `convert_to_markdown` para qualquer agente compatível |
+| Análise de Qualidade | Formatos estruturados (CSV, JSON, XLSX) alcançam qualidade ≥0,98; imagens com a menor em 0,72 |
+| Análise de Velocidade | PDFs grandes e imagens são os mais lentos; CSV/JSON convertem em menos de 50ms |
+| Taxa de Sucesso | 11/12 conversões bem-sucedidas — apenas arquivos corrompidos falham |
+| Extração de Elementos | 31 tabelas, 62 imagens, 103 títulos extraídos nas conversões bem-sucedidas |
+
+---
+
+## Próximos Passos
+
+- **[Lab 081](lab-081-agentic-coding-tools.md)** — Ferramentas de Codificação Agêntica: Claude Code vs Copilot CLI
+- Explore o [repositório do MarkItDown no GitHub](https://github.com/microsoft/markitdown) para configuração avançada e conversores personalizados

@@ -1,49 +1,44 @@
 ---
 tags: [github-models, free, python, llm]
 ---
-# Lab 013: GitHub Models — Free LLM Inference
+# Lab 013 : GitHub Models — Inférence LLM gratuite
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a> · <a href="../paths/rag/">📚 RAG</a></span>
-  <span><strong>Time:</strong> ~25 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account, no credit card</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a> · <a href="../paths/rag/">📚 RAG</a></span>
+  <span><strong>Durée :</strong> ~25 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Compte GitHub gratuit, pas de carte bancaire</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What GitHub Models is and which models are available
-- How to use the GitHub Models **playground** (browser, no code)
-- How to call GitHub Models via the **REST API** and **Python SDK**
-- How to generate **text embeddings** for free (needed for RAG labs)
+- Ce qu'est GitHub Models et quels modèles sont disponibles
+- Comment utiliser le **playground** GitHub Models (navigateur, sans code)
+- Comment appeler GitHub Models via l'**API REST** et le **SDK Python**
+- Comment générer des **embeddings de texte** gratuitement (nécessaire pour les labs RAG)
 
 ---
 
 ## Introduction
 
-**GitHub Models** gives you free API access to frontier LLMs — GPT-4o, Llama, Phi, Mistral, and more — using your GitHub personal access token. No Azure account, no credit card, no sign-up beyond what you already have.
+**GitHub Models** vous donne un accès API gratuit aux LLM de pointe — GPT-4o, Llama, Phi, Mistral, et bien d'autres — en utilisant votre jeton d'accès personnel GitHub. Pas de compte Azure, pas de carte bancaire, pas d'inscription supplémentaire.
 
-This is the LLM backend used in all **L200 labs** in this hub.
+C'est le backend LLM utilisé dans tous les **labs L200** de ce hub.
 
 ---
 
-## Prerequisites Setup
+## Configuration des prérequis
 
-### 1. Create a GitHub personal access token
+### 1. Créer un jeton d'accès personnel GitHub
 
-1. Go to [github.com/settings/tokens](https://github.com/settings/tokens)
-2. Click **"Generate new token (classic)"**
-3. Name: `github-models-labs`
-4. Expiration: 90 days
-5. Scopes: none needed (read-only access is sufficient for Models API)
-6. Click **"Generate token"** — copy and save it immediately
+1. Allez sur [github.com/settings/tokens](https://github.com/settings/tokens)
+2. Cliquez sur **"Generate new token (classic)"**
+3. Nom : `github-models-labs`
+4. Expiration : 90 jours
+5. Portées : aucune nécessaire (l'accès en lecture seule est suffisant pour l'API Models)
+6. Cliquez sur **"Generate token"** — copiez et sauvegardez-le immédiatement
 
-### 2. Store the token as an environment variable
+### 2. Stocker le jeton comme variable d'environnement
 
 === "Windows (PowerShell)"
     ```powershell
@@ -56,51 +51,51 @@ This is the LLM backend used in all **L200 labs** in this hub.
     ```
 
 === "VS Code / Codespaces"
-    Add to your `.env` file (never commit this file to git!):
+    Ajoutez dans votre fichier `.env` (ne commitez jamais ce fichier dans git !) :
     ```
     GITHUB_TOKEN=ghp_your_token_here
     ```
 
 ---
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-013/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-013/` dans votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `requirements.txt` | Python dependencies | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/requirements.txt) |
-| `starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) |
+| Fichier | Description | Téléchargement |
+|---------|-------------|----------------|
+| `requirements.txt` | Dépendances Python | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/requirements.txt) |
+| `starter.py` | Script de démarrage avec des TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) |
 
 ---
 
-## Lab Exercise
+## Exercice du lab
 
-### Step 1: Explore the Playground
+### Étape 1 : Explorer le Playground
 
-1. Go to [github.com/marketplace/models](https://github.com/marketplace/models)
-2. Click on **"gpt-4o"**
-3. Click **"Playground"**
-4. Type a message and press Enter
+1. Allez sur [github.com/marketplace/models](https://github.com/marketplace/models)
+2. Cliquez sur **"gpt-4o"**
+3. Cliquez sur **"Playground"**
+4. Tapez un message et appuyez sur Entrée
 
-You're now chatting with GPT-4o for free, directly in the browser.
+Vous discutez maintenant avec GPT-4o gratuitement, directement dans le navigateur.
 
-Try different models:
-- `gpt-4o-mini` — faster and cheaper
-- `Phi-4` — Microsoft's small but powerful model
-- `Llama-3.3-70B-Instruct` — Meta's open-source model
+Essayez différents modèles :
+- `gpt-4o-mini` — plus rapide et moins cher
+- `Phi-4` — le petit mais puissant modèle de Microsoft
+- `Llama-3.3-70B-Instruct` — le modèle open-source de Meta
 
-### Step 2: Make your first API call
+### Étape 2 : Effectuer votre premier appel API
 
 === "Python"
 
-    Install the OpenAI Python SDK (it's compatible with GitHub Models):
+    Installez le SDK Python OpenAI (il est compatible avec GitHub Models) :
     ```bash
     pip install openai
     ```
 
-    Create `hello_models.py`:
+    Créez `hello_models.py` :
     ```python
     import os
     from openai import OpenAI
@@ -122,19 +117,19 @@ Try different models:
     print(response.choices[0].message.content)
     ```
 
-    Run it:
+    Exécutez-le :
     ```bash
     python hello_models.py
     ```
 
 === "C#"
 
-    Add the NuGet package:
+    Ajoutez le package NuGet :
     ```bash
     dotnet add package Azure.AI.Inference
     ```
 
-    Create `Program.cs`:
+    Créez `Program.cs` :
     ```csharp
     using Azure;
     using Azure.AI.Inference;
@@ -171,9 +166,9 @@ Try different models:
       }'
     ```
 
-### Step 3: Generate text embeddings
+### Étape 3 : Générer des embeddings de texte
 
-Embeddings are the key ingredient for RAG. Let's generate one:
+Les embeddings sont l'ingrédient clé du RAG. Générons-en un :
 
 === "Python"
 
@@ -196,14 +191,14 @@ Embeddings are the key ingredient for RAG. Let's generate one:
     print(f"First 5 values: {vector[:5]}")
     ```
 
-!!! info "What is an embedding?"
-    An embedding is a list of numbers (a vector) that represents the *meaning* of a piece of text.  
-    Similar texts produce vectors that are close together in vector space.  
-    This is how semantic search works: compare the query vector to all document vectors and return the closest ones.
+!!! info "Qu'est-ce qu'un embedding ?"
+    Un embedding est une liste de nombres (un vecteur) qui représente la *signification* d'un morceau de texte.  
+    Des textes similaires produisent des vecteurs proches dans l'espace vectoriel.  
+    C'est ainsi que fonctionne la recherche sémantique : on compare le vecteur de la requête à tous les vecteurs de documents et on retourne les plus proches.
 
-### Step 4: Available Models
+### Étape 4 : Modèles disponibles
 
-Check what models are available via the API:
+Vérifiez quels modèles sont disponibles via l'API :
 
 ```python
 import os
@@ -221,9 +216,9 @@ for model in models.data:
 
 ---
 
-## 📁 Starter Files
+## 📁 Fichiers de démarrage
 
-Download the starter file to follow along:
+Téléchargez le fichier de démarrage pour suivre le lab :
 
 ```bash
 # From your cloned repo:
@@ -232,30 +227,30 @@ pip install -r requirements.txt
 python starter.py
 ```
 
-The [📥 `starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) contains 4 exercises with `TODO` comments. Complete each TODO to build a working GitHub Models client.
+Le [📥 `starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) contient 4 exercices avec des commentaires `TODO`. Complétez chaque TODO pour construire un client GitHub Models fonctionnel.
 
 ---
 
-## Rate Limits
+## Limites de débit
 
-GitHub Models is free but rate-limited:
+GitHub Models est gratuit mais limité en débit :
 
-| Tier | Requests/min | Tokens/day |
-|------|-------------|-----------|
-| Free | ~15 | ~150,000 |
-| Copilot Pro/Business | Higher | Higher |
+| Niveau | Requêtes/min | Jetons/jour |
+|--------|-------------|-------------|
+| Free | ~15 | ~150 000 |
+| Copilot Pro/Business | Plus élevé | Plus élevé |
 
-For lab purposes, these limits are more than sufficient. If you hit a limit, wait 1 minute.
-
----
-
-## Summary
-
-GitHub Models gives you **free access to frontier LLMs** using just your GitHub account. You can use the playground browser UI or call the API from Python/C#/REST. The API is OpenAI-compatible, so any code that works with OpenAI works here too.
+Pour les besoins du lab, ces limites sont largement suffisantes. Si vous atteignez une limite, attendez 1 minute.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **Build an agent with Semantic Kernel:** → [Lab 014 — SK Hello Agent](lab-014-sk-hello-agent.md)
-- **Build a RAG app:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
+GitHub Models vous donne un **accès gratuit aux LLM de pointe** en utilisant simplement votre compte GitHub. Vous pouvez utiliser l'interface du playground dans le navigateur ou appeler l'API depuis Python/C#/REST. L'API est compatible OpenAI, donc tout code qui fonctionne avec OpenAI fonctionne aussi ici.
+
+---
+
+## Prochaines étapes
+
+- **Construire un agent avec Semantic Kernel :** → [Lab 014 — SK Hello Agent](lab-014-sk-hello-agent.md)
+- **Construire une application RAG :** → [Lab 022 — RAG avec GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)

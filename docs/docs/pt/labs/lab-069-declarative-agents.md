@@ -1,86 +1,81 @@
 ---
 tags: [declarative-agents, m365-copilot, teams, manifest, low-code]
 ---
-# Lab 069: Declarative Agents for Microsoft 365 Copilot
+# Lab 069: Declarative Agents para Microsoft 365 Copilot
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Mock manifest (no M365 Copilot license required)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Trilha:</strong> Todas as trilhas</span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Manifesto simulado (licença do M365 Copilot não necessária)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- O que são **declarative agents** e como eles estendem o Microsoft 365 Copilot
+- Definir o comportamento do agente por meio de um **manifesto JSON** sem escrever código
+- Configurar **fontes de conhecimento** (SharePoint, conectores do Graph, arquivos)
+- Adicionar **plugins de API** para dar ao seu agente capacidades personalizadas
+- Configurar **iniciadores de conversa** para interações guiadas com o usuário
+- Validar e solucionar problemas de configurações de manifesto
 
+!!! abstract "Pré-requisitos"
+    Familiaridade com os conceitos do **Microsoft 365 Copilot** é recomendada. Nenhuma experiência em programação é necessária — declarative agents são configurados inteiramente por meio de manifestos JSON.
 
-## What You'll Learn
+## Introdução
 
-- What **declarative agents** are and how they extend Microsoft 365 Copilot
-- Define agent behavior through a **JSON manifest** without writing code
-- Configure **knowledge sources** (SharePoint, Graph connectors, files)
-- Add **API plugins** to give your agent custom capabilities
-- Set up **conversation starters** for guided user interactions
-- Validate and troubleshoot manifest configurations
+**Declarative agents** permitem personalizar o comportamento do Microsoft 365 Copilot sem escrever código. Em vez de construir um agente personalizado do zero, você define um manifesto JSON que especifica:
 
-!!! abstract "Prerequisite"
-    Familiarity with **Microsoft 365 Copilot** concepts is recommended. No coding experience is required — declarative agents are configured entirely through JSON manifests.
+- **Instruções** — Prompt de sistema que molda a persona e o comportamento do agente
+- **Fontes de conhecimento** — De onde o agente recupera informações (sites do SharePoint, conectores do Graph, arquivos enviados)
+- **Plugins de API** — APIs externas que o agente pode chamar para executar ações
+- **Iniciadores de conversa** — Prompts pré-definidos que guiam os usuários em direção às capacidades do agente
 
-## Introduction
-
-**Declarative agents** let you customize Microsoft 365 Copilot's behavior without writing code. Instead of building a custom agent from scratch, you define a JSON manifest that specifies:
-
-- **Instructions** — System prompt that shapes the agent's persona and behavior
-- **Knowledge sources** — Where the agent retrieves information (SharePoint sites, Graph connectors, uploaded files)
-- **API plugins** — External APIs the agent can call to take actions
-- **Conversation starters** — Pre-defined prompts that guide users toward the agent's capabilities
-
-| Component | Purpose | Example |
+| Componente | Finalidade | Exemplo |
 |-----------|---------|---------|
-| **Instructions** | Define persona, tone, and boundaries | "You are an HR assistant. Only answer HR-related questions." |
-| **Knowledge Sources** | Ground responses in organizational data | SharePoint site with company policies |
-| **API Plugins** | Enable actions beyond chat | Submit PTO requests via HR API |
-| **Conversation Starters** | Guide users to productive interactions | "What is the company leave policy?" |
+| **Instruções** | Definir persona, tom e limites | "Você é um assistente de RH. Responda apenas perguntas relacionadas a RH." |
+| **Fontes de Conhecimento** | Fundamentar respostas em dados organizacionais | Site do SharePoint com políticas da empresa |
+| **Plugins de API** | Habilitar ações além do chat | Enviar solicitações de folga via API de RH |
+| **Iniciadores de Conversa** | Guiar usuários para interações produtivas | "Qual é a política de licenças da empresa?" |
 
-### The Scenario
+### O Cenário
 
-You are building a **company HR assistant** as a declarative agent for Microsoft 365 Copilot. The agent should answer questions about company policies, help employees submit time-off requests, and provide onboarding guidance. You will examine a manifest file, understand each component, and validate the configuration.
+Você está construindo um **assistente de RH da empresa** como um declarative agent para o Microsoft 365 Copilot. O agente deve responder perguntas sobre políticas da empresa, ajudar funcionários a enviar solicitações de folga e fornecer orientação de integração. Você irá examinar um arquivo de manifesto, entender cada componente e validar a configuração.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run validation scripts |
-| `json` (built-in) | Parse manifest files |
+| Python 3.10+ | Executar scripts de validação |
+| `json` (embutido) | Analisar arquivos de manifesto |
 
-No additional packages required — the `json` module is included with Python.
+Nenhum pacote adicional é necessário — o módulo `json` está incluído no Python.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-069/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-069/` no seu diretório de trabalho.
 
-| File | Description | Download |
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_manifest.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/broken_manifest.py) |
-| `declarative_agent.json` | Configuration / data file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/declarative_agent.json) |
+| `broken_manifest.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/broken_manifest.py) |
+| `declarative_agent.json` | Arquivo de configuração / dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/declarative_agent.json) |
 
 ---
 
-## Step 1: Understanding Declarative Agent Architecture
+## Etapa 1: Entendendo a Arquitetura de Declarative Agents
 
-Declarative agents sit between the user and Microsoft 365 Copilot, customizing its behavior:
+Declarative agents ficam entre o usuário e o Microsoft 365 Copilot, personalizando seu comportamento:
 
 ```
 User → [Teams / M365 App] → [Declarative Agent Manifest]
@@ -93,21 +88,21 @@ User → [Teams / M365 App] → [Declarative Agent Manifest]
                             Microsoft 365 Copilot → Response
 ```
 
-Key principles:
+Princípios fundamentais:
 
-1. **No code required** — All configuration is in JSON
-2. **Scoped knowledge** — The agent only accesses specified sources
-3. **Plugin actions** — The agent can call APIs to perform tasks
-4. **Guardrails** — Instructions define what the agent should and should not do
+1. **Sem código necessário** — Toda a configuração está em JSON
+2. **Conhecimento com escopo definido** — O agente acessa apenas fontes especificadas
+3. **Ações via plugins** — O agente pode chamar APIs para executar tarefas
+4. **Proteções** — As instruções definem o que o agente deve e não deve fazer
 
-!!! info "Declarative vs Custom Agents"
-    Declarative agents extend Copilot — they inherit its reasoning, safety, and grounding capabilities. Custom agents (built with Bot Framework or Copilot Studio) are standalone and require more development effort but offer greater flexibility for complex workflows.
+!!! info "Declarative vs Agentes Personalizados"
+    Declarative agents estendem o Copilot — eles herdam suas capacidades de raciocínio, segurança e fundamentação. Agentes personalizados (construídos com Bot Framework ou Copilot Studio) são independentes e exigem mais esforço de desenvolvimento, mas oferecem maior flexibilidade para fluxos de trabalho complexos.
 
 ---
 
-## Step 2: Load and Explore the Manifest
+## Etapa 2: Carregar e Explorar o Manifesto
 
-Load the declarative agent manifest and examine its structure:
+Carregue o manifesto do declarative agent e examine sua estrutura:
 
 ```python
 import json
@@ -121,7 +116,7 @@ print(f"\nTop-level keys: {list(manifest.keys())}")
 print(f"Instructions length: {len(manifest['instructions'])} characters")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Agent Name: HR Assistant
@@ -130,9 +125,9 @@ Description: A declarative agent for answering HR policy questions and managing 
 
 ---
 
-## Step 3: Knowledge Sources Analysis
+## Etapa 3: Análise das Fontes de Conhecimento
 
-Examine the knowledge sources configured for the agent:
+Examine as fontes de conhecimento configuradas para o agente:
 
 ```python
 knowledge = manifest["knowledge_sources"]
@@ -144,20 +139,20 @@ for i, source in enumerate(knowledge):
     print(f"    Description: {source['description']}")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Number of knowledge sources: 3
 ```
 
-!!! tip "Scoped Knowledge"
-    Each knowledge source limits what the agent can access. By specifying exactly 3 sources (e.g., SharePoint site for policies, Graph connector for org data, uploaded file for benefits guide), the agent is grounded in verified organizational information and cannot access data outside its scope.
+!!! tip "Conhecimento com Escopo Definido"
+    Cada fonte de conhecimento limita o que o agente pode acessar. Ao especificar exatamente 3 fontes (por exemplo, site do SharePoint para políticas, conector do Graph para dados organizacionais, arquivo enviado para guia de benefícios), o agente é fundamentado em informações organizacionais verificadas e não pode acessar dados fora de seu escopo.
 
 ---
 
-## Step 4: API Plugin Configuration
+## Etapa 4: Configuração de Plugins de API
 
-Examine the API plugins available to the agent:
+Examine os plugins de API disponíveis para o agente:
 
 ```python
 plugins = manifest["api_plugins"]
@@ -169,20 +164,20 @@ for plugin in plugins:
     print(f"  Operations: {[op['name'] for op in plugin['operations']]}")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Number of API plugins: 1
 ```
 
-!!! warning "Plugin Security"
-    API plugins allow the agent to take actions — submitting requests, updating records, or querying external systems. Each plugin should use OAuth 2.0 authentication and be restricted to the minimum required permissions. Always validate that plugin endpoints are internal and trusted.
+!!! warning "Segurança de Plugins"
+    Plugins de API permitem que o agente execute ações — enviar solicitações, atualizar registros ou consultar sistemas externos. Cada plugin deve usar autenticação OAuth 2.0 e ser restrito às permissões mínimas necessárias. Sempre valide se os endpoints dos plugins são internos e confiáveis.
 
 ---
 
-## Step 5: Conversation Starters
+## Etapa 5: Iniciadores de Conversa
 
-Examine the conversation starters that guide users:
+Examine os iniciadores de conversa que guiam os usuários:
 
 ```python
 starters = manifest["conversation_starters"]
@@ -192,19 +187,19 @@ for i, starter in enumerate(starters):
     print(f"    Category: {starter.get('category', 'general')}")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Number of conversation starters: 4
 ```
 
-Conversation starters appear as clickable suggestions when users first interact with the agent. They guide users toward the agent's core capabilities and reduce the "blank prompt" problem.
+Os iniciadores de conversa aparecem como sugestões clicáveis quando os usuários interagem pela primeira vez com o agente. Eles guiam os usuários em direção às capacidades principais do agente e reduzem o problema do "prompt em branco".
 
 ---
 
-## Step 6: Manifest Validation
+## Etapa 6: Validação do Manifesto
 
-Validate the manifest for completeness and common issues:
+Valide o manifesto quanto à completude e problemas comuns:
 
 ```python
 required_fields = ["name", "description", "instructions", "knowledge_sources",
@@ -231,93 +226,93 @@ print(f"\nOverall: {'All checks passed' if all(checks.values()) else 'Some check
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-069/broken_manifest.py` has **3 bugs** in how it validates the manifest:
+O arquivo `lab-069/broken_manifest.py` tem **3 bugs** na forma como valida o manifesto:
 
 ```bash
 python lab-069/broken_manifest.py
 ```
 
-| Test | What it checks | Hint |
+| Teste | O que verifica | Dica |
 |------|---------------|------|
-| Test 1 | Knowledge source count | Should read from `knowledge_sources`, not `data_sources` |
-| Test 2 | Plugin validation | Should check `api_plugins`, not `extensions` |
-| Test 3 | Starter text extraction | Should access `starter['text']`, not `starter['prompt']` |
+| Teste 1 | Contagem de fontes de conhecimento | Deve ler de `knowledge_sources`, não de `data_sources` |
+| Teste 2 | Validação de plugins | Deve verificar `api_plugins`, não `extensions` |
+| Teste 3 | Extração do texto do iniciador | Deve acessar `starter['text']`, não `starter['prompt']` |
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What is the main advantage of declarative agents over custom-built agents?"
+??? question "**Q1 (Múltipla Escolha):** Qual é a principal vantagem dos declarative agents em relação aos agentes personalizados?"
 
-    - A) They are faster at inference
-    - B) They require no code — all configuration is defined in a JSON manifest
-    - C) They can access any data source without restrictions
-    - D) They run on-premises only
+    - A) Eles são mais rápidos na inferência
+    - B) Eles não requerem código — toda a configuração é definida em um manifesto JSON
+    - C) Eles podem acessar qualquer fonte de dados sem restrições
+    - D) Eles funcionam apenas localmente
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) They require no code — all configuration is defined in a JSON manifest**
+    ??? success "✅ Revelar Resposta"
+        **Correta: B) Eles não requerem código — toda a configuração é definida em um manifesto JSON**
 
-        Declarative agents extend Microsoft 365 Copilot by configuring behavior through a JSON manifest. This includes instructions (system prompt), knowledge sources, API plugins, and conversation starters. No coding is required, making them accessible to non-developers while still providing scoped, governed agent capabilities.
+        Declarative agents estendem o Microsoft 365 Copilot configurando o comportamento por meio de um manifesto JSON. Isso inclui instruções (prompt de sistema), fontes de conhecimento, plugins de API e iniciadores de conversa. Nenhuma programação é necessária, tornando-os acessíveis a não-desenvolvedores e ainda fornecendo capacidades de agente com escopo e governança definidos.
 
-??? question "**Q2 (Multiple Choice):** Why are scoped knowledge sources important for declarative agents?"
+??? question "**Q2 (Múltipla Escolha):** Por que fontes de conhecimento com escopo definido são importantes para declarative agents?"
 
-    - A) They make the agent respond faster
-    - B) They ensure the agent only accesses verified, authorized data — preventing hallucination from ungrounded sources
-    - C) They are required by the Teams app store
-    - D) They reduce the manifest file size
+    - A) Elas fazem o agente responder mais rápido
+    - B) Elas garantem que o agente acesse apenas dados verificados e autorizados — prevenindo alucinação de fontes não fundamentadas
+    - C) Elas são exigidas pela loja de aplicativos do Teams
+    - D) Elas reduzem o tamanho do arquivo de manifesto
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) They ensure the agent only accesses verified, authorized data — preventing hallucination from ungrounded sources**
+    ??? success "✅ Revelar Resposta"
+        **Correta: B) Elas garantem que o agente acesse apenas dados verificados e autorizados — prevenindo alucinação de fontes não fundamentadas**
 
-        By explicitly listing knowledge sources (SharePoint sites, Graph connectors, files), the agent is grounded in organizational data. It cannot access data outside its scope, reducing hallucination risk and ensuring compliance with data access policies. This is a key governance advantage of declarative agents.
+        Ao listar explicitamente as fontes de conhecimento (sites do SharePoint, conectores do Graph, arquivos), o agente é fundamentado em dados organizacionais. Ele não pode acessar dados fora de seu escopo, reduzindo o risco de alucinação e garantindo conformidade com as políticas de acesso a dados. Esta é uma vantagem-chave de governança dos declarative agents.
 
-??? question "**Q3 (Run the Lab):** How many knowledge sources are configured in the manifest?"
+??? question "**Q3 (Execute o Lab):** Quantas fontes de conhecimento estão configuradas no manifesto?"
 
-    Load the manifest JSON and check `len(manifest['knowledge_sources'])`.
+    Carregue o JSON do manifesto e verifique `len(manifest['knowledge_sources'])`.
 
-    ??? success "✅ Reveal Answer"
-        **3 knowledge sources**
+    ??? success "✅ Revelar Resposta"
+        **3 fontes de conhecimento**
 
-        The HR Assistant agent has 3 knowledge sources configured, providing it with scoped access to company policies, organizational data, and employee benefits information. Each source is explicitly declared in the manifest.
+        O agente HR Assistant tem 3 fontes de conhecimento configuradas, fornecendo acesso com escopo definido a políticas da empresa, dados organizacionais e informações de benefícios dos funcionários. Cada fonte é declarada explicitamente no manifesto.
 
-??? question "**Q4 (Run the Lab):** How many API plugins are configured?"
+??? question "**Q4 (Execute o Lab):** Quantos plugins de API estão configurados?"
 
-    Check `len(manifest['api_plugins'])`.
+    Verifique `len(manifest['api_plugins'])`.
 
-    ??? success "✅ Reveal Answer"
-        **1 API plugin**
+    ??? success "✅ Revelar Resposta"
+        **1 plugin de API**
 
-        The agent has 1 API plugin configured, enabling it to perform actions like submitting time-off requests through an HR API. API plugins allow declarative agents to go beyond chat and take real actions on behalf of users.
+        O agente tem 1 plugin de API configurado, permitindo que ele execute ações como enviar solicitações de folga por meio de uma API de RH. Plugins de API permitem que declarative agents vão além do chat e executem ações reais em nome dos usuários.
 
-??? question "**Q5 (Run the Lab):** How many conversation starters are defined?"
+??? question "**Q5 (Execute o Lab):** Quantos iniciadores de conversa estão definidos?"
 
-    Check `len(manifest['conversation_starters'])`.
+    Verifique `len(manifest['conversation_starters'])`.
 
-    ??? success "✅ Reveal Answer"
-        **4 conversation starters**
+    ??? success "✅ Revelar Resposta"
+        **4 iniciadores de conversa**
 
-        The manifest defines 4 conversation starters that appear as clickable suggestions when users first interact with the agent. These guide users toward the agent's core capabilities — asking about leave policies, submitting time-off requests, checking benefits, and getting onboarding help.
+        O manifesto define 4 iniciadores de conversa que aparecem como sugestões clicáveis quando os usuários interagem pela primeira vez com o agente. Eles guiam os usuários em direção às capacidades principais do agente — perguntar sobre políticas de licença, enviar solicitações de folga, verificar benefícios e obter ajuda de integração.
 
 ---
 
-## Summary
+## Resumo
 
-| Topic | What You Learned |
+| Tópico | O que Você Aprendeu |
 |-------|-----------------|
-| Declarative Agents | Extend M365 Copilot through JSON manifest configuration |
-| Instructions | Define persona, tone, and behavioral boundaries |
-| Knowledge Sources | Scope agent access to verified organizational data |
-| API Plugins | Enable agents to perform actions via external APIs |
-| Conversation Starters | Guide users toward productive interactions |
-| Manifest Validation | Verify completeness and correctness of agent configuration |
+| Declarative Agents | Estendem o M365 Copilot por meio de configuração de manifesto JSON |
+| Instruções | Definem persona, tom e limites de comportamento |
+| Fontes de Conhecimento | Definem o escopo de acesso do agente a dados organizacionais verificados |
+| Plugins de API | Permitem que agentes executem ações via APIs externas |
+| Iniciadores de Conversa | Guiam usuários em direção a interações produtivas |
+| Validação de Manifesto | Verificam completude e correção da configuração do agente |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 070](lab-070-agent-ux-patterns.md)** — Agent UX Patterns (design effective agent interactions)
-- **[Lab 066](lab-066-copilot-studio-governance.md)** — Copilot Studio Governance (govern agent deployments)
-- **[Lab 008](lab-008-responsible-ai.md)** — Responsible AI (foundational governance principles)
+- **[Lab 070](lab-070-agent-ux-patterns.md)** — Padrões de UX para Agentes (projetar interações eficazes com agentes)
+- **[Lab 066](lab-066-copilot-studio-governance.md)** — Governança do Copilot Studio (governar implantações de agentes)
+- **[Lab 008](lab-008-responsible-ai.md)** — IA Responsável (princípios fundamentais de governança)

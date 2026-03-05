@@ -1,63 +1,58 @@
 ---
 tags: [copilot-studio, governance, dlp, power-platform, enterprise]
 ---
-# Lab 066: Copilot Studio Enterprise Governance
+# Lab 066 : Gouvernance d'entreprise avec Copilot Studio
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~75 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Mock data (no Copilot Studio license required)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~75 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Données simulées (aucune licence Copilot Studio requise)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
+- Comment **auditer les agents Copilot Studio** à travers un locataire Power Platform
+- Appliquer des **stratégies DLP** sur les connecteurs et les flux de données des agents
+- Détecter les **agents non gouvernés** créés en dehors des environnements gérés par l'IT
+- Appliquer la **sécurité au niveau de l'environnement** pour isoler les agents de production
+- Identifier les **lacunes de conformité** entre les agents développés par les utilisateurs métier et ceux gérés par l'IT
+- Créer un **tableau de bord de gouvernance** résumant la posture des agents
 
-
-## What You'll Learn
-
-- How to **audit Copilot Studio agents** across a Power Platform tenant
-- Enforce **DLP policies** on agent connectors and data flows
-- Detect **ungoverned agents** created outside of IT-managed environments
-- Apply **environment-level security** to isolate production agents
-- Identify **compliance gaps** between citizen-developed and IT-managed agents
-- Build a **governance dashboard** summarizing agent posture
-
-!!! abstract "Prerequisite"
-    Complete **[Lab 065: Purview DSPM for AI](lab-065-purview-dspm-ai.md)** first. This lab assumes familiarity with data governance concepts and DLP policy fundamentals.
+!!! abstract "Prérequis"
+    Complétez d'abord le **[Lab 065 : Purview DSPM for AI](lab-065-purview-dspm-ai.md)**. Ce lab suppose une familiarité avec les concepts de gouvernance des données et les fondamentaux des stratégies DLP.
 
 ## Introduction
 
-As organizations adopt **Microsoft Copilot Studio**, citizen developers and professional developers alike create agents across the Power Platform. Without proper governance, agents proliferate unchecked — connecting to sensitive data sources, bypassing DLP policies, and operating without audit trails.
+Lorsque les organisations adoptent **Microsoft Copilot Studio**, les développeurs citoyens et les développeurs professionnels créent des agents à travers la Power Platform. Sans gouvernance adéquate, les agents prolifèrent sans contrôle — se connectant à des sources de données sensibles, contournant les stratégies DLP et fonctionnant sans piste d'audit.
 
-**Copilot Studio Enterprise Governance** addresses these challenges:
+**La gouvernance d'entreprise de Copilot Studio** répond à ces défis :
 
-- Which agents exist and who created them?
-- Do agents comply with organizational **DLP policies**?
-- Are agents operating in **managed environments** or personal sandboxes?
-- Which agents have **failed security scans**?
+- Quels agents existent et qui les a créés ?
+- Les agents respectent-ils les **stratégies DLP** organisationnelles ?
+- Les agents fonctionnent-ils dans des **environnements gérés** ou des bacs à sable personnels ?
+- Quels agents ont **échoué aux analyses de sécurité** ?
 
-| Governance Capability | What It Does | Example |
-|----------------------|-------------|---------|
-| **Agent Inventory** | Catalogs all agents across the tenant | 12 agents across 4 environments |
-| **DLP Enforcement** | Evaluates connector usage against DLP rules | Block agents using unapproved external APIs |
-| **Security Scanning** | Detects misconfigurations and vulnerabilities | Agent exposing internal KB without auth |
-| **Environment Isolation** | Separates dev/test/prod agents | Production agents locked to IT-managed environments |
-| **Creator Governance** | Tracks citizen vs IT-created agents | Flag unreviewed citizen-developed agents |
+| Capacité de gouvernance | Ce qu'elle fait | Exemple |
+|------------------------|----------------|---------|
+| **Inventaire des agents** | Catalogue tous les agents du locataire | 12 agents dans 4 environnements |
+| **Application DLP** | Évalue l'utilisation des connecteurs par rapport aux règles DLP | Bloquer les agents utilisant des API externes non approuvées |
+| **Analyse de sécurité** | Détecte les mauvaises configurations et vulnérabilités | Agent exposant une base de connaissances interne sans authentification |
+| **Isolation des environnements** | Sépare les agents dev/test/prod | Agents de production verrouillés dans les environnements gérés par l'IT |
+| **Gouvernance des créateurs** | Suit les agents créés par les utilisateurs métier vs l'IT | Signaler les agents développés par les utilisateurs métier non révisés |
 
-### The Scenario
+### Le scénario
 
-You are a **Power Platform Administrator** tasked with auditing all Copilot Studio agents in your tenant. The organization has **12 agents** built by different teams. Some were created by IT, others by citizen developers. Your job: identify ungoverned agents, flag DLP violations, and produce a governance report.
+Vous êtes un **administrateur Power Platform** chargé d'auditer tous les agents Copilot Studio de votre locataire. L'organisation compte **12 agents** créés par différentes équipes. Certains ont été créés par l'IT, d'autres par des développeurs citoyens. Votre mission : identifier les agents non gouvernés, signaler les violations DLP et produire un rapport de gouvernance.
 
 ---
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Pourquoi |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` | Analyze agent inventory data |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| `pandas` | Analyser les données d'inventaire des agents |
 
 ```bash
 pip install pandas
@@ -65,27 +60,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-066/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-066/` de votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_governance.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/broken_governance.py) |
-| `studio_agents.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/studio_agents.csv) |
+| Fichier | Description | Téléchargement |
+|---------|-------------|----------------|
+| `broken_governance.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/broken_governance.py) |
+| `studio_agents.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/studio_agents.csv) |
 
 ---
 
-## Step 1: Understanding Copilot Studio Governance
+## Étape 1 : Comprendre la gouvernance de Copilot Studio
 
-Copilot Studio governance operates through multiple layers:
+La gouvernance de Copilot Studio fonctionne à travers plusieurs couches :
 
 ```
 Tenant Admin Center → Environment Management → DLP Policies → Agent Inventory
@@ -93,21 +88,21 @@ Tenant Admin Center → Environment Management → DLP Policies → Agent Invent
 Governance Report ← Security Scan ← Connector Audit ←──────── Agent Config
 ```
 
-Each agent is evaluated against:
+Chaque agent est évalué selon :
 
-1. **Environment classification** — Is the agent in a managed or default environment?
-2. **DLP policy compliance** — Does the agent use only approved connectors?
-3. **Security scan status** — Has the agent passed automated security checks?
-4. **Creator type** — Was it built by IT or a citizen developer?
+1. **Classification de l'environnement** — L'agent est-il dans un environnement géré ou par défaut ?
+2. **Conformité aux stratégies DLP** — L'agent utilise-t-il uniquement des connecteurs approuvés ?
+3. **Statut de l'analyse de sécurité** — L'agent a-t-il réussi les vérifications de sécurité automatisées ?
+4. **Type de créateur** — A-t-il été créé par l'IT ou par un développeur citoyen ?
 
-!!! info "Citizen vs IT-Managed Agents"
-    Citizen-developed agents are created by business users using low-code tools. While they accelerate innovation, they often lack security reviews, proper error handling, and compliance controls. Governance ensures these agents meet the same standards as IT-managed ones.
+!!! info "Agents citoyens vs agents gérés par l'IT"
+    Les agents développés par les citoyens sont créés par des utilisateurs métier à l'aide d'outils low-code. Bien qu'ils accélèrent l'innovation, ils manquent souvent de revues de sécurité, de gestion d'erreurs appropriée et de contrôles de conformité. La gouvernance garantit que ces agents respectent les mêmes standards que ceux gérés par l'IT.
 
 ---
 
-## Step 2: Load and Explore the Agent Inventory
+## Étape 2 : Charger et explorer l'inventaire des agents
 
-The dataset contains **12 Copilot Studio agents** across the tenant:
+Le jeu de données contient **12 agents Copilot Studio** à travers le locataire :
 
 ```python
 import pandas as pd
@@ -120,7 +115,7 @@ print(f"\nAgents per environment:")
 print(agents.groupby("environment")["agent_id"].count().sort_values(ascending=False))
 ```
 
-**Expected:**
+**Résultat attendu :**
 
 ```
 Total agents: 12
@@ -130,9 +125,9 @@ Creator types: ['citizen', 'it_managed']
 
 ---
 
-## Step 3: DLP Policy Compliance Check
+## Étape 3 : Vérification de la conformité aux stratégies DLP
 
-Identify agents that violate DLP policies:
+Identifiez les agents qui violent les stratégies DLP :
 
 ```python
 dlp_violations = agents[agents["dlp_compliant"] == False]
@@ -141,20 +136,20 @@ print(dlp_violations[["agent_id", "agent_name", "environment", "creator_type", "
       .to_string(index=False))
 ```
 
-**Expected:**
+**Résultat attendu :**
 
 ```
 DLP non-compliant agents: 4
 ```
 
-!!! warning "Connector Risk"
-    Non-compliant agents typically use connectors that access external APIs or data sources outside of the organization's approved list. Each unapproved connector represents a potential data exfiltration path.
+!!! warning "Risque lié aux connecteurs"
+    Les agents non conformes utilisent généralement des connecteurs qui accèdent à des API externes ou à des sources de données en dehors de la liste approuvée de l'organisation. Chaque connecteur non approuvé représente un chemin potentiel d'exfiltration de données.
 
 ---
 
-## Step 4: Security Scan Analysis
+## Étape 4 : Analyse des scans de sécurité
 
-Check which agents have failed security scans:
+Vérifiez quels agents ont échoué aux analyses de sécurité :
 
 ```python
 failed_scans = agents[agents["security_scan"] == "failed"]
@@ -166,7 +161,7 @@ print(f"\nAgents without authentication: {len(unprotected)}")
 print(unprotected[["agent_id", "agent_name", "environment"]].to_string(index=False))
 ```
 
-**Expected:**
+**Résultat attendu :**
 
 ```
 Failed security scans: 3
@@ -174,14 +169,14 @@ Failed security scans: 3
 Agents without authentication: 3
 ```
 
-!!! danger "Unprotected Agents"
-    Agents without authentication are publicly accessible. Any user — or external attacker — can interact with them. These agents must be immediately secured or disabled.
+!!! danger "Agents non protégés"
+    Les agents sans authentification sont accessibles publiquement. N'importe quel utilisateur — ou attaquant externe — peut interagir avec eux. Ces agents doivent être immédiatement sécurisés ou désactivés.
 
 ---
 
-## Step 5: Citizen Developer Governance
+## Étape 5 : Gouvernance des développeurs citoyens
 
-Analyze the split between citizen-developed and IT-managed agents:
+Analysez la répartition entre les agents développés par les citoyens et ceux gérés par l'IT :
 
 ```python
 citizen = agents[agents["creator_type"] == "citizen"]
@@ -195,21 +190,21 @@ citizen_noncompliant = citizen[citizen["dlp_compliant"] == False]
 print(f"\nCitizen agents violating DLP: {len(citizen_noncompliant)}")
 ```
 
-**Expected:**
+**Résultat attendu :**
 
 ```
 Citizen-created agents: 8
 IT-managed agents: 4
 ```
 
-!!! tip "Governance Insight"
-    Citizen developers created 8 of 12 agents (67%). While this shows strong adoption, citizen agents are more likely to have DLP violations and failed security scans. Consider implementing mandatory review workflows for citizen-created agents before they reach production.
+!!! tip "Aperçu de gouvernance"
+    Les développeurs citoyens ont créé 8 agents sur 12 (67 %). Bien que cela démontre une forte adoption, les agents citoyens sont plus susceptibles de présenter des violations DLP et des échecs aux analyses de sécurité. Envisagez de mettre en place des workflows de révision obligatoires pour les agents créés par les citoyens avant qu'ils n'atteignent la production.
 
 ---
 
-## Step 6: Governance Dashboard
+## Étape 6 : Tableau de bord de gouvernance
 
-Combine all findings into a governance summary:
+Combinez toutes les conclusions dans un résumé de gouvernance :
 
 ```python
 dashboard = f"""
@@ -230,93 +225,93 @@ print(dashboard)
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-066/broken_governance.py` has **3 bugs** in how it analyzes governance data:
+Le fichier `lab-066/broken_governance.py` contient **3 bugs** dans la manière dont il analyse les données de gouvernance :
 
 ```bash
 python lab-066/broken_governance.py
 ```
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | DLP violation count | Should filter `dlp_compliant == False`, not `True` |
-| Test 2 | Citizen agent count | Should filter `creator_type == "citizen"`, not `"it_managed"` |
-| Test 3 | Failed scan percentage | Should filter `security_scan == "failed"`, not `"passed"` |
+| Test | Ce qu'il vérifie | Indice |
+|------|-----------------|--------|
+| Test 1 | Nombre de violations DLP | Devrait filtrer `dlp_compliant == False`, pas `True` |
+| Test 2 | Nombre d'agents citoyens | Devrait filtrer `creator_type == "citizen"`, pas `"it_managed"` |
+| Test 3 | Pourcentage de scans échoués | Devrait filtrer `security_scan == "failed"`, pas `"passed"` |
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What is the primary risk of ungoverned Copilot Studio agents?"
+??? question "**Q1 (Choix multiple) :** Quel est le principal risque des agents Copilot Studio non gouvernés ?"
 
-    - A) They consume too much compute
-    - B) They can access sensitive data without DLP controls, authentication, or audit trails
-    - C) They slow down the Power Platform
-    - D) They prevent IT from creating new agents
+    - A) Ils consomment trop de ressources de calcul
+    - B) Ils peuvent accéder à des données sensibles sans contrôles DLP, authentification ni pistes d'audit
+    - C) Ils ralentissent la Power Platform
+    - D) Ils empêchent l'IT de créer de nouveaux agents
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) They can access sensitive data without DLP controls, authentication, or audit trails**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Ils peuvent accéder à des données sensibles sans contrôles DLP, authentification ni pistes d'audit**
 
-        Ungoverned agents bypass organizational security policies. They may connect to sensitive data sources using unapproved connectors, operate without authentication, and lack audit logging — creating compliance gaps and data exfiltration risks.
+        Les agents non gouvernés contournent les politiques de sécurité organisationnelles. Ils peuvent se connecter à des sources de données sensibles en utilisant des connecteurs non approuvés, fonctionner sans authentification et manquer de journalisation d'audit — créant des lacunes de conformité et des risques d'exfiltration de données.
 
-??? question "**Q2 (Multiple Choice):** Why is environment isolation important for Copilot Studio governance?"
+??? question "**Q2 (Choix multiple) :** Pourquoi l'isolation des environnements est-elle importante pour la gouvernance de Copilot Studio ?"
 
-    - A) It makes agents run faster
-    - B) It separates development, testing, and production agents to enforce different security policies per lifecycle stage
-    - C) It reduces licensing costs
-    - D) It is only needed for custom code agents
+    - A) Cela fait fonctionner les agents plus rapidement
+    - B) Cela sépare les agents de développement, de test et de production pour appliquer différentes politiques de sécurité par étape du cycle de vie
+    - C) Cela réduit les coûts de licence
+    - D) Cela n'est nécessaire que pour les agents à code personnalisé
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It separates development, testing, and production agents to enforce different security policies per lifecycle stage**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Cela sépare les agents de développement, de test et de production pour appliquer différentes politiques de sécurité par étape du cycle de vie**
 
-        Environment isolation ensures that experimental agents in sandbox environments cannot access production data, and that production agents meet stricter DLP, authentication, and review requirements. Without isolation, a citizen developer's prototype could accidentally connect to production databases.
+        L'isolation des environnements garantit que les agents expérimentaux dans les environnements bac à sable ne peuvent pas accéder aux données de production, et que les agents de production respectent des exigences plus strictes en matière de DLP, d'authentification et de révision. Sans isolation, le prototype d'un développeur citoyen pourrait accidentellement se connecter à des bases de données de production.
 
-??? question "**Q3 (Run the Lab):** How many agents failed security scans?"
+??? question "**Q3 (Exécuter le lab) :** Combien d'agents ont échoué aux analyses de sécurité ?"
 
-    Filter the agents DataFrame for `security_scan == "failed"` and count the rows.
+    Filtrez le DataFrame des agents pour `security_scan == "failed"` et comptez les lignes.
 
-    ??? success "✅ Reveal Answer"
-        **3 agents failed security scans**
+    ??? success "✅ Révéler la réponse"
+        **3 agents ont échoué aux analyses de sécurité**
 
-        These agents had misconfigurations such as missing authentication, exposed internal knowledge bases, or unapproved connector usage. Failed scans require immediate remediation before the agents can be promoted to production.
+        Ces agents présentaient des mauvaises configurations telles que l'absence d'authentification, des bases de connaissances internes exposées ou l'utilisation de connecteurs non approuvés. Les scans échoués nécessitent une remédiation immédiate avant que les agents puissent être promus en production.
 
-??? question "**Q4 (Run the Lab):** How many agents have no authentication configured?"
+??? question "**Q4 (Exécuter le lab) :** Combien d'agents n'ont pas d'authentification configurée ?"
 
-    Filter for `authentication == "none"` and count.
+    Filtrez pour `authentication == "none"` et comptez.
 
-    ??? success "✅ Reveal Answer"
-        **3 agents have no authentication**
+    ??? success "✅ Révéler la réponse"
+        **3 agents n'ont pas d'authentification**
 
-        Agents without authentication are publicly accessible, meaning anyone with the endpoint URL can interact with them. This is a critical security gap that must be resolved by configuring Azure AD or other identity providers.
+        Les agents sans authentification sont accessibles publiquement, ce qui signifie que toute personne disposant de l'URL du point de terminaison peut interagir avec eux. C'est une faille de sécurité critique qui doit être résolue en configurant Azure AD ou d'autres fournisseurs d'identité.
 
-??? question "**Q5 (Run the Lab):** How many agents were created by citizen developers?"
+??? question "**Q5 (Exécuter le lab) :** Combien d'agents ont été créés par des développeurs citoyens ?"
 
-    Filter for `creator_type == "citizen"` and count.
+    Filtrez pour `creator_type == "citizen"` et comptez.
 
-    ??? success "✅ Reveal Answer"
-        **8 agents were created by citizen developers**
+    ??? success "✅ Révéler la réponse"
+        **8 agents ont été créés par des développeurs citoyens**
 
-        Citizen developers created 8 of the 12 total agents (67%). While citizen development accelerates innovation, these agents require additional governance review to ensure DLP compliance, proper authentication, and security scan passage before production deployment.
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| Agent Inventory | Catalog and audit all Copilot Studio agents across the tenant |
-| DLP Enforcement | Detect agents using unapproved connectors and data sources |
-| Security Scanning | Identify agents with failed security scans and misconfigurations |
-| Environment Isolation | Separate dev/test/prod to enforce lifecycle-appropriate policies |
-| Creator Governance | Track citizen vs IT-managed agent creation and compliance rates |
-| Governance Dashboards | Build summary reports for executive and compliance stakeholders |
+        Les développeurs citoyens ont créé 8 des 12 agents au total (67 %). Bien que le développement citoyen accélère l'innovation, ces agents nécessitent une révision de gouvernance supplémentaire pour garantir la conformité DLP, une authentification appropriée et la réussite des analyses de sécurité avant le déploiement en production.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (complementary data governance)
-- **[Lab 064](lab-064-securing-mcp-apim.md)** — Securing MCP with APIM (infrastructure-level security)
-- **[Lab 008](lab-008-responsible-ai.md)** — Responsible AI (foundational governance principles)
+| Sujet | Ce que vous avez appris |
+|-------|------------------------|
+| Inventaire des agents | Cataloguer et auditer tous les agents Copilot Studio à travers le locataire |
+| Application DLP | Détecter les agents utilisant des connecteurs et sources de données non approuvés |
+| Analyses de sécurité | Identifier les agents avec des scans de sécurité échoués et des mauvaises configurations |
+| Isolation des environnements | Séparer dev/test/prod pour appliquer des politiques adaptées au cycle de vie |
+| Gouvernance des créateurs | Suivre la création d'agents citoyens vs gérés par l'IT et les taux de conformité |
+| Tableaux de bord de gouvernance | Créer des rapports de synthèse pour les parties prenantes exécutives et de conformité |
+
+---
+
+## Prochaines étapes
+
+- **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (gouvernance complémentaire des données)
+- **[Lab 064](lab-064-securing-mcp-apim.md)** — Sécurisation de MCP avec APIM (sécurité au niveau de l'infrastructure)
+- **[Lab 008](lab-008-responsible-ai.md)** — IA responsable (principes fondamentaux de gouvernance)

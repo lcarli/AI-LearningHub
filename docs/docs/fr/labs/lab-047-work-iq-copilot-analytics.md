@@ -1,57 +1,52 @@
 ---
 tags: [enterprise, work-iq, copilot-analytics, python, viva-insights, m365]
 ---
-# Lab 047: Work IQ — Copilot Adoption Analytics
+# Lab 047 : Work IQ — Analytique d'adoption de Copilot
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses included mock dataset (live Viva Insights requires M365 Copilot license)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~45 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise un jeu de données simulé inclus (Viva Insights en production nécessite une licence M365 Copilot)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What **Work IQ** is and why adoption analytics matters for AI rollouts
-- How to read and interpret Copilot usage data from Viva Insights and the M365 Admin Center
-- Analyze adoption rates by department using Python and pandas
-- Identify **adoption blockers**: licensing gaps, enablement gaps, and low engagement
-- Build a **rollout scorecard** that turns raw data into an executive summary
+- Ce qu'est **Work IQ** et pourquoi l'analytique d'adoption est importante pour les déploiements IA
+- Comment lire et interpréter les données d'utilisation de Copilot depuis Viva Insights et le Centre d'administration M365
+- Analyser les taux d'adoption par département avec Python et pandas
+- Identifier les **freins à l'adoption** : écarts de licences, écarts d'activation et faible engagement
+- Construire un **tableau de bord d'adoption** qui transforme les données brutes en synthèse exécutive
 
 ## Introduction
 
-![Work IQ Analytics Flow](../../assets/diagrams/work-iq-analytics-flow.svg)
+![Flux d'analytique Work IQ](../../assets/diagrams/work-iq-analytics-flow.svg)
 
-**Work IQ** is Microsoft's framework for measuring and optimizing AI adoption across an organization. As companies move from *deploying* Microsoft 365 Copilot to *proving ROI*, the ability to analyze adoption data becomes a critical skill.
+**Work IQ** est le framework de Microsoft pour mesurer et optimiser l'adoption de l'IA dans une organisation. À mesure que les entreprises passent du *déploiement* de Microsoft 365 Copilot à la *démonstration du ROI*, la capacité à analyser les données d'adoption devient une compétence essentielle.
 
-In 2025-2026, the question has shifted from _"Did we deploy Copilot?"_ to _"Is it actually being used? By whom? For what? And what value is it creating?"_
+En 2025-2026, la question est passée de _« Avons-nous déployé Copilot ? »_ à _« Est-il réellement utilisé ? Par qui ? Pour quoi ? Et quelle valeur crée-t-il ? »_
 
-### The Scenario
+### Le scénario
 
-You are the **AI Adoption Lead** at OutdoorGear Inc. The company deployed M365 Copilot to 52 employees across 7 departments three months ago. Leadership wants answers:
+Vous êtes le **responsable de l'adoption IA** chez OutdoorGear Inc. L'entreprise a déployé M365 Copilot auprès de 52 employés dans 7 départements il y a trois mois. La direction veut des réponses :
 
-1. Which departments are actually using Copilot?
-2. Where are licenses going unused — and why?
-3. What features are people using most?
-4. How much time has Copilot saved the organization?
+1. Quels départements utilisent réellement Copilot ?
+2. Où les licences sont-elles inutilisées — et pourquoi ?
+3. Quelles fonctionnalités les gens utilisent-ils le plus ?
+4. Combien de temps Copilot a-t-il fait économiser à l'organisation ?
 
-You have a **usage data export** (similar to what Viva Insights and the M365 Admin Center provide). Your job: turn raw data into an actionable **adoption scorecard**.
+Vous disposez d'un **export de données d'utilisation** (similaire à ce que fournissent Viva Insights et le Centre d'administration M365). Votre mission : transformer les données brutes en un **tableau de bord d'adoption** exploitable.
 
-!!! info "Live vs. Mock Data"
-    This lab uses a **mock dataset** (`copilot_usage_data.csv`) so anyone can follow along without an M365 Copilot license. The data structure mirrors what you'd see in Viva Insights exports. If you have a live M365 environment, you can substitute your own data.
+!!! info "Données réelles vs. simulées"
+    Ce lab utilise un **jeu de données simulé** (`copilot_usage_data.csv`) pour que tout le monde puisse suivre sans licence M365 Copilot. La structure des données reflète ce que vous verriez dans les exports Viva Insights. Si vous disposez d'un environnement M365 en production, vous pouvez substituer vos propres données.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Prérequis | Pourquoi |
 |---|---|
-| Python 3.10+ | Run the analysis scripts |
-| `pandas` library | Data manipulation |
-| (Optional) M365 Copilot license + Viva Insights | For live data instead of mock |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| Bibliothèque `pandas` | Manipulation de données |
+| (Optionnel) Licence M365 Copilot + Viva Insights | Pour des données réelles au lieu de simulées |
 
 ```bash
 pip install pandas
@@ -59,41 +54,41 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
-    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
+!!! tip "Démarrage rapide avec GitHub Codespaces"
+    [![Ouvrir dans GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont préinstallées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers d'accompagnement
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-047/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-047/` dans votre répertoire de travail.
 
-| File | Description | Download |
+| Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `broken_scorecard.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/broken_scorecard.py) |
-| `copilot_usage_data.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) |
-| `scorecard_builder.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/scorecard_builder.py) |
+| `broken_scorecard.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/broken_scorecard.py) |
+| `copilot_usage_data.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) |
+| `scorecard_builder.py` | Script de démarrage avec TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/scorecard_builder.py) |
 
 ---
 
-## Step 1: Understand the Key Metrics
+## Étape 1 : Comprendre les métriques clés
 
-Before touching data, you need to understand what Work IQ measures. These are the same metrics tracked by Viva Insights and the M365 Admin Center:
+Avant de toucher aux données, vous devez comprendre ce que Work IQ mesure. Ce sont les mêmes métriques suivies par Viva Insights et le Centre d'administration M365 :
 
-| Metric | What It Measures | Why It Matters |
+| Métrique | Ce qu'elle mesure | Pourquoi c'est important |
 |--------|-----------------|----------------|
-| **Licensed** | User has an M365 Copilot license assigned | License ≠ usage; tracks investment allocation |
-| **Enabled** | Admin has activated Copilot for the user | Gap between licensed and enabled = wasted spend |
-| **Active Days** | Days the user interacted with any Copilot feature | Measures engagement depth, not just one-time trial |
-| **Meetings Assisted** | Meetings where Copilot generated summaries/actions | High-value use case for managers |
-| **Emails Drafted** | Emails composed or refined with Copilot help | Measures writing productivity |
-| **Docs Summarized** | Documents summarized or analyzed by Copilot | Measures knowledge work efficiency |
-| **Chats** | Copilot Chat interactions (questions, brainstorming) | Measures exploration and daily utility |
-| **Time Saved (min)** | Estimated minutes saved by Copilot | The ultimate ROI metric |
+| **Licencié** | L'utilisateur a une licence M365 Copilot attribuée | Licence ≠ utilisation ; suit l'allocation de l'investissement |
+| **Activé** | L'administrateur a activé Copilot pour l'utilisateur | L'écart entre licencié et activé = dépenses gaspillées |
+| **Jours actifs** | Jours où l'utilisateur a interagi avec une fonctionnalité Copilot | Mesure la profondeur d'engagement, pas juste un essai ponctuel |
+| **Réunions assistées** | Réunions où Copilot a généré des résumés/actions | Cas d'usage à forte valeur pour les managers |
+| **E-mails rédigés** | E-mails composés ou affinés avec l'aide de Copilot | Mesure la productivité rédactionnelle |
+| **Documents résumés** | Documents résumés ou analysés par Copilot | Mesure l'efficacité du travail de connaissance |
+| **Chats** | Interactions Copilot Chat (questions, brainstorming) | Mesure l'exploration et l'utilité quotidienne |
+| **Temps économisé (min)** | Minutes estimées économisées par Copilot | La métrique ROI ultime |
 
-### Key Formulas
+### Formules clés
 
 ```
 Adoption Rate = (Active Users ÷ Enabled Users) × 100
@@ -105,14 +100,14 @@ Licensing Gap = Total Users − Licensed Users
     → Users without any Copilot license at all
 ```
 
-!!! warning "Viva Insights Privacy"
-    In production Viva Insights, a **minimum group size of 5 users** is enforced for all reports. You cannot drill into departments smaller than 5. Our mock data ignores this for learning purposes, but keep it in mind for real deployments.
+!!! warning "Confidentialité Viva Insights"
+    En production, Viva Insights applique une **taille de groupe minimale de 5 utilisateurs** pour tous les rapports. Vous ne pouvez pas détailler les départements de moins de 5 personnes. Nos données simulées ignorent cela à des fins d'apprentissage, mais gardez-le à l'esprit pour les déploiements réels.
 
 ---
 
-## Step 2: Load and Explore the Dataset
+## Étape 2 : Charger et explorer le jeu de données
 
-The dataset has **52 user records** across 7 departments. Start by loading it in Python:
+Le jeu de données contient **52 enregistrements utilisateurs** répartis dans 7 départements. Commencez par le charger en Python :
 
 ```python
 import pandas as pd
@@ -129,14 +124,14 @@ print(f"\nColumn types:\n{df.dtypes}")
 print(f"\nFirst 5 rows:\n{df.head()}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total records: 52
 Departments: 7
 ```
 
-Take a moment to explore:
+Prenez un moment pour explorer :
 
 ```python
 # Quick summary by department
@@ -148,17 +143,17 @@ summary = df.groupby("department").agg(
 print(summary)
 ```
 
-??? question "**🤔 Before you continue:** Which department do you *predict* will have the highest adoption rate?"
+??? question "**🤔 Avant de continuer :** Quel département *prédisez-vous* aura le taux d'adoption le plus élevé ?"
 
-    Think about it — then continue to Step 3 to find out if you're right!
+    Réfléchissez-y — puis passez à l'étape 3 pour découvrir si vous aviez raison !
 
 ---
 
-## Step 3: Calculate Adoption Rates by Department
+## Étape 3 : Calculer les taux d'adoption par département
 
-Now compute the adoption rate for each department. Remember: **adoption rate = active users ÷ enabled users × 100**.
+Calculez maintenant le taux d'adoption pour chaque département. Rappel : **taux d'adoption = utilisateurs actifs ÷ utilisateurs activés × 100**.
 
-An "active" user is anyone with `active_days > 0` (they used Copilot at least once during the month).
+Un utilisateur « actif » est toute personne avec `active_days > 0` (elle a utilisé Copilot au moins une fois pendant le mois).
 
 ```python
 results = []
@@ -182,7 +177,7 @@ adoption_df = pd.DataFrame(results).sort_values("Adoption %", ascending=False)
 print(adoption_df.to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 | Department | Total | Licensed | Enabled | Active | Adoption % |
 |------------|-------|----------|---------|--------|------------|
@@ -194,16 +189,16 @@ print(adoption_df.to_string(index=False))
 | HR | 5 | 3 | 3 | 2 | 66.7 |
 | Legal | 4 | 3 | 2 | 1 | 50.0 |
 
-!!! tip "Insight"
-    **Finance leads at 100%** — every enabled user is active. **Legal is at 50%** — only 1 out of 2 enabled users has ever opened Copilot. But notice that Legal also has the fewest enabled users (2). Small sample sizes can be misleading — this is why Viva Insights enforces a minimum group size of 5.
+!!! tip "Observation"
+    **Finance est en tête à 100 %** — chaque utilisateur activé est actif. **Legal est à 50 %** — seul 1 utilisateur activé sur 2 a déjà ouvert Copilot. Mais notez que Legal a aussi le moins d'utilisateurs activés (2). Les petits échantillons peuvent être trompeurs — c'est pourquoi Viva Insights applique une taille de groupe minimale de 5.
 
 ---
 
-## Step 4: Identify Adoption Blockers
+## Étape 4 : Identifier les freins à l'adoption
 
-Three types of blockers prevent Copilot adoption:
+Trois types de freins empêchent l'adoption de Copilot :
 
-### 4a — Enablement Gap (Licensed but NOT Enabled)
+### 4a — Écart d'activation (Licencié mais NON activé)
 
 ```python
 gap = df[(df["licensed"] == True) & (df["enabled"] == False)]
@@ -211,7 +206,7 @@ print(f"Enablement gap: {len(gap)} users\n")
 print(gap[["department", "user_id"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Enablement gap: 7 users
@@ -226,10 +221,10 @@ Enablement gap: 7 users
   Operations OPS-006
 ```
 
-!!! warning "The Sales Problem"
-    **Sales has 3 licensed users stuck in the enablement gap** — that's 37.5% of their licensed users! This is likely an admin oversight. One ticket to IT could unlock 3 more active users.
+!!! warning "Le problème des ventes"
+    **Sales a 3 utilisateurs licenciés bloqués dans l'écart d'activation** — soit 37,5 % de leurs utilisateurs licenciés ! Il s'agit probablement d'un oubli administratif. Un simple ticket IT pourrait débloquer 3 utilisateurs actifs supplémentaires.
 
-### 4b — Licensing Gap (No License at All)
+### 4b — Écart de licences (Pas de licence du tout)
 
 ```python
 unlicensed = df[df["licensed"] == False]
@@ -237,7 +232,7 @@ print(f"Unlicensed users: {len(unlicensed)}")
 print(unlicensed.groupby("department")["user_id"].count())
 ```
 
-### 4c — Zero-Usage Users (Enabled but Never Used)
+### 4c — Utilisateurs à utilisation nulle (Activé mais jamais utilisé)
 
 ```python
 zero_usage = df[(df["enabled"] == True) & (df["active_days"] == 0)]
@@ -245,13 +240,13 @@ print(f"Enabled but never used: {len(zero_usage)} users")
 print(zero_usage[["department", "user_id"]].to_string(index=False))
 ```
 
-These users have Copilot available but haven't touched it. They may need training, awareness campaigns, or a nudge from their manager.
+Ces utilisateurs ont Copilot disponible mais ne l'ont jamais utilisé. Ils ont peut-être besoin de formation, de campagnes de sensibilisation ou d'un rappel de leur manager.
 
 ---
 
-## Step 5: Feature Usage Analysis
+## Étape 5 : Analyse de l'utilisation des fonctionnalités
 
-Which Copilot features drive the most value at OutdoorGear?
+Quelles fonctionnalités de Copilot apportent le plus de valeur chez OutdoorGear ?
 
 ```python
 active = df[df["active_days"] > 0]
@@ -269,23 +264,23 @@ for feat, count in sorted(features.items(), key=lambda x: x[1], reverse=True):
     print(f"  {feat:>20s}: {count:>5d}  ({pct:.1f}%)")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
-| Feature | Total | Share |
+| Fonctionnalité | Total | Part |
 |---------|-------|-------|
-| Chats | 400 | 32.8% |
-| Meetings Assisted | 303 | 24.8% |
-| Emails Drafted | 260 | 21.3% |
-| Docs Summarized | 257 | 21.1% |
+| Chats | 400 | 32,8 % |
+| Meetings Assisted | 303 | 24,8 % |
+| Emails Drafted | 260 | 21,3 % |
+| Docs Summarized | 257 | 21,1 % |
 
-!!! tip "Insight"
-    **Chats dominate** at 32.8% — users are primarily using Copilot for Q&A, brainstorming, and quick lookups. Meetings are the second most used feature, driven by Finance and Engineering where managers rely on meeting summaries.
+!!! tip "Observation"
+    **Les Chats dominent** à 32,8 % — les utilisateurs utilisent principalement Copilot pour les questions-réponses, le brainstorming et les recherches rapides. Les réunions sont la deuxième fonctionnalité la plus utilisée, portée par Finance et Engineering où les managers s'appuient sur les résumés de réunions.
 
 ---
 
-## Step 6: Build the Scorecard
+## Étape 6 : Construire le tableau de bord
 
-Now combine all your analysis into a single **Adoption Scorecard** for leadership:
+Combinez maintenant toute votre analyse en un seul **tableau de bord d'adoption** pour la direction :
 
 ```python
 total_time = int(active["time_saved_min"].sum())
@@ -324,103 +319,103 @@ print("💾 Saved to lab-047/scorecard_report.md")
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-047/broken_scorecard.py` contains **3 bugs** that produce incorrect adoption metrics. Can you find and fix them all?
+Le fichier `lab-047/broken_scorecard.py` contient **3 bugs** qui produisent des métriques d'adoption incorrectes. Pouvez-vous tous les trouver et les corriger ?
 
-Run the self-tests to see which ones fail:
+Exécutez les auto-tests pour voir lesquels échouent :
 
 ```bash
 python lab-047/broken_scorecard.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Vous devriez voir **3 tests échoués**. Chaque test correspond à un bug :
 
-| Test | What it checks | Hint |
+| Test | Ce qu'il vérifie | Indice |
 |------|---------------|------|
-| Test 1 | Adoption rate denominator | Should use enabled users, not total users |
-| Test 2 | Enablement gap filter logic | Check the boolean conditions |
-| Test 3 | Time conversion factor | Minutes → hours conversion |
+| Test 1 | Dénominateur du taux d'adoption | Devrait utiliser les utilisateurs activés, pas le total |
+| Test 2 | Logique de filtre de l'écart d'activation | Vérifiez les conditions booléennes |
+| Test 3 | Facteur de conversion du temps | Conversion minutes → heures |
 
-Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done!
+Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, c'est terminé !
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Quiz de connaissances
 
-??? question "**Q1 (Multiple Choice):** In Microsoft Viva Insights, what is the default minimum group size to protect employee privacy?"
+??? question "**Q1 (Choix multiple) :** Dans Microsoft Viva Insights, quelle est la taille de groupe minimale par défaut pour protéger la vie privée des employés ?"
 
-    - A) 3 users
-    - B) 5 users
-    - C) 10 users
-    - D) 25 users
+    - A) 3 utilisateurs
+    - B) 5 utilisateurs
+    - C) 10 utilisateurs
+    - D) 25 utilisateurs
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) 5 users**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) 5 utilisateurs**
 
-        Viva Insights enforces a minimum group size of **5** by default. Reports for groups smaller than 5 are suppressed to prevent identifying individual usage patterns. Admins can increase (but not decrease) this threshold.
+        Viva Insights applique une taille de groupe minimale de **5** par défaut. Les rapports pour les groupes de moins de 5 personnes sont supprimés pour éviter l'identification des habitudes d'utilisation individuelles. Les administrateurs peuvent augmenter (mais pas diminuer) ce seuil.
 
-??? question "**Q2 (Multiple Choice):** Which metric best indicates that users are *consistently* using Copilot over time, rather than just trying it once?"
+??? question "**Q2 (Choix multiple) :** Quelle métrique indique le mieux que les utilisateurs utilisent Copilot de manière *régulière* dans le temps, plutôt que de simplement l'essayer une fois ?"
 
-    - A) Total emails drafted
-    - B) Number of licensed users
-    - C) Monthly active days average
-    - D) Time saved in minutes
+    - A) Total d'e-mails rédigés
+    - B) Nombre d'utilisateurs licenciés
+    - C) Moyenne mensuelle de jours actifs
+    - D) Temps économisé en minutes
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) Monthly active days average**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C) Moyenne mensuelle de jours actifs**
 
-        A high active-days count means the user returns to Copilot day after day — this measures **stickiness** and **habit formation**, not just a one-time trial. Total emails or time saved can be inflated by a single heavy-use day.
+        Un nombre élevé de jours actifs signifie que l'utilisateur revient sur Copilot jour après jour — cela mesure la **fidélisation** et la **formation d'habitudes**, pas juste un essai ponctuel. Le total d'e-mails ou le temps économisé peuvent être gonflés par une seule journée d'utilisation intensive.
 
-??? question "**Q3 (Run the Lab):** Which department has the highest Copilot adoption rate (active ÷ enabled × 100)?"
+??? question "**Q3 (Exécutez le lab) :** Quel département a le taux d'adoption Copilot le plus élevé (actifs ÷ activés × 100) ?"
 
-    Run the Step 3 analysis on [📥 `copilot_usage_data.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) and check the results.
+    Exécutez l'analyse de l'étape 3 sur [📥 `copilot_usage_data.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) et vérifiez les résultats.
 
-    ??? success "✅ Reveal Answer"
-        **Finance — 100.0%**
+    ??? success "✅ Révéler la réponse"
+        **Finance — 100,0 %**
 
-        Finance has 6 licensed, 6 enabled, and 6 active users — every single enabled user is actively using Copilot. This makes Finance the model department for scaling adoption best practices to other teams.
+        Finance a 6 utilisateurs licenciés, 6 activés et 6 actifs — chaque utilisateur activé utilise activement Copilot. Cela fait de Finance le département modèle pour diffuser les bonnes pratiques d'adoption aux autres équipes.
 
-??? question "**Q4 (Run the Lab):** How many users across the organization are in the 'enablement gap' (licensed = true, enabled = false)?"
+??? question "**Q4 (Exécutez le lab) :** Combien d'utilisateurs dans l'organisation se trouvent dans l'« écart d'activation » (licensed = true, enabled = false) ?"
 
-    Run the Step 4a analysis to find out.
+    Exécutez l'analyse de l'étape 4a pour le découvrir.
 
-    ??? success "✅ Reveal Answer"
-        **7 users**
+    ??? success "✅ Révéler la réponse"
+        **7 utilisateurs**
 
-        The 7 users in the enablement gap are: ENG-011, MKT-008, SLS-004, SLS-005, SLS-006, LEG-003, and OPS-006. Sales alone accounts for 3 of these — the quickest win for improving overall adoption is to enable these users.
+        Les 7 utilisateurs dans l'écart d'activation sont : ENG-011, MKT-008, SLS-004, SLS-005, SLS-006, LEG-003 et OPS-006. Sales représente à lui seul 3 d'entre eux — le moyen le plus rapide d'améliorer l'adoption globale est d'activer ces utilisateurs.
 
-??? question "**Q5 (Run the Lab):** How many 'power users' are there (employees with `active_days >= 20`)?"
+??? question "**Q5 (Exécutez le lab) :** Combien y a-t-il de « power users » (employés avec `active_days >= 20`) ?"
 
-    Filter the dataset for users with 20+ active days and count them.
+    Filtrez le jeu de données pour les utilisateurs avec 20+ jours actifs et comptez-les.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **10 power users**
 
-        - Engineering: ENG-001 (22), ENG-002 (20), ENG-004 (21), ENG-007 (23), ENG-009 (20) → 5
-        - Marketing: MKT-003 (20) → 1
-        - Finance: FIN-001 (22), FIN-002 (21), FIN-003 (20), FIN-005 (23) → 4
-        - **Total: 10 power users** across Engineering, Marketing, and Finance
+        - Engineering : ENG-001 (22), ENG-002 (20), ENG-004 (21), ENG-007 (23), ENG-009 (20) → 5
+        - Marketing : MKT-003 (20) → 1
+        - Finance : FIN-001 (22), FIN-002 (21), FIN-003 (20), FIN-005 (23) → 4
+        - **Total : 10 power users** répartis entre Engineering, Marketing et Finance
 
 ---
 
-## Summary
+## Résumé
 
-| Topic | What You Learned |
+| Sujet | Ce que vous avez appris |
 |-------|-----------------|
-| Work IQ | Framework for measuring AI adoption and proving ROI |
-| Adoption Rate | active ÷ enabled × 100 — the primary health metric |
-| Enablement Gap | Licensed but not enabled — the quickest fix for low adoption |
-| Feature Mix | Which Copilot features drive the most value |
-| Time Saved | Converting minutes into business impact for leadership |
-| Scorecard | Combining metrics into an executive-ready report |
+| Work IQ | Framework pour mesurer l'adoption de l'IA et démontrer le ROI |
+| Taux d'adoption | actifs ÷ activés × 100 — la métrique de santé principale |
+| Écart d'activation | Licencié mais non activé — la correction la plus rapide pour une faible adoption |
+| Mix de fonctionnalités | Quelles fonctionnalités Copilot apportent le plus de valeur |
+| Temps économisé | Convertir les minutes en impact business pour la direction |
+| Tableau de bord | Combiner les métriques en un rapport prêt pour la direction |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **[Lab 048](lab-048-work-iq-power-bi.md)** *(coming soon)* — Build advanced Power BI dashboards with Viva Insights Advanced Reporting
-- **[Lab 033](lab-033-agent-observability.md)** — Agent Observability with Application Insights (similar analytics mindset for custom agents)
-- **[Lab 035](lab-035-agent-evaluation.md)** — Agent Evaluation with Azure AI Eval SDK (measuring agent quality, not just adoption)
-- **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (the financial side of ROI)
+- **[Lab 048](lab-048-work-iq-power-bi.md)** *(à venir)* — Construire des tableaux de bord Power BI avancés avec Viva Insights Advanced Reporting
+- **[Lab 033](lab-033-agent-observability.md)** — Observabilité des agents avec Application Insights (même approche analytique pour les agents personnalisés)
+- **[Lab 035](lab-035-agent-evaluation.md)** — Évaluation des agents avec le SDK Azure AI Eval (mesurer la qualité des agents, pas seulement l'adoption)
+- **[Lab 038](lab-038-cost-optimization.md)** — Optimisation des coûts IA (le volet financier du ROI)

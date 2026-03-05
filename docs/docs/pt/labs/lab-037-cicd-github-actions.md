@@ -1,64 +1,59 @@
 ---
 tags: [cicd, github-actions, python, free]
 ---
-# Lab 037: CI/CD for AI Agents with GitHub Actions
+# Lab 037: CI/CD para Agentes de IA com GitHub Actions
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — GitHub Actions free tier (2000 min/month)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Tempo:</strong> ~45 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Free</span> — Nível gratuito do GitHub Actions (2000 min/mês)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Why AI agents need CI/CD pipelines (they're different from regular software)
-- **Automated prompt regression tests** — detect when a prompt change breaks behavior
-- **LLM-as-judge** evaluation in CI — use a model to grade outputs
-- **Safe deployment** patterns: shadow mode, canary releases
-- A complete GitHub Actions workflow for an AI agent
+- Por que agentes de IA precisam de pipelines de CI/CD (eles são diferentes de software convencional)
+- **Testes de regressão automatizados de prompts** — detecte quando uma mudança no prompt quebra o comportamento
+- Avaliação **LLM-as-judge** no CI — use um modelo para avaliar as saídas
+- Padrões de **deploy seguro**: modo shadow, releases canário
+- Um workflow completo de GitHub Actions para um agente de IA
 
 ---
 
-## Introduction
+## Introdução
 
-Shipping agent updates is risky. A small prompt change can silently break the agent's behavior. Unlike traditional software, there's no compiler or type checker — the "bug" is a subtle shift in reasoning quality.
+Publicar atualizações de agentes é arriscado. Uma pequena mudança no prompt pode silenciosamente quebrar o comportamento do agente. Diferente do software tradicional, não há compilador ou verificador de tipos — o "bug" é uma mudança sutil na qualidade do raciocínio.
 
-CI/CD for AI agents needs:
+CI/CD para agentes de IA precisa de:
 
-1. **Regression tests** for expected behaviors
-2. **Quality gates** (automated evals) before merging
-3. **Safe deployment** strategies that limit blast radius
-
----
-
-## Prerequisites
-
-- GitHub account (free)
-- `GITHUB_TOKEN` (Personal Access Token or Actions secret)
-- Python project with a simple agent (we'll create one)
+1. **Testes de regressão** para comportamentos esperados
+2. **Portões de qualidade** (avaliações automatizadas) antes do merge
+3. Estratégias de **deploy seguro** que limitam o raio de impacto
 
 ---
 
-## 📦 Supporting Files
+## Pré-requisitos
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-037/` folder in your working directory.
+- Conta no GitHub (gratuita)
+- `GITHUB_TOKEN` (Personal Access Token ou segredo do Actions)
+- Projeto Python com um agente simples (vamos criar um)
 
-| File | Description | Download |
+---
+
+## 📦 Arquivos de Suporte
+
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-037/` no seu diretório de trabalho.
+
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `ai-agent-ci.yml` | CI/CD workflow template | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) |
+| `ai-agent-ci.yml` | Template de workflow CI/CD | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) |
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Create a testable agent module
+### Passo 1: Crie um módulo de agente testável
 
 ```
 my-agent/
@@ -73,7 +68,7 @@ my-agent/
         └── agent-ci.yml
 ```
 
-**`agent.py`** — a simple customer service agent:
+**`agent.py`** — um agente simples de atendimento ao cliente:
 
 ```python
 import os
@@ -110,9 +105,9 @@ def ask_agent(question: str) -> AgentResponse:
     return response.choices[0].message.parsed
 ```
 
-### Step 2: Behavioral tests (fast, deterministic)
+### Passo 2: Testes comportamentais (rápidos, determinísticos)
 
-These tests check **binary** behaviors — things that should always be true.
+Estes testes verificam comportamentos **binários** — coisas que devem sempre ser verdadeiras.
 
 **`tests/test_behaviors.py`**:
 
@@ -158,7 +153,7 @@ class TestSafetyBehaviors:
         assert "system" not in result.answer.lower() or "can't share" in result.answer.lower()
 ```
 
-### Step 3: Golden test cases (JSON)
+### Passo 3: Casos de teste golden (JSON)
 
 **`evals/test_cases.json`**:
 
@@ -188,7 +183,7 @@ class TestSafetyBehaviors:
 ]
 ```
 
-### Step 4: LLM-as-judge evaluation
+### Passo 4: Avaliação LLM-as-judge
 
 **`tests/test_evals.py`**:
 
@@ -274,7 +269,7 @@ def test_overall_quality():
     assert avg_score >= 3.5, f"Average quality score {avg_score:.1f} is below threshold 3.5"
 ```
 
-### Step 5: GitHub Actions workflow
+### Passo 5: Workflow do GitHub Actions
 
 **`.github/workflows/agent-ci.yml`**:
 
@@ -350,56 +345,56 @@ jobs:
 
 ---
 
-## CI Strategy Summary
+## Resumo da Estratégia de CI
 
-| Test type | Runs on | Speed | Cost |
+| Tipo de teste | Executa em | Velocidade | Custo |
 |-----------|---------|-------|------|
-| **Behavioral** (pytest) | Every PR | Fast (~10s) | No LLM calls |
-| **Golden cases** | Every PR | Medium (~30s) | Minimal (structured output) |
-| **LLM-as-judge** | Main branch only | Slow (~2min) | ~10 LLM calls |
-| **Deploy** | Main, tests pass | — | — |
+| **Comportamental** (pytest) | Todo PR | Rápido (~10s) | Sem chamadas LLM |
+| **Casos golden** | Todo PR | Médio (~30s) | Mínimo (saída estruturada) |
+| **LLM-as-judge** | Apenas branch main | Lento (~2min) | ~10 chamadas LLM |
+| **Deploy** | Main, testes passam | — | — |
 
-!!! tip "Prompt versioning"
-    Store your prompts in version-controlled files (`prompts/system.txt`), not hardcoded in Python. This makes diffs meaningful and enables rollback.
+!!! tip "Versionamento de prompts"
+    Armazene seus prompts em arquivos versionados (`prompts/system.txt`), não codificados diretamente no Python. Isso torna os diffs significativos e permite rollback.
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Run the Lab):** Open `lab-037/ai-agent-ci.yml`. How many jobs are defined in the workflow?"
+??? question "**Q1 (Execute o Lab):** Abra `lab-037/ai-agent-ci.yml`. Quantos jobs estão definidos no workflow?"
 
-    Open the file and count the number of `job-name:` entries under the `jobs:` key.
+    Abra o arquivo e conte o número de entradas `job-name:` sob a chave `jobs:`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **7 jobs**
 
-        The workflow defines: `unit-tests`, `integration-tests`, `security-scan`, `agent-evaluation`, `docker-build`, `deploy-staging`, and `deploy-production`. Each job has a distinct responsibility in the agent deployment pipeline.
+        O workflow define: `unit-tests`, `integration-tests`, `security-scan`, `agent-evaluation`, `docker-build`, `deploy-staging` e `deploy-production`. Cada job tem uma responsabilidade distinta no pipeline de deploy do agente.
 
-??? question "**Q2 (Run the Lab):** Which job in [📥 `ai-agent-ci.yml`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) does NOT run on pull requests — only on pushes to the `main` branch?"
+??? question "**Q2 (Execute o Lab):** Qual job no [📥 `ai-agent-ci.yml`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) NÃO executa em pull requests — apenas em pushes para a branch `main`?"
 
-    Look at the `if:` condition on each job, or the workflow-level trigger vs per-job conditions.
+    Observe a condição `if:` em cada job, ou o trigger no nível do workflow versus condições por job.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **`integration-tests`**
 
-        Integration tests call real external APIs (GitHub Models, etc.) and could fail due to rate limits or cost if run on every PR. The `integration-tests` job has `if: github.event_name == 'push' && github.ref == 'refs/heads/main'` — it only runs on pushes to main, not on every pull request. Unit tests run on all events.
+        Testes de integração chamam APIs externas reais (GitHub Models, etc.) e podem falhar devido a limites de taxa ou custo se executados em todo PR. O job `integration-tests` tem `if: github.event_name == 'push' && github.ref == 'refs/heads/main'` — ele só executa em pushes para main, não em todo pull request. Testes unitários executam em todos os eventos.
 
-??? question "**Q3 (Multiple Choice):** The `deploy-production` job in the workflow requires manual approval. What GitHub Actions feature enables this?"
+??? question "**Q3 (Múltipla Escolha):** O job `deploy-production` no workflow requer aprovação manual. Qual recurso do GitHub Actions possibilita isso?"
 
-    - A) A `manual-approval: true` flag in the job definition
-    - B) An `environment:` block referencing a protected environment with required reviewers configured
-    - C) A `wait-for-approval` step using the GitHub API
-    - D) Setting `runs-on: manual` instead of `runs-on: ubuntu-latest`
+    - A) Um flag `manual-approval: true` na definição do job
+    - B) Um bloco `environment:` referenciando um ambiente protegido com revisores obrigatórios configurados
+    - C) Um passo `wait-for-approval` usando a API do GitHub
+    - D) Definir `runs-on: manual` em vez de `runs-on: ubuntu-latest`
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B — A protected GitHub Environment with required reviewers**
+    ??? success "✅ Revelar Resposta"
+        **Correta: B — Um Ambiente protegido do GitHub com revisores obrigatórios**
 
-        The `deploy-production` job specifies `environment: production`. In GitHub repository settings, you configure the `production` environment to require 1+ specific reviewers before the job runs. When the workflow reaches this job, GitHub sends a notification to the reviewers, pauses the workflow, and waits. Only after approval does the deployment proceed. This is the standard GitHub Actions pattern for human-in-the-loop production deployments.
+        O job `deploy-production` especifica `environment: production`. Nas configurações do repositório GitHub, você configura o ambiente `production` para exigir 1+ revisores específicos antes que o job execute. Quando o workflow atinge este job, o GitHub envia uma notificação aos revisores, pausa o workflow e aguarda. Somente após a aprovação o deploy prossegue. Este é o padrão do GitHub Actions para deploys em produção com humano no loop.
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Evaluate at scale with Azure AI:** → [Lab 035 — Agent Evaluation with Azure AI Eval SDK](lab-035-agent-evaluation.md)
-- **Deploy your agent to Azure Container Apps:** → [Lab 028 — Deploy MCP to Azure Container Apps](lab-028-deploy-mcp-azure.md)
+- **Avalie em escala com Azure AI:** → [Lab 035 — Avaliação de Agentes com Azure AI Eval SDK](lab-035-agent-evaluation.md)
+- **Faça deploy do seu agente no Azure Container Apps:** → [Lab 028 — Deploy MCP no Azure Container Apps](lab-028-deploy-mcp-azure.md)

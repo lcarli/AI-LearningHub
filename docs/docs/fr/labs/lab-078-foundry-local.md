@@ -1,31 +1,26 @@
 ---
 tags: [foundry-local, local-inference, free, ollama-alternative, python]
 ---
-# Lab 078: Foundry Local — Run AI Models Offline
+# Lab 078 : Foundry Local — Exécuter des modèles IA hors ligne
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Runs entirely on local hardware</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~45 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Fonctionne entièrement sur du matériel local</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What **Foundry Local** is and how it enables offline AI model inference
-- How to install and run models with `winget` and the `foundry` CLI
-- How the **OpenAI-compatible API** makes Foundry Local a drop-in replacement
-- Analyze a **model catalog** of 8 models — comparing sizes, hardware requirements, and quality
-- Identify the **smallest model** and which models support **CPU-only** inference
+- Ce qu'est **Foundry Local** et comment il permet l'inférence de modèles IA hors ligne
+- Comment installer et exécuter des modèles avec `winget` et le CLI `foundry`
+- Comment l'**API compatible OpenAI** fait de Foundry Local un remplacement direct
+- Analyser un **catalogue de modèles** de 8 modèles — en comparant tailles, exigences matérielles et qualité
+- Identifier le **plus petit modèle** et quels modèles supportent l'inférence **CPU uniquement**
 
 ## Introduction
 
-**Foundry Local** is Microsoft's local inference runtime that lets you run AI models entirely on your own hardware — no cloud, no API keys, no internet required. It's a free alternative to Ollama, optimized for Windows with DirectML GPU acceleration.
+**Foundry Local** est le runtime d'inférence locale de Microsoft qui vous permet d'exécuter des modèles IA entièrement sur votre propre matériel — sans cloud, sans clés API, sans internet requis. C'est une alternative gratuite à Ollama, optimisée pour Windows avec l'accélération GPU DirectML.
 
 ### Installation
 
@@ -33,13 +28,13 @@ tags: [foundry-local, local-inference, free, ollama-alternative, python]
 winget install Microsoft.FoundryLocal
 ```
 
-### Running a Model
+### Exécuter un modèle
 
 ```bash
 foundry model run phi-4-mini
 ```
 
-This downloads the model (if needed) and starts a local server with an **OpenAI-compatible API** at `http://localhost:5273`:
+Cela télécharge le modèle (si nécessaire) et démarre un serveur local avec une **API compatible OpenAI** à `http://localhost:5273` :
 
 ```python
 from openai import OpenAI
@@ -53,19 +48,19 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-### The Scenario
+### Le scénario
 
-You are a **DevOps Engineer** evaluating Foundry Local for air-gapped (offline) deployments. You have a catalog of **8 models** (`foundry_models.csv`) with size, hardware requirements, and quality benchmarks. Your job: analyze the catalog, find the best model for different hardware profiles, and build a deployment recommendation.
+Vous êtes un **ingénieur DevOps** évaluant Foundry Local pour des déploiements en environnement isolé (hors ligne). Vous disposez d'un catalogue de **8 modèles** (`foundry_models.csv`) avec la taille, les exigences matérielles et les benchmarks de qualité. Votre mission : analyser le catalogue, trouver le meilleur modèle pour différents profils matériels et construire une recommandation de déploiement.
 
-!!! info "Mock Data"
-    This lab uses a mock model catalog CSV. The model names and sizes are representative of the models available in Foundry Local's catalog as of early 2026.
+!!! info "Données simulées"
+    Ce lab utilise un fichier CSV de catalogue de modèles simulé. Les noms et tailles des modèles sont représentatifs des modèles disponibles dans le catalogue de Foundry Local début 2026.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Pourquoi |
 |---|---|
-| Python 3.10+ | Run the analysis scripts |
-| `pandas` library | Data manipulation |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| Bibliothèque `pandas` | Manipulation des données |
 
 ```bash
 pip install pandas
@@ -73,41 +68,41 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-078/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-078/` de votre répertoire de travail.
 
-| File | Description | Download |
+| Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_foundry_local.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-078/broken_foundry_local.py) |
-| `foundry_models.csv` | 8-model catalog with sizes, hardware, and quality scores | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-078/foundry_models.csv) |
+| `broken_foundry_local.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-078/broken_foundry_local.py) |
+| `foundry_models.csv` | Catalogue de 8 modèles avec tailles, matériel et scores de qualité | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-078/foundry_models.csv) |
 
 ---
 
-## Step 1: Understand the Model Catalog
+## Étape 1 : Comprendre le catalogue de modèles
 
-Each model in the catalog has these attributes:
+Chaque modèle du catalogue possède ces attributs :
 
-| Column | Description |
+| Colonne | Description |
 |--------|-----------|
-| **model_name** | Model identifier (e.g., `phi-4-mini`, `qwen2.5-0.5b`) |
-| **size_gb** | Download size in gigabytes |
-| **parameters** | Number of model parameters (e.g., `3.8B`, `0.5B`) |
-| **hardware** | Required hardware: `cpu_only`, `gpu_recommended`, or `gpu_required` |
-| **quality_score** | Benchmark quality score (0.0–1.0) |
-| **use_case** | Primary use case: `chat`, `coding`, `embedding`, or `general` |
-| **quantization** | Quantization level: `q4`, `q8`, or `fp16` |
+| **model_name** | Identifiant du modèle (ex. : `phi-4-mini`, `qwen2.5-0.5b`) |
+| **size_gb** | Taille de téléchargement en gigaoctets |
+| **parameters** | Nombre de paramètres du modèle (ex. : `3.8B`, `0.5B`) |
+| **hardware** | Matériel requis : `cpu_only`, `gpu_recommended` ou `gpu_required` |
+| **quality_score** | Score de qualité benchmark (0.0–1.0) |
+| **use_case** | Cas d'usage principal : `chat`, `coding`, `embedding` ou `general` |
+| **quantization** | Niveau de quantification : `q4`, `q8` ou `fp16` |
 
 ---
 
-## Step 2: Load and Explore the Catalog
+## Étape 2 : Charger et explorer le catalogue
 
 ```python
 import pandas as pd
@@ -121,7 +116,7 @@ print(f"\nFull catalog:")
 print(df[["model_name", "size_gb", "parameters", "hardware", "quality_score"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total models: 8
@@ -131,7 +126,7 @@ Use cases: {'chat': 3, 'coding': 2, 'general': 2, 'embedding': 1}
 
 ---
 
-## Step 3: Find the Smallest Model
+## Étape 3 : Trouver le plus petit modèle
 
 ```python
 smallest = df.loc[df["size_gb"].idxmin()]
@@ -150,7 +145,7 @@ print(f"  Quality: {largest['quality_score']}")
 print(f"\nSize range: {smallest['size_gb']} GB – {largest['size_gb']} GB")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Smallest model: qwen2.5-0.5b (0.4 GB)
@@ -159,14 +154,14 @@ Smallest model: qwen2.5-0.5b (0.4 GB)
   Quality: 0.52
 ```
 
-!!! tip "Edge Deployment"
-    **qwen2.5-0.5b** at just **0.4 GB** is ideal for edge devices, IoT gateways, or machines with minimal storage. Despite its small size, it handles basic chat and summarization tasks reasonably well.
+!!! tip "Déploiement en périphérie"
+    **qwen2.5-0.5b** avec seulement **0.4 Go** est idéal pour les appareils en périphérie, les passerelles IoT ou les machines avec un stockage minimal. Malgré sa petite taille, il gère raisonnablement bien les tâches de base de conversation et de résumé.
 
 ---
 
-## Step 4: Identify CPU-Only Models
+## Étape 4 : Identifier les modèles CPU uniquement
 
-For air-gapped machines without GPUs:
+Pour les machines isolées sans GPU :
 
 ```python
 cpu_models = df[df["hardware"] == "cpu_only"]
@@ -183,12 +178,12 @@ print(f"GPU models avg quality: {gpu_models['quality_score'].mean():.2f}")
 print(f"Quality gap: {(gpu_models['quality_score'].mean() - cpu_models['quality_score'].mean()) * 100:.1f}pp")
 ```
 
-!!! warning "Quality Trade-off"
-    CPU-only models are smaller and run anywhere, but their quality scores are typically lower than GPU models. For production use cases requiring high accuracy, prefer GPU-recommended models with at least 4 GB VRAM.
+!!! warning "Compromis qualité"
+    Les modèles CPU uniquement sont plus petits et fonctionnent partout, mais leurs scores de qualité sont généralement inférieurs à ceux des modèles GPU. Pour les cas d'usage en production nécessitant une haute précision, préférez les modèles recommandés GPU avec au moins 4 Go de VRAM.
 
 ---
 
-## Step 5: Analyze by Use Case
+## Étape 5 : Analyser par cas d'usage
 
 ```python
 print("Models by use case:\n")
@@ -207,7 +202,7 @@ for use_case, group in df.groupby("use_case"):
 
 ---
 
-## Step 6: Build the Deployment Recommendation
+## Étape 6 : Construire la recommandation de déploiement
 
 ```python
 report = f"""# 📋 Foundry Local Deployment Recommendation
@@ -253,100 +248,100 @@ print("💾 Saved to lab-078/deployment_recommendation.md")
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-078/broken_foundry_local.py` contains **3 bugs** that produce incorrect model analysis. Can you find and fix them all?
+Le fichier `lab-078/broken_foundry_local.py` contient **3 bugs** qui produisent une analyse de modèles incorrecte. Pouvez-vous les trouver et les corriger tous ?
 
-Run the self-tests to see which ones fail:
+Exécutez les auto-tests pour voir lesquels échouent :
 
 ```bash
 python lab-078/broken_foundry_local.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Vous devriez voir **3 tests échoués**. Chaque test correspond à un bug :
 
-| Test | What it checks | Hint |
+| Test | Ce qu'il vérifie | Indice |
 |------|---------------|------|
-| Test 1 | Smallest model name | Should find min `size_gb`, not max |
-| Test 2 | CPU-only model count | Should filter `hardware == "cpu_only"`, not `"gpu_required"` |
-| Test 3 | Total model count | Should use `len(df)`, not a hardcoded value |
+| Test 1 | Nom du plus petit modèle | Devrait trouver le min de `size_gb`, pas le max |
+| Test 2 | Nombre de modèles CPU uniquement | Devrait filtrer `hardware == "cpu_only"`, pas `"gpu_required"` |
+| Test 3 | Nombre total de modèles | Devrait utiliser `len(df)`, pas une valeur codée en dur |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
-
----
-
-
-## 🧠 Knowledge Check
-
-??? question "**Q1 (Multiple Choice):** What makes Foundry Local different from cloud-based AI services?"
-
-    - A) It only supports Microsoft models
-    - B) It runs AI models entirely on local hardware with no internet required
-    - C) It requires an Azure subscription
-    - D) It only works on Linux
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It runs AI models entirely on local hardware with no internet required**
-
-        Foundry Local is a local inference runtime — models are downloaded once and run entirely offline. It uses an OpenAI-compatible API, making it a drop-in replacement for cloud endpoints. No API keys, no internet, no per-token costs.
-
-??? question "**Q2 (Multiple Choice):** Why does Foundry Local use an OpenAI-compatible API?"
-
-    - A) It's built by OpenAI
-    - B) It enables drop-in replacement — existing code that calls OpenAI APIs works without changes
-    - C) OpenAI requires all inference engines to use their API format
-    - D) It only runs OpenAI models
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It enables drop-in replacement — existing code that calls OpenAI APIs works without changes**
-
-        By exposing the same `/v1/chat/completions` endpoint format, Foundry Local lets developers switch from cloud to local inference by changing only the `base_url`. All existing SDKs, tools, and frameworks that speak the OpenAI API format work immediately.
-
-??? question "**Q3 (Run the Lab):** What is the smallest model in the catalog, and how large is it?"
-
-    Run the Step 3 analysis on [📥 `foundry_models.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-078/foundry_models.csv) to find the smallest model.
-
-    ??? success "✅ Reveal Answer"
-        **qwen2.5-0.5b at 0.4 GB**
-
-        The smallest model in the catalog is **qwen2.5-0.5b** with only **0.4 GB** download size and 0.5B parameters. It runs on CPU only and achieves a quality score of 0.52 — suitable for basic chat and edge deployments.
-
-??? question "**Q4 (Run the Lab):** How many models support CPU-only inference?"
-
-    Run the Step 4 analysis to filter models with `hardware == "cpu_only"`.
-
-    ??? success "✅ Reveal Answer"
-        **2 models**
-
-        Only **2 models** support CPU-only inference. These are the smallest models in the catalog, optimized with aggressive quantization (q4) to run without GPU acceleration. They're ideal for edge devices and air-gapped environments.
-
-??? question "**Q5 (Run the Lab):** How many total models are available in the Foundry Local catalog?"
-
-    Load the CSV and check the total row count.
-
-    ??? success "✅ Reveal Answer"
-        **8 models**
-
-        The Foundry Local catalog includes **8 models** across 4 use cases: chat (3), coding (2), general (2), and embedding (1). Hardware requirements range from CPU-only to GPU-required.
+Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est terminé !
 
 ---
 
-## Summary
 
-| Topic | What You Learned |
+## 🧠 Vérification des connaissances
+
+??? question "**Q1 (Choix multiple) :** Qu'est-ce qui différencie Foundry Local des services IA cloud ?"
+
+    - A) Il ne prend en charge que les modèles Microsoft
+    - B) Il exécute les modèles IA entièrement sur du matériel local sans internet requis
+    - C) Il nécessite un abonnement Azure
+    - D) Il ne fonctionne que sous Linux
+
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Il exécute les modèles IA entièrement sur du matériel local sans internet requis**
+
+        Foundry Local est un runtime d'inférence locale — les modèles sont téléchargés une fois et fonctionnent entièrement hors ligne. Il utilise une API compatible OpenAI, en faisant un remplacement direct des endpoints cloud. Pas de clés API, pas d'internet, pas de coûts par token.
+
+??? question "**Q2 (Choix multiple) :** Pourquoi Foundry Local utilise-t-il une API compatible OpenAI ?"
+
+    - A) Il est développé par OpenAI
+    - B) Il permet un remplacement direct — le code existant qui appelle les API OpenAI fonctionne sans modification
+    - C) OpenAI exige que tous les moteurs d'inférence utilisent leur format d'API
+    - D) Il n'exécute que des modèles OpenAI
+
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Il permet un remplacement direct — le code existant qui appelle les API OpenAI fonctionne sans modification**
+
+        En exposant le même format d'endpoint `/v1/chat/completions`, Foundry Local permet aux développeurs de passer du cloud à l'inférence locale en changeant uniquement la `base_url`. Tous les SDK, outils et frameworks existants qui parlent le format d'API OpenAI fonctionnent immédiatement.
+
+??? question "**Q3 (Exécutez le lab) :** Quel est le plus petit modèle du catalogue et quelle est sa taille ?"
+
+    Exécutez l'analyse de l'étape 3 sur [📥 `foundry_models.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-078/foundry_models.csv) pour trouver le plus petit modèle.
+
+    ??? success "✅ Révéler la réponse"
+        **qwen2.5-0.5b à 0.4 Go**
+
+        Le plus petit modèle du catalogue est **qwen2.5-0.5b** avec seulement **0.4 Go** de taille de téléchargement et 0.5B de paramètres. Il fonctionne en CPU uniquement et atteint un score de qualité de 0.52 — adapté aux conversations de base et aux déploiements en périphérie.
+
+??? question "**Q4 (Exécutez le lab) :** Combien de modèles supportent l'inférence CPU uniquement ?"
+
+    Exécutez l'analyse de l'étape 4 pour filtrer les modèles avec `hardware == "cpu_only"`.
+
+    ??? success "✅ Révéler la réponse"
+        **2 modèles**
+
+        Seuls **2 modèles** supportent l'inférence CPU uniquement. Ce sont les plus petits modèles du catalogue, optimisés avec une quantification agressive (q4) pour fonctionner sans accélération GPU. Ils sont idéaux pour les appareils en périphérie et les environnements isolés.
+
+??? question "**Q5 (Exécutez le lab) :** Combien de modèles au total sont disponibles dans le catalogue Foundry Local ?"
+
+    Chargez le CSV et vérifiez le nombre total de lignes.
+
+    ??? success "✅ Révéler la réponse"
+        **8 modèles**
+
+        Le catalogue Foundry Local comprend **8 modèles** répartis en 4 cas d'usage : chat (3), coding (2), general (2) et embedding (1). Les exigences matérielles vont de CPU uniquement à GPU requis.
+
+---
+
+## Résumé
+
+| Sujet | Ce que vous avez appris |
 |-------|-----------------|
-| Foundry Local | Microsoft's local inference runtime — free, offline, no API keys |
+| Foundry Local | Runtime d'inférence locale de Microsoft — gratuit, hors ligne, sans clés API |
 | Installation | `winget install Microsoft.FoundryLocal` + `foundry model run` |
-| OpenAI Compatibility | Drop-in replacement via `http://localhost:5273/v1` |
-| Model Catalog | 8 models from 0.4 GB to multi-GB, CPU to GPU-required |
-| Smallest Model | qwen2.5-0.5b at 0.4 GB — runs on CPU, ideal for edge |
-| Hardware Profiles | CPU-only (2 models), GPU-recommended (4), GPU-required (2) |
+| Compatibilité OpenAI | Remplacement direct via `http://localhost:5273/v1` |
+| Catalogue de modèles | 8 modèles de 0.4 Go à plusieurs Go, CPU à GPU requis |
+| Plus petit modèle | qwen2.5-0.5b à 0.4 Go — fonctionne en CPU, idéal pour la périphérie |
+| Profils matériels | CPU uniquement (2 modèles), GPU recommandé (4), GPU requis (2) |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (deploy agents using Foundry models)
-- **[Lab 071](lab-071-context-caching.md)** — Context Caching (optimize local inference with prompt caching)
-- **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (compare local vs. cloud inference costs)
-- **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (use Foundry Local as the inference backend for MAF agents)
+- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (déployer des agents utilisant des modèles Foundry)
+- **[Lab 071](lab-071-context-caching.md)** — Mise en cache du contexte (optimiser l'inférence locale avec la mise en cache des prompts)
+- **[Lab 038](lab-038-cost-optimization.md)** — Optimisation des coûts IA (comparer les coûts d'inférence locale vs. cloud)
+- **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (utiliser Foundry Local comme backend d'inférence pour les agents MAF)

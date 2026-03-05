@@ -1,45 +1,40 @@
 ---
 tags: [vector-db, rag, azure, production, L300]
 ---
-# Lab 039: Vector Database Comparison
+# Lab 039 : Comparaison des bases de données vectorielles
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">📚 RAG</a></span>
-  <span><strong>Time:</strong> ~50 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — All options have free tiers or local mode</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/rag/">📚 RAG</a></span>
+  <span><strong>Durée :</strong> ~50 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Free</span> — Toutes les options ont des niveaux gratuits ou un mode local</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- Understand the key differences between major vector databases
-- Compare **pgvector**, **Chroma**, **Qdrant**, and **Azure AI Search** on the same task
-- Evaluate each on: setup complexity, query speed, filtering, cloud integration
-- Choose the right vector database for your agent's requirements
+- Comprendre les différences clés entre les principales bases de données vectorielles
+- Comparer **pgvector**, **Chroma**, **Qdrant** et **Azure AI Search** sur la même tâche
+- Évaluer chacune sur : complexité de mise en place, vitesse de requête, filtrage, intégration cloud
+- Choisir la bonne base de données vectorielle pour les besoins de votre agent
 
 ---
 
 ## Introduction
 
-Choosing a vector database is one of the most consequential architecture decisions for a RAG-based agent. The "best" choice depends on your team's existing stack, scale requirements, filtering needs, and cloud strategy.
+Le choix d'une base de données vectorielle est l'une des décisions d'architecture les plus importantes pour un agent basé sur RAG. Le « meilleur » choix dépend de la stack existante de votre équipe, des exigences de mise à l'échelle, des besoins de filtrage et de la stratégie cloud.
 
-**The candidates:**
+**Les candidats :**
 
-| Database | Type | Free option | Best for |
+| Base de données | Type | Option gratuite | Idéal pour |
 |----------|------|-------------|---------|
-| **pgvector** | PostgreSQL extension | Azure free tier / local | Teams already using PostgreSQL |
-| **Chroma** | Embedded / server | Fully open-source | Local development, small projects |
-| **Qdrant** | Dedicated vector DB | Qdrant Cloud free tier | High-scale production, advanced filtering |
-| **Azure AI Search** | Azure service | Free tier (1 index) | Azure-native, hybrid search, enterprise |
+| **pgvector** | Extension PostgreSQL | Azure free tier / local | Équipes utilisant déjà PostgreSQL |
+| **Chroma** | Embarqué / serveur | Entièrement open-source | Développement local, petits projets |
+| **Qdrant** | BD vectorielle dédiée | Qdrant Cloud free tier | Production à grande échelle, filtrage avancé |
+| **Azure AI Search** | Service Azure | Free tier (1 index) | Azure natif, recherche hybride, entreprise |
 
 ---
 
-## Prerequisites
+## Prérequis
 
 ```bash
 # Install all clients
@@ -49,17 +44,17 @@ pip install chromadb qdrant-client openai
 pip install azure-search-documents
 ```
 
-No API keys needed for Chroma (local) and Qdrant (local mode).
-GitHub Token required for embeddings:
+Pas de clés API nécessaires pour Chroma (local) et Qdrant (mode local).
+GitHub Token requis pour les embeddings :
 ```bash
 export GITHUB_TOKEN=<your PAT>
 ```
 
 ---
 
-## Setup: Shared Embedding Function
+## Configuration : Fonction d'embedding partagée
 
-All four tests use the same OutdoorGear product data and the same embedding model:
+Les quatre tests utilisent les mêmes données produit OutdoorGear et le même modèle d'embedding :
 
 ```python
 # shared.py
@@ -92,9 +87,9 @@ def product_text(p: dict) -> str:
 
 ---
 
-## Option A: Chroma (Local, No Setup)
+## Option A : Chroma (local, sans configuration)
 
-Chroma is the easiest way to get started — pure Python, runs in-memory or on-disk:
+Chroma est la façon la plus simple de démarrer — pur Python, s'exécute en mémoire ou sur disque :
 
 ```python
 # option_a_chroma.py
@@ -149,9 +144,9 @@ for doc in filtered["documents"][0]:
 
 ---
 
-## Option B: Qdrant (Local Server Mode)
+## Option B : Qdrant (mode serveur local)
 
-Qdrant offers advanced filtering and scales to hundreds of millions of vectors:
+Qdrant offre un filtrage avancé et passe à l'échelle à des centaines de millions de vecteurs :
 
 ```bash
 # Run Qdrant locally with Docker (or use Qdrant Cloud free tier)
@@ -234,9 +229,9 @@ for r in filtered:
 
 ---
 
-## Option C: pgvector (Azure PostgreSQL or Local)
+## Option C : pgvector (Azure PostgreSQL ou local)
 
-See [Lab 031](lab-031-pgvector-semantic-search.md) for the full pgvector setup. Quick comparison:
+Voir le [Lab 031](lab-031-pgvector-semantic-search.md) pour la configuration complète de pgvector. Comparaison rapide :
 
 ```python
 # option_c_pgvector_query.py
@@ -274,9 +269,9 @@ for name, category, price, sim in cur.fetchall():
 
 ---
 
-## Option D: Azure AI Search (Hybrid Search)
+## Option D : Azure AI Search (recherche hybride)
 
-Azure AI Search uniquely supports **hybrid search**: vector + BM25 keyword search combined with semantic reranking:
+Azure AI Search prend en charge de manière unique la **recherche hybride** : recherche vectorielle + BM25 par mots-clés combinée avec un re-classement sémantique :
 
 ```python
 # option_d_azure_search.py
@@ -318,72 +313,72 @@ for r in results:
 
 ---
 
-## Decision Framework
+## Cadre de décision
 
 ```
-Start here:
+Commencez ici :
          ↓
-Already using PostgreSQL?
-  → YES → Use pgvector (Lab 031)
-  → NO  ↓
+Utilisez-vous déjà PostgreSQL ?
+  → OUI → Utilisez pgvector (Lab 031)
+  → NON ↓
 
-Need Azure-native + hybrid search?
-  → YES → Azure AI Search
-  → NO  ↓
+Besoin d'Azure natif + recherche hybride ?
+  → OUI → Azure AI Search
+  → NON ↓
 
-Local dev / prototype?
-  → YES → Chroma (zero setup)
-  → NO  ↓
+Développement local / prototype ?
+  → OUI → Chroma (zéro configuration)
+  → NON ↓
 
-Need advanced filtering + high scale?
-  → YES → Qdrant
-  → NO  → Chroma or pgvector
+Besoin de filtrage avancé + grande échelle ?
+  → OUI → Qdrant
+  → NON → Chroma ou pgvector
 ```
 
 ---
 
-## Comparison Table
+## Tableau comparatif
 
 | | pgvector | Chroma | Qdrant | Azure AI Search |
 |---|---|---|---|---|
-| **Setup** | Medium (DB needed) | Minimal | Easy (Docker) | Medium (Azure) |
-| **Local dev** | ✅ (Docker) | ✅ (in-memory) | ✅ (Docker) | ❌ (Azure only) |
-| **Hybrid search** | ✅ (manual) | ❌ | ✅ | ✅ (built-in) |
-| **Filtering** | SQL WHERE | Basic metadata | Advanced | Full OData |
-| **Scale** | Moderate (< 1M) | Small (< 100K) | High (> 100M) | High (enterprise) |
-| **Azure integration** | ✅ (managed PG) | ❌ | Partial | ✅ (native) |
-| **Cost (free tier)** | Free tier PG | Free | Qdrant Cloud free | 1 index free |
+| **Configuration** | Moyenne (BD nécessaire) | Minimale | Facile (Docker) | Moyenne (Azure) |
+| **Dev local** | ✅ (Docker) | ✅ (en mémoire) | ✅ (Docker) | ❌ (Azure uniquement) |
+| **Recherche hybride** | ✅ (manuelle) | ❌ | ✅ | ✅ (intégrée) |
+| **Filtrage** | SQL WHERE | Métadonnées basiques | Avancé | OData complet |
+| **Échelle** | Modérée (< 1M) | Petite (< 100K) | Grande (> 100M) | Grande (entreprise) |
+| **Intégration Azure** | ✅ (PG managé) | ❌ | Partielle | ✅ (native) |
+| **Coût (niveau gratuit)** | Free tier PG | Gratuit | Qdrant Cloud free | 1 index gratuit |
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Quiz de connaissances
 
-??? question "1. What is hybrid search, and why is it often better than pure vector search?"
-    **Hybrid search** combines **vector (semantic) search** with **keyword (BM25) search** and ranks results using both signals. Vector search excels at semantic understanding ("warm shelter" → sleeping bag) but can miss exact matches (a specific product ID). BM25 is excellent for exact keyword matches but misses synonyms. Combining them outperforms either alone, especially for product names, SKUs, and specialized terminology.
+??? question "1. Qu'est-ce que la recherche hybride et pourquoi est-elle souvent meilleure que la recherche vectorielle pure ?"
+    La **recherche hybride** combine la **recherche vectorielle (sémantique)** avec la **recherche par mots-clés (BM25)** et classe les résultats en utilisant les deux signaux. La recherche vectorielle excelle dans la compréhension sémantique (« abri chaud » → sac de couchage) mais peut manquer les correspondances exactes (un identifiant produit spécifique). BM25 est excellent pour les correspondances exactes de mots-clés mais manque les synonymes. Les combiner surpasse l'un ou l'autre seul, en particulier pour les noms de produits, les SKU et la terminologie spécialisée.
 
-??? question "2. Why would you choose pgvector over a dedicated vector database like Qdrant?"
-    If you already have **PostgreSQL as your primary database**, pgvector adds vector search without adding another service to operate, maintain, and pay for. The data lives alongside your relational data — you can JOIN product records with their embeddings in a single query. For most applications under 1M vectors, pgvector's performance is excellent. Choose Qdrant when you need > 100M vectors or very advanced filtering.
+??? question "2. Pourquoi choisiriez-vous pgvector plutôt qu'une base de données vectorielle dédiée comme Qdrant ?"
+    Si vous avez déjà **PostgreSQL comme base de données principale**, pgvector ajoute la recherche vectorielle sans ajouter un autre service à exploiter, maintenir et payer. Les données cohabitent avec vos données relationnelles — vous pouvez faire un JOIN entre les enregistrements produit et leurs embeddings dans une seule requête. Pour la plupart des applications de moins de 1M de vecteurs, les performances de pgvector sont excellentes. Choisissez Qdrant quand vous avez besoin de > 100M de vecteurs ou d'un filtrage très avancé.
 
-??? question "3. What is the IVFFlat index in pgvector, and when should you use HNSW instead?"
-    **IVFFlat** (Inverted File Index with Flat quantization): fast to build, uses less memory, good for datasets that don't change frequently. Uses approximate search — lists parameter controls recall/speed trade-off. **HNSW** (Hierarchical Navigable Small World): better recall, faster queries, but higher memory usage and slower to build. Use IVFFlat for datasets < 1M that don't change much; use HNSW for frequently updated datasets or when recall is critical. Both require pgvector ≥ 0.5.0.
-
----
-
-## Summary
-
-For the **OutdoorGear learning hub scenario** (< 10K products, Azure infrastructure, team knows SQL):
-
-**Recommended: pgvector** on Azure Database for PostgreSQL Flexible Server.
-
-- No new service to learn
-- SQL + vector in one query
-- Free tier available
-- Production-ready with Lab 031 migrations
+??? question "3. Qu'est-ce que l'index IVFFlat dans pgvector et quand devriez-vous utiliser HNSW à la place ?"
+    **IVFFlat** (Inverted File Index with Flat quantization) : rapide à construire, utilise moins de mémoire, bon pour les jeux de données qui ne changent pas fréquemment. Utilise une recherche approximative — le paramètre lists contrôle le compromis rappel/vitesse. **HNSW** (Hierarchical Navigable Small World) : meilleur rappel, requêtes plus rapides, mais utilisation mémoire plus élevée et construction plus lente. Utilisez IVFFlat pour les jeux de données < 1M qui ne changent pas beaucoup ; utilisez HNSW pour les jeux de données fréquemment mis à jour ou quand le rappel est critique. Les deux nécessitent pgvector ≥ 0.5.0.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **Build the pgvector setup:** → [Lab 031 — pgvector Semantic Search](lab-031-pgvector-semantic-search.md)
-- **Full RAG application:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
-- **Enterprise RAG with evaluation:** → [Lab 042 — Enterprise RAG](lab-042-enterprise-rag.md)
+Pour le **scénario du hub d'apprentissage OutdoorGear** (< 10K produits, infrastructure Azure, équipe connaissant SQL) :
+
+**Recommandé : pgvector** sur Azure Database for PostgreSQL Flexible Server.
+
+- Pas de nouveau service à apprendre
+- SQL + vectoriel dans une seule requête
+- Niveau gratuit disponible
+- Prêt pour la production avec les migrations du Lab 031
+
+---
+
+## Prochaines étapes
+
+- **Construire la configuration pgvector :** → [Lab 031 — Recherche sémantique pgvector](lab-031-pgvector-semantic-search.md)
+- **Application RAG complète :** → [Lab 022 — RAG avec GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
+- **RAG d'entreprise avec évaluation :** → [Lab 042 — RAG d'entreprise](lab-042-enterprise-rag.md)

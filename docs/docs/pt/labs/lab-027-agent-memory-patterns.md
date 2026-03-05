@@ -4,49 +4,44 @@ tags: [memory, python, free, github-models]
 # Lab 027: Agent Memory Patterns
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code</a> / <a href="../paths/semantic-kernel/">SK</a></span>
-  <span><strong>Time:</strong> ~35 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free (local)</span></span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">Pro Code</a> / <a href="../paths/semantic-kernel/">SK</a></span>
+  <span><strong>Tempo:</strong> ~35 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito (local)</span></span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- The **4 types of agent memory** and when to use each
-- **In-context memory** (conversation history management)
-- **External memory** (vector store + SQLite for structured data)
-- **Episodic memory** (what happened in past sessions)
-- Building a **memory-aware agent** that remembers user preferences
+- Os **4 tipos de memória de agente** e quando usar cada um
+- **Memória em contexto** (gerenciamento do histórico de conversas)
+- **Memória externa** (vector store + SQLite para dados estruturados)
+- **Memória episódica** (o que aconteceu em sessões anteriores)
+- Construindo um **agente com memória** que lembra as preferências do usuário
 
 ---
 
-## Introduction
+## Introdução
 
-Without memory, every agent conversation starts from zero. A customer service agent that forgets the customer's name mid-conversation, or an assistant that can't recall what you decided last week, creates a frustrating experience.
+Sem memória, toda conversa com o agente começa do zero. Um agente de atendimento ao cliente que esquece o nome do cliente no meio da conversa, ou um assistente que não consegue lembrar o que você decidiu na semana passada, cria uma experiência frustrante.
 
-The four memory types:
+Os quatro tipos de memória:
 
-| Type | Storage | Lifetime | Example |
-|------|---------|----------|---------|
-| **In-context** | LLM context window | Single request | Conversation history |
-| **External semantic** | Vector DB | Persistent | Past support tickets |
-| **External structured** | SQL DB | Persistent | User preferences, order history |
-| **Episodic** | Key-value / file | Session or persistent | "Last session we discussed X" |
+| Tipo | Armazenamento | Duração | Exemplo |
+|------|---------------|---------|---------|
+| **Em contexto** | Janela de contexto do LLM | Requisição única | Histórico de conversas |
+| **Semântica externa** | Banco de dados vetorial | Persistente | Tickets de suporte anteriores |
+| **Estruturada externa** | Banco de dados SQL | Persistente | Preferências do usuário, histórico de pedidos |
+| **Episódica** | Chave-valor / arquivo | Sessão ou persistente | "Na última sessão discutimos X" |
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 - Python 3.11+
 - `pip install openai chromadb`
 - `GITHUB_TOKEN` set
 
-!!! tip "Sample data included"
+!!! tip "Dados de exemplo incluídos"
     This lab uses `orders.csv` and `products.csv` from the repo.
     ```bash
     curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/orders.csv
@@ -55,11 +50,11 @@ The four memory types:
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: In-context memory (conversation history)
+### Passo 1: Memória em contexto (histórico de conversas)
 
-The simplest memory — just keep the message history. The challenge: context windows have limits.
+A memória mais simples — apenas mantenha o histórico de mensagens. O desafio: janelas de contexto têm limites.
 
 ```python
 import os
@@ -121,9 +116,9 @@ print(agent.chat("I have a $300 budget and I'm planning a 3-day trip."))
 print(agent.chat("What's my name and what did I say my budget was?"))  # Tests memory
 ```
 
-### Step 2: Structured memory with SQLite
+### Passo 2: Memória estruturada com SQLite
 
-For facts that need precision (preferences, orders, settings), use a database, not the context window.
+Para fatos que precisam de precisão (preferências, pedidos, configurações), use um banco de dados, não a janela de contexto.
 
 ```python
 import sqlite3, json
@@ -189,9 +184,9 @@ prefs = store.get_preferences("alex-001")
 print(f"Alex's preferences: {prefs}")
 ```
 
-### Step 3: Semantic episodic memory with ChromaDB
+### Passo 3: Memória episódica semântica com ChromaDB
 
-ChromaDB is a free, local vector database — no Docker needed.
+ChromaDB é um banco de dados vetorial gratuito e local — sem necessidade de Docker.
 
 ```python
 import chromadb
@@ -243,9 +238,9 @@ for m in memories:
     print(f"📝 {m}")
 ```
 
-### Step 4: Memory-aware agent
+### Passo 4: Agente com memória
 
-Combine all three memory types into one agent:
+Combine os três tipos de memória em um único agente:
 
 ```python
 class MemoryAwareAgent:
@@ -289,7 +284,7 @@ print(agent.chat("I'm thinking about doing a Rainier summit this summer — what
 
 ---
 
-## Memory Pattern Decision Guide
+## Guia de Decisão de Padrões de Memória
 
 ```
 Is the data needed only in this conversation?
@@ -307,7 +302,7 @@ Is it a summary of past sessions?
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Agentic RAG uses retrieval memory:** → [Lab 026 — Agentic RAG](lab-026-agentic-rag.md)
-- **SK has built-in memory abstractions:** → [Lab 023 — SK Plugins & Memory](lab-023-sk-plugins-memory.md)
+- **RAG agêntico usa memória de recuperação:** → [Lab 026 — Agentic RAG](lab-026-agentic-rag.md)
+- **SK possui abstrações de memória integradas:** → [Lab 023 — SK Plugins & Memory](lab-023-sk-plugins-memory.md)

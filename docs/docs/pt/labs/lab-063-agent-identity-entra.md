@@ -4,82 +4,77 @@ tags: [security, entra-id, obo, identity, oauth, enterprise]
 # Lab 063: Agent Identity — Entra OBO Flow & Least Privilege
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~75 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock scenario data (no Entra tenant required)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Caminho:</strong> Todos os caminhos</span>
+  <span><strong>Tempo:</strong> ~75 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados de cenário simulados (não é necessário um tenant Entra)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O Que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- How the **OAuth 2.0 On-Behalf-Of (OBO) flow** passes user identity through an agent chain
-- The difference between **delegated permissions** (act as user) and **application permissions** (act as app)
-- Identify **compliance violations** in agent permission configurations
-- Apply **least-privilege principles** to agent identity design
-- Implement **human-in-the-loop** gates for high-risk agent actions
-- Analyze a **15-scenario dataset** across 4 agents for security posture
+- Como o **fluxo OAuth 2.0 On-Behalf-Of (OBO)** passa a identidade do usuário através de uma cadeia de agentes
+- A diferença entre **permissões delegadas** (agir como usuário) e **permissões de aplicativo** (agir como aplicativo)
+- Identificar **violações de conformidade** nas configurações de permissões de agentes
+- Aplicar **princípios de menor privilégio** ao design de identidade de agentes
+- Implementar **portões de aprovação humana (human-in-the-loop)** para ações de agentes de alto risco
+- Analisar um **conjunto de dados de 15 cenários** em 4 agentes para postura de segurança
 
 ---
 
-## Introduction
+## Introdução
 
-When agents access enterprise resources — reading email, querying databases, modifying SharePoint — they need an identity. **How** they authenticate determines the security posture of your entire system.
+Quando agentes acessam recursos empresariais — lendo e-mails, consultando bancos de dados, modificando SharePoint — eles precisam de uma identidade. **Como** eles se autenticam determina a postura de segurança de todo o seu sistema.
 
-The **On-Behalf-Of (OBO) flow** ensures agents act with the user's identity and permissions, maintaining the principle of least privilege. The alternative — **client_credentials** (application permissions) — gives the agent its own identity with potentially broad access, bypassing user-level authorization.
+O **fluxo On-Behalf-Of (OBO)** garante que os agentes ajam com a identidade e permissões do usuário, mantendo o princípio do menor privilégio. A alternativa — **client_credentials** (permissões de aplicativo) — dá ao agente sua própria identidade com acesso potencialmente amplo, contornando a autorização em nível de usuário.
 
-This lab analyzes 15 real-world scenarios to show why OBO is the default choice and when client_credentials creates compliance risks.
+Este lab analisa 15 cenários do mundo real para mostrar por que OBO é a escolha padrão e quando client_credentials cria riscos de conformidade.
 
-### The Scenarios
+### Os Cenários
 
-You'll examine **15 scenarios** across **4 agents**, each with different permission configurations:
+Você examinará **15 cenários** em **4 agentes**, cada um com diferentes configurações de permissões:
 
-| Agent | Description | Scenarios |
-|-------|-------------|-----------|
-| **MailAgent** | Reads and sends email on behalf of users | 4 |
-| **FileAgent** | Accesses SharePoint and OneDrive files | 4 |
-| **CalendarAgent** | Manages calendar events and scheduling | 4 |
-| **AdminAgent** | Performs directory and compliance operations | 3 |
+| Agente | Descrição | Cenários |
+|--------|-----------|----------|
+| **MailAgent** | Lê e envia e-mails em nome dos usuários | 4 |
+| **FileAgent** | Acessa arquivos do SharePoint e OneDrive | 4 |
+| **CalendarAgent** | Gerencia eventos de calendário e agendamentos | 4 |
+| **AdminAgent** | Realiza operações de diretório e conformidade | 3 |
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 ```bash
 pip install pandas
 ```
 
-This lab analyzes pre-computed scenario data — no Entra ID tenant, Azure subscription, or application registration required. To implement OBO flows in production, you would need an Entra ID tenant with app registrations.
+Este lab analisa dados de cenários pré-computados — não é necessário tenant Entra ID, assinatura Azure ou registro de aplicativo. Para implementar fluxos OBO em produção, você precisaria de um tenant Entra ID com registros de aplicativos.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-063/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-063/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_identity.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/broken_identity.py) |
-| `identity_scenarios.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_identity.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/broken_identity.py) |
+| `identity_scenarios.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv) |
 
 ---
 
-## Part 1: Understanding OBO Flow
+## Parte 1: Entendendo o Fluxo OBO
 
-### Step 1: OBO vs client_credentials
+### Etapa 1: OBO vs client_credentials
 
-The two primary authentication flows for agents:
+Os dois principais fluxos de autenticação para agentes:
 
 ```
 OBO Flow (Delegated — Recommended):
@@ -91,26 +86,26 @@ Client Credentials (Application — Use with caution):
   Agent acts AS ITSELF — app permissions apply (often broader)
 ```
 
-Key concepts:
+Conceitos-chave:
 
-| Concept | Description |
-|---------|-------------|
-| **OBO (On-Behalf-Of)** | Agent exchanges user token for downstream API token, preserving user identity |
-| **Delegated permissions** | Agent acts as the signed-in user — limited to user's own access |
-| **Application permissions** | Agent acts as itself — can access all users' data (e.g., read ALL mailboxes) |
-| **Least privilege** | Grant only the minimum permissions needed for the task |
-| **Human-in-the-loop** | Require explicit user approval for high-risk actions |
+| Conceito | Descrição |
+|----------|-----------|
+| **OBO (On-Behalf-Of)** | O agente troca o token do usuário por um token de API downstream, preservando a identidade do usuário |
+| **Permissões delegadas** | O agente age como o usuário autenticado — limitado ao acesso do próprio usuário |
+| **Permissões de aplicativo** | O agente age como ele mesmo — pode acessar dados de todos os usuários (ex.: ler TODAS as caixas de correio) |
+| **Menor privilégio** | Conceder apenas as permissões mínimas necessárias para a tarefa |
+| **Human-in-the-loop** | Exigir aprovação explícita do usuário para ações de alto risco |
 
-!!! warning "Why OBO Matters"
-    With client_credentials, a MailAgent could read **every user's** email — not just the requesting user's. OBO ensures the agent can only access what the user themselves can access. This is the difference between a controlled tool and a security liability.
+!!! warning "Por Que o OBO É Importante"
+    Com client_credentials, um MailAgent poderia ler o e-mail de **todos os usuários** — não apenas o do usuário solicitante. O OBO garante que o agente só pode acessar o que o próprio usuário pode acessar. Esta é a diferença entre uma ferramenta controlada e uma vulnerabilidade de segurança.
 
 ---
 
-## Part 2: Load Scenario Data
+## Parte 2: Carregar Dados de Cenários
 
-### Step 2: Load [📥 `identity_scenarios.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv)
+### Etapa 2: Carregar [📥 `identity_scenarios.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv)
 
-The scenario dataset contains 15 identity configurations across 4 agents:
+O conjunto de dados de cenários contém 15 configurações de identidade em 4 agentes:
 
 ```python
 # identity_analysis.py
@@ -124,7 +119,7 @@ print(f"Auth flows: {scenarios['auth_flow'].unique().tolist()}")
 print(scenarios[["scenario_id", "agent", "auth_flow", "risk_level", "compliant"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Scenarios: 15
@@ -151,9 +146,9 @@ scenario_id          agent          auth_flow risk_level  compliant
 
 ---
 
-## Part 3: Compliance Analysis
+## Parte 3: Análise de Conformidade
 
-### Step 3: Identify compliance violations
+### Etapa 3: Identificar violações de conformidade
 
 ```python
 # Compliance violations
@@ -163,7 +158,7 @@ print("\nViolation details:")
 print(violations[["scenario_id", "agent", "auth_flow", "risk_level", "description"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Compliance violations: 4/15
@@ -176,8 +171,8 @@ scenario_id          agent          auth_flow risk_level                        
         S14      AdminAgent  client_credentials       high  Directory read with app permissions instead of OBO
 ```
 
-!!! warning "Critical Finding"
-    All 4 compliance violations use **client_credentials** — not OBO. Three are critical-risk (S05, S07, S10) because they grant broad access to all users' data. The pattern is clear: client_credentials without scoping creates compliance violations.
+!!! warning "Descoberta Crítica"
+    Todas as 4 violações de conformidade usam **client_credentials** — não OBO. Três são de risco crítico (S05, S07, S10) porque concedem acesso amplo aos dados de todos os usuários. O padrão é claro: client_credentials sem escopo cria violações de conformidade.
 
 ```python
 # Verify: do all violations use client_credentials?
@@ -186,7 +181,7 @@ print(f"\nAuth flows in violations: {violation_flows}")
 print(f"All violations use client_credentials: {violation_flows == ['client_credentials']}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Auth flows in violations: ['client_credentials']
@@ -195,9 +190,9 @@ All violations use client_credentials: True
 
 ---
 
-## Part 4: Risk Level Analysis
+## Parte 4: Análise de Nível de Risco
 
-### Step 4: Analyze risk distribution
+### Etapa 4: Analisar a distribuição de riscos
 
 ```python
 # Risk level distribution
@@ -213,7 +208,7 @@ print(f"\nCritical-risk scenarios: {len(critical)}")
 print(critical[["scenario_id", "agent", "auth_flow", "description"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Risk level distribution:
@@ -229,14 +224,14 @@ scenario_id          agent          auth_flow                                   
         S10   CalendarAgent  client_credentials  Modify any user's calendar without delegation
 ```
 
-!!! info "Risk Pattern"
-    All 3 critical-risk scenarios involve agents with **client_credentials accessing user data** (mail, files, calendar) without user context. The AdminAgent's client_credentials scenario (S14) is high-risk but not critical because directory reads are less sensitive than accessing individual users' data.
+!!! info "Padrão de Risco"
+    Todos os 3 cenários de risco crítico envolvem agentes com **client_credentials acessando dados de usuários** (e-mail, arquivos, calendário) sem contexto de usuário. O cenário de client_credentials do AdminAgent (S14) é de alto risco, mas não crítico, porque leituras de diretório são menos sensíveis do que acessar dados individuais dos usuários.
 
 ---
 
-## Part 5: OBO Flow Analysis
+## Parte 5: Análise do Fluxo OBO
 
-### Step 5: OBO adoption rate
+### Etapa 5: Taxa de adoção do OBO
 
 ```python
 # OBO vs client_credentials
@@ -256,7 +251,7 @@ for agent in scenarios["agent"].unique():
     print(f"  {agent:>15}: {agent_obo}/{agent_total} OBO")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 OBO flow: 11/15 = 73.3%
@@ -269,22 +264,22 @@ OBO usage by agent:
      AdminAgent: 2/3 OBO
 ```
 
-73.3% of scenarios use OBO — good, but the 26.7% using client_credentials accounts for **all** compliance violations. Every agent has at least one client_credentials scenario that should be reviewed.
+73,3% dos cenários usam OBO — bom, mas os 26,7% usando client_credentials são responsáveis por **todas** as violações de conformidade. Cada agente tem pelo menos um cenário de client_credentials que deveria ser revisado.
 
 ---
 
-## Part 6: Remediation Strategy
+## Parte 6: Estratégia de Remediação
 
-### Step 6: Fix compliance violations
+### Etapa 6: Corrigir violações de conformidade
 
-For each violation, the remediation is to switch from client_credentials to OBO:
+Para cada violação, a remediação é mudar de client_credentials para OBO:
 
-| Scenario | Current | Fix | Notes |
-|----------|---------|-----|-------|
-| S05 | App reads all mail | OBO — read only requesting user's mail | Eliminates cross-user data access |
-| S07 | App accesses all SharePoint | OBO — access only user's authorized sites | Respects site permissions |
-| S10 | App modifies any calendar | OBO — modify only user's own calendar | Prevents cross-user modification |
-| S14 | App directory read | OBO — directory read as user | Limits scope to user's directory view |
+| Cenário | Atual | Correção | Observações |
+|---------|-------|----------|-------------|
+| S05 | App lê todos os e-mails | OBO — ler apenas o e-mail do usuário solicitante | Elimina acesso cruzado de dados entre usuários |
+| S07 | App acessa todo o SharePoint | OBO — acessar apenas os sites autorizados do usuário | Respeita as permissões do site |
+| S10 | App modifica qualquer calendário | OBO — modificar apenas o calendário do próprio usuário | Impede modificação cruzada entre usuários |
+| S14 | App lê diretório | OBO — leitura de diretório como usuário | Limita o escopo à visão de diretório do usuário |
 
 ```python
 # Compliance improvement after remediation
@@ -295,9 +290,9 @@ print(f"After remediation:  {total}/{total} = 100.0%")
 print(f"\nAction: Convert {total - compliant_count} client_credentials scenarios to OBO")
 ```
 
-### Step 7: Human-in-the-loop for high-risk actions
+### Etapa 7: Human-in-the-loop para ações de alto risco
 
-Even with OBO, some actions warrant explicit user approval:
+Mesmo com OBO, algumas ações exigem aprovação explícita do usuário:
 
 ```python
 # High-risk + medium scenarios that should have human-in-the-loop
@@ -306,102 +301,102 @@ print(f"Scenarios needing human-in-the-loop review: {len(hitl_candidates)}")
 print(hitl_candidates[["scenario_id", "agent", "risk_level", "description"]].to_string(index=False))
 ```
 
-!!! info "Defense in Depth"
-    OBO + least privilege + human-in-the-loop form three layers of defense. OBO ensures correct identity. Least privilege limits what that identity can do. Human-in-the-loop adds a confirmation step for sensitive actions — even if the agent has permission, the user explicitly approves.
+!!! info "Defesa em Profundidade"
+    OBO + menor privilégio + human-in-the-loop formam três camadas de defesa. O OBO garante a identidade correta. O menor privilégio limita o que essa identidade pode fazer. O human-in-the-loop adiciona uma etapa de confirmação para ações sensíveis — mesmo que o agente tenha permissão, o usuário aprova explicitamente.
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-063/broken_identity.py` has **3 bugs** in the identity analysis functions. Run the self-tests:
+O arquivo `lab-063/broken_identity.py` tem **3 bugs** nas funções de análise de identidade. Execute os autotestes:
 
 ```bash
 python lab-063/broken_identity.py
 ```
 
-You should see **3 failed tests**:
+Você deverá ver **3 testes falhando**:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Compliance violation count | Are you counting `compliant == True` instead of `compliant == False`? |
-| Test 2 | Critical-risk count | Are you filtering for `risk_level == "high"` instead of `risk_level == "critical"`? |
-| Test 3 | OBO percentage | Are you filtering for `auth_flow == "client_credentials"` instead of `auth_flow == "obo"`? |
+| Teste | O que ele verifica | Dica |
+|-------|-------------------|------|
+| Teste 1 | Contagem de violações de conformidade | Você está contando `compliant == True` em vez de `compliant == False`? |
+| Teste 2 | Contagem de risco crítico | Você está filtrando por `risk_level == "high"` em vez de `risk_level == "critical"`? |
+| Teste 3 | Percentual de OBO | Você está filtrando por `auth_flow == "client_credentials"` em vez de `auth_flow == "obo"`? |
 
-Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
-
----
-
-
-## 🧠 Knowledge Check
-
-??? question "**Q1 (Multiple Choice):** What is the purpose of the OAuth 2.0 On-Behalf-Of (OBO) flow?"
-
-    - A) To give agents their own independent identity with full admin access
-    - B) To pass the user's identity through the agent chain so the agent acts as the user
-    - C) To bypass authentication entirely for faster agent execution
-    - D) To create a new user account for each agent instance
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) To pass the user's identity through the agent chain so the agent acts as the user**
-
-        The OBO flow exchanges the user's token for a downstream API token, preserving the user's identity and permissions. The agent acts **as** the user — it can only access what the user can access. This is the foundation of least-privilege agent identity: the agent inherits the user's authorization scope, not a broad application-level scope.
-
-??? question "**Q2 (Multiple Choice):** What is the key difference between delegated and application permissions?"
-
-    - A) Delegated is faster; application is more accurate
-    - B) Delegated acts as the signed-in user; application acts as the app itself
-    - C) Delegated requires no authentication; application requires OAuth
-    - D) There is no practical difference — they are interchangeable
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Delegated acts as the signed-in user; application acts as the app itself**
-
-        With **delegated permissions** (OBO), the agent acts as the user — it can read the user's own email but not other users' email. With **application permissions** (client_credentials), the agent acts as itself with app-level access — it could read ALL users' email. This distinction is critical: all 4 compliance violations in the benchmark use application permissions where delegated permissions should have been used.
-
-??? question "**Q3 (Run the Lab):** How many compliance violations exist in the 15 scenarios?"
-
-    Calculate `(scenarios["compliant"] == False).sum()`.
-
-    ??? success "✅ Reveal Answer"
-        **4 violations (S05, S07, S10, S14)**
-
-        Four scenarios are non-compliant: S05 (MailAgent reads all users' mail), S07 (FileAgent accesses all SharePoint), S10 (CalendarAgent modifies any calendar), and S14 (AdminAgent directory read with app permissions). All four use client_credentials instead of OBO, granting broader access than necessary.
-
-??? question "**Q4 (Run the Lab):** How many scenarios are classified as critical risk?"
-
-    Calculate `(scenarios["risk_level"] == "critical").sum()`.
-
-    ??? success "✅ Reveal Answer"
-        **3 scenarios (S05, S07, S10)**
-
-        Three scenarios are critical-risk: S05 (MailAgent), S07 (FileAgent), and S10 (CalendarAgent). All three involve agents using client_credentials to access user data (mail, files, calendar) without user context. S14 (AdminAgent) is high-risk but not critical because directory reads are less sensitive than accessing individual users' personal data.
-
-??? question "**Q5 (Run the Lab):** What percentage of scenarios use the OBO flow?"
-
-    Calculate `(scenarios["auth_flow"] == "obo").sum() / len(scenarios) * 100`.
-
-    ??? success "✅ Reveal Answer"
-        **73.3% (11/15)**
-
-        11 of 15 scenarios use OBO — a solid majority, but the remaining 4 (26.7%) using client_credentials account for all compliance violations. The remediation path is clear: convert all 4 client_credentials scenarios to OBO, bringing compliance from 73.3% to 100%. Every agent (MailAgent, FileAgent, CalendarAgent, AdminAgent) has at least one scenario that needs conversion.
+Corrija todos os 3 bugs e execute novamente até ver `🎉 All 3 tests passed`.
 
 ---
 
-## Summary
 
-| Topic | What You Learned |
-|-------|-----------------|
-| OBO Flow | Passes user identity through agent chain — agent acts as user |
-| Delegated vs Application | Delegated = user scope; Application = app-wide scope |
-| Compliance | 4/15 violations — all from client_credentials, not OBO |
-| Risk Levels | 3 critical-risk scenarios — all client_credentials accessing user data |
-| OBO Adoption | 73.3% OBO — the 26.7% client_credentials causes all violations |
-| Remediation | Convert client_credentials to OBO; add human-in-the-loop for high risk |
+## 🧠 Verificação de Conhecimento
+
+??? question "**Q1 (Múltipla Escolha):** Qual é o propósito do fluxo OAuth 2.0 On-Behalf-Of (OBO)?"
+
+    - A) Dar aos agentes sua própria identidade independente com acesso total de administrador
+    - B) Passar a identidade do usuário através da cadeia de agentes para que o agente aja como o usuário
+    - C) Ignorar a autenticação completamente para execução mais rápida do agente
+    - D) Criar uma nova conta de usuário para cada instância de agente
+
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Passar a identidade do usuário através da cadeia de agentes para que o agente aja como o usuário**
+
+        O fluxo OBO troca o token do usuário por um token de API downstream, preservando a identidade e as permissões do usuário. O agente age **como** o usuário — ele só pode acessar o que o usuário pode acessar. Esta é a base da identidade de agente com menor privilégio: o agente herda o escopo de autorização do usuário, não um escopo amplo de nível de aplicativo.
+
+??? question "**Q2 (Múltipla Escolha):** Qual é a diferença principal entre permissões delegadas e de aplicativo?"
+
+    - A) Delegada é mais rápida; aplicativo é mais preciso
+    - B) Delegada age como o usuário autenticado; aplicativo age como o próprio aplicativo
+    - C) Delegada não requer autenticação; aplicativo requer OAuth
+    - D) Não há diferença prática — são intercambiáveis
+
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Delegada age como o usuário autenticado; aplicativo age como o próprio aplicativo**
+
+        Com **permissões delegadas** (OBO), o agente age como o usuário — pode ler o e-mail do próprio usuário, mas não o de outros usuários. Com **permissões de aplicativo** (client_credentials), o agente age como ele mesmo com acesso em nível de aplicativo — poderia ler o e-mail de TODOS os usuários. Esta distinção é crítica: todas as 4 violações de conformidade no benchmark usam permissões de aplicativo onde permissões delegadas deveriam ter sido usadas.
+
+??? question "**Q3 (Execute o Lab):** Quantas violações de conformidade existem nos 15 cenários?"
+
+    Calcule `(scenarios["compliant"] == False).sum()`.
+
+    ??? success "✅ Revelar Resposta"
+        **4 violações (S05, S07, S10, S14)**
+
+        Quatro cenários não estão em conformidade: S05 (MailAgent lê e-mails de todos os usuários), S07 (FileAgent acessa todo o SharePoint), S10 (CalendarAgent modifica qualquer calendário) e S14 (AdminAgent leitura de diretório com permissões de aplicativo). Todos os quatro usam client_credentials em vez de OBO, concedendo acesso mais amplo do que o necessário.
+
+??? question "**Q4 (Execute o Lab):** Quantos cenários são classificados como risco crítico?"
+
+    Calcule `(scenarios["risk_level"] == "critical").sum()`.
+
+    ??? success "✅ Revelar Resposta"
+        **3 cenários (S05, S07, S10)**
+
+        Três cenários são de risco crítico: S05 (MailAgent), S07 (FileAgent) e S10 (CalendarAgent). Todos os três envolvem agentes usando client_credentials para acessar dados de usuários (e-mail, arquivos, calendário) sem contexto de usuário. S14 (AdminAgent) é de alto risco, mas não crítico, porque leituras de diretório são menos sensíveis do que acessar dados pessoais individuais dos usuários.
+
+??? question "**Q5 (Execute o Lab):** Qual percentual dos cenários usa o fluxo OBO?"
+
+    Calcule `(scenarios["auth_flow"] == "obo").sum() / len(scenarios) * 100`.
+
+    ??? success "✅ Revelar Resposta"
+        **73,3% (11/15)**
+
+        11 de 15 cenários usam OBO — uma maioria sólida, mas os 4 restantes (26,7%) usando client_credentials são responsáveis por todas as violações de conformidade. O caminho de remediação é claro: converter todos os 4 cenários de client_credentials para OBO, elevando a conformidade de 73,3% para 100%. Cada agente (MailAgent, FileAgent, CalendarAgent, AdminAgent) tem pelo menos um cenário que precisa de conversão.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **[Lab 062](lab-062-ondevice-phi-silica.md)** — On-Device Agents with Phi Silica (privacy through on-device inference)
-- **[Lab 061](lab-061-slm-phi4-mini.md)** — SLMs with Phi-4 Mini (another approach to privacy-first AI)
-- **[Lab 042](lab-042-enterprise-rag.md)** — Enterprise RAG (applying identity controls to data retrieval)
+| Tópico | O Que Você Aprendeu |
+|--------|---------------------|
+| Fluxo OBO | Passa a identidade do usuário pela cadeia de agentes — o agente age como usuário |
+| Delegada vs Aplicativo | Delegada = escopo do usuário; Aplicativo = escopo de todo o aplicativo |
+| Conformidade | 4/15 violações — todas de client_credentials, não de OBO |
+| Níveis de Risco | 3 cenários de risco crítico — todos client_credentials acessando dados de usuários |
+| Adoção do OBO | 73,3% OBO — os 26,7% de client_credentials causam todas as violações |
+| Remediação | Converter client_credentials para OBO; adicionar human-in-the-loop para alto risco |
+
+---
+
+## Próximos Passos
+
+- **[Lab 062](lab-062-ondevice-phi-silica.md)** — Agentes On-Device com Phi Silica (privacidade através de inferência no dispositivo)
+- **[Lab 061](lab-061-slm-phi4-mini.md)** — SLMs com Phi-4 Mini (outra abordagem para IA com privacidade em primeiro lugar)
+- **[Lab 042](lab-042-enterprise-rag.md)** — Enterprise RAG (aplicando controles de identidade à recuperação de dados)

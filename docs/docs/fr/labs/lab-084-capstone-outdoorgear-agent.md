@@ -1,56 +1,51 @@
 ---
 tags: [capstone, full-stack, rag, mcp, guardrails, observability, production]
 ---
-# Lab 084: Capstone — Build the Complete OutdoorGear Agent
+# Lab 084 : Capstone — Construire l'agent OutdoorGear complet
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~180 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> (uses mock data and local tools)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~180 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> (utilise des données simulées et des outils locaux)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous allez construire
 
+Un **agent de service client OutdoorGear** complet et prêt pour la production qui combine tous les concepts majeurs des labs précédents en un système unifié :
 
+- **Pipeline RAG** — Récupérer les connaissances produits et articles de support depuis un magasin vectoriel
+- **Outils MCP** — Exposer les capacités de recherche, commande et inventaire comme outils Model Context Protocol
+- **Orchestration Agent Framework** — Câbler la boucle d'agent avec Microsoft Agent Framework
+- **Garde-fous** — Filtrage d'entrée (détection de PII, prévention de jailbreak) et filtrage de sortie (contrôle de sujet, exigences de citation)
+- **Observabilité** — Traces OpenTelemetry pour chaque itération de la boucle d'agent, appel LLM et invocation d'outil
+- **Configuration de déploiement** — Dockerfile et docker-compose pour des environnements reproductibles
 
-## What You'll Build
-
-A complete, production-ready **OutdoorGear customer service agent** that combines every major concept from previous labs into one unified system:
-
-- **RAG pipeline** — Retrieve product knowledge and support articles from a vector store
-- **MCP tools** — Expose search, order, and inventory capabilities as Model Context Protocol tools
-- **Agent Framework orchestration** — Wire the agent loop with Microsoft Agent Framework
-- **Guardrails** — Input filtering (PII detection, jailbreak prevention) and output filtering (topic control, citation requirements)
-- **Observability** — OpenTelemetry traces for every agent loop iteration, LLM call, and tool invocation
-- **Deployment config** — Dockerfile and docker-compose for reproducible environments
-
-When finished, you'll have a single project that a user can query conversationally — "Do you have the Alpine Explorer Tent in stock?" — and watch the agent search products, check inventory, apply guardrails, and return a cited answer, all observable through traces.
+Une fois terminé, vous aurez un projet unique qu'un utilisateur peut interroger de manière conversationnelle — « Avez-vous l'Alpine Explorer Tent en stock ? » — et observer l'agent rechercher des produits, vérifier l'inventaire, appliquer les garde-fous et retourner une réponse citée, le tout observable via des traces.
 
 ---
 
-## Prerequisites
+## Prérequis
 
-This capstone draws from concepts introduced in earlier labs. Complete (or review) these before starting:
+Ce capstone s'appuie sur des concepts introduits dans les labs précédents. Complétez (ou révisez) ceux-ci avant de commencer :
 
-| Lab | Topic | What It Contributes |
+| Lab | Sujet | Ce qu'il apporte |
 |-----|-------|---------------------|
-| [Lab 022](lab-022-rag-github-models-pgvector.md) | RAG with Vector Search | Embedding, chunking, and retrieval patterns |
-| [Lab 020](lab-020-mcp-server-python.md) | MCP Server (Python) | Tool definition, JSON-RPC transport, tool registration |
-| [Lab 076](lab-076-microsoft-agent-framework.md) | Microsoft Agent Framework | Agent loop, system prompts, tool binding |
-| [Lab 082](lab-082-agent-guardrails.md) | Agent Guardrails | Input/output rails, PII redaction, jailbreak prevention |
-| [Lab 049](lab-049-foundry-iq-agent-tracing.md) | Agent Tracing | OpenTelemetry spans, token counting, latency tracking |
-| [Lab 028](lab-028-deploy-mcp-azure.md) | Deploy MCP to Azure | Dockerfile, environment config, container deployment |
+| [Lab 022](lab-022-rag-github-models-pgvector.md) | RAG avec recherche vectorielle | Patterns d'embedding, découpage et récupération |
+| [Lab 020](lab-020-mcp-server-python.md) | Serveur MCP (Python) | Définition d'outils, transport JSON-RPC, enregistrement d'outils |
+| [Lab 076](lab-076-microsoft-agent-framework.md) | Microsoft Agent Framework | Boucle d'agent, prompts système, liaison d'outils |
+| [Lab 082](lab-082-agent-guardrails.md) | Garde-fous des agents | Rails d'entrée/sortie, masquage de PII, prévention de jailbreak |
+| [Lab 049](lab-049-foundry-iq-agent-tracing.md) | Traçage d'agents | Spans OpenTelemetry, comptage de tokens, suivi de latence |
+| [Lab 028](lab-028-deploy-mcp-azure.md) | Déployer MCP sur Azure | Dockerfile, configuration d'environnement, déploiement en conteneur |
 
-!!! info "No Cloud Services Required"
-    This lab uses **mock data** and **in-memory stores** throughout. You do not need API keys, cloud subscriptions, or external services. All components run locally.
+!!! info "Aucun service cloud requis"
+    Ce lab utilise des **données simulées** et des **magasins en mémoire** tout au long. Vous n'avez pas besoin de clés API, d'abonnements cloud ou de services externes. Tous les composants fonctionnent localement.
 
 ---
 
-## Architecture Overview
+## Vue d'ensemble de l'architecture
 
-The full system follows this data flow:
+Le système complet suit ce flux de données :
 
 ```
 ┌──────────┐     ┌──────────────┐     ┌───────────────────────┐     ┌──────────────┐
@@ -77,24 +72,24 @@ The full system follows this data flow:
                                       └───────────────────────┘
 ```
 
-| Layer | Responsibility |
+| Couche | Responsabilité |
 |-------|---------------|
-| **AG-UI Frontend** | Conversational interface — sends user messages, renders agent responses |
-| **Agent (MAF)** | Orchestrates the agent loop — receives messages, calls LLM, invokes tools, returns responses |
-| **MCP Tools** | Structured tool interface — search_products, get_order_status, check_inventory |
-| **Data Layer** | RAG vector store (in-memory) + products CSV + knowledge base JSON |
-| **Guardrails** | Input rails (PII detection, jailbreak prevention) + Output rails (topic control, citation requirements) |
-| **Observability** | OpenTelemetry spans for agent loop, LLM calls, and tool invocations; token counting and latency tracking |
+| **Frontend AG-UI** | Interface conversationnelle — envoie les messages utilisateur, affiche les réponses de l'agent |
+| **Agent (MAF)** | Orchestre la boucle d'agent — reçoit les messages, appelle le LLM, invoque les outils, retourne les réponses |
+| **Outils MCP** | Interface d'outils structurée — search_products, get_order_status, check_inventory |
+| **Couche de données** | Magasin vectoriel RAG (en mémoire) + CSV produits + base de connaissances JSON |
+| **Garde-fous** | Rails d'entrée (détection PII, prévention jailbreak) + Rails de sortie (contrôle de sujet, exigences de citation) |
+| **Observabilité** | Spans OpenTelemetry pour la boucle d'agent, les appels LLM et les invocations d'outils ; comptage de tokens et suivi de latence |
 
 ---
 
-## Phase 1: Data Layer (~30 min)
+## Phase 1 : Couche de données (~30 min)
 
-Set up the OutdoorGear knowledge base that the agent will query.
+Mettez en place la base de connaissances OutdoorGear que l'agent interrogera.
 
-### Step 1.1: Create the Product Catalog
+### Étape 1.1 : Créer le catalogue de produits
 
-Create a `products.csv` file with the OutdoorGear product catalog:
+Créez un fichier `products.csv` avec le catalogue de produits OutdoorGear :
 
 ```csv
 product_id,name,category,price,in_stock,description
@@ -108,9 +103,9 @@ P007,TrekLite Carbon Poles,accessories,89.99,true,"Ultralight carbon fiber trekk
 P008,Basecamp 4-Person Tent,tents,499.99,true,"4-person 3-season tent with two vestibules and gear loft. Weight: 6.8 lbs."
 ```
 
-### Step 1.2: Create the Knowledge Base
+### Étape 1.2 : Créer la base de connaissances
 
-Create a `knowledge_base.json` file with support articles:
+Créez un fichier `knowledge_base.json` avec les articles de support :
 
 ```json
 [
@@ -142,9 +137,9 @@ Create a `knowledge_base.json` file with support articles:
 ]
 ```
 
-### Step 1.3: Build the In-Memory Vector Store
+### Étape 1.3 : Construire le magasin vectoriel en mémoire
 
-Create `data_layer.py` — a simple in-memory embedding and retrieval module:
+Créez `data_layer.py` — un module simple d'embedding et de récupération en mémoire :
 
 ```python
 import json
@@ -201,21 +196,21 @@ def load_products(path: str) -> List[Dict]:
     return products
 ```
 
-!!! tip "Production Note"
-    This uses a trivial bag-of-words embedding for simplicity. In a real system, replace `_simple_embedding` with a call to an embedding model (e.g., `text-embedding-3-small` from Lab 022).
+!!! tip "Note production"
+    Ceci utilise un embedding trivial de type sac-de-mots pour la simplicité. Dans un système réel, remplacez `_simple_embedding` par un appel à un modèle d'embedding (ex. : `text-embedding-3-small` du Lab 022).
 
 ---
 
-## Phase 2: MCP Tool Server (~30 min)
+## Phase 2 : Serveur d'outils MCP (~30 min)
 
-Build the MCP tools that expose product search, order lookup, and inventory checks.
+Construisez les outils MCP qui exposent la recherche de produits, la consultation de commandes et la vérification d'inventaire.
 
-!!! note "Pattern Reference"
-    These tools follow the MCP server patterns from **[Lab 020](lab-020-mcp-server-python.md)**.
+!!! note "Référence de pattern"
+    Ces outils suivent les patterns de serveur MCP du **[Lab 020](lab-020-mcp-server-python.md)**.
 
-### Step 2.1: Define the MCP Tools
+### Étape 2.1 : Définir les outils MCP
 
-Create `mcp_tools.py`:
+Créez `mcp_tools.py` :
 
 ```python
 from data_layer import KnowledgeStore, load_products
@@ -314,7 +309,7 @@ TOOLS = {
 }
 ```
 
-### Step 2.2: Verify the Tools
+### Étape 2.2 : Vérifier les outils
 
 ```python
 # Quick smoke test
@@ -332,7 +327,7 @@ if __name__ == "__main__":
     print(f"  {check_inventory('P004')}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 === search_products('tent') ===
@@ -349,16 +344,16 @@ if __name__ == "__main__":
 
 ---
 
-## Phase 3: Agent Core (~30 min)
+## Phase 3 : Cœur de l'agent (~30 min)
 
-Wire up the agent with a system prompt, tool connections, and conversation memory.
+Câblez l'agent avec un prompt système, des connexions d'outils et une mémoire conversationnelle.
 
-!!! note "Pattern Reference"
-    This follows the agent framework patterns from **[Lab 076](lab-076-microsoft-agent-framework.md)**.
+!!! note "Référence de pattern"
+    Ceci suit les patterns du framework d'agent du **[Lab 076](lab-076-microsoft-agent-framework.md)**.
 
-### Step 3.1: Define the System Prompt
+### Étape 3.1 : Définir le prompt système
 
-Create `agent_core.py`:
+Créez `agent_core.py` :
 
 ```python
 SYSTEM_PROMPT = """You are OutdoorGear Assistant, a helpful customer service agent for OutdoorGear Inc.,
@@ -380,7 +375,7 @@ an outdoor recreation equipment retailer.
 """
 ```
 
-### Step 3.2: Add Conversation Memory
+### Étape 3.2 : Ajouter la mémoire conversationnelle
 
 ```python
 from typing import List, Dict
@@ -405,7 +400,7 @@ class ConversationMemory:
         self.history = []
 ```
 
-### Step 3.3: Build the Agent Loop
+### Étape 3.3 : Construire la boucle d'agent
 
 ```python
 from mcp_tools import TOOLS
@@ -460,7 +455,7 @@ class OutdoorGearAgent:
         return response
 ```
 
-### Step 3.4: Test the Agent Core
+### Étape 3.4 : Tester le cœur de l'agent
 
 ```python
 if __name__ == "__main__":
@@ -481,16 +476,16 @@ if __name__ == "__main__":
 
 ---
 
-## Phase 4: Guardrails (~20 min)
+## Phase 4 : Garde-fous (~20 min)
 
-Add safety layers that intercept inputs and outputs.
+Ajoutez des couches de sécurité qui interceptent les entrées et sorties.
 
-!!! note "Pattern Reference"
-    These guardrails follow the patterns from **[Lab 082](lab-082-agent-guardrails.md)**.
+!!! note "Référence de pattern"
+    Ces garde-fous suivent les patterns du **[Lab 082](lab-082-agent-guardrails.md)**.
 
-### Step 4.1: Input Guardrails
+### Étape 4.1 : Garde-fous d'entrée
 
-Create `guardrails.py`:
+Créez `guardrails.py` :
 
 ```python
 import re
@@ -548,7 +543,7 @@ class InputGuardrails:
         return {"action": "passed"}
 ```
 
-### Step 4.2: Output Guardrails
+### Étape 4.2 : Garde-fous de sortie
 
 ```python
 class OutputGuardrails:
@@ -583,9 +578,9 @@ class OutputGuardrails:
         return {"action": "passed"}
 ```
 
-### Step 4.3: Integrate Guardrails into the Agent
+### Étape 4.3 : Intégrer les garde-fous dans l'agent
 
-Add this method to `OutdoorGearAgent`:
+Ajoutez cette méthode à `OutdoorGearAgent` :
 
 ```python
 from guardrails import InputGuardrails, OutputGuardrails
@@ -617,7 +612,7 @@ class GuardedAgent(OutdoorGearAgent):
         return response
 ```
 
-### Step 4.4: Test the Guardrails
+### Étape 4.4 : Tester les garde-fous
 
 ```python
 if __name__ == "__main__":
@@ -637,16 +632,16 @@ if __name__ == "__main__":
 
 ---
 
-## Phase 5: Observability (~20 min)
+## Phase 5 : Observabilité (~20 min)
 
-Add OpenTelemetry tracing to the agent so every step is observable.
+Ajoutez le traçage OpenTelemetry à l'agent pour que chaque étape soit observable.
 
-!!! note "Pattern Reference"
-    These tracing patterns follow **[Lab 049](lab-049-foundry-iq-agent-tracing.md)**.
+!!! note "Référence de pattern"
+    Ces patterns de traçage suivent le **[Lab 049](lab-049-foundry-iq-agent-tracing.md)**.
 
-### Step 5.1: Set Up the Tracer
+### Étape 5.1 : Configurer le traceur
 
-Create `observability.py`:
+Créez `observability.py` :
 
 ```python
 import time
@@ -709,9 +704,9 @@ class SimpleTracer:
 tracer = SimpleTracer()
 ```
 
-### Step 5.2: Instrument the Agent
+### Étape 5.2 : Instrumenter l'agent
 
-Add tracing to the agent loop, LLM calls, and tool invocations:
+Ajoutez le traçage à la boucle d'agent, aux appels LLM et aux invocations d'outils :
 
 ```python
 class ObservableAgent(GuardedAgent):
@@ -780,22 +775,22 @@ class ObservableAgent(GuardedAgent):
         return response
 ```
 
-!!! tip "OpenTelemetry Span Kinds"
-    | Kind | When to Use |
+!!! tip "Types de spans OpenTelemetry"
+    | Type | Quand l'utiliser |
     |------|-------------|
-    | `SERVER` | Incoming request (agent loop entry point) |
-    | `CLIENT` | Outgoing call to external service (LLM API, tool call) |
-    | `INTERNAL` | In-process work (guardrails, memory retrieval) |
+    | `SERVER` | Requête entrante (point d'entrée de la boucle d'agent) |
+    | `CLIENT` | Appel sortant vers un service externe (API LLM, appel d'outil) |
+    | `INTERNAL` | Travail interne au processus (garde-fous, récupération de mémoire) |
 
 ---
 
-## Phase 6: Integration Test (~20 min)
+## Phase 6 : Test d'intégration (~20 min)
 
-Test the complete system end-to-end with 5 scenarios that exercise every layer.
+Testez le système complet de bout en bout avec 5 scénarios qui exercent chaque couche.
 
-### Step 6.1: Define Test Scenarios
+### Étape 6.1 : Définir les scénarios de test
 
-Create `integration_test.py`:
+Créez `integration_test.py` :
 
 ```python
 from agent_core import ObservableAgent
@@ -879,13 +874,13 @@ if __name__ == "__main__":
     run_integration_tests()
 ```
 
-### Step 6.2: Run the Tests
+### Étape 6.2 : Exécuter les tests
 
 ```bash
 python integration_test.py
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 ──────────────────────────────────────────────────
@@ -927,19 +922,19 @@ Results: 5/5 scenarios passed
 ✅ All integration tests passed!
 ```
 
-!!! success "Checkpoint"
-    If all 5 scenarios pass, your agent has a working data layer, MCP tools, guardrails, and observability. Every component is connected.
+!!! success "Point de contrôle"
+    Si les 5 scénarios passent, votre agent dispose d'une couche de données fonctionnelle, d'outils MCP, de garde-fous et d'observabilité. Tous les composants sont connectés.
 
 ---
 
-## Phase 7: Deployment Config (~10 min)
+## Phase 7 : Configuration de déploiement (~10 min)
 
-Prepare the project for deployment with Docker.
+Préparez le projet pour le déploiement avec Docker.
 
-!!! note "Pattern Reference"
-    These deployment patterns follow **[Lab 028](lab-028-deploy-mcp-azure.md)**.
+!!! note "Référence de pattern"
+    Ces patterns de déploiement suivent le **[Lab 028](lab-028-deploy-mcp-azure.md)**.
 
-### Step 7.1: Create the Dockerfile
+### Étape 7.1 : Créer le Dockerfile
 
 ```dockerfile
 FROM python:3.11-slim
@@ -961,7 +956,7 @@ ENV LOG_LEVEL=INFO
 CMD ["python", "integration_test.py"]
 ```
 
-### Step 7.2: Create docker-compose.yml
+### Étape 7.2 : Créer docker-compose.yml
 
 ```yaml
 version: "3.8"
@@ -987,7 +982,7 @@ services:
     restart: unless-stopped
 ```
 
-### Step 7.3: Create requirements.txt
+### Étape 7.3 : Créer requirements.txt
 
 ```text
 # Core (no external dependencies for the mock version)
@@ -1000,102 +995,102 @@ services:
 # uvicorn>=0.23
 ```
 
-!!! tip "Production Note"
-    The mock version has zero external dependencies. When you replace the mock LLM with a real model, uncomment the production dependencies and add your API configuration.
+!!! tip "Note production"
+    La version simulée n'a aucune dépendance externe. Lorsque vous remplacerez le LLM simulé par un vrai modèle, décommentez les dépendances de production et ajoutez votre configuration API.
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** Which layer handles PII detection in the OutdoorGear agent?"
+??? question "**Q1 (Choix multiple) :** Quelle couche gère la détection de PII dans l'agent OutdoorGear ?"
 
-    - A) The MCP tool server
-    - B) The agent framework orchestrator
-    - C) The guardrails input filter
-    - D) The observability tracer
+    - A) Le serveur d'outils MCP
+    - B) L'orchestrateur du framework d'agent
+    - C) Le filtre d'entrée des garde-fous
+    - D) Le traceur d'observabilité
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) The guardrails input filter**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C) Le filtre d'entrée des garde-fous**
 
-        PII detection runs as an **input rail** — it inspects the user message *before* it reaches the agent or LLM. The `InputGuardrails.check()` method uses regex patterns to detect SSNs, emails, phone numbers, and credit card numbers, then redacts them before the message is forwarded.
+        La détection de PII s'exécute comme un **rail d'entrée** — il inspecte le message utilisateur *avant* qu'il n'atteigne l'agent ou le LLM. La méthode `InputGuardrails.check()` utilise des patterns regex pour détecter les NSS, e-mails, numéros de téléphone et numéros de carte de crédit, puis les masque avant que le message ne soit transmis.
 
-??? question "**Q2 (Multiple Choice):** Why separate MCP tools from the agent logic?"
+??? question "**Q2 (Choix multiple) :** Pourquoi séparer les outils MCP de la logique de l'agent ?"
 
-    - A) MCP tools are faster than inline code
-    - B) It makes the code look more professional
-    - C) Reusability across agents and independent scaling of tool servers
-    - D) MCP is required by the agent framework
+    - A) Les outils MCP sont plus rapides que le code intégré
+    - B) Ça rend le code plus professionnel
+    - C) Réutilisabilité entre agents et mise à l'échelle indépendante des serveurs d'outils
+    - D) MCP est requis par le framework d'agent
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) Reusability across agents and independent scaling of tool servers**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C) Réutilisabilité entre agents et mise à l'échelle indépendante des serveurs d'outils**
 
-        MCP tools are standalone services with well-defined interfaces. The same `search_products` tool can be used by a customer service agent, a sales dashboard agent, or a recommendation agent — without duplicating code. Tool servers can also be scaled independently (e.g., scale inventory checks during a sale without scaling the entire agent).
+        Les outils MCP sont des services autonomes avec des interfaces bien définies. Le même outil `search_products` peut être utilisé par un agent de service client, un agent de tableau de bord commercial ou un agent de recommandation — sans dupliquer le code. Les serveurs d'outils peuvent aussi être mis à l'échelle indépendamment (ex. : mettre à l'échelle les vérifications d'inventaire pendant une vente sans mettre à l'échelle l'agent entier).
 
-??? question "**Q3 (Multiple Choice):** What OpenTelemetry span kind is used for LLM calls?"
+??? question "**Q3 (Choix multiple) :** Quel type de span OpenTelemetry est utilisé pour les appels LLM ?"
 
     - A) SERVER
     - B) PRODUCER
     - C) CLIENT
     - D) INTERNAL
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) CLIENT**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C) CLIENT**
 
-        LLM calls are outgoing requests from the agent to an external service (the LLM API), so they use **CLIENT** span kind per OpenTelemetry semantic conventions. `SERVER` is for incoming requests (the agent's own entry point). `INTERNAL` is for in-process work like guardrail checks.
+        Les appels LLM sont des requêtes sortantes de l'agent vers un service externe (l'API LLM), donc ils utilisent le type de span **CLIENT** selon les conventions sémantiques OpenTelemetry. `SERVER` est pour les requêtes entrantes (le point d'entrée propre de l'agent). `INTERNAL` est pour le travail interne au processus comme les vérifications de garde-fous.
 
-??? question "**Q4 (Multiple Choice):** Why add a system prompt persona to the agent?"
+??? question "**Q4 (Choix multiple) :** Pourquoi ajouter un persona de prompt système à l'agent ?"
 
-    - A) It makes the agent respond faster
-    - B) Consistency in tone and scope control over what the agent will and won't discuss
-    - C) It is required by the LLM API
-    - D) It replaces the need for guardrails
+    - A) Ça rend l'agent plus rapide dans ses réponses
+    - B) Cohérence du ton et contrôle du périmètre de ce que l'agent va et ne va pas discuter
+    - C) C'est requis par l'API LLM
+    - D) Ça remplace le besoin de garde-fous
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Consistency in tone and scope control over what the agent will and won't discuss**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Cohérence du ton et contrôle du périmètre de ce que l'agent va et ne va pas discuter**
 
-        The system prompt establishes the agent's identity ("OutdoorGear Assistant"), defines its capabilities, and sets behavioral guidelines. This ensures consistent, on-brand responses and constrains the agent to its domain. However, a system prompt alone is not sufficient for safety — guardrails provide runtime enforcement that the system prompt cannot guarantee.
+        Le prompt système établit l'identité de l'agent (« OutdoorGear Assistant »), définit ses capacités et fixe des directives comportementales. Cela garantit des réponses cohérentes et conformes à la marque et contraint l'agent à son domaine. Cependant, un prompt système seul n'est pas suffisant pour la sécurité — les garde-fous fournissent une application en temps réel que le prompt système ne peut pas garantir.
 
-??? question "**Q5 (Multiple Choice):** What's the deployment benefit of Docker for the OutdoorGear agent?"
+??? question "**Q5 (Choix multiple) :** Quel est l'avantage de Docker pour le déploiement de l'agent OutdoorGear ?"
 
-    - A) Docker makes the agent respond faster
-    - B) Docker is the only way to deploy Python applications
-    - C) Reproducible environment across dev, staging, and production
-    - D) Docker automatically adds guardrails
+    - A) Docker rend l'agent plus rapide dans ses réponses
+    - B) Docker est le seul moyen de déployer des applications Python
+    - C) Environnement reproductible entre développement, staging et production
+    - D) Docker ajoute automatiquement des garde-fous
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) Reproducible environment across dev, staging, and production**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C) Environnement reproductible entre développement, staging et production**
 
-        Docker packages the agent, its dependencies, data files, and configuration into a single container image. This image runs identically on a developer's laptop, in a CI/CD pipeline, and in production — eliminating "works on my machine" issues. Combined with docker-compose, it also orchestrates multi-service setups (agent + observability collector).
+        Docker encapsule l'agent, ses dépendances, fichiers de données et configuration dans une seule image conteneur. Cette image s'exécute de manière identique sur le portable d'un développeur, dans un pipeline CI/CD et en production — éliminant les problèmes de « ça marche sur ma machine ». Combiné avec docker-compose, il orchestre aussi les configurations multi-services (agent + collecteur d'observabilité).
 
 ---
 
-## Summary
+## Résumé
 
-Each phase of this capstone maps directly to a previous lab:
+Chaque phase de ce capstone correspond directement à un lab précédent :
 
-| Phase | What You Built | Source Lab |
+| Phase | Ce que vous avez construit | Lab source |
 |-------|---------------|------------|
-| Phase 1: Data Layer | Product catalog, knowledge base, vector store | [Lab 022 — RAG](lab-022-rag-github-models-pgvector.md) |
-| Phase 2: MCP Tools | search_products, get_order_status, check_inventory | [Lab 020 — MCP Server](lab-020-mcp-server-python.md) |
-| Phase 3: Agent Core | System prompt, memory, agent loop | [Lab 076 — Agent Framework](lab-076-microsoft-agent-framework.md) |
-| Phase 4: Guardrails | PII redaction, jailbreak prevention, topic control | [Lab 082 — Guardrails](lab-082-agent-guardrails.md) |
-| Phase 5: Observability | Spans, token counting, latency tracking | [Lab 049 — Tracing](lab-049-foundry-iq-agent-tracing.md) |
-| Phase 6: Integration Test | 5 end-to-end scenarios | All of the above |
-| Phase 7: Deployment | Dockerfile, docker-compose, env config | [Lab 028 — Deploy](lab-028-deploy-mcp-azure.md) |
+| Phase 1 : Couche de données | Catalogue produits, base de connaissances, magasin vectoriel | [Lab 022 — RAG](lab-022-rag-github-models-pgvector.md) |
+| Phase 2 : Outils MCP | search_products, get_order_status, check_inventory | [Lab 020 — Serveur MCP](lab-020-mcp-server-python.md) |
+| Phase 3 : Cœur de l'agent | Prompt système, mémoire, boucle d'agent | [Lab 076 — Agent Framework](lab-076-microsoft-agent-framework.md) |
+| Phase 4 : Garde-fous | Masquage de PII, prévention de jailbreak, contrôle de sujet | [Lab 082 — Garde-fous](lab-082-agent-guardrails.md) |
+| Phase 5 : Observabilité | Spans, comptage de tokens, suivi de latence | [Lab 049 — Traçage](lab-049-foundry-iq-agent-tracing.md) |
+| Phase 6 : Test d'intégration | 5 scénarios de bout en bout | Tous les précédents |
+| Phase 7 : Déploiement | Dockerfile, docker-compose, config d'environnement | [Lab 028 — Déploiement](lab-028-deploy-mcp-azure.md) |
 
 ---
 
-## 🎉 Congratulations!
+## 🎉 Félicitations !
 
-You've built a **complete AI agent from scratch** — from raw data to deployment-ready container. This project integrates:
+Vous avez construit un **agent IA complet de A à Z** — des données brutes au conteneur prêt pour le déploiement. Ce projet intègre :
 
-- ✅ A **RAG pipeline** for knowledge retrieval
-- ✅ **MCP tools** for structured capabilities
-- ✅ An **Agent Framework** for orchestration
-- ✅ **Guardrails** for safety and compliance
-- ✅ **Observability** for debugging and monitoring
-- ✅ **Deployment config** for production readiness
+- ✅ Un **pipeline RAG** pour la récupération de connaissances
+- ✅ Des **outils MCP** pour des capacités structurées
+- ✅ Un **Agent Framework** pour l'orchestration
+- ✅ Des **garde-fous** pour la sécurité et la conformité
+- ✅ De l'**observabilité** pour le débogage et la surveillance
+- ✅ Une **configuration de déploiement** pour la production
 
-This is the architecture pattern behind production AI agents. Every component can be independently improved — swap the mock LLM for GPT-4o, replace the in-memory vector store with pgvector, add more MCP tools, tighten the guardrails, export traces to Azure Monitor — while the overall structure remains the same.
+C'est le pattern architectural derrière les agents IA en production. Chaque composant peut être amélioré indépendamment — remplacer le LLM simulé par GPT-4o, remplacer le magasin vectoriel en mémoire par pgvector, ajouter d'autres outils MCP, resserrer les garde-fous, exporter les traces vers Azure Monitor — tandis que la structure globale reste la même.
 
-**You're ready to build production AI agents.** 🚀
+**Vous êtes prêt à construire des agents IA en production.** 🚀

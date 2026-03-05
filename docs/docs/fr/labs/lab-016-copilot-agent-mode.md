@@ -1,109 +1,104 @@
 ---
 tags: [github-copilot, free, vscode]
 ---
-# Lab 016: GitHub Copilot Agent Mode
+# Lab 016 : GitHub Copilot Agent Mode
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
-  <span><strong>Time:</strong> ~30 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account (free tier includes agent mode)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
+  <span><strong>Durée :</strong> ~30 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Compte GitHub gratuit (le niveau gratuit inclut le mode agent)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous allez apprendre
 
-
-
-## What You'll Learn
-
-- What makes **agent mode** different from regular Copilot Chat
-- How to activate and use agent mode in VS Code
-- How the agent reads your codebase, plans, and executes multi-step tasks
-- How to connect **MCP servers** to expand agent capabilities
-- Best practices and limitations
+- Ce qui distingue le **mode agent** du Copilot Chat classique
+- Comment activer et utiliser le mode agent dans VS Code
+- Comment l'agent lit votre code source, planifie et exécute des tâches en plusieurs étapes
+- Comment connecter des **serveurs MCP** pour étendre les capacités de l'agent
+- Bonnes pratiques et limitations
 
 ---
 
 ## Introduction
 
-GitHub Copilot in VS Code has three modes:
+GitHub Copilot dans VS Code dispose de trois modes :
 
-| Mode | What it does |
-|------|-------------|
-| **Ask** | Answers questions about code; read-only |
-| **Edit** | Makes changes to files you specify |
-| **Agent** ⭐ | Autonomously explores your codebase, runs commands, uses tools, and completes multi-step tasks |
+| Mode | Ce qu'il fait |
+|------|---------------|
+| **Ask** | Répond aux questions sur le code ; lecture seule |
+| **Edit** | Effectue des modifications sur les fichiers que vous spécifiez |
+| **Agent** ⭐ | Explore de manière autonome votre code source, exécute des commandes, utilise des outils et accomplit des tâches en plusieurs étapes |
 
-**Agent mode** is the newest and most powerful. You describe a goal, and Copilot acts like a junior developer: it reads files, writes code, runs tests, and iterates until done — asking for your approval at key decision points.
+Le **mode agent** est le plus récent et le plus puissant. Vous décrivez un objectif, et Copilot agit comme un développeur junior : il lit les fichiers, écrit du code, exécute les tests et itère jusqu'à ce que ce soit terminé — en vous demandant votre approbation aux points de décision clés.
 
-!!! info "Available in VS Code 1.99+"
-    Agent mode requires VS Code 1.99 or later and GitHub Copilot extension. Check for updates if you don't see the mode switcher.
-
----
-
-## Prerequisites Setup
-
-1. **VS Code 1.99+** with GitHub Copilot extension installed
-2. **Free GitHub account** with Copilot enabled ([github.com/features/copilot](https://github.com/features/copilot))
-3. A project to work with (we'll use a simple Python project)
+!!! info "Disponible dans VS Code 1.99+"
+    Le mode agent nécessite VS Code 1.99 ou une version ultérieure et l'extension GitHub Copilot. Vérifiez les mises à jour si vous ne voyez pas le sélecteur de mode.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+## Configuration des prérequis
+
+1. **VS Code 1.99+** avec l'extension GitHub Copilot installée
+2. **Compte GitHub gratuit** avec Copilot activé ([github.com/features/copilot](https://github.com/features/copilot))
+3. Un projet sur lequel travailler (nous utiliserons un projet Python simple)
+
+---
+
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-016/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-016/` dans votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `outdoorgear_api.py` | Python script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) |
-
----
-
-## Lab Exercise
-
-### Step 1: Activate agent mode
-
-1. Open the Copilot Chat panel (`Ctrl+Shift+I`)
-2. Look for the mode switcher at the top of the chat input
-3. Select **"Agent"**
-
-You'll notice the input changes — you can now describe goals, not just ask questions.
+| Fichier | Description | Téléchargement |
+|---------|-------------|----------------|
+| `outdoorgear_api.py` | Script Python | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) |
 
 ---
 
-### Step 2: The Broken Project — Fix it with Agent Mode 🐛
+## Exercice du lab
 
-This exercise gives you a **real broken Python project** to fix using agent mode. The goal is to see how the agent reads files, identifies problems, and fixes them — step by step.
+### Étape 1 : Activer le mode agent
 
-**Download the project:**
+1. Ouvrez le panneau Copilot Chat (`Ctrl+Shift+I`)
+2. Cherchez le sélecteur de mode en haut de la zone de saisie du chat
+3. Sélectionnez **« Agent »**
+
+Vous remarquerez que la zone de saisie change — vous pouvez maintenant décrire des objectifs, pas seulement poser des questions.
+
+---
+
+### Étape 2 : Le projet cassé — Corrigez-le avec le mode agent 🐛
+
+Cet exercice vous donne un **vrai projet Python cassé** à corriger en utilisant le mode agent. L'objectif est de voir comment l'agent lit les fichiers, identifie les problèmes et les corrige — étape par étape.
+
+**Téléchargez le projet :**
 ```bash
 cd AI-LearningHub/docs/docs/en/labs/lab-016
 ```
 
-Or copy the file [📥 `outdoorgear_api.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) below:
+Ou copiez le fichier [📥 `outdoorgear_api.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) ci-dessous :
 
 ```python title="lab-016/outdoorgear_api.py — 5 bugs, 1 missing feature, no tests"
 --8<-- "labs/lab-016/outdoorgear_api.py"
 ```
 
-**Open the folder in VS Code** (important — the agent needs to see the whole project):
+**Ouvrez le dossier dans VS Code** (important — l'agent a besoin de voir l'ensemble du projet) :
 ```bash
 code docs/docs/en/labs/lab-016/
 ```
 
 ---
 
-### Phase 1: Let the agent find and fix the bugs
+### Phase 1 : Laissez l'agent trouver et corriger les bugs
 
-Switch to **Agent mode** and type exactly this:
+Passez en **mode agent** et tapez exactement ceci :
 
 ```
 Fix all the bugs in outdoorgear_api.py so that the basic tests 
@@ -112,27 +107,27 @@ at the bottom of the file pass when I run: python outdoorgear_api.py
 Don't fix the "Test 7" failure yet — that requires a missing function.
 ```
 
-Watch what the agent does:
+Observez ce que fait l'agent :
 
-1. 🔍 It **reads the file** without you pasting anything
-2. 🐛 It **identifies each bug** and explains why it's wrong
-3. ✏️ It **proposes fixes** and asks your approval
-4. ▶️ It **runs the file** to verify the fix worked
+1. 🔍 Il **lit le fichier** sans que vous ayez à coller quoi que ce soit
+2. 🐛 Il **identifie chaque bug** et explique pourquoi c'est incorrect
+3. ✏️ Il **propose des correctifs** et vous demande votre approbation
+4. ▶️ Il **exécute le fichier** pour vérifier que la correction fonctionne
 
-After accepting, run the verification:
+Après avoir accepté, lancez la vérification :
 ```bash
 python outdoorgear_api.py
 ```
-Tests 1–6 should pass. Test 7 will fail (that's expected — the function is missing).
+Les tests 1 à 6 devraient passer. Le test 7 échouera (c'est attendu — la fonction est manquante).
 
-!!! tip "If the agent gets stuck"
-    Try being more specific: "Run python outdoorgear_api.py and show me the error output, then fix the remaining bug"
+!!! tip "Si l'agent se bloque"
+    Essayez d'être plus précis : « Exécute python outdoorgear_api.py et montre-moi la sortie d'erreur, puis corrige le bug restant »
 
 ---
 
-### Phase 2: Add the missing feature
+### Phase 2 : Ajouter la fonctionnalité manquante
 
-Now ask the agent to implement the missing `search_by_price_range` function:
+Demandez maintenant à l'agent d'implémenter la fonction `search_by_price_range` manquante :
 
 ```
 Implement the search_by_price_range(min_price, max_price) function 
@@ -141,16 +136,16 @@ It should return active products in that price range, sorted by price ascending.
 Then run python outdoorgear_api.py to verify all 7 tests pass.
 ```
 
-The agent should:
-1. Read the existing code to understand the data structures
-2. Implement the function
-3. Run the tests to verify
+L'agent devrait :
+1. Lire le code existant pour comprendre les structures de données
+2. Implémenter la fonction
+3. Exécuter les tests pour vérifier
 
 ---
 
-### Phase 3: Write a test suite
+### Phase 3 : Écrire une suite de tests
 
-Now ask the agent to create proper tests:
+Demandez maintenant à l'agent de créer des tests appropriés :
 
 ```
 Create a tests/ folder with a file test_outdoorgear_api.py.
@@ -165,15 +160,15 @@ Write pytest tests that cover:
 Run pytest to make sure all tests pass.
 ```
 
-Watch the agent:
-- Creates the `tests/` folder
-- Writes comprehensive tests using pytest fixtures
-- Runs `pytest` in the terminal
-- Fixes any test failures it finds
+Observez l'agent :
+- Il crée le dossier `tests/`
+- Il écrit des tests complets en utilisant des fixtures pytest
+- Il exécute `pytest` dans le terminal
+- Il corrige toutes les erreurs de test qu'il trouve
 
 ---
 
-### Phase 4: Improve code quality
+### Phase 4 : Améliorer la qualité du code
 
 ```
 Add type hints to all public functions in outdoorgear_api.py.
@@ -183,9 +178,9 @@ Don't change any logic.
 
 ---
 
-### Step 3: Codebase exploration
+### Étape 3 : Exploration du code source
 
-Try asking the agent to analyze what it just created:
+Essayez de demander à l'agent d'analyser ce qu'il vient de créer :
 
 ```
 Give me a summary of the outdoorgear_api.py module:
@@ -194,15 +189,15 @@ Give me a summary of the outdoorgear_api.py module:
 3. Any edge cases not currently handled
 ```
 
-The agent reads the whole codebase and synthesizes a coherent answer — without you pasting any code.
+L'agent lit l'ensemble du code source et synthétise une réponse cohérente — sans que vous ayez à coller du code.
 
 ---
 
-### Step 4: Connect an MCP server (bonus)
+### Étape 4 : Connecter un serveur MCP (bonus)
 
-Agent mode supports MCP servers. Configure VS Code to use the MCP server from [Lab 020](lab-020-mcp-server-python.md):
+Le mode agent prend en charge les serveurs MCP. Configurez VS Code pour utiliser le serveur MCP du [Lab 020](lab-020-mcp-server-python.md) :
 
-**`.vscode/mcp.json`:**
+**`.vscode/mcp.json` :**
 ```json
 {
   "servers": {
@@ -216,14 +211,14 @@ Agent mode supports MCP servers. Configure VS Code to use the MCP server from [L
 }
 ```
 
-Then ask in agent mode:
+Puis demandez en mode agent :
 ```
 What camping products do we have in stock? Use the outdoorgear-products MCP tool.
 ```
 
-### Step 5: Custom instructions
+### Étape 5 : Instructions personnalisées
 
-Create `.github/copilot-instructions.md` to make the agent always follow your project conventions:
+Créez `.github/copilot-instructions.md` pour que l'agent suive toujours les conventions de votre projet :
 
 ```markdown
 # Copilot Instructions
@@ -245,18 +240,18 @@ Python API project for OutdoorGear Inc.
 
 ---
 
-## Agent Mode vs. Edit Mode: When to Use Which
+## Mode agent vs. mode édition : quand utiliser lequel
 
-| Use Edit mode when | Use Agent mode when |
-|-------------------|---------------------|
-| You know exactly what to change | You have a goal but not a plan |
-| Simple, targeted edits | Multi-file, multi-step tasks |
-| You want full control of each edit | You want the agent to figure it out |
-| Quick fixes, refactors | Debugging, adding features, writing tests |
+| Utilisez le mode édition quand | Utilisez le mode agent quand |
+|--------------------------------|------------------------------|
+| Vous savez exactement quoi modifier | Vous avez un objectif mais pas de plan |
+| Modifications simples et ciblées | Tâches multi-fichiers et multi-étapes |
+| Vous voulez un contrôle total sur chaque modification | Vous voulez que l'agent trouve la solution |
+| Corrections rapides, refactorisations | Débogage, ajout de fonctionnalités, écriture de tests |
 
 ---
 
-## What the Agent Did (Behind the Scenes)
+## Ce que l'agent a fait (en coulisses)
 
 ```
 Your request: "Fix all bugs"
@@ -282,17 +277,17 @@ Your request: "Fix all bugs"
 
 ---
 
-## Summary
+## Résumé
 
-- ✅ **Reads your codebase** — no copying/pasting code into chat
-- ✅ **Multi-step execution** — plans and completes complex tasks
-- ✅ **Terminal access** — runs tests, verifies fixes
-- ✅ **MCP integration** — connect custom tools
-- ✅ **Approvals at every step** — you stay in control
+- ✅ **Lit votre code source** — pas besoin de copier/coller du code dans le chat
+- ✅ **Exécution en plusieurs étapes** — planifie et accomplit des tâches complexes
+- ✅ **Accès au terminal** — exécute les tests, vérifie les corrections
+- ✅ **Intégration MCP** — connecte des outils personnalisés
+- ✅ **Approbation à chaque étape** — vous gardez le contrôle
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Build an MCP server to extend agent mode:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
-- **Build a VS Code Chat Participant (custom @agent):** → [Lab 025 — VS Code Chat Participant](lab-025-vscode-chat-participant.md)
+- **Créer un serveur MCP pour étendre le mode agent :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)
+- **Créer un Chat Participant VS Code (@agent personnalisé) :** → [Lab 025 — VS Code Chat Participant](lab-025-vscode-chat-participant.md)

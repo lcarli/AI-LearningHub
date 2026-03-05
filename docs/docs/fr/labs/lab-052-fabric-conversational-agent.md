@@ -8,103 +8,98 @@ tags:
   - entra-id
 ---
 
-# Lab 052: Fabric IQ — Conversational Data Agent (NL → SQL)
+# Lab 052 : Fabric IQ — Agent de données conversationnel (NL → SQL)
 
 <div class="lab-meta">
   <span class="level-badge level-200">L200</span>
   <span class="path-badge">All paths</span>
   <span class="time-badge">~75 min</span>
-  <span class="cost-badge cost-free">Free — Uses SQLite locally (Fabric capacity optional)</span>
+  <span class="cost-badge cost-free">Gratuit — Utilise SQLite localement (capacité Fabric optionnelle)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- How **Microsoft Fabric Data Agents** translate natural-language questions into SQL, DAX, or KQL queries
-- The end-to-end flow of **NL → SQL** generation, execution, and result presentation
-- How **least-privilege** access and **Entra ID** identity binding keep data secure at every step
-- Why **query transparency** and **audit logging** are critical for trust in AI-generated queries
-- How to enable **self-serve analytics** for non-technical users without exposing raw database access
+- Comment les **Microsoft Fabric Data Agents** traduisent des questions en langage naturel en requêtes SQL, DAX ou KQL
+- Le flux de bout en bout de la génération **NL → SQL**, l'exécution et la présentation des résultats
+- Comment l'accès **moindre privilège** et la liaison d'identité **Entra ID** sécurisent les données à chaque étape
+- Pourquoi la **transparence des requêtes** et la **journalisation d'audit** sont essentielles pour la confiance dans les requêtes générées par l'IA
+- Comment permettre l'**analytique en libre-service** pour les utilisateurs non techniques sans exposer l'accès brut à la base de données
 
 ## Introduction
 
 ![NL to SQL Flow](../../assets/diagrams/fabric-nl-to-sql.svg)
 
-A **Fabric Data Agent** lets business users ask data questions in plain English. Behind the scenes the agent inspects the database schema, generates a SQL (or DAX / KQL) query, executes it under the caller's own Entra identity, and returns a formatted answer — all without the user writing a single line of code.
+Un **Fabric Data Agent** permet aux utilisateurs métier de poser des questions sur les données en langage courant. En coulisses, l'agent inspecte le schéma de la base de données, génère une requête SQL (ou DAX / KQL), l'exécute sous l'identité Entra de l'appelant et renvoie une réponse formatée — le tout sans que l'utilisateur n'écrive une seule ligne de code.
 
-In this lab you will build a local simulation of that pipeline using **SQLite** and **Python**. The scenario is **OutdoorGear**, a fictitious outdoor-equipment retailer. The database contains two tables:
+Dans ce lab, vous allez construire une simulation locale de ce pipeline en utilisant **SQLite** et **Python**. Le scénario est **OutdoorGear**, un détaillant fictif d'équipements de plein air. La base de données contient deux tables :
 
 | Table | Description |
 |-------|-------------|
-| `products` | Product catalog — 10 items across categories such as Tents, Backpacks, Sleeping Bags, and Accessories |
-| `orders` | Order history — 15 orders referencing products by `product_id` |
+| `products` | Catalogue de produits — 10 articles répartis dans des catégories telles que Tentes, Sacs à dos, Sacs de couchage et Accessoires |
+| `orders` | Historique des commandes — 15 commandes référençant les produits par `product_id` |
 
-Non-technical users — store managers, marketing analysts, supply-chain planners — need to ask questions like *"How many tents are in stock?"* or *"What is the total revenue?"* without learning SQL. By the end of this lab you will understand exactly how a Fabric Data Agent answers those questions and why the security model matters.
+Les utilisateurs non techniques — responsables de magasin, analystes marketing, planificateurs de la chaîne d'approvisionnement — ont besoin de poser des questions comme *« Combien de tentes sont en stock ? »* ou *« Quel est le chiffre d'affaires total ? »* sans apprendre le SQL. À la fin de ce lab, vous comprendrez exactement comment un Fabric Data Agent répond à ces questions et pourquoi le modèle de sécurité est important.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Notes |
-|-------------|-------|
+| Prérequis | Notes |
+|-----------|-------|
 | **Python 3.10+** | [python.org/downloads](https://www.python.org/downloads/){:target="_blank"} |
-| **pandas** | `pip install pandas` — used to load CSV files into SQLite |
-| **sqlite3** | Part of the Python standard library — no installation required |
+| **pandas** | `pip install pandas` — utilisé pour charger les fichiers CSV dans SQLite |
+| **sqlite3** | Fait partie de la bibliothèque standard Python — aucune installation requise |
 
-!!! tip "No Fabric capacity needed"
-    This lab runs entirely on your local machine using SQLite. A Fabric capacity is only needed if you want to deploy a real Data Agent afterward.
+!!! tip "Aucune capacité Fabric nécessaire"
+    Ce lab s'exécute entièrement sur votre machine locale avec SQLite. Une capacité Fabric n'est nécessaire que si vous souhaitez déployer un vrai Data Agent par la suite.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-052/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-052/` dans votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_query_gen.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/broken_query_gen.py) |
-| `orders.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/orders.csv) |
-| `products.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/products.csv) |
-
----
-
-## Step 1: Understanding Fabric Data Agents
-
-A Fabric Data Agent sits between the user and the data. When a user types a question the agent:
-
-1. **Parses** the natural-language input and identifies intent, entities, and filters.
-2. **Inspects** the connected data-source schema (tables, columns, relationships).
-3. **Generates** a query in the appropriate language — SQL for warehouses and SQL endpoints, DAX for semantic models, KQL for KQL databases.
-4. **Executes** the query under the **user's own Entra ID**. The agent never uses a service account with elevated privileges; it delegates to the caller's identity so that Row-Level Security (RLS) and object-level permissions are enforced automatically.
-5. **Returns** the result along with the generated query so the user (or an auditor) can inspect exactly what ran.
-
-This design delivers three guarantees:
-
-| Guarantee | How |
-|-----------|-----|
-| **Least-privilege** | Queries run as the authenticated user — no shared super-user |
-| **Transparency** | The generated SQL/DAX/KQL is always shown to the caller |
-| **Auditability** | Every query is logged with the user's identity and timestamp |
-
-!!! info "Why transparency matters"
-    If the agent generates an incorrect query the user can see — and report — the mistake. This feedback loop is essential for building trust in AI-generated analytics.
+| Fichier | Description | Télécharger |
+|---------|-------------|-------------|
+| `broken_query_gen.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/broken_query_gen.py) |
+| `orders.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/orders.csv) |
+| `products.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/products.csv) |
 
 ---
 
-## Step 2: Set Up the Database
+## Étape 1 : Comprendre les Fabric Data Agents
 
-In this step you will create a local SQLite database from two CSV files that ship with the lab.
+Un Fabric Data Agent se situe entre l'utilisateur et les données. Lorsqu'un utilisateur saisit une question, l'agent :
 
-### 2.1 Load the CSV files into SQLite
+1. **Analyse** l'entrée en langage naturel et identifie l'intention, les entités et les filtres.
+2. **Inspecte** le schéma de la source de données connectée (tables, colonnes, relations).
+3. **Génère** une requête dans le langage approprié — SQL pour les entrepôts et les points de terminaison SQL, DAX pour les modèles sémantiques, KQL pour les bases de données KQL.
+4. **Exécute** la requête sous l'**identité Entra ID de l'utilisateur**. L'agent n'utilise jamais un compte de service avec des privilèges élevés ; il délègue à l'identité de l'appelant afin que la sécurité au niveau des lignes (RLS) et les permissions au niveau des objets soient appliquées automatiquement.
+5. **Renvoie** le résultat accompagné de la requête générée afin que l'utilisateur (ou un auditeur) puisse inspecter exactement ce qui a été exécuté.
+
+Cette conception offre trois garanties :
+
+| Garantie | Comment |
+|----------|---------|
+| **Moindre privilège** | Les requêtes s'exécutent en tant qu'utilisateur authentifié — pas de super-utilisateur partagé |
+| **Transparence** | Le SQL/DAX/KQL généré est toujours montré à l'appelant |
+| **Auditabilité** | Chaque requête est journalisée avec l'identité de l'utilisateur et l'horodatage |
+
+!!! info "Pourquoi la transparence est importante"
+    Si l'agent génère une requête incorrecte, l'utilisateur peut voir — et signaler — l'erreur. Cette boucle de rétroaction est essentielle pour construire la confiance dans l'analytique générée par l'IA.
+
+---
+
+## Étape 2 : Configurer la base de données
+
+Dans cette étape, vous allez créer une base de données SQLite locale à partir de deux fichiers CSV fournis avec le lab.
+
+### 2.1 Charger les fichiers CSV dans SQLite
 
 ```python
 import sqlite3
@@ -118,7 +113,7 @@ pd.read_csv("lab-052/orders.csv").to_sql("orders", conn, if_exists="replace", in
 print("✅ Database created: lab-052/outdoor_gear.db")
 ```
 
-### 2.2 Explore the schema
+### 2.2 Explorer le schéma
 
 ```python
 cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table'")
@@ -132,7 +127,7 @@ for table in tables:
         print(f"  {col[1]:20s} {col[2]}")
 ```
 
-Expected output:
+Sortie attendue :
 
 ```
 Tables: ['products', 'orders']
@@ -153,7 +148,7 @@ Tables: ['products', 'orders']
   order_date           TEXT
 ```
 
-### 2.3 Quick row counts
+### 2.3 Comptage rapide des lignes
 
 ```python
 for table in tables:
@@ -168,13 +163,13 @@ orders: 15 rows
 
 ---
 
-## Step 3: Build NL → SQL Query Patterns
+## Étape 3 : Construire des modèles de requêtes NL → SQL
 
-A Fabric Data Agent maps natural-language questions to SQL queries. Below are five representative patterns that cover the most common question types: counting, aggregation, filtering, joining, and averaging.
+Un Fabric Data Agent associe des questions en langage naturel à des requêtes SQL. Voici cinq modèles représentatifs qui couvrent les types de questions les plus courants : comptage, agrégation, filtrage, jointure et moyenne.
 
-### Pattern 1 — Counting with a filter
+### Modèle 1 — Comptage avec un filtre
 
-> **User asks:** *"How many tents are in stock?"*
+> **L'utilisateur demande :** *« Combien de tentes sont en stock ? »*
 
 ```sql
 SELECT COUNT(*)
@@ -183,31 +178,31 @@ WHERE  category = 'Tents'
   AND  stock > 0;
 ```
 
-**Expected result:** `2`
+**Résultat attendu :** `2`
 
-!!! warning "The `stock > 0` filter matters"
-    Without the `stock > 0` clause the query would count products that exist in the catalog even if they are out of stock. A well-designed agent always applies the in-stock filter when the user says *"in stock."*
+!!! warning "Le filtre `stock > 0` est important"
+    Sans la clause `stock > 0`, la requête compterait les produits qui existent dans le catalogue même s'ils sont en rupture de stock. Un agent bien conçu applique toujours le filtre « en stock » lorsque l'utilisateur dit *« en stock ».*
 
 ---
 
-### Pattern 2 — Sum aggregation
+### Modèle 2 — Agrégation par somme
 
-> **User asks:** *"What is the total revenue?"*
+> **L'utilisateur demande :** *« Quel est le chiffre d'affaires total ? »*
 
 ```sql
 SELECT SUM(total)
 FROM   orders;
 ```
 
-**Expected result:** `3209.74`
+**Résultat attendu :** `3209.74`
 
-Revenue comes from the **orders** table — not from multiplying `price × stock` in the products table. This is a common mistake in NL → SQL systems.
+Le chiffre d'affaires provient de la table **orders** — et non de la multiplication de `price × stock` dans la table products. C'est une erreur courante dans les systèmes NL → SQL.
 
 ---
 
-### Pattern 3 — Simple filter / SELECT *
+### Modèle 3 — Filtre simple / SELECT *
 
-> **User asks:** *"Show all backpacks"*
+> **L'utilisateur demande :** *« Afficher tous les sacs à dos »*
 
 ```sql
 SELECT *
@@ -215,13 +210,13 @@ FROM   products
 WHERE  category = 'Backpacks';
 ```
 
-This returns all columns for products in the Backpacks category.
+Cela renvoie toutes les colonnes pour les produits de la catégorie Backpacks.
 
 ---
 
-### Pattern 4 — JOIN + GROUP BY + ORDER BY
+### Modèle 4 — JOIN + GROUP BY + ORDER BY
 
-> **User asks:** *"Which product has the most orders?"*
+> **L'utilisateur demande :** *« Quel produit a le plus de commandes ? »*
 
 ```sql
 SELECT   p.product_name,
@@ -233,31 +228,31 @@ ORDER BY order_count DESC
 LIMIT    1;
 ```
 
-**Expected result:** `Alpine Explorer Tent` — 3 orders
+**Résultat attendu :** `Alpine Explorer Tent` — 3 commandes
 
 !!! note "COUNT(*) vs SUM(quantity)"
-    *"Most orders"* means the highest **number of order rows**, not the highest total quantity. The correct aggregate is `COUNT(*)`, not `SUM(quantity)`.
+    *« Le plus de commandes »* signifie le plus grand **nombre de lignes de commandes**, et non la quantité totale la plus élevée. L'agrégat correct est `COUNT(*)`, et non `SUM(quantity)`.
 
 ---
 
-### Pattern 5 — Average aggregation
+### Modèle 5 — Agrégation par moyenne
 
-> **User asks:** *"Average order value?"*
+> **L'utilisateur demande :** *« Valeur moyenne des commandes ? »*
 
 ```sql
 SELECT AVG(total)
 FROM   orders;
 ```
 
-**Expected result:** `213.98`
+**Résultat attendu :** `213.98`
 
-Verification: total revenue is 3,209.74 and there are 15 orders → 3,209.74 ÷ 15 = **213.9827 ≈ 213.98**.
+Vérification : le chiffre d'affaires total est de 3 209,74 et il y a 15 commandes → 3 209,74 ÷ 15 = **213,9827 ≈ 213,98**.
 
 ---
 
-## Step 4: Run Queries and Verify
+## Étape 4 : Exécuter les requêtes et vérifier
 
-Execute every pattern against the local SQLite database and confirm the results match the expected values.
+Exécutez chaque modèle sur la base de données SQLite locale et confirmez que les résultats correspondent aux valeurs attendues.
 
 ```python
 queries = {
@@ -296,53 +291,53 @@ for question, (sql, expected) in queries.items():
 print("\n" + "=" * 60)
 ```
 
-!!! tip "Compare carefully"
-    If any result does not match, re-check the CSV data and the query. Mismatches usually come from an incorrect filter or the wrong aggregation function.
+!!! tip "Comparez attentivement"
+    Si un résultat ne correspond pas, vérifiez à nouveau les données CSV et la requête. Les écarts proviennent généralement d'un filtre incorrect ou d'une mauvaise fonction d'agrégation.
 
 ---
 
-## Step 5: Security and Audit
+## Étape 5 : Sécurité et audit
 
-In a production Fabric deployment the same queries you ran locally would be executed through the Data Agent with full enterprise security. This section explains the key safeguards.
+Dans un déploiement Fabric en production, les mêmes requêtes que vous avez exécutées localement seraient exécutées via le Data Agent avec une sécurité d'entreprise complète. Cette section explique les protections clés.
 
-### Entra ID identity binding
+### Liaison d'identité Entra ID
 
-Every query is executed under the **calling user's Entra ID token**. The Data Agent does not have its own database credentials — it delegates authentication to the identity provider. This means:
+Chaque requête est exécutée sous le **jeton Entra ID de l'utilisateur appelant**. Le Data Agent ne possède pas ses propres identifiants de base de données — il délègue l'authentification au fournisseur d'identité. Cela signifie :
 
-- A store manager sees only their store's data (if RLS is configured).
-- A marketing analyst can query aggregate revenue but cannot see individual customer records.
-- An external auditor can review query logs tied to specific user identities.
+- Un responsable de magasin ne voit que les données de son magasin (si la RLS est configurée).
+- Un analyste marketing peut interroger le chiffre d'affaires agrégé mais ne peut pas voir les enregistrements individuels des clients.
+- Un auditeur externe peut examiner les journaux de requêtes liés à des identités utilisateur spécifiques.
 
-### Row-Level Security (RLS)
+### Sécurité au niveau des lignes (RLS)
 
-Fabric supports RLS on SQL endpoints and semantic models. When the Data Agent generates a query, the database engine automatically applies RLS filters based on the authenticated user's identity. The agent itself never modifies or strips these filters.
+Fabric prend en charge la RLS sur les points de terminaison SQL et les modèles sémantiques. Lorsque le Data Agent génère une requête, le moteur de base de données applique automatiquement les filtres RLS en fonction de l'identité de l'utilisateur authentifié. L'agent lui-même ne modifie ni ne supprime jamais ces filtres.
 
-### Query logging and audit
+### Journalisation des requêtes et audit
 
-Every generated query — along with the user identity, timestamp, and result row count — is recorded in the Fabric activity log. This enables:
+Chaque requête générée — accompagnée de l'identité de l'utilisateur, de l'horodatage et du nombre de lignes du résultat — est enregistrée dans le journal d'activité Fabric. Cela permet :
 
-| Capability | Benefit |
-|------------|---------|
-| **Compliance reporting** | Prove who accessed what data and when |
-| **Anomaly detection** | Flag unusual query patterns (e.g., bulk exports) |
-| **Agent improvement** | Identify frequently failed queries and improve the NL → SQL model |
+| Capacité | Avantage |
+|----------|----------|
+| **Rapports de conformité** | Prouver qui a accédé à quelles données et quand |
+| **Détection d'anomalies** | Signaler des modèles de requêtes inhabituels (par ex., exports en masse) |
+| **Amélioration de l'agent** | Identifier les requêtes fréquemment échouées et améliorer le modèle NL → SQL |
 
-!!! info "Local simulation"
-    In this lab you are running queries directly against SQLite, so there is no Entra binding or RLS. In a real Fabric deployment these controls are enforced automatically.
+!!! info "Simulation locale"
+    Dans ce lab, vous exécutez les requêtes directement sur SQLite, il n'y a donc pas de liaison Entra ni de RLS. Dans un déploiement Fabric réel, ces contrôles sont appliqués automatiquement.
 
 ---
 
-## Bug-Fix Exercise
+## Exercice de correction de bugs
 
-The file `lab-052/broken_query_gen.py` contains a simplified NL → SQL generator with **three bugs**. Your task is to find and fix each one.
+Le fichier `lab-052/broken_query_gen.py` contient un générateur NL → SQL simplifié avec **trois bugs**. Votre tâche est de trouver et corriger chacun d'entre eux.
 
-### Run the broken script
+### Exécuter le script défectueux
 
 ```bash
 python lab-052/broken_query_gen.py
 ```
 
-### Bug 1 — Missing `stock > 0` filter
+### Bug 1 — Filtre `stock > 0` manquant
 
 ```python
 # ❌ BUG: counts all products in the category, including out-of-stock
@@ -350,7 +345,7 @@ def count_in_stock(category):
     return f"SELECT COUNT(*) FROM products WHERE category='{category}'"
 ```
 
-**Fix:** Add `AND stock > 0` to the WHERE clause.
+**Correction :** Ajouter `AND stock > 0` à la clause WHERE.
 
 ```python
 # ✅ FIXED
@@ -358,7 +353,7 @@ def count_in_stock(category):
     return f"SELECT COUNT(*) FROM products WHERE category='{category}' AND stock > 0"
 ```
 
-### Bug 2 — Revenue uses `price × stock` instead of order totals
+### Bug 2 — Le chiffre d'affaires utilise `price × stock` au lieu des totaux de commandes
 
 ```python
 # ❌ BUG: calculates potential inventory value, not actual revenue
@@ -366,7 +361,7 @@ def total_revenue():
     return "SELECT SUM(price * stock) FROM products"
 ```
 
-**Fix:** Query the `orders` table instead.
+**Correction :** Interroger la table `orders` à la place.
 
 ```python
 # ✅ FIXED
@@ -374,7 +369,7 @@ def total_revenue():
     return "SELECT SUM(total) FROM orders"
 ```
 
-### Bug 3 — Most ordered uses `quantity DESC` instead of `COUNT(*)`
+### Bug 3 — Le produit le plus commandé utilise `quantity DESC` au lieu de `COUNT(*)`
 
 ```python
 # ❌ BUG: returns the order with the highest single-order quantity,
@@ -387,7 +382,7 @@ def most_ordered_product():
     )
 ```
 
-**Fix:** Group by product and count order rows.
+**Correction :** Regrouper par produit et compter les lignes de commandes.
 
 ```python
 # ✅ FIXED
@@ -401,9 +396,9 @@ def most_ordered_product():
 
 ---
 
-## Supporting Files
+## Fichiers de support
 
-The following files are provided in the `lab-052/` directory.
+Les fichiers suivants sont fournis dans le répertoire `lab-052/`.
 
 ### `lab-052/products.csv`
 
@@ -488,61 +483,61 @@ if __name__ == "__main__":
 
 ---
 
-## Knowledge Check
+## Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What security model does a Fabric Data Agent use for query execution?"
+??? question "**Q1 (Choix multiple) :** Quel modèle de sécurité un Fabric Data Agent utilise-t-il pour l'exécution des requêtes ?"
 
-    - A) A shared service account with full database access
-    - B) The user's own Entra ID with least-privilege permissions
-    - C) An API key embedded in the agent configuration
-    - D) Anonymous access with IP-based restrictions
+    - A) Un compte de service partagé avec un accès complet à la base de données
+    - B) L'identité Entra ID propre à l'utilisateur avec des permissions de moindre privilège
+    - C) Une clé API intégrée dans la configuration de l'agent
+    - D) Un accès anonyme avec des restrictions basées sur l'adresse IP
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) The user's own Entra ID with least-privilege permissions**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) L'identité Entra ID propre à l'utilisateur avec des permissions de moindre privilège**
 
-        Fabric Data Agents execute every query under the calling user's Entra identity. This ensures that Row-Level Security, object permissions, and conditional-access policies are enforced automatically — the agent never elevates privileges beyond what the user already has.
+        Les Fabric Data Agents exécutent chaque requête sous l'identité Entra de l'utilisateur appelant. Cela garantit que la sécurité au niveau des lignes, les permissions sur les objets et les politiques d'accès conditionnel sont appliquées automatiquement — l'agent n'élève jamais les privilèges au-delà de ce que l'utilisateur possède déjà.
 
-??? question "**Q2 (Multiple Choice):** Why is it important that generated SQL is inspectable by the user?"
+??? question "**Q2 (Choix multiple) :** Pourquoi est-il important que le SQL généré soit consultable par l'utilisateur ?"
 
-    - A) So users can copy the SQL and run it faster next time
-    - B) To enable transparency, auditability, and trust in AI-generated queries
-    - C) Because SQL syntax highlighting looks better in the UI
-    - D) To allow users to manually optimize query performance
+    - A) Pour que les utilisateurs puissent copier le SQL et l'exécuter plus rapidement la prochaine fois
+    - B) Pour permettre la transparence, l'auditabilité et la confiance dans les requêtes générées par l'IA
+    - C) Parce que la coloration syntaxique SQL est plus belle dans l'interface
+    - D) Pour permettre aux utilisateurs d'optimiser manuellement les performances des requêtes
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) To enable transparency, auditability, and trust in AI-generated queries**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Pour permettre la transparence, l'auditabilité et la confiance dans les requêtes générées par l'IA**
 
-        When users can see the exact SQL that was generated and executed, they can verify correctness, report mistakes, and auditors can review data-access patterns. This transparency is a foundational requirement for trustworthy AI-assisted analytics.
+        Lorsque les utilisateurs peuvent voir le SQL exact qui a été généré et exécuté, ils peuvent vérifier l'exactitude, signaler les erreurs, et les auditeurs peuvent examiner les modèles d'accès aux données. Cette transparence est une exigence fondamentale pour une analytique assistée par l'IA digne de confiance.
 
-??? question "**Q3 (Run the query):** How many tents are currently in stock (stock > 0)?"
+??? question "**Q3 (Exécuter la requête) :** Combien de tentes sont actuellement en stock (stock > 0) ?"
 
-    Run this query against the lab database:
+    Exécutez cette requête sur la base de données du lab :
 
     ```sql
     SELECT COUNT(*) FROM products WHERE category='Tents' AND stock > 0;
     ```
 
-    ??? success "✅ Reveal Answer"
-        **Answer: 2**
+    ??? success "✅ Révéler la réponse"
+        **Réponse : 2**
 
-        Both the Alpine Explorer Tent (P001, stock=5) and the TrailMaster 2P Tent (P002, stock=8) have stock greater than zero. The query correctly filters on both `category='Tents'` and `stock > 0`.
+        L'Alpine Explorer Tent (P001, stock=5) et la TrailMaster 2P Tent (P002, stock=8) ont toutes deux un stock supérieur à zéro. La requête filtre correctement sur `category='Tents'` et `stock > 0`.
 
-??? question "**Q4 (Run the query):** What is the total revenue from all orders?"
+??? question "**Q4 (Exécuter la requête) :** Quel est le chiffre d'affaires total de toutes les commandes ?"
 
-    Run this query against the lab database:
+    Exécutez cette requête sur la base de données du lab :
 
     ```sql
     SELECT SUM(total) FROM orders;
     ```
 
-    ??? success "✅ Reveal Answer"
-        **Answer: $3,209.74**
+    ??? success "✅ Révéler la réponse"
+        **Réponse : 3 209,74 $**
 
-        The `total` column in the orders table contains the actual revenue for each order (price × quantity). Summing all 15 order totals gives 3,209.74. A common mistake is to calculate `SUM(price * stock)` from the products table, which gives inventory value — not revenue.
+        La colonne `total` dans la table orders contient le chiffre d'affaires réel de chaque commande (prix × quantité). La somme des 15 totaux de commandes donne 3 209,74. Une erreur courante est de calculer `SUM(price * stock)` à partir de la table products, ce qui donne la valeur de l'inventaire — et non le chiffre d'affaires.
 
-??? question "**Q5 (Run the query):** Which product has the most orders?"
+??? question "**Q5 (Exécuter la requête) :** Quel produit a le plus de commandes ?"
 
-    Run this query against the lab database:
+    Exécutez cette requête sur la base de données du lab :
 
     ```sql
     SELECT p.product_name, COUNT(*) AS order_count
@@ -553,28 +548,28 @@ if __name__ == "__main__":
     LIMIT 1;
     ```
 
-    ??? success "✅ Reveal Answer"
-        **Answer: Alpine Explorer Tent (P001) — 3 orders**
+    ??? success "✅ Révéler la réponse"
+        **Réponse : Alpine Explorer Tent (P001) — 3 commandes**
 
-        Product P001 appears in orders O001, O006, and O010. The query joins orders to products, groups by product name, counts the number of order rows per product, and returns the one with the highest count. Note that `COUNT(*)` counts order rows — not total quantity shipped.
-
----
-
-## Summary
-
-| Topic | Key Takeaway |
-|-------|-------------|
-| **Fabric Data Agents** | Translate natural-language questions into SQL, DAX, or KQL and execute them on behalf of the user |
-| **NL → SQL pipeline** | Parse intent → inspect schema → generate query → execute → return results |
-| **Identity & security** | Queries run under the user's Entra ID — least-privilege by default |
-| **Row-Level Security** | RLS filters are applied by the database engine, not the agent |
-| **Query transparency** | The generated query is always shown so users can verify and auditors can review |
-| **Audit logging** | Every query is recorded with user identity, timestamp, and result metadata |
-| **Common NL → SQL bugs** | Missing filters, wrong table for aggregation, incorrect aggregate function |
+        Le produit P001 apparaît dans les commandes O001, O006 et O010. La requête joint les commandes aux produits, regroupe par nom de produit, compte le nombre de lignes de commandes par produit et renvoie celui avec le compte le plus élevé. Notez que `COUNT(*)` compte les lignes de commandes — et non la quantité totale expédiée.
 
 ---
 
-## Next Steps
+## Résumé
 
-- [← Lab 051: Previous Lab](lab-051-previous-lab.md) — continue your learning path
-- [→ Lab 053: Next Lab](lab-053-next-lab.md) — advance to the next topic
+| Sujet | Point clé |
+|-------|-----------|
+| **Fabric Data Agents** | Traduisent les questions en langage naturel en SQL, DAX ou KQL et les exécutent au nom de l'utilisateur |
+| **Pipeline NL → SQL** | Analyser l'intention → inspecter le schéma → générer la requête → exécuter → renvoyer les résultats |
+| **Identité et sécurité** | Les requêtes s'exécutent sous l'identité Entra ID de l'utilisateur — moindre privilège par défaut |
+| **Sécurité au niveau des lignes** | Les filtres RLS sont appliqués par le moteur de base de données, pas par l'agent |
+| **Transparence des requêtes** | La requête générée est toujours affichée pour que les utilisateurs puissent vérifier et les auditeurs examiner |
+| **Journalisation d'audit** | Chaque requête est enregistrée avec l'identité de l'utilisateur, l'horodatage et les métadonnées du résultat |
+| **Bugs courants NL → SQL** | Filtres manquants, mauvaise table pour l'agrégation, fonction d'agrégation incorrecte |
+
+---
+
+## Prochaines étapes
+
+- [← Lab 051 : Lab précédent](lab-051-previous-lab.md) — continuez votre parcours d'apprentissage
+- [→ Lab 053 : Lab suivant](lab-053-next-lab.md) — passez au sujet suivant

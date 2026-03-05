@@ -1,49 +1,44 @@
 ---
 tags: [cost-optimization, azure, production, monitoring, L300]
 ---
-# Lab 038: AI Cost Optimization
+# Lab 038 : Optimisation des coûts de l'IA
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-azure">Azure Free Tier</span> — Most strategies are free to implement</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
+  <span><strong>Durée :</strong> ~45 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-azure">Azure Free Tier</span> — La plupart des stratégies sont gratuites à mettre en œuvre</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- Understand AI API cost drivers (tokens, model choice, request frequency)
-- Apply **5 key strategies** to reduce costs: caching, batching, model routing, prompt compression, and streaming
-- Implement **semantic caching** to avoid duplicate LLM calls
-- Build a **model router** that uses cheap models for simple queries and expensive models for complex ones
-- Monitor and alert on cost with **Azure Monitor**
+- Comprendre les facteurs de coût des API IA (tokens, choix du modèle, fréquence des requêtes)
+- Appliquer **5 stratégies clés** pour réduire les coûts : mise en cache, traitement par lots, routage de modèles, compression de prompts et streaming
+- Implémenter un **cache sémantique** pour éviter les appels LLM en double
+- Construire un **routeur de modèles** qui utilise des modèles économiques pour les requêtes simples et des modèles coûteux pour les requêtes complexes
+- Surveiller et alerter sur les coûts avec **Azure Monitor**
 
 ---
 
 ## Introduction
 
-A production AI agent can easily cost $50–500/month even with modest usage if not optimized. The good news: most cost reduction strategies also improve latency and user experience.
+Un agent IA en production peut facilement coûter 50–500 $/mois même avec une utilisation modeste s'il n'est pas optimisé. La bonne nouvelle : la plupart des stratégies de réduction des coûts améliorent également la latence et l'expérience utilisateur.
 
-**The key cost levers:**
+**Les principaux leviers de coût :**
 
-| Factor | Impact | Optimization |
+| Facteur | Impact | Optimisation |
 |--------|--------|-------------|
-| **Model choice** | 10–50× cost difference | Route to cheaper model when possible |
-| **Token count** | Linear cost | Compress prompts, trim history |
-| **Cache hits** | Eliminate cost entirely | Semantic cache for repeated queries |
-| **Request volume** | Linear cost | Batch, debounce, deduplicate |
-| **Output length** | Linear cost | Use `max_tokens`, structured output |
+| **Choix du modèle** | Différence de coût 10–50× | Router vers un modèle moins cher quand c'est possible |
+| **Nombre de tokens** | Coût linéaire | Compresser les prompts, réduire l'historique |
+| **Hits de cache** | Élimine entièrement le coût | Cache sémantique pour les requêtes répétées |
+| **Volume de requêtes** | Coût linéaire | Grouper, temporiser, dédupliquer |
+| **Longueur de la sortie** | Coût linéaire | Utiliser `max_tokens`, sortie structurée |
 
 ---
 
-## Part 1: Measure Your Baseline
+## Partie 1 : Mesurer votre référence
 
-Before optimizing, measure what you're spending:
+Avant d'optimiser, mesurez ce que vous dépensez :
 
 ```python
 # cost_tracker.py
@@ -127,9 +122,9 @@ print("\n" + tracker.summary())
 
 ---
 
-## Part 2: Strategy 1 — Semantic Cache
+## Partie 2 : Stratégie 1 — Cache sémantique
 
-A **semantic cache** stores LLM responses and reuses them for semantically similar queries, even when the wording differs:
+Un **cache sémantique** stocke les réponses du LLM et les réutilise pour des requêtes sémantiquement similaires, même lorsque la formulation diffère :
 
 ```python
 # semantic_cache.py
@@ -208,9 +203,9 @@ print(f"API calls saved: {cache.hits}")
 
 ---
 
-## Part 3: Strategy 2 — Model Router
+## Partie 3 : Stratégie 2 — Routeur de modèles
 
-Use cheap models for simple queries, expensive models for complex ones:
+Utilisez des modèles économiques pour les requêtes simples, des modèles coûteux pour les requêtes complexes :
 
 ```python
 # model_router.py
@@ -253,11 +248,11 @@ def smart_chat(query: str, system: str = "You are an OutdoorGear product advisor
 
 # Test routing
 test_queries = [
-    ("What tents do you have?",                             "→ simple listing"),
-    ("What's the price of the DayHiker 22L?",              "→ simple lookup"),
-    ("Compare the TrailBlazer Tent 2P vs Summit Dome 4P",  "→ comparison"),
+    ("What tents do you have?",                             "→ liste simple"),
+    ("What's the price of the DayHiker 22L?",              "→ recherche simple"),
+    ("Compare the TrailBlazer Tent 2P vs Summit Dome 4P",  "→ comparaison"),
     ("I'm going on a 2-week alpine climb in January, which sleeping bag and tent should I buy and why?",
-                                                           "→ complex recommendation"),
+                                                           "→ recommandation complexe"),
 ]
 
 print("=== MODEL ROUTER ===")
@@ -271,9 +266,9 @@ for query, description in test_queries:
 
 ---
 
-## Part 4: Strategy 3 — Prompt Compression
+## Partie 4 : Stratégie 3 — Compression de prompts
 
-Trim conversation history to keep only the most recent + summary:
+Réduisez l'historique de conversation en ne gardant que les échanges les plus récents + un résumé :
 
 ```python
 # prompt_compression.py
@@ -330,9 +325,9 @@ print(f"Savings:    {savings:.0%}")
 
 ---
 
-## Part 5: Cost Monitoring with Azure Monitor
+## Partie 5 : Surveillance des coûts avec Azure Monitor
 
-In production, track costs with Azure Monitor:
+En production, suivez les coûts avec Azure Monitor :
 
 ```python
 # azure_cost_monitor.py (requires azure-monitor-opentelemetry)
@@ -366,7 +361,7 @@ def track_llm_call(model: str, input_tokens: int, output_tokens: int, cost: floa
     cost_gauge.add(cost, attrs)
 ```
 
-In the Azure Portal, create an alert:
+Dans le portail Azure, créez une alerte :
 
 ```
 Alert rule: AI cost > $10/day
@@ -377,33 +372,33 @@ Action: Email engineering@outdoorgear.example.com
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Quiz de connaissances
 
-??? question "1. What is semantic caching, and how does it differ from exact-match caching?"
-    **Exact-match caching** returns cached results only when the input is byte-for-byte identical. **Semantic caching** uses embeddings to find cached responses for semantically similar inputs — "Show me tents" and "What tents do you have?" get the same cached response even though the wording differs. Semantic caching is far more effective for conversational AI.
+??? question "1. Qu'est-ce que le cache sémantique et en quoi diffère-t-il du cache par correspondance exacte ?"
+    Le **cache par correspondance exacte** ne renvoie des résultats mis en cache que lorsque l'entrée est identique octet par octet. Le **cache sémantique** utilise des embeddings pour trouver des réponses en cache pour des entrées sémantiquement similaires — « Montrez-moi les tentes » et « Quelles tentes avez-vous ? » obtiennent la même réponse en cache même si la formulation diffère. Le cache sémantique est bien plus efficace pour l'IA conversationnelle.
 
-??? question "2. When should you NOT use a cheap model in a model router?"
-    Use a premium model for: **multi-step reasoning** (chain-of-thought), **comparisons** between complex options, **personalized recommendations** that require weighing many factors, **tasks where errors are costly** (medical, financial, legal). Use cheap models for: lookups, listing, formatting, simple Q&A where accuracy tolerance is higher.
+??? question "2. Quand ne devriez-vous PAS utiliser un modèle économique dans un routeur de modèles ?"
+    Utilisez un modèle premium pour : le **raisonnement en plusieurs étapes** (chaîne de pensée), les **comparaisons** entre des options complexes, les **recommandations personnalisées** qui nécessitent de pondérer de nombreux facteurs, les **tâches où les erreurs sont coûteuses** (médical, financier, juridique). Utilisez des modèles économiques pour : les recherches, les listes, le formatage, les questions-réponses simples où la tolérance aux erreurs est plus élevée.
 
-??? question "3. What are the risks of aggressively compressing prompt history?"
-    The agent may **lose context** it needs: a user mentioned an allergy 5 turns ago and the compressed summary missed it. A poorly summarized history can cause **contradictory responses** in long conversations. Always keep the most recent N turns verbatim; only summarize older turns. Test with scenarios that require long-range context.
+??? question "3. Quels sont les risques d'une compression agressive de l'historique des prompts ?"
+    L'agent peut **perdre le contexte** dont il a besoin : un utilisateur a mentionné une allergie 5 tours plus tôt et le résumé compressé l'a manqué. Un historique mal résumé peut causer des **réponses contradictoires** dans les longues conversations. Gardez toujours les N tours les plus récents textuellement ; ne résumez que les tours plus anciens. Testez avec des scénarios qui nécessitent un contexte à longue portée.
 
 ---
 
-## Summary
+## Résumé
 
-| Strategy | Potential Savings | Complexity |
+| Stratégie | Économies potentielles | Complexité |
 |----------|-------------------|------------|
-| Semantic caching | 40–80% of API calls | Medium |
-| Model routing | 10–40× cost reduction | Low |
-| Prompt compression | 20–60% token reduction | Low |
-| Batching requests | 10–30% (latency trade-off) | Medium |
-| Output limiting (`max_tokens`) | 5–20% | Very Low |
+| Cache sémantique | 40–80 % des appels API | Moyenne |
+| Routage de modèles | Réduction de coût 10–40× | Faible |
+| Compression de prompts | Réduction de 20–60 % des tokens | Faible |
+| Groupement de requêtes | 10–30 % (compromis latence) | Moyenne |
+| Limitation de la sortie (`max_tokens`) | 5–20 % | Très faible |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Observe what you optimized:** → [Lab 033 — Agent Observability](lab-033-agent-observability.md)
-- **Evaluate quality after optimization:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)
-- **Full production deployment:** → [Lab 028 — Deploy MCP to Azure](lab-028-deploy-mcp-azure.md)
+- **Observer ce que vous avez optimisé :** → [Lab 033 — Observabilité des agents](lab-033-agent-observability.md)
+- **Évaluer la qualité après l'optimisation :** → [Lab 035 — Évaluation des agents](lab-035-agent-evaluation.md)
+- **Déploiement complet en production :** → [Lab 028 — Déployer MCP sur Azure](lab-028-deploy-mcp-azure.md)

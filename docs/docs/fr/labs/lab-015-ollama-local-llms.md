@@ -1,93 +1,88 @@
 ---
 tags: [ollama, local-llm, free, python]
 ---
-# Lab 015: Ollama — Run LLMs Locally for Free
+# Lab 015 : Ollama — Exécutez des LLMs localement et gratuitement
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~30 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Runs on your machine, no cloud, no API key</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~30 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — S'exécute sur votre machine, pas de cloud, pas de clé API</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+!!! tip "Essayez aussi Foundry Local"
+    Microsoft **Foundry Local** est une alternative à Ollama avec une API compatible OpenAI. Consultez le **[Lab 078 : Foundry Local](lab-078-foundry-local.md)** pour un guide pratique.
 
+## Ce que vous allez apprendre
 
-
-!!! tip "Also try Foundry Local"
-    Microsoft **Foundry Local** is an alternative to Ollama with an OpenAI-compatible API. See **[Lab 078: Foundry Local](lab-078-foundry-local.md)** for a hands-on guide.
-
-## What You'll Learn
-
-- Install and run **Ollama** to serve LLMs locally
-- Run **Phi-4** (Microsoft's powerful small model) and **Llama 3.2** on your own machine
-- Generate **text embeddings** locally with `nomic-embed-text`
-- Call Ollama from **Python** and **C#** using the OpenAI-compatible API
-- Use Ollama as the LLM backend for **Semantic Kernel** (no API key needed)
+- Installer et exécuter **Ollama** pour servir des LLMs localement
+- Exécuter **Phi-4** (le puissant petit modèle de Microsoft) et **Llama 3.2** sur votre propre machine
+- Générer des **embeddings de texte** localement avec `nomic-embed-text`
+- Appeler Ollama depuis **Python** et **C#** en utilisant l'API compatible OpenAI
+- Utiliser Ollama comme backend LLM pour **Semantic Kernel** (pas de clé API nécessaire)
 
 ---
 
 ## Introduction
 
-**Ollama** is an open-source tool that makes running LLMs on your laptop as easy as `ollama run phi4`. No API key, no cloud account, no usage costs — just your own hardware.
+**Ollama** est un outil open source qui permet d'exécuter des LLMs sur votre ordinateur portable aussi facilement que `ollama run phi4`. Pas de clé API, pas de compte cloud, pas de coûts d'utilisation — juste votre propre matériel.
 
-This is valuable for:
-- **Privacy**: sensitive data never leaves your machine
-- **Offline development**: works without internet
-- **Cost control**: zero API costs during development
-- **Learning**: experiment freely without worrying about bills
+Cela est utile pour :
+- **Confidentialité** : les données sensibles ne quittent jamais votre machine
+- **Développement hors ligne** : fonctionne sans internet
+- **Contrôle des coûts** : zéro frais d'API pendant le développement
+- **Apprentissage** : expérimentez librement sans vous soucier des factures
 
-!!! info "Hardware requirements"
-    Ollama works on Mac (Apple Silicon or Intel), Windows, and Linux.  
-    For best performance: 16GB+ RAM. Works with 8GB but slower.  
-    GPU is optional — models run on CPU too (just slower).
+!!! info "Configuration matérielle requise"
+    Ollama fonctionne sur Mac (Apple Silicon ou Intel), Windows et Linux.  
+    Pour de meilleures performances : 16 Go+ de RAM. Fonctionne avec 8 Go mais plus lentement.  
+    Le GPU est optionnel — les modèles fonctionnent aussi sur CPU (juste plus lentement).
 
 ---
 
-## Prerequisites Setup
+## Configuration des prérequis
 
-### Install Ollama
+### Installer Ollama
 
-1. Go to [ollama.com](https://ollama.com) and download the installer for your OS
-2. Install and verify:
+1. Allez sur [ollama.com](https://ollama.com) et téléchargez l'installateur pour votre système d'exploitation
+2. Installez et vérifiez :
 
 ```bash
 ollama --version
 # ollama version 0.5.x
 ```
 
-Ollama runs as a background service on `http://localhost:11434`.
+Ollama s'exécute comme un service en arrière-plan sur `http://localhost:11434`.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-015/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-015/` dans votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `Modelfile` | Ollama model configuration | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) |
-| `chat_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) |
+| Fichier | Description | Téléchargement |
+|---------|-------------|----------------|
+| `Modelfile` | Configuration de modèle Ollama | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) |
+| `chat_starter.py` | Script de démarrage avec des TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) |
 
 ---
 
-## Lab Exercise
+## Exercice du lab
 
-### Step 1: Run your first model
+### Étape 1 : Exécuter votre premier modèle
 
 ```bash
 ollama run phi4
 ```
 
-This downloads Phi-4 (~9GB) on first run, then starts an interactive chat.
+Cela télécharge Phi-4 (~9 Go) lors de la première exécution, puis démarre un chat interactif.
 
 ```
 >>> What are AI agents?
@@ -95,32 +90,32 @@ AI agents are autonomous systems that use LLMs as their reasoning engine...
 >>> /bye
 ```
 
-Other models to try:
+Autres modèles à essayer :
 
 ```bash
-ollama run llama3.2        # Meta Llama 3.2 3B — fast, small
-ollama run llama3.2:1b     # Even smaller, very fast
-ollama run mistral         # Mistral 7B — good balance
-ollama run deepseek-r1     # Reasoning model (like o1)
-ollama run phi4-mini       # Phi-4 Mini — faster, less RAM
+ollama run llama3.2        # Meta Llama 3.2 3B — rapide, petit
+ollama run llama3.2:1b     # Encore plus petit, très rapide
+ollama run mistral         # Mistral 7B — bon équilibre
+ollama run deepseek-r1     # Modèle de raisonnement (comme o1)
+ollama run phi4-mini       # Phi-4 Mini — plus rapide, moins de RAM
 ```
 
-Check what you have installed:
+Vérifiez ce que vous avez installé :
 ```bash
 ollama list
 ```
 
-### Step 2: Pull an embedding model
+### Étape 2 : Télécharger un modèle d'embedding
 
 ```bash
 ollama pull nomic-embed-text
 ```
 
-This gives you a free local embedding model — perfect for RAG without any API costs.
+Cela vous donne un modèle d'embedding local gratuit — parfait pour le RAG sans aucun coût d'API.
 
-### Step 3: Call Ollama from Python
+### Étape 3 : Appeler Ollama depuis Python
 
-Ollama's API is **100% OpenAI-compatible**, so the same code that calls GitHub Models or Azure OpenAI works here:
+L'API d'Ollama est **100 % compatible OpenAI**, donc le même code qui appelle GitHub Models ou Azure OpenAI fonctionne ici :
 
 ```python
 from openai import OpenAI
@@ -143,7 +138,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-### Step 4: Generate embeddings locally
+### Étape 4 : Générer des embeddings localement
 
 ```python
 from openai import OpenAI
@@ -163,9 +158,9 @@ print(f"Dimensions: {len(vector)}")   # 768
 print(f"First 5:    {vector[:5]}")
 ```
 
-### Step 5: Use Ollama with Semantic Kernel
+### Étape 5 : Utiliser Ollama avec Semantic Kernel
 
-Because Ollama is OpenAI-compatible, plugging it into Semantic Kernel is trivial:
+Comme Ollama est compatible OpenAI, l'intégrer dans Semantic Kernel est trivial :
 
 === "Python"
 
@@ -224,9 +219,9 @@ Because Ollama is OpenAI-compatible, plugging it into Semantic Kernel is trivial
     Console.WriteLine(response.Content);
     ```
 
-### Step 6: Use Ollama as an MCP server backend
+### Étape 6 : Utiliser Ollama comme backend de serveur MCP
 
-Since Ollama is OpenAI-compatible, any MCP server that calls an LLM can use it locally. Just swap the client configuration:
+Comme Ollama est compatible OpenAI, tout serveur MCP qui appelle un LLM peut l'utiliser localement. Il suffit de changer la configuration du client :
 
 ```python
 # In your MCP server's config.py
@@ -236,11 +231,11 @@ EMBED_MODEL = "nomic-embed-text"
 LLM_API_KEY = "ollama"
 ```
 
-No other code changes needed.
+Aucune autre modification de code nécessaire.
 
-### Step 7: Ollama via REST API directly
+### Étape 7 : Ollama via l'API REST directement
 
-You can also call Ollama's native API (not OpenAI-compatible):
+Vous pouvez aussi appeler l'API native d'Ollama (non compatible OpenAI) :
 
 ```bash
 curl http://localhost:11434/api/chat -d '{
@@ -254,9 +249,9 @@ curl http://localhost:11434/api/chat -d '{
 
 ---
 
-## 📁 Starter Files
+## 📁 Fichiers de démarrage
 
-Two files are provided to help you follow along:
+Deux fichiers sont fournis pour vous accompagner :
 
 ```bash
 # From your cloned repo:
@@ -270,36 +265,36 @@ ollama create outdoorgear -f Modelfile
 ollama run outdoorgear
 ```
 
-The [📥 `Modelfile`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) creates a custom **OutdoorGear Advisor** persona on top of Phi-4. The [📥 `chat_starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) has 5 exercises covering basic completion, custom models, comparison, and streaming.
+Le [📥 `Modelfile`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) crée un persona personnalisé **OutdoorGear Advisor** basé sur Phi-4. Le [📥 `chat_starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) contient 5 exercices couvrant la complétion de base, les modèles personnalisés, la comparaison et le streaming.
 
 ---
 
-## Model Comparison (on a typical laptop)
+## Comparaison des modèles (sur un ordinateur portable typique)
 
-| Model | Size | RAM needed | Speed | Quality |
-|-------|------|-----------|-------|---------|
-| `phi4-mini` | 2.5GB | 4GB | ⚡⚡⚡ Fast | Good |
-| `llama3.2:1b` | 1.3GB | 4GB | ⚡⚡⚡ Very fast | Basic |
-| `llama3.2` | 2.0GB | 6GB | ⚡⚡ Fast | Good |
-| `phi4` | 9.1GB | 12GB | ⚡ Moderate | Excellent |
-| `mistral` | 4.1GB | 8GB | ⚡⚡ Fast | Very good |
-| `deepseek-r1` | 4.7GB | 8GB | ⚡ Moderate | Best reasoning |
-
----
-
-## Summary
-
-You now have a fully local LLM stack:
-
-- ✅ **Ollama** serving models on `localhost:11434`
-- ✅ **Phi-4** (or Llama) for chat/reasoning — free, private, offline
-- ✅ **nomic-embed-text** for embeddings — free, local
-- ✅ Same code works for Ollama, GitHub Models, and Azure OpenAI — just change base URL
+| Modèle | Taille | RAM nécessaire | Vitesse | Qualité |
+|--------|--------|----------------|---------|---------|
+| `phi4-mini` | 2,5 Go | 4 Go | ⚡⚡⚡ Rapide | Bonne |
+| `llama3.2:1b` | 1,3 Go | 4 Go | ⚡⚡⚡ Très rapide | Basique |
+| `llama3.2` | 2,0 Go | 6 Go | ⚡⚡ Rapide | Bonne |
+| `phi4` | 9,1 Go | 12 Go | ⚡ Modérée | Excellente |
+| `mistral` | 4,1 Go | 8 Go | ⚡⚡ Rapide | Très bonne |
+| `deepseek-r1` | 4,7 Go | 8 Go | ⚡ Modérée | Meilleur raisonnement |
 
 ---
 
-## Next Steps
+## Résumé
 
-- **Build a RAG app with local embeddings:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
-- **Use with Semantic Kernel plugins:** → [Lab 023 — SK Plugins, Memory & Planners](lab-023-sk-plugins-memory.md)
-- **Production local AI:** → [Lab 044 — Phi-4 + Ollama in Production](lab-044-phi4-ollama-production.md)
+Vous disposez maintenant d'une pile LLM entièrement locale :
+
+- ✅ **Ollama** servant les modèles sur `localhost:11434`
+- ✅ **Phi-4** (ou Llama) pour le chat/raisonnement — gratuit, privé, hors ligne
+- ✅ **nomic-embed-text** pour les embeddings — gratuit, local
+- ✅ Le même code fonctionne pour Ollama, GitHub Models et Azure OpenAI — il suffit de changer l'URL de base
+
+---
+
+## Prochaines étapes
+
+- **Construire une application RAG avec des embeddings locaux :** → [Lab 022 — RAG avec GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
+- **Utiliser avec les plugins Semantic Kernel :** → [Lab 023 — Plugins, mémoire et planificateurs SK](lab-023-sk-plugins-memory.md)
+- **IA locale en production :** → [Lab 044 — Phi-4 + Ollama en production](lab-044-phi4-ollama-production.md)

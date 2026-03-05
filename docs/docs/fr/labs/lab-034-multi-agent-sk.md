@@ -1,42 +1,37 @@
 ---
 tags: [semantic-kernel, multi-agent, python, free, github-models]
 ---
-# Lab 034: Multi-Agent Orchestration with Semantic Kernel
+# Lab 034 : Orchestration multi-agents avec Semantic Kernel
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/semantic-kernel/">Semantic Kernel</a></span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — GitHub Models API</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/semantic-kernel/">Semantic Kernel</a></span>
+  <span><strong>Durée :</strong> ~60 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Gratuit</span> — API GitHub Models</span>
 </div>
-
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
-
-
 !!! warning "Semantic Kernel -> Microsoft Agent Framework"
-    Semantic Kernel is now part of **Microsoft Agent Framework (MAF)**, which unifies SK and AutoGen into a single framework. The concepts in this lab still apply — MAF builds on top of them. See **[Lab 076: Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** for the migration guide.
+    Semantic Kernel fait désormais partie de **Microsoft Agent Framework (MAF)**, qui unifie SK et AutoGen en un seul framework. Les concepts de ce lab restent applicables — MAF s'appuie sur eux. Voir **[Lab 076 : Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** pour le guide de migration.
 
 
 
-## What You'll Learn
+## Ce que vous apprendrez
 
-- Design a **multi-agent system** with an orchestrator and specialist agents
-- Use **SK `AgentGroupChat`** for structured agent-to-agent collaboration
-- Create `ProductAgent`, `PolicyAgent`, and `OrderAgent` as specialists
-- Route user requests to the right specialist automatically
-- Aggregate answers from multiple agents into one coherent response
+- Concevoir un **système multi-agents** avec un orchestrateur et des agents spécialistes
+- Utiliser **SK `AgentGroupChat`** pour une collaboration structurée entre agents
+- Créer `ProductAgent`, `PolicyAgent` et `OrderAgent` comme spécialistes
+- Router automatiquement les requêtes utilisateur vers le bon spécialiste
+- Agréger les réponses de plusieurs agents en une réponse cohérente
 
 ---
 
 ## Introduction
 
-A single agent handling every task quickly becomes unmaintainable. The **multi-agent pattern** splits responsibilities:
+Un seul agent gérant chaque tâche devient rapidement impossible à maintenir. Le **pattern multi-agents** répartit les responsabilités :
 
-- **Orchestrator** — understands user intent and delegates
-- **Specialist agents** — deep focus on one domain (products, policy, orders)
+- **Orchestrateur** — comprend l'intention de l'utilisateur et délègue
+- **Agents spécialistes** — concentration approfondie sur un domaine (produits, politiques, commandes)
 
-Semantic Kernel's `AgentGroupChat` provides the infrastructure for agents to collaborate: taking turns, calling each other's functions, and reaching a coordinated answer.
+Le `AgentGroupChat` de Semantic Kernel fournit l'infrastructure pour que les agents collaborent : prendre la parole à tour de rôle, appeler les fonctions les uns des autres et aboutir à une réponse coordonnée.
 
 ```
 User Query
@@ -53,24 +48,24 @@ OrchestratorAgent
 
 ---
 
-## Prerequisites
+## Prérequis
 
 - Python 3.11+
 - `pip install semantic-kernel openai`
-- `GITHUB_TOKEN` set
+- `GITHUB_TOKEN` configuré
 
 ---
 
-## Lab Exercise
+## Exercice du lab
 
-### Step 1: Install dependencies
+### Étape 1 : Installer les dépendances
 
 ```bash
 pip install semantic-kernel openai
 export GITHUB_TOKEN=your_github_token_here
 ```
 
-### Step 2: Define agent tools (plugins)
+### Étape 2 : Définir les outils des agents (plugins)
 
 ```python
 # plugins.py
@@ -167,7 +162,7 @@ class OrderPlugin:
         return f"Order '{order_id}' not found."
 ```
 
-### Step 3: Build the multi-agent system
+### Étape 3 : Construire le système multi-agents
 
 ```python
 # multi_agent.py
@@ -280,13 +275,13 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### Step 4: Run the multi-agent system
+### Étape 4 : Exécuter le système multi-agents
 
 ```bash
 python multi_agent.py
 ```
 
-Expected output (abbreviated):
+Sortie attendue (abrégée) :
 ```
 ============================================================
 Customer (Alex Chen): What waterproof boots do you have, and can I return them?
@@ -309,18 +304,18 @@ Returns: 60 days from purchase, must be unused. Once worn, non-refundable unless
 
 ---
 
-## Orchestration Patterns Compared
+## Comparaison des patterns d'orchestration
 
-| Pattern | When to use |
+| Pattern | Quand l'utiliser |
 |---------|-------------|
-| **Sequential** | Steps must happen in order (A → B → C) |
-| **Parallel** | Independent tasks that can run simultaneously |
-| **AgentGroupChat** | Collaborative, conversational, dynamic routing |
-| **Handoff** | One agent passes full context to another |
+| **Séquentiel** | Les étapes doivent se dérouler dans l'ordre (A → B → C) |
+| **Parallèle** | Tâches indépendantes pouvant s'exécuter simultanément |
+| **AgentGroupChat** | Routage collaboratif, conversationnel et dynamique |
+| **Transfert (Handoff)** | Un agent transmet le contexte complet à un autre |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Agent Evaluation:** → [Lab 035 — Evaluate agent quality](lab-035-agent-evaluation.md)
-- **Production AutoGen:** → [Lab 040 — Production Multi-Agent with AutoGen](lab-040-autogen-multi-agent.md)
+- **Évaluation des agents :** → [Lab 035 — Évaluer la qualité des agents](lab-035-agent-evaluation.md)
+- **AutoGen en production :** → [Lab 040 — Multi-agents en production avec AutoGen](lab-040-autogen-multi-agent.md)

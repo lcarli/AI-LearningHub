@@ -1,31 +1,31 @@
-# 💻 Agent Builder — VS Code Path
+# 💻 Agent Builder — Parcours VS Code
 
 <span class="level-badge level-100">L100</span> <span class="level-badge level-200">L200</span> <span class="level-badge level-300">L300</span>
 
-Build AI agents that extend **Visual Studio Code** — turning Copilot Chat into a powerful, customizable coding assistant with domain-specific knowledge and actions.
+Construisez des agents IA qui étendent **Visual Studio Code** — transformant Copilot Chat en un assistant de programmation puissant et personnalisable avec des connaissances et actions spécifiques au domaine.
 
 ---
 
-## What You'll Build
+## Ce que Vous Allez Construire
 
-- ✅ A **VS Code Chat Participant** (`@myagent`) that responds in Copilot Chat
-- ✅ A chat participant that calls an **MCP Server** for live data
-- ✅ Understanding of the VS Code Extension API for AI features
+- ✅ Un **VS Code Chat Participant** (`@myagent`) qui répond dans Copilot Chat
+- ✅ Un chat participant qui appelle un **Serveur MCP** pour des données en temps réel
+- ✅ Compréhension de l'API d'Extensions VS Code pour les fonctionnalités IA
 
 ---
 
-## Path Labs (1 labs, ~45 min total)
+## Laboratoires du Parcours (1 laboratoire, ~45 min au total)
 
-| Lab | Title | Level | Cost |
-|-----|-------|-------|------|
+| Lab | Titre | Niveau | Coût |
+|-----|-------|--------|------|
 | [Lab 025](../../labs/lab-025-vscode-chat-participant.md) | VS Code Copilot Chat Participant | <span class="level-badge level-200">L200</span> | ✅ Free |
 
 ---
 
-## Key Concepts
+## Concepts Clés
 
 ### Chat Participants (`@participant`)
-Chat participants are VS Code extensions that register a handler for Copilot Chat. When a user types `@myagent`, your code runs and responds.
+Les chat participants sont des extensions VS Code qui enregistrent un handler pour Copilot Chat. Quand un utilisateur tape `@myagent`, votre code s'exécute et répond.
 
 ```typescript
 vscode.chat.createChatParticipant('myagent', async (request, context, stream, token) => {
@@ -34,21 +34,21 @@ vscode.chat.createChatParticipant('myagent', async (request, context, stream, to
 });
 ```
 
-### VS Code Language Model API
-VS Code exposes LLMs (GitHub Copilot's models) directly to extensions — no API key needed for users.
+### API de Modèle de Langage VS Code
+VS Code expose les LLMs (modèles de GitHub Copilot) directement aux extensions — aucune clé API nécessaire pour les utilisateurs.
 
 ---
 
-## Prerequisites
+## Prérequis
 
 - VS Code 1.90+
 - Node.js 20+
-- GitHub Copilot extension installed
+- Extension GitHub Copilot installée
 
 ---
 
-## External Resources
+## Ressources Externes
 
-- [VS Code Chat Participants Docs](https://code.visualstudio.com/api/extension-guides/chat)
-- [VS Code Language Model API](https://code.visualstudio.com/api/extension-guides/language-model)
-- [VS Code Extension Samples — Chat](https://github.com/microsoft/vscode-extension-samples/tree/main/chat-sample)
+- [Documentation Chat Participants VS Code](https://code.visualstudio.com/api/extension-guides/chat)
+- [API de Modèle de Langage VS Code](https://code.visualstudio.com/api/extension-guides/language-model)
+- [Exemples d'Extensions VS Code — Chat](https://github.com/microsoft/vscode-extension-samples/tree/main/chat-sample)

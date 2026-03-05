@@ -1,57 +1,52 @@
 ---
 tags: [mcp, csharp, free, github-models]
 ---
-# Lab 021: Build an MCP Server in C#
+# Lab 021: Construa um Servidor MCP em C#
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/mcp/">MCP</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free (local + Ollama)</span></span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/mcp/">MCP</a></span>
+  <span><strong>Tempo:</strong> ~45 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito (local + Ollama)</span></span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Create an MCP server using the official **ModelContextProtocol .NET SDK**
-- Expose **tools**, **resources**, and **prompts** from C#
-- Test the server with **MCP Inspector**
-- Connect it to **GitHub Copilot Agent Mode** via `mcp.json`
+- Criar um servidor MCP usando o **ModelContextProtocol .NET SDK** oficial
+- Expor **tools**, **resources** e **prompts** a partir do C#
+- Testar o servidor com o **MCP Inspector**
+- Conectá-lo ao **GitHub Copilot Agent Mode** via `mcp.json`
 
 ---
 
-## Introduction
+## Introdução
 
-Python is great for rapid MCP prototyping, but .NET is common in enterprise environments. The official `ModelContextProtocol` NuGet package makes building MCP servers in C# first-class.
-
----
-
-## Prerequisites
-
-- [.NET 8 SDK](https://dot.net) or later — free
-- [Lab 012: What is MCP?](lab-012-what-is-mcp.md) recommended
-- Node.js (for MCP Inspector) — free
+Python é ótimo para prototipagem rápida de MCP, mas .NET é comum em ambientes corporativos. O pacote NuGet oficial `ModelContextProtocol` torna a construção de servidores MCP em C# uma experiência de primeira classe.
 
 ---
 
-## 📦 Supporting Files
+## Pré-requisitos
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-021/` folder in your working directory.
+- [.NET 8 SDK](https://dot.net) ou posterior — gratuito
+- [Lab 012: O que é MCP?](lab-012-what-is-mcp.md) recomendado
+- Node.js (para o MCP Inspector) — gratuito
 
-| File | Description | Download |
+---
+
+## 📦 Arquivos de Apoio
+
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-021/` no seu diretório de trabalho.
+
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `BrokenMcpServer.cs` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs) |
+| `BrokenMcpServer.cs` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs) |
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Create the project
+### Passo 1: Criar o projeto
 
 ```bash
 mkdir mcp-csharp-demo && cd mcp-csharp-demo
@@ -61,9 +56,9 @@ dotnet add package ModelContextProtocol --prerelease
 dotnet add package Microsoft.Extensions.Hosting
 ```
 
-### Step 2: Build the MCP server
+### Passo 2: Construir o servidor MCP
 
-Replace `Program.cs` with:
+Substitua `Program.cs` por:
 
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
@@ -81,7 +76,7 @@ builder.Services
 await builder.Build().RunAsync();
 ```
 
-Create `ProductTools.cs`:
+Crie `ProductTools.cs`:
 
 ```csharp
 using ModelContextProtocol.Server;
@@ -137,23 +132,23 @@ public class ProductTools
 public record Product(string Id, string Name, string Category, decimal Price, bool InStock);
 ```
 
-### Step 3: Run and test with MCP Inspector
+### Passo 3: Executar e testar com o MCP Inspector
 
-**Terminal 1** — build the server:
+**Terminal 1** — compilar o servidor:
 ```bash
 dotnet build
 ```
 
-**Test with MCP Inspector:**
+**Testar com o MCP Inspector:**
 ```bash
 npx @modelcontextprotocol/inspector dotnet run
 ```
 
-In Inspector, click **Tools** and test `search_products` with query `"camping"`. You should see the tent returned.
+No Inspector, clique em **Tools** e teste `search_products` com a consulta `"camping"`. Você deverá ver a barraca retornada.
 
-### Step 4: Add a Resource
+### Passo 4: Adicionar um Resource
 
-Resources expose read-only data (files, database views, etc.). Add to `ProductTools.cs`:
+Resources expõem dados somente leitura (arquivos, views de banco de dados, etc.). Adicione ao `ProductTools.cs`:
 
 ```csharp
 [McpServerResourceType]
@@ -168,18 +163,18 @@ public class ProductResources
 }
 ```
 
-Update `Program.cs` to register resources:
+Atualize `Program.cs` para registrar os resources:
 ```csharp
 builder.Services
     .AddMcpServer()
     .WithStdioServerTransport()
     .WithTools<ProductTools>()
-    .WithResources<ProductResources>();  // ← add this
+    .WithResources<ProductResources>();  // ← adicione isto
 ```
 
-### Step 5: Connect to GitHub Copilot
+### Passo 5: Conectar ao GitHub Copilot
 
-Add to `.vscode/mcp.json` in your workspace:
+Adicione ao `.vscode/mcp.json` no seu workspace:
 
 ```json
 {
@@ -193,32 +188,32 @@ Add to `.vscode/mcp.json` in your workspace:
 }
 ```
 
-Enable Agent Mode in VS Code, then ask: *"What camping products are in stock?"*
+Ative o Agent Mode no VS Code e pergunte: *"Quais produtos de camping estão em estoque?"*
 
 ---
 
-## Key Differences vs Python SDK
+## Principais Diferenças vs Python SDK
 
 | | Python | C# |
 |---|---|---|
 | Decorator | `@mcp.tool()` | `[McpServerTool]` |
-| Description | docstring | `[Description("...")]` |
+| Descrição | docstring | `[Description("...")]` |
 | Resources | `@mcp.resource()` | `[McpServerResource(...)]` |
-| Transport | `mcp.run(transport="stdio")` | `.WithStdioServerTransport()` |
-| DI container | — | `Microsoft.Extensions.Hosting` |
+| Transporte | `mcp.run(transport="stdio")` | `.WithStdioServerTransport()` |
+| Container DI | — | `Microsoft.Extensions.Hosting` |
 
 ---
 
-## 🐛 Bug-Fix Exercise: Fix the Broken MCP Server
+## 🐛 Exercício de Correção de Bugs: Corrija o Servidor MCP Quebrado
 
-This lab includes a deliberately broken C# MCP server file. Your challenge: find and fix 3 bugs.
+Este lab inclui um arquivo de servidor MCP em C# deliberadamente quebrado. Seu desafio: encontrar e corrigir 3 bugs.
 
 ```
 lab-021/
-└── BrokenMcpServer.cs    ← 3 intentional bugs to find and fix
+└── BrokenMcpServer.cs    ← 3 bugs intencionais para encontrar e corrigir
 ```
 
-**Setup:**
+**Configuração:**
 ```bash
 mkdir mcp-bugfix && cd mcp-bugfix
 dotnet new console -o BugFixServer
@@ -226,62 +221,62 @@ cd BugFixServer
 dotnet add package ModelContextProtocol --prerelease
 dotnet add package Microsoft.Extensions.Hosting
 
-# Copy the broken file over Program.cs
+# Copie o arquivo quebrado sobre o Program.cs
 cp ../lab-021/BrokenMcpServer.cs Program.cs
 dotnet run
 ```
 
-**The 3 bugs:**
+**Os 3 bugs:**
 
-| # | Tool | Symptom | Type |
+| # | Tool | Sintoma | Tipo |
 |---|------|---------|------|
-| 1 | `list_categories` | `NullReferenceException` on startup | Null initialization |
-| 2 | `search_products` | Always returns empty list `[]` | Logic inversion (`!`) |
-| 3 | `get_product_details` | Returns "not found" for lowercase IDs | Case-sensitive comparison |
+| 1 | `list_categories` | `NullReferenceException` na inicialização | Inicialização nula |
+| 2 | `search_products` | Sempre retorna lista vazia `[]` | Inversão de lógica (`!`) |
+| 3 | `get_product_details` | Retorna "not found" para IDs em minúsculas | Comparação sensível a maiúsculas/minúsculas |
 
-**Verify your fixes:** After fixing all 3 bugs, connect with the MCP Inspector and run:
+**Verifique suas correções:** Após corrigir todos os 3 bugs, conecte-se com o MCP Inspector e execute:
 
-- `list_categories()` → should return `["Backpacks", "Sleeping Bags", "Tents"]`
-- `search_products(keyword: "tent")` → should return P001, P002, P003
-- `get_product_details(productId: "p001")` → should return TrailBlazer Tent 2P details
+- `list_categories()` → deve retornar `["Backpacks", "Sleeping Bags", "Tents"]`
+- `search_products(keyword: "tent")` → deve retornar P001, P002, P003
+- `get_product_details(productId: "p001")` → deve retornar os detalhes do TrailBlazer Tent 2P
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Run the Lab):** After fixing all 3 bugs and calling `list_categories()`, what does the tool return? List the categories in the order they appear in the output."
+??? question "**Q1 (Execute o Lab):** Após corrigir todos os 3 bugs e chamar `list_categories()`, o que a tool retorna? Liste as categorias na ordem em que aparecem na saída."
 
-    Fix the bugs, start the server, connect with MCP Inspector, and call `list_categories()`.
+    Corrija os bugs, inicie o servidor, conecte-se com o MCP Inspector e chame `list_categories()`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **`["Backpacks", "Sleeping Bags", "Tents"]`**
 
-        The categories are returned in alphabetical order because the original code uses a sorted `List<string>`. Bug #1 (`categories = null`) caused a `NullReferenceException` before returning anything — fixing it reveals the properly sorted list.
+        As categorias são retornadas em ordem alfabética porque o código original usa uma `List<string>` ordenada. O bug #1 (`categories = null`) causava uma `NullReferenceException` antes de retornar qualquer coisa — corrigi-lo revela a lista corretamente ordenada.
 
-??? question "**Q2 (Run the Lab):** After fixing bug #3 (the case-sensitive comparison bug), what `StringComparison` value replaces `StringComparison.Ordinal` in the fix?"
+??? question "**Q2 (Execute o Lab):** Após corrigir o bug #3 (o bug de comparação sensível a maiúsculas/minúsculas), qual valor de `StringComparison` substitui `StringComparison.Ordinal` na correção?"
 
-    Read the bug #3 description carefully, then look at the fix you applied in [📥 `BrokenMcpServer.cs`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs).
+    Leia a descrição do bug #3 cuidadosamente e depois observe a correção que você aplicou em [📥 `BrokenMcpServer.cs`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs).
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **`StringComparison.OrdinalIgnoreCase`**
 
-        The original code used `StringComparison.Ordinal` which is case-sensitive, so `get_product_details("p001")` failed because the stored IDs are uppercase (`"P001"`). Replacing it with `OrdinalIgnoreCase` makes ID lookups work regardless of the case the client sends.
+        O código original usava `StringComparison.Ordinal`, que é sensível a maiúsculas/minúsculas, então `get_product_details("p001")` falhava porque os IDs armazenados são em maiúsculas (`"P001"`). Substituí-lo por `OrdinalIgnoreCase` faz as buscas de ID funcionarem independentemente do formato de maiúsculas/minúsculas enviado pelo cliente.
 
-??? question "**Q3 (Multiple Choice):** Bug #2 in `search_products` caused it to always return an empty list. What was the root cause?"
+??? question "**Q3 (Múltipla Escolha):** O bug #2 em `search_products` fazia com que sempre retornasse uma lista vazia. Qual foi a causa raiz?"
 
-    - A) The keyword parameter was null
-    - B) The `Contains()` call was inverted with `!` — it filtered OUT matches instead of keeping them
-    - C) The product list was not initialized
-    - D) The search was case-sensitive and no products matched
+    - A) O parâmetro keyword era nulo
+    - B) A chamada `Contains()` foi invertida com `!` — ela filtrava PARA FORA os resultados correspondentes em vez de mantê-los
+    - C) A lista de produtos não foi inicializada
+    - D) A busca era sensível a maiúsculas/minúsculas e nenhum produto correspondia
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B — Logic inversion**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B — Inversão de lógica**
 
-        The code had `!product.Name.Contains(keyword)` — the `!` negated the condition, so products that DID contain the keyword were excluded, and products that did NOT contain the keyword were returned. With an empty results list, there were no non-matching products either. Removing the `!` fixes the logic.
+        O código tinha `!product.Name.Contains(keyword)` — o `!` negava a condição, então os produtos que CONTINHAM a palavra-chave eram excluídos, e os produtos que NÃO continham a palavra-chave eram retornados. Com uma lista de resultados vazia, não havia produtos não correspondentes também. Remover o `!` corrige a lógica.
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Deploy this server to the cloud:** → [Lab 028 — Deploy MCP to Azure Container Apps](lab-028-deploy-mcp-azure.md)
-- **Python version of MCP server:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
+- **Implantar este servidor na nuvem:** → [Lab 028 — Implantar MCP no Azure Container Apps](lab-028-deploy-mcp-azure.md)
+- **Versão Python do servidor MCP:** → [Lab 020 — Servidor MCP em Python](lab-020-mcp-server-python.md)

@@ -1,51 +1,46 @@
 ---
 tags: [phi4, ollama, local-llm, free, python]
 ---
-# Lab 044: Phi-4 + Ollama in Production
+# Lab 044: Phi-4 + Ollama em Produção
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free (local)</span> — 8GB+ RAM for Phi-4-mini</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Tempo:</strong> ~90 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito (local)</span> — 8GB+ RAM para Phi-4-mini</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Run **Microsoft Phi-4** locally via Ollama (zero cost, no internet required)
-- **Benchmark** Phi-4-mini vs GPT-4o-mini on reasoning tasks
-- Build a **local-first agent** with automatic cloud fallback
-- Add **response caching** to avoid redundant LLM calls
-- **Batch processing** for high-throughput use cases
+- Executar o **Microsoft Phi-4** localmente via Ollama (custo zero, sem necessidade de internet)
+- Fazer **benchmark** do Phi-4-mini vs GPT-4o-mini em tarefas de raciocínio
+- Construir um **agente local-first** com fallback automático para a nuvem
+- Adicionar **cache de respostas** para evitar chamadas redundantes ao LLM
+- **Processamento em lote** para casos de uso de alto throughput
 
 ---
 
-## Introduction
+## Introdução
 
-Phi-4 is Microsoft's state-of-the-art small language model family. **Phi-4-mini** (3.8B parameters) runs on a laptop with 8GB RAM and matches GPT-4o-mini on many reasoning benchmarks — for free, locally, with no privacy concerns.
+O Phi-4 é a família de modelos de linguagem pequenos de última geração da Microsoft. O **Phi-4-mini** (3.8B parâmetros) roda em um laptop com 8GB de RAM e iguala o GPT-4o-mini em muitos benchmarks de raciocínio — gratuitamente, localmente, sem preocupações com privacidade.
 
-This lab builds a production-grade local inference setup: caching, batching, fallback, and benchmarking.
+Este lab constrói uma configuração de inferência local de nível de produção: cache, processamento em lote, fallback e benchmarking.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-- [Ollama](https://ollama.ai) installed
-- 8GB+ RAM (16GB recommended for best performance)
+- [Ollama](https://ollama.ai) instalado
+- 8GB+ RAM (16GB recomendado para melhor desempenho)
 - Python 3.11+
 - `pip install openai httpx`
-- Optional: `GITHUB_TOKEN` for cloud fallback
+- Opcional: `GITHUB_TOKEN` para fallback na nuvem
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Pull Phi-4 models
+### Passo 1: Baixar os modelos Phi-4
 
 ```bash
 # Phi-4-mini: 3.8B parameters, fast, fits in 8GB RAM
@@ -58,9 +53,9 @@ ollama pull phi4
 ollama list
 ```
 
-### Step 2: Test Phi-4 via Ollama's OpenAI-compatible API
+### Passo 2: Testar o Phi-4 via API compatível com OpenAI do Ollama
 
-Ollama exposes an OpenAI-compatible API at `http://localhost:11434/v1`, so you can use the same `openai` Python client:
+O Ollama expõe uma API compatível com OpenAI em `http://localhost:11434/v1`, então você pode usar o mesmo cliente Python `openai`:
 
 ```python
 # test_phi4.py
@@ -83,7 +78,7 @@ print(response.choices[0].message.content)
 # Expected: 391
 ```
 
-### Step 3: Build a local-first client with cloud fallback
+### Passo 3: Construir um cliente local-first com fallback para a nuvem
 
 ```python
 # local_first_client.py
@@ -179,7 +174,7 @@ class LocalFirstClient:
             print(f"  {k}: {v} ({pct:.0f}%)")
 ```
 
-### Step 4: Benchmark Phi-4-mini vs GPT-4o-mini
+### Passo 4: Benchmark do Phi-4-mini vs GPT-4o-mini
 
 ```python
 # benchmark.py
@@ -219,7 +214,7 @@ for task in TASKS:
 python benchmark.py
 ```
 
-### Step 5: Batch processing for high throughput
+### Passo 5: Processamento em lote para alto throughput
 
 ```python
 # batch_processor.py
@@ -273,21 +268,21 @@ asyncio.run(main())
 
 ---
 
-## Performance Comparison (typical results)
+## Comparação de Desempenho (resultados típicos)
 
-| Model | Avg Latency | Quality | Cost | Privacy |
-|-------|------------|---------|------|---------|
-| phi4-mini (local) | 800–2000ms | ★★★★☆ | Free | ✅ Local |
-| phi4 (local) | 3000–8000ms | ★★★★★ | Free | ✅ Local |
-| gpt-4o-mini (cloud) | 300–800ms | ★★★★★ | ~$0.00015/1k tok | ☁️ Cloud |
+| Modelo | Latência Média | Qualidade | Custo | Privacidade |
+|--------|---------------|-----------|-------|-------------|
+| phi4-mini (local) | 800–2000ms | ★★★★☆ | Gratuito | ✅ Local |
+| phi4 (local) | 3000–8000ms | ★★★★★ | Gratuito | ✅ Local |
+| gpt-4o-mini (nuvem) | 300–800ms | ★★★★★ | ~$0.00015/1k tok | ☁️ Nuvem |
 
-!!! tip "When to choose local"
-    Use Phi-4-mini for: high-volume tasks, sensitive data, offline scenarios, and development.
-    Use cloud for: complex reasoning, production SLAs, and tasks requiring latest capabilities.
+!!! tip "Quando escolher local"
+    Use Phi-4-mini para: tarefas de alto volume, dados sensíveis, cenários offline e desenvolvimento.
+    Use nuvem para: raciocínio complexo, SLAs de produção e tarefas que exigem as capacidades mais recentes.
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Containerize your local AI setup:** Add Ollama to the devcontainer (already pre-configured in `.devcontainer/devcontainer.json`)
-- **Embed Phi-4 in RAG:** → [Lab 022 — RAG with pgvector](lab-022-rag-github-models-pgvector.md)
+- **Containerize sua configuração de IA local:** Adicione o Ollama ao devcontainer (já pré-configurado em `.devcontainer/devcontainer.json`)
+- **Incorpore o Phi-4 em RAG:** → [Lab 022 — RAG with pgvector](lab-022-rag-github-models-pgvector.md)

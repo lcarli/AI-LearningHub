@@ -1,39 +1,34 @@
 ---
 tags: [python, free, github-models, streaming]
 ---
-# Lab 019: Streaming Responses in Agents
+# Lab 019 : Réponses en streaming dans les agents
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code Agents</a></span>
-  <span><strong>Time:</strong> ~25 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account, no credit card</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">⚙️ Pro Code Agents</a></span>
+  <span><strong>Durée :</strong> ~25 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Compte GitHub gratuit, pas de carte bancaire</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- Why streaming matters for AI agent UX
-- How to use `stream=True` with the OpenAI Python SDK
-- How to handle streamed tool calls (tricky — different from regular streaming)
-- How to yield streaming tokens from a FastAPI endpoint
-- How to stream from Semantic Kernel
+- Pourquoi le streaming est important pour l'expérience utilisateur des agents IA
+- Comment utiliser `stream=True` avec le SDK Python OpenAI
+- Comment gérer les appels d'outils en streaming (délicat — différent du streaming classique)
+- Comment renvoyer des tokens en streaming depuis un endpoint FastAPI
+- Comment streamer depuis Semantic Kernel
 
 ---
 
 ## Introduction
 
-Without streaming, users stare at a blank screen for 3–10 seconds while the model generates a long response. With streaming, text appears **token by token** as it's generated — just like ChatGPT.
+Sans streaming, les utilisateurs fixent un écran vide pendant 3 à 10 secondes pendant que le modèle génère une longue réponse. Avec le streaming, le texte apparaît **token par token** au fur et à mesure de la génération — exactement comme ChatGPT.
 
-For agents, streaming is especially important because tool calls can add significant latency. Showing intermediate output ("Searching products... Found 3 results. Generating answer...") makes the wait feel much shorter.
+Pour les agents, le streaming est particulièrement important car les appels d'outils peuvent ajouter une latence significative. Afficher des résultats intermédiaires ("Recherche de produits... 3 résultats trouvés. Génération de la réponse...") rend l'attente beaucoup plus courte.
 
 ---
 
-## Step 1: Basic Streaming
+## Étape 1 : Streaming basique
 
 ```bash
 pip install openai
@@ -70,13 +65,13 @@ for chunk in stream:
 print("\n\n✅ Done!")
 ```
 
-The `flush=True` is critical — without it, Python buffers output and you lose the streaming effect.
+Le `flush=True` est essentiel — sans lui, Python met en mémoire tampon la sortie et vous perdez l'effet de streaming.
 
 ---
 
-## Step 2: Collect the Full Response While Streaming
+## Étape 2 : Collecter la réponse complète pendant le streaming
 
-Sometimes you want to show streaming output AND have the full text for further processing:
+Parfois, vous souhaitez afficher la sortie en streaming ET disposer du texte complet pour un traitement ultérieur :
 
 ```python
 full_response = []
@@ -99,9 +94,9 @@ print(f"\n\nFull response ({len(full_text)} chars):\n{full_text}")
 
 ---
 
-## Step 3: Streaming with Tool Calls
+## Étape 3 : Streaming avec appels d'outils
 
-Streaming and tool calling together requires careful handling. The tool call is delivered across multiple chunks:
+Le streaming combiné aux appels d'outils nécessite un traitement attentif. L'appel d'outil est transmis sur plusieurs fragments :
 
 ```python
 import json
@@ -166,14 +161,14 @@ def stream_with_tools(user_message: str, tools: list):
     return "".join(full_content), current_tool_calls
 ```
 
-!!! tip "Streaming + tools is complex"
-    Most production code uses non-streaming for the tool-calling phase and only streams the final answer generation. That's simpler and usually sufficient.
+!!! tip "Le streaming + les outils est complexe"
+    La plupart du code en production utilise le mode non-streaming pour la phase d'appel d'outils et ne streame que la génération de la réponse finale. C'est plus simple et généralement suffisant.
 
 ---
 
-## Step 4: Streaming in a FastAPI Endpoint
+## Étape 4 : Streaming dans un endpoint FastAPI
 
-This is the pattern for real web applications:
+Voici le pattern pour les applications web réelles :
 
 ```python
 # pip install fastapi uvicorn openai
@@ -218,17 +213,17 @@ async def stream_endpoint(question: str = "What gear do I need for a weekend hik
     )
 ```
 
-Start the server:
+Démarrez le serveur :
 ```bash
 uvicorn main:app --reload
 ```
 
-Test with curl:
+Testez avec curl :
 ```bash
 curl "http://localhost:8000/stream?question=What+tent+is+best+for+winter+camping"
 ```
 
-Or consume in JavaScript (browser):
+Ou consommez en JavaScript (navigateur) :
 ```javascript
 const source = new EventSource('/stream?question=What+boots+for+hiking%3F');
 source.onmessage = (event) => {
@@ -239,7 +234,7 @@ source.onmessage = (event) => {
 
 ---
 
-## Step 5: Streaming in Semantic Kernel
+## Étape 5 : Streaming dans Semantic Kernel
 
 ```python
 import asyncio
@@ -282,9 +277,9 @@ asyncio.run(stream_sk_response())
 
 ---
 
-## Step 6: Show Progress During Tool Calls
+## Étape 6 : Afficher la progression pendant les appels d'outils
 
-For better UX, show users what's happening while tools execute:
+Pour une meilleure expérience utilisateur, montrez aux utilisateurs ce qui se passe pendant l'exécution des outils :
 
 ```python
 import time
@@ -342,37 +337,37 @@ def run_agent_with_progress(user_message: str) -> str:
             return "".join(result_text)
 ```
 
-This pattern is used in production agents: tool calls run non-streamed (for simpler code), and only the final LLM answer is streamed.
+Ce pattern est utilisé dans les agents en production : les appels d'outils s'exécutent sans streaming (pour un code plus simple), et seule la réponse finale du LLM est streamée.
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "1. Why is flush=True important when printing streamed tokens?"
-    Python buffers stdout by default. Without `flush=True`, text accumulates in the buffer and gets printed all at once at the end — defeating the purpose of streaming. `flush=True` forces the buffer to be written immediately on each `print()` call.
+??? question "1. Pourquoi flush=True est-il important lors de l'affichage des tokens en streaming ?"
+    Python met en mémoire tampon stdout par défaut. Sans `flush=True`, le texte s'accumule dans le tampon et s'affiche d'un seul coup à la fin — ce qui annule l'intérêt du streaming. `flush=True` force l'écriture immédiate du tampon à chaque appel `print()`.
 
-??? question "2. Why does streaming with tool calls require more complex code than basic streaming?"
-    Tool call data arrives **across multiple chunks** — each chunk contains a small piece of the function name, ID, and arguments. You must accumulate these pieces and reconstruct the complete tool call object before you can execute it. Regular text streaming is simpler because each chunk is already complete text you can display immediately.
+??? question "2. Pourquoi le streaming avec appels d'outils nécessite-t-il un code plus complexe que le streaming basique ?"
+    Les données d'appel d'outil arrivent **sur plusieurs fragments** — chaque fragment contient une petite partie du nom de la fonction, de l'identifiant et des arguments. Vous devez accumuler ces morceaux et reconstruire l'objet d'appel d'outil complet avant de pouvoir l'exécuter. Le streaming de texte classique est plus simple car chaque fragment est déjà du texte complet que vous pouvez afficher immédiatement.
 
-??? question "3. What is Server-Sent Events (SSE) and why is it used for AI streaming in web apps?"
-    SSE is a web standard where the server sends a stream of events over a single HTTP connection, formatted as `data: <content>\n\n`. It's simpler than WebSockets for one-way server→client streaming. Browsers have built-in `EventSource` API support, and it works through proxies and load balancers better than WebSockets. Most AI chat interfaces (ChatGPT, Copilot) use SSE for streaming responses.
-
----
-
-## Summary
-
-| Approach | When to use |
-|----------|------------|
-| `stream=True` basic | CLI tools, simple scripts |
-| Collect while streaming | Need both streaming UX + full text for processing |
-| FastAPI + SSE | Web applications, chat interfaces |
-| SK `get_streaming_...` | Production SK agents |
-| Progress messages | When tool calls add significant latency |
+??? question "3. Qu'est-ce que les Server-Sent Events (SSE) et pourquoi sont-ils utilisés pour le streaming IA dans les applications web ?"
+    SSE est un standard web où le serveur envoie un flux d'événements via une seule connexion HTTP, formaté comme `data: <contenu>\n\n`. C'est plus simple que les WebSockets pour le streaming unidirectionnel serveur→client. Les navigateurs disposent d'un support natif via l'API `EventSource`, et cela fonctionne mieux à travers les proxys et les répartiteurs de charge que les WebSockets. La plupart des interfaces de chat IA (ChatGPT, Copilot) utilisent SSE pour les réponses en streaming.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **Tool calling deep dive:** → [Lab 018 — Function Calling & Tool Use](lab-018-function-calling.md)
-- **Build a web UI for your agent:** → [Lab 041 — Custom GitHub Copilot Extension](lab-041-copilot-extension.md)
-- **Production streaming with Foundry:** → [Lab 030 — Foundry Agent Service](lab-030-foundry-agent-mcp.md)
+| Approche | Quand l'utiliser |
+|----------|-----------------|
+| `stream=True` basique | Outils en ligne de commande, scripts simples |
+| Collecter pendant le streaming | Besoin du streaming UX + texte complet pour le traitement |
+| FastAPI + SSE | Applications web, interfaces de chat |
+| SK `get_streaming_...` | Agents SK en production |
+| Messages de progression | Quand les appels d'outils ajoutent une latence significative |
+
+---
+
+## Prochaines étapes
+
+- **Approfondissement des appels d'outils :** → [Lab 018 — Appel de fonctions et utilisation d'outils](lab-018-function-calling.md)
+- **Construire une interface web pour votre agent :** → [Lab 041 — Extension GitHub Copilot personnalisée](lab-041-copilot-extension.md)
+- **Streaming en production avec Foundry :** → [Lab 030 — Foundry Agent Service](lab-030-foundry-agent-mcp.md)

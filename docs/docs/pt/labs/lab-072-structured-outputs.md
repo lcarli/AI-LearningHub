@@ -1,55 +1,50 @@
 ---
 tags: [structured-outputs, json-schema, pydantic, reliability, python]
 ---
-# Lab 072: Structured Outputs — Guaranteed JSON for Agents
+# Lab 072: Structured Outputs — JSON Garantido para Agentes
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock extraction data</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Trilha:</strong> Todas as trilhas</span>
+  <span><strong>Tempo:</strong> ~45 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados simulados de extração</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- O que são **Structured Outputs** e por que agentes precisam de JSON garantido
+- Como a imposição de JSON Schema difere de prompts genéricos do tipo "por favor, retorne JSON"
+- Analisar resultados de testes de extração comparando saídas com e sem imposição de schema
+- Medir **taxas de validade de schema** e **precisão de campos** em diferentes tipos de entrada
+- Criar um **relatório de confiabilidade** provando que structured outputs eliminam falhas de parsing
 
+## Introdução
 
-## What You'll Learn
+Quando um agente extrai informações de texto não estruturado — e-mails, faturas, currículos, chamados de suporte — ele precisa retornar **dados estruturados** que sistemas downstream possam interpretar de forma confiável. Sem imposição de schema, até os melhores modelos ocasionalmente retornam JSON malformado, campos ausentes ou tipos inesperados.
 
-- What **Structured Outputs** are and why agents need guaranteed JSON
-- How JSON Schema enforcement differs from free-form "please return JSON" prompts
-- Analyze extraction test results comparing schema-enforced vs. no-schema outputs
-- Measure **schema validity rates** and **field accuracy** across input types
-- Build a **reliability report** proving structured outputs eliminate parsing failures
+**Structured Outputs** resolvem isso ao restringir a saída do modelo a um JSON Schema no momento da decodificação. O modelo literalmente *não consegue* produzir JSON inválido.
 
-## Introduction
-
-When an agent extracts information from unstructured text — emails, invoices, resumes, support tickets — it needs to return **structured data** that downstream systems can parse reliably. Without schema enforcement, even the best models occasionally return malformed JSON, missing fields, or unexpected types.
-
-**Structured Outputs** solve this by constraining the model's output to a JSON Schema at decoding time. The model literally *cannot* produce invalid JSON.
-
-| Approach | Validity Guarantee | Field Accuracy | Parsing Failures |
+| Abordagem | Garantia de Validade | Precisão de Campos | Falhas de Parsing |
 |----------|-------------------|----------------|-----------------|
-| Free-form prompt ("return JSON") | ❌ No guarantee | Variable | Common |
-| JSON mode | ✅ Valid JSON | Variable | Rare |
-| **Structured Outputs (JSON Schema)** | ✅ Valid + schema-compliant | High | **Zero** |
+| Prompt genérico ("retorne JSON") | ❌ Sem garantia | Variável | Comuns |
+| Modo JSON | ✅ JSON válido | Variável | Raras |
+| **Structured Outputs (JSON Schema)** | ✅ Válido + compatível com schema | Alta | **Zero** |
 
-### The Scenario
+### O Cenário
 
-You are a **Data Engineer** building an extraction pipeline for an insurance company. The pipeline processes 5 document types: emails, invoices, resumes, support tickets, and product reviews. You've run **15 extraction tests** — 10 with schema enforcement and 5 without — and need to prove that structured outputs are production-ready.
+Você é um **Engenheiro de Dados** construindo um pipeline de extração para uma seguradora. O pipeline processa 5 tipos de documentos: e-mails, faturas, currículos, chamados de suporte e avaliações de produtos. Você executou **15 testes de extração** — 10 com imposição de schema e 5 sem — e precisa provar que structured outputs estão prontos para produção.
 
-Your dataset (`structured_outputs.csv`) contains the results. Your job: analyze validity rates, field accuracy, and build the case for schema enforcement.
+Seu dataset (`structured_outputs.csv`) contém os resultados. Seu trabalho: analisar taxas de validade, precisão de campos e construir o caso para imposição de schema.
 
-!!! info "Mock Data"
-    This lab uses a mock test results CSV. The patterns mirror real-world behavior: schema-enforced outputs achieve near-perfect accuracy, while free-form outputs are inconsistent.
+!!! info "Dados Simulados"
+    Este lab utiliza um CSV com resultados de testes simulados. Os padrões refletem o comportamento do mundo real: saídas com imposição de schema alcançam precisão quase perfeita, enquanto saídas genéricas são inconsistentes.
 
-## Prerequisites
+## Pré-requisitos
 
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run the analysis scripts |
-| `pandas` library | Data manipulation |
+| Python 3.10+ | Executar os scripts de análise |
+| Biblioteca `pandas` | Manipulação de dados |
 
 ```bash
 pip install pandas
@@ -57,29 +52,29 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências já estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-072/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-072/` no seu diretório de trabalho.
 
-| File | Description | Download |
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_structured.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/broken_structured.py) |
+| `broken_structured.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/broken_structured.py) |
 | `structured_outputs.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) |
 
 ---
 
-## Step 1: Understand Structured Outputs
+## Etapa 1: Entender Structured Outputs
 
-Structured Outputs work by providing a **JSON Schema** alongside your prompt. The model's decoder is constrained to only produce tokens that result in valid JSON matching the schema.
+Structured Outputs funcionam fornecendo um **JSON Schema** junto com seu prompt. O decodificador do modelo é restringido a produzir apenas tokens que resultem em JSON válido compatível com o schema.
 
-### Example Schema (Pydantic)
+### Exemplo de Schema (Pydantic)
 
 ```python
 from pydantic import BaseModel
@@ -98,21 +93,21 @@ class InvoiceExtraction(BaseModel):
     line_items: List[str]
 ```
 
-### How It Works
+### Como Funciona
 
-1. You define a JSON Schema (or Pydantic model)
-2. You pass it to the API alongside your prompt
-3. The model's token sampling is constrained to match the schema
-4. The output is **guaranteed** to be valid JSON matching your schema — every field present, every type correct
+1. Você define um JSON Schema (ou modelo Pydantic)
+2. Você o passa para a API junto com seu prompt
+3. A amostragem de tokens do modelo é restringida para corresponder ao schema
+4. A saída tem **garantia** de ser JSON válido correspondente ao seu schema — todo campo presente, todo tipo correto
 
-!!! tip "Pydantic Integration"
-    OpenAI's Python SDK can accept a Pydantic model directly via `response_format=EmailExtraction`. The SDK handles the schema conversion automatically.
+!!! tip "Integração com Pydantic"
+    O SDK Python da OpenAI pode aceitar um modelo Pydantic diretamente via `response_format=EmailExtraction`. O SDK lida com a conversão do schema automaticamente.
 
 ---
 
-## Step 2: Load and Explore the Test Results
+## Etapa 2: Carregar e Explorar os Resultados dos Testes
 
-The dataset has **15 extraction tests** — 10 with schema enforcement (`gpt-4o`) and 5 without (`gpt-4o-no-schema`):
+O dataset possui **15 testes de extração** — 10 com imposição de schema (`gpt-4o`) e 5 sem (`gpt-4o-no-schema`):
 
 ```python
 import pandas as pd
@@ -129,7 +124,7 @@ print(f"Input types: {df['input_type'].unique().tolist()}")
 print(f"\nFirst 5 rows:\n{df.head()}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total tests: 15
@@ -139,9 +134,9 @@ Input types: ['email', 'invoice', 'resume', 'support_ticket', 'product_review']
 
 ---
 
-## Step 3: Compare Schema Validity Rates
+## Etapa 3: Comparar Taxas de Validade de Schema
 
-The `structured_output_valid` column indicates whether the output matched the expected schema (all fields present, correct types):
+A coluna `structured_output_valid` indica se a saída correspondeu ao schema esperado (todos os campos presentes, tipos corretos):
 
 ```python
 schema_rows = df[df["model"] == "gpt-4o"]
@@ -154,7 +149,7 @@ print(f"Schema-enforced validity rate:  {schema_valid_rate:.0f}%")
 print(f"No-schema validity rate:        {no_schema_valid_rate:.0f}%")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Schema-enforced validity rate:  100%
@@ -162,13 +157,13 @@ No-schema validity rate:        0%
 ```
 
 !!! tip "Insight"
-    **100% vs. 0%** — this is the entire argument for structured outputs. With schema enforcement, every single extraction passes validation. Without it, *none* do (some may parse as JSON, but fields are missing or types are wrong).
+    **100% vs. 0%** — este é o argumento completo a favor de structured outputs. Com imposição de schema, cada extração passa na validação. Sem ela, *nenhuma* passa (algumas podem ser interpretadas como JSON, mas campos estão ausentes ou tipos estão errados).
 
 ---
 
-## Step 4: Analyze Field Accuracy
+## Etapa 4: Analisar Precisão de Campos
 
-Even when JSON is valid, the extracted *values* may not be accurate. The `field_accuracy_pct` column measures how many fields had the correct value:
+Mesmo quando o JSON é válido, os *valores* extraídos podem não ser precisos. A coluna `field_accuracy_pct` mede quantos campos tiveram o valor correto:
 
 ```python
 schema_accuracy = schema_rows["field_accuracy_pct"].mean()
@@ -178,14 +173,14 @@ print(f"Avg field accuracy (with schema):    {schema_accuracy:.0f}%")
 print(f"Avg field accuracy (without schema): {no_schema_accuracy:.0f}%")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Avg field accuracy (with schema):    98%
 Avg field accuracy (without schema): 68%
 ```
 
-Break it down by input type:
+Detalhamento por tipo de entrada:
 
 ```python
 accuracy_by_type = df.groupby(["input_type", "model"])["field_accuracy_pct"].mean().unstack()
@@ -203,9 +198,9 @@ for input_type in df["input_type"].unique():
 
 ---
 
-## Step 5: Measure Latency and Token Usage
+## Etapa 5: Medir Latência e Uso de Tokens
 
-Schema enforcement has a small overhead — the model must conform to constraints during decoding:
+A imposição de schema tem um pequeno overhead — o modelo precisa se conformar às restrições durante a decodificação:
 
 ```python
 for model in df["model"].unique():
@@ -215,19 +210,19 @@ for model in df["model"].unique():
     print(f"{model:>20s}: avg_time={avg_time:.0f}ms  avg_tokens={avg_tokens:.0f}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
            gpt-4o: avg_time=915ms  avg_tokens=139
   gpt-4o-no-schema: avg_time=660ms  avg_tokens=121
 ```
 
-!!! warning "Latency Trade-off"
-    Schema-enforced outputs are ~38% slower on average. This is expected — constrained decoding requires additional processing. For most agent workflows, the reliability guarantee far outweighs the latency cost.
+!!! warning "Compensação de Latência"
+    Saídas com imposição de schema são ~38% mais lentas em média. Isso é esperado — a decodificação restringida requer processamento adicional. Para a maioria dos fluxos de trabalho de agentes, a garantia de confiabilidade compensa amplamente o custo de latência.
 
 ---
 
-## Step 6: Build the Reliability Report
+## Etapa 6: Criar o Relatório de Confiabilidade
 
 ```python
 report = f"""# 📊 Structured Outputs Reliability Report
@@ -258,100 +253,100 @@ print("💾 Saved to lab-072/reliability_report.md")
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-072/broken_structured.py` contains **3 bugs** that produce incorrect metrics. Can you find and fix them all?
+O arquivo `lab-072/broken_structured.py` contém **3 bugs** que produzem métricas incorretas. Você consegue encontrar e corrigir todos?
 
-Run the self-tests to see which ones fail:
+Execute os autotestes para ver quais falham:
 
 ```bash
 python lab-072/broken_structured.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Você deve ver **3 testes falhando**. Cada teste corresponde a um bug:
 
-| Test | What it checks | Hint |
+| Teste | O que verifica | Dica |
 |------|---------------|------|
-| Test 1 | Schema success rate metric | Should check `structured_output_valid`, not `json_parse_success` |
-| Test 2 | No-schema accuracy | Should filter by the no-schema model, not the schema model |
-| Test 3 | Average tokens per model | Should filter by model before averaging |
+| Teste 1 | Métrica de taxa de sucesso do schema | Deve verificar `structured_output_valid`, não `json_parse_success` |
+| Teste 2 | Precisão sem schema | Deve filtrar pelo modelo sem schema, não pelo modelo com schema |
+| Teste 3 | Média de tokens por modelo | Deve filtrar por modelo antes de calcular a média |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
+Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, está feito!
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What distinguishes Structured Outputs from regular JSON mode?"
+??? question "**Q1 (Múltipla Escolha):** O que distingue Structured Outputs do modo JSON comum?"
 
-    - A) Structured Outputs are faster than JSON mode
-    - B) Structured Outputs guarantee the output matches a specific JSON Schema, not just valid JSON
-    - C) Structured Outputs work without an API key
-    - D) Structured Outputs use a different model architecture
+    - A) Structured Outputs são mais rápidos que o modo JSON
+    - B) Structured Outputs garantem que a saída corresponda a um JSON Schema específico, não apenas JSON válido
+    - C) Structured Outputs funcionam sem uma chave de API
+    - D) Structured Outputs usam uma arquitetura de modelo diferente
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Structured Outputs guarantee the output matches a specific JSON Schema, not just valid JSON**
+    ??? success "✅ Revelar Resposta"
+        **Correta: B) Structured Outputs garantem que a saída corresponda a um JSON Schema específico, não apenas JSON válido**
 
-        JSON mode ensures valid JSON syntax (proper brackets, quotes, etc.), but the *structure* — which fields exist, their types, nesting — is not enforced. Structured Outputs constrain the decoder to match a specific schema, guaranteeing every field is present with the correct type.
+        O modo JSON garante sintaxe JSON válida (colchetes, aspas, etc. corretos), mas a *estrutura* — quais campos existem, seus tipos, aninhamento — não é imposta. Structured Outputs restringem o decodificador para corresponder a um schema específico, garantindo que cada campo esteja presente com o tipo correto.
 
-??? question "**Q2 (Multiple Choice):** Which Python library integrates most seamlessly with OpenAI's Structured Outputs for schema definition?"
+??? question "**Q2 (Múltipla Escolha):** Qual biblioteca Python se integra mais facilmente com Structured Outputs da OpenAI para definição de schemas?"
 
     - A) dataclasses
     - B) marshmallow
     - C) Pydantic
     - D) attrs
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) Pydantic**
+    ??? success "✅ Revelar Resposta"
+        **Correta: C) Pydantic**
 
-        OpenAI's Python SDK directly accepts Pydantic `BaseModel` subclasses via the `response_format` parameter. The SDK converts the Pydantic model to a JSON Schema automatically, making schema definition as simple as writing a Python class.
+        O SDK Python da OpenAI aceita diretamente subclasses de `BaseModel` do Pydantic via parâmetro `response_format`. O SDK converte o modelo Pydantic para um JSON Schema automaticamente, tornando a definição de schema tão simples quanto escrever uma classe Python.
 
-??? question "**Q3 (Run the Lab):** What is the schema validity rate for schema-enforced extraction tests?"
+??? question "**Q3 (Execute o Lab):** Qual é a taxa de validade de schema para os testes de extração com imposição de schema?"
 
-    Run the Step 3 analysis on [📥 `structured_outputs.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) and check the results.
+    Execute a análise da Etapa 3 em [📥 `structured_outputs.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) e confira os resultados.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **100%**
 
-        All 10 schema-enforced tests (`model=gpt-4o`) have `structured_output_valid=true`. The constrained decoder guarantees that every output matches the defined JSON Schema — zero parsing or validation failures.
+        Todos os 10 testes com imposição de schema (`model=gpt-4o`) possuem `structured_output_valid=true`. O decodificador restringido garante que cada saída corresponda ao JSON Schema definido — zero falhas de parsing ou validação.
 
-??? question "**Q4 (Run the Lab):** What is the schema validity rate for tests **without** schema enforcement?"
+??? question "**Q4 (Execute o Lab):** Qual é a taxa de validade de schema para os testes **sem** imposição de schema?"
 
-    Run the Step 3 analysis to compare.
+    Execute a análise da Etapa 3 para comparar.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **0%**
 
-        All 5 no-schema tests (`model=gpt-4o-no-schema`) have `structured_output_valid=false`. Even though some produce parseable JSON (`json_parse_success=true`), they fail schema validation because fields are missing, have wrong types, or use unexpected key names.
+        Todos os 5 testes sem schema (`model=gpt-4o-no-schema`) possuem `structured_output_valid=false`. Mesmo que alguns produzam JSON interpretável (`json_parse_success=true`), eles falham na validação de schema porque campos estão ausentes, possuem tipos errados ou usam nomes de chave inesperados.
 
-??? question "**Q5 (Run the Lab):** What is the average field accuracy for schema-enforced tests (gpt-4o rows)?"
+??? question "**Q5 (Execute o Lab):** Qual é a precisão média de campos para os testes com imposição de schema (linhas gpt-4o)?"
 
-    Run the Step 4 analysis to calculate it.
+    Execute a análise da Etapa 4 para calcular.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **98%**
 
-        The 10 schema-enforced tests have field accuracies of 100, 100, 100, 95, 100, 90, 100, 100, 100, and 95. The mean is (100+100+100+95+100+90+100+100+100+95) ÷ 10 = **98%**.
+        Os 10 testes com imposição de schema possuem precisões de campo de 100, 100, 100, 95, 100, 90, 100, 100, 100 e 95. A média é (100+100+100+95+100+90+100+100+100+95) ÷ 10 = **98%**.
 
 ---
 
-## Summary
+## Resumo
 
-| Topic | What You Learned |
+| Tópico | O que Você Aprendeu |
 |-------|-----------------|
-| Structured Outputs | JSON Schema-constrained decoding that guarantees valid output |
-| Schema Validity | 100% with enforcement vs. 0% without — eliminates parsing failures |
-| Field Accuracy | 98% with schema vs. 68% without — structure improves content accuracy |
-| Pydantic Integration | Define schemas as Python classes for seamless API integration |
-| Latency Trade-off | ~38% overhead is justified by production reliability |
-| Production Readiness | Zero parsing failures makes structured outputs essential for pipelines |
+| Structured Outputs | Decodificação restringida por JSON Schema que garante saída válida |
+| Validade de Schema | 100% com imposição vs. 0% sem — elimina falhas de parsing |
+| Precisão de Campos | 98% com schema vs. 68% sem — a estrutura melhora a precisão do conteúdo |
+| Integração com Pydantic | Defina schemas como classes Python para integração perfeita com a API |
+| Compensação de Latência | ~38% de overhead é justificado pela confiabilidade em produção |
+| Prontidão para Produção | Zero falhas de parsing torna structured outputs essenciais para pipelines |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 018](lab-018-function-calling.md)** — Function Calling (the foundation for tool-using agents)
-- **[Lab 017](lab-017-structured-output.md)** — Structured Output deep-dive (complementary theory)
-- **[Lab 071](lab-071-context-caching.md)** — Context Caching (cost optimization for schema-heavy workflows)
-- **[Lab 073](lab-073-swe-bench.md)** — Agent Benchmarking with SWE-bench (evaluate agent quality)
+- **[Lab 018](lab-018-function-calling.md)** — Function Calling (a base para agentes que usam ferramentas)
+- **[Lab 017](lab-017-structured-output.md)** — Structured Output em profundidade (teoria complementar)
+- **[Lab 071](lab-071-context-caching.md)** — Context Caching (otimização de custos para fluxos com muitos schemas)
+- **[Lab 073](lab-073-swe-bench.md)** — Benchmarking de Agentes com SWE-bench (avalie a qualidade do agente)

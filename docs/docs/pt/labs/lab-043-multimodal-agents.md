@@ -1,56 +1,51 @@
 ---
 tags: [multimodal, gpt-4o, vision, python, github-models, L300]
 ---
-# Lab 043: Multimodal Agents with GPT-4o Vision
+# Lab 043: Agentes Multimodais com GPT-4o Vision
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
-  <span><strong>Time:</strong> ~50 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — GitHub Models free tier supports GPT-4o vision</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
+  <span><strong>Tempo:</strong> ~50 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — O nível gratuito do GitHub Models suporta GPT-4o vision</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Send **images to GPT-4o** using the OpenAI vision API (base64 and URL methods)
-- Build an agent that can **analyze product photos** and answer questions about them
-- Combine **vision + tool calling**: the model sees an image and calls tools based on what it observes
-- Handle **multi-image inputs** for product comparison
-- Apply vision in real scenarios: product identification, damage assessment, size estimation
+- Enviar **imagens para o GPT-4o** usando a API de visão da OpenAI (métodos base64 e URL)
+- Construir um agente que pode **analisar fotos de produtos** e responder perguntas sobre eles
+- Combinar **visão + chamada de ferramentas**: o modelo vê uma imagem e chama ferramentas com base no que observa
+- Lidar com **entradas de múltiplas imagens** para comparação de produtos
+- Aplicar visão em cenários reais: identificação de produtos, avaliação de danos, estimativa de tamanho
 
 ---
 
-## Introduction
+## Introdução
 
-GPT-4o is natively multimodal — it processes text and images in a single model, not as a pipeline of separate models. This enables agents that can "see" what the user is looking at and respond with context.
+O GPT-4o é nativamente multimodal — ele processa texto e imagens em um único modelo, não como um pipeline de modelos separados. Isso permite agentes que podem "ver" o que o usuário está olhando e responder com contexto.
 
-**OutdoorGear use cases for vision:**
-- Customer uploads a photo of a product → agent identifies it and retrieves specs
-- Customer shows a damaged item → agent assesses damage and initiates return
-- Customer asks "will this tent fit in this car?" with two photos → agent estimates
-- Customer shares a trail photo → agent recommends gear for that terrain and weather
+**Casos de uso do OutdoorGear para visão:**
+- O cliente envia uma foto de um produto → o agente identifica e recupera as especificações
+- O cliente mostra um item danificado → o agente avalia o dano e inicia a devolução
+- O cliente pergunta "essa barraca cabe nesse carro?" com duas fotos → o agente estima
+- O cliente compartilha uma foto de trilha → o agente recomenda equipamentos para aquele terreno e clima
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 ```bash
 pip install openai requests Pillow
 export GITHUB_TOKEN=<your PAT>
 ```
 
-GPT-4o with vision is available on the GitHub Models free tier — no Azure subscription needed.
+O GPT-4o com visão está disponível no nível gratuito do GitHub Models — não é necessária assinatura do Azure.
 
 ---
 
-## Part 1: Basic Vision — Analyze a Product Photo
+## Parte 1: Visão Básica — Analisar uma Foto de Produto
 
-### Step 1: Send an image URL to GPT-4o
+### Passo 1: Enviar uma URL de imagem para o GPT-4o
 
 ```python
 # vision_basics.py
@@ -92,9 +87,9 @@ print("=== Vision Analysis ===")
 print(response.choices[0].message.content)
 ```
 
-### Step 2: Send a local image (base64)
+### Passo 2: Enviar uma imagem local (base64)
 
-When customers upload images, you receive file bytes — send them base64-encoded:
+Quando os clientes enviam imagens, você recebe bytes do arquivo — envie-os codificados em base64:
 
 ```python
 # vision_local_image.py
@@ -149,11 +144,11 @@ def analyze_product_image(image_path: str, question: str) -> str:
 
 ---
 
-## Part 2: Vision + Tool Calling
+## Parte 2: Visão + Chamada de Ferramentas
 
-The real power of multimodal agents: the model sees an image, decides what tools to call, and takes action.
+O verdadeiro poder dos agentes multimodais: o modelo vê uma imagem, decide quais ferramentas chamar e toma ação.
 
-### Step 3: Product identification agent
+### Passo 3: Agente de identificação de produtos
 
 ```python
 # vision_agent.py
@@ -291,9 +286,9 @@ print(answer)
 
 ---
 
-## Part 3: Multi-Image Comparison
+## Parte 3: Comparação de Múltiplas Imagens
 
-GPT-4o can analyze multiple images in one request:
+O GPT-4o pode analisar múltiplas imagens em uma única requisição:
 
 ```python
 # multi_image.py
@@ -340,9 +335,9 @@ print(result)
 
 ---
 
-## Part 4: Vision Best Practices
+## Parte 4: Melhores Práticas de Visão
 
-### Token optimization
+### Otimização de tokens
 
 ```python
 # Vision input token costs:
@@ -359,16 +354,16 @@ print(result)
 }
 ```
 
-### Image size guidelines
+### Diretrizes de tamanho de imagem
 
-| Use case | Detail | Max image size |
-|----------|--------|---------------|
-| Product identification | `low` | Any (down-sampled automatically) |
-| Damage assessment | `high` | 2048×2048px optimal |
-| Text extraction (labels) | `high` | High resolution needed |
-| General Q&A | `low` | Any |
+| Caso de uso | Detalhe | Tamanho máximo da imagem |
+|-------------|---------|--------------------------|
+| Identificação de produto | `low` | Qualquer (redimensionado automaticamente) |
+| Avaliação de danos | `high` | 2048×2048px ideal |
+| Extração de texto (rótulos) | `high` | Alta resolução necessária |
+| Perguntas e respostas gerais | `low` | Qualquer |
 
-### Safety and moderation
+### Segurança e moderação
 
 ```python
 def safe_vision_request(image_url: str, user_question: str) -> str:
@@ -386,33 +381,33 @@ def safe_vision_request(image_url: str, user_question: str) -> str:
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "1. What is the difference between `detail: 'low'` and `detail: 'high'` in vision requests?"
-    `detail: 'low'` resizes the image to 512×512 pixels and uses **~85 tokens** — fast and cheap, suitable for general product identification and scene understanding. `detail: 'high'` tiles the image into 512×512 chunks and processes each one with full detail, using **~1000+ tokens** — necessary for reading small text (labels, serial numbers), detecting fine damage, or analyzing intricate details. Always use `low` unless the task explicitly requires fine detail.
+??? question "1. Qual é a diferença entre `detail: 'low'` e `detail: 'high'` nas requisições de visão?"
+    `detail: 'low'` redimensiona a imagem para 512×512 pixels e usa **~85 tokens** — rápido e barato, adequado para identificação geral de produtos e compreensão de cenas. `detail: 'high'` divide a imagem em blocos de 512×512 e processa cada um com detalhe completo, usando **~1000+ tokens** — necessário para ler texto pequeno (rótulos, números de série), detectar danos finos ou analisar detalhes intrincados. Sempre use `low` a menos que a tarefa exija explicitamente detalhe fino.
 
-??? question "2. Why is combining vision with tool calling more powerful than vision alone?"
-    Vision-only agents can describe what they see but cannot take action. Combining vision with tool calling means: the agent **sees** a damaged backpack → **calls** `lookup_product()` to identify it → **calls** `initiate_return()` to start the warranty process — all in one conversation turn. The agent becomes an active participant rather than just a narrator.
+??? question "2. Por que combinar visão com chamada de ferramentas é mais poderoso do que apenas visão?"
+    Agentes apenas com visão podem descrever o que veem, mas não podem tomar ação. Combinar visão com chamada de ferramentas significa: o agente **vê** uma mochila danificada → **chama** `lookup_product()` para identificá-la → **chama** `initiate_return()` para iniciar o processo de garantia — tudo em um único turno de conversa. O agente se torna um participante ativo em vez de apenas um narrador.
 
-??? question "3. What is a key safety practice when deploying multimodal agents?"
-    **Scope restriction via system prompt**: explicitly tell the model what types of images it should and should not process. Without this, users can send unrelated images (medical, personal, NSFW) and extract responses. A scoped system prompt like "Only analyze outdoor gear images — refuse anything else" significantly reduces misuse. Combine with content moderation APIs (Azure Content Safety) for production deployments.
-
----
-
-## Summary
-
-| Concept | Implementation |
-|---------|---------------|
-| **URL image input** | `"type": "image_url", "image_url": {"url": "..."}` |
-| **Base64 image input** | `"url": "data:image/jpeg;base64,<encoded>"` |
-| **Token control** | `"detail": "low"` (~85 tokens) or `"high"` (1000+) |
-| **Vision + tools** | Same tool-calling loop as text agents |
-| **Multi-image** | Multiple `image_url` blocks in one `content` array |
+??? question "3. Qual é uma prática-chave de segurança ao implantar agentes multimodais?"
+    **Restrição de escopo via prompt de sistema**: diga explicitamente ao modelo quais tipos de imagens ele deve e não deve processar. Sem isso, os usuários podem enviar imagens não relacionadas (médicas, pessoais, NSFW) e extrair respostas. Um prompt de sistema com escopo definido como "Apenas analise imagens de equipamentos outdoor — recuse qualquer outra coisa" reduz significativamente o uso indevido. Combine com APIs de moderação de conteúdo (Azure Content Safety) para implantações em produção.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **Add streaming to vision responses:** → [Lab 019 — Streaming Responses](lab-019-streaming-responses.md)
-- **Cost control for vision-heavy agents:** → [Lab 038 — AI Cost Optimization](lab-038-cost-optimization.md)
-- **Evaluate multimodal agent quality:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)
+| Conceito | Implementação |
+|----------|---------------|
+| **Entrada de imagem por URL** | `"type": "image_url", "image_url": {"url": "..."}` |
+| **Entrada de imagem em Base64** | `"url": "data:image/jpeg;base64,<encoded>"` |
+| **Controle de tokens** | `"detail": "low"` (~85 tokens) ou `"high"` (1000+) |
+| **Visão + ferramentas** | Mesmo loop de chamada de ferramentas dos agentes de texto |
+| **Múltiplas imagens** | Múltiplos blocos `image_url` em um único array `content` |
+
+---
+
+## Próximos Passos
+
+- **Adicionar streaming às respostas de visão:** → [Lab 019 — Streaming Responses](lab-019-streaming-responses.md)
+- **Controle de custos para agentes com uso intenso de visão:** → [Lab 038 — AI Cost Optimization](lab-038-cost-optimization.md)
+- **Avaliar a qualidade de agentes multimodais:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)

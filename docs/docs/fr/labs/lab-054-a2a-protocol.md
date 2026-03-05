@@ -1,98 +1,93 @@
 ---
 tags: [a2a, protocol, multi-agent, interoperability, python, free]
 ---
-# Lab 054: A2A Protocol — Build Interoperable Multi-Agent Systems
+# Lab 054 : Protocole A2A — Construire des systèmes multi-agents interopérables
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~75 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses local JSON data only</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~75 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise uniquement des données JSON locales</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+!!! tip "Les trois protocoles agentiques"
+    A2A est l'un des trois protocoles ouverts de l'ère agentique : **MCP** (agent↔outils, [Lab 012](lab-012-what-is-mcp.md)), **A2A** (agent↔agent, ce lab), et **AG-UI** (agent↔utilisateur, [Lab 077](lab-077-agui-protocol.md)). Ensemble, ils forment la pile complète d'interopérabilité.
 
+## Ce que vous apprendrez
 
-
-!!! tip "The Three Agentic Protocols"
-    A2A is one of three open protocols for the agentic era: **MCP** (agent↔tools, [Lab 012](lab-012-what-is-mcp.md)), **A2A** (agent↔agent, this lab), and **AG-UI** (agent↔user, [Lab 077](lab-077-agui-protocol.md)). Together they form the complete interoperability stack.
-
-## What You'll Learn
-
-- What the **A2A (Agent-to-Agent) protocol** is — JSON-RPC 2.0 over HTTPS, governed by the Linux Foundation
-- How **Agent Cards** work as the discovery mechanism for agent capabilities
-- How to programmatically parse Agent Cards and inspect **skills**, **streaming**, and **pushNotifications**
-- The key differences between **A2A** (peer-to-peer agent communication) and **MCP** (agent-to-tool access)
+- Ce qu'est le **protocole A2A (Agent-to-Agent)** — JSON-RPC 2.0 sur HTTPS, gouverné par la Linux Foundation
+- Comment les **Agent Cards** fonctionnent comme mécanisme de découverte des capacités des agents
+- Comment analyser programmatiquement les Agent Cards et inspecter les **skills**, le **streaming** et les **pushNotifications**
+- Les différences clés entre **A2A** (communication pair-à-pair entre agents) et **MCP** (accès agent-outil)
 
 ## Introduction
 
-Modern AI systems rarely consist of a single agent. Real-world solutions require **multiple specialized agents** that discover each other, negotiate capabilities, and collaborate on tasks. The **Agent-to-Agent (A2A) protocol** standardizes this communication.
+Les systèmes d'IA modernes consistent rarement en un seul agent. Les solutions réelles nécessitent **plusieurs agents spécialisés** qui se découvrent mutuellement, négocient leurs capacités et collaborent sur des tâches. Le **protocole Agent-to-Agent (A2A)** standardise cette communication.
 
-A2A and MCP solve different problems:
+A2A et MCP résolvent des problèmes différents :
 
-| Protocol | Purpose | Direction |
-|----------|---------|-----------|
-| **A2A** | Agent ↔ Agent communication | Peer-to-peer — agents delegate tasks to other agents |
-| **MCP** | Agent → Tool access | Client-server — agents call tools, databases, APIs |
+| Protocole | Objectif | Direction |
+|-----------|----------|-----------|
+| **A2A** | Communication Agent ↔ Agent | Pair-à-pair — les agents délèguent des tâches à d'autres agents |
+| **MCP** | Accès Agent → Outil | Client-serveur — les agents appellent des outils, bases de données, APIs |
 
-Think of A2A as agents *talking to each other*, and MCP as agents *using tools*. A complete multi-agent system typically uses **both** protocols.
+Pensez à A2A comme des agents *qui se parlent entre eux*, et à MCP comme des agents *qui utilisent des outils*. Un système multi-agents complet utilise généralement **les deux** protocoles.
 
-### The Scenario
+### Le scénario
 
-You are an **Integration Architect** at OutdoorGear Inc. The company operates **3 specialized agents**:
+Vous êtes un **architecte d'intégration** chez OutdoorGear Inc. L'entreprise exploite **3 agents spécialisés** :
 
-1. **ProductSearchAgent** — searches the product catalog by category, price, and availability
-2. **OrderManagementAgent** — manages orders, returns, and shipping updates
-3. **CustomerSupportAgent** — handles inquiries, complaints, and FAQ responses
+1. **ProductSearchAgent** — recherche dans le catalogue de produits par catégorie, prix et disponibilité
+2. **OrderManagementAgent** — gère les commandes, retours et mises à jour d'expédition
+3. **CustomerSupportAgent** — traite les demandes, réclamations et réponses FAQ
 
-Each agent publishes an **Agent Card** — a JSON document describing its identity, capabilities, skills, and authentication requirements. Your job is to load these cards, analyze what each agent can do, and understand how A2A enables them to discover and collaborate with each other.
+Chaque agent publie une **Agent Card** — un document JSON décrivant son identité, ses capacités, ses compétences et ses exigences d'authentification. Votre travail consiste à charger ces cartes, analyser ce que chaque agent peut faire, et comprendre comment A2A leur permet de se découvrir et de collaborer.
 
-!!! info "A2A Protocol Essentials"
-    A2A uses **JSON-RPC 2.0 over HTTPS** as its transport layer. Each agent publishes an Agent Card at a well-known URL (typically `/.well-known/agent.json`). Client agents discover available agents by fetching these cards, inspecting their skills, and sending task requests using the JSON-RPC protocol.
+!!! info "Essentiels du protocole A2A"
+    A2A utilise **JSON-RPC 2.0 sur HTTPS** comme couche de transport. Chaque agent publie une Agent Card à une URL bien connue (généralement `/.well-known/agent.json`). Les agents clients découvrent les agents disponibles en récupérant ces cartes, en inspectant leurs compétences et en envoyant des requêtes de tâches via le protocole JSON-RPC.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
-|---|---|
-| Python 3.10+ | Parse and analyze Agent Cards |
-| `json` (built-in) | Load agent card data |
+| Exigence | Pourquoi |
+|----------|----------|
+| Python 3.10+ | Analyser et parser les Agent Cards |
+| `json` (intégré) | Charger les données des Agent Cards |
 
-No external packages are required — this lab uses only the Python standard library.
+Aucun paquet externe n'est requis — ce lab utilise uniquement la bibliothèque standard Python.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-054/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-054/` dans votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `agent_cards.json` | Configuration / data file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json) |
-| `broken_a2a.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/broken_a2a.py) |
+| Fichier | Description | Télécharger |
+|---------|-------------|-------------|
+| `agent_cards.json` | Fichier de configuration / données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json) |
+| `broken_a2a.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/broken_a2a.py) |
 
 ---
 
-## Step 1: Understanding the A2A Protocol
+## Étape 1 : Comprendre le protocole A2A
 
-A2A defines a standard for **peer-to-peer agent communication**. The protocol specifies:
+A2A définit un standard pour la **communication pair-à-pair entre agents**. Le protocole spécifie :
 
 | Concept | Description |
 |---------|-------------|
-| **Agent Card** | JSON document advertising an agent's identity, URL, capabilities, skills, and auth |
-| **Skills** | Named operations an agent can perform (e.g., `search_products`, `track_order`) |
-| **Capabilities** | Feature flags: `streaming`, `pushNotifications`, `stateTransitionHistory` |
-| **Task** | A unit of work sent from one agent to another via JSON-RPC 2.0 |
-| **Artifact** | The result returned by an agent after completing a task |
+| **Agent Card** | Document JSON annonçant l'identité, l'URL, les capacités, les compétences et l'authentification d'un agent |
+| **Skills** | Opérations nommées qu'un agent peut effectuer (ex. `search_products`, `track_order`) |
+| **Capabilities** | Indicateurs de fonctionnalités : `streaming`, `pushNotifications`, `stateTransitionHistory` |
+| **Task** | Une unité de travail envoyée d'un agent à un autre via JSON-RPC 2.0 |
+| **Artifact** | Le résultat renvoyé par un agent après l'achèvement d'une tâche |
 
-### Agent Card Structure
+### Structure d'une Agent Card
 
 ```json
 {
@@ -113,7 +108,7 @@ A2A defines a standard for **peer-to-peer agent communication**. The protocol sp
 }
 ```
 
-### A2A Communication Flow
+### Flux de communication A2A
 
 ```
 ┌─────────────┐   1. Fetch Agent Card    ┌─────────────────┐
@@ -129,9 +124,9 @@ A2A defines a standard for **peer-to-peer agent communication**. The protocol sp
 
 ---
 
-## Step 2: Load Agent Cards
+## Étape 2 : Charger les Agent Cards
 
-Load the three OutdoorGear agent cards from the JSON file:
+Chargez les trois Agent Cards OutdoorGear depuis le fichier JSON :
 
 ```python
 import json
@@ -144,7 +139,7 @@ for card in cards:
     print(f"  • {card['name']} (v{card['version']}) — {card['description']}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total agents: 3
@@ -155,11 +150,11 @@ Total agents: 3
 
 ---
 
-## Step 3: Analyze Agent Capabilities
+## Étape 3 : Analyser les capacités des agents
 
-Parse each agent's capabilities, skills, and authentication to build a discovery summary:
+Analysez les capacités, compétences et authentification de chaque agent pour construire un résumé de découverte :
 
-### 3a — Skills Inventory
+### 3a — Inventaire des compétences
 
 ```python
 total_skills = 0
@@ -173,7 +168,7 @@ for card in cards:
 print(f"\nTotal skills across all agents: {total_skills}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 ProductSearchAgent — 2 skill(s):
@@ -192,7 +187,7 @@ CustomerSupportAgent — 2 skill(s):
 Total skills across all agents: 7
 ```
 
-### 3b — Capability Flags
+### 3b — Indicateurs de capacités
 
 ```python
 print("Agent Capabilities Matrix:")
@@ -208,7 +203,7 @@ push_count = sum(1 for c in cards if c["capabilities"]["pushNotifications"])
 print(f"\nAgents supporting pushNotifications: {push_count}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Agent Capabilities Matrix:
@@ -221,7 +216,7 @@ CustomerSupportAgent      True         True         False
 Agents supporting pushNotifications: 2
 ```
 
-### 3c — Authentication Types
+### 3c — Types d'authentification
 
 ```python
 auth_types = sorted(set(c["authentication"]["type"] for c in cards))
@@ -232,7 +227,7 @@ for card in cards:
     print(f"  {card['name']}: {auth['type']} (required={auth['required']})")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Authentication types used: ['bearer', 'oauth2']
@@ -243,21 +238,21 @@ Authentication types used: ['bearer', 'oauth2']
 
 ---
 
-## Step 4: A2A vs MCP — Protocol Comparison
+## Étape 4 : A2A vs MCP — Comparaison des protocoles
 
-Understanding when to use each protocol is essential for multi-agent architecture:
+Comprendre quand utiliser chaque protocole est essentiel pour une architecture multi-agents :
 
 | Dimension | A2A | MCP |
 |-----------|-----|-----|
-| **Purpose** | Agent-to-agent task delegation | Agent-to-tool access |
-| **Transport** | JSON-RPC 2.0 over HTTPS | JSON-RPC 2.0 over stdio/SSE |
-| **Discovery** | Agent Cards at `/.well-known/agent.json` | Tool manifests in MCP server |
-| **Direction** | Peer-to-peer (bidirectional) | Client → Server (unidirectional) |
-| **Auth** | OAuth 2.0, bearer tokens | Server-defined (API keys, OAuth) |
-| **Governance** | Linux Foundation | Anthropic (open standard) |
-| **Use case** | "Ask another agent to do something" | "Call a tool / read a resource" |
+| **Objectif** | Délégation de tâches agent-à-agent | Accès agent-outil |
+| **Transport** | JSON-RPC 2.0 sur HTTPS | JSON-RPC 2.0 sur stdio/SSE |
+| **Découverte** | Agent Cards à `/.well-known/agent.json` | Manifestes d'outils dans le serveur MCP |
+| **Direction** | Pair-à-pair (bidirectionnel) | Client → Serveur (unidirectionnel) |
+| **Auth** | OAuth 2.0, jetons bearer | Défini par le serveur (clés API, OAuth) |
+| **Gouvernance** | Linux Foundation | Anthropic (standard ouvert) |
+| **Cas d'usage** | « Demander à un autre agent de faire quelque chose » | « Appeler un outil / lire une ressource » |
 
-### When to Use Which
+### Quand utiliser lequel
 
 ```
 Customer asks: "Find me a waterproof tent under $200 and track my last order"
@@ -282,14 +277,14 @@ Customer asks: "Find me a waterproof tent under $200 and track my last order"
     └──────────────┘ └──────────┘ └──────────────┘
 ```
 
-- **A2A** connects the Coordinator to specialized agents (peer-to-peer delegation)
-- **MCP** connects each agent to its back-end tools and data sources
+- **A2A** connecte le coordinateur aux agents spécialisés (délégation pair-à-pair)
+- **MCP** connecte chaque agent à ses outils et sources de données back-end
 
 ---
 
-## Step 5: Build a Mock A2A Request/Response Flow
+## Étape 5 : Construire un flux requête/réponse A2A simulé
 
-Simulate how a client agent discovers and communicates with a remote agent using A2A:
+Simulez comment un agent client découvre et communique avec un agent distant en utilisant A2A :
 
 ```python
 import json
@@ -350,7 +345,7 @@ response = mock_a2a_response(request)
 print(f"\nA2A Response:\n{json.dumps(response, indent=2)}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Discovered agent: ProductSearchAgent at https://agents.outdoorgear.com/product-search
@@ -391,97 +386,97 @@ A2A Response:
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-054/broken_a2a.py` has **3 bugs** in the Agent Card parser. Can you find and fix them all?
+Le fichier `lab-054/broken_a2a.py` contient **3 bugs** dans le parseur d'Agent Cards. Pouvez-vous tous les trouver et les corriger ?
 
-Run the self-tests to see which ones fail:
+Exécutez les auto-tests pour voir lesquels échouent :
 
 ```bash
 python lab-054/broken_a2a.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Vous devriez voir **3 tests échoués**. Chaque test correspond à un bug :
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Total skill count across all agents | Should sum skills from *all* cards, not just the first |
-| Test 2 | Agents supporting push notifications | Check `pushNotifications`, not `streaming` |
-| Test 3 | Authentication types | Return the `type` field (string), not the `required` field (bool) |
+| Test | Ce qu'il vérifie | Indice |
+|------|-------------------|--------|
+| Test 1 | Nombre total de compétences pour tous les agents | Devrait additionner les compétences de *toutes* les cartes, pas seulement la première |
+| Test 2 | Agents supportant les notifications push | Vérifiez `pushNotifications`, pas `streaming` |
+| Test 3 | Types d'authentification | Retournez le champ `type` (string), pas le champ `required` (bool) |
 
-Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done!
+Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, c'est terminé !
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What transport mechanism does the A2A protocol use?"
+??? question "**Q1 (Choix multiple) :** Quel mécanisme de transport le protocole A2A utilise-t-il ?"
 
-    - A) gRPC over HTTP/2
-    - B) JSON-RPC 2.0 over HTTPS
-    - C) GraphQL over WebSocket
-    - D) REST over HTTP with OpenAPI
+    - A) gRPC sur HTTP/2
+    - B) JSON-RPC 2.0 sur HTTPS
+    - C) GraphQL sur WebSocket
+    - D) REST sur HTTP avec OpenAPI
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) JSON-RPC 2.0 over HTTPS**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) JSON-RPC 2.0 sur HTTPS**
 
-        The A2A protocol uses **JSON-RPC 2.0 over HTTPS** as its transport layer. This provides a standardized request/response format with method names, parameters, and error codes — all transmitted securely over HTTPS.
+        Le protocole A2A utilise **JSON-RPC 2.0 sur HTTPS** comme couche de transport. Cela fournit un format standardisé de requête/réponse avec des noms de méthodes, des paramètres et des codes d'erreur — le tout transmis de manière sécurisée via HTTPS.
 
-??? question "**Q2 (Multiple Choice):** What is the primary purpose of an Agent Card in A2A?"
+??? question "**Q2 (Choix multiple) :** Quel est l'objectif principal d'une Agent Card dans A2A ?"
 
-    - A) Storing the agent's conversation history
-    - B) Capability discovery — advertising what an agent can do
-    - C) Encrypting messages between agents
-    - D) Rate-limiting incoming requests
+    - A) Stocker l'historique des conversations de l'agent
+    - B) Découverte des capacités — annoncer ce qu'un agent peut faire
+    - C) Chiffrer les messages entre agents
+    - D) Limiter le débit des requêtes entrantes
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Capability discovery — advertising what an agent can do**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Découverte des capacités — annoncer ce qu'un agent peut faire**
 
-        An Agent Card is a JSON document published at a well-known URL that describes an agent's identity, skills, capabilities (streaming, push notifications), and authentication requirements. Client agents fetch these cards to **discover** what remote agents can do before sending task requests.
+        Une Agent Card est un document JSON publié à une URL bien connue qui décrit l'identité d'un agent, ses compétences, ses capacités (streaming, notifications push) et ses exigences d'authentification. Les agents clients récupèrent ces cartes pour **découvrir** ce que les agents distants peuvent faire avant d'envoyer des requêtes de tâches.
 
-??? question "**Q3 (Run the Lab):** How many total skills exist across all 3 OutdoorGear agents?"
+??? question "**Q3 (Exécuter le lab) :** Combien de compétences au total existent pour les 3 agents OutdoorGear ?"
 
-    Sum the skills arrays from all agent cards in [📥 `agent_cards.json`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json).
+    Additionnez les tableaux de compétences de toutes les Agent Cards dans [📥 `agent_cards.json`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json).
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **7**
 
-        ProductSearchAgent has 2 skills (`search_products`, `get_details`), OrderManagementAgent has 3 skills (`track_order`, `process_return`, `update_shipping`), and CustomerSupportAgent has 2 skills (`answer_faq`, `handle_complaint`). Total: 2 + 3 + 2 = **7**.
+        ProductSearchAgent a 2 compétences (`search_products`, `get_details`), OrderManagementAgent a 3 compétences (`track_order`, `process_return`, `update_shipping`), et CustomerSupportAgent a 2 compétences (`answer_faq`, `handle_complaint`). Total : 2 + 3 + 2 = **7**.
 
-??? question "**Q4 (Run the Lab):** How many agents support `pushNotifications`?"
+??? question "**Q4 (Exécuter le lab) :** Combien d'agents supportent `pushNotifications` ?"
 
-    Check the `capabilities.pushNotifications` field in each agent card.
+    Vérifiez le champ `capabilities.pushNotifications` dans chaque Agent Card.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **2**
 
-        OrderManagementAgent (`pushNotifications: true`) and CustomerSupportAgent (`pushNotifications: true`) support push notifications. ProductSearchAgent does not (`pushNotifications: false`).
+        OrderManagementAgent (`pushNotifications: true`) et CustomerSupportAgent (`pushNotifications: true`) supportent les notifications push. ProductSearchAgent ne les supporte pas (`pushNotifications: false`).
 
-??? question "**Q5 (Run the Lab):** What authentication types are used across the 3 agents?"
+??? question "**Q5 (Exécuter le lab) :** Quels types d'authentification sont utilisés par les 3 agents ?"
 
-    Inspect the `authentication.type` field in each card and collect the unique values.
+    Inspectez le champ `authentication.type` dans chaque carte et collectez les valeurs uniques.
 
-    ??? success "✅ Reveal Answer"
-        **bearer and oauth2**
+    ??? success "✅ Révéler la réponse"
+        **bearer et oauth2**
 
-        ProductSearchAgent and OrderManagementAgent use `bearer` token authentication. CustomerSupportAgent uses `oauth2`. The two unique auth types are **bearer** and **oauth2**.
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| A2A Protocol | JSON-RPC 2.0 over HTTPS for peer-to-peer agent communication |
-| Agent Cards | JSON documents for capability discovery (skills, capabilities, auth) |
-| Skills & Capabilities | How agents advertise what they can do and what features they support |
-| A2A vs MCP | A2A for agent↔agent delegation; MCP for agent→tool access |
-| Discovery Flow | Fetch Agent Card → Inspect skills → Send task → Receive artifact |
+        ProductSearchAgent et OrderManagementAgent utilisent l'authentification par jeton `bearer`. CustomerSupportAgent utilise `oauth2`. Les deux types d'authentification uniques sont **bearer** et **oauth2**.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **[Lab 055](lab-055-a2a-mcp-capstone.md)** — A2A + MCP Full Stack — Agent Interoperability Capstone
-- **[Lab 056](lab-056-federated-connectors.md)** — Federated M365 Copilot Connectors with MCP
+| Sujet | Ce que vous avez appris |
+|-------|------------------------|
+| Protocole A2A | JSON-RPC 2.0 sur HTTPS pour la communication pair-à-pair entre agents |
+| Agent Cards | Documents JSON pour la découverte des capacités (compétences, capacités, auth) |
+| Compétences & Capacités | Comment les agents annoncent ce qu'ils peuvent faire et les fonctionnalités qu'ils supportent |
+| A2A vs MCP | A2A pour la délégation agent↔agent ; MCP pour l'accès agent→outil |
+| Flux de découverte | Récupérer l'Agent Card → Inspecter les compétences → Envoyer la tâche → Recevoir l'artifact |
+
+---
+
+## Prochaines étapes
+
+- **[Lab 055](lab-055-a2a-mcp-capstone.md)** — A2A + MCP Full Stack — Capstone d'interopérabilité des agents
+- **[Lab 056](lab-056-federated-connectors.md)** — Connecteurs fédérés M365 Copilot avec MCP

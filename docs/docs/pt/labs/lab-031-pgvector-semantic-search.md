@@ -4,47 +4,42 @@ tags: [pgvector, rag, azure, azure-required]
 # Lab 031: pgvector Semantic Search on Azure
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">RAG</a></span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> ~$15/month (PostgreSQL Flexible Server Burstable B1ms)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>💰 Custo:</strong> ~$15/mês (PostgreSQL Flexible Server Burstable B1ms)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+!!! warning "Assinatura do Azure necessária"
+    Este lab implanta o Azure PostgreSQL Flexible Server. → [Guia de pré-requisitos](../prerequisites.md)
 
+## O que Você Vai Aprender
 
-
-!!! warning "Azure subscription required"
-    This lab deploys Azure PostgreSQL Flexible Server. → [Prerequisites guide](../prerequisites.md)
-
-## What You'll Learn
-
-- Deploy **Azure PostgreSQL Flexible Server** with pgvector enabled via one click
-- Connect securely with SSL and firewall rules
-- Migrate the RAG pipeline from [Lab 022](lab-022-rag-github-models-pgvector.md) to Azure
-- Use **Azure AI Services** for embeddings (or keep using GitHub Models — free)
-- Expose the vector store as an **MCP tool** for agents
+- Implantar o **Azure PostgreSQL Flexible Server** com pgvector habilitado em um clique
+- Conectar-se com segurança usando SSL e regras de firewall
+- Migrar o pipeline RAG do [Lab 022](lab-022-rag-github-models-pgvector.md) para o Azure
+- Usar o **Azure AI Services** para embeddings (ou continuar usando GitHub Models — gratuito)
+- Expor o banco vetorial como uma **ferramenta MCP** para agentes
 
 ---
 
-## Deploy Infrastructure
+## Implantar Infraestrutura
 
-### Option A — Deploy to Azure (one click)
+### Opção A — Implantar no Azure (um clique)
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flcarli%2FAI-LearningHub%2Fmain%2Finfra%2Flab-031-pgvector%2Fazuredeploy.json)
 
-This deploys:
-- PostgreSQL Flexible Server (Burstable B1ms, ~$15/month)
-- pgvector extension enabled
-- Database `ragdb` pre-created
-- Azure services firewall rule
+Isso implanta:
+- PostgreSQL Flexible Server (Burstable B1ms, ~$15/mês)
+- Extensão pgvector habilitada
+- Banco de dados `ragdb` pré-criado
+- Regra de firewall para serviços do Azure
 
-**Parameters you'll set:**
-- `administratorLoginPassword` — your database password (note it down!)
-- `location` — choose a region close to you
+**Parâmetros que você definirá:**
+- `administratorLoginPassword` — sua senha do banco de dados (anote-a!)
+- `location` — escolha uma região próxima a você
 
-### Option B — Azure CLI (Bicep)
+### Opção B — Azure CLI (Bicep)
 
 ```bash
 # Clone the repo (if you haven't)
@@ -68,22 +63,22 @@ az deployment group show \
 
 ---
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-031/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-031/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `migrations` | Database migration files | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-031/migrations) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `migrations` | Arquivos de migração do banco de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-031/migrations) |
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Set connection environment variables
+### Passo 1: Definir variáveis de ambiente de conexão
 
-After deployment, save your connection details:
+Após a implantação, salve seus detalhes de conexão:
 
 ```bash
 # From the Azure portal: PostgreSQL server → Connection strings
@@ -93,7 +88,7 @@ export PG_PASSWORD="YourP@ssw0rd!"
 export PG_DATABASE="ragdb"
 ```
 
-### Step 2: Connect and verify pgvector
+### Passo 2: Conectar e verificar o pgvector
 
 ```python
 import os, psycopg2
@@ -118,7 +113,7 @@ cur.close()
 conn.close()
 ```
 
-### Step 3: Create schema
+### Passo 3: Criar esquema
 
 ```python
 # setup_db.py
@@ -158,16 +153,16 @@ conn.close()
 print("Schema ready on Azure PostgreSQL!")
 ```
 
-### Step 4: Ingest the sample dataset
+### Passo 4: Ingerir o conjunto de dados de exemplo
 
-Download and ingest the OutdoorGear sample data:
+Baixe e ingira os dados de exemplo do OutdoorGear:
 
 ```bash
 curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
 curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
 ```
 
-Re-use the `ingest.py` from [Lab 022](lab-022-rag-github-models-pgvector.md#step-3-ingest-documents-from-the-sample-dataset), but update the connection to use Azure:
+Reutilize o `ingest.py` do [Lab 022](lab-022-rag-github-models-pgvector.md#step-3-ingest-documents-from-the-sample-dataset), mas atualize a conexão para usar o Azure:
 
 ```python
 # Use environment variables instead of hardcoded local values
@@ -180,9 +175,9 @@ conn = psycopg2.connect(
 )
 ```
 
-### Step 5: Expose as an MCP tool
+### Passo 5: Expor como ferramenta MCP
 
-Wrap the search function as an MCP tool so any agent can query your knowledge base:
+Encapsule a função de busca como uma ferramenta MCP para que qualquer agente possa consultar sua base de conhecimento:
 
 ```python
 # mcp_search_server.py
@@ -246,7 +241,7 @@ if __name__ == "__main__":
     mcp.run(transport="stdio")
 ```
 
-Add to `.vscode/mcp.json`:
+Adicione ao `.vscode/mcp.json`:
 ```json
 {
   "servers": {
@@ -268,7 +263,7 @@ Add to `.vscode/mcp.json`:
 
 ---
 
-## Cleanup
+## Limpeza
 
 ```bash
 # Stop charges immediately
@@ -278,43 +273,43 @@ az group delete --name rg-ai-labs-rag --yes --no-wait
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Run the Lab):** After running `001_init.sql` against your database, how many rows are in the `products` table? Run `SELECT COUNT(*) FROM products;` to verify."
+??? question "**Q1 (Execute o Lab):** Após executar `001_init.sql` no seu banco de dados, quantas linhas existem na tabela `products`? Execute `SELECT COUNT(*) FROM products;` para verificar."
 
-    Run the migration then query the table.
+    Execute a migração e depois consulte a tabela.
 
-    ??? success "✅ Reveal Answer"
-        **7 rows**
+    ??? success "✅ Revelar Resposta"
+        **7 linhas**
 
-        The migration seeds 7 OutdoorGear products: P001 (TrailBlazer Tent 2P), P002 (Summit Dome 4P), P003 (TrailBlazer Solo), P004 (ArcticDown -20°C), P005 (SummerLight +5°C), P006 (Osprey Atmos 65L), P007 (DayHiker 22L). Run `SELECT id, name, category FROM products ORDER BY id;` to see them all.
+        A migração insere 7 produtos OutdoorGear: P001 (TrailBlazer Tent 2P), P002 (Summit Dome 4P), P003 (TrailBlazer Solo), P004 (ArcticDown -20°C), P005 (SummerLight +5°C), P006 (Osprey Atmos 65L), P007 (DayHiker 22L). Execute `SELECT id, name, category FROM products ORDER BY id;` para ver todos.
 
-??? question "**Q2 (Run the Lab):** What type of index is created on the `product_embeddings` table, and which column does it index?"
+??? question "**Q2 (Execute o Lab):** Que tipo de índice é criado na tabela `product_embeddings`, e qual coluna ele indexa?"
 
-    Open `lab-031/migrations/001_init.sql` and find the `CREATE INDEX` statement.
+    Abra `lab-031/migrations/001_init.sql` e encontre a instrução `CREATE INDEX`.
 
-    ??? success "✅ Reveal Answer"
-        **IVFFlat index on the `embedding` column**
+    ??? success "✅ Revelar Resposta"
+        **Índice IVFFlat na coluna `embedding`**
 
-        The migration creates: `CREATE INDEX ON product_embeddings USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);`
+        A migração cria: `CREATE INDEX ON product_embeddings USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);`
 
-        IVFFlat (Inverted File with Flat quantization) is an approximate nearest neighbor index — it's faster than exact search but sacrifices a small amount of recall. The `lists = 100` parameter defines the number of Voronoi cells for clustering. `vector_cosine_ops` means distances are computed using cosine similarity.
+        IVFFlat (Inverted File with Flat quantization) é um índice de vizinho mais próximo aproximado — é mais rápido que a busca exata, mas sacrifica uma pequena quantidade de recall. O parâmetro `lists = 100` define o número de células de Voronoi para agrupamento. `vector_cosine_ops` significa que as distâncias são calculadas usando similaridade de cosseno.
 
-??? question "**Q3 (Multiple Choice):** You run `SELECT * FROM search_products_by_vector($1::vector, 3)` and get 3 results. What do the results represent?"
+??? question "**Q3 (Múltipla Escolha):** Você executa `SELECT * FROM search_products_by_vector($1::vector, 3)` e obtém 3 resultados. O que os resultados representam?"
 
-    - A) The 3 most recently inserted products
-    - B) The 3 products with the highest price
-    - C) The 3 products whose embedding vectors are most similar (closest cosine distance) to the query vector
-    - D) 3 randomly selected products from the database
+    - A) Os 3 produtos inseridos mais recentemente
+    - B) Os 3 produtos com o maior preço
+    - C) Os 3 produtos cujos vetores de embedding são mais similares (menor distância de cosseno) ao vetor de consulta
+    - D) 3 produtos selecionados aleatoriamente do banco de dados
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C**
+    ??? success "✅ Revelar Resposta"
+        **Correto: C**
 
-        The `search_products_by_vector()` function performs an **approximate nearest neighbor (ANN) search** using the IVFFlat index. It computes cosine distance between the query vector and all stored product embeddings, then returns the `k` products with the smallest distance (= highest semantic similarity). The result represents the most semantically relevant products for the user's query.
+        A função `search_products_by_vector()` realiza uma **busca de vizinho mais próximo aproximado (ANN)** usando o índice IVFFlat. Ela calcula a distância de cosseno entre o vetor de consulta e todos os embeddings de produtos armazenados, e então retorna os `k` produtos com a menor distância (= maior similaridade semântica). O resultado representa os produtos semanticamente mais relevantes para a consulta do usuário.
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Row Level Security for multi-tenant agents:** → [Lab 032 — Row Level Security](lab-032-row-level-security.md)
-- **Agentic RAG on top of this:** → [Lab 026 — Agentic RAG Pattern](lab-026-agentic-rag.md)
+- **Row Level Security para agentes multi-tenant:** → [Lab 032 — Row Level Security](lab-032-row-level-security.md)
+- **RAG Agêntico sobre isso:** → [Lab 026 — Agentic RAG Pattern](lab-026-agentic-rag.md)

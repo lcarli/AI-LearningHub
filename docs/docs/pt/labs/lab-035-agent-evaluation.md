@@ -1,75 +1,70 @@
 ---
 tags: [evaluation, python, free, github-models]
 ---
-# Lab 035: Agent Evaluation with Azure AI Eval SDK
+# Lab 035: Avaliação de Agentes com Azure AI Eval SDK
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — uses GitHub Models for evaluation</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Gratuito</span> — usa GitHub Models para avaliação</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Why **LLM-as-judge** evaluation works and when to use it
-- Measure **groundedness**, **relevance**, **coherence**, and **fluency**
-- Build a **golden dataset** for regression testing
-- Evaluate your RAG agent automatically with `azure-ai-evaluation` SDK
-- Track quality metrics over time and detect regressions
+- Por que a avaliação **LLM-as-judge** funciona e quando usá-la
+- Medir **fundamentação**, **relevância**, **coerência** e **fluência**
+- Construir um **golden dataset** para testes de regressão
+- Avaliar seu agente RAG automaticamente com o SDK `azure-ai-evaluation`
+- Rastrear métricas de qualidade ao longo do tempo e detectar regressões
 
 ---
 
-## Introduction
+## Introdução
 
-How do you know if your agent got better or worse after a change? Manual testing doesn't scale.
+Como você sabe se seu agente melhorou ou piorou após uma mudança? Testes manuais não escalam.
 
-**LLM-as-judge evaluation** uses a second, independent LLM to score your agent's answers against criteria like:
+A **avaliação LLM-as-judge** usa um segundo LLM independente para pontuar as respostas do seu agente com base em critérios como:
 
-- **Groundedness** — Is the answer supported by the retrieved documents?
-- **Relevance** — Does the answer address what the user asked?
-- **Coherence** — Is the answer logically structured?
-- **Fluency** — Is the grammar correct?
+- **Fundamentação** — A resposta é suportada pelos documentos recuperados?
+- **Relevância** — A resposta aborda o que o usuário perguntou?
+- **Coerência** — A resposta é logicamente estruturada?
+- **Fluência** — A gramática está correta?
 
-This lab builds an automated evaluation pipeline for the OutdoorGear assistant.
+Este lab constrói um pipeline de avaliação automatizado para o assistente OutdoorGear.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 - Python 3.11+
 - `pip install azure-ai-evaluation openai`
-- `GITHUB_TOKEN` set
+- `GITHUB_TOKEN` configurado
 
 ---
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-035/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-035/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `eval_dataset.jsonl` | Evaluation dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `eval_dataset.jsonl` | Conjunto de dados de avaliação | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl) |
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Install the evaluation SDK
+### Passo 1: Instalar o SDK de avaliação
 
 ```bash
 pip install azure-ai-evaluation openai
 ```
 
-### Step 2: Create a golden dataset
+### Passo 2: Criar um golden dataset
 
-A **golden dataset** is a set of test questions with known-good answers. Create [📥 `eval_dataset.jsonl`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl):
+Um **golden dataset** é um conjunto de perguntas de teste com respostas corretas conhecidas. Crie [📥 `eval_dataset.jsonl`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl):
 
 ```jsonl
 {"query": "What is the return policy?", "response": "We offer a 60-day return window. Items must be unused in original packaging.", "context": "60-day return window. Items must be unused in original packaging. Worn footwear non-refundable unless defective."}
@@ -79,9 +74,9 @@ A **golden dataset** is a set of test questions with known-good answers. Create 
 {"query": "Tell me about the TrailBlazer X200", "response": "The TrailBlazer X200 is a waterproof hiking boot with Vibram outsole, priced at $189.99.", "context": "TrailBlazer X200 ($189.99): Waterproof Gore-Tex hiking boot. Vibram outsole. 3-season rated."}
 ```
 
-Note the 4th entry — the agent answers a question unrelated to the knowledge base. Groundedness evaluation should flag this.
+Observe a 4ª entrada — o agente responde uma pergunta não relacionada à base de conhecimento. A avaliação de fundamentação deve sinalizar isso.
 
-### Step 3: Run built-in evaluators
+### Passo 3: Executar avaliadores integrados
 
 ```python
 # evaluate_agent.py
@@ -158,7 +153,7 @@ for metric in ["groundedness", "relevance", "coherence", "fluency"]:
 python evaluate_agent.py
 ```
 
-Expected output:
+Saída esperada:
 ```
 ============================================================
 Query                                         Ground  Relev  Coher  Fluency
@@ -166,7 +161,7 @@ Query                                         Ground  Relev  Coher  Fluency
 What is the return policy?                       4.0    5.0    5.0      5.0
 Do you sell waterproof jackets?                  5.0    5.0    4.0      5.0
 How long does standard shipping take?            5.0    5.0    5.0      5.0
-What is the capital of France?                   1.0    1.0    4.0      5.0  ← flagged!
+What is the capital of France?                   1.0    1.0    4.0      5.0  ← sinalizado!
 Tell me about the TrailBlazer X200               5.0    5.0    5.0      5.0
 ============================================================
 ✅ Avg groundedness    : 4.00/5.0
@@ -175,11 +170,11 @@ Tell me about the TrailBlazer X200               5.0    5.0    5.0      5.0
 ✅ Avg fluency         : 5.00/5.0
 ```
 
-The Paris question is correctly flagged with low groundedness (1.0) — the answer is not supported by the OutdoorGear context.
+A pergunta sobre Paris é corretamente sinalizada com baixa fundamentação (1.0) — a resposta não é suportada pelo contexto do OutdoorGear.
 
-### Step 4: Build a custom evaluator
+### Passo 4: Construir um avaliador personalizado
 
-Sometimes you need domain-specific criteria. Here's a custom evaluator for **price accuracy**:
+Às vezes você precisa de critérios específicos do domínio. Aqui está um avaliador personalizado para **precisão de preço**:
 
 ```python
 # custom_evaluator.py
@@ -217,9 +212,9 @@ result = price_evaluator(
 print(f"Price accuracy score: {result['price_accuracy']}")
 ```
 
-### Step 5: Automate in CI/CD
+### Passo 5: Automatizar no CI/CD
 
-Add this to your GitHub Actions workflow (see [Lab 037](lab-037-cicd-github-actions.md)):
+Adicione isso ao seu workflow do GitHub Actions (veja [Lab 037](lab-037-cicd-github-actions.md)):
 
 ```yaml
 - name: Evaluate agent quality
@@ -240,55 +235,55 @@ Add this to your GitHub Actions workflow (see [Lab 037](lab-037-cicd-github-acti
 
 ---
 
-## Evaluation Metrics Reference
+## Referência de Métricas de Avaliação
 
-| Metric | What it measures | Good score |
-|--------|-----------------|------------|
-| Groundedness | Answer supported by context | ≥ 4.0 |
-| Relevance | Answers the user's question | ≥ 4.0 |
-| Coherence | Logical, well-structured | ≥ 4.0 |
-| Fluency | Grammatically correct | ≥ 4.5 |
+| Métrica | O que mede | Pontuação boa |
+|---------|-----------|---------------|
+| Fundamentação | Resposta suportada pelo contexto | ≥ 4.0 |
+| Relevância | Responde à pergunta do usuário | ≥ 4.0 |
+| Coerência | Lógica, bem estruturada | ≥ 4.0 |
+| Fluência | Gramaticalmente correta | ≥ 4.5 |
 
-Scores are 1–5. Below 3.0 on groundedness usually indicates hallucination.
+Pontuações são de 1 a 5. Abaixo de 3.0 em fundamentação geralmente indica alucinação.
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Run the Lab):** Load `lab-035/eval_dataset.jsonl` in Python. How many examples are in the dataset, and how many are in the `out_of_scope` category?"
+??? question "**Q1 (Execute o Lab):** Carregue `lab-035/eval_dataset.jsonl` em Python. Quantos exemplos existem no conjunto de dados, e quantos estão na categoria `out_of_scope`?"
 
-    Run the loader code from the Supporting Files section above.
+    Execute o código de carregamento da seção Arquivos de Apoio acima.
 
-    ??? success "✅ Reveal Answer"
-        **20 total examples. 1 example is in the `out_of_scope` category.**
+    ??? success "✅ Revelar Resposta"
+        **20 exemplos no total. 1 exemplo está na categoria `out_of_scope`.**
 
-        The dataset has exactly 20 lines. Run `sum(1 for d in dataset if d["category"] == "out_of_scope")` to confirm there is 1 out-of-scope example. That example tests whether your agent correctly refuses to answer questions unrelated to outdoor gear.
+        O conjunto de dados tem exatamente 20 linhas. Execute `sum(1 for d in dataset if d["category"] == "out_of_scope")` para confirmar que há 1 exemplo fora do escopo. Esse exemplo testa se seu agente recusa corretamente responder perguntas não relacionadas a equipamentos outdoor.
 
-??? question "**Q2 (Run the Lab):** For the single `out_of_scope` example in `eval_dataset.jsonl`, what is the value of the `product_ids` field?"
+??? question "**Q2 (Execute o Lab):** Para o único exemplo `out_of_scope` em `eval_dataset.jsonl`, qual é o valor do campo `product_ids`?"
 
-    Load the dataset and filter for `category == "out_of_scope"`. Print the `product_ids` field.
+    Carregue o conjunto de dados e filtre por `category == "out_of_scope"`. Imprima o campo `product_ids`.
 
-    ??? success "✅ Reveal Answer"
-        **`[]` (empty list)**
+    ??? success "✅ Revelar Resposta"
+        **`[]` (lista vazia)**
 
-        The out-of-scope example has `"product_ids": []` because the question is not about any specific product — it's testing whether the agent refuses to answer irrelevant questions (like asking for cooking recipes). A well-designed agent should return a refusal message rather than hallucinating an answer. Your evaluation metric should check that the agent's `groundedness` score is high and it does NOT reference any product IDs.
+        O exemplo fora do escopo tem `"product_ids": []` porque a pergunta não é sobre nenhum produto específico — está testando se o agente recusa responder perguntas irrelevantes (como pedir receitas culinárias). Um agente bem projetado deve retornar uma mensagem de recusa em vez de alucinar uma resposta. Sua métrica de avaliação deve verificar que a pontuação de `groundedness` do agente é alta e que ele NÃO referencia nenhum ID de produto.
 
-??? question "**Q3 (Multiple Choice):** How many examples in `eval_dataset.jsonl` are in the `tents` category?"
+??? question "**Q3 (Múltipla Escolha):** Quantos exemplos em `eval_dataset.jsonl` estão na categoria `tents`?"
 
     - A) 3
     - B) 5
     - C) 7
     - D) 4
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B — 5 examples**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B — 5 exemplos**
 
-        The `tents` category has 5 examples, making it the largest single category. Run `sum(1 for d in dataset if d["category"] == "tents")` to confirm. The full breakdown: tents(5), backpacks(4), sleeping_bags(3), pricing(3), recommendations(3), out_of_scope(1), comparisons(1).
+        A categoria `tents` tem 5 exemplos, sendo a maior categoria individual. Execute `sum(1 for d in dataset if d["category"] == "tents")` para confirmar. A distribuição completa: tents(5), backpacks(4), sleeping_bags(3), pricing(3), recommendations(3), out_of_scope(1), comparisons(1).
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **CI/CD for agents:** → [Lab 037 — GitHub Actions for AI Agents](lab-037-cicd-github-actions.md)
-- **Enterprise RAG evaluation:** → [Lab 042 — Enterprise RAG with Evaluations](lab-042-enterprise-rag.md)
+- **CI/CD para agentes:** → [Lab 037 — GitHub Actions for AI Agents](lab-037-cicd-github-actions.md)
+- **Avaliação RAG empresarial:** → [Lab 042 — Enterprise RAG with Evaluations](lab-042-enterprise-rag.md)

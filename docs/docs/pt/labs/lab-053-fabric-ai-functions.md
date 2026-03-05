@@ -1,56 +1,51 @@
 ---
 tags: [fabric, ai-functions, batch-enrichment, etl, python, pandas]
 ---
-# Lab 053: Fabric IQ — Batch AI Enrichment with AI Functions
+# Lab 053: Fabric IQ — Enriquecimento em Lote com AI Functions
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock AI functions locally (Fabric capacity optional)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Caminho:</strong> Todos os caminhos</span>
+  <span><strong>Tempo:</strong> ~90 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa funções de IA simuladas localmente (capacidade do Fabric opcional)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O Que Você Vai Aprender
 
+- O que são as **Fabric AI Functions** e como elas integram IA em fluxos de trabalho Spark/pandas (`ai.classify`, `ai.summarize`, `ai.extract`, `ai.embed`)
+- Projetar **pipelines de AI ETL** que enriquecem dados tabulares com transformações alimentadas por LLM
+- Processar dados em **lote** — aplicando classificação, sumarização e extração de entidades a DataFrames inteiros
+- Construir e testar com **funções de IA simuladas** localmente, depois trocar para chamadas reais `ai.*()` do Fabric em produção
 
+## Introdução
 
-## What You'll Learn
+![Pipeline AI ETL](../../assets/diagrams/fabric-ai-etl.svg)
 
-- What **Fabric AI Functions** are and how they integrate AI into Spark/pandas workflows (`ai.classify`, `ai.summarize`, `ai.extract`, `ai.embed`)
-- Design **AI ETL pipelines** that enrich tabular data with LLM-powered transformations
-- Process data in **batch** — applying classification, summarization, and entity extraction to entire DataFrames
-- Build and test with **mock AI functions** locally, then swap to real Fabric `ai.*()` calls in production
+Pipelines ETL tradicionais movem e transformam dados estruturados — limpar, filtrar, juntar, agregar. **AI Functions** adicionam uma nova dimensão: permitem chamar um LLM em cada linha de um DataFrame, tratando classificação, sumarização e extração como operações nativas de coluna.
 
-## Introduction
+No Microsoft Fabric, as funções `ai.*()` rodam diretamente dentro de notebooks Spark. Você escreve `df["sentiment"] = ai.classify(df["text"], ["positive", "neutral", "negative"])` e o Fabric cuida do agrupamento em lotes, limitação de taxa e roteamento de modelo nos bastidores.
 
-![AI ETL Pipeline](../../assets/diagrams/fabric-ai-etl.svg)
+### O Cenário
 
-Traditional ETL pipelines move and transform structured data — clean, filter, join, aggregate. **AI Functions** add a new dimension: they let you call an LLM on every row of a DataFrame, treating classification, summarization, and extraction as native column operations.
+Você é um **Engenheiro de Dados** na OutdoorGear Inc. A equipe de produto coletou **20 avaliações de clientes** para equipamentos outdoor e quer que você construa um pipeline de enriquecimento que:
 
-In Microsoft Fabric, the `ai.*()` functions run directly inside Spark notebooks. You write `df["sentiment"] = ai.classify(df["text"], ["positive", "neutral", "negative"])` and Fabric handles batching, rate-limiting, and model routing behind the scenes.
+1. **Classifica** o sentimento de cada avaliação (positivo / neutro / negativo)
+2. **Sumariza** cada avaliação em um snippet curto
+3. **Extrai** entidades-chave (prós e contras) do texto da avaliação
+4. **Gera embeddings** do texto da avaliação para busca semântica downstream *(discutido conceitualmente)*
 
-### The Scenario
+Como você está desenvolvendo localmente, usará **funções de IA simuladas** que imitam o comportamento das chamadas `ai.*()` do Fabric. Uma vez que o pipeline esteja validado, trocar para modelos reais requer alterar apenas as implementações das funções.
 
-You are a **Data Engineer** at OutdoorGear Inc. The product team has collected **20 customer reviews** for outdoor gear and wants you to build an enrichment pipeline that:
+!!! info "Funções de IA Simuladas vs. Reais"
+    Este lab usa funções simuladas (baseadas em regras, sem necessidade de LLM) para que qualquer pessoa possa acompanhar sem uma capacidade do Fabric. As funções simuladas produzem resultados determinísticos que correspondem às saídas esperadas. No Fabric em produção, você substituiria essas simulações por `ai.classify()`, `ai.summarize()`, etc.
 
-1. **Classifies** each review's sentiment (positive / neutral / negative)
-2. **Summarizes** each review into a short snippet
-3. **Extracts** key entities (pros and cons) from the review text
-4. **Embeds** the review text for downstream semantic search *(discussed conceptually)*
+## Pré-requisitos
 
-Because you're developing locally, you'll use **mock AI functions** that mimic the behavior of Fabric's `ai.*()` calls. Once the pipeline is validated, swapping to real models requires changing only the function implementations.
-
-!!! info "Mock vs. Real AI Functions"
-    This lab uses mock functions (rule-based, no LLM needed) so anyone can follow along without a Fabric capacity. The mock functions produce deterministic results that match the expected outputs. In production Fabric, you would replace these mocks with `ai.classify()`, `ai.summarize()`, etc.
-
-## Prerequisites
-
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run the enrichment pipeline |
-| `pandas` library | DataFrame operations |
-| (Optional) Microsoft Fabric capacity | For real `ai.*()` functions |
+| Python 3.10+ | Executar o pipeline de enriquecimento |
+| Biblioteca `pandas` | Operações com DataFrame |
+| (Opcional) Capacidade do Microsoft Fabric | Para funções `ai.*()` reais |
 
 ```bash
 pip install pandas
@@ -58,38 +53,38 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
-    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
+!!! tip "Início Rápido com GitHub Codespaces"
+    [![Abrir no GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-053/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-053/` no seu diretório de trabalho.
 
-| File | Description | Download |
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_pipeline.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/broken_pipeline.py) |
-| `product_reviews.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/product_reviews.csv) |
+| `broken_pipeline.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/broken_pipeline.py) |
+| `product_reviews.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/product_reviews.csv) |
 
 ---
 
-## Step 1: Understanding Fabric AI Functions
+## Etapa 1: Entendendo as Fabric AI Functions
 
-Fabric AI Functions are native operations that apply LLM capabilities to DataFrame columns. They abstract away prompt engineering, batching, and API management:
+As Fabric AI Functions são operações nativas que aplicam capacidades de LLM a colunas de DataFrame. Elas abstraem a engenharia de prompts, agrupamento em lotes e gerenciamento de API:
 
-| Function | Signature | Description |
+| Função | Assinatura | Descrição |
 |----------|-----------|-------------|
-| `ai.classify()` | `ai.classify(column, categories)` | Classifies text into one of the provided categories using an LLM |
-| `ai.summarize()` | `ai.summarize(column, max_length=None)` | Generates a concise summary of each text value |
-| `ai.extract()` | `ai.extract(column, fields)` | Extracts structured fields (entities, keywords) from text |
-| `ai.embed()` | `ai.embed(column, model=None)` | Generates vector embeddings for downstream similarity search |
+| `ai.classify()` | `ai.classify(column, categories)` | Classifica texto em uma das categorias fornecidas usando um LLM |
+| `ai.summarize()` | `ai.summarize(column, max_length=None)` | Gera um resumo conciso de cada valor de texto |
+| `ai.extract()` | `ai.extract(column, fields)` | Extrai campos estruturados (entidades, palavras-chave) do texto |
+| `ai.embed()` | `ai.embed(column, model=None)` | Gera embeddings vetoriais para busca de similaridade downstream |
 
-### How They Work in Fabric
+### Como Elas Funcionam no Fabric
 
-In a real Fabric Spark notebook, you'd write:
+Em um notebook Spark real do Fabric, você escreveria:
 
 ```python
 from synapse.ml.fabric import ai
@@ -101,21 +96,21 @@ df["sentiment"] = ai.classify(df["review_text"], ["positive", "neutral", "negati
 df["summary"] = ai.summarize(df["review_text"], max_length=50)
 ```
 
-Fabric handles:
+O Fabric cuida de:
 
-- **Batching** — groups rows into optimal batch sizes for the model endpoint
-- **Rate limiting** — respects token-per-minute limits automatically
-- **Error handling** — retries transient failures with exponential backoff
-- **Model routing** — uses the workspace's default model or a specified one
+- **Agrupamento em lotes** — agrupa linhas em tamanhos ótimos de lote para o endpoint do modelo
+- **Limitação de taxa** — respeita limites de tokens por minuto automaticamente
+- **Tratamento de erros** — repete falhas transientes com backoff exponencial
+- **Roteamento de modelo** — usa o modelo padrão do workspace ou um especificado
 
-!!! tip "Why Mock First?"
-    Building with mocks lets you validate pipeline logic, data types, and downstream consumers *before* spending compute on real LLM calls. This is a best practice for any AI ETL pipeline.
+!!! tip "Por Que Simular Primeiro?"
+    Construir com simulações permite validar a lógica do pipeline, tipos de dados e consumidores downstream *antes* de gastar computação em chamadas reais de LLM. Esta é uma melhor prática para qualquer pipeline de AI ETL.
 
 ---
 
-## Step 2: Load the Reviews Dataset
+## Etapa 2: Carregar o Conjunto de Dados de Avaliações
 
-The dataset contains **20 product reviews** for OutdoorGear products:
+O conjunto de dados contém **20 avaliações de produtos** para produtos OutdoorGear:
 
 ```python
 import pandas as pd
@@ -129,7 +124,7 @@ print(f"\nReviews per product:")
 print(reviews.groupby("product_name").size().sort_values(ascending=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total reviews: 20
@@ -148,7 +143,7 @@ DayTripper Pack            2
 Summit Water Bottle        2
 ```
 
-Take a moment to explore the data:
+Reserve um momento para explorar os dados:
 
 ```python
 print(reviews[["review_id", "product_name", "rating", "review_text"]].head(5).to_string(index=False))
@@ -156,13 +151,13 @@ print(reviews[["review_id", "product_name", "rating", "review_text"]].head(5).to
 
 ---
 
-## Step 3: Implement Mock AI Functions
+## Etapa 3: Implementar Funções de IA Simuladas
 
-Instead of calling a real LLM, we create deterministic mock functions that mimic Fabric's `ai.*()` behavior:
+Em vez de chamar um LLM real, criamos funções simuladas determinísticas que imitam o comportamento das `ai.*()` do Fabric:
 
 ### 3a — `mock_classify(rating)`
 
-Classifies sentiment based on the numeric rating:
+Classifica o sentimento com base na nota numérica:
 
 ```python
 def mock_classify(rating: int) -> str:
@@ -181,7 +176,7 @@ def mock_classify(rating: int) -> str:
 
 ### 3b — `mock_summarize(text)`
 
-Returns a truncated version of the review text:
+Retorna uma versão truncada do texto da avaliação:
 
 ```python
 def mock_summarize(text: str) -> str:
@@ -193,7 +188,7 @@ def mock_summarize(text: str) -> str:
 
 ### 3c — `mock_extract(text)`
 
-Extracts simple keywords by scanning for positive/negative indicator words:
+Extrai palavras-chave simples procurando por palavras indicadoras positivas/negativas:
 
 ```python
 POSITIVE_WORDS = {"amazing", "great", "best", "perfect", "incredible", "love",
@@ -209,14 +204,14 @@ def mock_extract(text: str) -> dict:
     return {"pros": pros, "cons": cons}
 ```
 
-!!! tip "Real vs. Mock"
-    In production Fabric, `ai.classify()` sends the review text to an LLM with the candidate labels — it understands context, sarcasm, and nuance. Our mock uses the rating as a proxy, which is a reasonable heuristic for this dataset but wouldn't generalize to unlabeled text.
+!!! tip "Real vs. Simulado"
+    No Fabric em produção, `ai.classify()` envia o texto da avaliação para um LLM com os rótulos candidatos — ele entende contexto, sarcasmo e nuances. Nossa simulação usa a nota como proxy, o que é uma heurística razoável para este conjunto de dados, mas não generalizaria para texto sem rótulos.
 
 ---
 
-## Step 4: Run the Enrichment Pipeline
+## Etapa 4: Executar o Pipeline de Enriquecimento
 
-Apply the mock functions to every row in the DataFrame:
+Aplique as funções simuladas a cada linha do DataFrame:
 
 ```python
 # Classify sentiment
@@ -233,7 +228,7 @@ print(f"\nSentiment distribution:")
 print(reviews["sentiment"].value_counts())
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Enriched DataFrame columns: ['review_id', 'product_id', 'product_name', 'category',
@@ -245,7 +240,7 @@ neutral      4
 negative     3
 ```
 
-### Verify the Results
+### Verificar os Resultados
 
 ```python
 # Show a sample of enriched data
@@ -253,7 +248,7 @@ sample_cols = ["review_id", "product_name", "rating", "sentiment", "summary"]
 print(reviews[sample_cols].head(6).to_string(index=False))
 ```
 
-**Expected:**
+**Esperado:**
 
 | review_id | product_name | rating | sentiment | summary |
 |-----------|-------------|--------|-----------|---------|
@@ -264,28 +259,28 @@ print(reviews[sample_cols].head(6).to_string(index=False))
 | R005 | Alpine Explorer Tent | 4 | positive | Good quality materials. Survived a storm with no ... |
 | R006 | TrailMaster X4 Tent | 4 | positive | Great ventilation and the zipper is smooth. Sligh... |
 
-### Sentiment Breakdown
+### Distribuição de Sentimento
 
-| Sentiment | Count | Ratings |
+| Sentimento | Contagem | Notas |
 |-----------|-------|---------|
-| Positive (rating ≥ 4) | 13 | Ratings 4 and 5 |
-| Neutral (rating = 3) | 4 | Rating 3 |
-| Negative (rating ≤ 2) | 3 | Ratings 1 and 2 |
+| Positivo (rating ≥ 4) | 13 | Notas 4 e 5 |
+| Neutro (rating = 3) | 4 | Nota 3 |
+| Negativo (rating ≤ 2) | 3 | Notas 1 e 2 |
 
 ---
 
-## Step 5: Analyze Enriched Data
+## Etapa 5: Analisar Dados Enriquecidos
 
-Now that the reviews are enriched, analyze them to extract business insights:
+Agora que as avaliações estão enriquecidas, analise-as para extrair insights de negócios:
 
-### 5a — Average Rating by Sentiment
+### 5a — Nota Média por Sentimento
 
 ```python
 print("Average rating by sentiment:")
 print(reviews.groupby("sentiment")["rating"].mean().to_string())
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 negative    1.666667
@@ -293,7 +288,7 @@ neutral     3.000000
 positive    4.384615
 ```
 
-### 5b — Product-Level Analysis
+### 5b — Análise por Produto
 
 ```python
 product_stats = reviews.groupby("product_name").agg(
@@ -307,7 +302,7 @@ print(f"\nProduct statistics:")
 print(product_stats.to_string())
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Overall average rating: 3.70
@@ -326,7 +321,7 @@ DayTripper Pack                     2    3.500000
 Summit Water Bottle                 2    2.500000
 ```
 
-### 5c — Best-Rated Product (2+ reviews)
+### 5c — Produto com Melhor Nota (2+ avaliações)
 
 ```python
 multi_review = product_stats[product_stats["review_count"] >= 2]
@@ -335,14 +330,14 @@ print(f"Highest-rated product (2+ reviews): {multi_review.sort_values('avg_ratin
 print(f"  Average rating: {best['avg_rating']:.2f}")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Highest-rated product (2+ reviews): Alpine Explorer Tent
   Average rating: 4.20
 ```
 
-### 5d — Sentiment by Category
+### 5d — Sentimento por Categoria
 
 ```python
 print("Sentiment distribution by category:")
@@ -351,28 +346,28 @@ print(pd.crosstab(reviews["category"], reviews["sentiment"]))
 
 ---
 
-## Step 6: Production Considerations
+## Etapa 6: Considerações de Produção
 
-When moving from mocks to real Fabric AI Functions, consider these factors:
+Ao migrar de simulações para Fabric AI Functions reais, considere estes fatores:
 
-### Batch Size
+### Tamanho do Lote
 
-| Batch Size | Trade-off |
+| Tamanho do Lote | Compensação |
 |------------|-----------|
-| Small (1–10 rows) | Higher latency per row; easier to debug |
-| Medium (50–100 rows) | Good balance of throughput and cost |
-| Large (500+ rows) | Maximum throughput; risk of timeouts and rate limits |
+| Pequeno (1–10 linhas) | Maior latência por linha; mais fácil de depurar |
+| Médio (50–100 linhas) | Bom equilíbrio entre throughput e custo |
+| Grande (500+ linhas) | Throughput máximo; risco de timeouts e limites de taxa |
 
-Fabric's `ai.*()` functions handle batching automatically, but you can tune it:
+As funções `ai.*()` do Fabric lidam com agrupamento em lotes automaticamente, mas você pode ajustar:
 
 ```python
 # In Fabric, control batch behavior via configuration
 spark.conf.set("spark.synapse.ml.ai.batchSize", 50)
 ```
 
-### Mock → Real Swap
+### Troca Simulado → Real
 
-The key advantage of our mock-first approach: swapping to real functions requires changing only the function implementations:
+A principal vantagem da nossa abordagem de simulação primeiro: trocar para funções reais requer alterar apenas as implementações das funções:
 
 ```python
 # ── Mock (local development) ────────────────────
@@ -384,112 +379,112 @@ reviews["sentiment"] = reviews["rating"].apply(mock_classify)
 #                                    ["positive", "neutral", "negative"])
 ```
 
-### Cost Awareness
+### Conscientização de Custos
 
-| Factor | Impact |
+| Fator | Impacto |
 |--------|--------|
-| Token count | Each review consumes input tokens; longer reviews cost more |
-| Model choice | GPT-4o vs. GPT-4o-mini — 10× cost difference |
-| Redundant calls | Cache results to avoid re-processing unchanged rows |
-| Column count | Each `ai.*()` call is a separate LLM invocation per row |
+| Contagem de tokens | Cada avaliação consome tokens de entrada; avaliações mais longas custam mais |
+| Escolha do modelo | GPT-4o vs. GPT-4o-mini — diferença de custo de 10× |
+| Chamadas redundantes | Faça cache dos resultados para evitar reprocessamento de linhas inalteradas |
+| Contagem de colunas | Cada chamada `ai.*()` é uma invocação separada de LLM por linha |
 
-!!! warning "Cost Tip"
-    For 20 reviews, cost is negligible. For 200,000 reviews, a single `ai.classify()` column could cost $50+ with GPT-4o. Always prototype with a sample, validate results, then scale.
+!!! warning "Dica de Custo"
+    Para 20 avaliações, o custo é insignificante. Para 200.000 avaliações, uma única coluna `ai.classify()` pode custar $50+ com GPT-4o. Sempre faça protótipos com uma amostra, valide os resultados e depois escale.
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-053/broken_pipeline.py` has **3 bugs** in the AI enrichment functions. Can you find and fix them all?
+O arquivo `lab-053/broken_pipeline.py` tem **3 bugs** nas funções de enriquecimento de IA. Você consegue encontrar e corrigir todos?
 
-Run the self-tests to see which ones fail:
+Execute os auto-testes para ver quais falham:
 
 ```bash
 python lab-053/broken_pipeline.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Você deverá ver **3 testes falhando**. Cada teste corresponde a um bug:
 
-| Test | What it checks | Hint |
+| Teste | O que verifica | Dica |
 |------|---------------|------|
-| Test 1 | Sentiment classification thresholds | Rating 3 should be neutral, not positive |
-| Test 2 | Reviews-per-product grouping | Should group by `product_name`, not `review_id` |
-| Test 3 | Average rating filtered by sentiment | Must filter the DataFrame before computing the mean |
+| Teste 1 | Limites de classificação de sentimento | Rating 3 deve ser neutro, não positivo |
+| Teste 2 | Agrupamento de avaliações por produto | Deve agrupar por `product_name`, não por `review_id` |
+| Teste 3 | Nota média filtrada por sentimento | Deve filtrar o DataFrame antes de calcular a média |
 
-Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done!
+Corrija todos os 3 bugs e execute novamente. Quando você ver `🎉 All 3 tests passed`, está feito!
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What does `ai.classify()` do in Fabric AI Functions?"
+??? question "**Q1 (Múltipla Escolha):** O que `ai.classify()` faz nas Fabric AI Functions?"
 
-    - A) Splits text into sentences for NLP processing
-    - B) Classifies text into predefined categories using an LLM
-    - C) Trains a custom classification model on your data
-    - D) Converts text to numeric feature vectors
+    - A) Divide texto em sentenças para processamento de NLP
+    - B) Classifica texto em categorias predefinidas usando um LLM
+    - C) Treina um modelo de classificação personalizado nos seus dados
+    - D) Converte texto em vetores de características numéricas
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Classifies text into predefined categories using an LLM**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Classifica texto em categorias predefinidas usando um LLM**
 
-        `ai.classify()` sends each text value to an LLM along with the candidate labels you provide (e.g., `["positive", "neutral", "negative"]`). The LLM returns the best-matching label. It does not train a model — it uses the LLM's existing knowledge via in-context learning.
+        `ai.classify()` envia cada valor de texto para um LLM junto com os rótulos candidatos que você fornece (ex.: `["positive", "neutral", "negative"]`). O LLM retorna o rótulo que melhor corresponde. Ele não treina um modelo — usa o conhecimento existente do LLM via aprendizado em contexto.
 
-??? question "**Q2 (Multiple Choice):** Why is batch size important when using AI Functions at scale?"
+??? question "**Q2 (Múltipla Escolha):** Por que o tamanho do lote é importante ao usar AI Functions em escala?"
 
-    - A) Larger batches always produce more accurate results
-    - B) Batch size determines which LLM model is used
-    - C) Balances throughput, cost, and rate-limit compliance
-    - D) Smaller batches use fewer tokens per row
+    - A) Lotes maiores sempre produzem resultados mais precisos
+    - B) O tamanho do lote determina qual modelo de LLM é usado
+    - C) Equilibra throughput, custo e conformidade com limites de taxa
+    - D) Lotes menores usam menos tokens por linha
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) Balances throughput, cost, and rate-limit compliance**
+    ??? success "✅ Revelar Resposta"
+        **Correto: C) Equilibra throughput, custo e conformidade com limites de taxa**
 
-        Batch size affects how many rows are sent to the LLM endpoint per request. Too small = high latency overhead; too large = risk of rate-limit errors and timeouts. The optimal batch size balances throughput (rows/second), cost (tokens/request), and API rate limits.
+        O tamanho do lote afeta quantas linhas são enviadas ao endpoint do LLM por requisição. Muito pequeno = alta sobrecarga de latência; muito grande = risco de erros de limite de taxa e timeouts. O tamanho ótimo de lote equilibra throughput (linhas/segundo), custo (tokens/requisição) e limites de taxa da API.
 
-??? question "**Q3 (Run the Lab):** How many reviews have a positive sentiment (rating ≥ 4)?"
+??? question "**Q3 (Execute o Lab):** Quantas avaliações têm sentimento positivo (rating ≥ 4)?"
 
-    Apply `mock_classify()` to the rating column and count the `"positive"` values.
+    Aplique `mock_classify()` à coluna de rating e conte os valores `"positive"`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **13**
 
-        Ratings of 4 or 5 map to `"positive"`. There are 9 reviews with rating 4 and 4 reviews with rating 5, totaling **13 positive reviews** out of 20.
+        Ratings de 4 ou 5 mapeiam para `"positive"`. Há 9 avaliações com rating 4 e 4 avaliações com rating 5, totalizando **13 avaliações positivas** de 20.
 
-??? question "**Q4 (Run the Lab):** Which product has the most reviews?"
+??? question "**Q4 (Execute o Lab):** Qual produto tem mais avaliações?"
 
-    Group by `product_name` and count the rows.
+    Agrupe por `product_name` e conte as linhas.
 
-    ??? success "✅ Reveal Answer"
-        **Alpine Explorer Tent — 5 reviews**
+    ??? success "✅ Revelar Resposta"
+        **Alpine Explorer Tent — 5 avaliações**
 
-        Alpine Explorer Tent (P001) has reviews R001–R005, making it the most-reviewed product. The next most-reviewed products (Peak Performer Boots, Explorer Pro Backpack, TrailMaster X4 Tent) each have 3 reviews.
+        Alpine Explorer Tent (P001) tem avaliações R001–R005, tornando-o o produto mais avaliado. Os próximos produtos mais avaliados (Peak Performer Boots, Explorer Pro Backpack, TrailMaster X4 Tent) têm 3 avaliações cada.
 
-??? question "**Q5 (Run the Lab):** What is the average rating across all 20 reviews?"
+??? question "**Q5 (Execute o Lab):** Qual é a nota média de todas as 20 avaliações?"
 
-    Compute `reviews["rating"].mean()`.
+    Calcule `reviews["rating"].mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **3.70**
+    ??? success "✅ Revelar Resposta"
+        **3,70**
 
-        Sum of all ratings: 5+4+5+3+4+4+2+4+5+4+3+5+4+2+4+3+5+3+4+1 = 74. Average = 74 ÷ 20 = **3.70**.
+        Soma de todas as notas: 5+4+5+3+4+4+2+4+5+4+3+5+4+2+4+3+5+3+4+1 = 74. Média = 74 ÷ 20 = **3,70**.
 
 ---
 
-## Summary
+## Resumo
 
-| Topic | What You Learned |
+| Tópico | O Que Você Aprendeu |
 |-------|-----------------|
-| AI Functions | `ai.classify`, `ai.summarize`, `ai.extract`, `ai.embed` as DataFrame operations |
-| Mock-First Development | Build and validate pipeline logic before using real LLM calls |
-| Batch Enrichment | Apply AI transformations to every row of a dataset |
-| Sentiment Analysis | Rating-based classification: positive (≥4), neutral (3), negative (≤2) |
-| Product Analytics | Group-by analysis on enriched data for business insights |
-| Production Readiness | Batch size, cost, caching, and mock-to-real swap patterns |
+| AI Functions | `ai.classify`, `ai.summarize`, `ai.extract`, `ai.embed` como operações de DataFrame |
+| Desenvolvimento com Simulação Primeiro | Construir e validar a lógica do pipeline antes de usar chamadas reais de LLM |
+| Enriquecimento em Lote | Aplicar transformações de IA a cada linha de um conjunto de dados |
+| Análise de Sentimento | Classificação baseada em nota: positivo (≥4), neutro (3), negativo (≤2) |
+| Análise de Produtos | Análise de agrupamento em dados enriquecidos para insights de negócios |
+| Prontidão para Produção | Tamanho do lote, custo, cache e padrões de troca simulação para real |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 051](lab-051-fabric-iq-event-streams.md)** *(coming soon)* — Fabric IQ — Real-Time Event Stream Processing
-- **[Lab 052](lab-052-fabric-iq-nl-to-sql.md)** *(coming soon)* — Fabric IQ — Natural Language to SQL with AI
+- **[Lab 051](lab-051-fabric-iq-event-streams.md)** *(em breve)* — Fabric IQ — Processamento de Event Stream em Tempo Real
+- **[Lab 052](lab-052-fabric-iq-nl-to-sql.md)** *(em breve)* — Fabric IQ — Linguagem Natural para SQL com IA

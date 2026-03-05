@@ -1,75 +1,70 @@
 ---
 tags: [vscode, typescript, github-copilot, free]
 ---
-# Lab 025: VS Code Copilot Chat Participant
+# Lab 025: Participante do Chat do VS Code Copilot
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/agent-builder-vscode/">Agent Builder — VS Code</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — GitHub Copilot subscription OR VS Code Language Model API (free in VS Code)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/agent-builder-vscode/">Agent Builder — VS Code</a></span>
+  <span><strong>Tempo:</strong> ~45 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — assinatura do GitHub Copilot OU VS Code Language Model API (gratuita no VS Code)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- How VS Code **Chat Participants** extend GitHub Copilot Chat
-- Create a custom `@outdoorgear` participant that answers product questions
-- Use the **VS Code Language Model API** — no external API keys needed
-- Handle **slash commands** (`/search`, `/policy`)
-- Stream responses in real-time
+- Como os **Chat Participants** do VS Code estendem o GitHub Copilot Chat
+- Criar um participante personalizado `@outdoorgear` que responde perguntas sobre produtos
+- Usar a **VS Code Language Model API** — sem necessidade de chaves de API externas
+- Lidar com **slash commands** (`/search`, `/policy`)
+- Transmitir respostas em tempo real
 
 ---
 
-## Introduction
+## Introdução
 
-VS Code Chat Participants are custom agents that plug directly into GitHub Copilot Chat using the `@` prefix. When a user types `@outdoorgear what tents do you have?`, your extension handles the request.
+Chat Participants do VS Code são agentes personalizados que se conectam diretamente ao GitHub Copilot Chat usando o prefixo `@`. Quando um usuário digita `@outdoorgear what tents do you have?`, sua extensão lida com a solicitação.
 
-The **Language Model API** (`vscode.lm`) gives extensions access to the same LLM powering Copilot — for free, using the user's existing GitHub Copilot subscription.
+A **Language Model API** (`vscode.lm`) dá às extensões acesso ao mesmo LLM que alimenta o Copilot — gratuitamente, usando a assinatura existente do GitHub Copilot do usuário.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 - VS Code 1.90+
-- GitHub Copilot subscription (free trial available)
+- Assinatura do GitHub Copilot (teste gratuito disponível)
 - Node.js 18+
 - `npm install -g yo generator-code`
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Scaffold a VS Code extension
+### Passo 1: Criar a estrutura de uma extensão VS Code
 
 ```bash
 mkdir outdoorgear-participant && cd outdoorgear-participant
 npx --yes yo code
 ```
 
-Select:
+Selecione:
 - **New Extension (TypeScript)**
-- Name: `outdoorgear-participant`
-- Identifier: `outdoorgear-participant`
-- Description: `OutdoorGear product assistant for Copilot Chat`
-- Bundle with webpack: **No**
+- Nome: `outdoorgear-participant`
+- Identificador: `outdoorgear-participant`
+- Descrição: `OutdoorGear product assistant for Copilot Chat`
+- Empacotar com webpack: **No**
 
-Open in VS Code:
+Abra no VS Code:
 ```bash
 code .
 ```
 
-### Step 2: Install type definitions
+### Passo 2: Instalar as definições de tipos
 
 ```bash
 npm install --save-dev @types/vscode
 ```
 
-Update `package.json` — set the engine version and add chat participant contribution:
+Atualize o `package.json` — defina a versão do engine e adicione a contribuição do chat participant:
 
 ```json
 {
@@ -98,9 +93,9 @@ Update `package.json` — set the engine version and add chat participant contri
 }
 ```
 
-### Step 3: Write the participant handler
+### Passo 3: Escrever o handler do participante
 
-Replace `src/extension.ts` with:
+Substitua `src/extension.ts` por:
 
 ```typescript
 import * as vscode from 'vscode';
@@ -129,8 +124,11 @@ function searchProducts(query: string): string {
     );
     if (matches.length === 0) { return 'No products found for that query.'; }
     return matches.map(p =>
-        `**${p.name}** — $${p.price}\n${p.description} _(${p.category})_`
-    ).join('\n\n');
+        `**${p.name}** — $${p.price}
+${p.description} _(${p.category})_`
+    ).join('
+
+');
 }
 
 export function activate(context: vscode.ExtensionContext) {
@@ -151,9 +149,13 @@ export function activate(context: vscode.ExtensionContext) {
             const prompt = request.prompt.toLowerCase();
             const key = Object.keys(POLICIES).find(k => prompt.includes(k));
             if (key) {
-                stream.markdown(`**${key.charAt(0).toUpperCase() + key.slice(1)} Policy:**\n\n${POLICIES[key]}`);
+                stream.markdown(`**${key.charAt(0).toUpperCase() + key.slice(1)} Policy:**
+
+${POLICIES[key]}`);
             } else {
-                stream.markdown(`Available policies: **return**, **shipping**, **warranty**\n\nTry: \`@outdoorgear /policy return\``);
+                stream.markdown(`Available policies: **return**, **shipping**, **warranty**
+
+Try: \`@outdoorgear /policy return\``);
             }
             return;
         }
@@ -161,11 +163,13 @@ export function activate(context: vscode.ExtensionContext) {
         // General question — use the Language Model API
         const productContext = PRODUCTS.map(p =>
             `- ${p.name} ($${p.price}): ${p.description}`
-        ).join('\n');
+        ).join('
+');
 
         const policyContext = Object.entries(POLICIES)
             .map(([k, v]) => `${k}: ${v}`)
-            .join('\n');
+            .join('
+');
 
         const systemPrompt = `You are a helpful outdoor gear shopping assistant for OutdoorGear Inc.
 Answer questions using ONLY the provided product and policy context.
@@ -215,10 +219,15 @@ ${policyContext}`;
             return {
                 icon: new vscode.ThemeIcon('outdoor-gear'),
                 message: new vscode.MarkdownString(
-                    '👋 Hi! I\'m the **OutdoorGear Assistant**.\n\n' +
-                    'I can help you with:\n' +
-                    '- `@outdoorgear /search hiking boots` — Find products\n' +
-                    '- `@outdoorgear /policy return` — Policy questions\n' +
+                    '👋 Hi! I'm the **OutdoorGear Assistant**.
+
+' +
+                    'I can help you with:
+' +
+                    '- `@outdoorgear /search hiking boots` — Find products
+' +
+                    '- `@outdoorgear /policy return` — Policy questions
+' +
                     '- `@outdoorgear What tent is best for winter?` — General questions'
                 )
             };
@@ -231,11 +240,11 @@ ${policyContext}`;
 export function deactivate() {}
 ```
 
-### Step 4: Run and test the extension
+### Passo 4: Executar e testar a extensão
 
-Press **F5** to open an Extension Development Host (a new VS Code window).
+Pressione **F5** para abrir um Extension Development Host (uma nova janela do VS Code).
 
-In the new window, open Copilot Chat and try:
+Na nova janela, abra o Copilot Chat e experimente:
 
 ```
 @outdoorgear What waterproof boots do you have?
@@ -244,9 +253,9 @@ In the new window, open Copilot Chat and try:
 @outdoorgear I'm hiking Rainier in January, what do I need?
 ```
 
-### Step 5: Add follow-up suggestions
+### Passo 5: Adicionar sugestões de acompanhamento
 
-Improve UX by suggesting follow-up questions:
+Melhore a experiência do usuário sugerindo perguntas de acompanhamento:
 
 ```typescript
 // Add inside the handler, before the return at end of general question block:
@@ -267,7 +276,7 @@ return {
 
 ---
 
-## How the Language Model API Works
+## Como a Language Model API Funciona
 
 ```
 User types: @outdoorgear What tent for winter?
@@ -288,11 +297,11 @@ model.sendRequest() → streams tokens back
 stream.markdown() → renders in Chat panel
 ```
 
-No external API key. No network cost. Uses the user's Copilot subscription.
+Sem chave de API externa. Sem custo de rede. Usa a assinatura Copilot do usuário.
 
 ---
 
-## Publishing (Optional)
+## Publicação (Opcional)
 
 ```bash
 npm install -g @vscode/vsce
@@ -308,7 +317,7 @@ vsce publish
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Build a full Copilot Extension (GitHub.com):** → [Lab 041 — Custom GitHub Copilot Extension](lab-041-copilot-extension.md)
-- **Connect your participant to an MCP server:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
+- **Construir uma Extensão Copilot completa (GitHub.com):** → [Lab 041 — Extensão Personalizada do GitHub Copilot](lab-041-copilot-extension.md)
+- **Conectar seu participante a um servidor MCP:** → [Lab 020 — Servidor MCP em Python](lab-020-mcp-server-python.md)

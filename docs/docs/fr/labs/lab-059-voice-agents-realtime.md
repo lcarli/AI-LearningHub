@@ -1,38 +1,33 @@
 ---
 tags: [voice, realtime-api, webrtc, azure-openai, multimodal, python]
 ---
-# Lab 059: Voice Agents with GPT Realtime API
+# Lab 059 : Agents vocaux avec GPT Realtime API
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~75 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses session dataset (Azure OpenAI optional)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~75 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise un jeu de données de sessions (Azure OpenAI optionnel)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- How the **GPT-4o Realtime API** enables full-duplex voice conversations with ~100 ms latency
-- Connect clients via **WebRTC** for low-latency, browser-native audio streaming
-- Handle **interruptions (barge-in)** — letting users cut in while the agent is still speaking
-- Integrate **RAG with real-time audio** so the agent retrieves product data mid-conversation
-- Analyze **voice session metrics**: latency percentiles, sentiment, and language distribution
-- Evaluate **multi-language support** (en, es, fr) in a single voice agent deployment
+- Comment le **GPT-4o Realtime API** permet des conversations vocales en duplex intégral avec une latence d'environ 100 ms
+- Connecter des clients via **WebRTC** pour un streaming audio natif au navigateur à faible latence
+- Gérer les **interruptions (barge-in)** — permettre aux utilisateurs d'intervenir pendant que l'agent parle encore
+- Intégrer le **RAG avec l'audio en temps réel** pour que l'agent récupère des données produit en cours de conversation
+- Analyser les **métriques des sessions vocales** : percentiles de latence, sentiment et distribution linguistique
+- Évaluer le **support multilingue** (en, es, fr) dans un déploiement unique d'agent vocal
 
 ---
 
 ## Introduction
 
-Voice agents are shifting from traditional turn-taking — where the user speaks, waits, then the agent responds — to **real-time conversation**. The GPT-4o Realtime API processes speech input and generates speech output simultaneously, enabling natural back-and-forth dialogue with sub-100 ms latency.
+Les agents vocaux passent du mode traditionnel de prise de parole alternée — où l'utilisateur parle, attend, puis l'agent répond — à la **conversation en temps réel**. Le GPT-4o Realtime API traite l'entrée vocale et génère une sortie vocale simultanément, permettant un dialogue naturel en va-et-vient avec une latence inférieure à 100 ms.
 
-**OutdoorGear** wants a voice assistant for product inquiries. Customers call in, ask about gear, and the agent responds with product details — all in real time. The system must handle interruptions gracefully (a customer can say "wait, actually…" mid-response), support multiple languages, and pull product information from a RAG pipeline on the fly.
+**OutdoorGear** souhaite un assistant vocal pour les demandes de renseignements sur les produits. Les clients appellent, posent des questions sur l'équipement, et l'agent répond avec les détails du produit — le tout en temps réel. Le système doit gérer les interruptions avec élégance (un client peut dire « attendez, en fait… » en pleine réponse), prendre en charge plusieurs langues et récupérer les informations produit depuis un pipeline RAG à la volée.
 
-### Architecture Overview
+### Vue d'ensemble de l'architecture
 
 ```
 ┌──────────┐   WebRTC    ┌────────────────────┐   REST/WS   ┌───────────┐
@@ -44,70 +39,70 @@ Voice agents are shifting from traditional turn-taking — where the user speaks
                          └────────────────────┘
 ```
 
-Key concepts:
+Concepts clés :
 
 | Concept | Description |
 |---------|-------------|
-| **Realtime API** | Full-duplex speech-to-speech endpoint — no separate STT/TTS pipeline |
-| **WebRTC** | Browser-native protocol for low-latency audio/video streaming |
-| **VAD (Voice Activity Detection)** | Detects when the user starts/stops speaking |
-| **Barge-in** | User can interrupt the agent mid-response; the agent stops and listens |
-| **Server-side turn detection** | The API decides when a user turn is complete |
+| **Realtime API** | Point de terminaison voix-vers-voix en duplex intégral — pas de pipeline STT/TTS séparé |
+| **WebRTC** | Protocole natif au navigateur pour le streaming audio/vidéo à faible latence |
+| **VAD (Voice Activity Detection)** | Détecte quand l'utilisateur commence/arrête de parler |
+| **Barge-in** | L'utilisateur peut interrompre l'agent en pleine réponse ; l'agent s'arrête et écoute |
+| **Détection de tour côté serveur** | L'API décide quand le tour de parole de l'utilisateur est terminé |
 
 ---
 
-## Prerequisites
+## Prérequis
 
 ```bash
 pip install pandas
 ```
 
-This lab analyzes pre-recorded session data — no API key or Azure subscription required. To build a live voice agent, you would need an Azure OpenAI resource with the `gpt-4o-realtime-preview` model deployed.
+Ce lab analyse des données de session pré-enregistrées — aucune clé API ni abonnement Azure requis. Pour construire un agent vocal en direct, vous auriez besoin d'une ressource Azure OpenAI avec le modèle `gpt-4o-realtime-preview` déployé.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-059/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-059/` dans votre répertoire de travail.
 
-| File | Description | Download |
+| Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `broken_voice.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/broken_voice.py) |
-| `voice_sessions.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv) |
+| `broken_voice.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/broken_voice.py) |
+| `voice_sessions.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv) |
 
 ---
 
-## Part 1: Understanding Realtime API Architecture
+## Partie 1 : Comprendre l'architecture du Realtime API
 
-### Step 1: How the Realtime API differs from Chat Completions
+### Étape 1 : En quoi le Realtime API diffère de Chat Completions
 
-The standard Chat Completions API follows a request-response pattern: send text, receive text. The Realtime API is fundamentally different:
+L'API Chat Completions standard suit un modèle requête-réponse : envoyer du texte, recevoir du texte. Le Realtime API est fondamentalement différent :
 
-| Feature | Chat Completions | Realtime API |
+| Fonctionnalité | Chat Completions | Realtime API |
 |---------|-----------------|--------------|
-| Input | Text (JSON) | Audio stream (PCM/WebRTC) |
-| Output | Text (JSON) | Audio stream + text transcript |
-| Latency | 500–2000 ms | ~100 ms (P50) |
-| Duplex | Half-duplex (request → response) | Full-duplex (simultaneous) |
-| Interruption | Not supported | Barge-in supported |
-| Protocol | HTTP REST | WebSocket / WebRTC |
+| Entrée | Texte (JSON) | Flux audio (PCM/WebRTC) |
+| Sortie | Texte (JSON) | Flux audio + transcription textuelle |
+| Latence | 500–2000 ms | ~100 ms (P50) |
+| Duplex | Semi-duplex (requête → réponse) | Duplex intégral (simultané) |
+| Interruption | Non supportée | Barge-in supporté |
+| Protocole | HTTP REST | WebSocket / WebRTC |
 
-The ~100 ms target latency makes voice conversations feel natural — comparable to human-to-human phone calls.
+La latence cible d'environ 100 ms rend les conversations vocales naturelles — comparable aux appels téléphoniques entre humains.
 
 ---
 
-## Part 2: Load and Explore Voice Session Data
+## Partie 2 : Charger et explorer les données des sessions vocales
 
-### Step 2: Load [📥 `voice_sessions.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv)
+### Étape 2 : Charger [📥 `voice_sessions.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv)
 
-OutdoorGear recorded **15 voice sessions** during a pilot test of their Realtime API integration. Each session captures a customer interaction:
+OutdoorGear a enregistré **15 sessions vocales** lors d'un test pilote de leur intégration du Realtime API. Chaque session capture une interaction client :
 
 ```python
 # voice_analysis.py
@@ -119,7 +114,7 @@ print(f"Columns: {list(sessions.columns)}")
 print(sessions.head())
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total sessions: 15
@@ -128,29 +123,29 @@ Columns: ['session_id', 'scenario', 'duration_sec', 'latency_p50_ms',
            'model', 'rag_used', 'language']
 ```
 
-The dataset includes:
+Le jeu de données inclut :
 
-| Column | Description |
+| Colonne | Description |
 |--------|-------------|
-| `session_id` | Unique session identifier (S01–S15) |
-| `scenario` | Type of interaction: product_inquiry, order_status, complaint, return_request, faq |
-| `duration_sec` | Total session duration in seconds |
-| `latency_p50_ms` | Median response latency in milliseconds |
-| `latency_p95_ms` | 95th percentile response latency |
-| `interruptions` | Number of times the user interrupted the agent |
-| `turns` | Total conversational turns |
-| `sentiment` | Overall session sentiment: positive, neutral, negative |
-| `model` | Model used (`gpt-4o-realtime`) |
-| `rag_used` | Whether RAG was invoked during the session |
-| `language` | Session language: en, es, fr |
+| `session_id` | Identifiant unique de session (S01–S15) |
+| `scenario` | Type d'interaction : product_inquiry, order_status, complaint, return_request, faq |
+| `duration_sec` | Durée totale de la session en secondes |
+| `latency_p50_ms` | Latence médiane de réponse en millisecondes |
+| `latency_p95_ms` | 95e percentile de latence de réponse |
+| `interruptions` | Nombre de fois où l'utilisateur a interrompu l'agent |
+| `turns` | Nombre total de tours de conversation |
+| `sentiment` | Sentiment global de la session : positive, neutral, negative |
+| `model` | Modèle utilisé (`gpt-4o-realtime`) |
+| `rag_used` | Si le RAG a été invoqué pendant la session |
+| `language` | Langue de la session : en, es, fr |
 
 ---
 
-## Part 3: Latency Analysis
+## Partie 3 : Analyse de la latence
 
-### Step 3: Measure response latency across sessions
+### Étape 3 : Mesurer la latence de réponse à travers les sessions
 
-Latency is the most critical metric for voice agents — anything above 200 ms feels laggy.
+La latence est la métrique la plus critique pour les agents vocaux — tout ce qui dépasse 200 ms donne une impression de lenteur.
 
 ```python
 # Latency statistics
@@ -168,7 +163,7 @@ print(f"\nSessions with P95 > 200ms: {len(slow)}")
 print(slow[["session_id", "scenario", "latency_p95_ms"]])
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Average P50 latency: 89.3 ms
@@ -184,14 +179,14 @@ Sessions with P95 > 200ms: 4
        S14       complaint             255
 ```
 
-!!! info "Latency Insight"
-    The average P50 of 89.3 ms is well below the 100 ms target. However, complaint and return sessions consistently have higher latency — likely because they trigger longer RAG lookups and more complex reasoning.
+!!! info "Observation sur la latence"
+    Le P50 moyen de 89,3 ms est bien en dessous de la cible de 100 ms. Cependant, les sessions de réclamation et de retour ont systématiquement une latence plus élevée — probablement parce qu'elles déclenchent des recherches RAG plus longues et un raisonnement plus complexe.
 
 ---
 
-## Part 4: Sentiment Analysis
+## Partie 4 : Analyse du sentiment
 
-### Step 4: Analyze session sentiment distribution
+### Étape 4 : Analyser la distribution du sentiment des sessions
 
 ```python
 # Sentiment breakdown
@@ -208,7 +203,7 @@ print(f"\nNegative sessions:")
 print(negative[["session_id", "scenario", "duration_sec", "interruptions"]])
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Sentiment Distribution:
@@ -228,14 +223,14 @@ Negative sessions:
        S14       complaint           105              5
 ```
 
-!!! warning "Pattern"
-    All 4 negative sessions are either complaints or return requests. Three of the four have 3+ interruptions — frustrated customers interrupt more frequently.
+!!! warning "Tendance observée"
+    Les 4 sessions négatives sont toutes des réclamations ou des demandes de retour. Trois des quatre ont 3+ interruptions — les clients frustrés interrompent plus fréquemment.
 
 ---
 
-## Part 5: RAG Usage Patterns
+## Partie 5 : Modèles d'utilisation du RAG
 
-### Step 5: Analyze which sessions use RAG
+### Étape 5 : Analyser quelles sessions utilisent le RAG
 
 ```python
 # RAG usage
@@ -252,7 +247,7 @@ print(f"\nAvg P50 with RAG:    {rag_used['latency_p50_ms'].mean():.1f} ms")
 print(f"Avg P50 without RAG: {rag_not_used['latency_p50_ms'].mean():.1f} ms")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 RAG used: 12/15 sessions (80%)
@@ -268,16 +263,16 @@ Avg P50 with RAG:    92.6 ms
 Avg P50 without RAG: 76.3 ms
 ```
 
-!!! info "RAG Insight"
-    The 3 sessions without RAG are all FAQ scenarios — simple questions that don't require product database lookups. FAQ sessions are also the shortest (15–20 seconds) and have the lowest latency.
+!!! info "Observation sur le RAG"
+    Les 3 sessions sans RAG sont toutes des scénarios FAQ — des questions simples qui ne nécessitent pas de recherche dans la base de données produit. Les sessions FAQ sont aussi les plus courtes (15–20 secondes) et ont la latence la plus faible.
 
 ---
 
-## Part 6: Interruption Patterns
+## Partie 6 : Modèles d'interruption
 
-### Step 6: Analyze barge-in behavior
+### Étape 6 : Analyser le comportement de barge-in
 
-Barge-in is when a user interrupts the agent mid-response. It's a key capability of the Realtime API — without it, voice agents feel robotic.
+Le barge-in désigne le moment où un utilisateur interrompt l'agent en pleine réponse. C'est une capacité clé du Realtime API — sans elle, les agents vocaux semblent robotiques.
 
 ```python
 # Interruption analysis
@@ -295,7 +290,7 @@ print(f"\nHigh-interruption sessions (≥3):")
 print(high_interrupt[["session_id", "scenario", "interruptions", "sentiment"]])
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Avg interruptions by sentiment:
@@ -310,14 +305,14 @@ High-interruption sessions (≥3):
        S14  complaint              5  negative
 ```
 
-!!! info "Barge-in Insight"
-    Negative sessions average 3.25 interruptions vs 0.63 for positive sessions. High interruption counts are a strong signal of customer frustration — an agent could detect this in real time and escalate to a human agent.
+!!! info "Observation sur le barge-in"
+    Les sessions négatives ont en moyenne 3,25 interruptions contre 0,63 pour les sessions positives. Un nombre élevé d'interruptions est un signal fort de frustration du client — un agent pourrait détecter cela en temps réel et escalader vers un agent humain.
 
 ---
 
-## Part 7: Multi-Language Support
+## Partie 7 : Support multilingue
 
-### Step 7: Analyze language distribution
+### Étape 7 : Analyser la distribution linguistique
 
 ```python
 # Language breakdown
@@ -333,7 +328,7 @@ for lang in sessions["language"].unique():
           f"avg sentiment: {lang_sessions['sentiment'].mode().iloc[0]}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Language Distribution:
@@ -346,101 +341,101 @@ ES: 1 sessions, avg P50=82.0ms, avg sentiment: positive
 FR: 1 sessions, avg P50=87.0ms, avg sentiment: positive
 ```
 
-The Realtime API supports multiple languages natively — the same model handles English, Spanish, and French without separate deployments.
+Le Realtime API prend en charge plusieurs langues nativement — le même modèle gère l'anglais, l'espagnol et le français sans déploiements séparés.
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-059/broken_voice.py` has **3 bugs** in the voice session analysis functions. Run the self-tests:
+Le fichier `lab-059/broken_voice.py` contient **3 bugs** dans les fonctions d'analyse des sessions vocales. Exécutez les auto-tests :
 
 ```bash
 python lab-059/broken_voice.py
 ```
 
-You should see **3 failed tests**:
+Vous devriez voir **3 tests échoués** :
 
-| Test | What it checks | Hint |
+| Test | Ce qu'il vérifie | Indice |
 |------|---------------|------|
-| Test 1 | Average P95 latency calculation | Which latency column should you use? |
-| Test 2 | Count of negative sentiment sessions | Are you filtering for the right sentiment value? |
-| Test 3 | RAG usage rate as a percentage | What should the denominator be? |
+| Test 1 | Calcul de la latence P95 moyenne | Quelle colonne de latence devriez-vous utiliser ? |
+| Test 2 | Nombre de sessions à sentiment négatif | Filtrez-vous la bonne valeur de sentiment ? |
+| Test 3 | Taux d'utilisation du RAG en pourcentage | Quel devrait être le dénominateur ? |
 
-Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
+Corrigez les 3 bugs et relancez jusqu'à voir `🎉 All 3 tests passed`.
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What is the target response latency for the GPT-4o Realtime API?"
+??? question "**Q1 (Choix multiple) :** Quelle est la latence de réponse cible du GPT-4o Realtime API ?"
 
-    - A) ~500 ms — fast enough for most voice applications
-    - B) ~100 ms — comparable to human-to-human conversation latency
-    - C) ~10 ms — near-instantaneous for real-time gaming
-    - D) ~1000 ms — acceptable for batch voice processing
+    - A) ~500 ms — suffisamment rapide pour la plupart des applications vocales
+    - B) ~100 ms — comparable à la latence de conversation entre humains
+    - C) ~10 ms — quasi instantané pour le jeu en temps réel
+    - D) ~1000 ms — acceptable pour le traitement vocal par lots
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) ~100 ms**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) ~100 ms**
 
-        The Realtime API targets ~100 ms P50 latency, which is comparable to the natural pauses in human conversation. At this speed, voice interactions feel fluid and natural. The session data confirms this — the average P50 across 15 sessions is 89.3 ms.
+        Le Realtime API cible une latence P50 d'environ 100 ms, comparable aux pauses naturelles dans la conversation humaine. À cette vitesse, les interactions vocales semblent fluides et naturelles. Les données de session confirment cela — le P50 moyen sur 15 sessions est de 89,3 ms.
 
-??? question "**Q2 (Multiple Choice):** What does 'barge-in' mean in the context of voice agents?"
+??? question "**Q2 (Choix multiple) :** Que signifie « barge-in » dans le contexte des agents vocaux ?"
 
-    - A) The agent interrupts the user to provide urgent information
-    - B) The user can interrupt the agent mid-response and the agent stops to listen
-    - C) Multiple users can join the same voice session simultaneously
-    - D) The agent switches between languages mid-conversation
+    - A) L'agent interrompt l'utilisateur pour fournir des informations urgentes
+    - B) L'utilisateur peut interrompre l'agent en pleine réponse et l'agent s'arrête pour écouter
+    - C) Plusieurs utilisateurs peuvent rejoindre la même session vocale simultanément
+    - D) L'agent change de langue en cours de conversation
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) The user can interrupt the agent mid-response and the agent stops to listen**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) L'utilisateur peut interrompre l'agent en pleine réponse et l'agent s'arrête pour écouter**
 
-        Barge-in is a critical feature of natural voice conversation. When a user says "wait, actually…" while the agent is still speaking, the agent immediately stops its current response and processes the new input. Without barge-in, users must wait for the agent to finish — creating a frustrating, robotic experience.
+        Le barge-in est une fonctionnalité essentielle de la conversation vocale naturelle. Quand un utilisateur dit « attendez, en fait… » pendant que l'agent parle encore, l'agent arrête immédiatement sa réponse en cours et traite la nouvelle entrée. Sans le barge-in, les utilisateurs doivent attendre que l'agent finisse — créant une expérience frustrante et robotique.
 
-??? question "**Q3 (Run the Lab):** What is the average P95 latency across all 15 voice sessions?"
+??? question "**Q3 (Exécuter le lab) :** Quelle est la latence P95 moyenne sur l'ensemble des 15 sessions vocales ?"
 
-    Calculate `sessions["latency_p95_ms"].mean()`.
+    Calculez `sessions["latency_p95_ms"].mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **187.5 ms**
+    ??? success "✅ Révéler la réponse"
+        **187,5 ms**
 
-        The P95 values range from 150 ms (S10, an FAQ session) to 255 ms (S14, a complaint). The mean across all 15 sessions is (170+185+195+180+155+210+165+175+240+150+178+215+188+255+152) / 15 = **187.5 ms**. Four sessions exceed the 200 ms threshold — all are complaints or return requests.
+        Les valeurs P95 vont de 150 ms (S10, une session FAQ) à 255 ms (S14, une réclamation). La moyenne sur les 15 sessions est (170+185+195+180+155+210+165+175+240+150+178+215+188+255+152) / 15 = **187,5 ms**. Quatre sessions dépassent le seuil de 200 ms — toutes sont des réclamations ou des demandes de retour.
 
-??? question "**Q4 (Run the Lab):** How many sessions have negative sentiment?"
+??? question "**Q4 (Exécuter le lab) :** Combien de sessions ont un sentiment négatif ?"
 
-    Filter `sessions[sessions["sentiment"] == "negative"]` and count.
+    Filtrez `sessions[sessions["sentiment"] == "negative"]` et comptez.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **4 sessions**
 
-        Sessions S03, S06, S09, and S14 have negative sentiment. All four are either complaints (S03, S09, S14) or return requests (S06). These sessions also have the highest latency and interruption counts, suggesting a correlation between customer frustration and system performance under complex scenarios.
+        Les sessions S03, S06, S09 et S14 ont un sentiment négatif. Les quatre sont soit des réclamations (S03, S09, S14) soit des demandes de retour (S06). Ces sessions ont aussi la latence et le nombre d'interruptions les plus élevés, suggérant une corrélation entre la frustration du client et les performances du système dans les scénarios complexes.
 
-??? question "**Q5 (Run the Lab):** What percentage of sessions use RAG?"
+??? question "**Q5 (Exécuter le lab) :** Quel pourcentage de sessions utilise le RAG ?"
 
-    Calculate `(sessions with rag_used == True) / total sessions * 100`.
+    Calculez `(sessions avec rag_used == True) / nombre total de sessions * 100`.
 
-    ??? success "✅ Reveal Answer"
-        **80% (12 out of 15)**
+    ??? success "✅ Révéler la réponse"
+        **80% (12 sur 15)**
 
-        12 of 15 sessions use RAG. The 3 sessions without RAG (S05, S10, S15) are all FAQ scenarios — simple questions that the model answers from its training data without needing product database lookups. FAQ sessions also have the lowest latency, confirming that RAG adds a measurable (but small) latency overhead.
+        12 des 15 sessions utilisent le RAG. Les 3 sessions sans RAG (S05, S10, S15) sont toutes des scénarios FAQ — des questions simples auxquelles le modèle répond à partir de ses données d'entraînement sans avoir besoin de recherches dans la base de données produit. Les sessions FAQ ont aussi la latence la plus faible, confirmant que le RAG ajoute un surcoût de latence mesurable (mais faible).
 
 ---
 
-## Summary
+## Résumé
 
-| Topic | What You Learned |
+| Sujet | Ce que vous avez appris |
 |-------|-----------------|
-| Realtime API | Full-duplex speech-to-speech with ~100 ms latency |
-| WebRTC | Browser-native protocol for low-latency audio streaming |
-| Barge-in | Users can interrupt mid-response for natural conversation flow |
-| RAG + Voice | 80% of sessions use RAG; FAQ sessions skip it for lower latency |
-| Sentiment | Negative sessions correlate with complaints, high latency, and interruptions |
-| Multi-language | Same model handles en, es, fr without separate deployments |
+| Realtime API | Voix-vers-voix en duplex intégral avec une latence d'environ 100 ms |
+| WebRTC | Protocole natif au navigateur pour le streaming audio à faible latence |
+| Barge-in | Les utilisateurs peuvent interrompre en pleine réponse pour un flux de conversation naturel |
+| RAG + Voix | 80% des sessions utilisent le RAG ; les sessions FAQ le contournent pour une latence plus faible |
+| Sentiment | Les sessions négatives corrèlent avec les réclamations, la latence élevée et les interruptions |
+| Multilingue | Le même modèle gère en, es, fr sans déploiements séparés |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **[Lab 043](lab-043-multimodal-agents.md)** — Multimodal Agents with GPT-4o Vision (complementary modality)
-- **[Lab 060](lab-060-reasoning-models.md)** — Reasoning Models: Chain-of-Thought with o3 and DeepSeek R1
-- **[Lab 019](lab-019-streaming-responses.md)** — Streaming Responses (foundational streaming concepts)
+- **[Lab 043](lab-043-multimodal-agents.md)** — Agents multimodaux avec GPT-4o Vision (modalité complémentaire)
+- **[Lab 060](lab-060-reasoning-models.md)** — Modèles de raisonnement : Chain-of-Thought avec o3 et DeepSeek R1
+- **[Lab 019](lab-019-streaming-responses.md)** — Réponses en streaming (concepts fondamentaux du streaming)

@@ -1,90 +1,85 @@
 ---
 tags: [github-copilot, free, foundations]
 ---
-# Lab 010: GitHub Copilot — First Steps
+# Lab 010 : GitHub Copilot — Premiers pas
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free tier (2,000 completions + 50 chat/month)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
+  <span><strong>Durée :</strong> ~45 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Niveau gratuit (2 000 complétions + 50 chats/mois)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
+- Utiliser la **complétion de code en ligne** pour écrire du code à partir de commentaires
+- Utiliser **Copilot Chat `/fix`** pour trouver et comprendre de vrais bugs
+- Utiliser **Copilot Edits** pour refactoriser un fichier entier en langage naturel
+- Utiliser le **chat en ligne** pour étendre le code sans quitter l'éditeur
+- Écrire des prompts qui donnent de meilleurs résultats
 
-
-## What You'll Learn
-
-- Use **inline code completion** to write code from comments
-- Use **Copilot Chat `/fix`** to find and understand real bugs
-- Use **Copilot Edits** to refactor an entire file with natural language
-- Use **inline chat** to extend code without leaving the editor
-- Write prompts that get better results
-
-This lab uses **hands-on exercises** — you'll open files with real bugs and incomplete code, then use Copilot to fix and extend them.
+Ce lab utilise des **exercices pratiques** — vous ouvrirez des fichiers contenant de vrais bugs et du code incomplet, puis vous utiliserez Copilot pour les corriger et les étendre.
 
 ---
 
-## Prerequisites
+## Prérequis
 
-### 1. Enable GitHub Copilot Free
+### 1. Activer GitHub Copilot Free
 
-1. Go to [github.com/features/copilot](https://github.com/features/copilot) → **"Start for free"**
-2. Sign in and follow the setup wizard
+1. Rendez-vous sur [github.com/features/copilot](https://github.com/features/copilot) → **« Commencer gratuitement »**
+2. Connectez-vous et suivez l'assistant de configuration
 
-!!! tip "Students get Copilot Pro for free"
+!!! tip "Les étudiants obtiennent Copilot Pro gratuitement"
     → [GitHub Student Developer Pack](https://education.github.com/pack)
 
-### 2. Install VS Code + Copilot extension
+### 2. Installer VS Code + l'extension Copilot
 
-1. Install [VS Code](https://code.visualstudio.com)
-2. Extensions (`Ctrl+Shift+X`) → search **"GitHub Copilot"** → Install both:
-   - **GitHub Copilot** (completions)
-   - **GitHub Copilot Chat** (chat panel)
-3. Sign in when prompted — you'll see the Copilot icon in the status bar
+1. Installez [VS Code](https://code.visualstudio.com)
+2. Extensions (`Ctrl+Shift+X`) → recherchez **« GitHub Copilot »** → Installez les deux :
+   - **GitHub Copilot** (complétions)
+   - **GitHub Copilot Chat** (panneau de chat)
+3. Connectez-vous lorsque vous y êtes invité — vous verrez l'icône Copilot dans la barre d'état
 
-### 3. Download the exercise files
+### 3. Télécharger les fichiers d'exercices
 
-Clone or download the exercise files for this lab:
+Clonez ou téléchargez les fichiers d'exercices pour ce lab :
 
 ```bash
 git clone https://github.com/lcarli/AI-LearningHub.git
 cd AI-LearningHub/docs/docs/en/labs/lab-010
 ```
 
-Or copy each file directly from the sections below.
+Ou copiez chaque fichier directement depuis les sections ci-dessous.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-010/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-010/` de votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `exercise1_fibonacci.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py) |
-| `exercise2_shopping_cart.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py) |
-| `exercise3_product_search.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py) |
-| `exercise4_refactor_me.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py) |
+| Fichier | Description | Téléchargement |
+|---------|-------------|----------------|
+| `exercise1_fibonacci.py` | Script d'exercice interactif | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py) |
+| `exercise2_shopping_cart.py` | Script d'exercice interactif | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py) |
+| `exercise3_product_search.py` | Script d'exercice interactif | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py) |
+| `exercise4_refactor_me.py` | Script d'exercice interactif | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py) |
 
 ---
 
-## Exercise 1 — Inline Completion: Write Code from Comments
+## Exercice 1 — Complétion en ligne : Écrire du code à partir de commentaires
 
-**Goal:** Learn how Copilot completes code as you type.
+**Objectif :** Apprendre comment Copilot complète le code au fur et à mesure que vous tapez.
 
-Create a new file `practice.py` and type each comment below. After each comment, **stop typing** and wait for Copilot's suggestion. Press `Tab` to accept, you can keep pressing tab until copilot stops suggesting more completions.
+Créez un nouveau fichier `practice.py` et tapez chaque commentaire ci-dessous. Après chaque commentaire, **arrêtez de taper** et attendez la suggestion de Copilot. Appuyez sur `Tab` pour accepter, vous pouvez continuer à appuyer sur Tab jusqu'à ce que Copilot arrête de proposer des complétions.
 
-!!! tip "We will not execute this code, so don't worry about syntax errors or missing imports — just focus on the suggestions Copilot gives you based on the comments."
+!!! tip "Nous n'exécuterons pas ce code, donc ne vous inquiétez pas des erreurs de syntaxe ou des imports manquants — concentrez-vous uniquement sur les suggestions que Copilot vous donne en fonction des commentaires."
 
 ```python
 # Function that takes a list of prices and returns the average:
@@ -96,72 +91,72 @@ Create a new file `practice.py` and type each comment below. After each comment,
 # Class OutdoorProduct with name, price, category attributes and a discount() method:
 ```
 
-!!! tip "Keyboard shortcuts"
-    | Key | Action |
-    |-----|--------|
-    | `Tab` | Accept suggestion |
-    | `Esc` | Dismiss |
-    | `Alt+]` / `Alt+[` | Next / previous suggestion |
-    | `Ctrl+Enter` | Open all suggestions panel |
+!!! tip "Raccourcis clavier"
+    | Touche | Action |
+    |--------|--------|
+    | `Tab` | Accepter la suggestion |
+    | `Esc` | Ignorer |
+    | `Alt+]` / `Alt+[` | Suggestion suivante / précédente |
+    | `Ctrl+Enter` | Ouvrir le panneau de toutes les suggestions |
 
-**Try better and worse prompts:**
+**Essayez des prompts meilleurs et moins bons :**
 
-| ❌ Vague | ✅ Specific |
-|---------|-----------|
+| ❌ Vague | ✅ Spécifique |
+|---------|-------------|
 | `# sort this` | `# Sort list of dicts by 'price' descending, then 'name' ascending` |
 | `# connect to db` | `# Connect to PostgreSQL using asyncpg, return a connection pool` |
 | `# handle error` | `# Retry 3 times with exponential backoff if requests.Timeout is raised` |
 
 ---
 
-## Exercise 2 — Copilot `/fix`: Bug Hunt 🐛
+## Exercice 2 — Copilot `/fix` : Chasse aux bugs 🐛
 
-**Goal:** Use Copilot Chat to find, understand, and fix real bugs.
+**Objectif :** Utiliser Copilot Chat pour trouver, comprendre et corriger de vrais bugs.
 
-### File: [📥 `exercise1_fibonacci.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py)
+### Fichier : [📥 `exercise1_fibonacci.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py)
 
-```python title="exercise1_fibonacci.py — 3 bugs hidden inside"
+```python title="exercise1_fibonacci.py — 3 bugs cachés à l'intérieur"
 --8<-- "labs/lab-010/exercise1_fibonacci.py"
 ```
 
-**Steps:**
+**Étapes :**
 
-1. Copy the code above into a new file (or open it from the cloned repo)
-2. Open **Copilot Chat** (`Ctrl+Shift+I`)
-3. Select **all the code** (`Ctrl+A`)
-4. Type: `/fix`
+1. Copiez le code ci-dessus dans un nouveau fichier (ou ouvrez-le à partir des exercices téléchargés)
+2. Ouvrez **Copilot Chat** (`Ctrl+Shift+I`)
+3. Sélectionnez **tout le code** (`Ctrl+A`)
+4. Tapez : `/fix`
 
-Copilot should identify all 3 bugs and explain each one. Before accepting, **read the explanation** — understanding *why* the code was wrong is the point.
+Copilot devrait identifier les 3 bugs et expliquer chacun d'entre eux. Avant d'accepter, **lisez l'explication** — comprendre *pourquoi* le code était incorrect, c'est tout l'intérêt.
 
-**Expected output after fixing:**
+**Sortie attendue après correction :**
 ```python
 fibonacci(0)  # → []
 fibonacci(1)  # → [0]
 fibonacci(8)  # → [0, 1, 1, 2, 3, 5, 8, 13]
 ```
 
-Run `python exercise1_fibonacci.py` — you should see: `✅ All tests passed!`
+Exécutez `python exercise1_fibonacci.py` — vous devriez voir : `✅ All tests passed!`
 
 ---
 
-### File: [📥 `exercise2_shopping_cart.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py)
+### Fichier : [📥 `exercise2_shopping_cart.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py)
 
-```python title="exercise2_shopping_cart.py — 4 bugs hidden inside"
+```python title="exercise2_shopping_cart.py — 4 bugs cachés à l'intérieur"
 --8<-- "labs/lab-010/exercise2_shopping_cart.py"
 ```
 
-This file has **4 bugs** in the `ShoppingCart` class. This time, before using `/fix`:
+Ce fichier contient **4 bugs** dans la classe `ShoppingCart`. Cette fois, avant d'utiliser `/fix` :
 
-1. **Try to spot the bugs yourself first** — spend 2 minutes reading the code
-2. Then use Copilot Chat: select all → `/fix`
-3. Did Copilot find bugs you missed?
+1. **Essayez d'abord de repérer les bugs vous-même** — passez 2 minutes à lire le code
+2. Puis utilisez Copilot Chat : sélectionnez tout → `/fix`
+3. Copilot a-t-il trouvé des bugs que vous avez manqués ?
 
-**Ask Copilot to explain one bug in depth:**
+**Demandez à Copilot d'expliquer un bug en profondeur :**
 ```
 Why is iterating with "for item in self.items" wrong here? What does it actually iterate over?
 ```
 
-**Expected output after fixing:**
+**Sortie attendue après correction :**
 ```
 TrailBlazer X200 x2 @ $189.99 = $379.98
 Summit Pro Tent x1 @ $349.00 = $349.00
@@ -173,88 +168,88 @@ Unique items: 2
 
 ---
 
-## Exercise 3 — Inline Chat: Fix + Extend
+## Exercice 3 — Chat en ligne : Corriger + Étendre
 
-**Goal:** Fix bugs AND add a new feature using inline chat (`Ctrl+I`).
+**Objectif :** Corriger des bugs ET ajouter une nouvelle fonctionnalité en utilisant le chat en ligne (`Ctrl+I`).
 
-### File: [📥 `exercise3_product_search.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py)
+### Fichier : [📥 `exercise3_product_search.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py)
 
-```python title="exercise3_product_search.py — 2 bugs + 1 missing feature"
+```python title="exercise3_product_search.py — 2 bugs + 1 fonctionnalité manquante"
 --8<-- "labs/lab-010/exercise3_product_search.py"
 ```
 
-**Part A — Fix (2 bugs):**
+**Partie A — Correction (2 bugs) :**
 
-1. Open the file in VS Code
-2. Select all (`Ctrl+A`) → Copilot Chat → `/fix`
-3. Verify: `python exercise3_product_search.py` — tests 1–4 should pass
+1. Ouvrez le fichier dans VS Code
+2. Sélectionnez tout (`Ctrl+A`) → Copilot Chat → `/fix`
+3. Vérifiez : `python exercise3_product_search.py` — les tests 1 à 4 devraient passer
 
-**Part B — Extend (1 missing feature):**
+**Partie B — Extension (1 fonctionnalité manquante) :**
 
-The file mentions a `sort_by_price()` function that doesn't exist yet.
+Le fichier mentionne une fonction `sort_by_price()` qui n'existe pas encore.
 
-1. Place your cursor at the end of the file (before the tests section)
-2. Press `Ctrl+I` (inline chat)
-3. Type exactly:
+1. Placez votre curseur à la fin du fichier (avant la section des tests)
+2. Appuyez sur `Ctrl+I` (chat en ligne)
+3. Tapez exactement :
    ```
    Add a sort_by_price(products, ascending=True) function that returns
    the products list sorted by price
    ```
-4. Review the suggestion and press **Accept** (`Ctrl+Enter`)
-5. Run the tests again — all 5 should pass now
+4. Examinez la suggestion et appuyez sur **Accepter** (`Ctrl+Enter`)
+5. Relancez les tests — les 5 devraient maintenant passer
 
 ---
 
-## Exercise 4 — Copilot Edits: Refactor an Entire File
+## Exercice 4 — Copilot Edits : Refactoriser un fichier entier
 
-**Goal:** Use Copilot Edits to improve code quality with natural language instructions — without changing behavior.
+**Objectif :** Utiliser Copilot Edits pour améliorer la qualité du code avec des instructions en langage naturel — sans changer le comportement.
 
-### File: [📥 `exercise4_refactor_me.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
+### Fichier : [📥 `exercise4_refactor_me.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
 
-```python title="exercise4_refactor_me.py — works, but needs improvement"
+```python title="exercise4_refactor_me.py — fonctionne, mais nécessite des améliorations"
 --8<-- "labs/lab-010/exercise4_refactor_me.py"
 ```
 
-This code **works correctly** but is hard to read and maintain. Use **Copilot Edits** to improve it step by step:
+Ce code **fonctionne correctement** mais est difficile à lire et à maintenir. Utilisez **Copilot Edits** pour l'améliorer étape par étape :
 
-1. Open the Copilot Edits panel: `Ctrl+Shift+I` → click **"Open Copilot Edits"** (pencil icon)
-2. Click **"Add Files"** and add `exercise4_refactor_me.py`
-3. Run each of these prompts **one at a time**, reviewing changes before moving on:
+1. Ouvrez le panneau Copilot Edits : `Ctrl+Shift+I` → cliquez sur **« Ouvrir Copilot Edits »** (icône crayon)
+2. Cliquez sur **« Ajouter des fichiers »** et ajoutez `exercise4_refactor_me.py`
+3. Exécutez chacun de ces prompts **un à la fois**, en examinant les modifications avant de continuer :
 
-**Prompt 1:**
+**Prompt 1 :**
 ```
 Add type hints to all function parameters and return values
 ```
 
-**Prompt 2:**
+**Prompt 2 :**
 ```
 Add docstrings following Google style to every function
 ```
 
-**Prompt 3:**
+**Prompt 3 :**
 ```
 Refactor calculate_shipping to use early return instead of nested if/else
 ```
 
-**Prompt 4:**
+**Prompt 4 :**
 ```
 Add input validation: raise ValueError if price or quantity is negative
 ```
 
-After each prompt, check that the test at the bottom still passes:
+Après chaque prompt, vérifiez que le test en bas du fichier passe toujours :
 ```bash
 python exercise4_refactor_me.py
 # Should still print: ✅ Refactoring complete — behavior unchanged!
 ```
 
-!!! warning "Don't accept everything blindly"
-    Sometimes Copilot adds extra complexity. If a suggestion makes the code harder to read, press **Discard** (`Ctrl+Backspace`) and rephrase.
+!!! warning "N'acceptez pas tout aveuglément"
+    Parfois Copilot ajoute de la complexité superflue. Si une suggestion rend le code plus difficile à lire, appuyez sur **Annuler** (`Ctrl+Backspace`) et reformulez.
 
 ---
 
-## Bonus: Ask Copilot to explain, not just fix
+## Bonus : Demandez à Copilot d'expliquer, pas seulement de corriger
 
-Use these prompts on any of the exercise files to deepen your understanding:
+Utilisez ces prompts sur n'importe quel fichier d'exercice pour approfondir votre compréhension :
 
 ```
 /explain
@@ -271,19 +266,19 @@ Is there a more Pythonic way to write this?
 
 ---
 
-## What You Practiced
+## Ce que vous avez pratiqué
 
-| Copilot feature | Exercise | Use case |
-|----------------|----------|----------|
-| Inline completion | Exercise 1 | Write new code from comments |
-| Chat `/fix` | Exercise 2 | Understand and fix bugs |
-| Inline chat `Ctrl+I` | Exercise 3 | Fix + extend in-place |
-| Copilot Edits | Exercise 4 | Refactor entire files |
+| Fonctionnalité Copilot | Exercice | Cas d'utilisation |
+|------------------------|----------|-------------------|
+| Complétion en ligne | Exercice 1 | Écrire du nouveau code à partir de commentaires |
+| Chat `/fix` | Exercice 2 | Comprendre et corriger des bugs |
+| Chat en ligne `Ctrl+I` | Exercice 3 | Corriger + étendre sur place |
+| Copilot Edits | Exercice 4 | Refactoriser des fichiers entiers |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Build a no-code Teams agent:** → [Lab 011 — Copilot Studio](lab-011-copilot-studio-first-agent.md)
-- **Use Agent Mode to build a full feature:** → [Lab 016 — Copilot Agent Mode](lab-016-copilot-agent-mode.md)
-- **Use free LLMs in your code:** → [Lab 013 — GitHub Models](lab-013-github-models.md)
+- **Construire un agent sans code pour Teams :** → [Lab 011 — Copilot Studio](lab-011-copilot-studio-first-agent.md)
+- **Utiliser le mode Agent pour construire une fonctionnalité complète :** → [Lab 016 — Copilot Agent Mode](lab-016-copilot-agent-mode.md)
+- **Utiliser des LLM gratuits dans votre code :** → [Lab 013 — GitHub Models](lab-013-github-models.md)

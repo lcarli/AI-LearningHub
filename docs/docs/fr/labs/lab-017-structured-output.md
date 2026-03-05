@@ -1,32 +1,27 @@
-# Lab 017: Structured Output & JSON Mode
+# Lab 017 : Sortie structurée & mode JSON
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~25 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account, no credit card</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~25 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Compte GitHub gratuit, sans carte de crédit</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- Why unstructured LLM output is fragile in agent systems
-- How to use **JSON mode** to force valid JSON output
-- How to define **schemas** with Pydantic (Python) and C# classes
-- How to use **structured output** with the OpenAI API
-- Practical patterns: extraction, classification, function output
+- Pourquoi la sortie non structurée des LLM est fragile dans les systèmes d'agents
+- Comment utiliser le **mode JSON** pour forcer une sortie JSON valide
+- Comment définir des **schémas** avec Pydantic (Python) et des classes C#
+- Comment utiliser la **sortie structurée** avec l'API OpenAI
+- Modèles pratiques : extraction, classification, sortie de fonction
 
 ---
 
 ## Introduction
 
-In production agent systems, you rarely just display the LLM's text to users. You parse it, store it in databases, pass it to other services, or trigger actions based on it.
+Dans les systèmes d'agents en production, vous affichez rarement le texte du LLM directement aux utilisateurs. Vous l'analysez, le stockez dans des bases de données, le transmettez à d'autres services ou déclenchez des actions en fonction de celui-ci.
 
-The problem: LLMs are chatty. Ask for JSON and you might get:
+Le problème : les LLM sont bavards. Demandez du JSON et vous pourriez obtenir :
 
 ```
 Sure! Here's the JSON you asked for:
@@ -36,23 +31,23 @@ Sure! Here's the JSON you asked for:
 I hope that helps!
 ```
 
-Now your JSON parser crashes because of the extra text. This is a real problem that structured output solves completely.
+Maintenant votre analyseur JSON plante à cause du texte supplémentaire. C'est un vrai problème que la sortie structurée résout complètement.
 
 ---
 
-## Prerequisites Setup
+## Prérequis et configuration
 
 ```bash
 pip install openai pydantic
 ```
 
-Set `GITHUB_TOKEN` from [Lab 013](lab-013-github-models.md).
+Définissez `GITHUB_TOKEN` depuis le [Lab 013](lab-013-github-models.md).
 
 ---
 
-## Lab Exercise
+## Exercice du lab
 
-### Step 1: The problem — parsing unstructured output
+### Étape 1 : Le problème — analyser une sortie non structurée
 
 === "Python"
 
@@ -84,9 +79,9 @@ Set `GITHUB_TOKEN` from [Lab 013](lab-013-github-models.md).
         print("Parse failed! LLM added extra text.")
     ```
 
-### Step 2: JSON mode — guaranteed valid JSON
+### Étape 2 : Mode JSON — JSON valide garanti
 
-JSON mode forces the model to output only valid JSON, nothing else.
+Le mode JSON force le modèle à produire uniquement du JSON valide, rien d'autre.
 
 === "Python"
 
@@ -112,12 +107,12 @@ JSON mode forces the model to output only valid JSON, nothing else.
     # {"name": "ProTrek X200", "type": "hiking boots", "price": 189.99, "colors": ["black"]}
     ```
 
-!!! warning "JSON mode requirement"
-    When using `json_object` mode, your system or user message **must** mention the word "JSON" — otherwise the API returns an error.
+!!! warning "Exigence du mode JSON"
+    Lors de l'utilisation du mode `json_object`, votre message système ou utilisateur **doit** mentionner le mot « JSON » — sinon l'API renvoie une erreur.
 
-### Step 3: Structured output with Pydantic schema
+### Étape 3 : Sortie structurée avec schéma Pydantic
 
-JSON mode gives you valid JSON, but not necessarily the *shape* you want. **Structured output** with a schema enforces the exact fields and types.
+Le mode JSON vous donne du JSON valide, mais pas nécessairement la *forme* souhaitée. La **sortie structurée** avec un schéma impose les champs et types exacts.
 
 === "Python"
 
@@ -188,9 +183,9 @@ JSON mode gives you valid JSON, but not necessarily the *shape* you want. **Stru
     Console.WriteLine($"{product.Name}: ${product.Price}");
     ```
 
-### Step 4: Practical patterns
+### Étape 4 : Modèles pratiques
 
-#### Pattern 1 — Classification
+#### Modèle 1 — Classification
 
 ```python
 from pydantic import BaseModel
@@ -217,7 +212,7 @@ print(f"Priority: {ticket.priority}")       # "urgent"
 print(f"Human needed: {ticket.requires_human}")  # True
 ```
 
-#### Pattern 2 — Extraction with nested objects
+#### Modèle 2 — Extraction avec objets imbriqués
 
 ```python
 from pydantic import BaseModel
@@ -243,9 +238,9 @@ Ship to 123 Main St, Seattle, WA 98101.
 """
 ```
 
-#### Pattern 3 — Agent tool output
+#### Modèle 3 — Sortie d'outil d'agent
 
-Use structured output for MCP tool return values to make parsing reliable:
+Utilisez la sortie structurée pour les valeurs de retour des outils MCP afin de rendre l'analyse fiable :
 
 ```python
 class SearchResult(BaseModel):
@@ -266,9 +261,9 @@ def search_products(query: str) -> dict:
     return result.model_dump()  # Pydantic → dict → JSON
 ```
 
-### Step 5: Temperature = 0 for structured tasks
+### Étape 5 : Temperature = 0 pour les tâches structurées
 
-When extracting structured data, always use `temperature=0`:
+Lors de l'extraction de données structurées, utilisez toujours `temperature=0` :
 
 ```python
 response = client.beta.chat.completions.parse(
@@ -279,23 +274,23 @@ response = client.beta.chat.completions.parse(
 )
 ```
 
-Extraction is a factual task — you want the same answer every time, not a creative variation.
+L'extraction est une tâche factuelle — vous voulez la même réponse à chaque fois, pas une variation créative.
 
 ---
 
-## Summary
+## Résumé
 
-| Approach | When to use | Python |
-|----------|------------|--------|
-| **Prompt-only** | Never for production | ❌ Fragile |
-| **JSON mode** | Simple JSON, no strict schema | `response_format={"type": "json_object"}` |
-| **Structured output** | Exact schema required | `response_format=MyPydanticModel` |
+| Approche | Quand l'utiliser | Python |
+|----------|-----------------|--------|
+| **Prompt uniquement** | Jamais en production | ❌ Fragile |
+| **Mode JSON** | JSON simple, pas de schéma strict | `response_format={"type": "json_object"}` |
+| **Sortie structurée** | Schéma exact requis | `response_format=MyPydanticModel` |
 
-The golden rule: **any LLM output that your code will parse should use structured output.**
+La règle d'or : **toute sortie de LLM que votre code analysera devrait utiliser la sortie structurée.**
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Use structured output in an MCP tool:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
-- **Use with Semantic Kernel function results:** → [Lab 023 — SK Plugins, Memory & Planners](lab-023-sk-plugins-memory.md)
+- **Utiliser la sortie structurée dans un outil MCP :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)
+- **Utiliser avec les résultats de fonctions Semantic Kernel :** → [Lab 023 — Plugins, mémoire et planificateurs SK](lab-023-sk-plugins-memory.md)

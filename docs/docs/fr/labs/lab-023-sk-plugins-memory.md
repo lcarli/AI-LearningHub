@@ -1,41 +1,36 @@
 ---
 tags: [semantic-kernel, python, free, github-models]
 ---
-# Lab 023: Semantic Kernel — Plugins, Memory & Planners
+# Lab 023 : Semantic Kernel — Plugins, mémoire & planificateurs
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/semantic-kernel/">Semantic Kernel</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span></span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/semantic-kernel/">Semantic Kernel</a></span>
+  <span><strong>Durée :</strong> ~45 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span></span>
 </div>
-
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
-
-
 !!! warning "Semantic Kernel -> Microsoft Agent Framework"
-    Semantic Kernel is now part of **Microsoft Agent Framework (MAF)**, which unifies SK and AutoGen into a single framework. The concepts in this lab still apply — MAF builds on top of them. See **[Lab 076: Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** for the migration guide.
+    Semantic Kernel fait désormais partie de **Microsoft Agent Framework (MAF)**, qui unifie SK et AutoGen en un seul framework. Les concepts de ce lab restent valables — MAF s'appuie dessus. Voir **[Lab 076 : Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** pour le guide de migration.
 
 
 
-## What You'll Learn
+## Ce que vous apprendrez
 
-- Create **native function plugins** in Python and C#
-- Use **KernelArguments** to pass typed data between plugins
-- Add **in-memory vector store** for semantic memory
-- Use **auto function calling** to let the LLM orchestrate plugins
-- Understand how SK planners work
+- Créer des **plugins à fonctions natives** en Python et C#
+- Utiliser **KernelArguments** pour passer des données typées entre plugins
+- Ajouter un **magasin de vecteurs en mémoire** pour la mémoire sémantique
+- Utiliser l'**appel automatique de fonctions** pour laisser le LLM orchestrer les plugins
+- Comprendre le fonctionnement des planificateurs SK
 
 ---
 
 ## Introduction
 
-[Lab 014](lab-014-sk-hello-agent.md) built a minimal SK agent. This lab goes deeper: multiple plugins working together, semantic memory, and letting the kernel decide which tools to call.
+Le [Lab 014](lab-014-sk-hello-agent.md) a construit un agent SK minimal. Ce lab va plus loin : plusieurs plugins fonctionnant ensemble, la mémoire sémantique, et laisser le noyau décider quels outils appeler.
 
 ---
 
-## Prerequisites
+## Prérequis
 
 === "Python"
     ```bash
@@ -48,30 +43,30 @@ tags: [semantic-kernel, python, free, github-models]
     dotnet add package Microsoft.SemanticKernel.Connectors.InMemory --prerelease
     ```
 
-Set `GITHUB_TOKEN`.
+Configurez `GITHUB_TOKEN`.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers d'accompagnement
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-023/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-023/` dans votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_plugin.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py) |
+| Fichier | Description | Téléchargement |
+|---------|-------------|----------------|
+| `broken_plugin.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py) |
 
 ---
 
-## Lab Exercise
+## Exercice du lab
 
-### Step 1: Create a multi-plugin agent
+### Étape 1 : Créer un agent multi-plugins
 
 === "Python"
 
@@ -154,9 +149,9 @@ Set `GITHUB_TOKEN`.
     asyncio.run(main())
     ```
 
-### Step 2: Add semantic memory
+### Étape 2 : Ajouter la mémoire sémantique
 
-Semantic memory lets you store facts and retrieve them by meaning (not keyword).
+La mémoire sémantique vous permet de stocker des faits et de les récupérer par signification (et non par mot-clé).
 
 === "Python"
 
@@ -207,7 +202,7 @@ Semantic memory lets you store facts and retrieve them by meaning (not keyword).
     asyncio.run(demo_memory())
     ```
 
-### Step 3: Combining plugins with memory
+### Étape 3 : Combiner plugins et mémoire
 
 ```python
 from semantic_kernel.core_plugins.text_memory_plugin import TextMemoryPlugin
@@ -237,11 +232,11 @@ async def agent_with_memory():
     print(result)
 ```
 
-### Step 4: Understanding planners
+### Étape 4 : Comprendre les planificateurs
 
-SK planners decompose a goal into steps. The modern approach is **auto function calling** (as used above) — the LLM generates a plan and executes it in one loop.
+Les planificateurs SK décomposent un objectif en étapes. L'approche moderne est l'**appel automatique de fonctions** (comme utilisé ci-dessus) — le LLM génère un plan et l'exécute en une seule boucle.
 
-For explainability, you can log each function call:
+Pour l'explicabilité, vous pouvez journaliser chaque appel de fonction :
 
 ```python
 from semantic_kernel.filters import FunctionInvocationContext
@@ -257,29 +252,29 @@ kernel.add_filter("function_invocation", log_function_calls)
 
 ---
 
-## Key Concepts Summary
+## Résumé des concepts clés
 
-| Concept | What it does |
-|---------|-------------|
-| **Plugin** | Groups related `@kernel_function` methods |
-| **KernelArguments** | Typed dict passed between functions |
-| **Auto Function Calling** | LLM decides which plugins to call |
-| **Semantic Memory** | Vector store for meaning-based retrieval |
-| **TextMemoryPlugin** | Bridges memory store into the plugin system |
-| **Filter** | Middleware — log, auth, or modify function calls |
+| Concept | Rôle |
+|---------|------|
+| **Plugin** | Regroupe des méthodes `@kernel_function` liées |
+| **KernelArguments** | Dictionnaire typé passé entre les fonctions |
+| **Appel automatique de fonctions** | Le LLM décide quels plugins appeler |
+| **Mémoire sémantique** | Magasin de vecteurs pour la récupération par signification |
+| **TextMemoryPlugin** | Connecte le magasin de mémoire au système de plugins |
+| **Filtre** | Middleware — journaliser, authentifier ou modifier les appels de fonctions |
 
 ---
 
-## 🐛 Bug-Fix Exercise: Fix the Broken SK Plugin
+## 🐛 Exercice de correction de bugs : Réparer le plugin SK cassé
 
-This lab includes a deliberately broken Semantic Kernel plugin. Find and fix 3 bugs!
+Ce lab inclut un plugin Semantic Kernel volontairement cassé. Trouvez et corrigez 3 bugs !
 
 ```
 lab-023/
-└── broken_plugin.py    ← 3 intentional bugs to find and fix
+└── broken_plugin.py    ← 3 bugs intentionnels à trouver et corriger
 ```
 
-**Setup:**
+**Configuration :**
 ```bash
 pip install semantic-kernel openai
 
@@ -287,15 +282,15 @@ pip install semantic-kernel openai
 python lab-023/broken_plugin.py
 ```
 
-**The 3 bugs:**
+**Les 3 bugs :**
 
-| # | Function | Symptom | Type |
-|---|----------|---------|------|
-| 1 | `search_products` | SK doesn't discover the function | Missing `@kernel_function` decorator |
-| 2 | `get_cart_total` | Returns `$2.00` instead of `$339.98` | Accumulates quantity not price |
-| 3 | `calculate_price_with_tax` | Returns `$291.59` instead of `$269.99` | Tax applied twice |
+| # | Fonction | Symptôme | Type |
+|---|----------|----------|------|
+| 1 | `search_products` | SK ne découvre pas la fonction | Décorateur `@kernel_function` manquant |
+| 2 | `get_cart_total` | Retourne `$2.00` au lieu de `$339.98` | Accumule la quantité et non le prix |
+| 3 | `calculate_price_with_tax` | Retourne `$291.59` au lieu de `$269.99` | Taxe appliquée deux fois |
 
-**Verify your fixes:** The built-in test runner checks each function:
+**Vérifiez vos corrections :** Le testeur intégré vérifie chaque fonction :
 ```bash
 python lab-023/broken_plugin.py
 # Expected output:
@@ -307,41 +302,41 @@ python lab-023/broken_plugin.py
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Quiz de connaissances
 
-??? question "**Q1 (Run the Lab):** After fixing bug #2, what does `get_cart_total()` return when the cart contains P001 (×1) at $249.99 and P007 (×1) at $89.99?"
+??? question "**Q1 (Exécutez le lab) :** Après avoir corrigé le bug #2, que retourne `get_cart_total()` quand le panier contient P001 (×1) à $249.99 et P007 (×1) à $89.99 ?"
 
-    Fix bug #2 in [📥 `broken_plugin.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py) and run it, or calculate manually: P001 price × 1 + P007 price × 1.
+    Corrigez le bug #2 dans [📥 `broken_plugin.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py) et exécutez-le, ou calculez manuellement : prix P001 × 1 + prix P007 × 1.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **$339.98**
 
-        The cart contains 1× P001 (TrailBlazer Tent 2P, $249.99) and 1× P007 (DayHiker 22L, $89.99). `total = 249.99 + 89.99 = $339.98`. Bug #2 was accumulating the item *quantity* instead of `price * quantity`, so single-item carts returned the quantity number (e.g., `$1.00`, `$2.00`) instead of the price.
+        Le panier contient 1× P001 (TrailBlazer Tent 2P, $249.99) et 1× P007 (DayHiker 22L, $89.99). `total = 249.99 + 89.99 = $339.98`. Le bug #2 accumulait la *quantité* de l'article au lieu de `prix * quantité`, donc les paniers à article unique retournaient le nombre de quantité (par ex. `$1.00`, `$2.00`) au lieu du prix.
 
-??? question "**Q2 (Run the Lab):** After fixing ALL 3 bugs, run `python lab-023/broken_plugin.py`. How many SK functions does the test runner discover in the OutdoorGearPlugin?"
+??? question "**Q2 (Exécutez le lab) :** Après avoir corrigé LES 3 bugs, exécutez `python lab-023/broken_plugin.py`. Combien de fonctions SK le testeur découvre-t-il dans OutdoorGearPlugin ?"
 
-    After all fixes, run the script. Look for the "SK discovers N functions" line in the output.
+    Après toutes les corrections, exécutez le script. Cherchez la ligne « SK discovers N functions » dans la sortie.
 
-    ??? success "✅ Reveal Answer"
-        **3 functions: `search_products`, `get_cart_total`, and `calculate_price_with_tax`**
+    ??? success "✅ Révéler la réponse"
+        **3 fonctions : `search_products`, `get_cart_total` et `calculate_price_with_tax`**
 
-        Before fixing bug #1 (missing `@kernel_function` decorator), SK could only discover 2 functions. After adding the decorator back to `search_products`, all 3 are visible to the SK planner. This is why decorators matter — without `@kernel_function`, SK simply ignores the function.
+        Avant la correction du bug #1 (décorateur `@kernel_function` manquant), SK ne pouvait découvrir que 2 fonctions. Après avoir ajouté le décorateur à `search_products`, les 3 sont visibles par le planificateur SK. C'est pourquoi les décorateurs sont importants — sans `@kernel_function`, SK ignore simplement la fonction.
 
-??? question "**Q3 (Multiple Choice):** Bug #3 caused `calculate_price_with_tax(249.99, tax_rate=0.08)` to return ~$291.59 instead of $269.99. What was the root cause?"
+??? question "**Q3 (Choix multiple) :** Le bug #3 faisait que `calculate_price_with_tax(249.99, tax_rate=0.08)` retournait ~$291.59 au lieu de $269.99. Quelle était la cause racine ?"
 
-    - A) The base price was doubled before tax was applied
-    - B) Tax was applied to the result of a previous tax calculation (applied twice)
-    - C) The function used the wrong tax rate variable
-    - D) The tax was subtracted instead of added
+    - A) Le prix de base était doublé avant l'application de la taxe
+    - B) La taxe était appliquée au résultat d'un calcul de taxe précédent (appliquée deux fois)
+    - C) La fonction utilisait la mauvaise variable de taux de taxe
+    - D) La taxe était soustraite au lieu d'être ajoutée
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B — Tax was applied twice**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B — La taxe était appliquée deux fois**
 
-        The buggy code first computed `price_with_tax = price * (1 + tax_rate)` → $269.99, then applied tax *again* on that result: `$269.99 * 1.08 = $291.59`. The fix: compute and return in a single step — `return round(price * (1 + tax_rate), 2)`.
+        Le code buggé calculait d'abord `price_with_tax = price * (1 + tax_rate)` → $269.99, puis appliquait la taxe *à nouveau* sur ce résultat : `$269.99 * 1.08 = $291.59`. La correction : calculer et retourner en une seule étape — `return round(price * (1 + tax_rate), 2)`.
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Multi-agent orchestration with SK:** → [Lab 034 — SK Multi-Agent Systems](lab-034-multi-agent-sk.md)
-- **RAG pipeline with SK:** → [Lab 022 — RAG with pgvector](lab-022-rag-github-models-pgvector.md)
+- **Orchestration multi-agents avec SK :** → [Lab 034 — Systèmes multi-agents SK](lab-034-multi-agent-sk.md)
+- **Pipeline RAG avec SK :** → [Lab 022 — RAG avec pgvector](lab-022-rag-github-models-pgvector.md)

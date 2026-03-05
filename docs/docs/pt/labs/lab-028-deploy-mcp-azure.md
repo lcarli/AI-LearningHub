@@ -1,52 +1,47 @@
 ---
 tags: [mcp, azure, container-apps, bicep, azure-required]
 ---
-# Lab 028: Deploy MCP Server to Azure Container Apps
+# Lab 028: Implantar Servidor MCP no Azure Container Apps
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/mcp/">MCP</a></span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> ~$0 (scale-to-zero) + Azure Container Registry ~$5/month</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/mcp/">MCP</a></span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>💰 Custo:</strong> ~$0 (scale-to-zero) + Azure Container Registry ~$5/month</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+!!! warning "Assinatura Azure necessária"
+    Este lab implanta Azure Container Apps. → [Guia de pré-requisitos](../prerequisites.md)
 
+## O que Você Vai Aprender
 
-
-!!! warning "Azure subscription required"
-    This lab deploys Azure Container Apps. → [Prerequisites guide](../prerequisites.md)
-
-## What You'll Learn
-
-- Containerize an MCP server (Python) with Docker
-- Push the image to **Azure Container Registry**
-- Deploy to **Azure Container Apps** with SSE transport
-- Update the MCP server with zero-downtime rolling deploys
-- Connect from GitHub Copilot and any MCP client
+- Containerizar um servidor MCP (Python) com Docker
+- Enviar a imagem para o **Azure Container Registry**
+- Implantar no **Azure Container Apps** com transporte SSE
+- Atualizar o servidor MCP com deploys de atualização contínua sem tempo de inatividade
+- Conectar a partir do GitHub Copilot e qualquer cliente MCP
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-- Docker Desktop — free: https://www.docker.com/products/docker-desktop
+- Docker Desktop — gratuito: https://www.docker.com/products/docker-desktop
 - Azure CLI: `az login`
-- Completed [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
+- Ter completado o [Lab 020 — Servidor MCP em Python](lab-020-mcp-server-python.md)
 
 ---
 
-## Deploy Infrastructure
+## Implantar Infraestrutura
 
-### Option A — Deploy to Azure (one click)
+### Opção A — Implantar no Azure (um clique)
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flcarli%2FAI-LearningHub%2Fmain%2Finfra%2Flab-028-mcp-container-apps%2Fazuredeploy.json)
 
-This deploys:
-- Azure Container Apps Environment + Log Analytics
-- A placeholder container app (you'll update it with your image in Step 3)
+Isto implanta:
+- Ambiente Azure Container Apps + Log Analytics
+- Um container app placeholder (você o atualizará com sua imagem no Passo 3)
 
-### Option B — Azure CLI (Bicep)
+### Opção B — Azure CLI (Bicep)
 
 ```bash
 git clone https://github.com/lcarli/AI-LearningHub.git && cd AI-LearningHub
@@ -66,11 +61,11 @@ az deployment group show \
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Create the MCP server (SSE transport)
+### Passo 1: Criar o servidor MCP (transporte SSE)
 
-For remote deployment, use SSE (Server-Sent Events) transport instead of stdio.
+Para implantação remota, use transporte SSE (Server-Sent Events) em vez de stdio.
 
 ```
 mcp-product-server/
@@ -146,7 +141,7 @@ EXPOSE 8000
 CMD ["python", "server.py"]
 ```
 
-### Step 2: Test locally
+### Passo 2: Testar localmente
 
 ```bash
 cd mcp-product-server
@@ -158,7 +153,7 @@ python server.py
 npx @modelcontextprotocol/inspector http://localhost:8000/sse
 ```
 
-### Step 3: Build and push container image
+### Passo 3: Construir e enviar a imagem do container
 
 ```bash
 # Variables — update these
@@ -176,7 +171,7 @@ IMAGE_URL="${ACR_NAME}.azurecr.io/mcp-product-server:latest"
 echo "Image: $IMAGE_URL"
 ```
 
-### Step 4: Deploy to Container Apps
+### Passo 4: Implantar no Container Apps
 
 ```bash
 # Get the app name from deployment outputs
@@ -210,7 +205,7 @@ az containerapp show \
   --query properties.configuration.ingress.fqdn -o tsv
 ```
 
-### Step 5: Connect from GitHub Copilot
+### Passo 5: Conectar a partir do GitHub Copilot
 
 Add to `.vscode/mcp.json`:
 
@@ -225,9 +220,9 @@ Add to `.vscode/mcp.json`:
 }
 ```
 
-Test in Copilot Agent Mode: *"What camping tents do you have in stock?"*
+Teste no Copilot Agent Mode: *"Quais barracas de camping vocês têm em estoque?"*
 
-### Step 6: Zero-downtime updates
+### Passo 6: Atualizações sem tempo de inatividade
 
 ```bash
 # Update to a new version
@@ -243,21 +238,21 @@ az containerapp update \
 
 ---
 
-## Cost Breakdown
+## Detalhamento de Custos
 
-| Resource | SKU | Estimated Cost |
-|----------|-----|---------------|
+| Recurso | SKU | Custo Estimado |
+|---------|-----|----------------|
 | Container Apps | Scale-to-zero (0 replicas when idle) | ~$0 when idle |
 | Container Apps (active) | 0.5 vCPU / 1Gi | ~$0.02/hour active |
 | Azure Container Registry | Basic | ~$5/month |
 | Log Analytics | PerGB2018 | ~$2/month (light usage) |
 
-!!! tip "Scale to zero"
-    Container Apps scales to 0 replicas when there are no requests. For a dev/lab MCP server with occasional use, you'll pay almost nothing.
+!!! tip "Escalar até zero"
+    O Container Apps escala para 0 réplicas quando não há requisições. Para um servidor MCP de dev/lab com uso ocasional, você pagará quase nada.
 
 ---
 
-## Cleanup
+## Limpeza
 
 ```bash
 az group delete --name rg-ai-labs-mcp --yes --no-wait
@@ -265,7 +260,7 @@ az group delete --name rg-ai-labs-mcp --yes --no-wait
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Secure the server with auth:** Add Azure API Management or Easy Auth in front
-- **Full Foundry + MCP pipeline:** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)
+- **Proteger o servidor com autenticação:** Adicione Azure API Management ou Easy Auth na frente
+- **Pipeline completo Foundry + MCP:** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)

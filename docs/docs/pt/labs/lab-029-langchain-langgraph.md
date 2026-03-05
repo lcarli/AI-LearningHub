@@ -1,54 +1,49 @@
 ---
 tags: [langchain, langgraph, python, free, github-models, agents]
 ---
-# Lab 029: LangChain & LangGraph Basics
+# Lab 029: LangChain & LangGraph Básico
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — GitHub Models free tier</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — GitHub Models nível gratuito</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Build a conversational agent with **LangChain** and a tool-calling loop
-- Model multi-step agent logic as a **LangGraph** state graph
-- Understand the difference between LangChain **chains** and LangGraph **graphs**
-- Add conditional routing: when to call a tool vs. return an answer
-- Persist conversation state with **LangGraph checkpointers**
+- Construir um agente conversacional com **LangChain** e um loop de chamada de ferramentas
+- Modelar lógica de agente multi-etapas como um **grafo de estado LangGraph**
+- Entender a diferença entre **cadeias** do LangChain e **grafos** do LangGraph
+- Adicionar roteamento condicional: quando chamar uma ferramenta vs. retornar uma resposta
+- Persistir estado da conversa com **checkpointers do LangGraph**
 
 ---
 
-## Introduction
+## Introdução
 
-LangChain is one of the most popular open-source frameworks for building LLM-powered applications. LangGraph extends it with explicit state machines — graphs where nodes are functions and edges are transitions.
+LangChain é um dos frameworks open-source mais populares para construir aplicações alimentadas por LLM. LangGraph o estende com máquinas de estado explícitas — grafos onde nós são funções e arestas são transições.
 
-**When to use each:**
+**Quando usar cada um:**
 
 | | LangChain | LangGraph |
 |---|---|---|
-| Best for | Linear pipelines, RAG chains, simple agents | Complex multi-step agents, branching logic, cycles |
-| State | Implicit (passed through chain) | Explicit (typed state dict) |
-| Loops | Not native | First-class support |
-| Visibility | Chain logs | Graph execution traces |
+| Melhor para | Pipelines lineares, cadeias RAG, agentes simples | Agentes multi-etapas complexos, lógica de ramificação, ciclos |
+| Estado | Implícito (passado pela cadeia) | Explícito (dict de estado tipado) |
+| Loops | Não nativo | Suporte de primeira classe |
+| Visibilidade | Logs da cadeia | Traces de execução do grafo |
 
-In this lab we build the same OutdoorGear shopping assistant two ways: first with LangChain (simpler), then with LangGraph (more explicit control).
+Neste lab construímos o mesmo assistente de compras OutdoorGear de duas formas: primeiro com LangChain (mais simples), depois com LangGraph (controle mais explícito).
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 ```bash
 pip install langchain langchain-openai langgraph
 ```
 
-No Azure subscription needed — we use GitHub Models' OpenAI-compatible endpoint:
+Nenhuma assinatura Azure necessária — usamos o endpoint compatível com OpenAI do GitHub Models:
 
 ```bash
 export GITHUB_TOKEN=<your PAT with models:read scope>
@@ -56,9 +51,9 @@ export GITHUB_TOKEN=<your PAT with models:read scope>
 
 ---
 
-## Part 1: LangChain Agent
+## Parte 1: Agente LangChain
 
-### Step 1: Tools
+### Passo 1: Ferramentas
 
 ```python
 # tools.py
@@ -119,7 +114,7 @@ def calculate_total(product_ids: list[str], quantities: list[int]) -> str:
     return "\n".join(lines)
 ```
 
-### Step 2: LangChain Agent with Tool Calling
+### Passo 2: Agente LangChain com Chamada de Ferramentas
 
 ```python
 # langchain_agent.py
@@ -158,7 +153,7 @@ result = executor.invoke({
 print("\n" + result["output"])
 ```
 
-Run it:
+Execute:
 ```bash
 python langchain_agent.py
 ```
@@ -167,11 +162,11 @@ You should see the agent call `search_products`, inspect a result, then provide 
 
 ---
 
-## Part 2: LangGraph Agent
+## Parte 2: Agente LangGraph
 
-LangGraph models the agent as a state machine. This makes the logic explicit and testable.
+LangGraph modela o agente como uma máquina de estados. Isso torna a lógica explícita e testável.
 
-### Step 3: Define the graph state
+### Passo 3: Definir o estado do grafo
 
 ```python
 # langgraph_agent.py
@@ -198,7 +193,7 @@ llm = ChatOpenAI(
 ).bind_tools(tools_list)
 ```
 
-### Step 4: Define graph nodes
+### Passo 4: Definir os nós do grafo
 
 ```python
 # Node 1: Call the LLM
@@ -233,7 +228,7 @@ def should_call_tools(state: AgentState) -> str:
     return "end"
 ```
 
-### Step 5: Build and run the graph
+### Passo 5: Construir e executar o grafo
 
 ```python
 # Build the graph
@@ -265,9 +260,9 @@ for step in agent.stream(initial_state, stream_mode="values"):
 
 ---
 
-## Part 3: Add Persistent Memory (Checkpointer)
+## Parte 3: Adicionar Memória Persistente (Checkpointer)
 
-LangGraph can persist state between runs using a checkpointer — this is how you build multi-turn agents that remember conversations:
+LangGraph pode persistir o estado entre execuções usando um checkpointer — é assim que você constrói agentes multi-turno que lembram conversas:
 
 ```python
 from langgraph.checkpoint.memory import MemorySaver
@@ -296,34 +291,34 @@ print(result["messages"][-1].content)
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "1. What is the main advantage of LangGraph over a simple LangChain agent?"
-    LangGraph uses an **explicit state machine** (graph with nodes and edges) to model agent logic. This makes **branching, looping, and conditional routing** first-class citizens — visible, testable, and debuggable. A LangChain agent hides the control flow inside the framework.
+??? question "1. Qual é a principal vantagem do LangGraph sobre um agente LangChain simples?"
+    LangGraph usa uma **máquina de estados explícita** (grafo com nós e arestas) para modelar a lógica do agente. Isso torna **ramificação, loops e roteamento condicional** cidadãos de primeira classe — visíveis, testáveis e depuráveis. Um agente LangChain esconde o fluxo de controle dentro do framework.
 
 ??? question "2. What does the `add_messages` reducer do in LangGraph state?"
     `add_messages` is a **reducer function** that tells LangGraph how to update the `messages` field: it **appends** new messages instead of replacing the whole list. Without it, each node return would overwrite the message history rather than adding to it.
 
-??? question "3. How does LangGraph checkpointing enable multi-turn conversations?"
+??? question "3. Como o checkpointing do LangGraph habilita conversas multi-turno?"
     A checkpointer **persists the graph state** (all messages) to storage (memory, Redis, PostgreSQL) keyed by a `thread_id`. When you invoke the agent with the same `thread_id`, LangGraph loads the previous state and continues from where it left off — the agent "remembers" prior turns without you managing history manually.
 
 ---
 
-## Summary
+## Resumo
 
-| Concept | LangChain | LangGraph |
+| Conceito | LangChain | LangGraph |
 |---------|-----------|-----------|
-| **Structure** | Linear chain | Directed graph (nodes + edges) |
-| **Loops** | Not native | `graph.add_edge("tools", "llm")` |
-| **Branching** | Limited | `add_conditional_edges()` |
+| **Estrutura** | Cadeia linear | Grafo dirigido (nós + arestas) |
+| **Loops** | Não nativo | `graph.add_edge("tools", "llm")` |
+| **Ramificação** | Limitada | `add_conditional_edges()` |
 | **State** | Implicit | Explicit `TypedDict` |
-| **Memory** | Manual | `MemorySaver` / `PostgresSaver` |
-| **Debugging** | Chain logs | Full graph execution trace |
+| **Memória** | Manual | `MemorySaver` / `PostgresSaver` |
+| **Depuração** | Logs da cadeia | Trace completo de execução do grafo |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Full function-calling deep dive:** → [Lab 018 — Function Calling & Tool Use](lab-018-function-calling.md)
-- **Multi-agent with Semantic Kernel:** → [Lab 034 — Multi-Agent Systems](lab-034-multi-agent-sk.md)
-- **Production AutoGen agents:** → [Lab 040 — Production Multi-Agent](lab-040-autogen-multi-agent.md)
+- **Aprofundamento em chamada de funções:** → [Lab 018 — Function Calling & Tool Use](lab-018-function-calling.md)
+- **Multi-agente com Semantic Kernel:** → [Lab 034 — Multi-Agent Systems](lab-034-multi-agent-sk.md)
+- **Agentes AutoGen em produção:** → [Lab 040 — Production Multi-Agent](lab-040-autogen-multi-agent.md)

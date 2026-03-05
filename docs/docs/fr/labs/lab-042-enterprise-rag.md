@@ -1,31 +1,26 @@
-# Lab 042: Enterprise RAG with Evaluations
+# Lab 042 : RAG entreprise avec évaluations
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">RAG</a></span>
-  <span><strong>Time:</strong> ~120 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-azure-paid">Azure paid</span></span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Durée :</strong> ~120 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-azure-paid">Azure payant</span></span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+!!! danger "Avertissement de coût"
+    Ce lab nécessite des ressources Azure payantes. Coût estimé : 10 à 50 $ selon l'utilisation.
+    Configurez toujours des alertes de budget avant de commencer.
 
+## Ce que vous apprendrez
 
-
-!!! danger "Cost warning"
-    This lab requires Azure paid resources. Estimated cost: $10-$50 depending on usage.
-    Always set budget alerts before starting.
-
-## What You'll Learn
-
-> 🚧 **This lab is coming soon.** Content is being developed.
+> 🚧 **Ce lab sera bientôt disponible.** Le contenu est en cours de développement.
 >
-> **Overview:** Build an enterprise RAG pipeline with chunking strategies, re-ranking, and evaluate quality using the Azure AI Evaluation SDK.
+> **Aperçu :** Construire un pipeline RAG entreprise avec des stratégies de découpage, du re-ranking, et évaluer la qualité à l'aide du SDK Azure AI Evaluation.
 
-## Prerequisites
+## Prérequis
 
-See [Prerequisites & Accounts](../prerequisites.md) for setup instructions.
+Consultez [Prérequis et comptes](../prerequisites.md) pour les instructions de configuration.
 
 ---
 
-*Check back soon, or [contribute to this lab](https://github.com/YOUR_ORG/ai-agents-learning-hub)!*
+*Revenez bientôt, ou [contribuez à ce lab](https://github.com/YOUR_ORG/ai-agents-learning-hub) !*

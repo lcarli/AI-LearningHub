@@ -1,43 +1,38 @@
 ---
 tags: [ag-ui, protocol, frontend, copilotkit, events, python]
 ---
-# Lab 077: AG-UI Protocol — Connect Agents to User Interfaces
+# Lab 077 : Protocole AG-UI — Connecter les agents aux interfaces utilisateur
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock event data</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~60 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise des données d'événements simulées</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What the **AG-UI Protocol** is and how it connects agents to frontend user interfaces
-- How AG-UI completes the **interoperability trilogy**: MCP (tools) + A2A (agents) + AG-UI (users)
-- Analyze **12 event types** and their directions (agent→frontend vs. frontend→agent)
-- Understand event categories: lifecycle, text, tool, state, and input
-- Build an **event flow diagram** from a real interaction trace
+- Ce qu'est le **protocole AG-UI** et comment il connecte les agents aux interfaces utilisateur frontend
+- Comment AG-UI complète la **trilogie d'interopérabilité** : MCP (outils) + A2A (agents) + AG-UI (utilisateurs)
+- Analyser **12 types d'événements** et leurs directions (agent→frontend vs. frontend→agent)
+- Comprendre les catégories d'événements : cycle de vie, texte, outil, état et entrée
+- Construire un **diagramme de flux d'événements** à partir d'une trace d'interaction réelle
 
 ## Introduction
 
-The **AG-UI (Agent–User Interface) Protocol** is an event-based protocol that standardizes how AI agents communicate with frontend applications. While **MCP** connects agents to tools and **A2A** connects agents to other agents, **AG-UI** closes the loop by connecting agents to **users** through their UIs.
+Le **protocole AG-UI (Agent–User Interface)** est un protocole basé sur les événements qui standardise la communication entre les agents IA et les applications frontend. Alors que **MCP** connecte les agents aux outils et **A2A** connecte les agents entre eux, **AG-UI** ferme la boucle en connectant les agents aux **utilisateurs** via leurs interfaces.
 
-### The Interoperability Trilogy
+### La trilogie d'interopérabilité
 
-| Protocol | Connects | Purpose |
+| Protocole | Connecte | Objectif |
 |----------|----------|---------|
-| **MCP** | Agent ↔ Tools | Standardized tool/resource access |
-| **A2A** | Agent ↔ Agent | Multi-agent collaboration |
-| **AG-UI** | Agent ↔ User | Real-time UI streaming and interaction |
+| **MCP** | Agent ↔ Outils | Accès standardisé aux outils/ressources |
+| **A2A** | Agent ↔ Agent | Collaboration multi-agents |
+| **AG-UI** | Agent ↔ Utilisateur | Streaming en temps réel et interaction UI |
 
-### How It Works
+### Comment ça fonctionne
 
-AG-UI uses a **streaming event model**. Instead of request/response, the agent and frontend exchange a continuous stream of typed events:
+AG-UI utilise un **modèle d'événements en streaming**. Au lieu d'un schéma requête/réponse, l'agent et le frontend échangent un flux continu d'événements typés :
 
 ```
 Frontend                          Agent
@@ -59,19 +54,19 @@ Frontend                          Agent
    │                                │
 ```
 
-### The Scenario
+### Le scénario
 
-You are a **Frontend Engineer** integrating an AI agent into a CopilotKit-powered UI. You have a dataset of **12 event types** (`agui_events.csv`) that defines every event in the AG-UI protocol. Your job: analyze the events, understand their directions and categories, and map out the event flow for a typical agent interaction.
+Vous êtes un **ingénieur frontend** intégrant un agent IA dans une interface alimentée par CopilotKit. Vous disposez d'un jeu de données de **12 types d'événements** (`agui_events.csv`) qui définit chaque événement du protocole AG-UI. Votre mission : analyser les événements, comprendre leurs directions et catégories, et cartographier le flux d'événements d'une interaction agent typique.
 
-!!! info "Mock Data"
-    This lab uses a mock event type dataset. The event names, directions, and categories mirror the AG-UI protocol specification as defined by CopilotKit.
+!!! info "Données simulées"
+    Ce lab utilise un jeu de données de types d'événements simulé. Les noms d'événements, directions et catégories correspondent à la spécification du protocole AG-UI telle que définie par CopilotKit.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Pourquoi |
 |---|---|
-| Python 3.10+ | Run the analysis scripts |
-| `pandas` library | Data manipulation |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| Bibliothèque `pandas` | Manipulation des données |
 
 ```bash
 pip install pandas
@@ -79,44 +74,44 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-077/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-077/` de votre répertoire de travail.
 
-| File | Description | Download |
+| Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_agui.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/broken_agui.py) |
-| `agui_events.csv` | 12 AG-UI event types with directions and categories | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/agui_events.csv) |
+| `broken_agui.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/broken_agui.py) |
+| `agui_events.csv` | 12 types d'événements AG-UI avec directions et catégories | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/agui_events.csv) |
 
 ---
 
-## Step 1: Understand the Event Model
+## Étape 1 : Comprendre le modèle d'événements
 
-AG-UI events are organized by **direction** and **category**:
+Les événements AG-UI sont organisés par **direction** et **catégorie** :
 
-| Direction | Meaning |
+| Direction | Signification |
 |-----------|---------|
-| **agent→frontend** | Agent sends data to the UI (streaming text, tool calls, state updates) |
-| **frontend→agent** | User/UI sends input to the agent (run command, tool results) |
+| **agent→frontend** | L'agent envoie des données à l'UI (texte en streaming, appels d'outils, mises à jour d'état) |
+| **frontend→agent** | L'utilisateur/UI envoie une entrée à l'agent (commande d'exécution, résultats d'outils) |
 
-| Category | Examples |
+| Catégorie | Exemples |
 |----------|---------|
-| **lifecycle** | `LifecycleStarted`, `LifecycleCompleted` — marks agent run boundaries |
-| **text** | `TextMessageStart`, `TextMessageContent`, `TextMessageEnd` — streaming text output |
-| **tool** | `ToolCallStart`, `ToolCallArgs`, `ToolCallEnd`, `ToolResult` — tool execution |
-| **state** | `StateUpdate`, `StateSnapshot` — shared state synchronization |
-| **input** | `RunAgent` — frontend initiates an agent run |
+| **lifecycle** | `LifecycleStarted`, `LifecycleCompleted` — marque les limites d'exécution de l'agent |
+| **text** | `TextMessageStart`, `TextMessageContent`, `TextMessageEnd` — sortie de texte en streaming |
+| **tool** | `ToolCallStart`, `ToolCallArgs`, `ToolCallEnd`, `ToolResult` — exécution d'outils |
+| **state** | `StateUpdate`, `StateSnapshot` — synchronisation d'état partagé |
+| **input** | `RunAgent` — le frontend lance une exécution d'agent |
 
 ---
 
-## Step 2: Load and Explore the Events
+## Étape 2 : Charger et explorer les événements
 
 ```python
 import pandas as pd
@@ -130,7 +125,7 @@ print(f"\nAll events:")
 print(df[["event_name", "direction", "category"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total event types: 12
@@ -140,9 +135,9 @@ Categories: {'tool': 4, 'text': 3, 'lifecycle': 2, 'state': 2, 'input': 1}
 
 ---
 
-## Step 3: Analyze Event Directions
+## Étape 3 : Analyser les directions des événements
 
-Which events flow from agent to frontend, and which go the other way?
+Quels événements vont de l'agent vers le frontend, et lesquels vont dans l'autre sens ?
 
 ```python
 agent_to_ui = df[df["direction"] == "agent_to_frontend"]
@@ -157,14 +152,14 @@ for _, row in ui_to_agent.iterrows():
     print(f"  {row['event_name']:>25s}  [{row['category']}]")
 ```
 
-!!! tip "Design Insight"
-    The protocol is **heavily asymmetric**: **9 events** flow from agent to frontend, but only **3** from frontend to agent. This reflects the reality that agents produce most of the data (streaming text, tool calls, state updates) while frontends primarily send commands and tool results.
+!!! tip "Aperçu de conception"
+    Le protocole est **fortement asymétrique** : **9 événements** vont de l'agent vers le frontend, mais seulement **3** du frontend vers l'agent. Cela reflète la réalité selon laquelle les agents produisent la majorité des données (texte en streaming, appels d'outils, mises à jour d'état) tandis que les frontends envoient principalement des commandes et des résultats d'outils.
 
 ---
 
-## Step 4: Map the Event Flow
+## Étape 4 : Cartographier le flux d'événements
 
-Build a timeline of events for a typical agent interaction:
+Construisez une chronologie des événements pour une interaction agent typique :
 
 ```python
 # Define a typical interaction sequence
@@ -198,7 +193,7 @@ for i, event_name in enumerate(sequence, 1):
 
 ---
 
-## Step 5: Analyze Categories in Depth
+## Étape 5 : Analyser les catégories en profondeur
 
 ```python
 print("Events by category:\n")
@@ -215,12 +210,12 @@ pivot = df.groupby(["category", "direction"]).size().unstack(fill_value=0)
 print(pivot.to_string())
 ```
 
-!!! warning "Frontend Responsibility"
-    When the agent emits a `ToolCallEnd` event, the **frontend is responsible** for executing the tool and sending back a `ToolResult` event. If the frontend doesn't respond, the agent will wait indefinitely. Always implement timeout handling for tool execution.
+!!! warning "Responsabilité du frontend"
+    Lorsque l'agent émet un événement `ToolCallEnd`, le **frontend est responsable** de l'exécution de l'outil et du renvoi d'un événement `ToolResult`. Si le frontend ne répond pas, l'agent attendra indéfiniment. Implémentez toujours une gestion de timeout pour l'exécution des outils.
 
 ---
 
-## Step 6: Build the Protocol Summary
+## Étape 6 : Construire le résumé du protocole
 
 ```python
 report = f"""# 📋 AG-UI Protocol Summary
@@ -258,100 +253,100 @@ print("💾 Saved to lab-077/protocol_summary.md")
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-077/broken_agui.py` contains **3 bugs** that produce incorrect event analysis. Can you find and fix them all?
+Le fichier `lab-077/broken_agui.py` contient **3 bugs** qui produisent une analyse d'événements incorrecte. Pouvez-vous les trouver et les corriger tous ?
 
-Run the self-tests to see which ones fail:
+Exécutez les auto-tests pour voir lesquels échouent :
 
 ```bash
 python lab-077/broken_agui.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Vous devriez voir **3 tests échoués**. Chaque test correspond à un bug :
 
-| Test | What it checks | Hint |
+| Test | Ce qu'il vérifie | Indice |
 |------|---------------|------|
-| Test 1 | Agent→frontend event count | Should filter `agent_to_frontend`, not `frontend_to_agent` |
-| Test 2 | Total event types | Should use `len(df)`, not `df['category'].nunique()` |
-| Test 3 | Frontend→agent event count | Should count `frontend_to_agent` direction, not `input` category |
+| Test 1 | Nombre d'événements agent→frontend | Devrait filtrer `agent_to_frontend`, pas `frontend_to_agent` |
+| Test 2 | Nombre total de types d'événements | Devrait utiliser `len(df)`, pas `df['category'].nunique()` |
+| Test 3 | Nombre d'événements frontend→agent | Devrait compter la direction `frontend_to_agent`, pas la catégorie `input` |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
-
----
-
-
-## 🧠 Knowledge Check
-
-??? question "**Q1 (Multiple Choice):** What role does AG-UI play in the interoperability trilogy?"
-
-    - A) It connects agents to external tools and APIs
-    - B) It connects agents to other agents for collaboration
-    - C) It connects agents to frontend user interfaces via streaming events
-    - D) It connects agents to databases for storage
-
-    ??? success "✅ Reveal Answer"
-        **Correct: C) It connects agents to frontend user interfaces via streaming events**
-
-        The interoperability trilogy consists of MCP (agent↔tools), A2A (agent↔agents), and AG-UI (agent↔users). AG-UI uses a streaming event model to enable real-time communication between AI agents and frontend applications like CopilotKit.
-
-??? question "**Q2 (Multiple Choice):** Why is the AG-UI protocol asymmetric (more agent→frontend events than frontend→agent)?"
-
-    - A) The frontend is too slow to send many events
-    - B) Agents produce most data (text, tool calls, state) while frontends mainly send commands and tool results
-    - C) The protocol limits frontend events for security reasons
-    - D) Frontend events are batched into fewer messages
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Agents produce most data (text, tool calls, state) while frontends mainly send commands and tool results**
-
-        In a typical interaction, the agent streams text tokens, emits tool call events, and pushes state updates — all flowing to the frontend. The frontend's role is primarily to initiate runs (`RunAgent`) and return tool execution results (`ToolResult`).
-
-??? question "**Q3 (Run the Lab):** How many event types flow from agent to frontend?"
-
-    Run the Step 3 analysis on [📥 `agui_events.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/agui_events.csv) and count `agent_to_frontend` events.
-
-    ??? success "✅ Reveal Answer"
-        **9 events**
-
-        The following events flow from agent to frontend: `LifecycleStarted`, `LifecycleCompleted`, `TextMessageStart`, `TextMessageContent`, `TextMessageEnd`, `ToolCallStart`, `ToolCallArgs`, `ToolCallEnd`, and `StateUpdate`. That's **9** out of 12 total event types.
-
-??? question "**Q4 (Run the Lab):** How many event types flow from frontend to agent?"
-
-    Count the events with `frontend_to_agent` direction.
-
-    ??? success "✅ Reveal Answer"
-        **3 events**
-
-        Only **3 events** flow from frontend to agent: `RunAgent` (input), `ToolResult` (tool), and `StateSnapshot` (state). The protocol is heavily asymmetric — agents send 3× more event types than frontends.
-
-??? question "**Q5 (Run the Lab):** What is the total number of event types in the AG-UI protocol?"
-
-    Load the CSV and check the total row count.
-
-    ??? success "✅ Reveal Answer"
-        **12 event types**
-
-        The AG-UI protocol defines exactly **12 event types** across 5 categories: tool (4), text (3), lifecycle (2), state (2), and input (1).
+Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est terminé !
 
 ---
 
-## Summary
 
-| Topic | What You Learned |
+## 🧠 Vérification des connaissances
+
+??? question "**Q1 (Choix multiple) :** Quel rôle joue AG-UI dans la trilogie d'interopérabilité ?"
+
+    - A) Il connecte les agents aux outils et API externes
+    - B) Il connecte les agents entre eux pour la collaboration
+    - C) Il connecte les agents aux interfaces utilisateur frontend via des événements en streaming
+    - D) Il connecte les agents aux bases de données pour le stockage
+
+    ??? success "✅ Révéler la réponse"
+        **Correct : C) Il connecte les agents aux interfaces utilisateur frontend via des événements en streaming**
+
+        La trilogie d'interopérabilité se compose de MCP (agent↔outils), A2A (agent↔agents) et AG-UI (agent↔utilisateurs). AG-UI utilise un modèle d'événements en streaming pour permettre la communication en temps réel entre les agents IA et les applications frontend comme CopilotKit.
+
+??? question "**Q2 (Choix multiple) :** Pourquoi le protocole AG-UI est-il asymétrique (plus d'événements agent→frontend que frontend→agent) ?"
+
+    - A) Le frontend est trop lent pour envoyer beaucoup d'événements
+    - B) Les agents produisent la majorité des données (texte, appels d'outils, état) tandis que les frontends envoient principalement des commandes et résultats d'outils
+    - C) Le protocole limite les événements frontend pour des raisons de sécurité
+    - D) Les événements frontend sont regroupés en moins de messages
+
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Les agents produisent la majorité des données (texte, appels d'outils, état) tandis que les frontends envoient principalement des commandes et résultats d'outils**
+
+        Dans une interaction typique, l'agent diffuse des tokens de texte, émet des événements d'appels d'outils et pousse des mises à jour d'état — tout cela allant vers le frontend. Le rôle du frontend est principalement d'initier les exécutions (`RunAgent`) et de retourner les résultats d'exécution d'outils (`ToolResult`).
+
+??? question "**Q3 (Exécutez le lab) :** Combien de types d'événements vont de l'agent vers le frontend ?"
+
+    Exécutez l'analyse de l'étape 3 sur [📥 `agui_events.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/agui_events.csv) et comptez les événements `agent_to_frontend`.
+
+    ??? success "✅ Révéler la réponse"
+        **9 événements**
+
+        Les événements suivants vont de l'agent vers le frontend : `LifecycleStarted`, `LifecycleCompleted`, `TextMessageStart`, `TextMessageContent`, `TextMessageEnd`, `ToolCallStart`, `ToolCallArgs`, `ToolCallEnd` et `StateUpdate`. Cela fait **9** sur 12 types d'événements au total.
+
+??? question "**Q4 (Exécutez le lab) :** Combien de types d'événements vont du frontend vers l'agent ?"
+
+    Comptez les événements avec la direction `frontend_to_agent`.
+
+    ??? success "✅ Révéler la réponse"
+        **3 événements**
+
+        Seuls **3 événements** vont du frontend vers l'agent : `RunAgent` (entrée), `ToolResult` (outil) et `StateSnapshot` (état). Le protocole est fortement asymétrique — les agents envoient 3× plus de types d'événements que les frontends.
+
+??? question "**Q5 (Exécutez le lab) :** Quel est le nombre total de types d'événements dans le protocole AG-UI ?"
+
+    Chargez le CSV et vérifiez le nombre total de lignes.
+
+    ??? success "✅ Révéler la réponse"
+        **12 types d'événements**
+
+        Le protocole AG-UI définit exactement **12 types d'événements** répartis en 5 catégories : tool (4), text (3), lifecycle (2), state (2) et input (1).
+
+---
+
+## Résumé
+
+| Sujet | Ce que vous avez appris |
 |-------|-----------------|
-| AG-UI Protocol | Event-based protocol connecting agents to frontend UIs |
-| Interoperability Trilogy | MCP (tools) + A2A (agents) + AG-UI (users) = complete agent ecosystem |
-| Event Model | 12 event types: 9 agent→frontend, 3 frontend→agent |
-| Categories | lifecycle, text, tool, state, input |
-| Streaming Architecture | Continuous event stream replaces request/response pattern |
-| Frontend Responsibility | UI must execute tools and return results when agent requests them |
+| Protocole AG-UI | Protocole basé sur les événements connectant les agents aux interfaces frontend |
+| Trilogie d'interopérabilité | MCP (outils) + A2A (agents) + AG-UI (utilisateurs) = écosystème d'agents complet |
+| Modèle d'événements | 12 types d'événements : 9 agent→frontend, 3 frontend→agent |
+| Catégories | lifecycle, text, tool, state, input |
+| Architecture de streaming | Un flux continu d'événements remplace le modèle requête/réponse |
+| Responsabilité du frontend | L'UI doit exécuter les outils et retourner les résultats lorsque l'agent le demande |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **[Lab 029](lab-029-mcp-protocol.md)** — MCP Protocol (the tools leg of the trilogy)
-- **[Lab 070](lab-070-agent-ux-patterns.md)** — Agent UX Patterns (design patterns for agent-powered UIs)
-- **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (build agents that speak AG-UI)
-- **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agent with Semantic Kernel (agents that collaborate via A2A)
+- **[Lab 029](lab-029-mcp-protocol.md)** — Protocole MCP (le volet outils de la trilogie)
+- **[Lab 070](lab-070-agent-ux-patterns.md)** — Modèles UX d'agents (patrons de conception pour les interfaces alimentées par des agents)
+- **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (créer des agents qui parlent AG-UI)
+- **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agent avec Semantic Kernel (agents qui collaborent via A2A)

@@ -1,64 +1,59 @@
 ---
 tags: [autogen, multi-agent, python, free, github-models]
 ---
-# Lab 040: Production Multi-Agent with AutoGen
+# Lab 040 : Multi-agent en production avec AutoGen
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code Agents</a></span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — GitHub Models API</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">Pro Code Agents</a></span>
+  <span><strong>Durée :</strong> ~90 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — GitHub Models API</span>
 </div>
-
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
-
-
 !!! warning "AutoGen -> Microsoft Agent Framework"
-    AutoGen is now part of **Microsoft Agent Framework (MAF)**, which unifies SK and AutoGen into a single framework. See **[Lab 076: Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** for the migration guide.
+    AutoGen fait désormais partie de **Microsoft Agent Framework (MAF)**, qui unifie SK et AutoGen en un seul framework. Voir **[Lab 076 : Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** pour le guide de migration.
 
 
 
-## What You'll Learn
+## Ce que vous apprendrez
 
-- Build a **4-agent AutoGen system**: Orchestrator, Researcher, Analyst, and Critic
-- Use **AutoGen AgentChat** for structured multi-agent conversations
-- Implement **termination conditions** and **selection strategies**
-- Design **agent handoffs** for complex multi-step tasks
-- Handle errors, loops, and stuck agents gracefully
+- Construire un **système AutoGen à 4 agents** : Orchestrateur, Chercheur, Analyste et Critique
+- Utiliser **AutoGen AgentChat** pour des conversations multi-agents structurées
+- Implémenter des **conditions de terminaison** et des **stratégies de sélection**
+- Concevoir des **transferts entre agents** pour des tâches complexes en plusieurs étapes
+- Gérer les erreurs, les boucles et les agents bloqués de manière élégante
 
 ---
 
 ## Introduction
 
-Microsoft **AutoGen** is a framework for building multi-agent systems where agents converse to solve complex tasks. Unlike single-agent loops, AutoGen agents:
+Microsoft **AutoGen** est un framework pour construire des systèmes multi-agents où les agents conversent pour résoudre des tâches complexes. Contrairement aux boucles à agent unique, les agents AutoGen :
 
-- Have distinct **personas** and expertise areas
-- Can **critique** each other's work
-- Use **structured handoffs** to pass tasks
-- Terminate with **consensus** or a defined stop condition
+- Ont des **personnalités** et des domaines d'expertise distincts
+- Peuvent **critiquer** le travail des autres
+- Utilisent des **transferts structurés** pour passer les tâches
+- Terminent par **consensus** ou une condition d'arrêt définie
 
-This lab builds a product research pipeline: given a product question, the Orchestrator tasks a Researcher to gather info, an Analyst to structure it, and a Critic to review quality.
+Ce lab construit un pipeline de recherche produit : étant donné une question sur un produit, l'Orchestrateur charge un Chercheur de collecter des informations, un Analyste de les structurer, et un Critique d'en vérifier la qualité.
 
 ---
 
-## Prerequisites
+## Prérequis
 
 - Python 3.11+
 - `pip install autogen-agentchat autogen-ext[openai] openai`
-- `GITHUB_TOKEN` set
+- `GITHUB_TOKEN` configuré
 
 ---
 
-## Lab Exercise
+## Exercice pratique
 
-### Step 1: Install AutoGen
+### Étape 1 : Installer AutoGen
 
 ```bash
 pip install autogen-agentchat autogen-ext[openai]
 ```
 
-### Step 2: Define the agent system
+### Étape 2 : Définir le système d'agents
 
 ```python
 # autogen_agents.py
@@ -181,9 +176,9 @@ if __name__ == "__main__":
 python autogen_agents.py
 ```
 
-### Step 3: Add a code-writing agent
+### Étape 3 : Ajouter un agent de programmation
 
-AutoGen shines when agents can write and execute code. Add a **Coder** agent:
+AutoGen excelle quand les agents peuvent écrire et exécuter du code. Ajoutez un agent **Codeur** :
 
 ```python
 from autogen_agentchat.agents import CodeExecutorAgent
@@ -205,7 +200,7 @@ executor = AssistantAgent(
 )
 ```
 
-### Step 4: Handle errors and timeouts
+### Étape 4 : Gérer les erreurs et les délais d'attente
 
 ```python
 import asyncio
@@ -224,18 +219,18 @@ async def safe_run(question: str, timeout: int = 120) -> TaskResult | None:
 
 ---
 
-## Agent Roles Summary
+## Résumé des rôles des agents
 
-| Agent | Role | Terminates when |
+| Agent | Rôle | Se termine quand |
 |-------|------|-----------------|
-| Orchestrator | Directs team, writes final answer | Says "TERMINATE" |
-| Researcher | Gathers raw facts | Asked to by Orchestrator |
-| Analyst | Structures findings | Asked to by Orchestrator |
-| Critic | Quality review | Gives APPROVED/REVISION |
+| Orchestrateur | Dirige l'équipe, rédige la réponse finale | Dit « TERMINATE » |
+| Chercheur | Collecte les faits bruts | Demandé par l'Orchestrateur |
+| Analyste | Structure les résultats | Demandé par l'Orchestrateur |
+| Critique | Revue qualité | Donne APPROVED/REVISION |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **VS Code Copilot Extension:** → [Lab 041 — Custom Copilot Extension](lab-041-copilot-extension.md)
-- **Add evaluation:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)
+- **Extension Copilot VS Code :** → [Lab 041 — Extension Copilot personnalisée](lab-041-copilot-extension.md)
+- **Ajouter l'évaluation :** → [Lab 035 — Évaluation des agents](lab-035-agent-evaluation.md)

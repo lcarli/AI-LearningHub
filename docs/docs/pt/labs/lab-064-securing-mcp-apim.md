@@ -1,58 +1,53 @@
 ---
 tags: [security, apim, mcp, oauth, enterprise, governance]
 ---
-# Lab 064: Securing MCP at Scale with Azure API Management
+# Lab 064: Protegendo MCP em Escala com Azure API Management
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Mock server data (no Azure subscription required)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Caminho:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Tempo:</strong> ~90 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Dados de servidor simulados (não é necessária assinatura Azure)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O Que Você Vai Aprender
 
+- Usar **Azure API Management (APIM)** como gateway centralizado para servidores MCP
+- Impor autenticação **OAuth 2.0** em todos os endpoints MCP
+- Aplicar **limitação de taxa**, **políticas de DLP** e **logging** ao tráfego MCP
+- Auditar a conformidade de servidores MCP entre equipes e identificar lacunas de segurança
+- Analisar **taxas de erro**, **latência** e **volumes de chamadas** em uma frota de MCP
 
+!!! abstract "Pré-requisito"
+    Complete **[Lab 012: O Que É MCP?](lab-012-what-is-mcp.md)** e **[Lab 020: MCP Server (Python)](lab-020-mcp-server-python.md)** primeiro. Este lab pressupõe familiaridade com a arquitetura MCP e padrões de disponibilização de ferramentas.
 
-## What You'll Learn
+## Introdução
 
-- Use **Azure API Management (APIM)** as a centralized gateway for MCP servers
-- Enforce **OAuth 2.0** authentication across all MCP endpoints
-- Apply **rate limiting**, **DLP policies**, and **logging** to MCP traffic
-- Audit MCP server compliance across teams and identify security gaps
-- Analyze **error rates**, **latency**, and **call volumes** across an MCP fleet
+À medida que as organizações escalam suas implantações de agentes de IA, o número de **servidores MCP** cresce rapidamente — cada equipe constrói o seu próprio, com diferentes esquemas de autenticação, limites de taxa e controles de prevenção contra perda de dados (DLP). Sem governança centralizada, você acaba com uma colcha de retalhos de políticas de segurança inconsistentes.
 
-!!! abstract "Prerequisite"
-    Complete **[Lab 012: What Is MCP?](lab-012-what-is-mcp.md)** and **[Lab 020: MCP Server (Python)](lab-020-mcp-server-python.md)** first. This lab assumes familiarity with MCP architecture and tool-serving patterns.
+**Azure API Management** resolve isso posicionando-se na frente de todos os servidores MCP como um gateway unificado:
 
-## Introduction
+| Preocupação | Sem APIM | Com APIM |
+|-------------|----------|----------|
+| **Autenticação** | Cada servidor implementa a sua própria (API key, basic, OAuth…) | OAuth 2.0 centralizado com Azure AD |
+| **Limitação de Taxa** | Sem limites ou limites inconsistentes por servidor | Política uniforme em todos os endpoints |
+| **DLP** | Sem varredura de entradas/saídas de ferramentas | Inspeção de conteúdo e redação de PII |
+| **Monitoramento** | Logs dispersos, sem visão unificada | Métricas centralizadas, alertas e dashboards |
 
-As organizations scale their AI agent deployments, the number of **MCP servers** grows rapidly — each team builds its own, with different authentication schemes, rate limits, and data-loss-prevention (DLP) controls. Without centralized governance, you end up with a patchwork of inconsistent security policies.
+### O Cenário
 
-**Azure API Management** solves this by sitting in front of all MCP servers as a unified gateway:
+Você é um **Engenheiro de Segurança de Plataforma** em uma empresa que opera **10 servidores MCP** em **6 equipes**. A gerência quer um relatório de conformidade: quais servidores atendem à linha de base de segurança (OAuth + DLP + logging), quais não atendem e qual é a exposição ao risco.
 
-| Concern | Without APIM | With APIM |
-|---------|-------------|-----------|
-| **Authentication** | Each server rolls its own (API key, basic, OAuth…) | Centralized OAuth 2.0 with Azure AD |
-| **Rate Limiting** | No limits or inconsistent per-server limits | Uniform policy across all endpoints |
-| **DLP** | No scanning of tool inputs/outputs | Content inspection and PII redaction |
-| **Monitoring** | Scattered logs, no unified view | Centralized metrics, alerts, and dashboards |
-
-### The Scenario
-
-You are a **Platform Security Engineer** at a company running **10 MCP servers** across **6 teams**. Management wants a compliance report: which servers meet the security baseline (OAuth + DLP + logging), which don't, and what the risk exposure looks like.
-
-You have a fleet inventory dataset with authentication types, rate limits, DLP status, logging status, call volumes, latency, and error rates.
+Você tem um conjunto de dados de inventário da frota com tipos de autenticação, limites de taxa, status de DLP, status de logging, volumes de chamadas, latência e taxas de erro.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-| Requirement | Why |
-|---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` | Analyze server fleet data |
+| Requisito | Por quê |
+|-----------|---------|
+| Python 3.10+ | Executar scripts de análise |
+| `pandas` | Analisar dados da frota de servidores |
 
 ```bash
 pip install pandas
@@ -60,27 +55,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-064/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-064/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_apim.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/broken_apim.py) |
-| `mcp_servers.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/mcp_servers.csv) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_apim.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/broken_apim.py) |
+| `mcp_servers.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/mcp_servers.csv) |
 
 ---
 
-## Step 1: Understanding the APIM Security Model
+## Etapa 1: Entendendo o Modelo de Segurança do APIM
 
-When APIM sits in front of MCP servers, every tool call flows through a policy pipeline:
+Quando o APIM está posicionado na frente dos servidores MCP, cada chamada de ferramenta flui através de um pipeline de políticas:
 
 ```
 Agent → APIM Gateway → [Auth Policy] → [Rate Limit] → [DLP Scan] → MCP Server
@@ -88,23 +83,23 @@ Agent → APIM Gateway → [Auth Policy] → [Rate Limit] → [DLP Scan] → MCP
 Agent ← APIM Gateway ← [Response DLP] ← [Logging] ←────────────── Response
 ```
 
-Key policies for MCP:
+Políticas-chave para MCP:
 
-| Policy | Purpose | Example |
-|--------|---------|---------|
-| **validate-jwt** | Verify OAuth 2.0 tokens | Reject calls without valid Azure AD token |
-| **rate-limit-by-key** | Throttle per client/team | 100 RPM per agent |
-| **set-body** | DLP content inspection | Redact SSN, credit card numbers from tool outputs |
-| **log-to-eventhub** | Centralized audit logging | Every tool call → Event Hub → Log Analytics |
+| Política | Finalidade | Exemplo |
+|----------|-----------|---------|
+| **validate-jwt** | Verificar tokens OAuth 2.0 | Rejeitar chamadas sem token Azure AD válido |
+| **rate-limit-by-key** | Limitar por cliente/equipe | 100 RPM por agente |
+| **set-body** | Inspeção de conteúdo DLP | Redigir SSN, números de cartão de crédito das saídas de ferramentas |
+| **log-to-eventhub** | Logging de auditoria centralizado | Cada chamada de ferramenta → Event Hub → Log Analytics |
 
-!!! tip "Why OAuth Over API Keys?"
-    API keys have no user identity, no token expiry, and no scope control. If a key leaks, anyone can call the MCP server until you manually rotate it. OAuth 2.0 tokens expire automatically, carry user/app identity, and can be scoped to specific tools.
+!!! tip "Por Que OAuth em Vez de API Keys?"
+    API keys não têm identidade de usuário, não têm expiração de token e não têm controle de escopo. Se uma chave vazar, qualquer pessoa pode chamar o servidor MCP até que você a rotacione manualmente. Tokens OAuth 2.0 expiram automaticamente, carregam identidade de usuário/aplicativo e podem ser restritos a ferramentas específicas.
 
 ---
 
-## Step 2: Load and Explore the MCP Server Fleet
+## Etapa 2: Carregar e Explorar a Frota de Servidores MCP
 
-The dataset contains **10 MCP servers** across **6 teams**:
+O conjunto de dados contém **10 servidores MCP** em **6 equipes**:
 
 ```python
 import pandas as pd
@@ -116,7 +111,7 @@ print(f"\nServers per team:")
 print(servers.groupby("team")["server_name"].count().sort_values(ascending=False))
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Total MCP servers: 10
@@ -134,9 +129,9 @@ Support       1
 
 ---
 
-## Step 3: Compliance Audit
+## Etapa 3: Auditoria de Conformidade
 
-A server is **compliant** if it has all three: OAuth 2.0 authentication, DLP enabled, and logging enabled. Check the fleet:
+Um servidor é **conforme** se tiver todos os três: autenticação OAuth 2.0, DLP habilitado e logging habilitado. Verifique a frota:
 
 ```python
 compliant = servers[servers["compliant"] == True]
@@ -148,7 +143,7 @@ print(f"\nNon-compliant details:")
 print(non_compliant[["server_name", "team", "auth_type", "has_dlp", "has_logging"]].to_string(index=False))
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Compliant servers:     6
@@ -162,14 +157,14 @@ Non-compliant details:
    maps-geocoding  Logistics   api_key   false       true
 ```
 
-!!! warning "Risk Alert"
-    4 of 10 servers are non-compliant — that's **40% of the fleet**. The `legacy-erp` server is the worst offender: basic auth, no DLP, no logging, and the highest error rate.
+!!! warning "Alerta de Risco"
+    4 de 10 servidores não estão em conformidade — isso é **40% da frota**. O servidor `legacy-erp` é o pior infrator: autenticação basic, sem DLP, sem logging e a maior taxa de erro.
 
 ---
 
-## Step 4: Authentication Gap Analysis
+## Etapa 4: Análise de Lacunas de Autenticação
 
-Identify servers that are **not** using OAuth 2.0:
+Identifique servidores que **não** estão usando OAuth 2.0:
 
 ```python
 non_oauth = servers[servers["auth_type"] != "oauth2"]
@@ -182,7 +177,7 @@ pct = total_non_oauth_calls / total_calls * 100
 print(f"\nNon-OAuth call volume: {total_non_oauth_calls:,} / {total_calls:,} ({pct:.1f}%)")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Servers without OAuth 2.0: 4
@@ -196,14 +191,14 @@ Servers without OAuth 2.0: 4
 Non-OAuth call volume: 70,000 / 194,500 (36.0%)
 ```
 
-!!! danger "36% of All MCP Calls Use Weak Authentication"
-    Over a third of monthly API calls go through servers with API keys or basic auth. A single leaked key could expose customer support data, analytics exports, ERP records, or geocoding services.
+!!! danger "36% de Todas as Chamadas MCP Usam Autenticação Fraca"
+    Mais de um terço das chamadas mensais de API passam por servidores com API keys ou autenticação basic. Uma única chave vazada poderia expor dados de suporte ao cliente, exportações de analytics, registros de ERP ou serviços de geocodificação.
 
 ---
 
-## Step 5: DLP Coverage Analysis
+## Etapa 5: Análise de Cobertura de DLP
 
-Check which servers lack data-loss-prevention scanning:
+Verifique quais servidores não possuem varredura de prevenção contra perda de dados:
 
 ```python
 no_dlp = servers[servers["has_dlp"].astype(str).str.lower() == "false"]
@@ -211,7 +206,7 @@ print(f"Servers without DLP: {len(no_dlp)}")
 print(no_dlp[["server_name", "team", "monthly_calls"]].to_string(index=False))
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Servers without DLP: 4
@@ -223,13 +218,13 @@ Servers without DLP: 4
    maps-geocoding  Logistics         22000
 ```
 
-The 4 servers without DLP handle **70,000 monthly calls** — any of these could leak PII or sensitive data through tool outputs without detection.
+Os 4 servidores sem DLP processam **70.000 chamadas mensais** — qualquer um deles poderia vazar PII ou dados sensíveis através das saídas de ferramentas sem detecção.
 
 ---
 
-## Step 6: Error Rate and Latency Analysis
+## Etapa 6: Análise de Taxa de Erro e Latência
 
-Identify servers with the highest error rates and latency:
+Identifique servidores com as maiores taxas de erro e latência:
 
 ```python
 print("Error rates (sorted):")
@@ -241,7 +236,7 @@ print(f"\nHighest error rate: {highest_error['server_name']} at {highest_error['
 print(f"Its average latency: {highest_error['avg_latency_ms']}ms")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Highest error rate: legacy-erp at 5.8%
@@ -249,20 +244,20 @@ Its average latency: 450ms
 ```
 
 !!! tip "Insight"
-    The `legacy-erp` server stands out as the highest-risk server: basic auth, no DLP, no logging, highest error rate (5.8%), and highest latency (450ms). This should be the top priority for APIM onboarding.
+    O servidor `legacy-erp` se destaca como o servidor de maior risco: autenticação basic, sem DLP, sem logging, maior taxa de erro (5,8%) e maior latência (450ms). Este deveria ser a prioridade máxima para integração ao APIM.
 
 ---
 
-## Step 7: Total Call Volume
+## Etapa 7: Volume Total de Chamadas
 
-Calculate the total monthly calls across all MCP servers:
+Calcule o total de chamadas mensais em todos os servidores MCP:
 
 ```python
 total = servers["monthly_calls"].sum()
 print(f"Total monthly calls across fleet: {total:,}")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Total monthly calls across fleet: 194,500
@@ -270,9 +265,9 @@ Total monthly calls across fleet: 194,500
 
 ---
 
-## Step 8: APIM Migration Priority
+## Etapa 8: Prioridade de Migração para APIM
 
-Create a prioritized migration plan based on risk:
+Crie um plano de migração priorizado com base no risco:
 
 ```python
 servers["risk_score"] = (
@@ -288,96 +283,96 @@ print(priority[["server_name", "auth_type", "has_dlp", "has_logging", "risk_scor
       .head(5).to_string(index=False))
 ```
 
-This produces a risk-ranked list to guide the APIM onboarding sequence.
+Isso produz uma lista classificada por risco para guiar a sequência de integração ao APIM.
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-064/broken_apim.py` has **3 bugs** in how it analyzes the MCP server fleet:
+O arquivo `lab-064/broken_apim.py` tem **3 bugs** na forma como analisa a frota de servidores MCP:
 
 ```bash
 python lab-064/broken_apim.py
 ```
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Count non-compliant servers | Should count `compliant == False`, not `True` |
-| Test 2 | Total monthly calls | Should be the **sum**, not the **average** |
-| Test 3 | Servers without OAuth | Should filter `auth_type != "oauth2"`, not `== "oauth2"` |
+| Teste | O que ele verifica | Dica |
+|-------|-------------------|------|
+| Teste 1 | Contagem de servidores não conformes | Deveria contar `compliant == False`, não `True` |
+| Teste 2 | Total de chamadas mensais | Deveria ser a **soma**, não a **média** |
+| Teste 3 | Servidores sem OAuth | Deveria filtrar `auth_type != "oauth2"`, não `== "oauth2"` |
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** Why is APIM the recommended approach for securing MCP servers at scale?"
+??? question "**Q1 (Múltipla Escolha):** Por que o APIM é a abordagem recomendada para proteger servidores MCP em escala?"
 
-    - A) It replaces MCP with a different protocol
-    - B) It provides centralized authentication, throttling, and monitoring across all MCP endpoints
-    - C) It eliminates the need for OAuth 2.0
-    - D) It only works with Azure-hosted MCP servers
+    - A) Ele substitui o MCP por um protocolo diferente
+    - B) Ele fornece autenticação centralizada, limitação de taxa e monitoramento em todos os endpoints MCP
+    - C) Ele elimina a necessidade de OAuth 2.0
+    - D) Ele só funciona com servidores MCP hospedados no Azure
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It provides centralized authentication, throttling, and monitoring across all MCP endpoints**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Ele fornece autenticação centralizada, limitação de taxa e monitoramento em todos os endpoints MCP**
 
-        APIM acts as a unified gateway in front of all MCP servers, enforcing consistent OAuth 2.0 validation, rate limiting, DLP content inspection, and audit logging — regardless of how each individual MCP server was originally built. Without APIM, each team implements (or skips) these controls independently.
+        O APIM atua como um gateway unificado na frente de todos os servidores MCP, aplicando validação OAuth 2.0 consistente, limitação de taxa, inspeção de conteúdo DLP e logging de auditoria — independentemente de como cada servidor MCP individual foi originalmente construído. Sem o APIM, cada equipe implementa (ou ignora) esses controles de forma independente.
 
-??? question "**Q2 (Multiple Choice):** Why is API key authentication insufficient for production MCP servers?"
+??? question "**Q2 (Múltipla Escolha):** Por que a autenticação por API key é insuficiente para servidores MCP em produção?"
 
-    - A) API keys are too long to store securely
-    - B) API keys provide no user identity, no token expiry, and no scope control
-    - C) API keys only work with REST APIs, not MCP
-    - D) API keys require Azure AD to function
+    - A) API keys são longas demais para armazenar com segurança
+    - B) API keys não fornecem identidade de usuário, expiração de token e controle de escopo
+    - C) API keys só funcionam com APIs REST, não com MCP
+    - D) API keys requerem Azure AD para funcionar
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) API keys provide no user identity, no token expiry, and no scope control**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) API keys não fornecem identidade de usuário, expiração de token e controle de escopo**
 
-        API keys are static secrets: if one leaks, anyone can use it indefinitely until manually rotated. They carry no information about *who* is calling or *what* they're allowed to do. OAuth 2.0 tokens expire automatically, embed user/app identity claims, and can be scoped to specific permissions (e.g., read-only access to a specific tool).
+        API keys são segredos estáticos: se uma vazar, qualquer pessoa pode usá-la indefinidamente até que seja rotacionada manualmente. Elas não carregam informação sobre *quem* está chamando ou *o que* é permitido fazer. Tokens OAuth 2.0 expiram automaticamente, incorporam claims de identidade de usuário/aplicativo e podem ser restritos a permissões específicas (ex.: acesso somente leitura a uma ferramenta específica).
 
-??? question "**Q3 (Run the Lab):** How many MCP servers in the fleet are non-compliant?"
+??? question "**Q3 (Execute o Lab):** Quantos servidores MCP na frota não estão em conformidade?"
 
-    Filter the servers DataFrame for `compliant == False` and count the rows.
+    Filtre o DataFrame de servidores por `compliant == False` e conte as linhas.
 
-    ??? success "✅ Reveal Answer"
-        **4 non-compliant servers**
+    ??? success "✅ Revelar Resposta"
+        **4 servidores não conformes**
 
-        The non-compliant servers are: `customer-support` (api_key, no DLP), `analytics-export` (api_key, no DLP, no logging), `legacy-erp` (basic auth, no DLP, no logging), and `maps-geocoding` (api_key, no DLP). All 4 lack OAuth and DLP; 2 also lack logging.
+        Os servidores não conformes são: `customer-support` (api_key, sem DLP), `analytics-export` (api_key, sem DLP, sem logging), `legacy-erp` (autenticação basic, sem DLP, sem logging) e `maps-geocoding` (api_key, sem DLP). Todos os 4 não possuem OAuth e DLP; 2 também não possuem logging.
 
-??? question "**Q4 (Run the Lab):** What is the total monthly call volume across all 10 MCP servers?"
+??? question "**Q4 (Execute o Lab):** Qual é o volume total de chamadas mensais em todos os 10 servidores MCP?"
 
-    Sum the `monthly_calls` column across all servers.
+    Some a coluna `monthly_calls` em todos os servidores.
 
-    ??? success "✅ Reveal Answer"
-        **194,500 total monthly calls**
+    ??? success "✅ Revelar Resposta"
+        **194.500 chamadas mensais no total**
 
-        45,000 + 32,000 + 28,000 + 18,000 + 15,000 + 12,000 + 5,000 + 8,000 + 22,000 + 9,500 = **194,500**. Of these, 70,000 (36%) go through servers without OAuth 2.0 — a significant security exposure.
+        45.000 + 32.000 + 28.000 + 18.000 + 15.000 + 12.000 + 5.000 + 8.000 + 22.000 + 9.500 = **194.500**. Destas, 70.000 (36%) passam por servidores sem OAuth 2.0 — uma exposição de segurança significativa.
 
-??? question "**Q5 (Run the Lab):** Which MCP server has the highest error rate, and what is it?"
+??? question "**Q5 (Execute o Lab):** Qual servidor MCP tem a maior taxa de erro e qual é ela?"
 
-    Sort servers by `error_rate_pct` descending and inspect the top row.
+    Ordene os servidores por `error_rate_pct` em ordem decrescente e inspecione a primeira linha.
 
-    ??? success "✅ Reveal Answer"
-        **legacy-erp at 5.8%**
+    ??? success "✅ Revelar Resposta"
+        **legacy-erp com 5,8%**
 
-        The `legacy-erp` server (Operations team) has the highest error rate at 5.8%, nearly 3× the next highest (payment-gateway at 2.1%). Combined with basic auth, no DLP, no logging, and 450ms average latency, it is the highest-risk server in the fleet and should be the top priority for APIM onboarding.
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| APIM as Gateway | Centralized security, rate limiting, and monitoring for MCP |
-| OAuth 2.0 | Token-based auth with identity, expiry, and scope control |
-| DLP Policies | Content inspection to prevent PII/sensitive data leakage |
-| Compliance Audit | Systematic assessment of fleet security posture |
-| Risk Prioritization | Data-driven migration planning based on auth, DLP, and error rates |
+        O servidor `legacy-erp` (equipe Operations) tem a maior taxa de erro com 5,8%, quase 3× a próxima maior (payment-gateway com 2,1%). Combinado com autenticação basic, sem DLP, sem logging e latência média de 450ms, ele é o servidor de maior risco na frota e deveria ser a prioridade máxima para integração ao APIM.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **[Lab 012](lab-012-what-is-mcp.md)** — What Is MCP? (foundational MCP concepts)
-- **[Lab 028](lab-028-deploy-mcp-azure.md)** — Deploy MCP to Azure (deploy the servers that APIM protects)
-- **[Lab 036](lab-036-prompt-injection-security.md)** — Prompt Injection Security (complementary security layer)
+| Tópico | O Que Você Aprendeu |
+|--------|---------------------|
+| APIM como Gateway | Segurança centralizada, limitação de taxa e monitoramento para MCP |
+| OAuth 2.0 | Autenticação baseada em token com identidade, expiração e controle de escopo |
+| Políticas de DLP | Inspeção de conteúdo para prevenir vazamento de PII/dados sensíveis |
+| Auditoria de Conformidade | Avaliação sistemática da postura de segurança da frota |
+| Priorização de Riscos | Planejamento de migração orientado por dados baseado em autenticação, DLP e taxas de erro |
+
+---
+
+## Próximos Passos
+
+- **[Lab 012](lab-012-what-is-mcp.md)** — O Que É MCP? (conceitos fundamentais de MCP)
+- **[Lab 028](lab-028-deploy-mcp-azure.md)** — Implantar MCP no Azure (implantar os servidores que o APIM protege)
+- **[Lab 036](lab-036-prompt-injection-security.md)** — Segurança contra Prompt Injection (camada de segurança complementar)

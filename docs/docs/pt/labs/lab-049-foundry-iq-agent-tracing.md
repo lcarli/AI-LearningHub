@@ -1,131 +1,126 @@
 ---
 tags: [observability, opentelemetry, azure-monitor, foundry, python, tracing]
 ---
-# Lab 049: Foundry IQ — Agent Tracing with OpenTelemetry
+# Lab 049: Foundry IQ — Rastreamento de Agentes com OpenTelemetry
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
-  <span><strong>Time:</strong> ~75 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Local mode with ConsoleSpanExporter (Azure Monitor optional)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Tempo:</strong> ~75 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Modo local com ConsoleSpanExporter (Azure Monitor opcional)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- Como o **OpenTelemetry** fornece observabilidade para agentes de IA (traces, spans, atributos)
+- Instrumentar código de agente com as **convenções semânticas GenAI** para chamadas de modelo e uso de ferramentas
+- Capturar **uso de tokens, latência e taxas de erro** como telemetria estruturada
+- Analisar traces de agentes para identificar problemas de desempenho e fatores de custo
+- (Opcional) Exportar traces para o **Azure Monitor / Application Insights** e o **portal Foundry**
+- Configurar **controles de privacidade** para gravação de conteúdo
 
+## Introdução
 
-## What You'll Learn
+![Arquitetura de Rastreamento Foundry IQ](../../assets/diagrams/foundry-iq-tracing.svg)
 
-- How **OpenTelemetry** provides observability for AI agents (traces, spans, attributes)
-- Instrument agent code with the **GenAI semantic conventions** for model calls and tool use
-- Capture **token usage, latency, and error rates** as structured telemetry
-- Analyze agent traces to identify performance issues and cost drivers
-- (Optional) Export traces to **Azure Monitor / Application Insights** and the **Foundry portal**
-- Configure **privacy controls** for content recording
+Agentes em produção falham silenciosamente. Uma resposta degrada em qualidade — mas ninguém percebe até que um cliente reclame. Os custos disparam porque um prompt ficou longo demais — mas a fatura chega 30 dias depois. Uma chamada de ferramenta começa a expirar — mas o agente retorna uma resposta alternativa em vez de um erro.
 
-## Introduction
+**Foundry IQ** é a camada de observabilidade que torna o comportamento do agente visível. Ele usa o **OpenTelemetry** — o framework de observabilidade padrão da indústria — com **convenções semânticas GenAI** que definem exatamente como capturar telemetria específica de IA, como contagens de tokens, nomes de modelos e chamadas de ferramentas.
 
-![Foundry IQ Tracing Architecture](../../assets/diagrams/foundry-iq-tracing.svg)
+### O Cenário
 
-Production agents fail silently. A response degrades in quality — but nobody notices until a customer complains. Costs spike because a prompt grew too long — but the invoice comes 30 days later. A tool call starts timing out — but the agent returns a fallback answer instead of an error.
+O agente de atendimento ao cliente da OutdoorGear Inc. lida com mais de 1.000 consultas por dia. A equipe precisa de:
 
-**Foundry IQ** is the observability layer that makes agent behavior visible. It uses **OpenTelemetry** — the industry-standard observability framework — with **GenAI semantic conventions** that define exactly how to capture AI-specific telemetry like token counts, model names, and tool calls.
+1. **Rastreamento de latência** — quais consultas demoram mais e por quê?
+2. **Visibilidade de custos** — quantos tokens são consumidos e a que custo?
+3. **Detecção de erros** — quais traces falham e qual é a causa raiz?
+4. **Monitoramento de qualidade** — as respostas estão piorando ao longo do tempo?
 
-### The Scenario
-
-OutdoorGear Inc.'s customer service agent handles 1,000+ queries per day. The team needs:
-
-1. **Latency tracking** — which queries take longest and why?
-2. **Cost visibility** — how many tokens are consumed and at what cost?
-3. **Error detection** — which traces fail, and what's the root cause?
-4. **Quality monitoring** — are responses getting worse over time?
-
-You have **10 sample traces** from the agent to analyze, plus a starter script to add tracing to new code.
+Você tem **10 traces de amostra** do agente para analisar, além de um script inicial para adicionar rastreamento ao novo código.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run the analysis and instrumentation |
-| `pandas` | Analyze sample trace data |
-| `opentelemetry-api`, `opentelemetry-sdk` | Local tracing (ConsoleSpanExporter) |
-| (Optional) Azure AI Foundry project | Live trace export to Foundry portal |
+| Python 3.10+ | Executar a análise e instrumentação |
+| `pandas` | Analisar dados de traces de amostra |
+| `opentelemetry-api`, `opentelemetry-sdk` | Rastreamento local (ConsoleSpanExporter) |
+| (Opcional) Projeto Azure AI Foundry | Exportação de traces ao vivo para o portal Foundry |
 
 ```bash
 pip install pandas opentelemetry-api opentelemetry-sdk
 ```
 
-For Azure mode (optional):
+Para o modo Azure (opcional):
 ```bash
 pip install azure-ai-projects azure-monitor-opentelemetry opentelemetry-instrumentation-openai-v2
 ```
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Suporte
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-049/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-049/` no seu diretório de trabalho.
 
-| File | Description | Download |
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_tracing.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/broken_tracing.py) |
-| `sample_traces.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) |
-| `traced_agent.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/traced_agent.py) |
+| `broken_tracing.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/broken_tracing.py) |
+| `sample_traces.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) |
+| `traced_agent.py` | Script inicial com TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/traced_agent.py) |
 
 ---
 
-## Step 1: Understanding OpenTelemetry for AI
+## Passo 1: Entendendo o OpenTelemetry para IA
 
-OpenTelemetry defines three signal types. For agent tracing, we focus on **traces**:
+O OpenTelemetry define três tipos de sinais. Para rastreamento de agentes, focamos em **traces**:
 
-| Signal | What It Captures | Agent Example |
+| Sinal | O que Captura | Exemplo de Agente |
 |--------|-----------------|---------------|
-| **Traces** | End-to-end request flow as a tree of spans | Agent loop → LLM call → Tool call → Response |
-| **Metrics** | Aggregated measurements over time | Token consumption, request count, latency histograms |
-| **Logs** | Discrete events | "Agent selected tool: search_products" |
+| **Traces** | Fluxo de requisição de ponta a ponta como uma árvore de spans | Loop do agente → Chamada LLM → Chamada de ferramenta → Resposta |
+| **Métricas** | Medições agregadas ao longo do tempo | Consumo de tokens, contagem de requisições, histogramas de latência |
+| **Logs** | Eventos discretos | "Agente selecionou ferramenta: search_products" |
 
-### Spans and Attributes
+### Spans e Atributos
 
-A **span** represents a single operation within a trace. Each span has:
+Um **span** representa uma única operação dentro de um trace. Cada span possui:
 
-- **Name**: e.g., `chat gpt-4o`
-- **Kind**: `CLIENT` (outgoing call to LLM/tool) or `INTERNAL` (agent logic)
-- **Duration**: start time to end time
-- **Attributes**: key-value metadata following GenAI conventions
-- **Status**: `OK` or `ERROR`
-- **Parent**: links spans into a tree
+- **Nome**: ex., `chat gpt-4o`
+- **Tipo**: `CLIENT` (chamada de saída para LLM/ferramenta) ou `INTERNAL` (lógica do agente)
+- **Duração**: tempo de início até tempo de término
+- **Atributos**: metadados chave-valor seguindo as convenções GenAI
+- **Status**: `OK` ou `ERROR`
+- **Pai**: vincula spans em uma árvore
 
-### GenAI Semantic Conventions
+### Convenções Semânticas GenAI
 
-The OpenTelemetry community defines standard attribute names for AI operations:
+A comunidade OpenTelemetry define nomes de atributos padrão para operações de IA:
 
-| Attribute | Description | Example |
+| Atributo | Descrição | Exemplo |
 |-----------|-------------|---------|
-| `gen_ai.operation.name` | Operation type | `chat` |
-| `gen_ai.request.model` | Model requested | `gpt-4o` |
-| `gen_ai.usage.input_tokens` | Prompt tokens consumed | `150` |
-| `gen_ai.usage.output_tokens` | Completion tokens | `85` |
-| `gen_ai.response.finish_reason` | Why the model stopped | `stop`, `tool_calls` |
-| `gen_ai.system` | Provider | `openai` |
+| `gen_ai.operation.name` | Tipo de operação | `chat` |
+| `gen_ai.request.model` | Modelo solicitado | `gpt-4o` |
+| `gen_ai.usage.input_tokens` | Tokens de prompt consumidos | `150` |
+| `gen_ai.usage.output_tokens` | Tokens de conclusão | `85` |
+| `gen_ai.response.finish_reason` | Por que o modelo parou | `stop`, `tool_calls` |
+| `gen_ai.system` | Provedor | `openai` |
 
-!!! tip "Why Standards Matter"
-    Using GenAI semantic conventions means your traces are readable by **any** OpenTelemetry-compatible backend — Jaeger, Zipkin, Datadog, Azure Monitor, Grafana Tempo — without custom parsing.
+!!! tip "Por que Padrões Importam"
+    Usar convenções semânticas GenAI significa que seus traces são legíveis por **qualquer** backend compatível com OpenTelemetry — Jaeger, Zipkin, Datadog, Azure Monitor, Grafana Tempo — sem análise personalizada.
 
 ---
 
-## Step 2: Analyze Sample Traces
+## Passo 2: Analisar Traces de Amostra
 
-Before instrumenting code, let's analyze real trace data. Load the 10 sample traces:
+Antes de instrumentar o código, vamos analisar dados reais de traces. Carregue os 10 traces de amostra:
 
 ```python
 import pandas as pd
@@ -135,7 +130,7 @@ print(f"Loaded {len(traces)} traces")
 print(traces[["trace_id", "query_type", "model", "duration_ms", "status"]].to_string(index=False))
 ```
 
-### 2a — Latency Analysis
+### 2a — Análise de Latência
 
 ```python
 avg_latency = traces["duration_ms"].mean()
@@ -147,14 +142,14 @@ print(f"P95 latency:      {p95:.0f} ms")
 print(f"Slowest trace:    {slowest['trace_id']} at {slowest['duration_ms']} ms ({slowest['status']})")
 ```
 
-**Expected:**
+**Esperado:**
 ```
 Average latency:  3150.0 ms  (3.15s)
 P95 latency:      7650 ms
 Slowest trace:    t006 at 8500 ms (ERROR)
 ```
 
-### 2b — Token Usage
+### 2b — Uso de Tokens
 
 ```python
 total_input = traces["input_tokens"].sum()
@@ -171,7 +166,7 @@ output_cost = total_output / 1_000_000 * 15
 print(f"Estimated cost:      ${input_cost + output_cost:.4f}")
 ```
 
-### 2c — Error Analysis
+### 2c — Análise de Erros
 
 ```python
 errors = traces[traces["status"] == "ERROR"]
@@ -181,7 +176,7 @@ if len(errors) > 0:
     print(f"Error types: {errors['error_type'].value_counts().to_dict()}")
 ```
 
-### 2d — Query Type Breakdown
+### 2d — Detalhamento por Tipo de Consulta
 
 ```python
 by_type = traces.groupby("query_type").agg(
@@ -194,31 +189,31 @@ print(by_type.to_string(index=False))
 
 ---
 
-## Step 3: Instrument an Agent (Local Mode)
+## Passo 3: Instrumentar um Agente (Modo Local)
 
-Open `lab-049/traced_agent.py` and complete the **5 TODOs**:
+Abra `lab-049/traced_agent.py` e complete os **5 TODOs**:
 
-| TODO | What to implement |
+| TODO | O que implementar |
 |------|------------------|
-| TODO 1 | Set up `TracerProvider` with `ConsoleSpanExporter` |
-| TODO 2 | Wrap the LLM call in a span with GenAI attributes |
-| TODO 3 | Record token usage as span attributes |
-| TODO 4 | Create a root span for the agent loop |
-| TODO 5 | Record errors with `span.set_status(StatusCode.ERROR)` |
+| TODO 1 | Configurar `TracerProvider` com `ConsoleSpanExporter` |
+| TODO 2 | Envolver a chamada LLM em um span com atributos GenAI |
+| TODO 3 | Registrar uso de tokens como atributos do span |
+| TODO 4 | Criar um span raiz para o loop do agente |
+| TODO 5 | Registrar erros com `span.set_status(StatusCode.ERROR)` |
 
-Run the starter script to see trace output in your console:
+Execute o script inicial para ver a saída de traces no seu console:
 
 ```bash
 python lab-049/traced_agent.py
 ```
 
-Before completing the TODOs, the script prints `❌ TODO 1 not implemented`. After completing TODO 1, you'll see JSON-formatted span data printed to the console.
+Antes de completar os TODOs, o script imprime `❌ TODO 1 not implemented`. Após completar o TODO 1, você verá dados de span formatados em JSON impressos no console.
 
 ---
 
-## Step 4: Export to Azure Monitor (Optional)
+## Passo 4: Exportar para o Azure Monitor (Opcional)
 
-If you have an Azure AI Foundry project, replace the ConsoleSpanExporter with Azure Monitor:
+Se você tem um projeto Azure AI Foundry, substitua o ConsoleSpanExporter pelo Azure Monitor:
 
 ```python
 from azure.ai.projects import AIProjectClient
@@ -240,10 +235,10 @@ configure_azure_monitor(connection_string=conn_str)
 OpenAIInstrumentor().instrument()
 ```
 
-Then navigate to **Foundry portal → Tracing** to see your traces in a visual timeline.
+Em seguida, navegue até **Portal Foundry → Tracing** para ver seus traces em uma linha do tempo visual.
 
-!!! warning "Content Recording"
-    By default, message content is **NOT** recorded in spans (privacy protection). To enable:
+!!! warning "Gravação de Conteúdo"
+    Por padrão, o conteúdo das mensagens **NÃO** é gravado nos spans (proteção de privacidade). Para habilitar:
 
     ```bash
     # PowerShell
@@ -253,112 +248,112 @@ Then navigate to **Foundry portal → Tracing** to see your traces in a visual t
     export OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
     ```
 
-    ⚠️ Never enable this in production with customer data unless you have proper data handling policies.
+    ⚠️ Nunca habilite isso em produção com dados de clientes, a menos que você tenha políticas adequadas de tratamento de dados.
 
 ---
 
-## Step 5: Build Alerting Rules
+## Passo 5: Criar Regras de Alerta
 
-In production, you'd configure alerts in Azure Monitor for:
+Em produção, você configuraria alertas no Azure Monitor para:
 
-| Alert | Condition | Severity |
+| Alerta | Condição | Severidade |
 |-------|-----------|----------|
-| High latency | P95 duration > 10s | Warning |
-| Error spike | Error rate > 5% in 5 min | Critical |
-| Token cost | Daily token cost > $50 | Warning |
-| Quality drop | Avg evaluation score < 0.7 | Critical |
+| Alta latência | Duração P95 > 10s | Aviso |
+| Pico de erros | Taxa de erro > 5% em 5 min | Crítico |
+| Custo de tokens | Custo diário de tokens > $50 | Aviso |
+| Queda de qualidade | Pontuação média de avaliação < 0.7 | Crítico |
 
-These map to Azure Monitor alert rules using KQL queries on Application Insights data.
+Esses correspondem a regras de alerta do Azure Monitor usando consultas KQL em dados do Application Insights.
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-049/broken_tracing.py` has **3 bugs** in the trace analysis logic:
+O arquivo `lab-049/broken_tracing.py` tem **3 bugs** na lógica de análise de traces:
 
 ```bash
 python lab-049/broken_tracing.py
 ```
 
-| Test | What it checks | Hint |
+| Teste | O que verifica | Dica |
 |------|---------------|------|
-| Test 1 | Average latency should include ALL traces | Don't filter by status |
-| Test 2 | Token cost uses different rates for input vs output | Input is cheaper |
-| Test 3 | Error rate denominator | Divide by total, not by errors |
+| Teste 1 | A latência média deve incluir TODOS os traces | Não filtre por status |
+| Teste 2 | O custo de tokens usa taxas diferentes para entrada vs saída | Entrada é mais barata |
+| Teste 3 | Denominador da taxa de erro | Divida pelo total, não pelos erros |
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What does the environment variable `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` control?"
+??? question "**Q1 (Múltipla Escolha):** O que a variável de ambiente `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` controla?"
 
-    - A) Whether traces are exported to Azure Monitor
-    - B) Whether LLM request/response message content is recorded in spans
-    - C) Whether tool call results are logged
-    - D) The maximum number of spans per trace
+    - A) Se os traces são exportados para o Azure Monitor
+    - B) Se o conteúdo das mensagens de requisição/resposta do LLM é gravado nos spans
+    - C) Se os resultados das chamadas de ferramentas são registrados
+    - D) O número máximo de spans por trace
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Whether LLM request/response message content is recorded in spans**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Se o conteúdo das mensagens de requisição/resposta do LLM é gravado nos spans**
 
-        By default, message content is NOT included in spans to protect privacy. Setting this variable to `true` captures the full prompt and completion text — useful for debugging but dangerous in production with real customer data.
+        Por padrão, o conteúdo das mensagens NÃO é incluído nos spans para proteger a privacidade. Definir essa variável como `true` captura o texto completo do prompt e da conclusão — útil para depuração, mas perigoso em produção com dados reais de clientes.
 
-??? question "**Q2 (Multiple Choice):** In OpenTelemetry, what is the correct `span kind` for an agent's internal logic (routing, planning, reasoning)?"
+??? question "**Q2 (Múltipla Escolha):** No OpenTelemetry, qual é o `span kind` correto para a lógica interna de um agente (roteamento, planejamento, raciocínio)?"
 
     - A) CLIENT
     - B) SERVER
     - C) INTERNAL
     - D) PRODUCER
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) INTERNAL**
+    ??? success "✅ Revelar Resposta"
+        **Correto: C) INTERNAL**
 
-        `INTERNAL` spans represent operations that don't cross a network boundary — such as agent reasoning, routing decisions, and memory lookups. `CLIENT` spans are used for outgoing calls to LLMs, tools, and external APIs.
+        Spans `INTERNAL` representam operações que não cruzam um limite de rede — como raciocínio do agente, decisões de roteamento e consultas à memória. Spans `CLIENT` são usados para chamadas de saída para LLMs, ferramentas e APIs externas.
 
-??? question "**Q3 (Run the Lab):** What is the average trace duration across all 10 sample traces?"
+??? question "**Q3 (Execute o Lab):** Qual é a duração média dos traces em todos os 10 traces de amostra?"
 
-    Load [📥 `sample_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) and calculate `traces["duration_ms"].mean()`.
+    Carregue [📥 `sample_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) e calcule `traces["duration_ms"].mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **3,150.0 ms (3.15 seconds)**
+    ??? success "✅ Revelar Resposta"
+        **3.150,0 ms (3,15 segundos)**
 
-        Sum of all durations: 2500+1800+5200+1200+3100+8500+1500+2000+4000+1700 = 31,500 ms ÷ 10 = **3,150 ms**. Note that the slowest trace (t006, 8500ms) is an ERROR — it significantly raises the average.
+        Soma de todas as durações: 2500+1800+5200+1200+3100+8500+1500+2000+4000+1700 = 31.500 ms ÷ 10 = **3.150 ms**. Note que o trace mais lento (t006, 8500ms) é um ERROR — ele eleva significativamente a média.
 
-??? question "**Q4 (Run the Lab):** What is the total token count (input + output) across all traces?"
+??? question "**Q4 (Execute o Lab):** Qual é a contagem total de tokens (entrada + saída) em todos os traces?"
 
-    Sum `input_tokens` and `output_tokens` columns.
+    Some as colunas `input_tokens` e `output_tokens`.
 
-    ??? success "✅ Reveal Answer"
-        **3,255 tokens**
+    ??? success "✅ Revelar Resposta"
+        **3.255 tokens**
 
-        Input: 150+120+350+100+200+500+130+160+280+110 = **2,100**. Output: 85+60+200+45+120+300+55+90+150+50 = **1,155**. Total: 2,100 + 1,155 = **3,255**.
+        Entrada: 150+120+350+100+200+500+130+160+280+110 = **2.100**. Saída: 85+60+200+45+120+300+55+90+150+50 = **1.155**. Total: 2.100 + 1.155 = **3.255**.
 
-??? question "**Q5 (Run the Lab):** Which trace has the highest latency and what is its status?"
+??? question "**Q5 (Execute o Lab):** Qual trace tem a maior latência e qual é seu status?"
 
-    Find the row with the maximum `duration_ms`.
+    Encontre a linha com o valor máximo de `duration_ms`.
 
-    ??? success "✅ Reveal Answer"
-        **Trace t006 — 8,500 ms — status: ERROR (timeout)**
+    ??? success "✅ Revelar Resposta"
+        **Trace t006 — 8.500 ms — status: ERROR (timeout)**
 
-        The slowest trace is also the only error. It attempted 3 tool calls for an order status query but timed out. This pattern (slow = error) is common — timeouts are a leading cause of both high latency and errors in agent systems.
+        O trace mais lento também é o único erro. Ele tentou 3 chamadas de ferramentas para uma consulta de status de pedido, mas expirou. Esse padrão (lento = erro) é comum — timeouts são uma causa principal tanto de alta latência quanto de erros em sistemas de agentes.
 
 ---
 
-## Summary
+## Resumo
 
-| Topic | What You Learned |
+| Tópico | O que Você Aprendeu |
 |-------|-----------------|
-| OpenTelemetry | Industry-standard observability framework (traces, metrics, logs) |
-| GenAI Conventions | Standard attributes for AI: model, tokens, tool calls |
-| Trace Analysis | Latency, token cost, error rate from structured trace data |
-| Instrumentation | TracerProvider, SpanProcessor, span attributes |
-| Azure Integration | Application Insights, Foundry portal tracing dashboard |
-| Privacy | Content recording controls via environment variables |
+| OpenTelemetry | Framework de observabilidade padrão da indústria (traces, métricas, logs) |
+| Convenções GenAI | Atributos padrão para IA: modelo, tokens, chamadas de ferramentas |
+| Análise de Traces | Latência, custo de tokens, taxa de erro a partir de dados estruturados de traces |
+| Instrumentação | TracerProvider, SpanProcessor, atributos de span |
+| Integração Azure | Application Insights, painel de rastreamento do portal Foundry |
+| Privacidade | Controles de gravação de conteúdo via variáveis de ambiente |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 050](lab-050-multi-agent-observability.md)** — Multi-Agent Observability with GenAI Semantic Conventions (L400)
-- **[Lab 033](lab-033-agent-observability.md)** — Agent Observability with Application Insights (complementary approach)
-- **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (using trace data to reduce costs)
+- **[Lab 050](lab-050-multi-agent-observability.md)** — Observabilidade Multi-Agente com Convenções Semânticas GenAI (L400)
+- **[Lab 033](lab-033-agent-observability.md)** — Observabilidade de Agentes com Application Insights (abordagem complementar)
+- **[Lab 038](lab-038-cost-optimization.md)** — Otimização de Custos de IA (usando dados de traces para reduzir custos)

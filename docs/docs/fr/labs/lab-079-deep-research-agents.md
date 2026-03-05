@@ -1,71 +1,67 @@
 ---
 tags: [deep-research, multi-agent, synthesis, citations, python]
 ---
-# Lab 079: Deep Research Agents — Multi-Step Knowledge Synthesis
+# Lab 079 : Agents de recherche approfondie — Synthèse de connaissances multi-étapes
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock research trace data</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~90 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise des données de trace de recherche simulées</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- How **Deep Research Agents** use a multi-agent pipeline for knowledge synthesis
-- The **Planner → Researcher → Writer → Reviewer** architecture and role responsibilities
-- How **citation tracking** ensures every claim maps back to a source
-- Analyze a **14-step research trace** with agent roles, token usage, and quality scores
-- Identify bottlenecks, token distribution, and quality patterns across the pipeline
+- Comment les **agents de recherche approfondie** utilisent un pipeline multi-agents pour la synthèse de connaissances
+- L'architecture **Planificateur → Chercheur → Rédacteur → Réviseur** et les responsabilités de chaque rôle
+- Comment le **suivi des citations** garantit que chaque affirmation est reliée à une source
+- Analyser une **trace de recherche en 14 étapes** avec les rôles d'agents, l'utilisation de tokens et les scores de qualité
+- Identifier les goulots d'étranglement, la distribution des tokens et les schémas de qualité dans le pipeline
 
 ## Introduction
 
-**Deep Research Agents** implement a multi-step pipeline for producing well-sourced, comprehensive research reports. Instead of a single LLM generating an entire report, the work is divided across specialized agents:
+Les **agents de recherche approfondie** implémentent un pipeline multi-étapes pour produire des rapports de recherche complets et bien sourcés. Au lieu qu'un seul LLM génère un rapport entier, le travail est réparti entre des agents spécialisés :
 
-### The Pipeline
+### Le pipeline
 
 ```
   ┌──────────┐     ┌────────────┐     ┌──────────┐     ┌──────────┐
   │ Planner  │────►│ Researcher │────►│  Writer  │────►│ Reviewer │
   └──────────┘     └────────────┘     └──────────┘     └──────────┘
        │                 │                  │                │
-  Decomposes        Gathers info       Synthesizes      Reviews &
-  query into        from sources       findings into    provides
-  sub-questions     with citations     prose report     feedback
+  Décompose         Collecte les      Synthétise les    Révise et
+  la requête        informations      résultats en      fournit un
+  en sous-          des sources       rapport en        retour
+  questions         avec citations    prose             d'information
 ```
 
-| Agent | Role | Key Output |
+| Agent | Rôle | Sortie clé |
 |-------|------|-----------|
-| **Planner** | Decomposes the research question into sub-questions and creates a research plan | Sub-questions, search strategy |
-| **Researcher** | Executes searches, reads sources, extracts key findings with citations | Findings with source citations |
-| **Writer** | Synthesizes findings into a coherent, well-structured report | Draft report with inline citations |
-| **Reviewer** | Reviews the draft for accuracy, completeness, and citation quality | Feedback, quality score, approval/revision |
+| **Planner** | Décompose la question de recherche en sous-questions et crée un plan de recherche | Sous-questions, stratégie de recherche |
+| **Researcher** | Exécute les recherches, lit les sources, extrait les résultats clés avec citations | Résultats avec citations de sources |
+| **Writer** | Synthétise les résultats en un rapport cohérent et bien structuré | Brouillon de rapport avec citations en ligne |
+| **Reviewer** | Révise le brouillon pour la précision, l'exhaustivité et la qualité des citations | Retour d'information, score de qualité, approbation/révision |
 
-### Citation Tracking
+### Suivi des citations
 
-Every claim in the final report must trace back to a source. The pipeline tracks:
+Chaque affirmation du rapport final doit être reliée à une source. Le pipeline suit :
 
-- **sources_cited**: Number of unique sources cited in each step
-- **quality_score**: Agent's self-assessed quality of the output (0.0–1.0)
+- **sources_cited** : Nombre de sources uniques citées à chaque étape
+- **quality_score** : Auto-évaluation de la qualité de la sortie par l'agent (0.0–1.0)
 
-### The Scenario
+### Le scénario
 
-You are a **Research Team Lead** evaluating a deep research agent system. You have a **14-step research trace** (`research_trace.csv`) from a completed research run. Your job: analyze the trace to understand agent behavior, token usage, quality patterns, and identify optimization opportunities.
+Vous êtes un **responsable d'équipe de recherche** évaluant un système d'agent de recherche approfondie. Vous disposez d'une **trace de recherche en 14 étapes** (`research_trace.csv`) provenant d'une exécution de recherche terminée. Votre mission : analyser la trace pour comprendre le comportement des agents, l'utilisation des tokens, les schémas de qualité et identifier les opportunités d'optimisation.
 
-!!! info "Mock Data"
-    This lab uses a mock research trace CSV. The data represents a realistic deep research run with 14 steps across 4 agent roles, including planning, multi-source research, writing, and iterative review.
+!!! info "Données simulées"
+    Ce lab utilise un fichier CSV de trace de recherche simulé. Les données représentent une exécution de recherche approfondie réaliste avec 14 étapes réparties sur 4 rôles d'agents, incluant la planification, la recherche multi-sources, la rédaction et la révision itérative.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Pourquoi |
 |---|---|
-| Python 3.10+ | Run the analysis scripts |
-| `pandas` library | Data manipulation |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| Bibliothèque `pandas` | Manipulation des données |
 
 ```bash
 pip install pandas
@@ -73,41 +69,41 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-079/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-079/` de votre répertoire de travail.
 
-| File | Description | Download |
+| Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_research.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/broken_research.py) |
-| `research_trace.csv` | 14-step research trace with agent roles, tokens, and quality | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) |
+| `broken_research.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/broken_research.py) |
+| `research_trace.csv` | Trace de recherche en 14 étapes avec rôles d'agents, tokens et qualité | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) |
 
 ---
 
-## Step 1: Understand the Trace Format
+## Étape 1 : Comprendre le format de la trace
 
-Each row in the trace represents one step in the research pipeline:
+Chaque ligne de la trace représente une étape du pipeline de recherche :
 
-| Column | Description |
+| Colonne | Description |
 |--------|-----------|
-| **step_id** | Sequential step number (1–14) |
-| **agent_role** | Which agent executed this step: `planner`, `researcher`, `writer`, `reviewer` |
-| **action** | What the agent did (e.g., `decompose_query`, `search_sources`, `write_section`) |
-| **tokens_used** | Number of tokens consumed in this step |
-| **sources_cited** | Number of sources cited in this step's output |
-| **quality_score** | Quality assessment of this step's output (0.0–1.0) |
-| **duration_sec** | Time taken for this step in seconds |
+| **step_id** | Numéro séquentiel de l'étape (1–14) |
+| **agent_role** | Quel agent a exécuté cette étape : `planner`, `researcher`, `writer`, `reviewer` |
+| **action** | Ce que l'agent a fait (ex. : `decompose_query`, `search_sources`, `write_section`) |
+| **tokens_used** | Nombre de tokens consommés à cette étape |
+| **sources_cited** | Nombre de sources citées dans la sortie de cette étape |
+| **quality_score** | Évaluation de la qualité de la sortie de cette étape (0.0–1.0) |
+| **duration_sec** | Temps pris pour cette étape en secondes |
 
 ---
 
-## Step 2: Load and Explore the Trace
+## Étape 2 : Charger et explorer la trace
 
 ```python
 import pandas as pd
@@ -122,7 +118,7 @@ print(f"\nFull trace:")
 print(df[["step_id", "agent_role", "action", "tokens_used", "sources_cited", "quality_score"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total steps: 14
@@ -133,7 +129,7 @@ Total sources cited: 10
 
 ---
 
-## Step 3: Analyze Token Usage by Agent
+## Étape 3 : Analyser l'utilisation des tokens par agent
 
 ```python
 print("Token usage by agent role:\n")
@@ -156,12 +152,12 @@ for role, group in df.groupby("agent_role"):
     print(f"  {role:>12s}: {share:>5.1f}% {bar}")
 ```
 
-!!! tip "Optimization Insight"
-    The **Researcher** typically consumes the most tokens because it processes multiple sources per sub-question. To reduce costs, consider caching source extractions and limiting the number of sources per sub-question.
+!!! tip "Piste d'optimisation"
+    Le **Researcher** consomme généralement le plus de tokens car il traite plusieurs sources par sous-question. Pour réduire les coûts, envisagez de mettre en cache les extractions de sources et de limiter le nombre de sources par sous-question.
 
 ---
 
-## Step 4: Analyze Citation Flow
+## Étape 4 : Analyser le flux de citations
 
 ```python
 print("Citation flow through the pipeline:\n")
@@ -180,7 +176,7 @@ for role, group in df.groupby("agent_role"):
 
 ---
 
-## Step 5: Quality Analysis
+## Étape 5 : Analyse de la qualité
 
 ```python
 print("Quality scores by agent role:\n")
@@ -204,12 +200,12 @@ print(f"  Step {best_step['step_id']}: [{best_step['agent_role']}] {best_step['a
 print(f"  Quality: {best_step['quality_score']}")
 ```
 
-!!! warning "Quality Variance"
-    Watch for **quality drops in later Researcher steps** — this often indicates source exhaustion (the agent is finding lower-quality sources for harder sub-questions). Consider adding a quality threshold that triggers re-search with alternative queries.
+!!! warning "Variance de qualité"
+    Surveillez les **baisses de qualité dans les étapes Researcher ultérieures** — cela indique souvent un épuisement des sources (l'agent trouve des sources de moindre qualité pour les sous-questions plus difficiles). Envisagez d'ajouter un seuil de qualité qui déclenche une nouvelle recherche avec des requêtes alternatives.
 
 ---
 
-## Step 6: Build the Research Analysis Report
+## Étape 6 : Construire le rapport d'analyse de recherche
 
 ```python
 writer_tokens = df[df["agent_role"] == "writer"]["tokens_used"].sum()
@@ -259,100 +255,100 @@ print("💾 Saved to lab-079/research_analysis.md")
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-079/broken_research.py` contains **3 bugs** that produce incorrect research analysis. Can you find and fix them all?
+Le fichier `lab-079/broken_research.py` contient **3 bugs** qui produisent une analyse de recherche incorrecte. Pouvez-vous les trouver et les corriger tous ?
 
-Run the self-tests to see which ones fail:
+Exécutez les auto-tests pour voir lesquels échouent :
 
 ```bash
 python lab-079/broken_research.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Vous devriez voir **3 tests échoués**. Chaque test correspond à un bug :
 
-| Test | What it checks | Hint |
+| Test | Ce qu'il vérifie | Indice |
 |------|---------------|------|
-| Test 1 | Total sources cited | Should sum `sources_cited`, not count rows |
-| Test 2 | Writer token count | Should filter `agent_role == "writer"`, not `"researcher"` |
-| Test 3 | Researcher step count | Should count rows where `agent_role == "researcher"`, not sum tokens |
+| Test 1 | Total des sources citées | Devrait sommer `sources_cited`, pas compter les lignes |
+| Test 2 | Nombre de tokens du Writer | Devrait filtrer `agent_role == "writer"`, pas `"researcher"` |
+| Test 3 | Nombre d'étapes du Researcher | Devrait compter les lignes où `agent_role == "researcher"`, pas sommer les tokens |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
+Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est terminé !
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What is the primary advantage of a multi-agent pipeline over a single-LLM approach for research?"
+??? question "**Q1 (Choix multiple) :** Quel est le principal avantage d'un pipeline multi-agents par rapport à une approche LLM unique pour la recherche ?"
 
-    - A) It uses fewer tokens overall
-    - B) Each agent specializes in one task, enabling better quality and traceability
-    - C) It requires only one model deployment
-    - D) It eliminates the need for citations
+    - A) Il utilise moins de tokens au total
+    - B) Chaque agent se spécialise dans une tâche, permettant une meilleure qualité et traçabilité
+    - C) Il ne nécessite qu'un seul déploiement de modèle
+    - D) Il élimine le besoin de citations
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Each agent specializes in one task, enabling better quality and traceability**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Chaque agent se spécialise dans une tâche, permettant une meilleure qualité et traçabilité**
 
-        By splitting research into planning, searching, writing, and reviewing, each agent can be optimized for its specific task. The Researcher can focus on source quality, the Writer on prose coherence, and the Reviewer on factual accuracy. This specialization typically produces higher-quality output than a single end-to-end generation.
+        En divisant la recherche en planification, recherche, rédaction et révision, chaque agent peut être optimisé pour sa tâche spécifique. Le Researcher peut se concentrer sur la qualité des sources, le Writer sur la cohérence de la prose, et le Reviewer sur la précision factuelle. Cette spécialisation produit généralement une sortie de meilleure qualité qu'une génération unique de bout en bout.
 
-??? question "**Q2 (Multiple Choice):** Why is citation tracking important in deep research agents?"
+??? question "**Q2 (Choix multiple) :** Pourquoi le suivi des citations est-il important dans les agents de recherche approfondie ?"
 
-    - A) It reduces token usage
-    - B) It ensures every claim maps back to a source, enabling verification and trust
-    - C) It makes the report longer
-    - D) It is required by the LLM's terms of service
+    - A) Il réduit l'utilisation des tokens
+    - B) Il garantit que chaque affirmation est reliée à une source, permettant la vérification et la confiance
+    - C) Il rend le rapport plus long
+    - D) Il est exigé par les conditions d'utilisation du LLM
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It ensures every claim maps back to a source, enabling verification and trust**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Il garantit que chaque affirmation est reliée à une source, permettant la vérification et la confiance**
 
-        Citation tracking creates an auditable chain from each claim in the final report back to its source. This enables reviewers to verify factual accuracy, users to explore primary sources, and organizations to maintain research integrity — critical for high-stakes applications like legal, medical, or financial research.
+        Le suivi des citations crée une chaîne auditable de chaque affirmation du rapport final jusqu'à sa source. Cela permet aux réviseurs de vérifier la précision factuelle, aux utilisateurs d'explorer les sources primaires et aux organisations de maintenir l'intégrité de la recherche — critique pour les applications à enjeux élevés comme la recherche juridique, médicale ou financière.
 
-??? question "**Q3 (Run the Lab):** What is the total number of sources cited across all steps?"
+??? question "**Q3 (Exécutez le lab) :** Quel est le nombre total de sources citées dans toutes les étapes ?"
 
-    Run the Step 4 analysis on [📥 `research_trace.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) and sum the `sources_cited` column.
+    Exécutez l'analyse de l'étape 4 sur [📥 `research_trace.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) et sommez la colonne `sources_cited`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **10 sources**
 
-        The sum of all `sources_cited` values across the 14 steps equals **10**. Most sources are cited during Researcher steps, with some additional citations added during the Writer's synthesis.
+        La somme de toutes les valeurs `sources_cited` sur les 14 étapes est de **10**. La plupart des sources sont citées pendant les étapes du Researcher, avec quelques citations supplémentaires ajoutées lors de la synthèse du Writer.
 
-??? question "**Q4 (Run the Lab):** How many total tokens did the Writer agent consume?"
+??? question "**Q4 (Exécutez le lab) :** Combien de tokens au total l'agent Writer a-t-il consommé ?"
 
-    Run the Step 3 analysis and find the total tokens for the `writer` role.
+    Exécutez l'analyse de l'étape 3 et trouvez le total de tokens pour le rôle `writer`.
 
-    ??? success "✅ Reveal Answer"
-        **Sum of `tokens_used` where `agent_role == "writer"`**
+    ??? success "✅ Révéler la réponse"
+        **Somme de `tokens_used` où `agent_role == "writer"`**
 
-        The Writer's total token count includes all writing and synthesis steps. Filter the trace for `agent_role == "writer"` and sum the `tokens_used` column to get the exact value.
+        Le total de tokens du Writer inclut toutes les étapes d'écriture et de synthèse. Filtrez la trace pour `agent_role == "writer"` et sommez la colonne `tokens_used` pour obtenir la valeur exacte.
 
-??? question "**Q5 (Run the Lab):** How many steps did the Researcher agent execute?"
+??? question "**Q5 (Exécutez le lab) :** Combien d'étapes l'agent Researcher a-t-il exécuté ?"
 
-    Count the rows where `agent_role == "researcher"`.
+    Comptez les lignes où `agent_role == "researcher"`.
 
-    ??? success "✅ Reveal Answer"
-        **6 steps**
+    ??? success "✅ Révéler la réponse"
+        **6 étapes**
 
-        The Researcher executed **6 steps** — the most of any agent role. This makes sense because the Researcher handles multiple sub-questions from the Planner, with each sub-question potentially requiring multiple search and extraction steps.
+        Le Researcher a exécuté **6 étapes** — le plus de tous les rôles d'agents. C'est logique car le Researcher traite plusieurs sous-questions du Planner, chaque sous-question pouvant nécessiter plusieurs étapes de recherche et d'extraction.
 
 ---
 
-## Summary
+## Résumé
 
-| Topic | What You Learned |
+| Sujet | Ce que vous avez appris |
 |-------|-----------------|
-| Deep Research Agents | Multi-agent pipeline for knowledge synthesis with citation tracking |
-| Pipeline Architecture | Planner → Researcher → Writer → Reviewer with specialized roles |
-| Citation Tracking | Every claim maps back to a source across the pipeline |
-| Token Distribution | Researcher uses most tokens; Writer synthesizes; Reviewer validates |
-| Quality Patterns | Quality varies by step — later research steps may show source exhaustion |
-| Optimization | Cache sources, parallelize research, add quality gates |
+| Agents de recherche approfondie | Pipeline multi-agents pour la synthèse de connaissances avec suivi des citations |
+| Architecture du pipeline | Planner → Researcher → Writer → Reviewer avec des rôles spécialisés |
+| Suivi des citations | Chaque affirmation est reliée à une source dans tout le pipeline |
+| Distribution des tokens | Le Researcher utilise le plus de tokens ; le Writer synthétise ; le Reviewer valide |
+| Schémas de qualité | La qualité varie selon les étapes — les étapes de recherche ultérieures peuvent montrer un épuisement des sources |
+| Optimisation | Mettre en cache les sources, paralléliser la recherche, ajouter des portes de qualité |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agent with Semantic Kernel (build the agents themselves)
-- **[Lab 067](lab-067-graphrag.md)** — GraphRAG (enhance research with knowledge graph retrieval)
-- **[Lab 033](lab-033-agent-observability.md)** — Agent Observability (monitor deep research pipelines in production)
-- **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (implement pipelines with MAF Graph Workflows)
+- **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agent avec Semantic Kernel (construire les agents eux-mêmes)
+- **[Lab 067](lab-067-graphrag.md)** — GraphRAG (enrichir la recherche avec la récupération par graphe de connaissances)
+- **[Lab 033](lab-033-agent-observability.md)** — Observabilité des agents (surveiller les pipelines de recherche approfondie en production)
+- **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (implémenter les pipelines avec les Graph Workflows de MAF)

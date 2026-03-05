@@ -1,54 +1,49 @@
 ---
 tags: [observability, opentelemetry, python, free]
 ---
-# Lab 033: Agent Observability with Application Insights
+# Lab 033 : Observabilité des agents avec Application Insights
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">Microsoft Foundry</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free (local)</span> + optional Azure Application Insights (free tier)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/foundry/">Microsoft Foundry</a></span>
+  <span><strong>Durée :</strong> ~45 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit (local)</span> + Azure Application Insights optionnel (niveau gratuit)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- Add **OpenTelemetry tracing** to a Python AI agent
-- Capture **LLM spans** — prompts, completions, token counts, latency
-- Export traces to the console (free) or Azure Application Insights
-- Build a **custom dashboard** of agent metrics
-- Detect slow queries and high-cost interactions
+- Ajouter le **traçage OpenTelemetry** à un agent IA Python
+- Capturer les **spans LLM** — prompts, complétions, nombre de tokens, latence
+- Exporter les traces vers la console (gratuit) ou Azure Application Insights
+- Construire un **tableau de bord personnalisé** de métriques d'agent
+- Détecter les requêtes lentes et les interactions coûteuses
 
 ---
 
 ## Introduction
 
-Production agents fail silently. Without observability:
+Les agents en production échouent silencieusement. Sans observabilité :
 
-- You don't know why an agent gave a wrong answer
-- You can't measure response quality over time
-- You can't detect when token costs spike
+- Vous ne savez pas pourquoi un agent a donné une mauvaise réponse
+- Vous ne pouvez pas mesurer la qualité des réponses au fil du temps
+- Vous ne pouvez pas détecter quand les coûts en tokens explosent
 
-**OpenTelemetry** is the open standard for distributed tracing. The `opentelemetry-sdk` package lets you instrument Python agents to emit spans for every LLM call, tool execution, and retrieval step.
+**OpenTelemetry** est le standard ouvert pour le traçage distribué. Le package `opentelemetry-sdk` vous permet d'instrumenter les agents Python pour émettre des spans pour chaque appel LLM, exécution d'outil et étape de récupération.
 
 ---
 
-## Prerequisites
+## Prérequis
 
 - Python 3.11+
 - `pip install opentelemetry-sdk opentelemetry-exporter-otlp openai`
-- `GITHUB_TOKEN` set
-- Optional: Azure subscription for Application Insights
+- `GITHUB_TOKEN` défini
+- Optionnel : abonnement Azure pour Application Insights
 
 ---
 
-## Lab Exercise
+## Exercice du lab
 
-### Step 1: Install dependencies
+### Étape 1 : Installer les dépendances
 
 ```bash
 pip install \
@@ -58,7 +53,7 @@ pip install \
   openai
 ```
 
-### Step 2: Create a traced agent
+### Étape 2 : Créer un agent tracé
 
 ```python
 # traced_agent.py
@@ -203,9 +198,9 @@ for q in questions:
 python traced_agent.py
 ```
 
-You'll see structured JSON spans in the console output showing each LLM call, token counts, and latency.
+Vous verrez des spans JSON structurés dans la sortie console montrant chaque appel LLM, le nombre de tokens et la latence.
 
-### Step 3: Add structured metrics logging
+### Étape 3 : Ajouter une journalisation structurée des métriques
 
 ```python
 # metrics_logger.py
@@ -233,7 +228,7 @@ def log_metrics(user_message: str, response: str, prompt_tokens: int,
     return record
 ```
 
-### Step 4: Analyze metrics
+### Étape 4 : Analyser les métriques
 
 ```python
 # analyze_metrics.py
@@ -266,9 +261,9 @@ else:
         print(f"  {r['latency_ms']}ms — '{r['user_message']}'")
 ```
 
-### Step 5: (Optional) Export to Azure Application Insights
+### Étape 5 : (Optionnel) Exporter vers Azure Application Insights
 
-If you have an Azure subscription, you can export traces to Application Insights for production monitoring:
+Si vous avez un abonnement Azure, vous pouvez exporter les traces vers Application Insights pour la supervision en production :
 
 ```bash
 pip install azure-monitor-opentelemetry
@@ -284,15 +279,15 @@ configure_azure_monitor(
 # No other code changes needed — OTel handles the rest
 ```
 
-Get the connection string from:
-> Azure Portal → Application Insights resource → Overview → Connection String
+Obtenez la chaîne de connexion depuis :
+> Portail Azure → Ressource Application Insights → Vue d'ensemble → Chaîne de connexion
 
 ---
 
-## What Each Span Captures
+## Ce que chaque span capture
 
-| Span | Key attributes |
-|------|---------------|
+| Span | Attributs clés |
+|------|----------------|
 | `agent.run` | user.message, agent.name |
 | `llm.chat_completion` | model, latency_ms, prompt_tokens, completion_tokens |
 | `tool.search_products` | tool.name, query, results_count, latency_ms |
@@ -300,7 +295,7 @@ Get the connection string from:
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Multi-Agent Orchestration:** → [Lab 034 — SK Multi-Agent](lab-034-multi-agent-sk.md)
-- **Agent Evaluation:** → [Lab 035 — Evaluation SDK](lab-035-agent-evaluation.md)
+- **Orchestration multi-agents :** → [Lab 034 — SK Multi-Agent](lab-034-multi-agent-sk.md)
+- **Évaluation des agents :** → [Lab 035 — Evaluation SDK](lab-035-agent-evaluation.md)

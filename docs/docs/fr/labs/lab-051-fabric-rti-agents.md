@@ -1,56 +1,51 @@
 ---
 tags: [fabric, real-time-intelligence, kql, eventstreams, iot, python]
 ---
-# Lab 051: Fabric IQ — Real-Time Intelligence Agents
+# Lab 051 : Fabric IQ — Agents Real-Time Intelligence
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~75 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses included mock dataset (Fabric capacity optional)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~75 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise un jeu de données simulé inclus (capacité Fabric optionnelle)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- How **Eventstreams** ingest real-time IoT sensor data into Microsoft Fabric
-- Query streaming data with **KQL (Kusto Query Language)** for instant anomaly detection
-- Detect **temperature, humidity, and stock anomalies** using threshold-based rules
-- Use **Fabric Activator** to trigger automated alerts when conditions are met
-- Build an **AI agent** that reads real-time data and surfaces actionable insights
-- Analyze **warehouse activity patterns** (door opens, sensor frequency) across locations
+- Comment les **Eventstreams** ingèrent des données de capteurs IoT en temps réel dans Microsoft Fabric
+- Interroger des données en streaming avec **KQL (Kusto Query Language)** pour une détection instantanée des anomalies
+- Détecter les **anomalies de température, d'humidité et de stock** à l'aide de règles basées sur des seuils
+- Utiliser **Fabric Activator** pour déclencher des alertes automatisées lorsque des conditions sont remplies
+- Construire un **agent IA** qui lit les données en temps réel et fait remonter des informations exploitables
+- Analyser les **modèles d'activité des entrepôts** (ouvertures de portes, fréquence des capteurs) à travers les sites
 
 ## Introduction
 
 ![Fabric RTI Pipeline](../../assets/diagrams/fabric-rti-pipeline.svg)
 
-**Real-Time Intelligence (RTI)** in Microsoft Fabric is a fully managed platform for capturing, transforming, and acting on streaming data — all within the Fabric workspace. Unlike traditional batch pipelines that process data hours or days after it arrives, RTI gives you sub-second visibility into what's happening *right now*.
+**Real-Time Intelligence (RTI)** dans Microsoft Fabric est une plateforme entièrement managée pour capturer, transformer et agir sur les données en streaming — le tout au sein de l'espace de travail Fabric. Contrairement aux pipelines batch traditionnels qui traitent les données des heures ou des jours après leur arrivée, RTI vous offre une visibilité en moins d'une seconde sur ce qui se passe *en ce moment*.
 
-### The Scenario
+### Le scénario
 
-OutdoorGear Inc. operates **5 warehouses** across the US (New York, Los Angeles, Chicago, Dallas, and Seattle). Each warehouse is equipped with IoT sensors monitoring four key metrics:
+OutdoorGear Inc. exploite **5 entrepôts** à travers les États-Unis (New York, Los Angeles, Chicago, Dallas et Seattle). Chaque entrepôt est équipé de capteurs IoT surveillant quatre métriques clés :
 
-| Sensor Type | What It Measures | Critical Threshold |
-|-------------|------------------|--------------------|
-| **temperature** | Ambient temperature (°C) | > 30°C (product damage risk) |
-| **humidity** | Relative humidity (%) | > 80% (moisture damage risk) |
-| **stock_level** | Units remaining in bin | < 10 units (reorder urgently) |
-| **door_opens** | Door open count per interval | High activity = unusual traffic |
+| Type de capteur | Ce qu'il mesure | Seuil critique |
+|-----------------|-----------------|----------------|
+| **temperature** | Température ambiante (°C) | > 30°C (risque de dommages aux produits) |
+| **humidity** | Humidité relative (%) | > 80% (risque de dommages par l'humidité) |
+| **stock_level** | Unités restantes dans le bac | < 10 unités (réapprovisionnement urgent) |
+| **door_opens** | Nombre d'ouvertures de porte par intervalle | Activité élevée = trafic inhabituel |
 
-An AI agent monitors these sensor feeds in real time, detects anomalies, and triggers alerts — so warehouse managers can act before products are damaged or stock runs out.
+Un agent IA surveille ces flux de capteurs en temps réel, détecte les anomalies et déclenche des alertes — afin que les responsables d'entrepôt puissent agir avant que les produits ne soient endommagés ou que le stock ne soit épuisé.
 
 ---
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Pourquoi |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` | Analyze sensor event data |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| `pandas` | Analyser les données d'événements des capteurs |
 
 ```bash
 pip install pandas
@@ -58,56 +53,56 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-051/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-051/` dans votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_alerting.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/broken_alerting.py) |
-| `sensor_events.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/sensor_events.csv) |
+| Fichier | Description | Télécharger |
+|---------|-------------|-------------|
+| `broken_alerting.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/broken_alerting.py) |
+| `sensor_events.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/sensor_events.csv) |
 
 ---
 
-## Step 1: Understanding Fabric Real-Time Intelligence
+## Étape 1 : Comprendre Fabric Real-Time Intelligence
 
-Before writing code, understand the four RTI components that form the end-to-end pipeline:
+Avant d'écrire du code, comprenez les quatre composants RTI qui forment le pipeline de bout en bout :
 
-| Component | Role | Analogy |
-|-----------|------|---------|
-| **Eventstream** | Managed real-time data ingestion pipeline — captures events from IoT hubs, Kafka, or custom apps | The conveyor belt that brings data in |
-| **Eventhouse** | Columnar time-series database optimized for streaming data; stores events for querying | The warehouse where data is stored |
-| **KQL (Kusto Query Language)** | Query language for filtering, aggregating, and analyzing time-series data at scale | The SQL of real-time analytics |
-| **Activator** | Rule engine that triggers automated actions (emails, Teams messages, Power Automate flows) when data conditions are met | The alarm system that acts on anomalies |
+| Composant | Rôle | Analogie |
+|-----------|------|----------|
+| **Eventstream** | Pipeline d'ingestion de données en temps réel managé — capture les événements depuis les hubs IoT, Kafka ou des applications personnalisées | Le tapis roulant qui amène les données |
+| **Eventhouse** | Base de données en colonnes optimisée pour les séries temporelles et les données en streaming ; stocke les événements pour l'interrogation | L'entrepôt où les données sont stockées |
+| **KQL (Kusto Query Language)** | Langage de requête pour filtrer, agréger et analyser les données de séries temporelles à grande échelle | Le SQL de l'analytique en temps réel |
+| **Activator** | Moteur de règles qui déclenche des actions automatisées (e-mails, messages Teams, flux Power Automate) lorsque des conditions sur les données sont remplies | Le système d'alarme qui réagit aux anomalies |
 
-### How They Work Together
+### Comment ils fonctionnent ensemble
 
 ```
 IoT Sensors → Eventstream → Eventhouse → KQL Queries → Activator → Alerts
                 (ingest)     (store)      (analyze)     (act)
 ```
 
-1. **Eventstream** captures raw sensor events (JSON payloads) from IoT Hub or custom sources
-2. Events land in an **Eventhouse** table (`SensorEvents`) for fast columnar querying
-3. **KQL queries** run against the Eventhouse to detect anomalies in near-real-time
-4. **Activator** monitors KQL query results and fires alerts when conditions are met
-5. An **AI agent** can query the Eventhouse directly, correlate anomalies, and generate plain-language summaries for warehouse managers
+1. **Eventstream** capture les événements bruts des capteurs (charges utiles JSON) depuis IoT Hub ou des sources personnalisées
+2. Les événements arrivent dans une table **Eventhouse** (`SensorEvents`) pour une interrogation en colonnes rapide
+3. Les **requêtes KQL** s'exécutent sur l'Eventhouse pour détecter les anomalies en quasi temps réel
+4. **Activator** surveille les résultats des requêtes KQL et déclenche des alertes lorsque les conditions sont remplies
+5. Un **agent IA** peut interroger directement l'Eventhouse, corréler les anomalies et générer des résumés en langage naturel pour les responsables d'entrepôt
 
-!!! info "This Lab Uses Mock Data"
-    In production, events flow continuously from IoT Hub through Eventstreams. In this lab, we simulate the pipeline with a CSV snapshot of 50 sensor events and use pandas to demonstrate the KQL-equivalent queries. The logic maps 1:1 to production KQL.
+!!! info "Ce lab utilise des données simulées"
+    En production, les événements circulent en continu depuis IoT Hub via les Eventstreams. Dans ce lab, nous simulons le pipeline avec un instantané CSV de 50 événements de capteurs et utilisons pandas pour démontrer les requêtes équivalentes à KQL. La logique correspond 1:1 à la production KQL.
 
 ---
 
-## Step 2: Load and Explore Sensor Events
+## Étape 2 : Charger et explorer les événements des capteurs
 
-The dataset has **50 sensor events** from **5 warehouses** covering all 4 sensor types:
+Le jeu de données contient **50 événements de capteurs** provenant de **5 entrepôts** couvrant les 4 types de capteurs :
 
 ```python
 import pandas as pd
@@ -122,7 +117,7 @@ print(f"\nEvents per sensor type:")
 print(events["sensor_type"].value_counts().sort_index())
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total events:   50
@@ -143,23 +138,23 @@ stock_level    13
 temperature    13
 ```
 
-### Preview the Data
+### Aperçu des données
 
 ```python
 print(events[["timestamp", "warehouse_id", "sensor_type", "value"]].head(10).to_string(index=False))
 ```
 
-Each event has a `timestamp`, `warehouse_id`, `sensor_type`, and numeric `value`. This is the shape of data that an Eventstream would deliver into an Eventhouse table.
+Chaque événement possède un `timestamp`, un `warehouse_id`, un `sensor_type` et une `value` numérique. C'est la forme des données qu'un Eventstream délivrerait dans une table Eventhouse.
 
 ---
 
-## Step 3: KQL-Style Anomaly Detection
+## Étape 3 : Détection d'anomalies à la manière KQL
 
-In production Fabric, you'd write KQL queries against the Eventhouse. Here we use pandas to replicate the same logic — every pandas filter maps directly to a KQL `where` clause.
+En production avec Fabric, vous écririez des requêtes KQL sur l'Eventhouse. Ici, nous utilisons pandas pour reproduire la même logique — chaque filtre pandas correspond directement à une clause `where` KQL.
 
-### 3a. Temperature Anomalies (> 30°C)
+### 3a. Anomalies de température (> 30°C)
 
-**KQL equivalent:**
+**Équivalent KQL :**
 
 ```kql
 SensorEvents
@@ -169,7 +164,7 @@ SensorEvents
 | order by value desc
 ```
 
-**Python equivalent:**
+**Équivalent Python :**
 
 ```python
 temp = events[events["sensor_type"] == "temperature"]
@@ -178,7 +173,7 @@ print(f"🌡️ Temperature anomalies (> 30°C): {len(temp_anomalies)}")
 print(temp_anomalies[["timestamp", "warehouse_id", "value"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 🌡️ Temperature anomalies (> 30°C): 3
@@ -188,12 +183,12 @@ print(temp_anomalies[["timestamp", "warehouse_id", "value"]].to_string(index=Fal
  2026-06-15 09:30:00       WH-DAL   32.0
 ```
 
-!!! warning "Critical Alert"
-    WH-NYC at **38°C** is dangerously high — perishable goods and electronics can be damaged above 35°C. An Activator rule would immediately notify the NYC warehouse manager and trigger the HVAC system.
+!!! warning "Alerte critique"
+    WH-NYC à **38°C** est dangereusement élevé — les denrées périssables et l'électronique peuvent être endommagés au-dessus de 35°C. Une règle Activator notifierait immédiatement le responsable de l'entrepôt de NYC et déclencherait le système CVC.
 
-### 3b. Stock Critical (< 10 Units)
+### 3b. Stock critique (< 10 unités)
 
-**KQL equivalent:**
+**Équivalent KQL :**
 
 ```kql
 SensorEvents
@@ -203,7 +198,7 @@ SensorEvents
 | order by value asc
 ```
 
-**Python equivalent:**
+**Équivalent Python :**
 
 ```python
 stock = events[events["sensor_type"] == "stock_level"]
@@ -212,7 +207,7 @@ print(f"📦 Stock critically low (< 10 units): {len(stock_critical)}")
 print(stock_critical[["timestamp", "warehouse_id", "value"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 📦 Stock critically low (< 10 units): 2
@@ -221,12 +216,12 @@ print(stock_critical[["timestamp", "warehouse_id", "value"]].to_string(index=Fal
  2026-06-15 10:15:00       WH-LAX    8.0
 ```
 
-!!! tip "Insight"
-    Both critical stock events are at **WH-LAX** — stock dropped from 8 units to 3 units over a few hours. An AI agent would detect this trend and recommend an emergency restock before the warehouse runs out completely.
+!!! tip "Observation"
+    Les deux événements de stock critique sont à **WH-LAX** — le stock est passé de 8 unités à 3 unités en quelques heures. Un agent IA détecterait cette tendance et recommanderait un réapprovisionnement d'urgence avant que l'entrepôt ne soit complètement en rupture de stock.
 
-### 3c. Humidity Alerts (> 80%)
+### 3c. Alertes d'humidité (> 80%)
 
-**KQL equivalent:**
+**Équivalent KQL :**
 
 ```kql
 SensorEvents
@@ -235,7 +230,7 @@ SensorEvents
 | project timestamp, warehouse_id, value
 ```
 
-**Python equivalent:**
+**Équivalent Python :**
 
 ```python
 humidity = events[events["sensor_type"] == "humidity"]
@@ -244,7 +239,7 @@ print(f"💧 Humidity alerts (> 80%): {len(humidity_alerts)}")
 print(humidity_alerts[["timestamp", "warehouse_id", "value"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 💧 Humidity alerts (> 80%): 1
@@ -254,9 +249,9 @@ print(humidity_alerts[["timestamp", "warehouse_id", "value"]].to_string(index=Fa
 
 ---
 
-## Step 4: Warehouse Activity Analysis
+## Étape 4 : Analyse de l'activité des entrepôts
 
-Analyze door open events per warehouse — unusually high activity may indicate security concerns or peak shipping periods:
+Analysez les événements d'ouverture de portes par entrepôt — une activité anormalement élevée peut indiquer des problèmes de sécurité ou des périodes d'expédition de pointe :
 
 ```python
 doors = events[events["sensor_type"] == "door_opens"]
@@ -269,7 +264,7 @@ print(f"\nMost active: {door_activity.iloc[0]['Warehouse']} "
       f"({int(door_activity.iloc[0]['Total Door Opens'])} total door opens)")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 🚪 Door Activity by Warehouse:
@@ -283,14 +278,14 @@ print(f"\nMost active: {door_activity.iloc[0]['Warehouse']} "
 Most active: WH-DAL (14 total door opens)
 ```
 
-!!! tip "Insight"
-    **WH-DAL leads with 14 total door opens** — combined with its two temperature anomalies (32°C and 35°C), frequent door openings could be letting hot air in. An AI agent would correlate these signals: _"Dallas warehouse has high door activity AND rising temperatures — consider adding an air curtain to loading dock 3."_
+!!! tip "Observation"
+    **WH-DAL est en tête avec 14 ouvertures de portes au total** — combiné avec ses deux anomalies de température (32°C et 35°C), les ouvertures fréquentes de portes pourraient laisser entrer l'air chaud. Un agent IA corrèlerait ces signaux : _« L'entrepôt de Dallas a une forte activité de portes ET des températures en hausse — envisagez d'ajouter un rideau d'air au quai de chargement 3. »_
 
 ---
 
-## Step 5: Build an Alert Dashboard
+## Étape 5 : Construire un tableau de bord d'alertes
 
-Combine all anomalies into a single summary dashboard that an AI agent would present to a warehouse operations manager:
+Combinez toutes les anomalies dans un tableau de bord récapitulatif unique qu'un agent IA présenterait à un responsable des opérations d'entrepôt :
 
 ```python
 temp_count = len(temp_anomalies)
@@ -329,7 +324,7 @@ Priority Actions:
 print(dashboard)
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 ╔══════════════════════════════════════════════════╗
@@ -348,101 +343,101 @@ print(dashboard)
 ╚══════════════════════════════════════════════════╝
 ```
 
-!!! info "AI Agent Integration"
-    In production, an AI agent would query the Eventhouse via KQL, run this anomaly detection logic, and post a natural-language summary to a Teams channel or email. Fabric Activator handles the automated alerting, while the AI agent provides the *interpretation* — turning raw numbers into actionable recommendations.
+!!! info "Intégration d'un agent IA"
+    En production, un agent IA interrogerait l'Eventhouse via KQL, exécuterait cette logique de détection d'anomalies et publierait un résumé en langage naturel dans un canal Teams ou par e-mail. Fabric Activator gère les alertes automatisées, tandis que l'agent IA fournit l'*interprétation* — transformant les chiffres bruts en recommandations exploitables.
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-051/broken_alerting.py` has **3 bugs** that produce incorrect anomaly detection results. Run the self-tests:
+Le fichier `lab-051/broken_alerting.py` contient **3 bugs** qui produisent des résultats incorrects de détection d'anomalies. Exécutez les auto-tests :
 
 ```bash
 python lab-051/broken_alerting.py
 ```
 
-You should see **3 failed tests**:
+Vous devriez voir **3 tests échoués** :
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Temperature threshold is parameterized | The threshold is hardcoded to 50 instead of using the `threshold` parameter |
-| Test 2 | Stock alert uses correct comparison | Stock alerts trigger when value is *below* the threshold, not above |
-| Test 3 | Anomaly rate is calculated per warehouse | The denominator should be events *per warehouse*, not total events across all warehouses |
+| Test | Ce qu'il vérifie | Indice |
+|------|-------------------|--------|
+| Test 1 | Le seuil de température est paramétré | Le seuil est codé en dur à 50 au lieu d'utiliser le paramètre `threshold` |
+| Test 2 | L'alerte de stock utilise la bonne comparaison | Les alertes de stock se déclenchent quand la valeur est *inférieure* au seuil, pas supérieure |
+| Test 3 | Le taux d'anomalies est calculé par entrepôt | Le dénominateur devrait être les événements *par entrepôt*, pas le total des événements de tous les entrepôts |
 
-Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
+Corrigez les 3 bugs et relancez jusqu'à voir `🎉 All 3 tests passed`.
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What is an Eventstream in Microsoft Fabric?"
+??? question "**Q1 (Choix multiple) :** Qu'est-ce qu'un Eventstream dans Microsoft Fabric ?"
 
-    - A) A batch data processing pipeline that runs on a schedule
-    - B) A managed real-time data ingestion pipeline that captures streaming events
-    - C) A visualization tool for creating dashboards
-    - D) A machine learning model training service
+    - A) Un pipeline de traitement de données par lots qui s'exécute selon un calendrier
+    - B) Un pipeline d'ingestion de données en temps réel managé qui capture les événements en streaming
+    - C) Un outil de visualisation pour créer des tableaux de bord
+    - D) Un service d'entraînement de modèles de machine learning
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) A managed real-time data ingestion pipeline that captures streaming events**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Un pipeline d'ingestion de données en temps réel managé qui capture les événements en streaming**
 
-        An Eventstream is the entry point for real-time data in Fabric. It captures events from sources like IoT Hub, Kafka, or custom applications, transforms them in-flight, and routes them to destinations like an Eventhouse for querying. Unlike batch pipelines, Eventstreams process data continuously with sub-second latency.
+        Un Eventstream est le point d'entrée des données en temps réel dans Fabric. Il capture les événements provenant de sources comme IoT Hub, Kafka ou des applications personnalisées, les transforme en vol et les achemine vers des destinations comme un Eventhouse pour l'interrogation. Contrairement aux pipelines batch, les Eventstreams traitent les données en continu avec une latence inférieure à la seconde.
 
-??? question "**Q2 (Multiple Choice):** What does Fabric Activator do?"
+??? question "**Q2 (Choix multiple) :** Que fait Fabric Activator ?"
 
-    - A) Optimizes KQL query performance
-    - B) Manages Eventhouse storage capacity
-    - C) Triggers automated actions when data conditions are met
-    - D) Converts batch data into streaming format
+    - A) Optimise les performances des requêtes KQL
+    - B) Gère la capacité de stockage de l'Eventhouse
+    - C) Déclenche des actions automatisées lorsque des conditions sur les données sont remplies
+    - D) Convertit les données par lots en format streaming
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) Triggers automated actions when data conditions are met**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C) Déclenche des actions automatisées lorsque des conditions sur les données sont remplies**
 
-        Activator is Fabric's rule engine for real-time alerting. You define conditions (e.g., "temperature > 30°C") and actions (e.g., send a Teams notification, trigger a Power Automate flow). It continuously monitors KQL query results and fires alerts the moment a condition is met — no polling required.
+        Activator est le moteur de règles de Fabric pour les alertes en temps réel. Vous définissez des conditions (par ex. « temperature > 30°C ») et des actions (par ex. envoyer une notification Teams, déclencher un flux Power Automate). Il surveille en continu les résultats des requêtes KQL et déclenche des alertes dès qu'une condition est remplie — sans interrogation périodique nécessaire.
 
-??? question "**Q3 (Run the Lab):** How many temperature readings exceed 30°C?"
+??? question "**Q3 (Exécuter le lab) :** Combien de relevés de température dépassent 30°C ?"
 
-    Filter the events DataFrame for `sensor_type == "temperature"` and `value > 30`.
+    Filtrez le DataFrame des événements pour `sensor_type == "temperature"` et `value > 30`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **3**
 
-        Three temperature anomalies exceed 30°C: WH-NYC at 38°C, WH-DAL at 35°C, and WH-DAL at 32°C. The NYC reading at 38°C is the most critical — well above the 35°C threshold for product damage.
+        Trois anomalies de température dépassent 30°C : WH-NYC à 38°C, WH-DAL à 35°C et WH-DAL à 32°C. Le relevé de NYC à 38°C est le plus critique — bien au-dessus du seuil de 35°C pour les dommages aux produits.
 
-??? question "**Q4 (Run the Lab):** Which warehouse has the most door_opens?"
+??? question "**Q4 (Exécuter le lab) :** Quel entrepôt a le plus de door_opens ?"
 
-    Filter for `sensor_type == "door_opens"`, group by `warehouse_id`, and sum the values.
+    Filtrez pour `sensor_type == "door_opens"`, regroupez par `warehouse_id` et faites la somme des valeurs.
 
-    ??? success "✅ Reveal Answer"
-        **WH-DAL (14 total door opens)**
+    ??? success "✅ Révéler la réponse"
+        **WH-DAL (14 ouvertures de portes au total)**
 
-        Dallas leads with 14 total door opens, followed by WH-NYC (12), WH-SEA (10), WH-CHI (9), and WH-LAX (7). Combined with Dallas's two temperature anomalies, the high door activity may be contributing to heat buildup.
+        Dallas est en tête avec 14 ouvertures de portes au total, suivi de WH-NYC (12), WH-SEA (10), WH-CHI (9) et WH-LAX (7). Combiné avec les deux anomalies de température de Dallas, la forte activité de portes peut contribuer à l'accumulation de chaleur.
 
-??? question "**Q5 (Run the Lab):** How many stock readings are critically low (< 10 units)?"
+??? question "**Q5 (Exécuter le lab) :** Combien de relevés de stock sont en niveau critique (< 10 unités) ?"
 
-    Filter for `sensor_type == "stock_level"` and `value < 10`.
+    Filtrez pour `sensor_type == "stock_level"` et `value < 10`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **2**
 
-        Two stock readings at WH-LAX are critically low: 8 units and 3 units. Both events are at the same warehouse, suggesting a rapid stock depletion trend that requires an emergency reorder.
+        Deux relevés de stock à WH-LAX sont en niveau critique : 8 unités et 3 unités. Les deux événements sont dans le même entrepôt, ce qui suggère une tendance rapide d'épuisement des stocks nécessitant un réapprovisionnement d'urgence.
 
 ---
 
-## Summary
+## Résumé
 
-| Topic | What You Learned |
-|-------|-----------------|
-| Eventstreams | Real-time ingestion of IoT sensor data into Fabric |
-| Eventhouse & KQL | Columnar storage and query language for time-series analytics |
-| Anomaly Detection | Threshold-based alerts for temperature, humidity, and stock levels |
-| Activator | Automated actions triggered by data conditions |
-| AI Agent Integration | Agents query Eventhouse data and generate actionable recommendations |
-| Alert Dashboard | Combining multiple anomaly types into a unified operations view |
+| Sujet | Ce que vous avez appris |
+|-------|------------------------|
+| Eventstreams | Ingestion en temps réel des données de capteurs IoT dans Fabric |
+| Eventhouse & KQL | Stockage en colonnes et langage de requête pour l'analytique de séries temporelles |
+| Détection d'anomalies | Alertes basées sur des seuils pour la température, l'humidité et les niveaux de stock |
+| Activator | Actions automatisées déclenchées par des conditions sur les données |
+| Intégration d'un agent IA | Les agents interrogent les données de l'Eventhouse et génèrent des recommandations exploitables |
+| Tableau de bord d'alertes | Combinaison de plusieurs types d'anomalies dans une vue opérationnelle unifiée |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **[Lab 052](lab-052-fabric-rti-advanced.md)** — Fabric RTI Advanced: Sliding-Window Aggregations & Trend Detection
-- **[Lab 053](lab-053-fabric-agent-activator.md)** — Building an AI Agent with Fabric Activator & Semantic Kernel
+- **[Lab 052](lab-052-fabric-rti-advanced.md)** — Fabric RTI Avancé : Agrégations par fenêtre glissante et détection de tendances
+- **[Lab 053](lab-053-fabric-agent-activator.md)** — Construire un agent IA avec Fabric Activator & Semantic Kernel

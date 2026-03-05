@@ -1,104 +1,99 @@
----
+﻿---
 tags: [caching, cost-optimization, anthropic, google, openai, python]
 ---
-# Lab 071: Context Caching — Cutting Costs for Large-Document Agents
+# Lab 071 : Mise en cache du contexte — Réduire les coûts pour les agents traitant de grands documents
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock benchmark data</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~60 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise des données de benchmark simulées</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What **context caching** is and how providers (Anthropic, Google, OpenAI) implement it
-- How cache hits reduce **time-to-first-token (TTFT)** and **per-request cost**
-- Analyze a benchmark CSV to quantify latency and cost savings across 3 providers
-- Identify when caching delivers the highest ROI for large-document agent workloads
-- Build a **cache performance report** comparing hit vs. miss economics
+- Ce qu'est la **mise en cache du contexte** et comment les fournisseurs (Anthropic, Google, OpenAI) l'implémentent
+- Comment les succès de cache réduisent le **temps jusqu'au premier token (TTFT)** et le **coût par requête**
+- Analyser un fichier CSV de benchmark pour quantifier les économies de latence et de coût sur 3 fournisseurs
+- Identifier quand la mise en cache offre le meilleur retour sur investissement pour les charges de travail d'agents sur grands documents
+- Construire un **rapport de performance du cache** comparant l'économie des succès et des échecs de cache
 
 ## Introduction
 
-When an agent processes the same 100k-token document across multiple turns, you pay for those input tokens every single time — unless you use **context caching**. All three major providers now offer caching mechanisms:
+Lorsqu'un agent traite le même document de 100 000 tokens sur plusieurs tours, vous payez ces tokens d'entrée à chaque fois — sauf si vous utilisez la **mise en cache du contexte**. Les trois principaux fournisseurs offrent désormais des mécanismes de mise en cache :
 
-| Provider | Feature | How It Works |
-|----------|---------|-------------|
-| **Anthropic** | Prompt Caching | Cache breakpoints in system/user messages; cached tokens billed at 10% of input price |
-| **Google** | Context Caching | Explicit cache creation via API; cached tokens billed at 25% of input price |
-| **OpenAI** | Automatic Caching | Automatic prefix matching for prompts ≥1024 tokens; cached tokens billed at 50% of input price |
+| Fournisseur | Fonctionnalité | Fonctionnement |
+|-------------|---------------|----------------|
+| **Anthropic** | Prompt Caching | Points de rupture de cache dans les messages système/utilisateur ; tokens en cache facturés à 10 % du prix d'entrée |
+| **Google** | Context Caching | Création explicite du cache via l'API ; tokens en cache facturés à 25 % du prix d'entrée |
+| **OpenAI** | Automatic Caching | Correspondance automatique de préfixe pour les prompts ≥1024 tokens ; tokens en cache facturés à 50 % du prix d'entrée |
 
-### The Scenario
+### Le scénario
 
-You are an **AI Platform Engineer** at a legal-tech company. Your contract-review agent processes 150k–200k token documents. Each contract requires 3–5 follow-up questions against the same document. Leadership wants to know: _"How much money and latency can we save by enabling context caching?"_
+Vous êtes un **ingénieur de plateforme IA** dans une entreprise de technologie juridique. Votre agent de révision de contrats traite des documents de 150 000 à 200 000 tokens. Chaque contrat nécessite 3 à 5 questions de suivi sur le même document. La direction veut savoir : _« Combien d'argent et de latence pouvons-nous économiser en activant la mise en cache du contexte ? »_
 
-You have a **benchmark dataset** (`cache_benchmark.csv`) with 15 requests across 3 providers — a mix of cache hits and misses. Your job: analyze the data and build a cost-savings report.
+Vous disposez d'un **jeu de données de benchmark** (\cache_benchmark.csv\) avec 15 requêtes sur 3 fournisseurs — un mélange de succès et d'échecs de cache. Votre mission : analyser les données et construire un rapport d'économies.
 
-!!! info "Mock Data"
-    This lab uses a mock benchmark CSV so anyone can follow along without API keys. The data structure and cost ratios mirror real-world caching behavior from each provider's documentation.
+!!! info "Données simulées"
+    Ce lab utilise un fichier CSV de benchmark simulé pour que tout le monde puisse suivre sans clés API. La structure des données et les ratios de coûts reflètent le comportement réel de mise en cache décrit dans la documentation de chaque fournisseur.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Pourquoi |
 |---|---|
-| Python 3.10+ | Run the analysis scripts |
-| `pandas` library | Data manipulation |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| \pandas\ | Manipulation des données |
 
-```bash
+\\\ash
 pip install pandas
-```
+\\\
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-071/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier \lab-071/\ de votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_cache.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/broken_cache.py) |
-| `cache_benchmark.csv` | Benchmark dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) |
+| Fichier | Description | Téléchargement |
+|---------|-------------|----------------|
+| \roken_cache.py\ | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/broken_cache.py) |
+| \cache_benchmark.csv\ | Jeu de données de benchmark | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) |
 
 ---
 
-## Step 1: Understand Context Caching Mechanics
+## Étape 1 : Comprendre les mécanismes de mise en cache du contexte
 
-Before analyzing data, understand the key concepts:
+Avant d'analyser les données, comprenez les concepts clés :
 
-| Concept | Definition |
+| Concept | Définition |
 |---------|-----------|
-| **Cache Miss** | First request — full context sent to model, no cached data exists |
-| **Cache Hit** | Subsequent request — context found in cache, reduced input processing |
-| **TTFT** | Time-to-first-token — how fast the model starts responding |
-| **Input Cost** | Cost charged when context is NOT cached (full price) |
-| **Cached Cost** | Cost charged when context IS cached (discounted price) |
+| **Échec de cache** | Première requête — contexte complet envoyé au modèle, aucune donnée en cache n'existe |
+| **Succès de cache** | Requête suivante — contexte trouvé en cache, traitement d'entrée réduit |
+| **TTFT** | Temps jusqu'au premier token — rapidité avec laquelle le modèle commence à répondre |
+| **Coût d'entrée** | Coût facturé lorsque le contexte N'EST PAS en cache (plein tarif) |
+| **Coût en cache** | Coût facturé lorsque le contexte EST en cache (tarif réduit) |
 
-### Key Insight
+### Aperçu clé
 
-Cache hits save money in two ways:
+Les succès de cache font économiser de l'argent de deux manières :
 
-1. **Lower token cost** — cached tokens are billed at a fraction of the input price
-2. **Lower latency** — the model doesn't need to re-process the full context, so TTFT drops dramatically
+1. **Coût de tokens inférieur** — les tokens en cache sont facturés à une fraction du prix d'entrée
+2. **Latence inférieure** — le modèle n'a pas besoin de retraiter l'intégralité du contexte, donc le TTFT diminue drastiquement
 
 ---
 
-## Step 2: Load and Explore the Benchmark Data
+## Étape 2 : Charger et explorer les données de benchmark
 
-The dataset has **15 requests** across 3 providers. Start by loading it:
+Le jeu de données contient **15 requêtes** sur 3 fournisseurs. Commencez par le charger :
 
-```python
+\\\python
 import pandas as pd
 
 df = pd.read_csv("lab-071/cache_benchmark.csv")
@@ -108,19 +103,19 @@ print(f"Providers: {df['provider'].unique().tolist()}")
 print(f"Cache statuses: {df['cache_status'].value_counts().to_dict()}")
 print(f"\nColumns: {list(df.columns)}")
 print(f"\nFirst 5 rows:\n{df.head()}")
-```
+\\\
 
-**Expected output:**
+**Résultat attendu :**
 
-```
+\\\
 Total requests: 15
 Providers: ['anthropic', 'google', 'openai']
 Cache statuses: {'hit': 9, 'miss': 6}
-```
+\\\
 
-Explore the data by provider:
+Explorez les données par fournisseur :
 
-```python
+\\\python
 summary = df.groupby("provider").agg(
     requests=("request_id", "count"),
     hits=("cache_status", lambda x: (x == "hit").sum()),
@@ -128,15 +123,15 @@ summary = df.groupby("provider").agg(
     avg_tokens=("context_tokens", "mean"),
 ).reset_index()
 print(summary)
-```
+\\\
 
 ---
 
-## Step 3: Analyze Latency Impact — TTFT Comparison
+## Étape 3 : Analyser l'impact sur la latence — Comparaison du TTFT
 
-The biggest user-facing benefit of caching is **latency reduction**. Compare TTFT for cache hits vs. misses:
+Le plus grand bénéfice visible pour l'utilisateur de la mise en cache est la **réduction de latence**. Comparez le TTFT pour les succès vs les échecs de cache :
 
-```python
+\\\python
 hits = df[df["cache_status"] == "hit"]
 misses = df[df["cache_status"] == "miss"]
 
@@ -147,105 +142,105 @@ speedup = avg_miss_ttft / avg_hit_ttft
 print(f"Avg TTFT (cache hit):  {avg_hit_ttft:.0f} ms")
 print(f"Avg TTFT (cache miss): {avg_miss_ttft:.0f} ms")
 print(f"Speedup factor:        {speedup:.1f}x faster with cache")
-```
+\\\
 
-**Expected output:**
+**Résultat attendu :**
 
-```
+\\\
 Avg TTFT (cache hit):  217 ms
 Avg TTFT (cache miss): 2583 ms
 Speedup factor:        11.9x faster with cache
-```
+\\\
 
-Now break it down by provider:
+Détaillez par fournisseur :
 
-```python
+\\\python
 ttft_by_provider = df.groupby(["provider", "cache_status"])["ttft_ms"].mean().unstack()
 ttft_by_provider["speedup"] = ttft_by_provider["miss"] / ttft_by_provider["hit"]
 print(ttft_by_provider.round(0))
-```
+\\\
 
-!!! tip "Insight"
-    Cache hits are roughly **10–15x faster** across all providers. For an agent handling follow-up questions on a large document, this means sub-second responses instead of 2–3 second waits per turn.
+!!! tip "Aperçu"
+    Les succès de cache sont environ **10 à 15 fois plus rapides** chez tous les fournisseurs. Pour un agent traitant des questions de suivi sur un grand document, cela signifie des réponses en moins d'une seconde au lieu de 2 à 3 secondes d'attente par tour.
 
 ---
 
-## Step 4: Analyze Cost Savings
+## Étape 4 : Analyser les économies de coûts
 
-Now compute the financial impact. Each row has `input_cost_usd` (charged on miss) and `cached_cost_usd` (charged on hit):
+Calculez maintenant l'impact financier. Chaque ligne a \input_cost_usd\ (facturé lors d'un échec) et \cached_cost_usd\ (facturé lors d'un succès) :
 
-```python
+\\\python
 total_miss_cost = misses["input_cost_usd"].sum()
 total_hit_cost = hits["cached_cost_usd"].sum()
 savings = total_miss_cost - total_hit_cost
 
-print(f"Total cost (cache misses): ${total_miss_cost:.2f}")
-print(f"Total cost (cache hits):   ${total_hit_cost:.2f}")
-print(f"Total savings:             ${savings:.2f}")
+print(f"Total cost (cache misses): \")
+print(f"Total cost (cache hits):   \")
+print(f"Total savings:             \")
 print(f"Savings ratio:             {savings / total_miss_cost * 100:.0f}%")
-```
+\\\
 
-**Expected output:**
+**Résultat attendu :**
 
-```
-Total cost (cache misses): $1.80
-Total cost (cache hits):   $0.36
-Total savings:             $1.44
+\\\
+Total cost (cache misses): \.80
+Total cost (cache hits):   \.36
+Total savings:             \.44
 Savings ratio:             80%
-```
+\\\
 
-Break it down by provider:
+Détaillez par fournisseur :
 
-```python
+\\\python
 cost_by_provider = []
 for provider, group in df.groupby("provider"):
     miss_cost = group[group["cache_status"] == "miss"]["input_cost_usd"].sum()
     hit_cost = group[group["cache_status"] == "hit"]["cached_cost_usd"].sum()
     cost_by_provider.append({
         "Provider": provider,
-        "Miss Cost": f"${miss_cost:.2f}",
-        "Hit Cost": f"${hit_cost:.2f}",
-        "Savings": f"${miss_cost - hit_cost:.2f}",
+        "Miss Cost": f"\",
+        "Hit Cost": f"\",
+        "Savings": f"\",
     })
 
 print(pd.DataFrame(cost_by_provider).to_string(index=False))
-```
+\\\
 
 ---
 
-## Step 5: Calculate Cache Hit Rate and ROI Metrics
+## Étape 5 : Calculer le taux de succès du cache et les métriques de ROI
 
-```python
+\\\python
 hit_rate = len(hits) / len(df) * 100
 cost_per_request_with_cache = (total_miss_cost + total_hit_cost) / len(df)
 cost_per_request_without_cache = total_miss_cost / len(misses)
 
 print(f"Overall cache hit rate:          {hit_rate:.0f}%")
-print(f"Avg cost/request (with cache):   ${cost_per_request_with_cache:.3f}")
-print(f"Avg cost/request (without cache):${cost_per_request_without_cache:.3f}")
-```
+print(f"Avg cost/request (with cache):   \")
+print(f"Avg cost/request (without cache):\")
+\\\
 
-### Projecting Annual Savings
+### Projection des économies annuelles
 
-```python
+\\\python
 daily_requests = 500
 annual_requests = daily_requests * 365
 annual_savings = (savings / len(df)) * annual_requests
 
 print(f"\nProjected annual savings at {daily_requests} requests/day:")
-print(f"  ${annual_savings:,.0f}")
-```
+print(f"  \")
+\\\
 
-!!! warning "Real-World Considerations"
-    Cache hit rates depend on usage patterns. Sequential follow-up questions on the same document get near-100% hit rates. Diverse, unrelated queries may see 0% hits. Size your savings estimates based on your actual agent conversation patterns.
+!!! warning "Considérations réelles"
+    Les taux de succès du cache dépendent des modèles d'utilisation. Les questions de suivi séquentielles sur le même document obtiennent des taux de succès proches de 100 %. Les requêtes diverses et sans rapport peuvent avoir 0 % de succès. Dimensionnez vos estimations d'économies en fonction des modèles de conversation réels de votre agent.
 
 ---
 
-## Step 6: Build the Cache Performance Report
+## Étape 6 : Construire le rapport de performance du cache
 
-Combine all analysis into a summary report:
+Combinez toute l'analyse dans un rapport de synthèse :
 
-```python
+\\\python
 report = f"""# 📊 Context Caching Benchmark Report
 
 ## Overview
@@ -266,9 +261,9 @@ report = f"""# 📊 Context Caching Benchmark Report
 ## Cost Impact
 | Metric | Value |
 |--------|-------|
-| Total Miss Cost | ${total_miss_cost:.2f} |
-| Total Hit Cost | ${total_hit_cost:.2f} |
-| Total Savings | ${savings:.2f} |
+| Total Miss Cost | \ |
+| Total Hit Cost | \ |
+| Total Savings | \ |
 | Savings Rate | {savings / total_miss_cost * 100:.0f}% |
 
 ## Recommendation
@@ -281,104 +276,104 @@ print(report)
 with open("lab-071/cache_report.md", "w") as f:
     f.write(report)
 print("💾 Saved to lab-071/cache_report.md")
-```
+\\\
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-071/broken_cache.py` contains **3 bugs** that produce incorrect caching metrics. Can you find and fix them all?
+Le fichier \lab-071/broken_cache.py\ contient **3 bugs** qui produisent des métriques de mise en cache incorrectes. Pouvez-vous les trouver et les corriger tous ?
 
-Run the self-tests to see which ones fail:
+Exécutez les auto-tests pour voir lesquels échouent :
 
-```bash
+\\\ash
 python lab-071/broken_cache.py
-```
+\\\
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Vous devriez voir **3 tests échoués**. Chaque test correspond à un bug :
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Average cached TTFT | Should average hit TTFT, not miss TTFT |
-| Test 2 | Total cost savings | Should be sum of miss input costs minus sum of hit cached costs |
-| Test 3 | Cache hit rate | Should count hits / total, not misses / total |
+| Test | Ce qu'il vérifie | Indice |
+|------|-----------------|--------|
+| Test 1 | TTFT moyen en cache | Devrait moyenner le TTFT des succès, pas des échecs |
+| Test 2 | Économies totales de coût | Devrait être la somme des coûts d'entrée des échecs moins la somme des coûts en cache des succès |
+| Test 3 | Taux de succès du cache | Devrait compter les succès / total, pas les échecs / total |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
+Corrigez les 3 bugs, puis relancez. Quand vous voyez \All passed!\, c'est terminé !
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What is the primary benefit of context caching for multi-turn agent conversations?"
+??? question "**Q1 (Choix multiple) :** Quel est le principal avantage de la mise en cache du contexte pour les conversations multi-tours d'un agent ?"
 
-    - A) It improves the model's reasoning accuracy
-    - B) It reduces input token costs and time-to-first-token on repeated context
-    - C) It allows the model to remember previous conversations permanently
-    - D) It increases the maximum context window size
+    - A) Elle améliore la précision du raisonnement du modèle
+    - B) Elle réduit les coûts des tokens d'entrée et le temps jusqu'au premier token sur un contexte répété
+    - C) Elle permet au modèle de se souvenir des conversations précédentes de manière permanente
+    - D) Elle augmente la taille maximale de la fenêtre de contexte
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It reduces input token costs and time-to-first-token on repeated context**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Elle réduit les coûts des tokens d'entrée et le temps jusqu'au premier token sur un contexte répété**
 
-        Context caching stores previously processed input tokens so they don't need to be re-sent and re-processed. This reduces both the cost (cached tokens are billed at a discount) and latency (TTFT drops dramatically because the model skips re-reading the cached context).
+        La mise en cache du contexte stocke les tokens d'entrée précédemment traités pour qu'ils n'aient pas besoin d'être renvoyés et retraités. Cela réduit à la fois le coût (les tokens en cache sont facturés avec une remise) et la latence (le TTFT diminue drastiquement car le modèle saute la relecture du contexte en cache).
 
-??? question "**Q2 (Multiple Choice):** Which provider charges the lowest rate for cached tokens relative to full input price?"
+??? question "**Q2 (Choix multiple) :** Quel fournisseur facture le tarif le plus bas pour les tokens en cache par rapport au plein tarif d'entrée ?"
 
-    - A) OpenAI (50% of input price)
-    - B) Google (25% of input price)
-    - C) Anthropic (10% of input price)
-    - D) All providers charge the same cached rate
+    - A) OpenAI (50 % du prix d'entrée)
+    - B) Google (25 % du prix d'entrée)
+    - C) Anthropic (10 % du prix d'entrée)
+    - D) Tous les fournisseurs facturent le même tarif en cache
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) Anthropic (10% of input price)**
+    ??? success "✅ Révéler la réponse"
+        **Correct : C) Anthropic (10 % du prix d'entrée)**
 
-        Anthropic's prompt caching bills cached tokens at just 10% of the standard input price, making it the most aggressive discount. Google charges 25% and OpenAI charges 50%. However, pricing models change — always check the latest documentation.
+        La mise en cache de prompts d'Anthropic facture les tokens en cache à seulement 10 % du prix d'entrée standard, ce qui en fait la remise la plus agressive. Google facture 25 % et OpenAI facture 50 %. Cependant, les modèles de tarification changent — vérifiez toujours la documentation la plus récente.
 
-??? question "**Q3 (Run the Lab):** What is the average TTFT for cache **hits** across all providers?"
+??? question "**Q3 (Exécuter le lab) :** Quel est le TTFT moyen pour les **succès** de cache sur tous les fournisseurs ?"
 
-    Run the Step 3 analysis on [📥 `cache_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) and check the results.
+    Exécutez l'analyse de l'étape 3 sur [📥 \cache_benchmark.csv\](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) et vérifiez les résultats.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **217 ms**
 
-        The 9 cache-hit requests have TTFTs of 180, 175, 190, 220, 210, 230, 250, 240, and 260 ms. The mean is (180+175+190+220+210+230+250+240+260) ÷ 9 = **217 ms** (rounded).
+        Les 9 requêtes avec succès de cache ont des TTFT de 180, 175, 190, 220, 210, 230, 250, 240 et 260 ms. La moyenne est (180+175+190+220+210+230+250+240+260) ÷ 9 = **217 ms** (arrondi).
 
-??? question "**Q4 (Run the Lab):** What is the average TTFT for cache **misses** across all providers?"
+??? question "**Q4 (Exécuter le lab) :** Quel est le TTFT moyen pour les **échecs** de cache sur tous les fournisseurs ?"
 
-    Run the Step 3 analysis to find out.
+    Exécutez l'analyse de l'étape 3 pour le découvrir.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **2583 ms**
 
-        The 6 cache-miss requests have TTFTs of 2800, 2750, 3200, 3100, 1800, and 1850 ms. The mean is (2800+2750+3200+3100+1800+1850) ÷ 6 = **2583 ms** (rounded).
+        Les 6 requêtes avec échec de cache ont des TTFT de 2800, 2750, 3200, 3100, 1800 et 1850 ms. La moyenne est (2800+2750+3200+3100+1800+1850) ÷ 6 = **2583 ms** (arrondi).
 
-??? question "**Q5 (Run the Lab):** What is the total cost savings (miss costs minus hit costs) across all 15 requests?"
+??? question "**Q5 (Exécuter le lab) :** Quelles sont les économies totales de coût (coûts des échecs moins coûts des succès) sur les 15 requêtes ?"
 
-    Run the Step 4 analysis to calculate it.
+    Exécutez l'analyse de l'étape 4 pour le calculer.
 
-    ??? success "✅ Reveal Answer"
-        **$1.44**
+    ??? success "✅ Révéler la réponse"
+        **1,44 \$**
 
-        Total miss input costs = $0.45 + $0.45 + $0.20 + $0.20 + $0.25 + $0.25 = **$1.80**. Total hit cached costs = $0.045×3 + $0.05×3 + $0.025×3 = $0.135 + $0.15 + $0.075 = **$0.36**. Savings = $1.80 − $0.36 = **$1.44**.
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| Context Caching | Stores processed input tokens to avoid re-sending on follow-up requests |
-| TTFT Impact | Cache hits reduce TTFT by ~12x (from ~2.6s to ~217ms) |
-| Cost Savings | 80% cost reduction on cached requests across all providers |
-| Provider Comparison | Anthropic (10%), Google (25%), OpenAI (50%) cached token discounts |
-| ROI Analysis | How to project savings based on request volume and hit rates |
-| Benchmark Methodology | Structuring cache experiments with hit/miss tracking |
+        Coûts totaux d'entrée des échecs = 0,45 \$ + 0,45 \$ + 0,20 \$ + 0,20 \$ + 0,25 \$ + 0,25 \$ = **1,80 \$**. Coûts totaux en cache des succès = 0,045 \$×3 + 0,05 \$×3 + 0,025 \$×3 = 0,135 \$ + 0,15 \$ + 0,075 \$ = **0,36 \$**. Économies = 1,80 \$ − 0,36 \$ = **1,44 \$**.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (broader cost strategies beyond caching)
-- **[Lab 019](lab-019-streaming-responses.md)** — Streaming Responses (complementary latency optimization)
-- **[Lab 033](lab-033-agent-observability.md)** — Agent Observability (monitor cache hit rates in production)
-- **[Lab 072](lab-072-structured-outputs.md)** — Structured Outputs (guaranteed JSON for cost-efficient agent pipelines)
+| Sujet | Ce que vous avez appris |
+|-------|------------------------|
+| Mise en cache du contexte | Stocke les tokens d'entrée traités pour éviter de les renvoyer lors des requêtes suivantes |
+| Impact sur le TTFT | Les succès de cache réduisent le TTFT d'environ 12x (de ~2,6 s à ~217 ms) |
+| Économies de coûts | 80 % de réduction des coûts sur les requêtes en cache chez tous les fournisseurs |
+| Comparaison des fournisseurs | Anthropic (10 %), Google (25 %), OpenAI (50 %) de remise sur les tokens en cache |
+| Analyse du ROI | Comment projeter les économies en fonction du volume de requêtes et des taux de succès |
+| Méthodologie de benchmark | Structurer des expériences de cache avec suivi des succès/échecs |
+
+---
+
+## Prochaines étapes
+
+- **[Lab 038](lab-038-cost-optimization.md)** — Optimisation des coûts IA (stratégies de coûts plus larges au-delà de la mise en cache)
+- **[Lab 019](lab-019-streaming-responses.md)** — Réponses en streaming (optimisation complémentaire de la latence)
+- **[Lab 033](lab-033-agent-observability.md)** — Observabilité des agents (surveiller les taux de succès du cache en production)
+- **[Lab 072](lab-072-structured-outputs.md)** — Sorties structurées (JSON garanti pour des pipelines d'agents efficaces en coûts)

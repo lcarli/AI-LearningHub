@@ -1,44 +1,39 @@
 ---
 tags: [a2a, mcp, multi-agent, architecture, capstone, python]
 ---
-# Lab 055: A2A + MCP Full Stack — Agent Interoperability Capstone
+# Lab 055: A2A + MCP Full Stack — Capstone de Interoperabilidade de Agentes
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
-  <span><strong>Time:</strong> ~120 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock trace data (no cloud resources required)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Tempo:</strong> ~120 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados de trace simulados (sem necessidade de recursos na nuvem)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+!!! tip "Os Três Protocolos Agênticos"
+    Este capstone cobre A2A + MCP. O terceiro protocolo — **AG-UI** (interação agente↔usuário) — é abordado no **[Lab 077](lab-077-agui-protocol.md)**.
 
+## O Que Você Vai Aprender
 
+- Como **A2A + MCP** trabalham juntos em uma arquitetura multi-agente full-stack
+- Analisar um **sistema de planejamento de viagens** com 3 agentes especializados usando traces de delegação
+- Distinguir **chamadas A2A** (delegação agente-para-agente) de **chamadas MCP** (acesso agente-para-ferramenta)
+- Realizar **análise de custo de tokens** em um sistema de agentes distribuído
+- Entender **tratamento de erros e padrões de retry** em fluxos de trabalho multi-agente
+- Aplicar **princípios de design** para construir arquiteturas de agentes prontas para produção
 
-!!! tip "The Three Agentic Protocols"
-    This capstone covers A2A + MCP. The third protocol — **AG-UI** (agent↔user interaction) — is covered in **[Lab 077](lab-077-agui-protocol.md)**.
+## Introdução
 
-## What You'll Learn
+A2A e MCP são **protocolos complementares** que desempenham papéis diferentes em um sistema multi-agente:
 
-- How **A2A + MCP** work together in a full-stack multi-agent architecture
-- Analyze a **travel planner system** with 3 specialized agents using delegation traces
-- Distinguish **A2A calls** (agent-to-agent delegation) from **MCP calls** (agent-to-tool access)
-- Perform **token cost analysis** across a distributed agent system
-- Understand **error handling and retry patterns** in multi-agent workflows
-- Apply **design principles** for building production-grade agent architectures
+| Protocolo | Papel | Exemplo |
+|-----------|-------|---------|
+| **A2A** | Delegação de tarefas agente-para-agente | Coordenador pede ao FlightAgent para encontrar voos |
+| **MCP** | Acesso agente-para-ferramenta | FlightAgent chama uma API de reservas via servidor MCP |
 
-## Introduction
+Neste lab capstone, você vai analisar um **sistema de planejamento de viagens** que usa ambos os protocolos. O agente Coordenador recebe uma requisição do cliente e delega sub-tarefas para agentes especializados via A2A. Cada agente especializado então usa MCP para acessar suas ferramentas e APIs de back-end.
 
-A2A and MCP are **complementary protocols** that serve different roles in a multi-agent system:
-
-| Protocol | Role | Example |
-|----------|------|---------|
-| **A2A** | Agent-to-agent task delegation | Coordinator asks FlightAgent to find flights |
-| **MCP** | Agent-to-tool access | FlightAgent calls a booking API via MCP server |
-
-In this capstone lab, you'll analyze a **travel planner system** that uses both protocols. The Coordinator agent receives a customer request and delegates sub-tasks to specialized agents via A2A. Each specialized agent then uses MCP to access its back-end tools and APIs.
-
-### The Architecture
+### A Arquitetura
 
 ```
                         Customer Request
@@ -64,17 +59,17 @@ In this capstone lab, you'll analyze a **travel planner system** that uses both 
     └─────────────┘ └─────────────┘ └──────────────┘
 ```
 
-The delegation traces dataset (`delegation_traces.csv`) captures **20 events** from a complete travel planning session — 8 A2A calls between agents and 12 MCP calls from agents to tools.
+O dataset de traces de delegação (`delegation_traces.csv`) captura **20 eventos** de uma sessão completa de planejamento de viagem — 8 chamadas A2A entre agentes e 12 chamadas MCP de agentes para ferramentas.
 
-!!! info "Why Two Protocols?"
-    A2A handles the *social* layer — agents discovering, negotiating, and delegating tasks to peers. MCP handles the *tool* layer — agents accessing databases, APIs, and external services. Separating these concerns enables independent scaling, security boundaries, and protocol evolution.
+!!! info "Por Que Dois Protocolos?"
+    A2A lida com a camada *social* — agentes descobrindo, negociando e delegando tarefas a pares. MCP lida com a camada de *ferramentas* — agentes acessando bancos de dados, APIs e serviços externos. Separar essas responsabilidades permite escalabilidade independente, limites de segurança e evolução de protocolo.
 
-## Prerequisites
+## Pré-requisitos
 
-| Requirement | Why |
+| Requisito | Motivo |
 |---|---|
-| Python 3.10+ | Analyze delegation traces |
-| `pandas` library | DataFrame operations on trace data |
+| Python 3.10+ | Analisar traces de delegação |
+| Biblioteca `pandas` | Operações com DataFrame nos dados de trace |
 
 ```bash
 pip install pandas
@@ -82,61 +77,61 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-055/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-055/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_delegation.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/broken_delegation.py) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_delegation.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/broken_delegation.py) |
 | `delegation_traces.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv) |
 
 ---
 
-## Step 1: Understanding the Architecture
+## Etapa 1: Entendendo a Arquitetura
 
-Before diving into data, understand what each component does:
+Antes de mergulhar nos dados, entenda o que cada componente faz:
 
-### Agent Roles
+### Papéis dos Agentes
 
-| Agent | A2A Role | MCP Tools |
-|-------|----------|-----------|
-| **Coordinator** | Receives customer request, delegates to specialists | None (orchestration only) |
-| **FlightAgent** | Finds and books flights | `booking_api`, `pricing_api`, `payment_api` |
-| **HotelAgent** | Finds and books hotels | `booking_api`, `reviews_api` |
-| **ItineraryAgent** | Plans and updates itineraries | `maps_api`, `calendar_api`, `weather_api` |
+| Agente | Papel A2A | Ferramentas MCP |
+|--------|-----------|-----------------|
+| **Coordinator** | Recebe requisição do cliente, delega para especialistas | Nenhuma (apenas orquestração) |
+| **FlightAgent** | Encontra e reserva voos | `booking_api`, `pricing_api`, `payment_api` |
+| **HotelAgent** | Encontra e reserva hotéis | `booking_api`, `reviews_api` |
+| **ItineraryAgent** | Planeja e atualiza itinerários | `maps_api`, `calendar_api`, `weather_api` |
 
-### Call Flow
+### Fluxo de Chamadas
 
-1. Customer sends a travel request to the **Coordinator**
-2. Coordinator uses **A2A** to delegate sub-tasks (find flights, find hotels, plan itinerary)
-3. Each specialist uses **MCP** to call its back-end tools
-4. Results flow back through A2A to the Coordinator
-5. Coordinator assembles the final response
+1. Cliente envia uma requisição de viagem para o **Coordinator**
+2. Coordinator usa **A2A** para delegar sub-tarefas (encontrar voos, encontrar hotéis, planejar itinerário)
+3. Cada especialista usa **MCP** para chamar suas ferramentas de back-end
+4. Resultados fluem de volta via A2A para o Coordinator
+5. Coordinator monta a resposta final
 
-### Protocol Boundaries
+### Limites de Protocolo
 
-| Boundary | Protocol | Auth |
-|----------|----------|------|
-| Customer → Coordinator | HTTP/API | API key |
-| Coordinator → Specialists | **A2A** | OAuth 2.0 |
-| Specialists → Tools | **MCP** | Service-to-service tokens |
+| Limite | Protocolo | Autenticação |
+|--------|-----------|--------------|
+| Cliente → Coordinator | HTTP/API | API key |
+| Coordinator → Especialistas | **A2A** | OAuth 2.0 |
+| Especialistas → Ferramentas | **MCP** | Tokens serviço-para-serviço |
 
-!!! tip "OAuth Across A2A Boundaries"
-    When the Coordinator delegates to FlightAgent via A2A, it must pass an OAuth token scoped to the customer's permissions. The FlightAgent then uses a *separate* service token for its MCP calls to the booking API. This two-layer auth model prevents privilege escalation.
+!!! tip "OAuth Através dos Limites A2A"
+    Quando o Coordinator delega para o FlightAgent via A2A, ele deve passar um token OAuth com escopo nas permissões do cliente. O FlightAgent então usa um token de serviço *separado* para suas chamadas MCP à API de reservas. Esse modelo de autenticação em duas camadas previne escalonamento de privilégios.
 
 ---
 
-## Step 2: Load and Explore Delegation Traces
+## Etapa 2: Carregar e Explorar Traces de Delegação
 
-Load the trace data containing all 20 events from the travel planning session:
+Carregue os dados de trace contendo todos os 20 eventos da sessão de planejamento de viagem:
 
 ```python
 import pandas as pd
@@ -150,7 +145,7 @@ print(f"\nFirst 5 events:")
 print(traces.head().to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total events: 20
@@ -169,11 +164,11 @@ request_id source_agent target_agent protocol        action  duration_ms  tokens
 
 ---
 
-## Step 3: Analyze A2A vs MCP Call Patterns
+## Etapa 3: Analisar Padrões de Chamadas A2A vs MCP
 
-Separate the traces by protocol to understand the delegation structure:
+Separe os traces por protocolo para entender a estrutura de delegação:
 
-### 3a — Call Counts by Protocol
+### 3a — Contagem de Chamadas por Protocolo
 
 ```python
 a2a_calls = traces[traces["protocol"] == "A2A"]
@@ -184,7 +179,7 @@ print(f"MCP calls (agent → tool):  {len(mcp_calls)}")
 print(f"Total calls:               {len(traces)}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 A2A calls (agent → agent): 8
@@ -192,14 +187,14 @@ MCP calls (agent → tool):  12
 Total calls:               20
 ```
 
-### 3b — A2A Delegation Breakdown
+### 3b — Detalhamento da Delegação A2A
 
 ```python
 print("A2A Delegations (Coordinator → Specialists):")
 print(a2a_calls[["request_id", "source_agent", "target_agent", "action", "status"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 A2A Delegations (Coordinator → Specialists):
@@ -214,7 +209,7 @@ request_id source_agent   target_agent           action status
       R008  Coordinator     HotelAgent     cancel_hotel     OK
 ```
 
-### 3c — MCP Tool Usage by Agent
+### 3c — Uso de Ferramentas MCP por Agente
 
 ```python
 print("MCP tool calls per agent:")
@@ -222,7 +217,7 @@ print(mcp_calls.groupby("source_agent")["action"].count().to_string())
 print(f"\nUnique MCP tools used: {mcp_calls['target_agent'].nunique()}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 MCP tool calls per agent:
@@ -234,7 +229,7 @@ ItineraryAgent    4
 Unique MCP tools used: 7
 ```
 
-### 3d — Error Analysis
+### 3d — Análise de Erros
 
 ```python
 errors = traces[traces["status"] == "ERROR"]
@@ -243,7 +238,7 @@ print(f"\nFailed events:")
 print(errors[["request_id", "source_agent", "target_agent", "protocol", "action"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total errors: 2
@@ -254,14 +249,14 @@ request_id source_agent target_agent protocol         action
       R006  FlightAgent  booking_api      MCP search_flights
 ```
 
-!!! warning "Cascading Failures"
-    Notice that R006 has errors in *both* the A2A call and the MCP call. When the `booking_api` MCP tool fails, the FlightAgent cannot complete the A2A task — the error cascades upward. Production systems need retry logic and circuit breakers at both protocol boundaries.
+!!! warning "Falhas em Cascata"
+    Observe que R006 tem erros *tanto* na chamada A2A quanto na chamada MCP. Quando a ferramenta MCP `booking_api` falha, o FlightAgent não consegue completar a tarefa A2A — o erro propaga em cascata. Sistemas em produção precisam de lógica de retry e circuit breakers em ambos os limites de protocolo.
 
 ---
 
-## Step 4: Token Cost Analysis
+## Etapa 4: Análise de Custo de Tokens
 
-A2A calls consume LLM tokens (agents reason about tasks), while MCP calls are typically token-free (direct API calls):
+Chamadas A2A consomem tokens de LLM (agentes raciocinam sobre tarefas), enquanto chamadas MCP são tipicamente isentas de tokens (chamadas diretas a APIs):
 
 ```python
 total_tokens = traces["tokens_used"].sum()
@@ -276,7 +271,7 @@ print(f"\nTokens per A2A call:")
 print(a2a_calls[["request_id", "action", "tokens_used"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total tokens consumed: 3330
@@ -295,7 +290,7 @@ request_id           action  tokens_used
       R008     cancel_hotel          200
 ```
 
-### Cost Breakdown
+### Detalhamento de Custos
 
 ```python
 COST_PER_1K_TOKENS = 0.005  # example: GPT-4o-mini pricing
@@ -309,11 +304,11 @@ print(f"Most expensive call: {a2a_calls.loc[a2a_calls['tokens_used'].idxmax(), '
 
 ---
 
-## Step 5: Error Handling and Retry Patterns
+## Etapa 5: Tratamento de Erros e Padrões de Retry
 
-Analyze how errors propagate and design retry strategies:
+Analise como erros se propagam e projete estratégias de retry:
 
-### 5a — Error Rate by Protocol
+### 5a — Taxa de Erro por Protocolo
 
 ```python
 for protocol in ["A2A", "MCP"]:
@@ -323,14 +318,14 @@ for protocol in ["A2A", "MCP"]:
     print(f"{protocol}: {error_count}/{total} errors ({error_count/total*100:.0f}%)")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 A2A: 1/8 errors (12%)
 MCP: 1/12 errors (8%)
 ```
 
-### 5b — Latency Analysis
+### 5b — Análise de Latência
 
 ```python
 print("Average latency by protocol:")
@@ -342,125 +337,125 @@ print(f"Fastest call: {traces.loc[traces['duration_ms'].idxmin(), 'action']} "
       f"({traces['duration_ms'].min()} ms)")
 ```
 
-### 5c — Retry Design Patterns
+### 5c — Padrões de Design para Retry
 
-| Pattern | A2A Layer | MCP Layer |
-|---------|-----------|-----------|
-| **Retry** | Retry the full A2A task with exponential backoff | Retry the specific tool call |
-| **Fallback** | Route to an alternative agent | Use a backup API endpoint |
-| **Circuit Breaker** | Stop delegating to a failing agent | Stop calling a failing tool |
-| **Timeout** | Set per-task timeout in A2A request | Set per-call timeout in MCP |
-| **Idempotency** | Include idempotency key in task ID | Include in tool call params |
-
----
-
-## Step 6: Design Principles
-
-Based on this analysis, here are the key principles for building A2A + MCP systems:
-
-| Principle | Description |
-|-----------|-------------|
-| **Separation of Concerns** | A2A for delegation, MCP for tool access — don't mix them |
-| **Token Awareness** | Only A2A calls consume LLM tokens; optimize agent prompts |
-| **Auth Boundaries** | Separate OAuth scopes for A2A (user context) and MCP (service context) |
-| **Error Isolation** | Handle errors at each protocol boundary independently |
-| **Observability** | Trace both A2A and MCP calls with correlated request IDs |
-| **Idempotency** | Design all operations to be safely retryable |
+| Padrão | Camada A2A | Camada MCP |
+|--------|------------|------------|
+| **Retry** | Retentar a tarefa A2A completa com backoff exponencial | Retentar a chamada de ferramenta específica |
+| **Fallback** | Rotear para um agente alternativo | Usar um endpoint de API de backup |
+| **Circuit Breaker** | Parar de delegar para um agente com falhas | Parar de chamar uma ferramenta com falhas |
+| **Timeout** | Definir timeout por tarefa na requisição A2A | Definir timeout por chamada no MCP |
+| **Idempotência** | Incluir chave de idempotência no ID da tarefa | Incluir nos parâmetros da chamada de ferramenta |
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## Etapa 6: Princípios de Design
 
-The file `lab-055/broken_delegation.py` has **3 bugs** in the trace analysis functions. Can you find and fix them all?
+Com base nesta análise, aqui estão os princípios-chave para construir sistemas A2A + MCP:
 
-Run the self-tests to see which ones fail:
+| Princípio | Descrição |
+|-----------|-----------|
+| **Separação de Responsabilidades** | A2A para delegação, MCP para acesso a ferramentas — não misture |
+| **Consciência de Tokens** | Apenas chamadas A2A consomem tokens de LLM; otimize os prompts dos agentes |
+| **Limites de Autenticação** | Escopos OAuth separados para A2A (contexto do usuário) e MCP (contexto do serviço) |
+| **Isolamento de Erros** | Trate erros em cada limite de protocolo de forma independente |
+| **Observabilidade** | Rastreie chamadas A2A e MCP com IDs de requisição correlacionados |
+| **Idempotência** | Projete todas as operações para serem seguras de retentar |
+
+---
+
+## 🐛 Exercício de Correção de Bugs
+
+O arquivo `lab-055/broken_delegation.py` possui **3 bugs** nas funções de análise de traces. Você consegue encontrar e corrigir todos?
+
+Execute os auto-testes para ver quais falham:
 
 ```bash
 python lab-055/broken_delegation.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Você deve ver **3 testes falhando**. Cada teste corresponde a um bug:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | A2A call count | Should filter by `protocol == "A2A"`, not count all rows |
-| Test 2 | Average latency | Should include ALL requests (including errors), not just OK |
-| Test 3 | Success rate | Should divide by total request count, not unique agent count |
+| Teste | O que verifica | Dica |
+|-------|---------------|------|
+| Teste 1 | Contagem de chamadas A2A | Deve filtrar por `protocol == "A2A"`, não contar todas as linhas |
+| Teste 2 | Latência média | Deve incluir TODAS as requisições (incluindo erros), não apenas OK |
+| Teste 3 | Taxa de sucesso | Deve dividir pela contagem total de requisições, não pela contagem de agentes únicos |
 
-Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done!
+Corrija todos os 3 bugs e execute novamente. Quando você ver `🎉 All 3 tests passed`, está pronto!
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What is the key difference between A2A and MCP?"
+??? question "**Q1 (Múltipla Escolha):** Qual é a principal diferença entre A2A e MCP?"
 
-    - A) A2A is faster than MCP
-    - B) A2A handles agent-to-agent delegation; MCP handles agent-to-tool access
-    - C) A2A uses REST; MCP uses GraphQL
-    - D) A2A is for cloud agents; MCP is for local agents
+    - A) A2A é mais rápido que MCP
+    - B) A2A lida com delegação agente-para-agente; MCP lida com acesso agente-para-ferramenta
+    - C) A2A usa REST; MCP usa GraphQL
+    - D) A2A é para agentes na nuvem; MCP é para agentes locais
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) A2A handles agent-to-agent delegation; MCP handles agent-to-tool access**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) A2A lida com delegação agente-para-agente; MCP lida com acesso agente-para-ferramenta**
 
-        A2A (Agent-to-Agent) is a peer-to-peer protocol for agents to discover each other and delegate tasks. MCP (Model Context Protocol) is a client-server protocol for agents to access tools, databases, and APIs. They are complementary — a multi-agent system typically uses both.
+        A2A (Agent-to-Agent) é um protocolo peer-to-peer para agentes se descobrirem e delegarem tarefas. MCP (Model Context Protocol) é um protocolo cliente-servidor para agentes acessarem ferramentas, bancos de dados e APIs. Eles são complementares — um sistema multi-agente tipicamente usa ambos.
 
-??? question "**Q2 (Multiple Choice):** Why does the architecture use separate protocols for agent communication and tool access?"
+??? question "**Q2 (Múltipla Escolha):** Por que a arquitetura usa protocolos separados para comunicação entre agentes e acesso a ferramentas?"
 
-    - A) To reduce the total number of API calls
-    - B) Because agents and tools use different programming languages
-    - C) To enable independent scaling, security boundaries, and protocol evolution
-    - D) Because A2A is proprietary and MCP is open source
+    - A) Para reduzir o número total de chamadas de API
+    - B) Porque agentes e ferramentas usam linguagens de programação diferentes
+    - C) Para permitir escalabilidade independente, limites de segurança e evolução de protocolo
+    - D) Porque A2A é proprietário e MCP é open source
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) To enable independent scaling, security boundaries, and protocol evolution**
+    ??? success "✅ Revelar Resposta"
+        **Correto: C) Para permitir escalabilidade independente, limites de segurança e evolução de protocolo**
 
-        Separating agent-to-agent communication (A2A) from agent-to-tool access (MCP) lets you scale each layer independently, enforce different auth scopes at each boundary (user-context OAuth for A2A, service tokens for MCP), and evolve the protocols without breaking the other layer.
+        Separar a comunicação agente-para-agente (A2A) do acesso agente-para-ferramenta (MCP) permite escalar cada camada de forma independente, aplicar escopos de autenticação diferentes em cada limite (OAuth de contexto do usuário para A2A, tokens de serviço para MCP), e evoluir os protocolos sem quebrar a outra camada.
 
-??? question "**Q3 (Run the Lab):** How many A2A calls are in the delegation traces?"
+??? question "**Q3 (Execute o Lab):** Quantas chamadas A2A existem nos traces de delegação?"
 
-    Filter [📥 `delegation_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv) by `protocol == "A2A"` and count the rows.
+    Filtre [📥 `delegation_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv) por `protocol == "A2A"` e conte as linhas.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **8**
 
-        There are 8 A2A calls — one for each request from the Coordinator to a specialist agent (R001–R008). The remaining 12 events are MCP calls from specialists to their back-end tools.
+        Existem 8 chamadas A2A — uma para cada requisição do Coordinator para um agente especialista (R001–R008). Os 12 eventos restantes são chamadas MCP dos especialistas para suas ferramentas de back-end.
 
-??? question "**Q4 (Run the Lab):** How many MCP calls are in the delegation traces?"
+??? question "**Q4 (Execute o Lab):** Quantas chamadas MCP existem nos traces de delegação?"
 
-    Filter `delegation_traces.csv` by `protocol == "MCP"` and count the rows.
+    Filtre `delegation_traces.csv` por `protocol == "MCP"` e conte as linhas.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **12**
 
-        There are 12 MCP calls — FlightAgent makes 5 (search, pricing, booking, payment, search-retry), HotelAgent makes 3 (search, booking, booking), and ItineraryAgent makes 4 (directions, availability, forecast, update).
+        Existem 12 chamadas MCP — FlightAgent faz 5 (search, pricing, booking, payment, search-retry), HotelAgent faz 3 (search, booking, booking), e ItineraryAgent faz 4 (directions, availability, forecast, update).
 
-??? question "**Q5 (Run the Lab):** What is the total number of tokens consumed across all events?"
+??? question "**Q5 (Execute o Lab):** Qual é o número total de tokens consumidos em todos os eventos?"
 
-    Sum the `tokens_used` column in `delegation_traces.csv`.
+    Some a coluna `tokens_used` em `delegation_traces.csv`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **3330**
 
-        Only A2A calls consume tokens (LLM reasoning). The 8 A2A calls use: 450 + 520 + 680 + 380 + 350 + 460 + 290 + 200 = **3330 tokens**. All 12 MCP calls use 0 tokens (direct API calls).
+        Apenas chamadas A2A consomem tokens (raciocínio do LLM). As 8 chamadas A2A usam: 450 + 520 + 680 + 380 + 350 + 460 + 290 + 200 = **3330 tokens**. Todas as 12 chamadas MCP usam 0 tokens (chamadas diretas a APIs).
 
 ---
 
-## Summary
+## Resumo
 
-| Topic | What You Learned |
-|-------|-----------------|
-| Architecture | A2A for agent delegation + MCP for tool access in a unified system |
-| Travel Planner | Coordinator → FlightAgent / HotelAgent / ItineraryAgent |
-| Call Patterns | 8 A2A delegations triggering 12 MCP tool calls |
-| Token Costs | Only A2A calls consume LLM tokens (3330 total) |
-| Error Handling | Cascading failures across protocol boundaries; retry patterns |
-| Design Principles | Separation of concerns, auth boundaries, observability |
+| Tópico | O Que Você Aprendeu |
+|--------|---------------------|
+| Arquitetura | A2A para delegação de agentes + MCP para acesso a ferramentas em um sistema unificado |
+| Planejador de Viagens | Coordinator → FlightAgent / HotelAgent / ItineraryAgent |
+| Padrões de Chamada | 8 delegações A2A acionando 12 chamadas de ferramentas MCP |
+| Custos de Tokens | Apenas chamadas A2A consomem tokens de LLM (3330 no total) |
+| Tratamento de Erros | Falhas em cascata através dos limites de protocolo; padrões de retry |
+| Princípios de Design | Separação de responsabilidades, limites de autenticação, observabilidade |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 054](lab-054-a2a-protocol.md)** — A2A Protocol — Build Interoperable Multi-Agent Systems
-- **[Lab 056](lab-056-federated-connectors.md)** — Federated M365 Copilot Connectors with MCP
+- **[Lab 054](lab-054-a2a-protocol.md)** — Protocolo A2A — Construa Sistemas Multi-Agente Interoperáveis
+- **[Lab 056](lab-056-federated-connectors.md)** — Conectores Federados M365 Copilot com MCP

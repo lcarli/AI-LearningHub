@@ -4,31 +4,31 @@ tags: [github-copilot, free, vscode, agentic]
 # Lab 045: GitHub Copilot Workspace
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
-  <span><strong>Time:</strong> ~30 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — GitHub Copilot account required</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
+  <span><strong>Tempo:</strong> ~30 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Free</span> — Conta do GitHub Copilot necessária</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- What GitHub Copilot Workspace is and how it differs from Copilot Chat
-- How to trigger Workspace from a GitHub issue
-- The Workspace flow: **Specification → Plan → Implementation**
-- How to review, edit, and refine the plan before code is generated
-- How to iterate on the implementation with natural language
-- When to use Workspace vs. Copilot Agent Mode vs. regular Copilot Chat
+- O que é o GitHub Copilot Workspace e como ele difere do Copilot Chat
+- Como acionar o Workspace a partir de uma issue do GitHub
+- O fluxo do Workspace: **Especificação → Plano → Implementação**
+- Como revisar, editar e refinar o plano antes do código ser gerado
+- Como iterar na implementação com linguagem natural
+- Quando usar Workspace vs. Copilot Agent Mode vs. Copilot Chat regular
+- Como acionar o Workspace a partir de uma issue do GitHub
+- O fluxo do Workspace: **Especificação → Plano → Implementação**
+- Como revisar, editar e refinar o plano antes do código ser gerado
+- Como iterar na implementação com linguagem natural
+- Quando usar Workspace vs. Copilot Agent Mode vs. Copilot Chat regular
 
 ---
 
-## Introduction
+## Introdução
 
-**GitHub Copilot Workspace** is an agentic coding experience built into GitHub.com. You start with a **GitHub issue** (a bug report, feature request, or task), and Workspace takes you through an end-to-end journey:
+O **GitHub Copilot Workspace** é uma experiência de codificação agêntica integrada ao GitHub.com. Você começa com uma **issue do GitHub** (um relatório de bug, solicitação de recurso ou tarefa), e o Workspace leva você por uma jornada de ponta a ponta:
 
 ```
 GitHub Issue
@@ -42,36 +42,36 @@ Implementation (actual code changes)
 Pull Request
 ```
 
-Unlike Copilot Chat (which helps you in your editor), Workspace works in the browser and can read your entire repository to understand context.
+Ao contrário do Copilot Chat (que ajuda você no seu editor), o Workspace funciona no navegador e pode ler todo o seu repositório para entender o contexto.
 
 !!! info "Workspace vs. Copilot Chat vs. Agent Mode"
     | | Copilot Chat | Agent Mode (VS Code) | Workspace |
     |--|-------------|---------------------|-----------|
-    | **Where** | IDE sidebar | VS Code editor | github.com browser |
-    | **Trigger** | Manual chat | Manual prompt | GitHub Issue |
-    | **Scope** | Current file/selection | Entire workspace | Entire repository |
-    | **Plan step** | ❌ | ❌ | ✅ Explicit plan you review |
-    | **Best for** | Line-by-line help | Multi-file tasks | Issue-driven development |
+    | **Onde** | Barra lateral da IDE | Editor do VS Code | Navegador github.com |
+    | **Gatilho** | Chat manual | Prompt manual | Issue do GitHub |
+    | **Escopo** | Arquivo/seleção atual | Workspace inteiro | Repositório inteiro |
+    | **Etapa de plano** | ❌ | ❌ | ✅ Plano explícito que você revisa |
+    | **Melhor para** | Ajuda linha por linha | Tarefas multi-arquivo | Desenvolvimento orientado por issues |
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-- GitHub Copilot subscription (Copilot Free includes limited Workspace access)
-- A GitHub repository with code (you can fork the OutdoorGear sample or use any repo)
-- No local setup needed — runs entirely in the browser
+- Assinatura do GitHub Copilot (Copilot Free inclui acesso limitado ao Workspace)
+- Um repositório GitHub com código (você pode fazer fork do exemplo OutdoorGear ou usar qualquer repositório)
+- Nenhuma configuração local necessária — roda inteiramente no navegador
 
 ---
 
-## Step 1: Create a Practice Repository
+## Passo 1: Criar um Repositório de Prática
 
-If you don't have a Python project to work with, fork the OutdoorGear starter:
+Se você não tem um projeto Python para trabalhar, faça fork do starter OutdoorGear:
 
-1. Go to [github.com/lcarli/AI-LearningHub](https://github.com/lcarli/AI-LearningHub)
-2. Fork the repo
-3. In your fork, navigate to `docs/docs/en/labs/lab-018/` — this has the OutdoorGear product functions from Lab 018
+1. Acesse [github.com/lcarli/AI-LearningHub](https://github.com/lcarli/AI-LearningHub)
+2. Faça fork do repositório
+3. No seu fork, navegue até `docs/docs/en/labs/lab-018/` — aqui estão as funções de produto do OutdoorGear do Lab 018
 
-Alternatively, create a minimal Python project:
+Alternativamente, crie um projeto Python mínimo:
 
 ```bash
 mkdir outdoorgear-api && cd outdoorgear-api
@@ -81,14 +81,14 @@ git init
 
 ---
 
-## Step 2: Create a GitHub Issue
+## Passo 2: Criar uma Issue no GitHub
 
-1. In your repository, click **Issues** → **New issue**
-2. Use this template:
+1. No seu repositório, clique em **Issues** → **New issue**
+2. Use este template:
 
-**Title:** `Add product review functionality to the OutdoorGear API`
+**Título:** `Add product review functionality to the OutdoorGear API`
 
-**Body:**
+**Corpo:**
 ```
 ## Feature Request
 
@@ -110,28 +110,28 @@ The API should support:
 - [ ] Type hints on all new functions
 ```
 
-3. Submit the issue — note the issue number (e.g., `#1`)
+3. Envie a issue — anote o número da issue (ex.: `#1`)
 
 ---
 
-## Step 3: Open in Copilot Workspace
+## Passo 3: Abrir no Copilot Workspace
 
-From your issue page:
-1. Click the **▾** dropdown next to **"Open a branch"** (or look for the Copilot icon)
-2. Click **"Open in Copilot Workspace"**
+Na página da sua issue:
+1. Clique no dropdown **▾** ao lado de **"Open a branch"** (ou procure o ícone do Copilot)
+2. Clique em **"Open in Copilot Workspace"**
 
-   Or navigate directly: `github.com/YOUR_ORG/YOUR_REPO/issues/1/workspace`
+   Ou navegue diretamente: `github.com/YOUR_ORG/YOUR_REPO/issues/1/workspace`
 
-!!! tip "Alternative entry point"
-    You can also open Workspace from the Copilot icon (✨) at the top right of any issue page.
+!!! tip "Ponto de entrada alternativo"
+    Você também pode abrir o Workspace pelo ícone do Copilot (✨) no canto superior direito de qualquer página de issue.
 
 ---
 
-## Step 4: Review the Specification
+## Passo 4: Revisar a Especificação
 
-Workspace analyzes your issue and generates a **specification** — a description of what needs to be built, expressed as natural language statements.
+O Workspace analisa sua issue e gera uma **especificação** — uma descrição do que precisa ser construído, expressa como declarações em linguagem natural.
 
-Example specification Workspace might generate:
+Exemplo de especificação que o Workspace pode gerar:
 ```
 The OutdoorGear API needs a review system. When implemented:
 
@@ -149,16 +149,16 @@ The OutdoorGear API needs a review system. When implemented:
    empty comment, retrieving reviews for unknown product
 ```
 
-**Your turn:** Read the specification carefully. Does it match what the issue asked for? If not, click **Edit** and refine it. This is the most important step — a clear specification leads to better code.
+**Sua vez:** Leia a especificação cuidadosamente. Ela corresponde ao que a issue pediu? Se não, clique em **Edit** e refine-a. Este é o passo mais importante — uma especificação clara leva a um código melhor.
 
-!!! warning "Don't skip the spec review"
-    The specification is the foundation for everything that follows. Vague or incorrect specs produce poor code. Spend 2-3 minutes here.
+!!! warning "Não pule a revisão da especificação"
+    A especificação é a base para tudo que vem depois. Especificações vagas ou incorretas produzem código ruim. Gaste 2-3 minutos aqui.
 
 ---
 
-## Step 5: Review and Edit the Plan
+## Passo 5: Revisar e Editar o Plano
 
-After you accept the specification, Workspace generates a **plan** — a list of specific file changes:
+Depois que você aceita a especificação, o Workspace gera um **plano** — uma lista de alterações específicas em arquivos:
 
 ```
 Plan:
@@ -179,18 +179,18 @@ Plan:
    - Test: get_average_rating with 3 reviews → returns correct average
 ```
 
-**Editing the plan:** Click any step and use natural language to modify it:
+**Editando o plano:** Clique em qualquer etapa e use linguagem natural para modificá-la:
 - "Also add type hints to all new functions"
 - "Use a list instead of a dict for REVIEWS storage"
 - "Add a DELETE endpoint for removing a review"
 
 ---
 
-## Step 6: Generate the Implementation
+## Passo 6: Gerar a Implementação
 
-Click **"Implement"** to generate the code changes.
+Clique em **"Implement"** para gerar as alterações de código.
 
-Workspace will show you a diff for each planned change. Review each file:
+O Workspace mostrará um diff para cada alteração planejada. Revise cada arquivo:
 
 ```python
 # Example generated code in products.py
@@ -250,76 +250,76 @@ def get_average_rating(product_id: str) -> Optional[float]:
 
 ---
 
-## Step 7: Iterate with Natural Language
+## Passo 7: Iterar com Linguagem Natural
 
-After seeing the generated code, you can request changes without re-reading all the code:
+Depois de ver o código gerado, você pode solicitar alterações sem reler todo o código:
 
-In the Workspace chat, type:
+No chat do Workspace, digite:
 - "The submit_review function should also check that the product_id exists before storing the review"
 - "Add a `helpful_votes` integer field to the Review dataclass, defaulting to 0"
 - "Change the REVIEWS store to use a class with proper encapsulation"
 
-Workspace will update the plan and regenerate only the affected parts.
+O Workspace atualizará o plano e regenerará apenas as partes afetadas.
 
 ---
 
-## Step 8: Create the Pull Request
+## Passo 8: Criar o Pull Request
 
-When satisfied with the implementation:
+Quando estiver satisfeito com a implementação:
 
-1. Click **"Create pull request"**
-2. Workspace pre-fills the PR title and body with:
-   - Link to the original issue
-   - Summary of changes
-   - List of files modified
-   - Test results (if tests ran)
-3. Review the PR on GitHub as normal
-4. Request code review from teammates
-
----
-
-## Workspace vs. Copilot Agent Mode — Choosing the Right Tool
-
-| Situation | Use |
-|-----------|-----|
-| Working from a formal GitHub issue | **Workspace** — issue provides clear context |
-| Quick multi-file refactor in VS Code | **Agent Mode** — faster, no browser switch |
-| Issue requires understanding many files | **Workspace** — better cross-repo context |
-| Exploratory coding, no issue | **Agent Mode** or **Copilot Chat** |
-| Need a reviewable plan before coding | **Workspace** — explicit plan step |
-| Bug fix with clear repro steps | Either works well |
+1. Clique em **"Create pull request"**
+2. O Workspace preenche automaticamente o título e corpo do PR com:
+   - Link para a issue original
+   - Resumo das alterações
+   - Lista de arquivos modificados
+   - Resultados de testes (se os testes rodaram)
+3. Revise o PR no GitHub normalmente
+4. Solicite revisão de código dos colegas de equipe
 
 ---
 
-## 🧠 Knowledge Check
+## Workspace vs. Copilot Agent Mode — Escolhendo a Ferramenta Certa
 
-??? question "1. What is the purpose of the Specification step in Copilot Workspace?"
-    The specification translates the GitHub issue (which is written for humans) into **precise, testable statements** about what the code should do when complete. It catches ambiguities before any code is written — much cheaper to fix a misunderstanding in the spec than in the implementation.
-
-??? question "2. Why is it important to review and edit the Plan before clicking Implement?"
-    The plan determines which files will be created or modified and what changes will be made. If the plan is wrong (missing files, wrong approach, incorrect scope), the generated code will be wrong too. Editing the plan with natural language is much faster than editing generated code afterwards.
-
-??? question "3. What is the main advantage of Workspace over asking Copilot Chat to 'implement this issue'?"
-    Workspace provides a **structured, reviewable process** with explicit Spec and Plan steps that you can review and edit before any code is generated. Copilot Chat goes directly to code without these review points, making it harder to catch misunderstandings early. Workspace also has better full-repository context.
-
----
-
-## Summary
-
-Copilot Workspace transforms a GitHub issue into a pull request through a structured, reviewable process:
-
-1. **Issue** → provides the requirement
-2. **Specification** → defines what "done" looks like in precise terms
-3. **Plan** → lists exact file changes (reviewable, editable)
-4. **Implementation** → generates the code
-5. **Pull Request** → ready for team review
-
-The key insight: Workspace is not just code generation — it's **agentic issue resolution** where you stay in control at each step.
+| Situação | Use |
+|----------|-----|
+| Trabalhando a partir de uma issue formal do GitHub | **Workspace** — a issue fornece contexto claro |
+| Refatoração rápida multi-arquivo no VS Code | **Agent Mode** — mais rápido, sem troca de navegador |
+| A issue requer entender muitos arquivos | **Workspace** — melhor contexto cross-repo |
+| Codificação exploratória, sem issue | **Agent Mode** ou **Copilot Chat** |
+| Precisa de um plano revisável antes de codificar | **Workspace** — etapa de plano explícita |
+| Correção de bug com passos de reprodução claros | Ambos funcionam bem |
 
 ---
 
-## Next Steps
+## 🧠 Verificação de Conhecimento
 
-- **Agentic coding in VS Code:** → [Lab 016 — Copilot Agent Mode](lab-016-copilot-agent-mode.md)
-- **Build a custom Copilot Extension:** → [Lab 041 — Custom GitHub Copilot Extension](lab-041-copilot-extension.md)
-- **Automate code review with CI/CD:** → [Lab 037 — CI/CD for AI Agents](lab-037-cicd-github-actions.md)
+??? question "1. Qual é o propósito da etapa de Especificação no Copilot Workspace?"
+    A especificação traduz a issue do GitHub (que é escrita para humanos) em **declarações precisas e testáveis** sobre o que o código deve fazer quando concluído. Ela captura ambiguidades antes que qualquer código seja escrito — é muito mais barato corrigir um mal-entendido na especificação do que na implementação.
+
+??? question "2. Por que é importante revisar e editar o Plano antes de clicar em Implementar?"
+    O plano determina quais arquivos serão criados ou modificados e quais alterações serão feitas. Se o plano estiver errado (arquivos faltando, abordagem errada, escopo incorreto), o código gerado também estará errado. Editar o plano com linguagem natural é muito mais rápido do que editar código gerado depois.
+
+??? question "3. Qual é a principal vantagem do Workspace em relação a pedir ao Copilot Chat para 'implementar esta issue'?"
+    O Workspace fornece um **processo estruturado e revisável** com etapas explícitas de Especificação e Plano que você pode revisar e editar antes que qualquer código seja gerado. O Copilot Chat vai direto para o código sem esses pontos de revisão, tornando mais difícil detectar mal-entendidos cedo. O Workspace também tem melhor contexto de repositório completo.
+
+---
+
+## Resumo
+
+O Copilot Workspace transforma uma issue do GitHub em um pull request através de um processo estruturado e revisável:
+
+1. **Issue** → fornece o requisito
+2. **Especificação** → define como "pronto" se parece em termos precisos
+3. **Plano** → lista as alterações exatas nos arquivos (revisável, editável)
+4. **Implementação** → gera o código
+5. **Pull Request** → pronto para revisão da equipe
+
+O insight principal: o Workspace não é apenas geração de código — é **resolução agêntica de issues** onde você mantém o controle em cada etapa.
+
+---
+
+## Próximos Passos
+
+- **Codificação agêntica no VS Code:** → [Lab 016 — Copilot Agent Mode](lab-016-copilot-agent-mode.md)
+- **Construir uma extensão personalizada do Copilot:** → [Lab 041 — Custom GitHub Copilot Extension](lab-041-copilot-extension.md)
+- **Automatizar revisão de código com CI/CD:** → [Lab 037 — CI/CD for AI Agents](lab-037-cicd-github-actions.md)

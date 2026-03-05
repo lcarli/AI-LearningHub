@@ -1,31 +1,26 @@
-# Lab 042: Enterprise RAG with Evaluations
+# Lab 042: RAG Empresarial com Avaliações
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">RAG</a></span>
-  <span><strong>Time:</strong> ~120 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-azure-paid">Azure paid</span></span>
+  <span><strong>Nível:</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Tempo:</strong> ~120 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-azure-paid">Azure paid</span></span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+!!! danger "Aviso de custo"
+    Este lab requer recursos pagos do Azure. Custo estimado: $10-$50 dependendo do uso.
+    Sempre configure alertas de orçamento antes de começar.
 
+## O que Você Vai Aprender
 
-
-!!! danger "Cost warning"
-    This lab requires Azure paid resources. Estimated cost: $10-$50 depending on usage.
-    Always set budget alerts before starting.
-
-## What You'll Learn
-
-> 🚧 **This lab is coming soon.** Content is being developed.
+> 🚧 **Este lab estará disponível em breve.** O conteúdo está sendo desenvolvido.
 >
-> **Overview:** Build an enterprise RAG pipeline with chunking strategies, re-ranking, and evaluate quality using the Azure AI Evaluation SDK.
+> **Visão Geral:** Construa um pipeline de RAG empresarial com estratégias de chunking, re-ranking e avalie a qualidade usando o Azure AI Evaluation SDK.
 
-## Prerequisites
+## Pré-requisitos
 
-See [Prerequisites & Accounts](../prerequisites.md) for setup instructions.
+Veja [Pré-requisitos e Contas](../prerequisites.md) para instruções de configuração.
 
 ---
 
-*Check back soon, or [contribute to this lab](https://github.com/YOUR_ORG/ai-agents-learning-hub)!*
+*Volte em breve, ou [contribua com este lab](https://github.com/YOUR_ORG/ai-agents-learning-hub)!*

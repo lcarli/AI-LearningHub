@@ -1,54 +1,49 @@
 ---
 tags: [foundry, agent-service, multi-agent, production, enterprise, python]
 ---
-# Lab 074: Foundry Agent Service — Production Multi-Agent Deployment
+# Lab 074: Foundry Agent Service — Implantação Multi-Agente em Produção
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
-  <span><strong>Time:</strong> ~120 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock agent data</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Tempo:</strong> ~120 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados simulados de agentes</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- O que é o **Foundry Agent Service** e como ele orquestra sistemas multi-agente em produção
+- Como os tipos de agentes (especialista, orquestrador) trabalham juntos em uma implantação
+- Analisar a saúde da frota de agentes: volumes de requisições, latência, taxas de erro e status
+- Identificar **agentes degradados** e **riscos de configuração** (ex.: filtros de conteúdo desativados)
+- Construir um **painel de saúde da frota** para monitoramento em produção
 
+## Introdução
 
-## What You'll Learn
+O **Azure AI Foundry Agent Service** fornece uma plataforma gerenciada para implantar, orquestrar e monitorar sistemas multi-agente em escala empresarial. Em vez de construir orquestração personalizada, você define agentes com ferramentas, memória e modelos específicos — e o serviço cuida do roteamento, gerenciamento de estado e escalabilidade.
 
-- What the **Foundry Agent Service** is and how it orchestrates production multi-agent systems
-- How agent types (specialist, orchestrator) work together in a deployment
-- Analyze agent fleet health: request volumes, latency, error rates, and status
-- Identify **degraded agents** and **configuration risks** (e.g., disabled content filters)
-- Build a **fleet health dashboard** for production monitoring
+### Tipos de Agentes
 
-## Introduction
+| Tipo | Função | Exemplo |
+|------|--------|---------|
+| **Orquestrador** | Roteia requisições para especialistas, gerencia o fluxo de conversa | SupportRouter, Coordinator |
+| **Especialista** | Lida com um domínio específico com ferramentas e memória dedicadas | ProductAdvisor, OrderProcessor |
 
-The **Azure AI Foundry Agent Service** provides a managed platform for deploying, orchestrating, and monitoring multi-agent systems at enterprise scale. Instead of building custom orchestration, you define agents with specific tools, memory, and models — and the service handles routing, state management, and scaling.
+### O Cenário
 
-### Agent Types
+Você é um **SRE de Plataforma** gerenciando uma implantação multi-agente para uma empresa de e-commerce. A frota tem **8 agentes** — 2 orquestradores e 6 especialistas — rodando no Azure Container Apps. Você foi alertado de que um agente está degradado e precisa investigar.
 
-| Type | Role | Example |
-|------|------|---------|
-| **Orchestrator** | Routes requests to specialists, manages conversation flow | SupportRouter, Coordinator |
-| **Specialist** | Handles a specific domain with dedicated tools and memory | ProductAdvisor, OrderProcessor |
+Seu dataset (`foundry_agents.csv`) contém o status atual da frota. Sua tarefa: analisar métricas de saúde, identificar problemas e produzir um relatório de status da frota.
 
-### The Scenario
+!!! info "Dados Simulados"
+    Este lab usa um CSV simulado de frota de agentes que espelha as métricas que você veria no painel de monitoramento do Azure AI Foundry. Os padrões (picos de latência, taxas de erro, status degradado) representam cenários comuns de produção.
 
-You are a **Platform SRE** managing a multi-agent deployment for an e-commerce company. The fleet has **8 agents** — 2 orchestrators and 6 specialists — running on Azure Container Apps. You've been alerted that one agent is degraded and need to investigate.
+## Pré-requisitos
 
-Your dataset (`foundry_agents.csv`) contains the current fleet status. Your job: analyze health metrics, identify issues, and produce a fleet status report.
-
-!!! info "Mock Data"
-    This lab uses a mock agent fleet CSV that mirrors the metrics you'd see in Azure AI Foundry's monitoring dashboard. The patterns (latency spikes, error rates, degraded status) represent common production scenarios.
-
-## Prerequisites
-
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run the analysis scripts |
-| `pandas` library | Data manipulation |
+| Python 3.10+ | Executar os scripts de análise |
+| Biblioteca `pandas` | Manipulação de dados |
 
 ```bash
 pip install pandas
@@ -56,27 +51,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-074/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-074/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_foundry.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/broken_foundry.py) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_foundry.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/broken_foundry.py) |
 | `foundry_agents.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) |
 
 ---
 
-## Step 1: Understand the Fleet Architecture
+## Etapa 1: Entenda a Arquitetura da Frota
 
-Before analyzing data, understand how the agents fit together:
+Antes de analisar os dados, entenda como os agentes se encaixam:
 
 ```
                     ┌─────────────────┐
@@ -99,18 +94,18 @@ Before analyzing data, understand how the agents fit together:
   └────────┘└────────┘└────────┘└──────────┘
 ```
 
-### Key Configuration Fields
+### Campos de Configuração Principais
 
-| Field | Description |
+| Campo | Descrição |
 |-------|-----------|
-| **memory_type** | How the agent persists state: `cosmos_db` (durable), `ai_search` (vector), `session_only` (ephemeral), `none` |
-| **deployment** | Infrastructure: `container_apps` (managed) or `vm` (self-hosted) |
-| **content_filter** | Whether Azure AI content safety is `enabled` or `disabled` |
-| **status** | Agent health: `active` or `degraded` |
+| **memory_type** | Como o agente persiste estado: `cosmos_db` (durável), `ai_search` (vetorial), `session_only` (efêmero), `none` |
+| **deployment** | Infraestrutura: `container_apps` (gerenciado) ou `vm` (auto-hospedado) |
+| **content_filter** | Se a segurança de conteúdo do Azure AI está `enabled` ou `disabled` |
+| **status** | Saúde do agente: `active` ou `degraded` |
 
 ---
 
-## Step 2: Load and Explore the Fleet Data
+## Etapa 2: Carregue e Explore os Dados da Frota
 
 ```python
 import pandas as pd
@@ -124,7 +119,7 @@ print(f"\nFull fleet:")
 print(df[["agent_id", "agent_name", "agent_type", "model", "status"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total agents: 8
@@ -134,9 +129,9 @@ Statuses: {'active': 7, 'degraded': 1}
 
 ---
 
-## Step 3: Analyze Request Volume and Load Distribution
+## Etapa 3: Analise o Volume de Requisições e a Distribuição de Carga
 
-How is traffic distributed across the fleet?
+Como o tráfego está distribuído pela frota?
 
 ```python
 total_requests = df["requests_24h"].sum()
@@ -149,31 +144,31 @@ for _, row in df.sort_values("requests_24h", ascending=False).iterrows():
     print(f"  {row['agent_name']:>20s}: {row['requests_24h']:>5,}  ({pct:>5.1f}%) {bar}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total 24h requests across fleet: 9,380
 ```
 
-| Agent | Requests | Share |
-|-------|----------|-------|
-| Coordinator | 3,200 | 34.1% |
-| SupportRouter | 2,100 | 22.4% |
-| ProductAdvisor | 1,250 | 13.3% |
-| OrderProcessor | 890 | 9.5% |
-| QualityReviewer | 780 | 8.3% |
-| InventoryMonitor | 560 | 6.0% |
-| AnalyticsAgent | 420 | 4.5% |
-| LegacyBridge | 180 | 1.9% |
+| Agente | Requisições | Participação |
+|--------|-------------|--------------|
+| Coordinator | 3.200 | 34,1% |
+| SupportRouter | 2.100 | 22,4% |
+| ProductAdvisor | 1.250 | 13,3% |
+| OrderProcessor | 890 | 9,5% |
+| QualityReviewer | 780 | 8,3% |
+| InventoryMonitor | 560 | 6,0% |
+| AnalyticsAgent | 420 | 4,5% |
+| LegacyBridge | 180 | 1,9% |
 
 !!! tip "Insight"
-    The **Coordinator orchestrator handles 34% of all traffic** — it's the entry point for most requests. If it goes down, the entire system is affected. The SupportRouter is the second-busiest, routing customer support queries to specialists.
+    O **orquestrador Coordinator lida com 34% de todo o tráfego** — ele é o ponto de entrada para a maioria das requisições. Se ele cair, todo o sistema é afetado. O SupportRouter é o segundo mais ocupado, roteando consultas de suporte ao cliente para especialistas.
 
 ---
 
-## Step 4: Identify Degraded and At-Risk Agents
+## Etapa 4: Identifique Agentes Degradados e em Risco
 
-### 4a — Degraded Agents
+### 4a — Agentes Degradados
 
 ```python
 degraded = df[df["status"] == "degraded"]
@@ -185,7 +180,7 @@ for _, agent in degraded.iterrows():
     print(f"  Requests: {agent['requests_24h']}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Degraded agents: 1
@@ -196,7 +191,7 @@ Degraded agents: 1
   Requests: 420
 ```
 
-### 4b — High Error Rate Agents
+### 4b — Agentes com Alta Taxa de Erro
 
 ```python
 high_error = df[df["error_rate_pct"] > 5.0]
@@ -205,7 +200,7 @@ for _, agent in high_error.iterrows():
     print(f"  {agent['agent_name']}: {agent['error_rate_pct']}% errors")
 ```
 
-### 4c — Content Filter Status
+### 4c — Status do Filtro de Conteúdo
 
 ```python
 disabled_filter = df[df["content_filter"] == "disabled"]
@@ -214,12 +209,12 @@ for _, agent in disabled_filter.iterrows():
     print(f"  {agent['agent_name']} ({agent['agent_id']}) — deployment: {agent['deployment']}")
 ```
 
-!!! warning "Security Risk"
-    **LegacyBridge (FA08)** has its content filter **disabled** and runs on a self-hosted VM. This is a compliance risk — all production agents should have content safety enabled, especially those handling customer data.
+!!! warning "Risco de Segurança"
+    **LegacyBridge (FA08)** tem seu filtro de conteúdo **desativado** e roda em uma VM auto-hospedada. Isso é um risco de conformidade — todos os agentes em produção devem ter a segurança de conteúdo habilitada, especialmente aqueles que lidam com dados de clientes.
 
 ---
 
-## Step 5: Analyze Memory and Infrastructure Patterns
+## Etapa 5: Analise Padrões de Memória e Infraestrutura
 
 ```python
 print("Memory type distribution:")
@@ -244,7 +239,7 @@ for model, group in df.groupby("model"):
 
 ---
 
-## Step 6: Build the Fleet Health Report
+## Etapa 6: Construa o Relatório de Saúde da Frota
 
 ```python
 avg_latency = df["avg_latency_ms"].mean()
@@ -288,100 +283,100 @@ print("💾 Saved to lab-074/fleet_report.md")
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-074/broken_foundry.py` contains **3 bugs** that produce incorrect fleet metrics. Can you find and fix them all?
+O arquivo `lab-074/broken_foundry.py` contém **3 bugs** que produzem métricas incorretas da frota. Você consegue encontrar e corrigir todos?
 
-Run the self-tests to see which ones fail:
+Execute os autotestes para ver quais falham:
 
 ```bash
 python lab-074/broken_foundry.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Você deverá ver **3 testes falhando**. Cada teste corresponde a um bug:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Total 24h requests | Should sum requests, not average them |
-| Test 2 | Degraded agent count | Should count `degraded` status, not `active` |
-| Test 3 | Agents without durable memory | Should count `none`/`session_only`, not `cosmos_db` |
+| Teste | O que verifica | Dica |
+|-------|---------------|------|
+| Teste 1 | Total de requisições em 24h | Deve somar as requisições, não calcular a média |
+| Teste 2 | Contagem de agentes degradados | Deve contar o status `degraded`, não `active` |
+| Teste 3 | Agentes sem memória durável | Deve contar `none`/`session_only`, não `cosmos_db` |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
-
----
-
-
-## 🧠 Knowledge Check
-
-??? question "**Q1 (Multiple Choice):** What is the role of an orchestrator agent in a Foundry multi-agent deployment?"
-
-    - A) It performs a specific domain task like order processing
-    - B) It routes requests to specialist agents and manages conversation flow
-    - C) It stores agent memory in Cosmos DB
-    - D) It monitors agent health and restarts failed agents
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It routes requests to specialist agents and manages conversation flow**
-
-        Orchestrator agents act as the "traffic controller" in a multi-agent system. They receive incoming requests, determine which specialist(s) should handle them, route the conversation accordingly, and manage the overall flow. Specialists handle the domain-specific work.
-
-??? question "**Q2 (Multiple Choice):** Why is a disabled content filter a security risk for production agents?"
-
-    - A) It makes the agent slower
-    - B) It allows the agent to generate harmful, biased, or policy-violating content
-    - C) It prevents the agent from accessing external APIs
-    - D) It increases token costs
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It allows the agent to generate harmful, biased, or policy-violating content**
-
-        Azure AI Content Safety filters detect and block harmful content (hate speech, violence, self-harm, sexual content). Disabling the filter means the agent can produce or respond to such content without guardrails — a compliance and reputational risk in any production deployment.
-
-??? question "**Q3 (Run the Lab):** What is the total number of requests across the entire fleet in the last 24 hours?"
-
-    Run the Step 3 analysis on [📥 `foundry_agents.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) and check the results.
-
-    ??? success "✅ Reveal Answer"
-        **9,380 requests**
-
-        Sum of all agent `requests_24h` values: 1,250 + 890 + 2,100 + 560 + 3,200 + 780 + 420 + 180 = **9,380**.
-
-??? question "**Q4 (Run the Lab):** How many agents are in a degraded state?"
-
-    Run the Step 4a analysis to find out.
-
-    ??? success "✅ Reveal Answer"
-        **1 agent**
-
-        Only **AnalyticsAgent (FA07)** is in a `degraded` state, with an 8.5% error rate and 850ms average latency — significantly worse than the other agents. This likely indicates a backend connectivity issue with its AI Search memory store.
-
-??? question "**Q5 (Run the Lab):** How many agents have their content filter disabled?"
-
-    Run the Step 4c analysis to check content filter status.
-
-    ??? success "✅ Reveal Answer"
-        **1 agent**
-
-        Only **LegacyBridge (FA08)** has `content_filter=disabled`. It's also the only agent deployed on a self-hosted VM rather than Container Apps, and has the highest error rate (12.0%) in the fleet. This agent needs immediate attention.
+Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, está pronto!
 
 ---
 
-## Summary
 
-| Topic | What You Learned |
-|-------|-----------------|
-| Foundry Agent Service | Managed platform for multi-agent orchestration and deployment |
-| Agent Types | Orchestrators route; specialists execute domain tasks |
-| Fleet Monitoring | Track requests, latency, error rates, and status per agent |
-| Degraded Detection | Identify agents with elevated error rates or latency |
-| Content Safety | All production agents should have content filters enabled |
-| Memory Patterns | Cosmos DB for durable, AI Search for vector, session_only for ephemeral |
+## 🧠 Verificação de Conhecimento
+
+??? question "**Q1 (Múltipla Escolha):** Qual é o papel de um agente orquestrador em uma implantação multi-agente do Foundry?"
+
+    - A) Ele executa uma tarefa de domínio específico, como processamento de pedidos
+    - B) Ele roteia requisições para agentes especialistas e gerencia o fluxo de conversa
+    - C) Ele armazena a memória do agente no Cosmos DB
+    - D) Ele monitora a saúde dos agentes e reinicia agentes com falha
+
+    ??? success "✅ Revelar Resposta"
+        **Correta: B) Ele roteia requisições para agentes especialistas e gerencia o fluxo de conversa**
+
+        Agentes orquestradores atuam como o "controlador de tráfego" em um sistema multi-agente. Eles recebem requisições de entrada, determinam qual(is) especialista(s) deve(m) tratá-las, roteiam a conversa adequadamente e gerenciam o fluxo geral. Os especialistas lidam com o trabalho específico do domínio.
+
+??? question "**Q2 (Múltipla Escolha):** Por que um filtro de conteúdo desativado é um risco de segurança para agentes em produção?"
+
+    - A) Ele torna o agente mais lento
+    - B) Ele permite que o agente gere conteúdo prejudicial, tendencioso ou que viole políticas
+    - C) Ele impede que o agente acesse APIs externas
+    - D) Ele aumenta os custos de tokens
+
+    ??? success "✅ Revelar Resposta"
+        **Correta: B) Ele permite que o agente gere conteúdo prejudicial, tendencioso ou que viole políticas**
+
+        Os filtros do Azure AI Content Safety detectam e bloqueiam conteúdo prejudicial (discurso de ódio, violência, autolesão, conteúdo sexual). Desativar o filtro significa que o agente pode produzir ou responder a esse tipo de conteúdo sem proteções — um risco de conformidade e reputação em qualquer implantação em produção.
+
+??? question "**Q3 (Execute o Lab):** Qual é o número total de requisições em toda a frota nas últimas 24 horas?"
+
+    Execute a análise da Etapa 3 no [📥 `foundry_agents.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) e verifique os resultados.
+
+    ??? success "✅ Revelar Resposta"
+        **9.380 requisições**
+
+        Soma de todos os valores `requests_24h` dos agentes: 1.250 + 890 + 2.100 + 560 + 3.200 + 780 + 420 + 180 = **9.380**.
+
+??? question "**Q4 (Execute o Lab):** Quantos agentes estão em estado degradado?"
+
+    Execute a análise da Etapa 4a para descobrir.
+
+    ??? success "✅ Revelar Resposta"
+        **1 agente**
+
+        Apenas o **AnalyticsAgent (FA07)** está em estado `degraded`, com uma taxa de erro de 8,5% e latência média de 850ms — significativamente pior que os outros agentes. Isso provavelmente indica um problema de conectividade com o backend do seu armazenamento de memória AI Search.
+
+??? question "**Q5 (Execute o Lab):** Quantos agentes têm o filtro de conteúdo desativado?"
+
+    Execute a análise da Etapa 4c para verificar o status do filtro de conteúdo.
+
+    ??? success "✅ Revelar Resposta"
+        **1 agente**
+
+        Apenas o **LegacyBridge (FA08)** tem `content_filter=disabled`. Ele também é o único agente implantado em uma VM auto-hospedada em vez de Container Apps, e possui a maior taxa de erro (12,0%) da frota. Este agente precisa de atenção imediata.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agent with Semantic Kernel (building the agents themselves)
-- **[Lab 033](lab-033-agent-observability.md)** — Agent Observability with Application Insights (deeper monitoring)
-- **[Lab 030](lab-030-foundry-agent-mcp.md)** — Foundry Agent + MCP (connecting agents to external tools)
-- **[Lab 075](lab-075-powerbi-copilot.md)** — Power BI Copilot (visualizing fleet data with AI-assisted dashboards)
+| Tópico | O que Você Aprendeu |
+|--------|---------------------|
+| Foundry Agent Service | Plataforma gerenciada para orquestração e implantação multi-agente |
+| Tipos de Agentes | Orquestradores roteiam; especialistas executam tarefas de domínio |
+| Monitoramento da Frota | Acompanhe requisições, latência, taxas de erro e status por agente |
+| Detecção de Degradação | Identifique agentes com taxas de erro ou latência elevadas |
+| Segurança de Conteúdo | Todos os agentes em produção devem ter filtros de conteúdo habilitados |
+| Padrões de Memória | Cosmos DB para durável, AI Search para vetorial, session_only para efêmero |
+
+---
+
+## Próximos Passos
+
+- **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agente com Semantic Kernel (construindo os agentes)
+- **[Lab 033](lab-033-agent-observability.md)** — Observabilidade de Agentes com Application Insights (monitoramento aprofundado)
+- **[Lab 030](lab-030-foundry-agent-mcp.md)** — Foundry Agent + MCP (conectando agentes a ferramentas externas)
+- **[Lab 075](lab-075-powerbi-copilot.md)** — Power BI Copilot (visualizando dados da frota com dashboards assistidos por IA)

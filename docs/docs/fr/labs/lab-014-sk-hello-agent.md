@@ -1,48 +1,43 @@
 ---
 tags: [semantic-kernel, free, python, github-models]
 ---
-# Lab 014: Semantic Kernel — Hello Agent
+# Lab 014 : Semantic Kernel — Hello Agent
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/semantic-kernel/">🧠 Semantic Kernel</a></span>
-  <span><strong>Time:</strong> ~30 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account, no credit card</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/semantic-kernel/">🧠 Semantic Kernel</a></span>
+  <span><strong>Durée :</strong> ~30 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Compte GitHub gratuit, pas de carte bancaire</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
-
-
-
 !!! warning "Semantic Kernel → Microsoft Agent Framework"
-    Semantic Kernel is now part of **Microsoft Agent Framework (MAF)**, which unifies SK and AutoGen into a single framework. The concepts in this lab (Kernel, Plugins, function calling) still apply — MAF builds on top of them. See **[Lab 076: Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** for the migration guide.
+    Semantic Kernel fait désormais partie de **Microsoft Agent Framework (MAF)**, qui unifie SK et AutoGen en un seul framework. Les concepts de ce lab (Kernel, Plugins, appel de fonctions) s'appliquent toujours — MAF s'appuie dessus. Voir **[Lab 076 : Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** pour le guide de migration.
 
-## What You'll Learn
+## Ce que vous apprendrez
 
-- What Semantic Kernel (SK) is and its key building blocks
-- How to create an SK **Kernel** connected to GitHub Models (free)
-- How to add your first **Plugin** (native function)
-- How to enable **auto function calling** so the LLM decides when to use your function
+- Ce qu'est Semantic Kernel (SK) et ses composants clés
+- Comment créer un **Kernel** SK connecté à GitHub Models (gratuit)
+- Comment ajouter votre premier **Plugin** (fonction native)
+- Comment activer l'**appel automatique de fonctions** pour que le LLM décide quand utiliser votre fonction
 
 ---
 
 ## Introduction
 
-**Semantic Kernel** is Microsoft's open-source SDK for building AI agents and applications. It sits between your code and the LLM, providing:
+**Semantic Kernel** est le SDK open-source de Microsoft pour construire des agents et des applications IA. Il se place entre votre code et le LLM, fournissant :
 
-- A unified abstraction over any LLM (OpenAI, Azure OpenAI, GitHub Models, Ollama...)
-- A **Plugin system** for defining functions the LLM can call
-- **Auto function calling** — the LLM automatically invokes your functions when needed
-- **Vector memory** for long-term context (covered in Lab 023)
+- Une abstraction unifiée sur n'importe quel LLM (OpenAI, Azure OpenAI, GitHub Models, Ollama...)
+- Un **système de Plugins** pour définir des fonctions que le LLM peut appeler
+- L'**appel automatique de fonctions** — le LLM invoque automatiquement vos fonctions quand c'est nécessaire
+- Une **mémoire vectorielle** pour le contexte à long terme (abordé dans le Lab 023)
 
-In this lab, we build a simple agent that can answer questions **and** call a custom function.
+Dans ce lab, nous construisons un agent simple qui peut répondre à des questions **et** appeler une fonction personnalisée.
 
 ---
 
-## 📁 Starter File
+## 📁 Fichier de démarrage
 
-A skeleton starter file is provided with `TODO` comments for each step:
+Un fichier squelette de démarrage est fourni avec des commentaires `TODO` pour chaque étape :
 
 ```bash
 # From your cloned repo:
@@ -51,11 +46,11 @@ pip install -r requirements.txt
 python hello_agent_starter.py
 ```
 
-Complete the TODOs in order (1–16) to build a full SK agent with semantic functions, native plugins, and a chat loop.
+Complétez les TODOs dans l'ordre (1–16) pour construire un agent SK complet avec des fonctions sémantiques, des plugins natifs et une boucle de conversation.
 
 ---
 
-## Prerequisites Setup
+## Configuration des prérequis
 
 ### Python
 ```bash
@@ -69,37 +64,37 @@ cd HelloSkAgent
 dotnet add package Microsoft.SemanticKernel
 ```
 
-Make sure `GITHUB_TOKEN` is set (see [Lab 013](lab-013-github-models.md#prerequisites-setup)).
+Assurez-vous que `GITHUB_TOKEN` est défini (voir [Lab 013](lab-013-github-models.md#prerequisites-setup)).
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-014/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-014/` dans votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `hello_agent_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/hello_agent_starter.py) |
-| `requirements.txt` | Python dependencies | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/requirements.txt) |
+| Fichier | Description | Téléchargement |
+|---------|-------------|----------------|
+| `hello_agent_starter.py` | Script de démarrage avec des TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/hello_agent_starter.py) |
+| `requirements.txt` | Dépendances Python | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/requirements.txt) |
 
 ---
 
-## Lab Exercise
+## Exercice du lab
 
-### Step 1: Create a basic Kernel
+### Étape 1 : Créer un Kernel de base
 
-The **Kernel** is the central object in Semantic Kernel — it holds your LLM connection and all plugins.
+Le **Kernel** est l'objet central de Semantic Kernel — il contient votre connexion LLM et tous les plugins.
 
 === "Python"
 
-    Create `hello_agent.py`:
+    Créez `hello_agent.py` :
 
     ```python
     import asyncio
@@ -139,7 +134,7 @@ The **Kernel** is the central object in Semantic Kernel — it holds your LLM co
 
 === "C#"
 
-    Edit `Program.cs`:
+    Modifiez `Program.cs` :
 
     ```csharp
     using Microsoft.SemanticKernel;
@@ -162,7 +157,7 @@ The **Kernel** is the central object in Semantic Kernel — it holds your LLM co
     Console.WriteLine(response.Content);
     ```
 
-Run it:
+Exécutez-le :
 
 === "Python"
     ```bash
@@ -173,17 +168,17 @@ Run it:
     dotnet run
     ```
 
-You should see the LLM respond. Now let's add a custom function.
+Vous devriez voir le LLM répondre. Ajoutons maintenant une fonction personnalisée.
 
 ---
 
-### Step 2: Add a Plugin (native function)
+### Étape 2 : Ajouter un Plugin (fonction native)
 
-A **Plugin** is a class with methods the LLM can call. Decorate them with `@kernel_function` (Python) or `[KernelFunction]` (C#).
+Un **Plugin** est une classe avec des méthodes que le LLM peut appeler. Décorez-les avec `@kernel_function` (Python) ou `[KernelFunction]` (C#).
 
 === "Python"
 
-    Add this class before `main()`:
+    Ajoutez cette classe avant `main()` :
 
     ```python
     from semantic_kernel.functions import kernel_function
@@ -206,14 +201,14 @@ A **Plugin** is a class with methods the LLM can call. Decorate them with `@kern
             return weather_data.get(city, f"Weather data not available for {city}")
     ```
 
-    Then register the plugin in `main()`:
+    Puis enregistrez le plugin dans `main()` :
     ```python
     kernel.add_plugin(WeatherPlugin(), plugin_name="weather")
     ```
 
 === "C#"
 
-    Add this class to your project:
+    Ajoutez cette classe à votre projet :
 
     ```csharp
     using Microsoft.SemanticKernel;
@@ -237,20 +232,20 @@ A **Plugin** is a class with methods the LLM can call. Decorate them with `@kern
     }
     ```
 
-    Register in `Program.cs`:
+    Enregistrez dans `Program.cs` :
     ```csharp
     kernel.Plugins.AddFromType<WeatherPlugin>("weather");
     ```
 
 ---
 
-### Step 3: Enable auto function calling
+### Étape 3 : Activer l'appel automatique de fonctions
 
-With auto function calling, the LLM **decides when to call your function** based on the conversation. You don't need to trigger it manually.
+Avec l'appel automatique de fonctions, le LLM **décide quand appeler votre fonction** en fonction de la conversation. Vous n'avez pas besoin de le déclencher manuellement.
 
 === "Python"
 
-    Update your settings to enable auto function calling:
+    Mettez à jour vos paramètres pour activer l'appel automatique de fonctions :
 
     ```python
     from semantic_kernel.connectors.ai.open_ai import OpenAIChatPromptExecutionSettings
@@ -287,21 +282,21 @@ With auto function calling, the LLM **decides when to call your function** based
     Console.WriteLine(response.Content);
     ```
 
-Run it and ask: `"What's the weather like in Seattle today?"`
+Exécutez-le et demandez : `"What's the weather like in Seattle today?"`
 
-The LLM will:
-1. See that `get_current_weather` is available
-2. Call it with `city = "Seattle"`
-3. Incorporate the result into its answer
+Le LLM va :
+1. Voir que `get_current_weather` est disponible
+2. L'appeler avec `city = "Seattle"`
+3. Intégrer le résultat dans sa réponse
 
-!!! success "Expected output"
+!!! success "Résultat attendu"
     "The current weather in Seattle is 🌧️ Rainy, 12°C. Bring an umbrella!"
 
 ---
 
-### Step 4: Build a simple conversation loop
+### Étape 4 : Construire une boucle de conversation simple
 
-Let's make it interactive:
+Rendons-le interactif :
 
 === "Python"
 
@@ -330,18 +325,18 @@ Let's make it interactive:
 
 ---
 
-## Summary
+## Résumé
 
-You've built your first **Semantic Kernel agent** that:
+Vous avez construit votre premier **agent Semantic Kernel** qui :
 
-- ✅ Connects to an LLM (GitHub Models — free)
-- ✅ Has a custom **Plugin** with a native function
-- ✅ Uses **auto function calling** — the LLM decides when to invoke the function
-- ✅ Maintains **conversation history** across turns
+- ✅ Se connecte à un LLM (GitHub Models — gratuit)
+- ✅ Possède un **Plugin** personnalisé avec une fonction native
+- ✅ Utilise l'**appel automatique de fonctions** — le LLM décide quand invoquer la fonction
+- ✅ Maintient un **historique de conversation** entre les tours
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Add memory and more plugins:** → [Lab 023 — SK Plugins, Memory & Planners](lab-023-sk-plugins-memory.md)
-- **Build an MCP Server and connect it to SK:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
+- **Ajouter de la mémoire et plus de plugins :** → [Lab 023 — SK Plugins, Memory & Planners](lab-023-sk-plugins-memory.md)
+- **Construire un serveur MCP et le connecter à SK :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)

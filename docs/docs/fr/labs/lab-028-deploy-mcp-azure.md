@@ -1,50 +1,45 @@
 ---
 tags: [mcp, azure, container-apps, bicep, azure-required]
 ---
-# Lab 028: Deploy MCP Server to Azure Container Apps
+# Lab 028 : Déployer un serveur MCP sur Azure Container Apps
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/mcp/">MCP</a></span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> ~$0 (scale-to-zero) + Azure Container Registry ~$5/month</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/mcp/">MCP</a></span>
+  <span><strong>Durée :</strong> ~60 min</span>
+  <span><strong>💰 Coût :</strong> ~0 $ (mise à l'échelle à zéro) + Azure Container Registry ~5 $/mois</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+!!! warning "Abonnement Azure requis"
+    Ce lab déploie Azure Container Apps. → [Guide des prérequis](../prerequisites.md)
 
+## Ce que vous apprendrez
 
-
-!!! warning "Azure subscription required"
-    This lab deploys Azure Container Apps. → [Prerequisites guide](../prerequisites.md)
-
-## What You'll Learn
-
-- Containerize an MCP server (Python) with Docker
-- Push the image to **Azure Container Registry**
-- Deploy to **Azure Container Apps** with SSE transport
-- Update the MCP server with zero-downtime rolling deploys
-- Connect from GitHub Copilot and any MCP client
+- Conteneuriser un serveur MCP (Python) avec Docker
+- Pousser l'image vers **Azure Container Registry**
+- Déployer sur **Azure Container Apps** avec le transport SSE
+- Mettre à jour le serveur MCP avec des déploiements progressifs sans interruption
+- Se connecter depuis GitHub Copilot et tout client MCP
 
 ---
 
-## Prerequisites
+## Prérequis
 
-- Docker Desktop — free: https://www.docker.com/products/docker-desktop
-- Azure CLI: `az login`
-- Completed [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
+- Docker Desktop — gratuit : https://www.docker.com/products/docker-desktop
+- Azure CLI : `az login`
+- Avoir terminé le [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)
 
 ---
 
-## Deploy Infrastructure
+## Déployer l'infrastructure
 
-### Option A — Deploy to Azure (one click)
+### Option A — Déployer sur Azure (un clic)
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flcarli%2FAI-LearningHub%2Fmain%2Finfra%2Flab-028-mcp-container-apps%2Fazuredeploy.json)
 
-This deploys:
-- Azure Container Apps Environment + Log Analytics
-- A placeholder container app (you'll update it with your image in Step 3)
+Ceci déploie :
+- Environnement Azure Container Apps + Log Analytics
+- Une application conteneur de substitution (vous la mettrez à jour avec votre image à l'étape 3)
 
 ### Option B — Azure CLI (Bicep)
 
@@ -66,11 +61,11 @@ az deployment group show \
 
 ---
 
-## Lab Exercise
+## Exercice du lab
 
-### Step 1: Create the MCP server (SSE transport)
+### Étape 1 : Créer le serveur MCP (transport SSE)
 
-For remote deployment, use SSE (Server-Sent Events) transport instead of stdio.
+Pour le déploiement distant, utilisez le transport SSE (Server-Sent Events) au lieu de stdio.
 
 ```
 mcp-product-server/
@@ -79,7 +74,7 @@ mcp-product-server/
 └── requirements.txt
 ```
 
-**`server.py`**:
+**`server.py`** :
 
 ```python
 import os, csv, json
@@ -130,12 +125,12 @@ if __name__ == "__main__":
     mcp.run(transport="sse", host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
 ```
 
-**`requirements.txt`**:
+**`requirements.txt`** :
 ```
 mcp[cli]>=1.0.0
 ```
 
-**`Dockerfile`**:
+**`Dockerfile`** :
 ```dockerfile
 FROM python:3.12-slim
 WORKDIR /app
@@ -146,7 +141,7 @@ EXPOSE 8000
 CMD ["python", "server.py"]
 ```
 
-### Step 2: Test locally
+### Étape 2 : Tester localement
 
 ```bash
 cd mcp-product-server
@@ -158,7 +153,7 @@ python server.py
 npx @modelcontextprotocol/inspector http://localhost:8000/sse
 ```
 
-### Step 3: Build and push container image
+### Étape 3 : Construire et pousser l'image conteneur
 
 ```bash
 # Variables — update these
@@ -176,7 +171,7 @@ IMAGE_URL="${ACR_NAME}.azurecr.io/mcp-product-server:latest"
 echo "Image: $IMAGE_URL"
 ```
 
-### Step 4: Deploy to Container Apps
+### Étape 4 : Déployer sur Container Apps
 
 ```bash
 # Get the app name from deployment outputs
@@ -210,9 +205,9 @@ az containerapp show \
   --query properties.configuration.ingress.fqdn -o tsv
 ```
 
-### Step 5: Connect from GitHub Copilot
+### Étape 5 : Se connecter depuis GitHub Copilot
 
-Add to `.vscode/mcp.json`:
+Ajoutez à `.vscode/mcp.json` :
 
 ```json
 {
@@ -225,9 +220,9 @@ Add to `.vscode/mcp.json`:
 }
 ```
 
-Test in Copilot Agent Mode: *"What camping tents do you have in stock?"*
+Testez en mode Agent Copilot : *« Quelles tentes de camping avez-vous en stock ? »*
 
-### Step 6: Zero-downtime updates
+### Étape 6 : Mises à jour sans interruption
 
 ```bash
 # Update to a new version
@@ -243,21 +238,21 @@ az containerapp update \
 
 ---
 
-## Cost Breakdown
+## Détail des coûts
 
-| Resource | SKU | Estimated Cost |
-|----------|-----|---------------|
-| Container Apps | Scale-to-zero (0 replicas when idle) | ~$0 when idle |
-| Container Apps (active) | 0.5 vCPU / 1Gi | ~$0.02/hour active |
-| Azure Container Registry | Basic | ~$5/month |
-| Log Analytics | PerGB2018 | ~$2/month (light usage) |
+| Ressource | SKU | Coût estimé |
+|-----------|-----|-------------|
+| Container Apps | Mise à l'échelle à zéro (0 réplicas au repos) | ~0 $ au repos |
+| Container Apps (actif) | 0.5 vCPU / 1 Gio | ~0,02 $/heure actif |
+| Azure Container Registry | Basic | ~5 $/mois |
+| Log Analytics | PerGB2018 | ~2 $/mois (utilisation légère) |
 
-!!! tip "Scale to zero"
-    Container Apps scales to 0 replicas when there are no requests. For a dev/lab MCP server with occasional use, you'll pay almost nothing.
+!!! tip "Mise à l'échelle à zéro"
+    Container Apps met à l'échelle à 0 réplicas lorsqu'il n'y a pas de requêtes. Pour un serveur MCP de développement/lab avec une utilisation occasionnelle, vous ne paierez presque rien.
 
 ---
 
-## Cleanup
+## Nettoyage
 
 ```bash
 az group delete --name rg-ai-labs-mcp --yes --no-wait
@@ -265,7 +260,7 @@ az group delete --name rg-ai-labs-mcp --yes --no-wait
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Secure the server with auth:** Add Azure API Management or Easy Auth in front
-- **Full Foundry + MCP pipeline:** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)
+- **Sécuriser le serveur avec l'authentification :** Ajoutez Azure API Management ou Easy Auth en amont
+- **Pipeline complet Foundry + MCP :** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)

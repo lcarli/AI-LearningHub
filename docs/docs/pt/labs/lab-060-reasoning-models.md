@@ -1,111 +1,106 @@
 ---
 tags: [reasoning, o3, deepseek-r1, chain-of-thought, benchmark, python]
 ---
-# Lab 060: Reasoning Models — Chain-of-Thought with o3 and DeepSeek R1
+# Lab 060: Modelos de Raciocínio — Chain-of-Thought com o3 e DeepSeek R1
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~75 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses benchmark dataset (Azure OpenAI optional)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Caminho:</strong> Todos os caminhos</span>
+  <span><strong>Tempo:</strong> ~75 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa conjunto de dados de benchmark (Azure OpenAI opcional)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O Que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- How **reasoning models** (o3, DeepSeek R1) differ from standard models (GPT-4o) — extended thinking, chain-of-thought
-- What a **thinking budget** is and how it controls the depth of model reasoning
-- Compare **accuracy, speed, and token cost** across 3 models on 12 benchmark problems
-- Identify which **problem categories and difficulty levels** benefit most from reasoning
-- Apply a decision framework: **when to use reasoning models** vs standard models
-- Understand **cost-performance trade-offs** for production deployments
+- Como **modelos de raciocínio** (o3, DeepSeek R1) diferem de modelos padrão (GPT-4o) — pensamento estendido, chain-of-thought
+- O que é um **orçamento de pensamento** e como ele controla a profundidade do raciocínio do modelo
+- Comparar **precisão, velocidade e custo de tokens** entre 3 modelos em 12 problemas de benchmark
+- Identificar quais **categorias de problemas e níveis de dificuldade** mais se beneficiam do raciocínio
+- Aplicar um framework de decisão: **quando usar modelos de raciocínio** vs modelos padrão
+- Entender **trade-offs de custo-desempenho** para implantações em produção
 
 ---
 
-## Introduction
+## Introdução
 
-Standard LLMs like GPT-4o generate answers in a single forward pass — fast, but they can stumble on problems that require multi-step logical reasoning. **Reasoning models** like o3 and DeepSeek R1 take a different approach: they use **extended thinking** (chain-of-thought) to break complex problems into steps, verify intermediate results, and backtrack when they detect errors.
+LLMs padrão como GPT-4o geram respostas em uma única passagem direta — rápido, mas podem tropeçar em problemas que exigem raciocínio lógico em múltiplas etapas. **Modelos de raciocínio** como o3 e DeepSeek R1 adotam uma abordagem diferente: eles usam **pensamento estendido** (chain-of-thought) para dividir problemas complexos em etapas, verificar resultados intermediários e retroceder quando detectam erros.
 
-The trade-off is clear: reasoning models are slower and use more tokens, but they achieve dramatically higher accuracy on hard problems.
+O trade-off é claro: modelos de raciocínio são mais lentos e usam mais tokens, mas alcançam precisão dramaticamente maior em problemas difíceis.
 
-### The Benchmark
+### O Benchmark
 
-You'll compare **3 models** on **12 problems** across 4 categories:
+Você comparará **3 modelos** em **12 problemas** em 4 categorias:
 
-| Category | Easy | Medium | Hard |
-|----------|------|--------|------|
-| **Math** | Compound interest | System of equations | Prove √2 is irrational |
-| **Code** | Reverse a string | Binary search | Thread-safe LRU cache |
-| **Logic** | Syllogism | Three boxes puzzle | Wolf-goat-cabbage |
-| **Planning** | Hiking itinerary | Delivery route | Microservices migration |
+| Categoria | Fácil | Médio | Difícil |
+|-----------|-------|-------|---------|
+| **Matemática** | Juros compostos | Sistema de equações | Provar que √2 é irracional |
+| **Código** | Inverter uma string | Busca binária | Cache LRU thread-safe |
+| **Lógica** | Silogismo | Puzzle das três caixas | Lobo-cabra-repolho |
+| **Planejamento** | Roteiro de caminhada | Rota de entrega | Migração de microsserviços |
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 ```bash
 pip install pandas
 ```
 
-This lab analyzes pre-computed benchmark results — no API key or Azure subscription required. To run live benchmarks, you would need access to GPT-4o, o3, and DeepSeek R1 via Azure OpenAI or the respective APIs.
+Este lab analisa resultados de benchmark pré-computados — nenhuma chave de API ou assinatura do Azure é necessária. Para executar benchmarks ao vivo, você precisaria de acesso ao GPT-4o, o3 e DeepSeek R1 via Azure OpenAI ou as respectivas APIs.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-060/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-060/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_reasoning.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/broken_reasoning.py) |
-| `reasoning_benchmark.csv` | Benchmark dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv) |
-
----
-
-## Part 1: Understanding Reasoning Models
-
-### Step 1: How reasoning models work
-
-Standard models generate tokens left-to-right without pausing to "think." Reasoning models add an internal deliberation phase:
-
-```
-Standard (GPT-4o):
-  Input → [Generate tokens] → Output
-
-Reasoning (o3 / DeepSeek R1):
-  Input → [Think: break into steps] → [Verify each step] → [Backtrack if needed] → Output
-```
-
-Key concepts:
-
-| Concept | Description |
-|---------|-------------|
-| **Chain-of-thought** | The model explicitly reasons through intermediate steps before answering |
-| **Thinking budget** | Controls how much reasoning the model does (more budget = more thorough = slower) |
-| **Extended thinking** | The model's internal deliberation — visible in some APIs as "thinking tokens" |
-| **Self-verification** | The model checks its own intermediate results and corrects mistakes |
-
-!!! info "Thinking Budget"
-    The thinking budget controls how much reasoning the model does before producing a final answer. A higher budget lets the model explore more solution paths and verify more thoroughly — but costs more tokens and takes more time. For simple questions, a low budget suffices; for complex proofs, you want the full budget.
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_reasoning.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/broken_reasoning.py) |
+| `reasoning_benchmark.csv` | Conjunto de dados de benchmark | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv) |
 
 ---
 
-## Part 2: Load Benchmark Data
+## Parte 1: Entendendo Modelos de Raciocínio
 
-### Step 2: Load [📥 `reasoning_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv)
+### Etapa 1: Como modelos de raciocínio funcionam
 
-The benchmark dataset contains results from running all 12 problems through each model:
+Modelos padrão geram tokens da esquerda para a direita sem pausar para "pensar". Modelos de raciocínio adicionam uma fase de deliberação interna:
+
+```
+Padrão (GPT-4o):
+  Entrada → [Gerar tokens] → Saída
+
+Raciocínio (o3 / DeepSeek R1):
+  Entrada → [Pensar: dividir em etapas] → [Verificar cada etapa] → [Retroceder se necessário] → Saída
+```
+
+Conceitos-chave:
+
+| Conceito | Descrição |
+|----------|-----------|
+| **Chain-of-thought** | O modelo raciocina explicitamente através de etapas intermediárias antes de responder |
+| **Orçamento de pensamento** | Controla quanto raciocínio o modelo realiza (mais orçamento = mais minucioso = mais lento) |
+| **Pensamento estendido** | A deliberação interna do modelo — visível em algumas APIs como "tokens de pensamento" |
+| **Autovalidação** | O modelo verifica seus próprios resultados intermediários e corrige erros |
+
+!!! info "Orçamento de Pensamento"
+    O orçamento de pensamento controla quanto raciocínio o modelo realiza antes de produzir uma resposta final. Um orçamento maior permite que o modelo explore mais caminhos de solução e verifique mais minuciosamente — mas custa mais tokens e leva mais tempo. Para perguntas simples, um orçamento baixo é suficiente; para provas complexas, você quer o orçamento completo.
+
+---
+
+## Parte 2: Carregar Dados de Benchmark
+
+### Etapa 2: Carregar [📥 `reasoning_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv)
+
+O conjunto de dados de benchmark contém resultados da execução de todos os 12 problemas em cada modelo:
 
 ```python
 # reasoning_analysis.py
@@ -123,7 +118,7 @@ print(f"Difficulties: {bench['difficulty'].unique().tolist()}")
 print(bench[["problem_id", "category", "difficulty"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Problems: 12
@@ -147,9 +142,9 @@ problem_id category difficulty
 
 ---
 
-## Part 3: Overall Accuracy Comparison
+## Parte 3: Comparação Geral de Precisão
 
-### Step 3: Calculate accuracy for each model
+### Etapa 3: Calcular a precisão de cada modelo
 
 ```python
 # Overall accuracy
@@ -159,7 +154,7 @@ for model in ["gpt4o", "o3", "deepseek_r1"]:
     print(f"{model:>12}: {correct}/{total} = {correct/total*100:.1f}%")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
       gpt4o: 6/12 = 50.0%
@@ -167,8 +162,8 @@ for model in ["gpt4o", "o3", "deepseek_r1"]:
  deepseek_r1: 11/12 = 91.7%
 ```
 
-!!! warning "Key Finding"
-    GPT-4o gets only half the problems right, while o3 achieves a perfect score. DeepSeek R1 misses just one problem (P12 — the hardest planning problem). The gap is dramatic on hard problems.
+!!! warning "Descoberta Principal"
+    GPT-4o acerta apenas metade dos problemas, enquanto o3 alcança pontuação perfeita. DeepSeek R1 erra apenas um problema (P12 — o problema de planejamento mais difícil). A diferença é dramática nos problemas difíceis.
 
 ```python
 # Which problems does GPT-4o get wrong?
@@ -177,7 +172,7 @@ print("GPT-4o failures:")
 print(gpt4o_fails[["problem_id", "category", "difficulty", "description"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 GPT-4o failures:
@@ -190,7 +185,7 @@ problem_id category difficulty                                       description
        P12 planning       hard  Design a microservices migration plan for a monolith app
 ```
 
-GPT-4o fails on **all hard problems** plus two medium problems (P08, P11) that require multi-step reasoning.
+GPT-4o falha em **todos os problemas difíceis** mais dois problemas médios (P08, P11) que exigem raciocínio em múltiplas etapas.
 
 ```python
 # What does DeepSeek R1 get wrong?
@@ -199,7 +194,7 @@ print("DeepSeek R1 failures:")
 print(r1_fails[["problem_id", "category", "difficulty", "description"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 DeepSeek R1 failures:
@@ -207,13 +202,13 @@ problem_id  category difficulty                                          descrip
        P12  planning       hard  Design a microservices migration plan for a monolith app
 ```
 
-DeepSeek R1 fails only on P12 — the most complex planning problem requiring both technical knowledge and multi-step project planning.
+DeepSeek R1 falha apenas no P12 — o problema de planejamento mais complexo que requer tanto conhecimento técnico quanto planejamento de projeto em múltiplas etapas.
 
 ---
 
-## Part 4: Accuracy by Category and Difficulty
+## Parte 4: Precisão por Categoria e Dificuldade
 
-### Step 4: Break down accuracy by category
+### Etapa 4: Detalhar a precisão por categoria
 
 ```python
 # Accuracy by category
@@ -226,7 +221,7 @@ for category in bench["category"].unique():
         print(f"  {model:>12}: {correct}/{total}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 MATH:
@@ -261,7 +256,7 @@ for diff in ["easy", "medium", "hard"]:
         print(f"  {model:>12}: {correct}/{total} = {correct/total*100:.0f}%")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 EASY:
@@ -280,14 +275,14 @@ HARD:
    deepseek_r1: 3/4 = 75%
 ```
 
-!!! info "Difficulty Insight"
-    All three models ace easy problems. The gap appears at medium difficulty (GPT-4o drops to 50%) and becomes dramatic on hard problems (GPT-4o: 0%, DeepSeek R1: 75%, o3: 100%). Reasoning models earn their keep on hard problems.
+!!! info "Insight de Dificuldade"
+    Todos os três modelos acertam os problemas fáceis. A diferença aparece na dificuldade média (GPT-4o cai para 50%) e se torna dramática nos problemas difíceis (GPT-4o: 0%, DeepSeek R1: 75%, o3: 100%). Modelos de raciocínio provam seu valor nos problemas difíceis.
 
 ---
 
-## Part 5: Speed vs Accuracy Trade-offs
+## Parte 5: Trade-offs de Velocidade vs Precisão
 
-### Step 5: Analyze response time by model
+### Etapa 5: Analisar o tempo de resposta por modelo
 
 ```python
 # Average time per model
@@ -304,7 +299,7 @@ for _, row in bench.iterrows():
           f"R1={row['deepseek_r1_time_sec']:.1f}s")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
       gpt4o: 2.1s average
@@ -319,14 +314,14 @@ Problem-level detail:
   P12 (  hard): GPT-4o=4.0s o3=15.0s R1=11.0s
 ```
 
-!!! warning "Speed Trade-off"
-    o3 is **3.4× slower** than GPT-4o on average (7.1s vs 2.1s). On the hardest problem (P12), o3 takes 15 seconds — acceptable for complex tasks, but too slow for real-time chat. Choose your model based on problem complexity, not blanket deployment.
+!!! warning "Trade-off de Velocidade"
+    o3 é **3,4× mais lento** que GPT-4o em média (7,1s vs 2,1s). No problema mais difícil (P12), o3 leva 15 segundos — aceitável para tarefas complexas, mas lento demais para chat em tempo real. Escolha seu modelo com base na complexidade do problema, não em implantação generalizada.
 
 ---
 
-## Part 6: Token Cost Analysis
+## Parte 6: Análise de Custo de Tokens
 
-### Step 6: Compare token usage
+### Etapa 6: Comparar uso de tokens
 
 ```python
 # Average tokens per model
@@ -343,7 +338,7 @@ for model in ["o3", "deepseek_r1"]:
     print(f"\n{model} uses {ratio:.1f}× more tokens than GPT-4o")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
       gpt4o: 287 avg tokens, 3,440 total
@@ -354,25 +349,25 @@ o3 uses 3.1× more tokens than GPT-4o
 deepseek_r1 uses 2.5× more tokens than GPT-4o
 ```
 
-The extra tokens come from chain-of-thought reasoning — the model is "thinking out loud" internally. This is the cost of higher accuracy.
+Os tokens extras vêm do raciocínio chain-of-thought — o modelo está "pensando em voz alta" internamente. Este é o custo de uma precisão mais alta.
 
 ---
 
-## Part 7: When to Use Each Model
+## Parte 7: Quando Usar Cada Modelo
 
-### Step 7: Decision framework
+### Etapa 7: Framework de decisão
 
-Based on the benchmark results, here's when to use each model:
+Com base nos resultados do benchmark, aqui está quando usar cada modelo:
 
-| Scenario | Recommended Model | Why |
-|----------|------------------|-----|
-| Simple Q&A, FAQ | **GPT-4o** | 100% accuracy on easy problems, 3× faster, 3× cheaper |
-| Multi-step reasoning | **o3** or **DeepSeek R1** | GPT-4o drops to 0% on hard problems |
-| Cost-sensitive production | **DeepSeek R1** | 91.7% accuracy at 2.5× tokens (vs o3's 3.1×) |
-| Maximum accuracy required | **o3** | 100% accuracy, but 3.4× slower and 3.1× more expensive |
-| Real-time conversation | **GPT-4o** | 2.1s avg — reasoning models are too slow for chat |
-| Code generation (complex) | **o3** | Thread-safe, concurrent code needs careful reasoning |
-| Mathematical proofs | **o3** or **DeepSeek R1** | Both handle formal proofs; GPT-4o cannot |
+| Cenário | Modelo Recomendado | Por quê |
+|---------|-------------------|---------|
+| Perguntas e respostas simples, FAQ | **GPT-4o** | 100% de precisão em problemas fáceis, 3× mais rápido, 3× mais barato |
+| Raciocínio em múltiplas etapas | **o3** ou **DeepSeek R1** | GPT-4o cai para 0% em problemas difíceis |
+| Produção com custo sensível | **DeepSeek R1** | 91,7% de precisão com 2,5× tokens (vs 3,1× do o3) |
+| Precisão máxima necessária | **o3** | 100% de precisão, mas 3,4× mais lento e 3,1× mais caro |
+| Conversa em tempo real | **GPT-4o** | 2,1s em média — modelos de raciocínio são lentos demais para chat |
+| Geração de código (complexo) | **o3** | Código thread-safe e concorrente precisa de raciocínio cuidadoso |
+| Provas matemáticas | **o3** ou **DeepSeek R1** | Ambos lidam com provas formais; GPT-4o não consegue |
 
 ```python
 # Summary dashboard
@@ -394,97 +389,97 @@ print("""
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-060/broken_reasoning.py` has **3 bugs** in the benchmark analysis functions. Run the self-tests:
+O arquivo `lab-060/broken_reasoning.py` tem **3 bugs** nas funções de análise de benchmark. Execute os autotestes:
 
 ```bash
 python lab-060/broken_reasoning.py
 ```
 
-You should see **3 failed tests**:
+Você deverá ver **3 testes falhando**:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Model accuracy calculation | Which column represents correctness — `_correct` or `_time_sec`? |
-| Test 2 | Finding the fastest model | Should you use `min` or `max` to find the fastest? |
-| Test 3 | Hard-problem accuracy | Which difficulty level are you filtering for? |
+| Teste | O que verifica | Dica |
+|-------|---------------|------|
+| Teste 1 | Cálculo de precisão do modelo | Qual coluna representa a correção — `_correct` ou `_time_sec`? |
+| Teste 2 | Encontrar o modelo mais rápido | Você deve usar `min` ou `max` para encontrar o mais rápido? |
+| Teste 3 | Precisão em problemas difíceis | Para qual nível de dificuldade você está filtrando? |
 
-Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
+Corrija todos os 3 bugs e execute novamente até ver `🎉 All 3 tests passed`.
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** When should you use a reasoning model instead of a standard model like GPT-4o?"
+??? question "**Q1 (Múltipla Escolha):** Quando você deve usar um modelo de raciocínio em vez de um modelo padrão como GPT-4o?"
 
-    - A) For all tasks — reasoning models are always better
-    - B) For complex multi-step problems requiring logical reasoning, proofs, or planning
-    - C) For real-time chat applications where speed is critical
-    - D) For simple FAQ and classification tasks
+    - A) Para todas as tarefas — modelos de raciocínio são sempre melhores
+    - B) Para problemas complexos em múltiplas etapas que exigem raciocínio lógico, provas ou planejamento
+    - C) Para aplicações de chat em tempo real onde velocidade é crítica
+    - D) Para tarefas simples de FAQ e classificação
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) For complex multi-step problems requiring logical reasoning, proofs, or planning**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Para problemas complexos em múltiplas etapas que exigem raciocínio lógico, provas ou planejamento**
 
-        Reasoning models excel when problems require breaking down into steps, verifying intermediate results, or exploring multiple solution paths. GPT-4o achieves 100% on easy problems — reasoning models add no value there but cost 3× more. Reserve reasoning models for hard problems where GPT-4o's single-pass approach fails.
+        Modelos de raciocínio se destacam quando problemas exigem divisão em etapas, verificação de resultados intermediários ou exploração de múltiplos caminhos de solução. GPT-4o alcança 100% em problemas fáceis — modelos de raciocínio não agregam valor ali, mas custam 3× mais. Reserve modelos de raciocínio para problemas difíceis onde a abordagem de passagem única do GPT-4o falha.
 
-??? question "**Q2 (Multiple Choice):** What does the 'thinking budget' control in a reasoning model?"
+??? question "**Q2 (Múltipla Escolha):** O que o 'orçamento de pensamento' controla em um modelo de raciocínio?"
 
-    - A) The maximum number of API calls per minute
-    - B) The total cost in dollars for a single request
-    - C) How much reasoning the model does before producing a final answer
-    - D) The maximum length of the output response
+    - A) O número máximo de chamadas de API por minuto
+    - B) O custo total em dólares para uma única requisição
+    - C) Quanto raciocínio o modelo realiza antes de produzir uma resposta final
+    - D) O comprimento máximo da resposta de saída
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) How much reasoning the model does before producing a final answer**
+    ??? success "✅ Revelar Resposta"
+        **Correto: C) Quanto raciocínio o modelo realiza antes de produzir uma resposta final**
 
-        The thinking budget controls the depth of the model's internal deliberation. A higher budget allows the model to explore more solution paths, verify intermediate steps more thoroughly, and backtrack when it detects errors. This produces more accurate results but consumes more tokens and takes more time.
+        O orçamento de pensamento controla a profundidade da deliberação interna do modelo. Um orçamento maior permite que o modelo explore mais caminhos de solução, verifique etapas intermediárias mais minuciosamente e retroceda quando detecta erros. Isso produz resultados mais precisos, mas consome mais tokens e leva mais tempo.
 
-??? question "**Q3 (Run the Lab):** What is o3's accuracy on the 12-problem benchmark?"
+??? question "**Q3 (Execute o Lab):** Qual é a precisão do o3 no benchmark de 12 problemas?"
 
-    Calculate `bench["o3_correct"].sum() / len(bench) * 100`.
+    Calcule `bench["o3_correct"].sum() / len(bench) * 100`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **100% (12/12)**
 
-        o3 correctly solves all 12 problems across every category and difficulty level — including P12 (microservices migration plan), which is the only problem DeepSeek R1 fails. This perfect score comes at a cost: o3 averages 7.1 seconds and 878 tokens per problem.
+        o3 resolve corretamente todos os 12 problemas em todas as categorias e níveis de dificuldade — incluindo P12 (plano de migração de microsserviços), que é o único problema que DeepSeek R1 erra. Esta pontuação perfeita tem um custo: o3 gasta em média 7,1 segundos e 878 tokens por problema.
 
-??? question "**Q4 (Run the Lab):** What is GPT-4o's accuracy on the benchmark?"
+??? question "**Q4 (Execute o Lab):** Qual é a precisão do GPT-4o no benchmark?"
 
-    Calculate `bench["gpt4o_correct"].sum() / len(bench) * 100`.
+    Calcule `bench["gpt4o_correct"].sum() / len(bench) * 100`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **50% (6/12)**
 
-        GPT-4o correctly solves 6 of 12 problems. It gets all 4 easy problems right but fails on all 4 hard problems (P03, P06, P09, P12) and 2 medium problems (P08, P11). The failures span all categories — math, code, logic, and planning — confirming that the issue is reasoning depth, not domain knowledge.
+        GPT-4o resolve corretamente 6 dos 12 problemas. Ele acerta todos os 4 problemas fáceis, mas falha em todos os 4 problemas difíceis (P03, P06, P09, P12) e 2 problemas médios (P08, P11). As falhas abrangem todas as categorias — matemática, código, lógica e planejamento — confirmando que o problema é a profundidade do raciocínio, não o conhecimento do domínio.
 
-??? question "**Q5 (Run the Lab):** Which model fails only on problem P12?"
+??? question "**Q5 (Execute o Lab):** Qual modelo falha apenas no problema P12?"
 
-    Check which model has `_correct == False` for exactly one problem, and that problem is P12.
+    Verifique qual modelo tem `_correct == False` para exatamente um problema, e esse problema é P12.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **DeepSeek R1**
 
-        DeepSeek R1 achieves 91.7% accuracy (11/12), failing only on P12 — "Design a microservices migration plan for a monolith app." This is the hardest planning problem, requiring both deep technical knowledge and complex multi-step project planning. o3 solves it; GPT-4o fails on it plus 5 other problems.
+        DeepSeek R1 alcança 91,7% de precisão (11/12), falhando apenas no P12 — "Projetar um plano de migração de microsserviços para um app monolítico". Este é o problema de planejamento mais difícil, exigindo tanto conhecimento técnico profundo quanto planejamento complexo de projeto em múltiplas etapas. o3 o resolve; GPT-4o falha nele e em mais 5 outros problemas.
 
 ---
 
-## Summary
+## Resumo
 
-| Topic | What You Learned |
-|-------|-----------------|
-| Reasoning Models | Extended thinking via chain-of-thought for complex problems |
-| Thinking Budget | Controls reasoning depth — more budget = more accurate but slower |
-| Accuracy | GPT-4o: 50%, DeepSeek R1: 91.7%, o3: 100% on 12-problem benchmark |
-| Speed Trade-off | GPT-4o: 2.1s avg, DeepSeek R1: 5.4s, o3: 7.1s — reasoning costs time |
-| Token Cost | Reasoning models use 2.5–3.1× more tokens than GPT-4o |
-| Decision Framework | Use GPT-4o for simple tasks; reasoning models for hard multi-step problems |
+| Tópico | O Que Você Aprendeu |
+|--------|---------------------|
+| Modelos de Raciocínio | Pensamento estendido via chain-of-thought para problemas complexos |
+| Orçamento de Pensamento | Controla a profundidade do raciocínio — mais orçamento = mais preciso, mas mais lento |
+| Precisão | GPT-4o: 50%, DeepSeek R1: 91,7%, o3: 100% no benchmark de 12 problemas |
+| Trade-off de Velocidade | GPT-4o: 2,1s em média, DeepSeek R1: 5,4s, o3: 7,1s — raciocínio custa tempo |
+| Custo de Tokens | Modelos de raciocínio usam 2,5–3,1× mais tokens que GPT-4o |
+| Framework de Decisão | Use GPT-4o para tarefas simples; modelos de raciocínio para problemas difíceis em múltiplas etapas |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 059](lab-059-voice-agents-realtime.md)** — Voice Agents with GPT Realtime API (real-time interaction, different modality)
-- **[Lab 043](lab-043-multimodal-agents.md)** — Multimodal Agents with GPT-4o Vision (another GPT-4o capability)
-- **[Lab 038](lab-038-cost-optimization.md)** — Cost Optimization (applying the cost-performance trade-offs from this lab)
+- **[Lab 059](lab-059-voice-agents-realtime.md)** — Agentes de Voz com GPT Realtime API (interação em tempo real, modalidade diferente)
+- **[Lab 043](lab-043-multimodal-agents.md)** — Agentes Multimodais com GPT-4o Vision (outra capacidade do GPT-4o)
+- **[Lab 038](lab-038-cost-optimization.md)** — Otimização de Custos (aplicando os trade-offs de custo-desempenho deste lab)

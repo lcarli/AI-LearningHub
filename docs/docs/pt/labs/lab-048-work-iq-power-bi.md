@@ -1,120 +1,115 @@
 ---
 tags: [enterprise, work-iq, copilot-analytics, python, power-bi, viva-insights, roi]
 ---
-# Lab 048: Work IQ — Copilot Impact Analytics & Power BI
+# Lab 048: Work IQ — Análise de Impacto do Copilot e Power BI
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses included mock datasets (live Viva Insights requires M365 Copilot license)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Trilha:</strong> Todas as trilhas</span>
+  <span><strong>Tempo:</strong> ~90 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa conjuntos de dados mock incluídos (Viva Insights ao vivo requer licença M365 Copilot)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- Como a **atribuição de impacto** funciona — conectando o uso do Copilot a resultados de negócios
+- Calcular o **valor em dólares do tempo economizado** (ROI) a partir de dados de adoção do Copilot
+- Usar **correlação de Pearson** para medir a relação entre uso e KPIs
+- Analisar **tendências de adoção mês a mês** para identificar padrões de crescimento
+- Escrever uma **narrativa executiva de impacto** que conta uma história baseada em dados
+- Entender como essas análises se mapeiam para dashboards do **Power BI** e Relatórios Avançados do Viva Insights
 
+!!! abstract "Pré-requisito"
+    Complete o **[Lab 047: Work IQ — Análise de Adoção do Copilot](lab-047-work-iq-copilot-analytics.md)** primeiro. Este lab se baseia nos conceitos de análise de adoção e no cenário da OutdoorGear Inc. do Lab 047.
 
-## What You'll Learn
+## Introdução
 
-- How **impact attribution** works — connecting Copilot usage to business outcomes
-- Calculate the **dollar value of time saved** (ROI) from Copilot adoption data
-- Use **Pearson correlation** to measure the relationship between usage and KPIs
-- Analyze **month-over-month adoption trends** to identify growth patterns
-- Write an **executive impact narrative** that tells a data-driven story
-- Understand how these analyses map to **Power BI** dashboards and Viva Insights Advanced Reporting
+![Modelo de Atribuição de Impacto](../../assets/diagrams/impact-attribution-model.svg)
 
-!!! abstract "Prerequisite"
-    Complete **[Lab 047: Work IQ — Copilot Adoption Analytics](lab-047-work-iq-copilot-analytics.md)** first. This lab builds on the adoption analysis concepts and OutdoorGear Inc. scenario from Lab 047.
+No Lab 047, você respondeu _"Quem está usando o Copilot?"_. Agora os executivos querem a pergunta mais difícil respondida: _"Que valor o Copilot está gerando?"_
 
-## Introduction
+A **atribuição de impacto** conecta o uso de ferramentas de IA a resultados reais de negócios — crescimento de receita, tempos de resposta mais rápidos, satisfação dos funcionários e entrega de projetos. Esta é a análise que garante o investimento contínuo em IA.
 
-![Impact Attribution Model](../../assets/diagrams/impact-attribution-model.svg)
+### O Cenário
 
-In Lab 047 you answered _"Who is using Copilot?"_. Now executives want the harder question answered: _"What value is Copilot creating?"_
+Três meses se passaram desde que a OutdoorGear Inc. implantou o M365 Copilot. Agora você tem:
 
-**Impact attribution** connects AI tool usage to real business outcomes — revenue growth, faster response times, employee satisfaction, and project delivery. This is the analysis that secures continued AI investment.
+1. **Dados de uso do Copilot** — 3 meses de métricas agregadas por departamento (usuários ativos, uso de recursos, tempo economizado)
+2. **KPIs de resultados de negócios** — mudança na receita, taxas de resolução de tickets, tempos de resposta, pontuações de satisfação, entrega de projetos
 
-### The Scenario
+Sua missão: **provar (ou refutar) que o Copilot está impulsionando melhorias mensuráveis nos negócios** — e apresentar suas descobertas ao conselho.
 
-Three months have passed since OutdoorGear Inc. deployed M365 Copilot. You now have:
-
-1. **Copilot usage data** — 3 months of aggregated metrics per department (active users, feature usage, time saved)
-2. **Business outcome KPIs** — revenue change, ticket resolution rates, response times, satisfaction scores, project delivery
-
-Your mission: **prove (or disprove) that Copilot is driving measurable business improvement** — and present your findings to the board.
-
-!!! warning "Correlation ≠ Causation"
-    This lab teaches you to find **correlations** between usage and outcomes. Correlation does NOT prove that Copilot *caused* the improvement — other factors (new hires, process changes, seasonality) could contribute. Always present findings as "departments with higher Copilot usage *tend to* show better outcomes" rather than "Copilot *caused* the improvement."
+!!! warning "Correlação ≠ Causalidade"
+    Este lab ensina você a encontrar **correlações** entre uso e resultados. Correlação NÃO prova que o Copilot *causou* a melhoria — outros fatores (novas contratações, mudanças de processo, sazonalidade) podem contribuir. Sempre apresente as descobertas como "departamentos com maior uso do Copilot *tendem a* mostrar melhores resultados" em vez de "o Copilot *causou* a melhoria."
 
 ---
 
-## 📦 Supporting Files
+## 📦 Arquivos de Suporte
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-048/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-048/` no seu diretório de trabalho.
 
-| File | Description | Download |
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_roi_calculator.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/broken_roi_calculator.py) |
-| `business_outcomes.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv) |
-| `copilot_quarterly_summary.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv) |
-| `impact_analyzer.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/impact_analyzer.py) |
+| `broken_roi_calculator.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/broken_roi_calculator.py) |
+| `business_outcomes.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv) |
+| `copilot_quarterly_summary.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv) |
+| `impact_analyzer.py` | Script inicial com TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/impact_analyzer.py) |
 
 ---
 
-## Step 1: Understand Impact Analytics
+## Passo 1: Entender a Análise de Impacto
 
-Before coding, understand the three pillars of impact analytics:
+Antes de programar, entenda os três pilares da análise de impacto:
 
-| Pillar | What It Measures | Example |
+| Pilar | O Que Ele Mede | Exemplo |
 |--------|-----------------|---------|
-| **ROI (Return on Investment)** | Dollar value of time saved vs. license cost | 188 hours saved × $50/hr = $9,400 |
-| **Correlation** | Statistical relationship between usage and outcomes | r = 0.97 between active days and satisfaction |
-| **Trend Analysis** | How adoption and outcomes change over time | 60% growth in active users over 3 months |
+| **ROI (Retorno sobre Investimento)** | Valor em dólares do tempo economizado vs. custo da licença | 188 horas economizadas × $50/h = $9.400 |
+| **Correlação** | Relação estatística entre uso e resultados | r = 0,97 entre dias ativos e satisfação |
+| **Análise de Tendência** | Como a adoção e os resultados mudam ao longo do tempo | 60% de crescimento em usuários ativos em 3 meses |
 
-### Viva Insights Advanced Reporting
+### Relatórios Avançados do Viva Insights
 
-In a live M365 environment, Viva Insights Advanced Reporting gives you:
+Em um ambiente M365 ao vivo, os Relatórios Avançados do Viva Insights fornecem:
 
-- **100+ Copilot metrics** sliced by department, role, manager, and location
-- **Organizational data import** to add custom attributes (cost center, hire date, etc.)
-- **Privacy controls**: minimum group size of 5, data aggregation, role-based access
-- **Power BI templates** for pre-built dashboards
+- **100+ métricas do Copilot** segmentadas por departamento, função, gestor e localização
+- **Importação de dados organizacionais** para adicionar atributos personalizados (centro de custo, data de contratação, etc.)
+- **Controles de privacidade**: tamanho mínimo de grupo de 5, agregação de dados, acesso baseado em função
+- **Modelos Power BI** para dashboards pré-construídos
 
-In this lab, we simulate these capabilities with Python and CSV exports.
+Neste lab, simulamos essas capacidades com Python e exportações CSV.
 
-!!! tip "Power BI Connection"
-    If you have Power BI Desktop installed, you can load both CSVs directly into Power BI to create interactive dashboards. All the analysis we do in Python maps 1:1 to Power BI visuals: tables → matrix, correlations → scatter charts, trends → line charts.
+!!! tip "Conexão com Power BI"
+    Se você tem o Power BI Desktop instalado, pode carregar ambos os CSVs diretamente no Power BI para criar dashboards interativos. Toda a análise que fazemos em Python se mapeia 1:1 para visuais do Power BI: tabelas → matriz, correlações → gráficos de dispersão, tendências → gráficos de linha.
 
 ---
 
-## Step 2: Load and Merge the Datasets
+## Passo 2: Carregar e Mesclar os Conjuntos de Dados
 
-You have two datasets to work with:
+Você tem dois conjuntos de dados para trabalhar:
 
-**[📥 `copilot_quarterly_summary.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv)** — Aggregated usage data (21 rows: 7 departments × 3 months)
+**[📥 `copilot_quarterly_summary.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv)** — Dados de uso agregados (21 linhas: 7 departamentos × 3 meses)
 
-| Column | Description |
+| Coluna | Descrição |
 |--------|-------------|
-| `department` | Department name |
-| `month` | Month (2026-01, 2026-02, 2026-03) |
-| `licensed` / `enabled` / `active_users` | User counts |
-| `avg_active_days` | Average active days among active users |
-| `total_meetings` / `total_emails` / `total_docs` / `total_chats` | Feature totals |
-| `total_time_saved_min` | Estimated minutes saved |
+| `department` | Nome do departamento |
+| `month` | Mês (2026-01, 2026-02, 2026-03) |
+| `licensed` / `enabled` / `active_users` | Contagens de usuários |
+| `avg_active_days` | Média de dias ativos entre usuários ativos |
+| `total_meetings` / `total_emails` / `total_docs` / `total_chats` | Totais por recurso |
+| `total_time_saved_min` | Minutos estimados economizados |
 
-**[📥 `business_outcomes.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv)** — Department KPIs (21 rows: 7 departments × 3 months)
+**[📥 `business_outcomes.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv)** — KPIs por departamento (21 linhas: 7 departamentos × 3 meses)
 
-| Column | Description |
+| Coluna | Descrição |
 |--------|-------------|
-| `revenue_change_pct` | Revenue change vs. previous year (%) |
-| `tickets_resolved_per_person` | Support tickets resolved per person |
-| `avg_response_hours` | Average response time (hours) |
-| `employee_satisfaction` | Satisfaction score (0-100) |
-| `projects_on_time_pct` | Projects delivered on time (%) |
+| `revenue_change_pct` | Mudança na receita vs. ano anterior (%) |
+| `tickets_resolved_per_person` | Tickets de suporte resolvidos por pessoa |
+| `avg_response_hours` | Tempo médio de resposta (horas) |
+| `employee_satisfaction` | Pontuação de satisfação (0-100) |
+| `projects_on_time_pct` | Projetos entregues no prazo (%) |
 
-Load and merge them:
+Carregue e mescle-os:
 
 ```python
 import pandas as pd
@@ -128,13 +123,13 @@ print(f"Merged: {len(merged)} rows × {len(merged.columns)} columns")
 print(merged.head())
 ```
 
-**Expected:** 21 rows × 17 columns.
+**Esperado:** 21 linhas × 17 colunas.
 
 ---
 
-## Step 3: Calculate ROI — Dollar Value of Time Saved
+## Passo 3: Calcular o ROI — Valor em Dólares do Tempo Economizado
 
-The simplest ROI metric: **how much is the time saved worth?**
+A métrica de ROI mais simples: **quanto vale o tempo economizado?**
 
 ```python
 HOURLY_RATE = 50  # Average fully-loaded cost per employee-hour
@@ -148,7 +143,7 @@ print(f"                = {total_hours:.1f} hours")
 print(f"Dollar value:    = ${dollar_value:,.0f} (at ${HOURLY_RATE}/hr)")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total time saved: 11,280 minutes
@@ -156,7 +151,7 @@ Total time saved: 11,280 minutes
 Dollar value:    = $9,400 (at $50/hr)
 ```
 
-### Per-Department ROI Breakdown
+### Detalhamento de ROI por Departamento
 
 ```python
 dept_roi = usage.groupby("department")["total_time_saved_min"].sum().reset_index()
@@ -166,26 +161,26 @@ dept_roi = dept_roi.sort_values("dollar_value", ascending=False)
 print(dept_roi[["department", "hours", "dollar_value"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
-| Department | Hours | Dollar Value |
+| Departamento | Horas | Valor em Dólares |
 |------------|-------|-------------|
-| Engineering | 65.2 | $3,262 |
-| Finance | 45.9 | $2,296 |
-| Marketing | 34.3 | $1,713 |
-| Operations | 19.6 | $979 |
-| Sales | 15.5 | $775 |
-| HR | 6.4 | $321 |
-| Legal | 1.1 | $54 |
+| Engineering | 65,2 | $3.262 |
+| Finance | 45,9 | $2.296 |
+| Marketing | 34,3 | $1.713 |
+| Operations | 19,6 | $979 |
+| Sales | 15,5 | $775 |
+| HR | 6,4 | $321 |
+| Legal | 1,1 | $54 |
 
 !!! tip "Insight"
-    Engineering generates the most absolute value ($3,262) because it has the most users. But **Finance has the highest ROI per user** — 6 users generating $2,296 vs. Engineering's 12 users generating $3,262. Finance's per-user value is **$383** vs. Engineering's **$272**.
+    Engineering gera o maior valor absoluto ($3.262) porque tem mais usuários. Mas **Finance tem o maior ROI por usuário** — 6 usuários gerando $2.296 vs. 12 usuários de Engineering gerando $3.262. O valor por usuário de Finance é **$383** vs. **$272** de Engineering.
 
 ---
 
-## Step 4: Correlate Usage with Business Outcomes
+## Passo 4: Correlacionar Uso com Resultados de Negócios
 
-Now the critical question: **does higher Copilot usage correlate with better business outcomes?**
+Agora a pergunta crítica: **maior uso do Copilot se correlaciona com melhores resultados de negócios?**
 
 ```python
 # Pearson correlation between average active days and employee satisfaction
@@ -193,17 +188,17 @@ correlation = merged["avg_active_days"].corr(merged["employee_satisfaction"])
 print(f"Correlation (active_days ↔ satisfaction): {correlation:.3f}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Correlation (active_days ↔ satisfaction): 0.970
 ```
 
-A correlation of **0.970** is extremely strong. Departments with higher average active days consistently show higher employee satisfaction.
+Uma correlação de **0,970** é extremamente forte. Departamentos com maior média de dias ativos consistentemente apresentam maior satisfação dos funcionários.
 
-### Correlation Matrix
+### Matriz de Correlação
 
-Check multiple outcome metrics at once:
+Verifique múltiplas métricas de resultado de uma vez:
 
 ```python
 usage_cols = ["avg_active_days", "active_users"]
@@ -218,21 +213,21 @@ for col in outcome_cols:
     print(f"  {col:>30s}: r = {r:+.3f}  ({direction})")
 ```
 
-You should see:
+Você deve ver:
 
-- **employee_satisfaction**: strong positive (~0.97)
-- **revenue_change_pct**: strong positive
-- **projects_on_time_pct**: strong positive
-- **avg_response_hours**: strong **negative** (higher usage → *lower* response time = faster)
+- **employee_satisfaction**: positiva forte (~0,97)
+- **revenue_change_pct**: positiva forte
+- **projects_on_time_pct**: positiva forte
+- **avg_response_hours**: **negativa** forte (maior uso → *menor* tempo de resposta = mais rápido)
 
-!!! warning "Remember: Correlation ≠ Causation"
-    A correlation of 0.97 is impressive, but it doesn't prove Copilot *caused* the satisfaction increase. High-performing departments may have adopted Copilot faster *because* they're already efficient. Present this as evidence of a **relationship**, not proof of causation.
+!!! warning "Lembre-se: Correlação ≠ Causalidade"
+    Uma correlação de 0,97 é impressionante, mas não prova que o Copilot *causou* o aumento de satisfação. Departamentos de alto desempenho podem ter adotado o Copilot mais rapidamente *porque* já eram eficientes. Apresente isso como evidência de uma **relação**, não prova de causalidade.
 
 ---
 
-## Step 5: Trend Analysis — Month-over-Month Growth
+## Passo 5: Análise de Tendência — Crescimento Mês a Mês
 
-Track how adoption is growing over time:
+Acompanhe como a adoção está crescendo ao longo do tempo:
 
 ```python
 monthly = usage.groupby("month")["active_users"].sum().reset_index()
@@ -245,7 +240,7 @@ growth = (mar - jan) / jan * 100
 print(f"\nGrowth (Jan → Mar): {jan} → {mar} = {growth:.1f}%")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
    Month  Active Users
@@ -256,7 +251,7 @@ print(f"\nGrowth (Jan → Mar): {jan} → {mar} = {growth:.1f}%")
 Growth (Jan → Mar): 20 → 32 = 60.0%
 ```
 
-### Department-Level Trends
+### Tendências por Departamento
 
 ```python
 print("\nDepartment-level growth (Jan → Mar):")
@@ -269,7 +264,7 @@ for dept in usage["department"].unique():
     print(f"  {arrow} {dept}: {j} → {m} ({g:+.0f}%)")
 ```
 
-### Satisfaction Improvement by Department
+### Melhoria de Satisfação por Departamento
 
 ```python
 print("\nSatisfaction improvement (Jan → Mar):")
@@ -281,26 +276,26 @@ for dept in outcomes["department"].unique():
     print(f"  {dept:>15s}: {j} → {m}  (Δ = {delta:+d})")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
-| Department | Jan | Mar | Δ |
+| Departamento | Jan | Mar | Δ |
 |------------|-----|-----|---|
-| Finance | 75 | 88 | **+13** ← largest |
+| Finance | 75 | 88 | **+13** ← maior |
 | Engineering | 72 | 84 | +12 |
 | Marketing | 70 | 80 | +10 |
 | Operations | 68 | 76 | +8 |
 | HR | 62 | 68 | +6 |
 | Sales | 65 | 70 | +5 |
-| Legal | 58 | 62 | +4 ← smallest |
+| Legal | 58 | 62 | +4 ← menor |
 
-!!! tip "The Story Writes Itself"
-    **Finance** (highest Copilot adoption at 100%) shows the **largest satisfaction improvement (+13)**. **Legal** (lowest adoption at 50%) shows the **smallest improvement (+4)**. This is the correlation story you'll present to the board.
+!!! tip "A História Se Escreve Sozinha"
+    **Finance** (maior adoção do Copilot com 100%) mostra a **maior melhoria na satisfação (+13)**. **Legal** (menor adoção com 50%) mostra a **menor melhoria (+4)**. Esta é a história de correlação que você apresentará ao conselho.
 
 ---
 
-## Step 6: Build the Impact Narrative
+## Passo 6: Construir a Narrativa de Impacto
 
-Combine all findings into an executive-ready document:
+Combine todas as descobertas em um documento pronto para executivos:
 
 ```python
 narrative = f"""# 📋 OutdoorGear Inc. — Copilot Impact Report
@@ -351,25 +346,25 @@ print("💾 Saved to lab-048/impact_narrative.md")
 
 ---
 
-## Step 7: Power BI Dashboard (Optional)
+## Passo 7: Dashboard Power BI (Opcional)
 
-If you have **Power BI Desktop** installed, you can create an interactive version of this analysis:
+Se você tem o **Power BI Desktop** instalado, pode criar uma versão interativa desta análise:
 
-1. **Open Power BI Desktop** → Get Data → Text/CSV
-2. Load `copilot_quarterly_summary.csv` and `business_outcomes.csv`
-3. In the **Model** view, create a relationship on `department` + `month`
-4. Create these visuals:
+1. **Abra o Power BI Desktop** → Obter Dados → Texto/CSV
+2. Carregue `copilot_quarterly_summary.csv` e `business_outcomes.csv`
+3. Na visualização de **Modelo**, crie um relacionamento em `department` + `month`
+4. Crie estes visuais:
 
-| Visual Type | X-Axis | Y-Axis | Purpose |
+| Tipo de Visual | Eixo X | Eixo Y | Propósito |
 |-------------|--------|--------|---------|
-| Clustered Bar | Department | active_users | Adoption by department |
-| Line Chart | Month | active_users | Adoption trend |
-| Scatter Plot | avg_active_days | employee_satisfaction | Correlation visualization |
-| Card | — | dollar_value | ROI headline |
-| Matrix | Department × Month | All KPIs | Detailed breakdown |
+| Barras Agrupadas | Department | active_users | Adoção por departamento |
+| Gráfico de Linha | Month | active_users | Tendência de adoção |
+| Gráfico de Dispersão | avg_active_days | employee_satisfaction | Visualização de correlação |
+| Cartão | — | dollar_value | Destaque de ROI |
+| Matriz | Department × Month | Todos os KPIs | Detalhamento completo |
 
-!!! info "No Power BI? No Problem"
-    The Python analysis above produces identical insights. Power BI adds interactivity (filtering, drilling, sharing) but the underlying data and formulas are the same. If you have **matplotlib** installed, you can also create charts in Python:
+!!! info "Sem Power BI? Sem problema"
+    A análise em Python acima produz insights idênticos. O Power BI adiciona interatividade (filtragem, drill-down, compartilhamento), mas os dados e fórmulas subjacentes são os mesmos. Se você tem o **matplotlib** instalado, também pode criar gráficos em Python:
 
     ```python
     # pip install matplotlib
@@ -397,97 +392,97 @@ If you have **Power BI Desktop** installed, you can create an interactive versio
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-048/broken_roi_calculator.py` contains **3 bugs** that produce wrong impact analytics. Run the self-tests:
+O arquivo `lab-048/broken_roi_calculator.py` contém **3 bugs** que produzem análises de impacto incorretas. Execute os autotestes:
 
 ```bash
 python lab-048/broken_roi_calculator.py
 ```
 
-You should see **3 failed tests**:
+Você deve ver **3 testes falhando**:
 
-| Test | What it checks | Hint |
+| Teste | O que ele verifica | Dica |
 |------|---------------|------|
-| Test 1 | ROI calculation | Check the unit conversion (minutes → hours) |
-| Test 2 | Correlation column | Which column actually measures *usage*? |
-| Test 3 | Growth rate base | Which month is the *starting point*? |
+| Teste 1 | Cálculo de ROI | Verifique a conversão de unidades (minutos → horas) |
+| Teste 2 | Coluna de correlação | Qual coluna realmente mede *uso*? |
+| Teste 3 | Base da taxa de crescimento | Qual mês é o *ponto de partida*? |
 
-Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
-
----
-
-
-## 🧠 Knowledge Check
-
-??? question "**Q1 (Multiple Choice):** What does 'impact attribution' mean in the context of Work IQ?"
-
-    - A) Counting how many users have a Copilot license
-    - B) Connecting AI tool usage to measurable business outcomes
-    - C) Tracking which department has the most active users
-    - D) Measuring the total cost of AI licenses
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Connecting AI tool usage to measurable business outcomes**
-
-        Impact attribution goes beyond adoption metrics (who is using Copilot?) to answer the ROI question: is Copilot usage correlated with improved business outcomes like revenue growth, faster response times, and higher employee satisfaction?
-
-??? question "**Q2 (Multiple Choice):** Why is the 'correlation ≠ causation' principle critical when presenting Copilot ROI to leadership?"
-
-    - A) Because correlations are always unreliable
-    - B) Because other factors could explain the business improvements
-    - C) Because Copilot usage data is not accurate
-    - D) Because leadership doesn't understand statistics
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Because other factors could explain the business improvements**
-
-        High-performing departments may adopt AI tools faster because they're already well-managed — the improvement might be due to leadership quality, hiring, process changes, or seasonal trends. Always present findings as "departments with higher usage *tend to* show better outcomes" rather than claiming direct causation.
-
-??? question "**Q3 (Run the Lab):** What is the estimated total dollar value of time saved across all departments over Q1 2026 (at $50/hr)?"
-
-    Calculate: sum all `total_time_saved_min` values, convert to hours, multiply by $50.
-
-    ??? success "✅ Reveal Answer"
-        **$9,400**
-
-        Total time saved: 11,280 minutes ÷ 60 = 188.0 hours × $50/hr = **$9,400**. Engineering contributes the most absolute value ($3,262), but Finance has the highest per-user ROI ($383/user).
-
-??? question "**Q4 (Run the Lab):** Which department shows the largest improvement in employee satisfaction from January to March 2026?"
-
-    Compare each department's January and March `employee_satisfaction` scores.
-
-    ??? success "✅ Reveal Answer"
-        **Finance (+13 points: 75 → 88)**
-
-        Finance improved from 75 to 88, a delta of +13. This aligns with Finance having the highest Copilot adoption rate (100%). Engineering is second with +12 (72 → 84). Legal shows the smallest improvement (+4), matching its low adoption.
-
-??? question "**Q5 (Run the Lab):** What is the overall adoption growth rate from January to March 2026?"
-
-    Sum `active_users` for January and March across all departments, then calculate the percentage growth.
-
-    ??? success "✅ Reveal Answer"
-        **60.0%**
-
-        January: 6+4+2+1+4+0+3 = **20** active users. March: 9+6+4+2+6+1+4 = **32** active users. Growth = (32 − 20) ÷ 20 × 100 = **60.0%**.
+Corrija os 3 bugs e execute novamente até ver `🎉 All 3 tests passed`.
 
 ---
 
-## Summary
 
-| Topic | What You Learned |
+## 🧠 Verificação de Conhecimento
+
+??? question "**Q1 (Múltipla Escolha):** O que significa 'atribuição de impacto' no contexto do Work IQ?"
+
+    - A) Contar quantos usuários têm uma licença Copilot
+    - B) Conectar o uso de ferramentas de IA a resultados de negócios mensuráveis
+    - C) Rastrear qual departamento tem mais usuários ativos
+    - D) Medir o custo total das licenças de IA
+
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Conectar o uso de ferramentas de IA a resultados de negócios mensuráveis**
+
+        A atribuição de impacto vai além das métricas de adoção (quem está usando o Copilot?) para responder à pergunta de ROI: o uso do Copilot está correlacionado com melhores resultados de negócios como crescimento de receita, tempos de resposta mais rápidos e maior satisfação dos funcionários?
+
+??? question "**Q2 (Múltipla Escolha):** Por que o princípio 'correlação ≠ causalidade' é crítico ao apresentar o ROI do Copilot para a liderança?"
+
+    - A) Porque correlações são sempre não confiáveis
+    - B) Porque outros fatores podem explicar as melhorias de negócios
+    - C) Porque os dados de uso do Copilot não são precisos
+    - D) Porque a liderança não entende estatística
+
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Porque outros fatores podem explicar as melhorias de negócios**
+
+        Departamentos de alto desempenho podem adotar ferramentas de IA mais rapidamente porque já são bem gerenciados — a melhoria pode ser devida à qualidade da liderança, contratações, mudanças de processo ou tendências sazonais. Sempre apresente as descobertas como "departamentos com maior uso *tendem a* mostrar melhores resultados" em vez de afirmar causalidade direta.
+
+??? question "**Q3 (Execute o Lab):** Qual é o valor total estimado em dólares do tempo economizado em todos os departamentos durante o Q1 2026 (a $50/h)?"
+
+    Calcule: some todos os valores de `total_time_saved_min`, converta para horas, multiplique por $50.
+
+    ??? success "✅ Revelar Resposta"
+        **$9.400**
+
+        Tempo total economizado: 11.280 minutos ÷ 60 = 188,0 horas × $50/h = **$9.400**. Engineering contribui com o maior valor absoluto ($3.262), mas Finance tem o maior ROI por usuário ($383/usuário).
+
+??? question "**Q4 (Execute o Lab):** Qual departamento mostra a maior melhoria na satisfação dos funcionários de janeiro a março de 2026?"
+
+    Compare as pontuações de `employee_satisfaction` de janeiro e março de cada departamento.
+
+    ??? success "✅ Revelar Resposta"
+        **Finance (+13 pontos: 75 → 88)**
+
+        Finance melhorou de 75 para 88, um delta de +13. Isso se alinha com Finance tendo a maior taxa de adoção do Copilot (100%). Engineering é o segundo com +12 (72 → 84). Legal mostra a menor melhoria (+4), correspondendo à sua baixa adoção.
+
+??? question "**Q5 (Execute o Lab):** Qual é a taxa geral de crescimento de adoção de janeiro a março de 2026?"
+
+    Some `active_users` para janeiro e março em todos os departamentos, e então calcule o crescimento percentual.
+
+    ??? success "✅ Revelar Resposta"
+        **60,0%**
+
+        Janeiro: 6+4+2+1+4+0+3 = **20** usuários ativos. Março: 9+6+4+2+6+1+4 = **32** usuários ativos. Crescimento = (32 − 20) ÷ 20 × 100 = **60,0%**.
+
+---
+
+## Resumo
+
+| Tópico | O Que Você Aprendeu |
 |-------|-----------------|
-| Impact Attribution | Connecting usage data to business KPIs |
-| ROI Calculation | Time saved → hours → dollar value |
-| Pearson Correlation | Measuring statistical relationships (r = 0.97) |
-| Trend Analysis | Month-over-month adoption growth (60%) |
-| Impact Narrative | Executive-ready storytelling with data |
-| Power BI Mapping | How Python analysis maps to Power BI visuals |
+| Atribuição de Impacto | Conectando dados de uso a KPIs de negócios |
+| Cálculo de ROI | Tempo economizado → horas → valor em dólares |
+| Correlação de Pearson | Medindo relações estatísticas (r = 0,97) |
+| Análise de Tendência | Crescimento de adoção mês a mês (60%) |
+| Narrativa de Impacto | Storytelling pronto para executivos com dados |
+| Mapeamento Power BI | Como a análise Python se mapeia para visuais do Power BI |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 033](lab-033-agent-observability.md)** — Agent Observability with Application Insights (monitoring custom agents the same way Viva monitors Copilot)
-- **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (the financial side of ROI for custom AI deployments)
-- **[Lab 035](lab-035-agent-evaluation.md)** — Agent Evaluation with Azure AI Eval SDK (quality metrics, not just adoption)
+- **[Lab 033](lab-033-agent-observability.md)** — Observabilidade de Agentes com Application Insights (monitorando agentes personalizados da mesma forma que o Viva monitora o Copilot)
+- **[Lab 038](lab-038-cost-optimization.md)** — Otimização de Custos de IA (o lado financeiro do ROI para implantações personalizadas de IA)
+- **[Lab 035](lab-035-agent-evaluation.md)** — Avaliação de Agentes com Azure AI Eval SDK (métricas de qualidade, não apenas adoção)

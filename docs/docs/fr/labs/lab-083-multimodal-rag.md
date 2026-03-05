@@ -1,52 +1,47 @@
 ---
 tags: [multimodal, rag, images, tables, gpt4o-vision, python]
 ---
-# Lab 083: Multi-Modal RAG — Images, Tables & Charts in Documents
+# Lab 083 : RAG multimodal — Images, tableaux et graphiques dans les documents
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span></span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~90 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span></span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What **multi-modal RAG** is — retrieval-augmented generation that handles images, tables, and charts alongside text
-- How **GPT-4o vision** enables understanding of visual content within documents for richer retrieval
-- Compare **text-only vs multi-modal retrieval** scores to quantify the improvement from visual understanding
-- Analyze **chunk types** (text, image, table) and their impact on retrieval quality
-- Debug a broken multi-modal RAG analysis script by fixing 3 bugs
+- Ce qu'est le **RAG multimodal** — la génération augmentée par récupération qui gère les images, tableaux et graphiques en plus du texte
+- Comment **GPT-4o vision** permet la compréhension du contenu visuel dans les documents pour une récupération plus riche
+- Comparer les scores de récupération **texte seul vs multimodal** pour quantifier l'amélioration apportée par la compréhension visuelle
+- Analyser les **types de chunks** (texte, image, tableau) et leur impact sur la qualité de récupération
+- Déboguer un script d'analyse RAG multimodal cassé en corrigeant 3 bugs
 
 ## Introduction
 
-Traditional RAG pipelines work well with text — they chunk documents, embed the chunks, and retrieve the most relevant ones for a query. But enterprise documents are not just text. They contain **bar charts**, **pie charts**, **product photos**, **architectural diagrams**, **data tables**, and **flowcharts** that carry critical information.
+Les pipelines RAG traditionnels fonctionnent bien avec le texte — ils découpent les documents, vectorisent les chunks et récupèrent les plus pertinents pour une requête. Mais les documents d'entreprise ne sont pas que du texte. Ils contiennent des **diagrammes à barres**, des **camemberts**, des **photos de produits**, des **diagrammes d'architecture**, des **tableaux de données** et des **organigrammes** qui portent des informations critiques.
 
-A text-only RAG pipeline misses this information entirely. When a user asks "What was Q1 revenue by region?", the answer might be in a **bar chart** — which text-only embedding scores at 0.15 (nearly useless) while a multi-modal approach scores 0.82 (highly relevant).
+Un pipeline RAG texte seul manque entièrement ces informations. Quand un utilisateur demande « Quel était le chiffre d'affaires du T1 par région ? », la réponse peut se trouver dans un **diagramme à barres** — que l'embedding texte seul score à 0.15 (quasi inutile) tandis qu'une approche multimodale score à 0.82 (hautement pertinent).
 
-| Approach | Handles Text | Handles Images | Handles Tables | Typical Use Case |
+| Approche | Gère le texte | Gère les images | Gère les tableaux | Cas d'usage typique |
 |----------|:---:|:---:|:---:|---|
-| **Text-only RAG** | ✅ | ❌ | ⚠️ (text only) | Simple Q&A over text documents |
-| **Multi-modal RAG** | ✅ | ✅ | ✅ | Documents with charts, photos, diagrams |
+| **RAG texte seul** | ✅ | ❌ | ⚠️ (texte seul) | Q&R simple sur des documents texte |
+| **RAG multimodal** | ✅ | ✅ | ✅ | Documents avec graphiques, photos, diagrammes |
 
-### The Scenario
+### Le scénario
 
-You are building a **document intelligence system** for OutdoorGear Inc. The corpus includes quarterly reports with charts, product catalogs with photos, training manuals with diagrams, investor decks with visualizations, and sales spreadsheets. You will analyze **15 document chunks** to compare text-only and multi-modal retrieval performance.
+Vous construisez un **système d'intelligence documentaire** pour OutdoorGear Inc. Le corpus comprend des rapports trimestriels avec graphiques, des catalogues de produits avec photos, des manuels de formation avec diagrammes, des présentations pour investisseurs avec visualisations et des tableurs de ventes. Vous analyserez **15 chunks de documents** pour comparer les performances de récupération texte seul et multimodal.
 
-!!! info "No GPT-4o API Required"
-    This lab analyzes a **pre-recorded benchmark dataset** of retrieval scores. You don't need an OpenAI API key — all analysis is done locally with pandas. The dataset simulates real retrieval scores from a multi-modal RAG pipeline.
+!!! info "Aucune API GPT-4o requise"
+    Ce lab analyse un **jeu de données de benchmark pré-enregistré** de scores de récupération. Vous n'avez pas besoin de clé API OpenAI — toute l'analyse est faite localement avec pandas. Le jeu de données simule des scores de récupération réels d'un pipeline RAG multimodal.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Pourquoi |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` library | DataFrame operations |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| Bibliothèque `pandas` | Opérations sur les DataFrames |
 
 ```bash
 pip install pandas
@@ -54,27 +49,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-083/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-083/` de votre répertoire de travail.
 
-| File | Description | Download |
+| Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_multimodal.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/broken_multimodal.py) |
-| `multimodal_chunks.csv` | Dataset — 15 document chunks with retrieval scores | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/multimodal_chunks.csv) |
+| `broken_multimodal.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/broken_multimodal.py) |
+| `multimodal_chunks.csv` | Jeu de données — 15 chunks de documents avec scores de récupération | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/multimodal_chunks.csv) |
 
 ---
 
-## Step 1: Understanding Multi-Modal RAG
+## Étape 1 : Comprendre le RAG multimodal
 
-A multi-modal RAG pipeline extends traditional RAG with visual understanding:
+Un pipeline RAG multimodal étend le RAG traditionnel avec la compréhension visuelle :
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -96,21 +91,21 @@ A multi-modal RAG pipeline extends traditional RAG with visual understanding:
                                           └──────────────┘
 ```
 
-### How Visual Chunks Are Processed
+### Comment les chunks visuels sont traités
 
-| Chunk Type | Text-Only Pipeline | Multi-Modal Pipeline |
+| Type de chunk | Pipeline texte seul | Pipeline multimodal |
 |-----------|-------------------|---------------------|
-| **Text** | Embed text → retrieve by cosine similarity | Same as text-only |
-| **Table** | Embed serialized table text | Embed text + understand structure |
-| **Image** | ❌ Skip or use alt text (low quality) | GPT-4o describes the image → embed description + visual features |
+| **Texte** | Vectoriser le texte → récupérer par similarité cosinus | Identique au texte seul |
+| **Tableau** | Vectoriser le texte sérialisé du tableau | Vectoriser le texte + comprendre la structure |
+| **Image** | ❌ Ignorer ou utiliser le texte alternatif (faible qualité) | GPT-4o décrit l'image → vectoriser la description + caractéristiques visuelles |
 
-The key insight: **images carry information that text cannot capture**. A bar chart, product photo, or architecture diagram conveys meaning that gets lost when the image is simply skipped or described by alt text alone.
+L'observation clé : **les images portent des informations que le texte ne peut pas capturer**. Un diagramme à barres, une photo de produit ou un diagramme d'architecture véhicule un sens qui se perd quand l'image est simplement ignorée ou décrite uniquement par le texte alternatif.
 
 ---
 
-## Step 2: Load the Chunk Dataset
+## Étape 2 : Charger le jeu de données de chunks
 
-The dataset contains **15 chunks** from 5 documents, each with text-only and multi-modal retrieval scores:
+Le jeu de données contient **15 chunks** provenant de 5 documents, chacun avec des scores de récupération texte seul et multimodal :
 
 ```python
 import pandas as pd
@@ -127,7 +122,7 @@ print(chunks[["chunk_id", "document", "chunk_type", "has_image", "retrieval_scor
               "retrieval_score_multimodal"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total chunks: 15
@@ -144,9 +139,9 @@ Documents: ['investor_deck.pptx', 'product_catalog.docx', 'quarterly_report.pdf'
 
 ---
 
-## Step 3: Compare Text-Only vs Multi-Modal Scores
+## Étape 3 : Comparer les scores texte seul vs multimodal
 
-Analyze how multi-modal retrieval improves over text-only:
+Analysez comment la récupération multimodale s'améliore par rapport au texte seul :
 
 ```python
 print("Average retrieval scores by chunk type:")
@@ -159,7 +154,7 @@ for ctype in ["text", "table", "image"]:
           f"improvement={improvement:+.3f}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Average retrieval scores by chunk type:
@@ -168,14 +163,14 @@ Average retrieval scores by chunk type:
   image: text=0.138  multimodal=0.853  improvement=+0.715
 ```
 
-!!! tip "Insight"
-    **Text chunks** see no improvement — they're already well-served by text embeddings. **Table chunks** gain +0.117 from structural understanding. **Image chunks** see a massive +0.715 improvement — text-only retrieval scores just 0.138 on average for images, while multi-modal scores 0.853. This is the primary value proposition of multi-modal RAG.
+!!! tip "Observation"
+    Les **chunks texte** ne voient aucune amélioration — ils sont déjà bien servis par les embeddings texte. Les **chunks tableau** gagnent +0.117 grâce à la compréhension structurelle. Les **chunks image** voient une amélioration massive de +0.715 — la récupération texte seul score seulement 0.138 en moyenne pour les images, tandis que le multimodal score 0.853. C'est la proposition de valeur principale du RAG multimodal.
 
 ---
 
-## Step 4: Analyze Image Chunks
+## Étape 4 : Analyser les chunks avec images
 
-Deep dive into chunks with images:
+Analyse approfondie des chunks contenant des images :
 
 ```python
 image_chunks = chunks[chunks["has_image"] == True]
@@ -190,7 +185,7 @@ for _, c in image_chunks.iterrows():
           f"(+{improvement:.2f})")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Image chunks: 6/15
@@ -218,9 +213,9 @@ Image chunk details:
 
 ---
 
-## Step 5: Calculate Improvement Metrics
+## Étape 5 : Calculer les métriques d'amélioration
 
-Compute the average improvement for image chunks:
+Calculez l'amélioration moyenne pour les chunks avec images :
 
 ```python
 image_text_avg = image_chunks["retrieval_score_text_only"].mean()
@@ -234,7 +229,7 @@ print(f"  Improvement:  +{avg_improvement:.3f}")
 print(f"  Multiplier:   {image_mm_avg/image_text_avg:.1f}x better")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Image chunks — average scores:
@@ -253,14 +248,14 @@ print(f"  Multi-modal:  {overall_mm:.3f}")
 print(f"  Improvement:  +{overall_mm - overall_text:.3f}")
 ```
 
-!!! tip "Insight"
-    Multi-modal retrieval is **6.2x better** than text-only for image chunks. Even across all 15 chunks (including text-only ones), the overall retrieval score improves significantly because 40% of chunks (6/15) contain images.
+!!! tip "Observation"
+    La récupération multimodale est **6.2x meilleure** que le texte seul pour les chunks avec images. Même sur l'ensemble des 15 chunks (y compris ceux en texte seul), le score de récupération global s'améliore significativement car 40% des chunks (6/15) contiennent des images.
 
 ---
 
-## Step 6: Document-Level Analysis
+## Étape 6 : Analyse au niveau du document
 
-Compare multi-modal impact per document:
+Comparez l'impact multimodal par document :
 
 ```python
 print("Retrieval improvement by document:")
@@ -273,7 +268,7 @@ for doc in sorted(chunks["document"].unique()):
           f"Δ={mm_avg-text_avg:+.3f}  images={'Yes' if has_images else 'No'}")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Retrieval improvement by document:
@@ -284,104 +279,104 @@ Retrieval improvement by document:
            training_manual.pdf: text=0.427  mm=0.840  Δ=+0.413  images=Yes
 ```
 
-!!! tip "Insight"
-    Documents with images see the largest improvements. The **training manual** benefits most (+0.413) because it contains assembly diagrams and photos that are critical for answering how-to questions. The **sales spreadsheet** (no images) still benefits from improved table understanding (+0.100).
+!!! tip "Observation"
+    Les documents avec images voient les plus grandes améliorations. Le **manuel de formation** bénéficie le plus (+0.413) car il contient des diagrammes d'assemblage et des photos essentiels pour répondre aux questions pratiques. Le **tableur de ventes** (sans images) bénéficie tout de même de la compréhension améliorée des tableaux (+0.100).
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-083/broken_multimodal.py` has **3 bugs** in the analysis functions. Can you find and fix them all?
+Le fichier `lab-083/broken_multimodal.py` contient **3 bugs** dans les fonctions d'analyse. Pouvez-vous les trouver et les corriger tous ?
 
-Run the self-tests to see which ones fail:
+Exécutez les auto-tests pour voir lesquels échouent :
 
 ```bash
 python lab-083/broken_multimodal.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Vous devriez voir **3 tests échoués**. Chaque test correspond à un bug :
 
-| Test | What it checks | Hint |
+| Test | Ce qu'il vérifie | Indice |
 |------|---------------|------|
-| Test 1 | Multi-modal improvement calculation | Should compute improvement using image chunks for both scores, not mixed |
-| Test 2 | Image chunk count | Should check `has_image`, not `has_table` |
-| Test 3 | Average multi-modal score | Should use `retrieval_score_multimodal`, not `retrieval_score_text_only` |
+| Test 1 | Calcul de l'amélioration multimodale | Devrait calculer l'amélioration en utilisant les chunks image pour les deux scores, pas un mélange |
+| Test 2 | Nombre de chunks avec images | Devrait vérifier `has_image`, pas `has_table` |
+| Test 3 | Score multimodal moyen | Devrait utiliser `retrieval_score_multimodal`, pas `retrieval_score_text_only` |
 
-Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
+Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est terminé !
 
 ---
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** Why do image chunks score poorly with text-only retrieval?"
+??? question "**Q1 (Choix multiple) :** Pourquoi les chunks avec images scorent-ils mal avec la récupération texte seul ?"
 
-    - A) Because images are always low quality
-    - B) Because text embeddings cannot capture visual information — charts, photos, and diagrams have minimal extractable text
-    - C) Because image files are too large to embed
-    - D) Because text-only models refuse to process images
+    - A) Parce que les images sont toujours de basse qualité
+    - B) Parce que les embeddings texte ne peuvent pas capturer l'information visuelle — les graphiques, photos et diagrammes ont un texte extractible minimal
+    - C) Parce que les fichiers image sont trop volumineux pour être vectorisés
+    - D) Parce que les modèles texte seul refusent de traiter les images
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Because text embeddings cannot capture visual information — charts, photos, and diagrams have minimal extractable text**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Parce que les embeddings texte ne peuvent pas capturer l'information visuelle — les graphiques, photos et diagrammes ont un texte extractible minimal**
 
-        A bar chart showing "Q1 revenue by region" has very little extractable text (maybe axis labels), so its text embedding has almost no semantic overlap with a query about revenue. Multi-modal RAG uses GPT-4o vision to *understand* the chart content and generate a rich description, producing an embedding that accurately represents the chart's information.
+        Un diagramme à barres montrant « Chiffre d'affaires T1 par région » a très peu de texte extractible (peut-être des étiquettes d'axes), donc son embedding texte a presque aucun chevauchement sémantique avec une requête sur le chiffre d'affaires. Le RAG multimodal utilise GPT-4o vision pour *comprendre* le contenu du graphique et générer une description riche, produisant un embedding qui représente fidèlement les informations du graphique.
 
-??? question "**Q2 (Multiple Choice):** What role does GPT-4o vision play in a multi-modal RAG pipeline?"
+??? question "**Q2 (Choix multiple) :** Quel rôle joue GPT-4o vision dans un pipeline RAG multimodal ?"
 
-    - A) It generates the final answer to the user's query
-    - B) It converts images into text descriptions that can be embedded alongside document text
-    - C) It replaces the vector database entirely
-    - D) It only handles OCR for scanned documents
+    - A) Il génère la réponse finale à la requête de l'utilisateur
+    - B) Il convertit les images en descriptions textuelles qui peuvent être vectorisées aux côtés du texte du document
+    - C) Il remplace entièrement la base de données vectorielle
+    - D) Il ne gère que l'OCR pour les documents numérisés
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It converts images into text descriptions that can be embedded alongside document text**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Il convertit les images en descriptions textuelles qui peuvent être vectorisées aux côtés du texte du document**
 
-        GPT-4o vision analyzes each image chunk — charts, photos, diagrams — and produces a detailed text description of what the image contains. This description is then embedded alongside the document text, enabling the retrieval system to find relevant images when a user asks a question. The description bridges the gap between visual content and text-based retrieval.
+        GPT-4o vision analyse chaque chunk image — graphiques, photos, diagrammes — et produit une description textuelle détaillée de ce que l'image contient. Cette description est ensuite vectorisée aux côtés du texte du document, permettant au système de récupération de trouver les images pertinentes quand un utilisateur pose une question. La description comble le fossé entre le contenu visuel et la récupération basée sur le texte.
 
-??? question "**Q3 (Run the Lab):** How many chunks contain images (`has_image == True`)?"
+??? question "**Q3 (Exécutez le lab) :** Combien de chunks contiennent des images (`has_image == True`) ?"
 
-    Load [📥 `multimodal_chunks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/multimodal_chunks.csv) and count rows where `has_image == True`.
+    Chargez [📥 `multimodal_chunks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/multimodal_chunks.csv) et comptez les lignes où `has_image == True`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **6**
 
-        6 out of 15 chunks contain images: C03 (bar chart), C05 (product photo), C08 (assembly diagram), C09 (stake placement photo), C11 (pie chart), and C15 (line graph). These represent 40% of the corpus.
+        6 des 15 chunks contiennent des images : C03 (diagramme à barres), C05 (photo de produit), C08 (diagramme d'assemblage), C09 (photo de placement de sardines), C11 (camembert) et C15 (graphique linéaire). Ils représentent 40% du corpus.
 
-??? question "**Q4 (Run the Lab):** What is the average multi-modal score improvement for image chunks compared to their text-only scores?"
+??? question "**Q4 (Exécutez le lab) :** Quelle est l'amélioration moyenne du score multimodal pour les chunks avec images par rapport à leurs scores texte seul ?"
 
-    For chunks where `has_image == True`, compute `retrieval_score_multimodal.mean() - retrieval_score_text_only.mean()`.
+    Pour les chunks où `has_image == True`, calculez `retrieval_score_multimodal.mean() - retrieval_score_text_only.mean()`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **+0.715**
 
-        Image chunks average text-only score: (0.15 + 0.10 + 0.12 + 0.08 + 0.18 + 0.20) ÷ 6 = **0.138**. Average multi-modal score: (0.82 + 0.91 + 0.85 + 0.79 + 0.87 + 0.88) ÷ 6 = **0.853**. Improvement = 0.853 − 0.138 = **+0.715**.
+        Score moyen texte seul des chunks image : (0.15 + 0.10 + 0.12 + 0.08 + 0.18 + 0.20) ÷ 6 = **0.138**. Score multimodal moyen : (0.82 + 0.91 + 0.85 + 0.79 + 0.87 + 0.88) ÷ 6 = **0.853**. Amélioration = 0.853 − 0.138 = **+0.715**.
 
-??? question "**Q5 (Run the Lab):** How many total chunks are in the dataset?"
+??? question "**Q5 (Exécutez le lab) :** Combien de chunks au total y a-t-il dans le jeu de données ?"
 
-    Count all rows in the dataset.
+    Comptez toutes les lignes du jeu de données.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **15**
 
-        The dataset contains 15 chunks across 5 documents: quarterly_report.pdf (3), product_catalog.docx (3), training_manual.pdf (2), investor_deck.pptx (3), sales_data.xlsx (1), product_catalog.docx (1), quarterly_report.pdf (1), and sales_data.xlsx (1) — totaling 15 chunks.
+        Le jeu de données contient 15 chunks répartis sur 5 documents : quarterly_report.pdf (3), product_catalog.docx (3), training_manual.pdf (2), investor_deck.pptx (3), sales_data.xlsx (1), product_catalog.docx (1), quarterly_report.pdf (1) et sales_data.xlsx (1) — totalisant 15 chunks.
 
 ---
 
-## Summary
+## Résumé
 
-| Topic | What You Learned |
+| Sujet | Ce que vous avez appris |
 |-------|-----------------|
-| Multi-Modal RAG | Extends text RAG with visual understanding of images, charts, and diagrams |
-| GPT-4o Vision | Converts images to rich text descriptions for embedding and retrieval |
-| Image Chunks | 6 out of 15 chunks contain images — 40% of the corpus |
-| Score Improvement | Image chunks improve from 0.138 (text-only) to 0.853 (multi-modal) — +0.715 gain |
-| Text Chunks | No improvement needed — already well-served by text embeddings |
-| Table Chunks | Moderate improvement (+0.117) from structural understanding |
-| Overall Impact | Multi-modal retrieval significantly improves quality for visually-rich documents |
+| RAG multimodal | Étend le RAG texte avec la compréhension visuelle des images, graphiques et diagrammes |
+| GPT-4o Vision | Convertit les images en descriptions textuelles riches pour la vectorisation et la récupération |
+| Chunks avec images | 6 des 15 chunks contiennent des images — 40% du corpus |
+| Amélioration des scores | Les chunks image passent de 0.138 (texte seul) à 0.853 (multimodal) — gain de +0.715 |
+| Chunks texte | Aucune amélioration nécessaire — déjà bien servis par les embeddings texte |
+| Chunks tableau | Amélioration modérée (+0.117) grâce à la compréhension structurelle |
+| Impact global | La récupération multimodale améliore significativement la qualité pour les documents visuellement riches |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- Explore [Azure AI Document Intelligence](https://learn.microsoft.com/azure/ai-services/document-intelligence/) for production-grade document parsing
-- Try building a multi-modal RAG pipeline with [LangChain's multi-modal support](https://python.langchain.com/docs/how_to/multimodal_inputs/)
-- Review **[Lab 080](lab-080-markitdown-mcp.md)** for document-to-Markdown conversion as a preprocessing step
+- Explorez [Azure AI Document Intelligence](https://learn.microsoft.com/azure/ai-services/document-intelligence/) pour l'analyse de documents de production
+- Essayez de construire un pipeline RAG multimodal avec le [support multimodal de LangChain](https://python.langchain.com/docs/how_to/multimodal_inputs/)
+- Consultez le **[Lab 080](lab-080-markitdown-mcp.md)** pour la conversion document-vers-Markdown comme étape de prétraitement

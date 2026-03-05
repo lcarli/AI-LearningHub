@@ -1,52 +1,52 @@
-# 🤖 GitHub Copilot Path
+# 🤖 Trilha GitHub Copilot
 
 <span class="level-badge level-100">L100</span> <span class="level-badge level-200">L200</span> <span class="level-badge level-300">L300</span> <span class="level-badge level-400">L400</span>
 
-GitHub Copilot is Microsoft's AI-powered developer tool, embedded directly in your IDE. It goes far beyond code completion — it's a full AI development platform.
+GitHub Copilot é a ferramenta de desenvolvimento com IA da Microsoft, integrada diretamente ao seu IDE. Vai muito além do autocompletar de código — é uma plataforma completa de desenvolvimento com IA.
 
 ---
 
-## What You'll Build
+## O que Você Vai Construir
 
-By the end of this path you will have:
+Ao final desta trilha você terá:
 
-- ✅ Set up GitHub Copilot in VS Code and used inline completions + chat
-- ✅ Used **GitHub Models** to interact with frontier LLMs for free
-- ✅ Created a custom **VS Code Chat Participant** (Copilot extension)
-- ✅ Published a **GitHub Copilot Extension** to the Marketplace
+- ✅ Configurado o GitHub Copilot no VS Code e usado completações inline + chat
+- ✅ Usado o **GitHub Models** para interagir com LLMs de ponta gratuitamente
+- ✅ Criado um **VS Code Chat Participant** personalizado (extensão do Copilot)
+- ✅ Publicado uma **Extensão do GitHub Copilot** no Marketplace
 
 ---
 
-## Path Labs (5 labs, ~220 min total)
+## Laboratórios da Trilha (5 laboratórios, ~220 min no total)
 
-| Lab | Title | Level | Cost |
-|-----|-------|-------|------|
-| [Lab 010](../../labs/lab-010-github-copilot-first-steps.md) | GitHub Copilot — First Steps | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Free LLM Inference | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | GitHub Copilot Agent Mode | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
+| Lab | Título | Nível | Custo |
+|-----|--------|-------|-------|
+| [Lab 010](../../labs/lab-010-github-copilot-first-steps.md) | GitHub Copilot — Primeiros Passos | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
+| [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Inferência LLM Gratuita | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
+| [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | Modo Agente do GitHub Copilot | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
 | [Lab 045](../../labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
-| [Lab 041](../../labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension | <span class="level-badge level-400">L400</span> | ⚠️ Azure |
+| [Lab 041](../../labs/lab-041-copilot-extension.md) | Extensão Personalizada do GitHub Copilot | <span class="level-badge level-400">L400</span> | ⚠️ Azure |
 
 ---
 
-## GitHub Copilot Free Tier
+## Nível Gratuito do GitHub Copilot
 
-You get access to GitHub Copilot free with a GitHub account:
+Você obtém acesso ao GitHub Copilot gratuitamente com uma conta GitHub:
 
-| Feature | Free Tier |
-|---------|-----------|
-| Code completions | 2,000 / month |
-| Copilot Chat messages | 50 / month |
-| Models available | GPT-4o, Claude 3.5 Sonnet |
-| GitHub Models API | ✅ Included |
+| Recurso | Nível Gratuito |
+|---------|----------------|
+| Completações de código | 2.000 / mês |
+| Mensagens do Copilot Chat | 50 / mês |
+| Modelos disponíveis | GPT-4o, Claude 3.5 Sonnet |
+| API do GitHub Models | ✅ Incluída |
 
-→ [Sign up for GitHub Copilot Free](https://github.com/features/copilot)
+→ [Cadastre-se no GitHub Copilot Free](https://github.com/features/copilot)
 
 ---
 
-## External Resources
+## Recursos Externos
 
-- [GitHub Copilot Docs](https://docs.github.com/copilot)
-- [GitHub Models Marketplace](https://github.com/marketplace/models)
-- [Copilot Studio Docs](https://learn.microsoft.com/microsoft-copilot-studio/)
-- [Building Copilot Extensions](https://docs.github.com/copilot/building-copilot-extensions)
+- [Documentação do GitHub Copilot](https://docs.github.com/copilot)
+- [Marketplace do GitHub Models](https://github.com/marketplace/models)
+- [Documentação do Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/)
+- [Construindo Extensões do Copilot](https://docs.github.com/copilot/building-copilot-extensions)

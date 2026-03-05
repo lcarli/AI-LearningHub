@@ -1,112 +1,107 @@
 ---
 tags: [slm, phi-4, onnx, privacy, local-inference, python]
 ---
-# Lab 061: SLMs — Phi-4 Mini for Low-Cost Agent Skills
+# Lab 061: SLMs — Phi-4 Mini para Habilidades de Agentes de Baixo Custo
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock benchmark data (no API key required)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Caminho:</strong> Todos os caminhos</span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados de benchmark simulados (nenhuma chave de API necessária)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O Que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- How **Small Language Models (SLMs)** like Phi-4 Mini compare to frontier models like GPT-4o
-- When SLMs offer a better trade-off: **low latency, privacy, and zero cloud cost**
-- Run **ONNX Runtime** inference locally for agent skills (classify, extract, summarize, route, draft)
-- Analyze a **15-task benchmark** comparing Phi-4 Mini vs GPT-4o on accuracy, latency, and cost
-- Identify which task types SLMs handle well — and where they fall short
-- Apply a **privacy-first inference** strategy for sensitive workloads
+- Como **Small Language Models (SLMs)** como Phi-4 Mini se comparam a modelos de fronteira como GPT-4o
+- Quando SLMs oferecem um melhor trade-off: **baixa latência, privacidade e custo zero na nuvem**
+- Executar inferência com **ONNX Runtime** localmente para habilidades de agentes (classificar, extrair, resumir, rotear, redigir)
+- Analisar um **benchmark de 15 tarefas** comparando Phi-4 Mini vs GPT-4o em precisão, latência e custo
+- Identificar quais tipos de tarefas SLMs lidam bem — e onde ficam aquém
+- Aplicar uma estratégia de **inferência com privacidade em primeiro lugar** para cargas de trabalho sensíveis
 
 ---
 
-## Introduction
+## Introdução
 
-Frontier models like GPT-4o deliver exceptional quality, but they come with latency, cost, and privacy trade-offs. **Small Language Models (SLMs)** like Phi-4 Mini run locally via ONNX Runtime, offering dramatically lower latency, zero cloud cost, and full data privacy — your data never leaves the device.
+Modelos de fronteira como GPT-4o entregam qualidade excepcional, mas trazem trade-offs de latência, custo e privacidade. **Small Language Models (SLMs)** como Phi-4 Mini executam localmente via ONNX Runtime, oferecendo latência dramaticamente menor, custo zero na nuvem e privacidade total dos dados — seus dados nunca saem do dispositivo.
 
-The question isn't "which model is better" — it's "which tasks can an SLM handle just as well?" This lab uses a 15-task benchmark to find the answer.
+A questão não é "qual modelo é melhor" — é "quais tarefas um SLM pode lidar igualmente bem?" Este lab usa um benchmark de 15 tarefas para encontrar a resposta.
 
-### The Benchmark
+### O Benchmark
 
-You'll compare **Phi-4 Mini (local)** vs **GPT-4o (cloud)** across **15 tasks** in 5 categories:
+Você comparará **Phi-4 Mini (local)** vs **GPT-4o (nuvem)** em **15 tarefas** em 5 categorias:
 
-| Category | Count | Example |
-|----------|-------|---------|
-| **Classify** | 3 | Sentiment analysis, intent detection, topic tagging |
-| **Extract** | 3 | Entity extraction, key-value parsing, date normalization |
-| **Summarize** | 3 | Meeting notes, article digest, support ticket summary |
-| **Route** | 3 | Ticket routing, escalation decision, queue assignment |
-| **Draft** | 3 | Email reply, report paragraph, product description |
+| Categoria | Quantidade | Exemplo |
+|-----------|-----------|---------|
+| **Classificar** | 3 | Análise de sentimento, detecção de intenção, etiquetagem de tópicos |
+| **Extrair** | 3 | Extração de entidades, parsing de chave-valor, normalização de datas |
+| **Resumir** | 3 | Notas de reunião, resumo de artigo, resumo de ticket de suporte |
+| **Rotear** | 3 | Roteamento de tickets, decisão de escalonamento, atribuição de fila |
+| **Redigir** | 3 | Resposta de e-mail, parágrafo de relatório, descrição de produto |
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 ```bash
 pip install pandas
 ```
 
-This lab analyzes pre-computed benchmark results — no API key, GPU, or ONNX Runtime installation required. To run live inference, you would need ONNX Runtime and the Phi-4 Mini ONNX model.
+Este lab analisa resultados de benchmark pré-computados — nenhuma chave de API, GPU ou instalação do ONNX Runtime é necessária. Para executar inferência ao vivo, você precisaria do ONNX Runtime e do modelo Phi-4 Mini ONNX.
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-061/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-061/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_slm.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/broken_slm.py) |
-| `slm_benchmark.csv` | Benchmark dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `broken_slm.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/broken_slm.py) |
+| `slm_benchmark.csv` | Conjunto de dados de benchmark | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv) |
 
 ---
 
-## Part 1: Understanding SLMs
+## Parte 1: Entendendo SLMs
 
-### Step 1: SLMs vs frontier models
+### Etapa 1: SLMs vs modelos de fronteira
 
-SLMs are compact models (typically 1–4B parameters) optimized for specific task patterns. They trade breadth for efficiency:
+SLMs são modelos compactos (tipicamente 1–4B parâmetros) otimizados para padrões de tarefas específicos. Eles trocam abrangência por eficiência:
 
 ```
-Frontier Model (GPT-4o):
-  Cloud API → [Large model] → High accuracy, high latency, per-token cost
+Modelo de Fronteira (GPT-4o):
+  API na Nuvem → [Modelo grande] → Alta precisão, alta latência, custo por token
 
 Small Language Model (Phi-4 Mini):
-  Local ONNX → [Compact model] → Good accuracy, very low latency, zero cost
+  ONNX Local → [Modelo compacto] → Boa precisão, latência muito baixa, custo zero
 ```
 
-Key concepts:
+Conceitos-chave:
 
-| Concept | Description |
-|---------|-------------|
-| **SLM** | Small Language Model — compact model optimized for specific tasks |
-| **ONNX Runtime** | Cross-platform inference engine for running models locally |
-| **Privacy-first inference** | Data never leaves the device — critical for PII, health, finance |
-| **Task routing** | Directing simple tasks to SLMs and complex tasks to frontier models |
+| Conceito | Descrição |
+|----------|-----------|
+| **SLM** | Small Language Model — modelo compacto otimizado para tarefas específicas |
+| **ONNX Runtime** | Motor de inferência multiplataforma para executar modelos localmente |
+| **Inferência com privacidade em primeiro lugar** | Dados nunca saem do dispositivo — crítico para PII, saúde, finanças |
+| **Roteamento de tarefas** | Direcionar tarefas simples para SLMs e tarefas complexas para modelos de fronteira |
 
-!!! info "When to consider SLMs"
-    SLMs excel at well-defined, constrained tasks like classification, extraction, and routing. They struggle with open-ended creative tasks that require broad world knowledge. The ideal architecture routes each task to the right-sized model.
+!!! info "Quando considerar SLMs"
+    SLMs se destacam em tarefas bem definidas e restritas como classificação, extração e roteamento. Eles têm dificuldade com tarefas criativas abertas que exigem amplo conhecimento de mundo. A arquitetura ideal roteia cada tarefa para o modelo do tamanho certo.
 
 ---
 
-## Part 2: Load Benchmark Data
+## Parte 2: Carregar Dados de Benchmark
 
-### Step 2: Load [📥 `slm_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv)
+### Etapa 2: Carregar [📥 `slm_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv)
 
-The benchmark dataset contains results from running all 15 tasks through both models:
+O conjunto de dados de benchmark contém resultados da execução de todas as 15 tarefas em ambos os modelos:
 
 ```python
 # slm_analysis.py
@@ -119,7 +114,7 @@ print(f"Categories: {bench['category'].unique().tolist()}")
 print(bench[["task_id", "category", "description"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Tasks: 15
@@ -145,9 +140,9 @@ task_id  category                          description
 
 ---
 
-## Part 3: Accuracy Comparison
+## Parte 3: Comparação de Precisão
 
-### Step 3: Calculate accuracy for each model
+### Etapa 3: Calcular a precisão de cada modelo
 
 ```python
 # Overall accuracy
@@ -157,15 +152,15 @@ for model in ["phi4_mini", "gpt4o"]:
     print(f"{model:>10}: {correct}/{total} = {correct/total*100:.0f}%")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
  phi4_mini: 12/15 = 80%
      gpt4o: 15/15 = 100%
 ```
 
-!!! warning "Key Finding"
-    Phi-4 Mini achieves 80% accuracy — solid for most agent tasks. GPT-4o gets everything right, but at much higher latency and cost. The 3 tasks Phi-4 Mini fails on reveal where SLMs hit their limits.
+!!! warning "Descoberta Principal"
+    Phi-4 Mini alcança 80% de precisão — sólido para a maioria das tarefas de agentes. GPT-4o acerta tudo, mas com latência e custo muito maiores. As 3 tarefas que Phi-4 Mini erra revelam onde os SLMs atingem seus limites.
 
 ```python
 # Which tasks does Phi-4 Mini get wrong?
@@ -174,7 +169,7 @@ print("Phi-4 Mini failures:")
 print(phi4_fails[["task_id", "category", "description"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Phi-4 Mini failures:
@@ -184,13 +179,13 @@ task_id  category                    description
     T14 summarize  Compliance document summary
 ```
 
-Phi-4 Mini fails on **2 draft tasks** (T10, T11) and **1 summarize task** (T14). Draft tasks require creative, nuanced writing — exactly where SLMs struggle. T14 is a complex compliance document that exceeds the model's context capacity.
+Phi-4 Mini falha em **2 tarefas de redação** (T10, T11) e **1 tarefa de resumo** (T14). Tarefas de redação exigem escrita criativa e nuançada — exatamente onde SLMs têm dificuldade. T14 é um documento complexo de conformidade que excede a capacidade de contexto do modelo.
 
 ---
 
-## Part 4: Latency Comparison
+## Parte 4: Comparação de Latência
 
-### Step 4: Compare inference latency
+### Etapa 4: Comparar latência de inferência
 
 ```python
 # Average latency per model
@@ -205,7 +200,7 @@ speedup = gpt4o_avg / phi4_avg
 print(f"\nPhi-4 Mini is {speedup:.0f}× faster than GPT-4o")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
  phi4_mini: 82.3ms average
@@ -214,8 +209,8 @@ print(f"\nPhi-4 Mini is {speedup:.0f}× faster than GPT-4o")
 Phi-4 Mini is 12× faster than GPT-4o
 ```
 
-!!! info "Latency Advantage"
-    Phi-4 Mini runs locally via ONNX Runtime at 82.3ms average — **12× faster** than GPT-4o's cloud round-trip of ~1 second. For agent skills that execute repeatedly (classification, routing), this latency difference compounds dramatically.
+!!! info "Vantagem de Latência"
+    Phi-4 Mini executa localmente via ONNX Runtime com 82,3ms em média — **12× mais rápido** que o round-trip na nuvem do GPT-4o de ~1 segundo. Para habilidades de agentes executadas repetidamente (classificação, roteamento), essa diferença de latência se acumula dramaticamente.
 
 ```python
 # Per-task latency comparison
@@ -228,9 +223,9 @@ for _, row in bench.iterrows():
 
 ---
 
-## Part 5: Cost Analysis
+## Parte 5: Análise de Custo
 
-### Step 5: Calculate cloud cost avoided
+### Etapa 5: Calcular custo de nuvem evitado
 
 ```python
 # Total cloud cost for GPT-4o
@@ -246,7 +241,7 @@ for cat in bench["category"].unique():
     print(f"  {cat:>9}: ${cat_cost:.4f}")
 ```
 
-**Expected output:**
+**Saída esperada:**
 
 ```
 Total GPT-4o cloud cost: $0.0121
@@ -261,23 +256,23 @@ Cost by category:
      draft: $0.0032
 ```
 
-While $0.0121 seems small for 15 tasks, at scale (thousands of agent invocations per day), the savings compound rapidly — and the privacy benefit is priceless for sensitive data.
+Embora $0,0121 pareça pouco para 15 tarefas, em escala (milhares de invocações de agentes por dia), a economia se acumula rapidamente — e o benefício de privacidade é inestimável para dados sensíveis.
 
 ---
 
-## Part 6: Task Routing Strategy
+## Parte 6: Estratégia de Roteamento de Tarefas
 
-### Step 6: Build a routing decision
+### Etapa 6: Construir uma decisão de roteamento
 
-Based on the benchmark, the optimal strategy routes tasks by category:
+Com base no benchmark, a estratégia ideal roteia tarefas por categoria:
 
-| Category | Recommended Model | Why |
-|----------|------------------|-----|
-| **Classify** | Phi-4 Mini | 100% accuracy, 12× faster, zero cost |
-| **Extract** | Phi-4 Mini | 100% accuracy, 12× faster, zero cost |
-| **Route** | Phi-4 Mini | 100% accuracy, 12× faster, zero cost |
-| **Summarize** | Phi-4 Mini (with fallback) | 2/3 correct; fall back to GPT-4o for complex docs |
-| **Draft** | GPT-4o | SLM fails on creative writing — use frontier model |
+| Categoria | Modelo Recomendado | Por quê |
+|-----------|-------------------|---------|
+| **Classificar** | Phi-4 Mini | 100% de precisão, 12× mais rápido, custo zero |
+| **Extrair** | Phi-4 Mini | 100% de precisão, 12× mais rápido, custo zero |
+| **Rotear** | Phi-4 Mini | 100% de precisão, 12× mais rápido, custo zero |
+| **Resumir** | Phi-4 Mini (com fallback) | 2/3 corretos; fallback para GPT-4o para documentos complexos |
+| **Redigir** | GPT-4o | SLM falha em escrita criativa — use modelo de fronteira |
 
 ```python
 # Summary dashboard
@@ -302,97 +297,97 @@ print("""
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-061/broken_slm.py` has **3 bugs** in the SLM analysis functions. Run the self-tests:
+O arquivo `lab-061/broken_slm.py` tem **3 bugs** nas funções de análise do SLM. Execute os autotestes:
 
 ```bash
 python lab-061/broken_slm.py
 ```
 
-You should see **3 failed tests**:
+Você deverá ver **3 testes falhando**:
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Accuracy calculation | Which column represents correctness — `_correct` or `_latency_ms`? |
-| Test 2 | Cost calculation | Are you summing `_tokens` or `_cost_usd`? |
-| Test 3 | Filtering failed tasks | Are you filtering for `category == "draft"` or missing the filter entirely? |
+| Teste | O que verifica | Dica |
+|-------|---------------|------|
+| Teste 1 | Cálculo de precisão | Qual coluna representa a correção — `_correct` ou `_latency_ms`? |
+| Teste 2 | Cálculo de custo | Você está somando `_tokens` ou `_cost_usd`? |
+| Teste 3 | Filtragem de tarefas falhadas | Você está filtrando por `category == "draft"` ou faltou o filtro? |
 
-Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
+Corrija todos os 3 bugs e execute novamente até ver `🎉 All 3 tests passed`.
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What are the primary advantages of using an SLM like Phi-4 Mini over a frontier model like GPT-4o?"
+??? question "**Q1 (Múltipla Escolha):** Quais são as principais vantagens de usar um SLM como Phi-4 Mini em vez de um modelo de fronteira como GPT-4o?"
 
-    - A) Higher accuracy on all task types
-    - B) Low latency, data privacy, and zero cloud cost
-    - C) Better creative writing and summarization
-    - D) Larger context window and more parameters
+    - A) Maior precisão em todos os tipos de tarefas
+    - B) Baixa latência, privacidade de dados e custo zero na nuvem
+    - C) Melhor escrita criativa e resumo
+    - D) Janela de contexto maior e mais parâmetros
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Low latency, data privacy, and zero cloud cost**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Baixa latência, privacidade de dados e custo zero na nuvem**
 
-        SLMs run locally via ONNX Runtime, delivering 12× lower latency (82.3ms vs 996.7ms), keeping all data on-device for full privacy, and eliminating per-token cloud costs. They don't beat frontier models on accuracy (80% vs 100%), but for well-defined tasks like classification, extraction, and routing, the accuracy is sufficient and the operational benefits are significant.
+        SLMs executam localmente via ONNX Runtime, entregando 12× menor latência (82,3ms vs 996,7ms), mantendo todos os dados no dispositivo para privacidade total e eliminando custos por token na nuvem. Eles não superam modelos de fronteira em precisão (80% vs 100%), mas para tarefas bem definidas como classificação, extração e roteamento, a precisão é suficiente e os benefícios operacionais são significativos.
 
-??? question "**Q2 (Multiple Choice):** When should you NOT use an SLM like Phi-4 Mini?"
+??? question "**Q2 (Múltipla Escolha):** Quando você NÃO deve usar um SLM como Phi-4 Mini?"
 
-    - A) For sentiment classification
-    - B) For entity extraction
-    - C) For complex creative writing tasks
-    - D) For ticket routing
+    - A) Para classificação de sentimento
+    - B) Para extração de entidades
+    - C) Para tarefas complexas de escrita criativa
+    - D) Para roteamento de tickets
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) For complex creative writing tasks**
+    ??? success "✅ Revelar Resposta"
+        **Correto: C) Para tarefas complexas de escrita criativa**
 
-        The benchmark shows Phi-4 Mini fails on both draft tasks (T10: email reply, T11: report paragraph). Creative writing requires nuanced language generation, broad world knowledge, and stylistic flexibility — areas where SLMs lack the capacity of frontier models. Classify, extract, and route tasks are well-suited to SLMs.
+        O benchmark mostra que Phi-4 Mini falha em ambas as tarefas de redação (T10: resposta de e-mail, T11: parágrafo de relatório). Escrita criativa exige geração de linguagem nuançada, amplo conhecimento de mundo e flexibilidade estilística — áreas onde SLMs carecem da capacidade dos modelos de fronteira. Tarefas de classificar, extrair e rotear são bem adequadas para SLMs.
 
-??? question "**Q3 (Run the Lab):** What is Phi-4 Mini's accuracy on the 15-task benchmark?"
+??? question "**Q3 (Execute o Lab):** Qual é a precisão do Phi-4 Mini no benchmark de 15 tarefas?"
 
-    Calculate `bench["phi4_mini_correct"].sum() / len(bench) * 100`.
+    Calcule `bench["phi4_mini_correct"].sum() / len(bench) * 100`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Revelar Resposta"
         **80% (12/15)**
 
-        Phi-4 Mini correctly handles 12 of 15 tasks. It achieves 100% accuracy on classify (3/3), extract (3/3), and route (3/3) tasks, but fails on 2 draft tasks (T10, T11) and 1 complex summarize task (T14). This 80% accuracy is sufficient for a task-routing architecture where only appropriate tasks are sent to the SLM.
+        Phi-4 Mini lida corretamente com 12 das 15 tarefas. Ele alcança 100% de precisão em tarefas de classificar (3/3), extrair (3/3) e rotear (3/3), mas falha em 2 tarefas de redação (T10, T11) e 1 tarefa complexa de resumo (T14). Esta precisão de 80% é suficiente para uma arquitetura de roteamento de tarefas onde apenas tarefas apropriadas são enviadas ao SLM.
 
-??? question "**Q4 (Run the Lab):** How much faster is Phi-4 Mini compared to GPT-4o?"
+??? question "**Q4 (Execute o Lab):** Quanto mais rápido é o Phi-4 Mini comparado ao GPT-4o?"
 
-    Calculate `bench["gpt4o_latency_ms"].mean() / bench["phi4_mini_latency_ms"].mean()`.
+    Calcule `bench["gpt4o_latency_ms"].mean() / bench["phi4_mini_latency_ms"].mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **~12× faster**
+    ??? success "✅ Revelar Resposta"
+        **~12× mais rápido**
 
-        Phi-4 Mini averages 82.3ms per task via local ONNX Runtime inference, while GPT-4o averages 996.7ms including cloud round-trip. The ratio is 996.7 / 82.3 ≈ 12×. For agent pipelines that execute many skills sequentially, this latency reduction compounds — a 10-step agent pipeline drops from ~10 seconds to under 1 second.
+        Phi-4 Mini tem média de 82,3ms por tarefa via inferência local com ONNX Runtime, enquanto GPT-4o tem média de 996,7ms incluindo o round-trip na nuvem. A proporção é 996,7 / 82,3 ≈ 12×. Para pipelines de agentes que executam muitas habilidades sequencialmente, essa redução de latência se acumula — um pipeline de agente com 10 etapas cai de ~10 segundos para menos de 1 segundo.
 
-??? question "**Q5 (Run the Lab):** How much total cloud cost is avoided by using Phi-4 Mini for all 15 tasks?"
+??? question "**Q5 (Execute o Lab):** Quanto de custo total de nuvem é evitado usando Phi-4 Mini para todas as 15 tarefas?"
 
-    Calculate `bench["gpt4o_cost_usd"].sum()`.
+    Calcule `bench["gpt4o_cost_usd"].sum()`.
 
-    ??? success "✅ Reveal Answer"
-        **$0.0121**
+    ??? success "✅ Revelar Resposta"
+        **$0,0121**
 
-        The total GPT-4o cloud cost across all 15 tasks is $0.0121. While this seems small, it scales linearly — 10,000 invocations per day would cost ~$8/day or ~$240/month. With Phi-4 Mini running locally, the cloud cost is exactly $0. The real value is often privacy rather than cost: for healthcare, finance, and legal workloads, keeping data on-device may be a compliance requirement.
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| SLMs | Compact models optimized for specific tasks — fast, private, free |
-| Phi-4 Mini | 80% accuracy on 15-task benchmark, 12× faster than GPT-4o |
-| ONNX Runtime | Local inference engine — no cloud dependency |
-| Task Routing | Route classify/extract/route to SLM; draft to frontier model |
-| Privacy | SLM inference keeps all data on-device — critical for sensitive workloads |
-| Cost | $0.0121 cloud cost avoided per 15 tasks; compounds at scale |
+        O custo total de nuvem do GPT-4o em todas as 15 tarefas é $0,0121. Embora pareça pouco, escala linearmente — 10.000 invocações por dia custariam ~$8/dia ou ~$240/mês. Com Phi-4 Mini executando localmente, o custo na nuvem é exatamente $0. O valor real geralmente é a privacidade e não o custo: para cargas de trabalho de saúde, finanças e jurídicas, manter os dados no dispositivo pode ser um requisito de conformidade.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **[Lab 062](lab-062-ondevice-phi-silica.md)** — On-Device Agents with Phi Silica (NPU-accelerated on-device inference)
-- **[Lab 060](lab-060-reasoning-models.md)** — Reasoning Models (when you need maximum accuracy over speed)
-- **[Lab 044](lab-044-phi4-ollama-production.md)** — Phi-4 with Ollama in Production (alternative local deployment)
+| Tópico | O Que Você Aprendeu |
+|--------|---------------------|
+| SLMs | Modelos compactos otimizados para tarefas específicas — rápidos, privados, gratuitos |
+| Phi-4 Mini | 80% de precisão no benchmark de 15 tarefas, 12× mais rápido que GPT-4o |
+| ONNX Runtime | Motor de inferência local — sem dependência de nuvem |
+| Roteamento de Tarefas | Rotear classificar/extrair/rotear para SLM; redigir para modelo de fronteira |
+| Privacidade | Inferência SLM mantém todos os dados no dispositivo — crítico para cargas de trabalho sensíveis |
+| Custo | $0,0121 de custo de nuvem evitado por 15 tarefas; se acumula em escala |
+
+---
+
+## Próximos Passos
+
+- **[Lab 062](lab-062-ondevice-phi-silica.md)** — Agentes On-Device com Phi Silica (inferência on-device acelerada por NPU)
+- **[Lab 060](lab-060-reasoning-models.md)** — Modelos de Raciocínio (quando você precisa de precisão máxima em vez de velocidade)
+- **[Lab 044](lab-044-phi4-ollama-production.md)** — Phi-4 com Ollama em Produção (implantação local alternativa)

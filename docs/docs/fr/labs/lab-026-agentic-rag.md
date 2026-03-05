@@ -1,59 +1,54 @@
 ---
 tags: [rag, agentic-rag, python, free, github-models]
 ---
-# Lab 026: Agentic RAG Pattern
+# Lab 026 : Pattern RAG agentique
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">RAG</a></span>
-  <span><strong>Time:</strong> ~40 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> + Docker (local)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Durée :</strong> ~40 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> + Docker (local)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- Why naive RAG fails on complex questions
-- **Query rewriting** — improving retrieval before searching
-- **Hypothetical Document Embeddings (HyDE)** — generate to retrieve
-- **Multi-hop RAG** — iterative retrieval for multi-part questions
-- **Self-reflection** — agent evaluates its own answer quality
+- Pourquoi le RAG naïf échoue sur les questions complexes
+- **Réécriture de requêtes** — améliorer la récupération avant la recherche
+- **Hypothetical Document Embeddings (HyDE)** — générer pour récupérer
+- **RAG multi-hop** — récupération itérative pour les questions en plusieurs parties
+- **Auto-réflexion** — l'agent évalue la qualité de sa propre réponse
 
 ---
 
 ## Introduction
 
-Naive RAG: embed query → search → generate. Works fine for simple questions. Fails for:
+RAG naïf : vectoriser la requête → chercher → générer. Fonctionne bien pour les questions simples. Échoue pour :
 
-- Vague questions: *"Tell me about it"* (what is "it"?)
-- Multi-hop: *"What's cheaper — camping or climbing gear? What would I save?"*
-- Knowledge gaps: *"What's the newest product?"* (may need to know current date)
-- Hallucination: model invents facts not in context
+- Questions vagues : *« Parle-moi de ça »* (qu'est-ce que « ça » ?)
+- Multi-hop : *« Qu'est-ce qui est moins cher — le matériel de camping ou d'escalade ? Combien j'économiserais ? »*
+- Lacunes de connaissances : *« Quel est le produit le plus récent ? »* (peut nécessiter de connaître la date actuelle)
+- Hallucination : le modèle invente des faits absents du contexte
 
-Agentic RAG adds reasoning loops around retrieval. The agent *decides* how to search, *evaluates* results, and *retries* if needed.
-
----
-
-## Prerequisites
-
-- Completed [Lab 022](lab-022-rag-github-models-pgvector.md) (pgvector running + documents ingested)
-- `GITHUB_TOKEN` set
-- pgvector container running: `docker start pgvector-rag`
-
-!!! tip "Sample data already loaded?"
-    If you ran Lab 022's ingest step with the sample dataset, you already have 42 documents in pgvector ready for this lab. If not, run Lab 022's Step 3 first.
+Le RAG agentique ajoute des boucles de raisonnement autour de la récupération. L'agent *décide* comment chercher, *évalue* les résultats, et *réessaie* si nécessaire.
 
 ---
 
-## Lab Exercise
+## Prérequis
 
-### Step 1: Query rewriting
+- Avoir terminé le [Lab 022](lab-022-rag-github-models-pgvector.md) (pgvector en fonctionnement + documents ingérés)
+- `GITHUB_TOKEN` configuré
+- Conteneur pgvector en fonctionnement : `docker start pgvector-rag`
 
-Before searching, ask the LLM to rewrite the user's question into better search queries.
+!!! tip "Données d'exemple déjà chargées ?"
+    Si vous avez exécuté l'étape d'ingestion du Lab 022 avec le jeu de données, vous avez déjà 42 documents dans pgvector prêts pour ce lab. Sinon, exécutez d'abord l'étape 3 du Lab 022.
+
+---
+
+## Exercice du lab
+
+### Étape 1 : Réécriture de requêtes
+
+Avant de chercher, demandez au LLM de réécrire la question de l'utilisateur en meilleures requêtes de recherche.
 
 ```python
 import os
@@ -97,7 +92,7 @@ for q in queries:
 # • camping shelter rain protection features
 ```
 
-### Step 2: Retrieve with multiple queries and deduplicate
+### Étape 2 : Récupérer avec plusieurs requêtes et dédupliquer
 
 ```python
 def retrieve_with_rewriting(question: str, top_k: int = 3) -> list[dict]:
@@ -118,9 +113,9 @@ def retrieve_with_rewriting(question: str, top_k: int = 3) -> list[dict]:
     return all_docs[:top_k]
 ```
 
-### Step 3: HyDE — Hypothetical Document Embeddings
+### Étape 3 : HyDE — Hypothetical Document Embeddings
 
-Instead of embedding the question, generate a *hypothetical answer* and embed that. This often matches the real document better.
+Au lieu de vectoriser la question, générez une *réponse hypothétique* et vectorisez-la. Cela correspond souvent mieux au vrai document.
 
 ```python
 def hyde_search(question: str, top_k: int = 3) -> list[dict]:
@@ -141,9 +136,9 @@ def hyde_search(question: str, top_k: int = 3) -> list[dict]:
     return search(hypothetical_answer, top_k=top_k)
 ```
 
-### Step 4: Multi-hop RAG
+### Étape 4 : RAG multi-hop
 
-For complex questions, retrieve → generate partial answer → retrieve again.
+Pour les questions complexes, récupérer → générer une réponse partielle → récupérer à nouveau.
 
 ```python
 def multi_hop_answer(question: str) -> str:
@@ -208,7 +203,7 @@ def answer_with_context(question: str, docs: list[dict]) -> str:
 print(multi_hop_answer("What's the cheapest product suitable for a Rainier climb?"))
 ```
 
-### Step 5: Self-reflection (answer quality check)
+### Étape 5 : Auto-réflexion (vérification de la qualité de la réponse)
 
 ```python
 from pydantic import BaseModel
@@ -240,33 +235,33 @@ def check_answer_quality(question: str, context: str, answer: str) -> AnswerQual
 
 ---
 
-## Agentic RAG Architecture Summary
+## Résumé de l'architecture RAG agentique
 
 ```
-User Question
+Question de l'utilisateur
      │
      ▼
-Query Rewriting ──► 3 query variants
+Réécriture de requêtes ──► 3 variantes de requêtes
      │
      ▼
-Parallel Search ──► deduplicated docs
+Recherche parallèle ──► documents dédupliqués
      │
      ▼
-Can I answer? ──No──► Follow-up search (multi-hop)
-     │Yes
+Puis-je répondre ? ──Non──► Recherche de suivi (multi-hop)
+     │Oui
      ▼
-Generate Answer
+Générer la réponse
      │
      ▼
-Self-Reflection ──► Is it grounded?
+Auto-réflexion ──► Est-elle fondée ?
      │
      ▼
-Return Answer (or retry)
+Retourner la réponse (ou réessayer)
 ```
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **Agent memory across sessions:** → [Lab 027 — Agent Memory Patterns](lab-027-agent-memory-patterns.md)
-- **Evaluate RAG quality at scale:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)
+- **Mémoire d'agent entre sessions :** → [Lab 027 — Patterns de mémoire d'agent](lab-027-agent-memory-patterns.md)
+- **Évaluer la qualité du RAG à grande échelle :** → [Lab 035 — Évaluation d'agent](lab-035-agent-evaluation.md)

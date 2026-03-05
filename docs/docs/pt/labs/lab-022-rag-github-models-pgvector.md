@@ -1,51 +1,46 @@
 ---
 tags: [rag, pgvector, python, free, github-models]
 ---
-# Lab 022: RAG Pipeline with GitHub Models + pgvector
+# Lab 022: Pipeline RAG com GitHub Models + pgvector
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">RAG</a></span>
-  <span><strong>Time:</strong> ~50 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> + <span class="level-badge cost-free">Docker (local)</span></span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Tempo:</strong> ~50 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Gratuito</span> + <span class="level-badge cost-free">Docker (local)</span></span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Spin up **pgvector** (PostgreSQL + vectors) locally via Docker
-- Generate embeddings with **GitHub Models** (`text-embedding-3-small`) — free
-- **Ingest** documents: chunk, embed, store in pgvector
-- **Query** with semantic similarity search (`<=>` cosine operator)
-- Build a full **RAG answer pipeline** (retrieve → augment → generate)
+- Iniciar o **pgvector** (PostgreSQL + vetores) localmente via Docker
+- Gerar embeddings com o **GitHub Models** (`text-embedding-3-small`) — gratuito
+- **Ingerir** documentos: fragmentar, gerar embeddings, armazenar no pgvector
+- **Consultar** com busca por similaridade semântica (operador cosseno `<=>`)
+- Construir um pipeline completo de **resposta RAG** (recuperar → aumentar → gerar)
 
 ---
 
-## Introduction
+## Introdução
 
-In [Lab 006](lab-006-what-is-rag.md) you learned RAG theory. Here you build the real thing — a working RAG system using only free tools: GitHub Models for embeddings + generation, and pgvector running locally in Docker.
+No [Lab 006](lab-006-what-is-rag.md) você aprendeu a teoria do RAG. Aqui você constrói a coisa real — um sistema RAG funcional usando apenas ferramentas gratuitas: GitHub Models para embeddings + geração, e pgvector rodando localmente no Docker.
 
-!!! tip "Pre-built dataset included"
-    This lab uses the **OutdoorGear sample dataset** — 25 products, FAQs, and company policies, ready to ingest.  
+!!! tip "Dataset pré-construído incluído"
+    Este lab usa o **dataset de exemplo OutdoorGear** — 25 produtos, FAQs e políticas da empresa, prontos para ingestão.  
     📥 [`data/products.csv`](https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv) · [`data/knowledge-base.json`](https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json)
 
     ```bash
-    # Download the sample data
+    # Baixar os dados de exemplo
     curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
     curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
     ```
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-- Docker Desktop — free: https://www.docker.com/products/docker-desktop
+- Docker Desktop — gratuito: https://www.docker.com/products/docker-desktop
 - Python 3.11+
-- `GITHUB_TOKEN` set (from [Lab 013](lab-013-github-models.md))
+- `GITHUB_TOKEN` configurado (do [Lab 013](lab-013-github-models.md))
 
 ```bash
 pip install openai psycopg2-binary python-dotenv
@@ -53,25 +48,20 @@ pip install openai psycopg2-binary python-dotenv
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Start pgvector with Docker
+### Passo 1: Iniciar o pgvector com Docker
 
 ```bash
-docker run -d \
-  --name pgvector-rag \
-  -e POSTGRES_PASSWORD=ragpass \
-  -e POSTGRES_DB=ragdb \
-  -p 5432:5432 \
-  pgvector/pgvector:pg16
+docker run -d   --name pgvector-rag   -e POSTGRES_PASSWORD=ragpass   -e POSTGRES_DB=ragdb   -p 5432:5432   pgvector/pgvector:pg16
 ```
 
-Verify it's running:
+Verifique se está rodando:
 ```bash
 docker ps | grep pgvector-rag
 ```
 
-### Step 2: Create the database schema
+### Passo 2: Criar o schema do banco de dados
 
 ```python
 # setup_db.py
@@ -109,9 +99,9 @@ print("Database ready.")
 python setup_db.py
 ```
 
-### Step 3: Ingest documents from the sample dataset
+### Passo 3: Ingerir documentos do dataset de exemplo
 
-The sample dataset lives in the repo. Download it (or use the URL directly):
+O dataset de exemplo está no repositório. Baixe-o (ou use a URL diretamente):
 
 ```bash
 curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
@@ -160,7 +150,8 @@ def build_documents() -> list[dict]:
     for faq in kb["faqs"]:
         docs.append({
             "title": f"FAQ: {faq['question']}",
-            "content": f"Q: {faq['question']}\nA: {faq['answer']}",
+            "content": f"Q: {faq['question']}
+A: {faq['answer']}",
             "source": "faq",
         })
 
@@ -200,7 +191,8 @@ for doc in documents:
 conn.commit()
 cur.close()
 conn.close()
-print(f"\n✅ Ingested {len(documents)} documents.")
+print(f"
+✅ Ingested {len(documents)} documents.")
 ```
 
 ```bash
@@ -209,7 +201,7 @@ python ingest.py
 # ✅ Ingested 42 documents.
 ```
 
-### Step 4: Query with semantic search
+### Passo 4: Consultar com busca semântica
 
 ```python
 # search.py
@@ -257,7 +249,7 @@ for r in results:
     print(f"[{r['similarity']:.3f}] {r['title']}")
 ```
 
-### Step 5: The RAG answer pipeline
+### Passo 5: O pipeline de resposta RAG
 
 ```python
 # rag.py
@@ -275,8 +267,11 @@ def answer(question: str) -> str:
     docs = search(question, top_k=3)
 
     # 2. Augment — build context
-    context = "\n\n".join([
-        f"**{d['title']}** (similarity: {d['similarity']:.2f})\n{d['content']}"
+    context = "
+
+".join([
+        f"**{d['title']}** (similarity: {d['similarity']:.2f})
+{d['content']}"
         for d in docs
     ])
 
@@ -296,7 +291,10 @@ def answer(question: str) -> str:
             },
             {
                 "role": "user",
-                "content": f"Context:\n{context}\n\nQuestion: {question}"
+                "content": f"Context:
+{context}
+
+Question: {question}"
             }
         ],
     )
@@ -311,7 +309,8 @@ questions = [
 ]
 
 for q in questions:
-    print(f"\n❓ {q}")
+    print(f"
+❓ {q}")
     print(f"💬 {answer(q)}")
     print("—" * 60)
 ```
@@ -322,14 +321,14 @@ python rag.py
 
 ---
 
-## Understanding the Results
+## Entendendo os Resultados
 
-!!! tip "Similarity scores"
-    - **> 0.85** — very strong match (the document directly answers the question)
-    - **0.70–0.85** — related (might be relevant)  
-    - **< 0.70** — weak match (probably not helpful, consider filtering)
+!!! tip "Scores de similaridade"
+    - **> 0.85** — correspondência muito forte (o documento responde diretamente à pergunta)
+    - **0.70–0.85** — relacionado (pode ser relevante)  
+    - **< 0.70** — correspondência fraca (provavelmente não é útil, considere filtrar)
 
-Add a threshold filter to avoid using low-confidence documents:
+Adicione um filtro de limiar para evitar usar documentos de baixa confiança:
 
 ```python
 docs = [d for d in search(question, top_k=5) if d["similarity"] > 0.75]
@@ -339,7 +338,7 @@ if not docs:
 
 ---
 
-## Cleanup
+## Limpeza
 
 ```bash
 docker stop pgvector-rag && docker rm pgvector-rag
@@ -347,8 +346,8 @@ docker stop pgvector-rag && docker rm pgvector-rag
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Agentic RAG** (query rewriting, multi-hop): → [Lab 026 — Agentic RAG Pattern](lab-026-agentic-rag.md)
-- **RAG with Semantic Kernel**: → [Lab 023 — SK Plugins, Memory & Planners](lab-023-sk-plugins-memory.md)
-- **Production pgvector on Azure**: → [Lab 031 — pgvector on Azure](lab-031-pgvector-semantic-search.md)
+- **RAG Agêntico** (reescrita de consulta, multi-hop): → [Lab 026 — Padrão RAG Agêntico](lab-026-agentic-rag.md)
+- **RAG com Semantic Kernel**: → [Lab 023 — Plugins, Memória e Planners do SK](lab-023-sk-plugins-memory.md)
+- **pgvector em produção no Azure**: → [Lab 031 — pgvector no Azure](lab-031-pgvector-semantic-search.md)

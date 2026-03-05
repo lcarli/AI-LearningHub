@@ -1,57 +1,57 @@
-# ⚙️ Pro Code Agents Path
+# ⚙️ Parcours Agents Pro Code
 
 <span class="level-badge level-200">L200</span> <span class="level-badge level-300">L300</span> <span class="level-badge level-400">L400</span>
 
-For developers who want full control over their agent architecture. Go beyond managed services and build production-ready agents with open-source frameworks and the Azure AI SDK.
+Pour les développeurs qui veulent un contrôle total sur l'architecture de leurs agents. Allez au-delà des services gérés et construisez des agents prêts pour la production avec des frameworks open-source et le Azure AI SDK.
 
 ---
 
-## What You'll Build
+## Ce que Vous Allez Construire
 
-- ✅ Multi-agent systems with **AutoGen** (orchestrator + specialist agents)
-- ✅ Production patterns: retry, circuit breaker, cost control
-- ✅ Custom **LangChain** chains with tool calling
-- ✅ End-to-end evaluation pipeline
-
----
-
-## Path Labs (16 labs, ~1040 min total)
-
-| Lab | Title | Level | Cost |
-|-----|-------|-------|------|
-| [Lab 018](../../labs/lab-018-function-calling.md) | Function Calling & Tool Use | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 019](../../labs/lab-019-streaming-responses.md) | Streaming Responses in Agents | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 027](../../labs/lab-027-agent-memory-patterns.md) | Agent Memory Patterns | <span class="level-badge level-200">L200</span> | ✅ Free |
-| [Lab 029](../../labs/lab-029-langchain-langgraph.md) | LangChain & LangGraph Basics | <span class="level-badge level-200">L200</span> | ✅ Free |
-| [Lab 035](../../labs/lab-035-agent-evaluation.md) | Agent Evaluation with Azure AI Eval SDK | <span class="level-badge level-300">L300</span> | ✅ GitHub Free |
-| [Lab 036](../../labs/lab-036-prompt-injection-security.md) | Prompt Injection Defense & Agent Security | <span class="level-badge level-300">L300</span> | ✅ GitHub Free |
-| [Lab 037](../../labs/lab-037-cicd-github-actions.md) | CI/CD for AI Agents with GitHub Actions | <span class="level-badge level-300">L300</span> | ✅ GitHub Free |
-| [Lab 038](../../labs/lab-038-cost-optimization.md) | AI Cost Optimization | <span class="level-badge level-300">L300</span> | ⚠️ Azure |
-| [Lab 043](../../labs/lab-043-multimodal-agents.md) | Multimodal Agents with GPT-4o Vision | <span class="level-badge level-300">L300</span> | ✅ Free |
-| [Lab 046](../../labs/lab-046-agent-365.md) | Microsoft Agent 365 — Enterprise Agent Governance | <span class="level-badge level-300">L300</span> | ⚠️ Azure |
-| [Lab 057](../../labs/lab-057-computer-use-agents.md) | Computer-Using Agents — Desktop Automation | <span class="level-badge level-300">L300</span> | ✅ Free |
-| [Lab 058](../../labs/lab-058-browser-automation-cua.md) | Browser Automation Agents with OpenAI CUA | <span class="level-badge level-300">L300</span> | ✅ Free |
-| [Lab 040](../../labs/lab-040-autogen-multi-agent.md) | Production Multi-Agent with AutoGen | <span class="level-badge level-400">L400</span> | ✅ GitHub Free |
-| [Lab 044](../../labs/lab-044-phi4-ollama-production.md) | Phi-4 + Ollama in Production | <span class="level-badge level-400">L400</span> | ✅ Free |
-| [Lab 055](../../labs/lab-055-a2a-mcp-capstone.md) | A2A + MCP Full Stack — Agent Interoperability Capstone | <span class="level-badge level-400">L400</span> | ✅ Free |
-| [Lab 064](../../labs/lab-064-securing-mcp-apim.md) | Securing MCP at Scale with Azure API Management | <span class="level-badge level-400">L400</span> | ✅ Free |
+- ✅ Des systèmes multi-agents avec **AutoGen** (orchestrateur + agents spécialisés)
+- ✅ Des patrons de production : retry, circuit breaker, contrôle des coûts
+- ✅ Des chaînes **LangChain** personnalisées avec appel d'outils
+- ✅ Un pipeline d'évaluation de bout en bout
 
 ---
 
-## Frameworks Covered
+## Laboratoires du Parcours (16 laboratoires, ~1040 min au total)
 
-| Framework | Language | Best for |
-|-----------|----------|---------|
-| **AutoGen** | Python | Multi-agent conversation orchestration |
-| **Semantic Kernel** | Python / C# | Plugin-based agents, Microsoft stack |
-| **LangChain** | Python / JS | General purpose agent chains |
-| **Azure AI SDK** | Python / C# | Azure-native agent development |
+| Lab | Titre | Niveau | Coût |
+|-----|-------|--------|------|
+| [Lab 018](../../labs/lab-018-function-calling.md) | Appel de Fonctions et Utilisation d'Outils | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
+| [Lab 019](../../labs/lab-019-streaming-responses.md) | Réponses en Streaming dans les Agents | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
+| [Lab 027](../../labs/lab-027-agent-memory-patterns.md) | Patrons de Mémoire d'Agents | <span class="level-badge level-200">L200</span> | ✅ Free |
+| [Lab 029](../../labs/lab-029-langchain-langgraph.md) | Fondamentaux de LangChain et LangGraph | <span class="level-badge level-200">L200</span> | ✅ Free |
+| [Lab 035](../../labs/lab-035-agent-evaluation.md) | Évaluation d'Agents avec Azure AI Eval SDK | <span class="level-badge level-300">L300</span> | ✅ GitHub Free |
+| [Lab 036](../../labs/lab-036-prompt-injection-security.md) | Défense contre le Prompt Injection et Sécurité des Agents | <span class="level-badge level-300">L300</span> | ✅ GitHub Free |
+| [Lab 037](../../labs/lab-037-cicd-github-actions.md) | CI/CD pour Agents IA avec GitHub Actions | <span class="level-badge level-300">L300</span> | ✅ GitHub Free |
+| [Lab 038](../../labs/lab-038-cost-optimization.md) | Optimisation des Coûts IA | <span class="level-badge level-300">L300</span> | ⚠️ Azure |
+| [Lab 043](../../labs/lab-043-multimodal-agents.md) | Agents Multimodaux avec GPT-4o Vision | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 046](../../labs/lab-046-agent-365.md) | Microsoft Agent 365 — Gouvernance d'Agents d'Entreprise | <span class="level-badge level-300">L300</span> | ⚠️ Azure |
+| [Lab 057](../../labs/lab-057-computer-use-agents.md) | Agents d'Utilisation d'Ordinateur — Automatisation de Bureau | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 058](../../labs/lab-058-browser-automation-cua.md) | Agents d'Automatisation de Navigateur avec OpenAI CUA | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 040](../../labs/lab-040-autogen-multi-agent.md) | Multi-Agent en Production avec AutoGen | <span class="level-badge level-400">L400</span> | ✅ GitHub Free |
+| [Lab 044](../../labs/lab-044-phi4-ollama-production.md) | Phi-4 + Ollama en Production | <span class="level-badge level-400">L400</span> | ✅ Free |
+| [Lab 055](../../labs/lab-055-a2a-mcp-capstone.md) | A2A + MCP Full Stack — Projet Final d'Interopérabilité d'Agents | <span class="level-badge level-400">L400</span> | ✅ Free |
+| [Lab 064](../../labs/lab-064-securing-mcp-apim.md) | Sécuriser MCP à Grande Échelle avec Azure API Management | <span class="level-badge level-400">L400</span> | ✅ Free |
 
 ---
 
-## External Resources
+## Frameworks Couverts
+
+| Framework | Langage | Idéal pour |
+|-----------|---------|------------|
+| **AutoGen** | Python | Orchestration de conversations multi-agents |
+| **Semantic Kernel** | Python / C# | Agents basés sur des plugins, stack Microsoft |
+| **LangChain** | Python / JS | Chaînes d'agents à usage général |
+| **Azure AI SDK** | Python / C# | Développement d'agents natif Azure |
+
+---
+
+## Ressources Externes
 
 - [AutoGen GitHub](https://github.com/microsoft/autogen)
 - [Azure AI SDK (Python)](https://learn.microsoft.com/azure/developer/python/sdk/azure-sdk-overview)
-- [LangChain Docs](https://python.langchain.com/docs/introduction/)
+- [Documentation LangChain](https://python.langchain.com/docs/introduction/)
 - [Azure AI Foundry SDK](https://learn.microsoft.com/azure/ai-foundry/how-to/develop/sdk-overview)

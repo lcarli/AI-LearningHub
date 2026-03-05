@@ -1,57 +1,52 @@
 ---
 tags: [ux, adaptive-cards, teams, proactive, accessibility, python]
 ---
-# Lab 070: Agent UX Patterns — Chat, Adaptive Cards & Proactive Notifications
+# Lab 070 : Patterns UX des agents — Chat, Adaptive Cards et notifications proactives
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Mock interaction data (no Teams or Azure Bot Service required)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~60 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Données d'interaction simulées (ni Teams ni Azure Bot Service requis)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
+- Les **patterns UX** essentiels pour les interactions d'agents IA en environnement d'entreprise
+- Concevoir des **interfaces de chat** efficaces avec des indicateurs de saisie et des citations de sources
+- Construire des **Adaptive Cards** pour l'affichage de données structurées et la saisie utilisateur
+- Implémenter des patterns de **notifications proactives** pour les messages initiés par l'agent
+- Appliquer les bonnes pratiques d'**accessibilité** à l'UX des agents
+- Mesurer la qualité UX à l'aide de métriques de **satisfaction utilisateur**
 
-
-## What You'll Learn
-
-- Core **UX patterns** for AI agent interactions in enterprise environments
-- Design effective **chat interfaces** with typing indicators and source citations
-- Build **Adaptive Cards** for structured data display and user input
-- Implement **proactive notification** patterns for agent-initiated messages
-- Apply **accessibility** best practices to agent UX
-- Measure UX quality using **user satisfaction** metrics
-
-!!! abstract "Prerequisite"
-    Familiarity with **chatbot** concepts is recommended. No front-end development experience is required — this lab analyzes UX patterns using mock interaction data.
+!!! abstract "Prérequis"
+    Une familiarité avec les concepts de **chatbot** est recommandée. Aucune expérience en développement front-end n'est requise — ce lab analyse les patterns UX à l'aide de données d'interaction simulées.
 
 ## Introduction
 
-An AI agent's intelligence is only as effective as its **user experience**. Poor UX — missing typing indicators, no source citations, inaccessible Adaptive Cards — erodes user trust and adoption. Great agent UX follows established patterns:
+L'intelligence d'un agent IA n'est efficace que dans la mesure de son **expérience utilisateur**. Une mauvaise UX — indicateurs de saisie manquants, pas de citations de sources, Adaptive Cards inaccessibles — érode la confiance et l'adoption des utilisateurs. Une excellente UX d'agent suit des patterns établis :
 
-| UX Pattern | Purpose | Impact |
+| Pattern UX | Objectif | Impact |
 |-----------|---------|--------|
-| **Typing Indicator** | Shows the agent is processing | Reduces perceived latency |
-| **Source Citation** | Links answers to source documents | Builds trust and verifiability |
-| **Adaptive Cards** | Structured display with actions | Enables rich interactions |
-| **Proactive Notifications** | Agent-initiated messages | Keeps users informed |
-| **Error Messaging** | Clear, actionable error states | Reduces frustration |
-| **Accessibility** | Screen reader support, keyboard nav | Ensures inclusive access |
+| **Indicateur de saisie** | Montre que l'agent traite la demande | Réduit la latence perçue |
+| **Citation de source** | Lie les réponses aux documents sources | Renforce la confiance et la vérifiabilité |
+| **Adaptive Cards** | Affichage structuré avec actions | Permet des interactions riches |
+| **Notifications proactives** | Messages initiés par l'agent | Tient les utilisateurs informés |
+| **Messages d'erreur** | États d'erreur clairs et exploitables | Réduit la frustration |
+| **Accessibilité** | Support des lecteurs d'écran, navigation clavier | Garantit un accès inclusif |
 
-### The Scenario
+### Le scénario
 
-You are a **UX Designer** auditing an enterprise agent's interaction patterns. You have data on **12 UX patterns** used across the organization, including satisfaction scores, implementation status, and accessibility compliance. Your job: identify high-impact patterns, find gaps, and recommend improvements.
+Vous êtes un **Designer UX** auditant les patterns d'interaction d'un agent d'entreprise. Vous disposez de données sur **12 patterns UX** utilisés dans l'organisation, incluant les scores de satisfaction, l'état d'implémentation et la conformité en matière d'accessibilité. Votre mission : identifier les patterns à fort impact, trouver les lacunes et recommander des améliorations.
 
 ---
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
+| Exigence | Raison |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` | Analyze UX pattern data |
+| Python 3.10+ | Exécuter les scripts d'analyse |
+| `pandas` | Analyser les données des patterns UX |
 
 ```bash
 pip install pandas
@@ -59,27 +54,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-070/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-070/` de votre répertoire de travail.
 
-| File | Description | Download |
+| Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_ux.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/broken_ux.py) |
-| `ux_patterns.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/ux_patterns.csv) |
+| `broken_ux.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/broken_ux.py) |
+| `ux_patterns.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/ux_patterns.csv) |
 
 ---
 
-## Step 1: Understanding Agent UX Principles
+## Étape 1 : Comprendre les principes UX des agents
 
-Effective agent UX follows a layered approach:
+Une UX d'agent efficace suit une approche en couches :
 
 ```
 User Input → [Typing Indicator] → Agent Processing → [Response Formatting]
@@ -92,22 +87,22 @@ User Input → [Typing Indicator] → Agent Processing → [Response Formatting]
                                               [Accessibility Check] → User
 ```
 
-Key principles:
+Principes clés :
 
-1. **Responsiveness** — Always acknowledge user input immediately (typing indicators)
-2. **Transparency** — Cite sources and explain confidence levels
-3. **Structure** — Use Adaptive Cards for complex data, plain text for simple answers
-4. **Proactivity** — Notify users of important events without requiring a prompt
-5. **Accessibility** — Ensure all interactions work with screen readers and keyboard navigation
+1. **Réactivité** — Toujours accuser réception de la saisie utilisateur immédiatement (indicateurs de saisie)
+2. **Transparence** — Citer les sources et expliquer les niveaux de confiance
+3. **Structure** — Utiliser les Adaptive Cards pour les données complexes, le texte brut pour les réponses simples
+4. **Proactivité** — Notifier les utilisateurs d'événements importants sans nécessiter de prompt
+5. **Accessibilité** — Assurer que toutes les interactions fonctionnent avec les lecteurs d'écran et la navigation clavier
 
-!!! info "Why UX Matters for Agent Adoption"
-    Research shows that agents with proper UX patterns (source citations, typing indicators, clear errors) have 2-3x higher user retention than agents with bare text responses. Users trust agents more when they can verify answers and understand the agent's state.
+!!! info "Pourquoi l'UX est importante pour l'adoption des agents"
+    Les recherches montrent que les agents avec des patterns UX appropriés (citations de sources, indicateurs de saisie, erreurs claires) ont un taux de rétention des utilisateurs 2 à 3 fois supérieur aux agents avec de simples réponses textuelles. Les utilisateurs font davantage confiance aux agents lorsqu'ils peuvent vérifier les réponses et comprendre l'état de l'agent.
 
 ---
 
-## Step 2: Load and Explore UX Patterns
+## Étape 2 : Charger et explorer les patterns UX
 
-The dataset contains **12 UX patterns** with satisfaction scores and implementation data:
+Le jeu de données contient **12 patterns UX** avec des scores de satisfaction et des données d'implémentation :
 
 ```python
 import pandas as pd
@@ -120,7 +115,7 @@ print(patterns[["pattern_id", "pattern_name", "category", "satisfaction_score"]]
       .to_string(index=False))
 ```
 
-**Expected:**
+**Attendu :**
 
 ```
 Total patterns: 12
@@ -128,9 +123,9 @@ Total patterns: 12
 
 ---
 
-## Step 3: Satisfaction Analysis
+## Étape 3 : Analyse de la satisfaction
 
-Identify the highest and lowest satisfaction patterns:
+Identifiez les patterns avec la satisfaction la plus élevée et la plus basse :
 
 ```python
 print("Patterns ranked by satisfaction score:")
@@ -142,21 +137,21 @@ print(f"\nHighest satisfaction: {highest['pattern_name']} ({highest['satisfactio
 print(f"Average satisfaction: {patterns['satisfaction_score'].mean():.2f}")
 ```
 
-**Expected:**
+**Attendu :**
 
 ```
 Highest satisfaction: Source Citation (4.8)
 Average satisfaction: 4.17
 ```
 
-!!! tip "Source Citations Win"
-    Source Citation has the highest satisfaction score (4.8 out of 5.0). Users strongly prefer agents that link answers to verifiable sources — it builds trust and allows users to dive deeper. This pattern should be implemented in every enterprise agent.
+!!! tip "Les citations de sources gagnent"
+    La Citation de source a le score de satisfaction le plus élevé (4.8 sur 5.0). Les utilisateurs préfèrent fortement les agents qui lient les réponses à des sources vérifiables — cela renforce la confiance et permet aux utilisateurs d'approfondir. Ce pattern devrait être implémenté dans chaque agent d'entreprise.
 
 ---
 
-## Step 4: Category Analysis
+## Étape 4 : Analyse par catégorie
 
-Analyze patterns by category:
+Analysez les patterns par catégorie :
 
 ```python
 print("Average satisfaction by category:")
@@ -167,13 +162,13 @@ cat_stats = patterns.groupby("category").agg(
 print(cat_stats.to_string())
 ```
 
-Categories group related patterns (e.g., "trust" patterns like source citations and confidence indicators, "responsiveness" patterns like typing indicators and streaming).
+Les catégories regroupent les patterns connexes (par ex. les patterns de « confiance » comme les citations de sources et les indicateurs de confiance, les patterns de « réactivité » comme les indicateurs de saisie et le streaming).
 
 ---
 
-## Step 5: Accessibility Compliance Check
+## Étape 5 : Vérification de la conformité en accessibilité
 
-Check which patterns meet accessibility standards:
+Vérifiez quels patterns respectent les normes d'accessibilité :
 
 ```python
 accessible = patterns[patterns["accessible"] == True]
@@ -186,14 +181,14 @@ if len(not_accessible) > 0:
     print(not_accessible[["pattern_name", "category", "satisfaction_score"]].to_string(index=False))
 ```
 
-!!! warning "Accessibility Gaps"
-    Any non-accessible pattern is a compliance risk and excludes users who rely on assistive technologies. Adaptive Cards must include `altText` for images, `label` for inputs, and proper `speak` properties for screen readers.
+!!! warning "Lacunes en accessibilité"
+    Tout pattern non accessible est un risque de conformité et exclut les utilisateurs qui dépendent des technologies d'assistance. Les Adaptive Cards doivent inclure `altText` pour les images, `label` pour les champs de saisie et les propriétés `speak` appropriées pour les lecteurs d'écran.
 
 ---
 
-## Step 6: UX Quality Dashboard
+## Étape 6 : Tableau de bord de la qualité UX
 
-Build a comprehensive UX quality report:
+Construisez un rapport complet de qualité UX :
 
 ```python
 total = len(patterns)
@@ -218,93 +213,93 @@ print(dashboard)
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-070/broken_ux.py` has **3 bugs** in how it analyzes UX pattern data:
+Le fichier `lab-070/broken_ux.py` contient **3 bugs** dans la façon dont il analyse les données des patterns UX :
 
 ```bash
 python lab-070/broken_ux.py
 ```
 
-| Test | What it checks | Hint |
+| Test | Ce qu'il vérifie | Indice |
 |------|---------------|------|
-| Test 1 | Pattern count | Should count all rows with `len()`, not unique categories |
-| Test 2 | Highest satisfaction pattern | Should use `idxmax()`, not `idxmin()` |
-| Test 3 | Average satisfaction | Should use `mean()`, not `median()` |
+| Test 1 | Nombre de patterns | Devrait compter toutes les lignes avec `len()`, pas les catégories uniques |
+| Test 2 | Pattern avec la satisfaction la plus élevée | Devrait utiliser `idxmax()`, pas `idxmin()` |
+| Test 3 | Satisfaction moyenne | Devrait utiliser `mean()`, pas `median()` |
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** Why are typing indicators important for AI agent UX?"
+??? question "**Q1 (Choix multiple) :** Pourquoi les indicateurs de saisie sont-ils importants pour l'UX des agents IA ?"
 
-    - A) They make the agent smarter
-    - B) They reduce perceived latency and signal that the agent is actively processing the request
-    - C) They are required by Microsoft Teams
-    - D) They improve the agent's response accuracy
+    - A) Ils rendent l'agent plus intelligent
+    - B) Ils réduisent la latence perçue et signalent que l'agent traite activement la requête
+    - C) Ils sont requis par Microsoft Teams
+    - D) Ils améliorent la précision des réponses de l'agent
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) They reduce perceived latency and signal that the agent is actively processing the request**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Ils réduisent la latence perçue et signalent que l'agent traite activement la requête**
 
-        Typing indicators provide immediate visual feedback that the agent received the user's message and is working on a response. Without them, users may think the agent is broken or unresponsive, especially during longer processing times. This simple pattern significantly improves perceived responsiveness and user trust.
+        Les indicateurs de saisie fournissent un retour visuel immédiat indiquant que l'agent a reçu le message de l'utilisateur et travaille sur une réponse. Sans eux, les utilisateurs peuvent penser que l'agent est en panne ou ne répond pas, surtout lors de temps de traitement plus longs. Ce pattern simple améliore significativement la réactivité perçue et la confiance des utilisateurs.
 
-??? question "**Q2 (Multiple Choice):** What is the primary benefit of Adaptive Cards over plain text responses?"
+??? question "**Q2 (Choix multiple) :** Quel est le principal avantage des Adaptive Cards par rapport aux réponses en texte brut ?"
 
-    - A) They are faster to render
-    - B) They enable structured data display with interactive elements like buttons, inputs, and formatted layouts
-    - C) They work without internet
-    - D) They are simpler to implement
+    - A) Elles sont plus rapides à afficher
+    - B) Elles permettent un affichage de données structurées avec des éléments interactifs comme des boutons, des champs de saisie et des mises en page formatées
+    - C) Elles fonctionnent sans internet
+    - D) Elles sont plus simples à implémenter
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) They enable structured data display with interactive elements like buttons, inputs, and formatted layouts**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Elles permettent un affichage de données structurées avec des éléments interactifs comme des boutons, des champs de saisie et des mises en page formatées**
 
-        Adaptive Cards transform agent responses from plain text into rich, interactive experiences. They can display tables, images, action buttons, input forms, and formatted text — enabling users to interact with data directly rather than typing follow-up queries. They are particularly effective for approval workflows, data summaries, and multi-step processes.
+        Les Adaptive Cards transforment les réponses des agents du texte brut en expériences riches et interactives. Elles peuvent afficher des tableaux, des images, des boutons d'action, des formulaires de saisie et du texte formaté — permettant aux utilisateurs d'interagir directement avec les données plutôt que de taper des requêtes de suivi. Elles sont particulièrement efficaces pour les workflows d'approbation, les résumés de données et les processus en plusieurs étapes.
 
-??? question "**Q3 (Run the Lab):** Which UX pattern has the highest user satisfaction score?"
+??? question "**Q3 (Exécutez le lab) :** Quel pattern UX a le score de satisfaction utilisateur le plus élevé ?"
 
-    Sort patterns by `satisfaction_score` descending and check the top entry.
+    Triez les patterns par `satisfaction_score` en ordre décroissant et vérifiez la première entrée.
 
-    ??? success "✅ Reveal Answer"
-        **Source Citation with a satisfaction score of 4.8**
+    ??? success "✅ Révéler la réponse"
+        **Citation de source avec un score de satisfaction de 4.8**
 
-        Source Citation is the highest-rated UX pattern (4.8 out of 5.0). Users strongly prefer agents that link answers to verifiable source documents, as it builds trust and allows them to verify information. This pattern should be a default in every enterprise agent.
+        La Citation de source est le pattern UX le mieux noté (4.8 sur 5.0). Les utilisateurs préfèrent fortement les agents qui lient les réponses à des documents sources vérifiables, car cela renforce la confiance et leur permet de vérifier les informations. Ce pattern devrait être un standard dans chaque agent d'entreprise.
 
-??? question "**Q4 (Run the Lab):** What is the average satisfaction score across all patterns?"
+??? question "**Q4 (Exécutez le lab) :** Quel est le score de satisfaction moyen de tous les patterns ?"
 
-    Compute `patterns['satisfaction_score'].mean()`.
+    Calculez `patterns['satisfaction_score'].mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **4.17 average satisfaction**
+    ??? success "✅ Révéler la réponse"
+        **4.17 de satisfaction moyenne**
 
-        The average satisfaction score across all 12 UX patterns is 4.17 out of 5.0, indicating generally positive user reception. However, the variance between the highest (4.8) and lowest scores suggests that some patterns need improvement to match the quality of top performers.
+        Le score de satisfaction moyen pour les 12 patterns UX est de 4.17 sur 5.0, indiquant une réception généralement positive par les utilisateurs. Cependant, l'écart entre le score le plus élevé (4.8) et les scores les plus bas suggère que certains patterns nécessitent des améliorations pour atteindre la qualité des meilleurs.
 
-??? question "**Q5 (Run the Lab):** How many UX patterns are in the dataset?"
+??? question "**Q5 (Exécutez le lab) :** Combien de patterns UX contient le jeu de données ?"
 
-    Check `len(patterns)`.
+    Vérifiez `len(patterns)`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **12 patterns**
 
-        The dataset contains 12 UX patterns spanning categories like trust (source citations, confidence indicators), responsiveness (typing indicators, streaming), structure (Adaptive Cards, carousels), proactivity (notifications, suggestions), and accessibility (screen reader support, keyboard navigation).
+        Le jeu de données contient 12 patterns UX couvrant des catégories comme la confiance (citations de sources, indicateurs de confiance), la réactivité (indicateurs de saisie, streaming), la structure (Adaptive Cards, carrousels), la proactivité (notifications, suggestions) et l'accessibilité (support lecteur d'écran, navigation clavier).
 
 ---
 
-## Summary
+## Résumé
 
-| Topic | What You Learned |
+| Sujet | Ce que vous avez appris |
 |-------|-----------------|
-| Chat UX | Design responsive chat with typing indicators and streaming |
-| Source Citations | Build trust by linking answers to verifiable sources |
-| Adaptive Cards | Display structured data with interactive elements |
-| Proactive Notifications | Enable agent-initiated messages for timely updates |
-| Accessibility | Ensure inclusive UX with screen reader and keyboard support |
-| Satisfaction Metrics | Measure and compare UX pattern effectiveness |
+| UX Chat | Concevoir un chat réactif avec indicateurs de saisie et streaming |
+| Citations de sources | Renforcer la confiance en liant les réponses à des sources vérifiables |
+| Adaptive Cards | Afficher des données structurées avec des éléments interactifs |
+| Notifications proactives | Permettre les messages initiés par l'agent pour des mises à jour opportunes |
+| Accessibilité | Assurer une UX inclusive avec le support des lecteurs d'écran et du clavier |
+| Métriques de satisfaction | Mesurer et comparer l'efficacité des patterns UX |
 
 ---
 
-## Next Steps
+## Prochaines étapes
 
-- **[Lab 069](lab-069-declarative-agents.md)** — Declarative Agents (configure agent behavior via manifests)
-- **[Lab 066](lab-066-copilot-studio-governance.md)** — Copilot Studio Governance (govern agent deployments)
-- **[Lab 008](lab-008-responsible-ai.md)** — Responsible AI (foundational UX and safety principles)
+- **[Lab 069](lab-069-declarative-agents.md)** — Agents déclaratifs (configurer le comportement d'un agent via des manifestes)
+- **[Lab 066](lab-066-copilot-studio-governance.md)** — Gouvernance Copilot Studio (gouverner les déploiements d'agents)
+- **[Lab 008](lab-008-responsible-ai.md)** — IA responsable (principes fondamentaux d'UX et de sécurité)

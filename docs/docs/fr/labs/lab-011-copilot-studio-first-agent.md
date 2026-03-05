@@ -1,122 +1,117 @@
 ---
 tags: [copilot-studio, teams, free-trial, no-code]
 ---
-# Lab 011: Copilot Studio — First Agent
+# Lab 011 : Copilot Studio — Premier agent
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/agent-builder-teams/">Agent Builder — Teams</a></span>
-  <span><strong>Time:</strong> ~30 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free Trial</span> — Microsoft Copilot Studio free trial (no credit card for first 30 days)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/agent-builder-teams/">Agent Builder — Teams</a></span>
+  <span><strong>Durée :</strong> ~30 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Essai gratuit</span> — Essai gratuit de Microsoft Copilot Studio (pas de carte bancaire pendant les 30 premiers jours)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- Navigate the **Copilot Studio** canvas (no-code/low-code agent builder)
-- Create a Q&A agent from a knowledge source (FAQ document)
-- Test your agent in the built-in chat test panel
-- Publish the agent to **Microsoft Teams**
-- Understand topics, triggers, and fallback behavior
+- Naviguer dans le canevas de **Copilot Studio** (créateur d'agents sans code / low-code)
+- Créer un agent de questions-réponses à partir d'une source de connaissances (document FAQ)
+- Tester votre agent dans le panneau de test intégré
+- Publier l'agent sur **Microsoft Teams**
+- Comprendre les sujets, les déclencheurs et le comportement de repli
 
 ---
 
 ## Introduction
 
-Microsoft Copilot Studio is a graphical, low-code platform for building conversational AI agents without writing code. You define **topics** (conversation flows), connect **knowledge sources**, and publish to Teams, websites, or other channels in minutes.
+Microsoft Copilot Studio est une plateforme graphique low-code permettant de créer des agents d'IA conversationnelle sans écrire de code. Vous définissez des **sujets** (flux de conversation), connectez des **sources de connaissances** et publiez sur Teams, des sites web ou d'autres canaux en quelques minutes.
 
-This lab builds a customer service agent for the fictional **OutdoorGear Inc.** company, grounded in a product FAQ.
-
----
-
-## Prerequisites
-
-- Microsoft account (free at account.microsoft.com)
-- Copilot Studio trial: [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com) → Start free trial
-- Microsoft Teams (free personal edition works)
-
-!!! tip "No credit card needed"
-    The Copilot Studio free trial lasts 30 days and does not require payment details.
+Ce lab construit un agent de service client pour l'entreprise fictive **OutdoorGear Inc.**, basé sur une FAQ produit.
 
 ---
 
-## Lab Exercise
+## Prérequis
 
-### Step 1: Create a new Copilot
+- Compte Microsoft (gratuit sur account.microsoft.com)
+- Essai Copilot Studio : [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com) → Démarrer l'essai gratuit
+- Microsoft Teams (l'édition personnelle gratuite fonctionne)
 
-1. Go to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
-2. Sign in with your Microsoft account
-3. Click **Create** → **New agent**
-4. Fill in:
-   - **Name:** `OutdoorGear Assistant`
-   - **Description:** `Customer service agent for OutdoorGear Inc. — answers product and policy questions`
-   - **Instructions:** `You are a friendly customer service agent for OutdoorGear Inc. Answer questions about products, return policies, shipping, and warranties. Be concise and helpful.`
-5. Click **Create**
+!!! tip "Pas de carte bancaire nécessaire"
+    L'essai gratuit de Copilot Studio dure 30 jours et ne nécessite pas de coordonnées de paiement.
 
-### Step 2: Add a knowledge source
+---
 
-1. In the left panel, click **Knowledge**
-2. Click **Add knowledge** → **Public website or file**
-3. Enter this URL (our sample FAQ):
+## Exercice du lab
+
+### Étape 1 : Créer un nouveau Copilot
+
+1. Accédez à [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
+2. Connectez-vous avec votre compte Microsoft
+3. Cliquez sur **Créer** → **Nouvel agent**
+4. Remplissez :
+   - **Nom :** `OutdoorGear Assistant`
+   - **Description :** `Customer service agent for OutdoorGear Inc. — answers product and policy questions`
+   - **Instructions :** `You are a friendly customer service agent for OutdoorGear Inc. Answer questions about products, return policies, shipping, and warranties. Be concise and helpful.`
+5. Cliquez sur **Créer**
+
+### Étape 2 : Ajouter une source de connaissances
+
+1. Dans le panneau de gauche, cliquez sur **Connaissances**
+2. Cliquez sur **Ajouter des connaissances** → **Site web public ou fichier**
+3. Entrez cette URL (notre FAQ d'exemple) :
    ```
    https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
    ```
-   Or click **Upload file** and paste this content into a `.txt` file first.
+   Ou cliquez sur **Charger un fichier** et collez d'abord ce contenu dans un fichier `.txt`.
 
-!!! tip "Using the knowledge-base.json"
-    The `data/knowledge-base.json` file contains 42 documents including product guides, return policies, FAQs, and shipping info — all pre-formatted for RAG.
+!!! tip "Utilisation de knowledge-base.json"
+    Le fichier `data/knowledge-base.json` contient 42 documents incluant des guides produits, des politiques de retour, des FAQ et des informations d'expédition — le tout pré-formaté pour le RAG.
 
-### Step 3: Test the built-in knowledge
+### Étape 3 : Tester les connaissances intégrées
 
-1. Click **Test** in the top-right corner
-2. In the chat panel, try these questions:
+1. Cliquez sur **Tester** dans le coin supérieur droit
+2. Dans le panneau de discussion, essayez ces questions :
    - `What is your return policy?`
    - `Do you have waterproof boots?`
    - `How long does shipping take?`
-3. The agent should answer from the knowledge source and cite where it found the answer
+3. L'agent devrait répondre à partir de la source de connaissances et citer l'endroit où il a trouvé la réponse
 
-### Step 4: Create a custom topic
+### Étape 4 : Créer un sujet personnalisé
 
-Custom topics let you override AI responses with deterministic flows for specific intents.
+Les sujets personnalisés vous permettent de remplacer les réponses IA par des flux déterministes pour des intentions spécifiques.
 
-1. Click **Topics** in the left panel
-2. Click **Add a topic** → **From blank**
-3. Name it: `Order Status`
-4. Under **Trigger phrases**, add:
+1. Cliquez sur **Sujets** dans le panneau de gauche
+2. Cliquez sur **Ajouter un sujet** → **À partir de zéro**
+3. Nommez-le : `Order Status`
+4. Sous **Phrases de déclenchement**, ajoutez :
    - `Where is my order`
    - `Track my order`
    - `Order status`
    - `What happened to my order`
-5. Add a **Message** node:
+5. Ajoutez un nœud **Message** :
    ```
    To check your order status, please visit our order portal at outdoorgear.com/orders or call 1-800-OUTDOOR. Have your order number ready!
    ```
-6. Add an **End conversation** node
-7. Click **Save**
+6. Ajoutez un nœud **Fin de conversation**
+7. Cliquez sur **Enregistrer**
 
-### Step 5: Test the custom topic
+### Étape 5 : Tester le sujet personnalisé
 
-In the test panel, type: `Where is my order?`
+Dans le panneau de test, tapez : `Where is my order?`
 
-The agent should use your custom topic flow, not the AI fallback. Notice how deterministic topics take priority over AI generative answers.
+L'agent devrait utiliser le flux de votre sujet personnalisé, et non le repli IA. Remarquez comment les sujets déterministes ont la priorité sur les réponses génératives de l'IA.
 
-### Step 6: Publish to Teams
+### Étape 6 : Publier sur Teams
 
-1. Click **Publish** in the left panel
-2. Click **Publish** to make the agent live
-3. Click **Channels** → **Microsoft Teams**
-4. Click **Turn on Teams**
-5. Click **Open agent** — this opens a deep link
-6. In Teams, click **Add** to install the agent as an app
-7. Start chatting with your OutdoorGear Assistant in Teams!
+1. Cliquez sur **Publier** dans le panneau de gauche
+2. Cliquez sur **Publier** pour mettre l'agent en ligne
+3. Cliquez sur **Canaux** → **Microsoft Teams**
+4. Cliquez sur **Activer Teams**
+5. Cliquez sur **Ouvrir l'agent** — cela ouvre un lien profond
+6. Dans Teams, cliquez sur **Ajouter** pour installer l'agent en tant qu'application
+7. Commencez à discuter avec votre OutdoorGear Assistant dans Teams !
 
 ---
 
-## Copilot Studio Architecture
+## Architecture de Copilot Studio
 
 ```
 ┌─────────────────────────────────────────┐
@@ -137,26 +132,26 @@ The agent should use your custom topic flow, not the AI fallback. Notice how det
   Channels: Teams, Web, Slack, ...
 ```
 
-**Priority order:**
-1. Custom topics (exact trigger match) → deterministic
-2. Built-in system topics (escalate, fallback)
-3. Generative AI answers from knowledge sources
+**Ordre de priorité :**
+1. Sujets personnalisés (correspondance exacte des déclencheurs) → déterministe
+2. Sujets système intégrés (escalade, repli)
+3. Réponses génératives de l'IA à partir des sources de connaissances
 
 ---
 
-## When to use Copilot Studio vs Pro Code
+## Quand utiliser Copilot Studio vs le code professionnel
 
-| Copilot Studio | Pro Code (SK/MCP) |
+| Copilot Studio | Code professionnel (SK/MCP) |
 |----------------|-------------------|
-| Business users, no code | Developers |
-| Fast prototyping | Complex logic |
-| Teams/SharePoint integration | Custom integrations |
-| GUI-based flows | Programmatic control |
-| Limited customization | Full flexibility |
+| Utilisateurs métier, sans code | Développeurs |
+| Prototypage rapide | Logique complexe |
+| Intégration Teams/SharePoint | Intégrations personnalisées |
+| Flux basés sur une interface graphique | Contrôle programmatique |
+| Personnalisation limitée | Flexibilité totale |
 
 ---
 
-## Next Steps
+## Étapes suivantes
 
-- **Teams AI Library (code-first Teams bot):** → [Lab 024 — Teams AI Library](lab-024-teams-ai-library.md)
-- **Add MCP tools to Copilot Studio:** → [Lab 012 — What is MCP?](lab-012-what-is-mcp.md)
+- **Teams AI Library (bot Teams code-first) :** → [Lab 024 — Teams AI Library](lab-024-teams-ai-library.md)
+- **Ajouter des outils MCP à Copilot Studio :** → [Lab 012 — Qu'est-ce que MCP ?](lab-012-what-is-mcp.md)

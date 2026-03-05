@@ -1,46 +1,41 @@
 ---
 tags: [python, free, github-models, tool-calling, function-calling]
 ---
-# Lab 018: Function Calling & Tool Use
+# Lab 018 : Appel de fonctions & utilisation d'outils
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code Agents</a> · <a href="../paths/semantic-kernel/">🧠 Semantic Kernel</a></span>
-  <span><strong>Time:</strong> ~35 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account, no credit card</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">⚙️ Pro Code Agents</a> · <a href="../paths/semantic-kernel/">🧠 Semantic Kernel</a></span>
+  <span><strong>Durée :</strong> ~35 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Compte GitHub gratuit, sans carte de crédit</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- What function calling (tool use) is and how it works at the API level
-- How to define tools that the LLM can call
-- How to **parse and execute tool calls** from the model's response
-- How to implement a **tool execution loop** (the agent loop)
-- Common patterns: parallel tools, required tools, tool error handling
-- The difference between function calling and Semantic Kernel plugins
+- Ce qu'est l'appel de fonctions (utilisation d'outils) et comment il fonctionne au niveau de l'API
+- Comment définir des outils que le LLM peut appeler
+- Comment **analyser et exécuter les appels d'outils** à partir de la réponse du modèle
+- Comment implémenter une **boucle d'exécution d'outils** (la boucle d'agent)
+- Modèles courants : outils parallèles, outils requis, gestion des erreurs d'outils
+- La différence entre l'appel de fonctions et les plugins Semantic Kernel
 
 ---
 
 ## Introduction
 
-**Function calling** (also called "tool use") is the mechanism that transforms an LLM from a text generator into an agent. Instead of just producing text, the model can say: "I need to call `get_weather("Seattle")` before I can answer."
+L'**appel de fonctions** (aussi appelé « utilisation d'outils ») est le mécanisme qui transforme un LLM d'un générateur de texte en un agent. Au lieu de simplement produire du texte, le modèle peut dire : « J'ai besoin d'appeler `get_weather("Seattle")` avant de pouvoir répondre. »
 
-Your code then executes that function, returns the result, and the model uses it to generate a grounded answer.
+Votre code exécute ensuite cette fonction, retourne le résultat, et le modèle l'utilise pour générer une réponse fondée.
 
-This is the foundation of every AI agent:
+C'est le fondement de chaque agent IA :
 
-![Agent Tool-Calling Loop](../../assets/diagrams/agent-tool-loop.svg)
+![Boucle d'appel d'outils de l'agent](../../assets/diagrams/agent-tool-loop.svg)
 
 ---
 
-## How Function Calling Works
+## Comment fonctionne l'appel de fonctions
 
-### 1. You define tools as JSON schemas
+### 1. Vous définissez les outils sous forme de schémas JSON
 
 ```python
 tools = [
@@ -72,7 +67,7 @@ tools = [
 ]
 ```
 
-### 2. The LLM responds with a tool call (not text)
+### 2. Le LLM répond avec un appel d'outil (pas du texte)
 
 ```json
 {
@@ -90,18 +85,18 @@ tools = [
 }
 ```
 
-### 3. You execute the function and return the result
+### 3. Vous exécutez la fonction et retournez le résultat
 
 ```python
 result = search_products(category="tent", max_price=200)
 # Add result to messages as a "tool" role message
 ```
 
-### 4. The LLM generates the final answer using the tool result
+### 4. Le LLM génère la réponse finale en utilisant le résultat de l'outil
 
 ---
 
-## Step 1: Set Up
+## Étape 1 : Configuration
 
 ```bash
 pip install openai
@@ -110,7 +105,7 @@ export GITHUB_TOKEN=your_github_token
 
 ---
 
-## Step 2: Define Your Tool Functions
+## Étape 2 : Définir vos fonctions d'outils
 
 ```python
 import json
@@ -166,7 +161,7 @@ def calculate_total(product_ids: list, discount_percent: float = 0) -> dict:
 
 ---
 
-## Step 3: Define Tool Schemas
+## Étape 3 : Définir les schémas d'outils
 
 ```python
 TOOLS = [
@@ -239,9 +234,9 @@ TOOLS = [
 
 ---
 
-## Step 4: The Tool Execution Loop
+## Étape 4 : La boucle d'exécution d'outils
 
-This is the core of every function-calling agent:
+C'est le cœur de chaque agent à appel de fonctions :
 
 ```python
 import os
@@ -331,9 +326,9 @@ if __name__ == "__main__":
 
 ---
 
-## Step 5: Parallel Tool Calls
+## Étape 5 : Appels d'outils parallèles
 
-The LLM can request multiple tool calls in a single response. Handle them all before returning:
+Le LLM peut demander plusieurs appels d'outils dans une seule réponse. Traitez-les tous avant de retourner :
 
 ```python
 # The loop above already handles this — message.tool_calls is a list
@@ -343,11 +338,11 @@ The LLM can request multiple tool calls in a single response. Handle them all be
 # (both in the same iteration)
 ```
 
-Try asking: *"Compare all tents and sleeping bags under $300"* — you'll see two parallel tool calls.
+Essayez de demander : *« Comparez toutes les tentes et sacs de couchage à moins de 300 $ »* — vous verrez deux appels d'outils parallèles.
 
 ---
 
-## Step 6: Controlling Tool Choice
+## Étape 6 : Contrôler le choix d'outil
 
 ```python
 # Auto (default): LLM decides whether and which tool to call
@@ -365,9 +360,9 @@ tool_choice="none"
 
 ---
 
-## Step 7: 🧪 Interactive Challenge — Fix the Broken Tool Definition
+## Étape 7 : 🧪 Défi interactif — Corriger la définition d'outil cassée
 
-The schema below has **3 bugs** that will cause the tool to fail or behave incorrectly. Find and fix them:
+Le schéma ci-dessous comporte **3 bugs** qui feront échouer l'outil ou le feront mal fonctionner. Trouvez-les et corrigez-les :
 
 ```python
 # BROKEN — find the 3 bugs
@@ -390,79 +385,79 @@ broken_tool = {
 }
 ```
 
-??? question "Show the fixes"
-    **Bug 1:** `"type": "functions"` → should be `"type": "function"` (singular)
+??? question "Afficher les corrections"
+    **Bug 1 :** `"type": "functions"` → devrait être `"type": "function"` (singulier)
 
-    **Bug 2:** Empty description — the LLM uses descriptions to decide when to call a tool. Without it, the LLM won't know what the tool does and may never call it (or call it inappropriately).
+    **Bug 2 :** Description vide — le LLM utilise les descriptions pour décider quand appeler un outil. Sans description, le LLM ne saura pas ce que fait l'outil et pourrait ne jamais l'appeler (ou l'appeler de manière inappropriée).
 
-    **Bug 3:** `"type": "int"` → should be `"type": "integer"` — JSON Schema uses `integer`, not `int`.
+    **Bug 3 :** `"type": "int"` → devrait être `"type": "integer"` — JSON Schema utilise `integer`, pas `int`.
 
-    **Bonus bug:** The `required` key is missing. Add `"required": ["warehouse_id"]` to ensure the LLM always passes a warehouse ID.
-
----
-
-## Function Calling vs. Semantic Kernel Plugins
-
-| | Direct Function Calling | Semantic Kernel Plugin |
-|--|------------------------|------------------------|
-| **Level** | Low-level API | High-level abstraction |
-| **Schema** | You write JSON manually | Inferred from Python type hints |
-| **Languages** | Any OpenAI-compatible client | Python, C#, Java |
-| **Flexibility** | Full control | Less boilerplate |
-| **When to use** | Learning, custom control | Production SK agents |
-
-In practice, SK plugins **generate the JSON schema automatically** from your Python function signatures and docstrings. Under the hood, it's the same API call.
+    **Bug bonus :** La clé `required` est manquante. Ajoutez `"required": ["warehouse_id"]` pour vous assurer que le LLM passe toujours un identifiant d'entrepôt.
 
 ---
 
-## 🧠 Knowledge Check
+## Appel de fonctions vs. plugins Semantic Kernel
 
-??? question "**Q1 (Multiple Choice):** When the LLM returns `finish_reason='tool_calls'`, what should your agent loop do next?"
+| | Appel de fonctions direct | Plugin Semantic Kernel |
+|--|--------------------------|------------------------|
+| **Niveau** | API bas niveau | Abstraction haut niveau |
+| **Schéma** | Vous écrivez le JSON manuellement | Inféré à partir des annotations de type Python |
+| **Langages** | Tout client compatible OpenAI | Python, C#, Java |
+| **Flexibilité** | Contrôle total | Moins de code répétitif |
+| **Quand l'utiliser** | Apprentissage, contrôle personnalisé | Agents SK en production |
 
-    - A) Return the partial answer to the user and wait for confirmation
-    - B) Execute the requested function(s), add results as `role: tool` messages, then call the LLM again
-    - C) Discard the response and retry with a different prompt
-    - D) Switch to a different model that supports the tool
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B**
-
-        `finish_reason='tool_calls'` means the LLM needs external data before it can answer. Your loop must: (1) read `response.choices[0].message.tool_calls`, (2) call each requested function with the provided arguments, (3) add the LLM's message AND tool results to history with `role: tool`, then (4) call the LLM again. Repeat until `finish_reason == 'stop'`.
-
-??? question "**Q2 (Run the Lab):** Using the `search_products` function defined in Step 2, how many tents are currently **in stock**?"
-
-    Run the search manually or trace through the product list in Step 2. Count tents where `in_stock == True`.
-
-    ??? success "✅ Reveal Answer"
-        **2 tents are in stock: P001 (TrailBlazer Tent 2P, $189.99) and P002 (Summit Dome 4P, $349.99)**
-
-        P003 (UltraLight Solo) is marked `"in_stock": False`. So `search_products("tent", in_stock=True)` returns exactly 2 items.
-
-??? question "**Q3 (Run the Lab):** What does `calculate_total(["P001", "P007"])` return as the `total` field? (No discount applied)"
-
-    Look up the prices for P001 and P007 in the PRODUCTS list and add them together.
-
-    ??? success "✅ Reveal Answer"
-        **$279.98**
-
-        P001 (TrailBlazer Tent 2P) = $189.99 + P007 (DayHiker 22L) = $89.99 = **$279.98**. The function applies no discount when `discount_percent=0`, so `total == subtotal == 279.98`.
+En pratique, les plugins SK **génèrent automatiquement le schéma JSON** à partir des signatures de vos fonctions Python et de leurs docstrings. Sous le capot, c'est le même appel d'API.
 
 ---
 
-## Summary
+## 🧠 Vérification des connaissances
 
-| Concept | Key takeaway |
-|---------|-------------|
-| **Tool schema** | JSON object with `name`, `description`, and `parameters` |
-| **finish_reason** | `"tool_calls"` = LLM wants to call a function; `"stop"` = final answer |
-| **Tool result** | Added as `role: "tool"` message with matching `tool_call_id` |
-| **Agent loop** | Keep calling LLM until `finish_reason == "stop"` |
-| **Parallel tools** | One response can contain multiple tool calls — handle them all |
+??? question "**Q1 (Choix multiple) :** Quand le LLM retourne `finish_reason='tool_calls'`, que doit faire votre boucle d'agent ensuite ?"
+
+    - A) Retourner la réponse partielle à l'utilisateur et attendre une confirmation
+    - B) Exécuter la ou les fonctions demandées, ajouter les résultats en tant que messages `role: tool`, puis appeler le LLM à nouveau
+    - C) Ignorer la réponse et réessayer avec un prompt différent
+    - D) Passer à un modèle différent qui prend en charge l'outil
+
+    ??? success "✅ Révéler la réponse"
+        **Correct : B**
+
+        `finish_reason='tool_calls'` signifie que le LLM a besoin de données externes avant de pouvoir répondre. Votre boucle doit : (1) lire `response.choices[0].message.tool_calls`, (2) appeler chaque fonction demandée avec les arguments fournis, (3) ajouter le message du LLM ET les résultats d'outil à l'historique avec `role: tool`, puis (4) appeler le LLM à nouveau. Répétez jusqu'à ce que `finish_reason == 'stop'`.
+
+??? question "**Q2 (Exécutez le lab) :** En utilisant la fonction `search_products` définie à l'étape 2, combien de tentes sont actuellement **en stock** ?"
+
+    Exécutez la recherche manuellement ou parcourez la liste de produits de l'étape 2. Comptez les tentes où `in_stock == True`.
+
+    ??? success "✅ Révéler la réponse"
+        **2 tentes sont en stock : P001 (TrailBlazer Tent 2P, 189,99 $) et P002 (Summit Dome 4P, 349,99 $)**
+
+        P003 (UltraLight Solo) est marqué `"in_stock": False`. Donc `search_products("tent", in_stock=True)` retourne exactement 2 éléments.
+
+??? question "**Q3 (Exécutez le lab) :** Que retourne `calculate_total(["P001", "P007"])` dans le champ `total` ? (Aucune remise appliquée)"
+
+    Consultez les prix de P001 et P007 dans la liste PRODUCTS et additionnez-les.
+
+    ??? success "✅ Révéler la réponse"
+        **279,98 $**
+
+        P001 (TrailBlazer Tent 2P) = 189,99 $ + P007 (DayHiker 22L) = 89,99 $ = **279,98 $**. La fonction n'applique aucune remise lorsque `discount_percent=0`, donc `total == subtotal == 279.98`.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **Higher-level abstraction:** → [Lab 014 — SK Hello Agent](lab-014-sk-hello-agent.md) — SK manages the loop automatically
-- **Build an MCP server:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md) — tools exposed via standard protocol
-- **Streaming with tools:** → [Lab 019 — Streaming Responses](lab-019-streaming-responses.md)
+| Concept | Point clé |
+|---------|-----------|
+| **Schéma d'outil** | Objet JSON avec `name`, `description` et `parameters` |
+| **finish_reason** | `"tool_calls"` = le LLM veut appeler une fonction ; `"stop"` = réponse finale |
+| **Résultat d'outil** | Ajouté en tant que message `role: "tool"` avec le `tool_call_id` correspondant |
+| **Boucle d'agent** | Continuez d'appeler le LLM jusqu'à `finish_reason == "stop"` |
+| **Outils parallèles** | Une réponse peut contenir plusieurs appels d'outils — traitez-les tous |
+
+---
+
+## Prochaines étapes
+
+- **Abstraction de plus haut niveau :** → [Lab 014 — SK Hello Agent](lab-014-sk-hello-agent.md) — SK gère la boucle automatiquement
+- **Construire un serveur MCP :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md) — outils exposés via un protocole standard
+- **Streaming avec outils :** → [Lab 019 — Réponses en streaming](lab-019-streaming-responses.md)

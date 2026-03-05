@@ -1,65 +1,60 @@
 ---
 tags: [connectors, mcp, m365, copilot, federation, enterprise]
 ---
-# Lab 056: Federated M365 Copilot Connectors with MCP
+# Lab 056 : Connecteurs fédérés M365 Copilot avec MCP
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock comparison data (no M365 tenant required)</span>
+  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours :</strong> Tous les parcours</span>
+  <span><strong>Durée :</strong> ~90 min</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise des données de comparaison simulées (aucun tenant M365 requis)</span>
 </div>
 
-!!! info "Traduction en cours"
-    Ce lab est en cours de traduction. Le contenu ci-dessous est en anglais.
+## Ce que vous apprendrez
 
-
-
-## What You'll Learn
-
-- The difference between **synced (indexed) connectors** and **federated (real-time) connectors** in Microsoft 365 Copilot
-- How **MCP can act as a federated connector** — providing real-time data access without indexing
-- How **citations** work in federated vs synced connectors
-- **OAuth and compliance considerations** for regulated data (healthcare, legal, finance)
-- When to choose each connector type based on latency, freshness, and compliance requirements
+- La différence entre les **connecteurs synchronisés (indexés)** et les **connecteurs fédérés (temps réel)** dans Microsoft 365 Copilot
+- Comment **MCP peut agir comme connecteur fédéré** — fournissant un accès aux données en temps réel sans indexation
+- Comment les **citations** fonctionnent dans les connecteurs fédérés vs synchronisés
+- Les **considérations OAuth et de conformité** pour les données réglementées (santé, juridique, finance)
+- Quand choisir chaque type de connecteur en fonction de la latence, de la fraîcheur des données et des exigences de conformité
 
 ## Introduction
 
-Microsoft 365 Copilot uses **connectors** to bring external data into the Copilot experience. There are two fundamental architectures:
+Microsoft 365 Copilot utilise des **connecteurs** pour intégrer des données externes dans l'expérience Copilot. Il existe deux architectures fondamentales :
 
-| Connector Type | How It Works | Data Location |
-|----------------|-------------|---------------|
-| **Synced (Indexed)** | Crawls and copies data into the Microsoft Search index | Data stored on Microsoft servers |
-| **Federated (Real-Time)** | Queries the source system at runtime — no data is copied | Data stays in the source system |
+| Type de connecteur | Fonctionnement | Emplacement des données |
+|--------------------|----------------|------------------------|
+| **Synchronisé (Indexé)** | Explore et copie les données dans l'index Microsoft Search | Données stockées sur les serveurs Microsoft |
+| **Fédéré (Temps réel)** | Interroge le système source au moment de l'exécution — aucune donnée n'est copiée | Les données restent dans le système source |
 
-Each approach has trade-offs:
+Chaque approche a ses compromis :
 
-| Dimension | Federated | Synced |
-|-----------|-----------|--------|
-| **Latency** | Higher (real-time query) | Lower (pre-indexed) |
-| **Data Freshness** | Always current (0 sec) | Depends on crawl schedule |
-| **Compliance** | Data never leaves source | Data copied to Microsoft servers |
-| **Offline Access** | Requires source availability | Works even if source is down |
+| Dimension | Fédéré | Synchronisé |
+|-----------|--------|-------------|
+| **Latence** | Plus élevée (requête en temps réel) | Plus basse (pré-indexé) |
+| **Fraîcheur des données** | Toujours à jour (0 sec) | Dépend du calendrier d'exploration |
+| **Conformité** | Les données ne quittent jamais la source | Données copiées sur les serveurs Microsoft |
+| **Accès hors ligne** | Nécessite la disponibilité de la source | Fonctionne même si la source est indisponible |
 
-### The Scenario
+### Le scénario
 
-OutdoorGear Inc. needs to connect **multiple data sources** to Microsoft 365 Copilot:
+OutdoorGear Inc. doit connecter **plusieurs sources de données** à Microsoft 365 Copilot :
 
-- **Product catalog** and **order history** — can be indexed (synced) for fast search
-- **Patient medical records**, **employee salary data**, and **legal contracts** — regulated data that must **never** leave the source system (federated only)
-- **Real-time stock prices** and **shipping tracking** — need the freshest data possible
+- **Catalogue de produits** et **historique des commandes** — peuvent être indexés (synchronisés) pour une recherche rapide
+- **Dossiers médicaux des patients**, **données salariales des employés** et **contrats juridiques** — données réglementées qui ne doivent **jamais** quitter le système source (fédéré uniquement)
+- **Cours boursiers en temps réel** et **suivi des expéditions** — nécessitent les données les plus fraîches possible
 
-Your job is to analyze a comparison dataset of 20 queries (10 federated, 10 synced) and determine when each connector type is the right choice.
+Votre travail consiste à analyser un jeu de données comparatif de 20 requêtes (10 fédérées, 10 synchronisées) et à déterminer quand chaque type de connecteur est le bon choix.
 
-!!! info "MCP as a Federated Connector"
-    An MCP server can serve as a federated connector for M365 Copilot. The MCP server queries the source system in real-time and returns results with citations — no data is ever indexed or stored on Microsoft servers. This makes MCP ideal for regulated data that must comply with HIPAA, GDPR, or SOX requirements.
+!!! info "MCP comme connecteur fédéré"
+    Un serveur MCP peut servir de connecteur fédéré pour M365 Copilot. Le serveur MCP interroge le système source en temps réel et renvoie les résultats avec des citations — aucune donnée n'est jamais indexée ni stockée sur les serveurs Microsoft. Cela rend MCP idéal pour les données réglementées devant se conformer aux exigences HIPAA, GDPR ou SOX.
 
-## Prerequisites
+## Prérequis
 
-| Requirement | Why |
-|---|---|
-| Python 3.10+ | Analyze connector comparison data |
-| `pandas` library | DataFrame operations |
+| Exigence | Pourquoi |
+|----------|----------|
+| Python 3.10+ | Analyser les données de comparaison des connecteurs |
+| Bibliothèque `pandas` | Opérations DataFrame |
 
 ```bash
 pip install pandas
@@ -67,29 +62,29 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Démarrage rapide avec GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Toutes les dépendances sont pré-installées dans le devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Fichiers de support
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-056/` folder in your working directory.
+!!! note "Téléchargez ces fichiers avant de commencer le lab"
+    Enregistrez tous les fichiers dans un dossier `lab-056/` dans votre répertoire de travail.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_connector.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/broken_connector.py) |
-| `connector_comparison.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) |
+| Fichier | Description | Télécharger |
+|---------|-------------|-------------|
+| `broken_connector.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/broken_connector.py) |
+| `connector_comparison.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) |
 
 ---
 
-## Step 1: Understanding Connector Types
+## Étape 1 : Comprendre les types de connecteurs
 
-### Synced (Indexed) Connectors
+### Connecteurs synchronisés (indexés)
 
-Synced connectors **crawl** a data source on a schedule and **copy** the content into the Microsoft Search index:
+Les connecteurs synchronisés **explorent** une source de données selon un calendrier et **copient** le contenu dans l'index Microsoft Search :
 
 ```
 ┌─────────────┐    Crawl     ┌──────────────┐    Index    ┌─────────────┐
@@ -99,14 +94,14 @@ Synced connectors **crawl** a data source on a schedule and **copy** the content
 └─────────────┘             └──────────────┘            └─────────────┘
 ```
 
-- ✅ **Fast queries** — data is pre-indexed
-- ✅ **Works offline** — source system can be down
-- ❌ **Stale data** — depends on crawl frequency
-- ❌ **Compliance risk** — data is copied to Microsoft servers
+- ✅ **Requêtes rapides** — les données sont pré-indexées
+- ✅ **Fonctionne hors ligne** — le système source peut être indisponible
+- ❌ **Données obsolètes** — dépend de la fréquence d'exploration
+- ❌ **Risque de conformité** — les données sont copiées sur les serveurs Microsoft
 
-### Federated (Real-Time) Connectors
+### Connecteurs fédérés (temps réel)
 
-Federated connectors query the source system **at runtime** — no data is ever copied:
+Les connecteurs fédérés interrogent le système source **au moment de l'exécution** — aucune donnée n'est jamais copiée :
 
 ```
 ┌─────────────┐   Real-time   ┌──────────────┐   Results   ┌─────────────┐
@@ -116,17 +111,17 @@ Federated connectors query the source system **at runtime** — no data is ever 
 └─────────────┘              └──────────────┘             └─────────────┘
 ```
 
-- ✅ **Always fresh** — queries live data
-- ✅ **Compliant** — data never leaves the source
-- ✅ **Citations** — responses include source links
-- ❌ **Higher latency** — real-time query overhead
-- ❌ **Source dependency** — requires source system availability
+- ✅ **Toujours à jour** — interroge les données en direct
+- ✅ **Conforme** — les données ne quittent jamais la source
+- ✅ **Citations** — les réponses incluent des liens vers les sources
+- ❌ **Latence plus élevée** — surcoût de la requête en temps réel
+- ❌ **Dépendance à la source** — nécessite la disponibilité du système source
 
 ---
 
-## Step 2: Load the Comparison Dataset
+## Étape 2 : Charger le jeu de données comparatif
 
-The dataset contains **20 queries** — each query was run through both a federated and a synced connector:
+Le jeu de données contient **20 requêtes** — chaque requête a été exécutée via un connecteur fédéré et un connecteur synchronisé :
 
 ```python
 import pandas as pd
@@ -139,7 +134,7 @@ print(f"\nFirst 6 rows:")
 print(df.head(6).to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Total queries: 20
@@ -159,11 +154,11 @@ query_id                      query_text connector_type  latency_ms  results_cou
 
 ---
 
-## Step 3: Compare Latency vs Freshness
+## Étape 3 : Comparer latence vs fraîcheur
 
-Analyze the performance trade-offs between connector types:
+Analysez les compromis de performance entre les types de connecteurs :
 
-### 3a — Average Latency by Type
+### 3a — Latence moyenne par type
 
 ```python
 fed = df[df["connector_type"] == "federated"]
@@ -178,7 +173,7 @@ print(f"Average synced latency:    {avg_syn_latency:.1f} ms")
 print(f"Federated/Synced ratio:    {ratio:.1f}×")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Average federated latency: 473 ms
@@ -186,7 +181,7 @@ Average synced latency:    109.8 ms
 Federated/Synced ratio:    4.3×
 ```
 
-### 3b — Freshness Comparison
+### 3b — Comparaison de la fraîcheur
 
 ```python
 print("Data freshness (seconds since last update):")
@@ -195,7 +190,7 @@ print(f"  Synced average:    {syn['data_freshness_sec'].mean():.0f} sec")
 print(f"  Synced max:        {syn['data_freshness_sec'].max():.0f} sec ({syn['data_freshness_sec'].max()/3600:.1f} hours)")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Data freshness (seconds since last update):
@@ -204,7 +199,7 @@ Data freshness (seconds since last update):
   Synced max:        14400 sec (4.0 hours)
 ```
 
-### 3c — Latency Distribution
+### 3c — Distribution de la latence
 
 ```python
 print("Latency ranges:")
@@ -213,7 +208,7 @@ for ctype, group in df.groupby("connector_type"):
           f"(median: {group['latency_ms'].median():.0f} ms)")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Latency ranges:
@@ -223,11 +218,11 @@ Latency ranges:
 
 ---
 
-## Step 4: Compliance Analysis
+## Étape 4 : Analyse de conformité
 
-Determine which queries involve regulated data that cannot be indexed:
+Déterminez quelles requêtes impliquent des données réglementées qui ne peuvent pas être indexées :
 
-### 4a — Non-Compliant Queries
+### 4a — Requêtes non conformes
 
 ```python
 non_compliant = df[df["compliant"] == False]
@@ -236,7 +231,7 @@ print(f"\nDetails:")
 print(non_compliant[["query_id", "query_text", "connector_type"]].to_string(index=False))
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Non-compliant queries: 3
@@ -248,7 +243,7 @@ query_id               query_text connector_type
      Q18    Legal contract clauses         synced
 ```
 
-### 4b — Why Synced Is Non-Compliant for Regulated Data
+### 4b — Pourquoi le synchronisé est non conforme pour les données réglementées
 
 ```python
 # Compare federated vs synced for the same regulated queries
@@ -262,7 +257,7 @@ for query_text in regulated_queries:
     print(f"  Synced:    compliant={syn_row['compliant']}, latency={syn_row['latency_ms']}ms, freshness={syn_row['data_freshness_sec']}s")
 ```
 
-**Expected output:**
+**Sortie attendue :**
 
 ```
 Patient medical records:
@@ -278,27 +273,27 @@ Legal contract clauses:
   Synced:    compliant=False, latency=115ms, freshness=7200s
 ```
 
-!!! warning "Compliance Is Non-Negotiable"
-    For regulated data (HIPAA, GDPR, SOX), the synced connector **copies data to Microsoft servers** during indexing. This violates data residency and sovereignty requirements. The federated connector (e.g., MCP server) keeps data in the source system — only query results are returned at runtime, never stored.
+!!! warning "La conformité n'est pas négociable"
+    Pour les données réglementées (HIPAA, GDPR, SOX), le connecteur synchronisé **copie les données sur les serveurs Microsoft** lors de l'indexation. Cela viole les exigences de résidence et de souveraineté des données. Le connecteur fédéré (ex. serveur MCP) conserve les données dans le système source — seuls les résultats des requêtes sont renvoyés au moment de l'exécution, jamais stockés.
 
 ---
 
-## Step 5: When to Use Each Connector Type
+## Étape 5 : Quand utiliser chaque type de connecteur
 
-Based on the analysis, here are the decision criteria:
+Sur la base de l'analyse, voici les critères de décision :
 
-### Decision Matrix
+### Matrice de décision
 
-| Criterion | Use Federated | Use Synced |
-|-----------|--------------|------------|
-| **Regulated data** (HIPAA, GDPR, SOX) | ✅ Required | ❌ Non-compliant |
-| **Real-time freshness needed** | ✅ Always current | ❌ Stale (crawl delay) |
-| **Low latency critical** | ❌ ~473ms avg | ✅ ~110ms avg |
-| **Source may be offline** | ❌ Requires source | ✅ Works from index |
-| **Large result sets** | ❌ Runtime cost | ✅ Pre-indexed |
-| **Infrequently changing data** | ⚠️ Overkill | ✅ Crawl catches updates |
+| Critère | Utiliser fédéré | Utiliser synchronisé |
+|---------|-----------------|----------------------|
+| **Données réglementées** (HIPAA, GDPR, SOX) | ✅ Requis | ❌ Non conforme |
+| **Fraîcheur temps réel nécessaire** | ✅ Toujours à jour | ❌ Obsolète (délai d'exploration) |
+| **Faible latence critique** | ❌ ~473ms moy. | ✅ ~110ms moy. |
+| **La source peut être hors ligne** | ❌ Nécessite la source | ✅ Fonctionne depuis l'index |
+| **Grands ensembles de résultats** | ❌ Coût d'exécution | ✅ Pré-indexé |
+| **Données rarement modifiées** | ⚠️ Excessif | ✅ L'exploration capte les mises à jour |
 
-### OutdoorGear Recommendations
+### Recommandations pour OutdoorGear
 
 ```python
 recommendations = {
@@ -320,97 +315,97 @@ for source, rec in recommendations.items():
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercice de correction de bugs
 
-The file `lab-056/broken_connector.py` has **3 bugs** in the connector analysis functions. Can you find and fix them all?
+Le fichier `lab-056/broken_connector.py` contient **3 bugs** dans les fonctions d'analyse des connecteurs. Pouvez-vous tous les trouver et les corriger ?
 
-Run the self-tests to see which ones fail:
+Exécutez les auto-tests pour voir lesquels échouent :
 
 ```bash
 python lab-056/broken_connector.py
 ```
 
-You should see **3 failed tests**. Each test corresponds to one bug:
+Vous devriez voir **3 tests échoués**. Chaque test correspond à un bug :
 
-| Test | What it checks | Hint |
-|------|---------------|------|
-| Test 1 | Average freshness by type | Should return `data_freshness_sec`, not `latency_ms` |
-| Test 2 | Non-compliant count | Should count `compliant == False`, not `compliant == True` |
-| Test 3 | Latency ratio | Should compute `federated / synced`, not `synced / federated` |
+| Test | Ce qu'il vérifie | Indice |
+|------|-------------------|--------|
+| Test 1 | Fraîcheur moyenne par type | Devrait retourner `data_freshness_sec`, pas `latency_ms` |
+| Test 2 | Nombre de non-conformes | Devrait compter `compliant == False`, pas `compliant == True` |
+| Test 3 | Ratio de latence | Devrait calculer `federated / synced`, pas `synced / federated` |
 
-Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done!
+Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, c'est terminé !
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Vérification des connaissances
 
-??? question "**Q1 (Multiple Choice):** What is the primary advantage of a federated connector over a synced connector?"
+??? question "**Q1 (Choix multiple) :** Quel est le principal avantage d'un connecteur fédéré par rapport à un connecteur synchronisé ?"
 
-    - A) Lower latency for all query types
-    - B) Real-time data freshness with no indexing — data never leaves the source
-    - C) Better support for offline access
-    - D) Simpler authentication setup
+    - A) Latence plus faible pour tous les types de requêtes
+    - B) Fraîcheur des données en temps réel sans indexation — les données ne quittent jamais la source
+    - C) Meilleur support de l'accès hors ligne
+    - D) Configuration d'authentification plus simple
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Real-time data freshness with no indexing — data never leaves the source**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Fraîcheur des données en temps réel sans indexation — les données ne quittent jamais la source**
 
-        Federated connectors query the source system at runtime, ensuring results are always current (0-second freshness). Because no data is copied or indexed, it remains in the source system — making it compliant with data residency requirements (HIPAA, GDPR, SOX).
+        Les connecteurs fédérés interrogent le système source au moment de l'exécution, garantissant que les résultats sont toujours à jour (fraîcheur de 0 seconde). Comme aucune donnée n'est copiée ni indexée, elle reste dans le système source — ce qui la rend conforme aux exigences de résidence des données (HIPAA, GDPR, SOX).
 
-??? question "**Q2 (Multiple Choice):** Why are synced connectors non-compliant for regulated data like patient medical records?"
+??? question "**Q2 (Choix multiple) :** Pourquoi les connecteurs synchronisés sont-ils non conformes pour les données réglementées comme les dossiers médicaux des patients ?"
 
-    - A) Synced connectors don't support encryption
-    - B) Data is copied to Microsoft servers during indexing, violating data residency requirements
-    - C) Synced connectors cannot handle large datasets
-    - D) Synced connectors don't support OAuth authentication
+    - A) Les connecteurs synchronisés ne supportent pas le chiffrement
+    - B) Les données sont copiées sur les serveurs Microsoft lors de l'indexation, violant les exigences de résidence des données
+    - C) Les connecteurs synchronisés ne peuvent pas gérer de grands ensembles de données
+    - D) Les connecteurs synchronisés ne supportent pas l'authentification OAuth
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Data is copied to Microsoft servers during indexing, violating data residency requirements**
+    ??? success "✅ Révéler la réponse"
+        **Correct : B) Les données sont copiées sur les serveurs Microsoft lors de l'indexation, violant les exigences de résidence des données**
 
-        When a synced connector crawls a data source, it **copies the content to Microsoft's search index**. For regulated data (HIPAA patient records, GDPR personal data, SOX financial data), this violates data sovereignty and residency requirements. The data must remain in the source system — only federated connectors guarantee this.
+        Lorsqu'un connecteur synchronisé explore une source de données, il **copie le contenu dans l'index de recherche de Microsoft**. Pour les données réglementées (dossiers patients HIPAA, données personnelles GDPR, données financières SOX), cela viole les exigences de souveraineté et de résidence des données. Les données doivent rester dans le système source — seuls les connecteurs fédérés garantissent cela.
 
-??? question "**Q3 (Run the Lab):** What is the average latency for federated connector queries?"
+??? question "**Q3 (Exécuter le lab) :** Quelle est la latence moyenne pour les requêtes du connecteur fédéré ?"
 
-    Filter [📥 `connector_comparison.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) by `connector_type == "federated"` and compute `latency_ms.mean()`.
+    Filtrez [📥 `connector_comparison.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) par `connector_type == "federated"` et calculez `latency_ms.mean()`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **473 ms**
 
-        The 10 federated queries have latencies: 450, 520, 680, 380, 550, 420, 610, 290, 480, 350. Sum = 4730, average = 4730 ÷ 10 = **473 ms**.
+        Les 10 requêtes fédérées ont des latences de : 450, 520, 680, 380, 550, 420, 610, 290, 480, 350. Somme = 4730, moyenne = 4730 ÷ 10 = **473 ms**.
 
-??? question "**Q4 (Run the Lab):** How many synced queries are non-compliant?"
+??? question "**Q4 (Exécuter le lab) :** Combien de requêtes synchronisées sont non conformes ?"
 
-    Filter for `connector_type == "synced"` and `compliant == False`.
+    Filtrez par `connector_type == "synced"` et `compliant == False`.
 
-    ??? success "✅ Reveal Answer"
+    ??? success "✅ Révéler la réponse"
         **3**
 
-        Three synced queries are non-compliant: Q10 (Patient medical records), Q12 (Employee salary data), and Q18 (Legal contract clauses). These involve regulated data that must not be copied to external servers.
+        Trois requêtes synchronisées sont non conformes : Q10 (dossiers médicaux des patients), Q12 (données salariales des employés) et Q18 (clauses de contrats juridiques). Celles-ci impliquent des données réglementées qui ne doivent pas être copiées sur des serveurs externes.
 
-??? question "**Q5 (Run the Lab):** What is the approximate federated-to-synced latency ratio?"
+??? question "**Q5 (Exécuter le lab) :** Quel est le ratio approximatif de latence fédéré/synchronisé ?"
 
-    Divide the average federated latency by the average synced latency.
+    Divisez la latence moyenne fédérée par la latence moyenne synchronisée.
 
-    ??? success "✅ Reveal Answer"
-        **≈ 4.3×**
+    ??? success "✅ Révéler la réponse"
+        **≈ 4,3×**
 
-        Average federated latency = 473 ms. Average synced latency ≈ 110 ms. Ratio = 473 ÷ 110 ≈ **4.3×**. Federated queries are about 4.3 times slower than synced queries — the trade-off for real-time freshness and compliance.
-
----
-
-## Summary
-
-| Topic | What You Learned |
-|-------|-----------------|
-| Connector Types | Synced (indexed, fast, stale) vs Federated (real-time, compliant, slower) |
-| MCP as Connector | MCP servers can serve as federated connectors for M365 Copilot |
-| Compliance | Regulated data requires federated connectors — synced copies data to Microsoft |
-| Latency Trade-off | Federated ≈ 4.3× slower but always fresh; synced is fast but stale |
-| Decision Criteria | Choose based on regulation, freshness needs, latency tolerance, and offline access |
+        Latence moyenne fédérée = 473 ms. Latence moyenne synchronisée ≈ 110 ms. Ratio = 473 ÷ 110 ≈ **4,3×**. Les requêtes fédérées sont environ 4,3 fois plus lentes que les requêtes synchronisées — le compromis pour la fraîcheur en temps réel et la conformité.
 
 ---
 
-## Next Steps
+## Résumé
 
-- **[Lab 054](lab-054-a2a-protocol.md)** — A2A Protocol — Build Interoperable Multi-Agent Systems
-- **[Lab 055](lab-055-a2a-mcp-capstone.md)** — A2A + MCP Full Stack — Agent Interoperability Capstone
+| Sujet | Ce que vous avez appris |
+|-------|------------------------|
+| Types de connecteurs | Synchronisé (indexé, rapide, obsolète) vs Fédéré (temps réel, conforme, plus lent) |
+| MCP comme connecteur | Les serveurs MCP peuvent servir de connecteurs fédérés pour M365 Copilot |
+| Conformité | Les données réglementées nécessitent des connecteurs fédérés — le synchronisé copie les données chez Microsoft |
+| Compromis de latence | Fédéré ≈ 4,3× plus lent mais toujours à jour ; synchronisé est rapide mais obsolète |
+| Critères de décision | Choisissez en fonction de la réglementation, des besoins de fraîcheur, de la tolérance à la latence et de l'accès hors ligne |
+
+---
+
+## Prochaines étapes
+
+- **[Lab 054](lab-054-a2a-protocol.md)** — Protocole A2A — Construire des systèmes multi-agents interopérables
+- **[Lab 055](lab-055-a2a-mcp-capstone.md)** — A2A + MCP Full Stack — Capstone d'interopérabilité des agents

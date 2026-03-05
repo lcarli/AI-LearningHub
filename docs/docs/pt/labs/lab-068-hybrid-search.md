@@ -4,52 +4,47 @@ tags: [search, rag, bm25, vector, semantic-ranker, python]
 # Lab 068: Hybrid Search — Vector + BM25 + Semantic Ranker
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> All paths</span>
-  <span><strong>Time:</strong> ~60 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Pre-computed search results (no Azure AI Search required)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> Todas as trilhas</span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Resultados de busca pré-computados (não requer Azure AI Search)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- As diferenças entre busca **BM25** (por palavras-chave), **vector** (semântica) e **hybrid** (híbrida)
+- Como o **Reciprocal Rank Fusion (RRF)** combina pontuações de BM25 e vetores
+- Como um **semantic ranker** (reranqueador cross-encoder) melhora a precisão
+- Medir a qualidade da recuperação com métricas de **recall** e **precision**
+- Comparar estratégias de busca usando um **dataset de benchmark**
+- Identificar quais tipos de consulta mais se beneficiam da busca híbrida + reranqueamento
 
+!!! abstract "Pré-requisito"
+    Complete primeiro o **[Lab 009: Retrieval-Augmented Generation](lab-009-rag-basic.md)**. Este lab pressupõe familiaridade com recuperação baseada em embeddings e conceitos básicos de busca.
 
-## What You'll Learn
+## Introdução
 
-- The differences between **BM25** (keyword), **vector** (semantic), and **hybrid** search
-- How **Reciprocal Rank Fusion (RRF)** combines BM25 and vector scores
-- How a **semantic ranker** (cross-encoder reranker) improves precision
-- Measure retrieval quality with **recall** and **precision** metrics
-- Compare search strategies using a **benchmark dataset**
-- Identify which query types benefit most from hybrid + reranking
+Pipelines de RAG dependem da qualidade da recuperação — se você recuperar os trechos errados, até o melhor LLM produzirá respostas incorretas. A busca moderna combina múltiplas estratégias para maximizar recall e precisão:
 
-!!! abstract "Prerequisite"
-    Complete **[Lab 009: Retrieval-Augmented Generation](lab-009-rag-basic.md)** first. This lab assumes familiarity with embedding-based retrieval and basic search concepts.
-
-## Introduction
-
-RAG pipelines depend on retrieval quality — if you retrieve the wrong chunks, even the best LLM will produce wrong answers. Modern search combines multiple strategies to maximize recall and precision:
-
-| Strategy | How It Works | Strengths | Weaknesses |
+| Estratégia | Como Funciona | Pontos Fortes | Pontos Fracos |
 |----------|-------------|-----------|------------|
-| **BM25** | TF-IDF keyword matching | Exact matches, rare terms | No semantic understanding |
-| **Vector** | Cosine similarity on embeddings | Semantic similarity, synonyms | Misses exact keywords |
-| **Hybrid (RRF)** | Combines BM25 + vector via rank fusion | Best of both worlds | Higher latency |
-| **Hybrid + Rerank** | Hybrid + cross-encoder reranking | Highest quality results | Highest latency and cost |
+| **BM25** | Correspondência de palavras-chave por TF-IDF | Correspondências exatas, termos raros | Sem compreensão semântica |
+| **Vector** | Similaridade de cosseno em embeddings | Similaridade semântica, sinônimos | Perde palavras-chave exatas |
+| **Hybrid (RRF)** | Combina BM25 + vector via fusão de rankings | O melhor dos dois mundos | Maior latência |
+| **Hybrid + Rerank** | Híbrido + reranqueamento com cross-encoder | Resultados de maior qualidade | Maior latência e custo |
 
-### The Scenario
+### O Cenário
 
-You have **20 search queries** with known relevant documents (ground truth). Each query has been executed against all four strategies, with recall and precision recorded. Your job: analyze which strategy delivers the best retrieval quality and understand when each approach shines.
+Você tem **20 consultas de busca** com documentos relevantes conhecidos (ground truth). Cada consulta foi executada contra todas as quatro estratégias, com recall e precisão registrados. Sua tarefa: analisar qual estratégia entrega a melhor qualidade de recuperação e entender quando cada abordagem se destaca.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` | Analyze search comparison data |
+| Python 3.10+ | Executar scripts de análise |
+| `pandas` | Analisar dados de comparação de busca |
 
 ```bash
 pip install pandas
@@ -57,27 +52,27 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-068/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-068/` no seu diretório de trabalho.
 
-| File | Description | Download |
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_search.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/broken_search.py) |
+| `broken_search.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/broken_search.py) |
 | `search_comparison.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/search_comparison.csv) |
 
 ---
 
-## Step 1: Understanding Search Strategies
+## Etapa 1: Entendendo as Estratégias de Busca
 
-Each search strategy processes queries differently:
+Cada estratégia de busca processa consultas de forma diferente:
 
 ```
 Query → ┬─ [BM25 Index]      → keyword matches   ─┐
@@ -88,21 +83,21 @@ Query → ┬─ [BM25 Index]      → keyword matches   ─┐
                                                                Hybrid + Rerank Results
 ```
 
-Key metrics:
+Métricas principais:
 
-1. **Recall** — What fraction of relevant documents were retrieved? (higher = fewer misses)
-2. **Precision** — What fraction of retrieved documents are relevant? (higher = less noise)
-3. **RRF Score** — Reciprocal Rank Fusion combines rankings: `1/(k + rank)` summed across strategies
-4. **Rerank Score** — Cross-encoder relevance score applied to hybrid results
+1. **Recall** — Qual fração dos documentos relevantes foi recuperada? (maior = menos omissões)
+2. **Precision** — Qual fração dos documentos recuperados é relevante? (maior = menos ruído)
+3. **RRF Score** — Reciprocal Rank Fusion combina rankings: `1/(k + rank)` somado entre estratégias
+4. **Rerank Score** — Pontuação de relevância do cross-encoder aplicada aos resultados híbridos
 
-!!! info "Why Hybrid Beats Both"
-    BM25 excels at exact keyword matches ("error code 0x8004") while vector search excels at semantic meaning ("application crashes on startup"). Hybrid search fuses both — capturing exact matches that vector search misses AND semantic matches that BM25 misses. The semantic ranker then reorders results using a more expensive but more accurate cross-encoder model.
+!!! info "Por que a Busca Híbrida Supera Ambas"
+    BM25 se destaca em correspondências exatas de palavras-chave ("error code 0x8004") enquanto a busca vetorial se destaca em significado semântico ("application crashes on startup"). A busca híbrida funde ambas — capturando correspondências exatas que a busca vetorial perde E correspondências semânticas que o BM25 perde. O semantic ranker então reordena os resultados usando um modelo cross-encoder mais caro, porém mais preciso.
 
 ---
 
-## Step 2: Load and Explore Search Results
+## Etapa 2: Carregar e Explorar Resultados de Busca
 
-The dataset contains **20 queries** with results from all four strategies:
+O dataset contém **20 consultas** com resultados de todas as quatro estratégias:
 
 ```python
 import pandas as pd
@@ -115,7 +110,7 @@ print(results[["query_id", "query_text", "bm25_recall", "vector_recall",
                "hybrid_recall", "hybrid_rerank_recall"]].head().to_string(index=False))
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Total queries: 20
@@ -123,9 +118,9 @@ Total queries: 20
 
 ---
 
-## Step 3: Recall Comparison
+## Etapa 3: Comparação de Recall
 
-Compare recall across all four strategies:
+Compare o recall entre todas as quatro estratégias:
 
 ```python
 print("Average Recall by Strategy:")
@@ -138,7 +133,7 @@ perfect_recall = results[results["hybrid_rerank_recall"] == 1.0]
 print(f"\nQueries with perfect hybrid+rerank recall: {len(perfect_recall)} / {len(results)}")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Average Recall by Strategy:
@@ -148,14 +143,14 @@ Average Recall by Strategy:
   Hybrid + Rerank: 1.00
 ```
 
-!!! tip "Key Insight"
-    Hybrid + Rerank achieves perfect recall (1.00) — every relevant document is retrieved for every query. BM25 alone retrieves less than half the relevant documents on average. This demonstrates why modern RAG pipelines should use hybrid search with reranking whenever possible.
+!!! tip "Insight Principal"
+    Hybrid + Rerank alcança recall perfeito (1.00) — todo documento relevante é recuperado para cada consulta. BM25 sozinho recupera menos da metade dos documentos relevantes em média. Isso demonstra por que pipelines modernos de RAG devem usar busca híbrida com reranqueamento sempre que possível.
 
 ---
 
-## Step 4: Precision Analysis
+## Etapa 4: Análise de Precisão
 
-Recall without precision means retrieving too much noise. Analyze precision:
+Recall sem precisão significa recuperar muito ruído. Analise a precisão:
 
 ```python
 print("Average Precision by Strategy:")
@@ -165,7 +160,7 @@ print(f"  Hybrid:          {results['hybrid_precision'].mean():.2f}")
 print(f"  Hybrid + Rerank: {results['hybrid_rerank_precision'].mean():.2f}")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Average Precision by Strategy:
@@ -175,14 +170,14 @@ Average Precision by Strategy:
   Hybrid + Rerank: 0.57
 ```
 
-!!! warning "Precision vs Recall Trade-off"
-    Even hybrid + rerank achieves only 0.57 average precision — meaning 43% of retrieved documents are not relevant. High recall ensures no relevant documents are missed, but the LLM must filter noise from the context. Consider using a stricter rerank threshold to improve precision at the cost of some recall.
+!!! warning "Trade-off entre Precisão e Recall"
+    Mesmo hybrid + rerank alcança apenas 0.57 de precisão média — significando que 43% dos documentos recuperados não são relevantes. Alto recall garante que nenhum documento relevante seja perdido, mas o LLM precisa filtrar o ruído do contexto. Considere usar um limiar de reranqueamento mais rigoroso para melhorar a precisão ao custo de algum recall.
 
 ---
 
-## Step 5: Query-Level Analysis
+## Etapa 5: Análise por Consulta
 
-Identify which queries benefit most from hybrid search:
+Identifique quais consultas mais se beneficiam da busca híbrida:
 
 ```python
 results["hybrid_lift"] = results["hybrid_rerank_recall"] - results["bm25_recall"]
@@ -192,13 +187,13 @@ print(biggest_lift[["query_id", "query_text", "bm25_recall", "hybrid_rerank_reca
       .to_string(index=False))
 ```
 
-Queries with the biggest lift are typically semantic in nature — paraphrases, synonyms, or conceptual queries where BM25's keyword matching fails but vector similarity succeeds.
+As consultas com maior ganho são tipicamente de natureza semântica — paráfrases, sinônimos ou consultas conceituais onde a correspondência por palavras-chave do BM25 falha, mas a similaridade vetorial tem sucesso.
 
 ---
 
-## Step 6: Search Strategy Recommendation Engine
+## Etapa 6: Motor de Recomendação de Estratégia de Busca
 
-Build a recommendation based on the analysis:
+Construa uma recomendação com base na análise:
 
 ```python
 summary = f"""
@@ -218,93 +213,93 @@ print(summary)
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-068/broken_search.py` has **3 bugs** in how it calculates search metrics:
+O arquivo `lab-068/broken_search.py` tem **3 bugs** na forma como calcula métricas de busca:
 
 ```bash
 python lab-068/broken_search.py
 ```
 
-| Test | What it checks | Hint |
+| Teste | O que verifica | Dica |
 |------|---------------|------|
-| Test 1 | Average recall calculation | Should use `mean()`, not `sum()` |
-| Test 2 | Precision column name | Should use `hybrid_rerank_precision`, not `hybrid_precision` |
-| Test 3 | Recall comparison | Should compare `hybrid_rerank_recall >= bm25_recall`, not `<=` |
+| Teste 1 | Cálculo de recall médio | Deve usar `mean()`, não `sum()` |
+| Teste 2 | Nome da coluna de precisão | Deve usar `hybrid_rerank_precision`, não `hybrid_precision` |
+| Teste 3 | Comparação de recall | Deve comparar `hybrid_rerank_recall >= bm25_recall`, não `<=` |
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** What does Reciprocal Rank Fusion (RRF) do in hybrid search?"
+??? question "**Q1 (Múltipla Escolha):** O que o Reciprocal Rank Fusion (RRF) faz na busca híbrida?"
 
-    - A) Replaces the vector index with a keyword index
-    - B) Combines rankings from multiple search strategies into a single unified ranking
-    - C) Trains a new embedding model on the query
-    - D) Reduces the number of documents in the index
+    - A) Substitui o índice vetorial por um índice de palavras-chave
+    - B) Combina rankings de múltiplas estratégias de busca em um único ranking unificado
+    - C) Treina um novo modelo de embedding na consulta
+    - D) Reduz o número de documentos no índice
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) Combines rankings from multiple search strategies into a single unified ranking**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Combina rankings de múltiplas estratégias de busca em um único ranking unificado**
 
-        RRF merges result rankings from BM25 and vector search using the formula `1/(k + rank)` summed across strategies. Documents ranked highly by both strategies get boosted, while documents ranked highly by only one strategy still appear. This produces a unified ranking that captures both keyword and semantic relevance.
+        O RRF mescla rankings de resultados de BM25 e busca vetorial usando a fórmula `1/(k + rank)` somada entre estratégias. Documentos bem classificados por ambas as estratégias recebem impulso, enquanto documentos bem classificados por apenas uma estratégia ainda aparecem. Isso produz um ranking unificado que captura tanto relevância por palavras-chave quanto semântica.
 
-??? question "**Q2 (Multiple Choice):** Why does a semantic ranker (cross-encoder) improve results over hybrid search alone?"
+??? question "**Q2 (Múltipla Escolha):** Por que um semantic ranker (cross-encoder) melhora os resultados em relação à busca híbrida sozinha?"
 
-    - A) It is faster than BM25
-    - B) It re-scores each candidate by jointly encoding the query and document together, capturing deeper relevance signals
-    - C) It removes all irrelevant documents perfectly
-    - D) It generates new documents to fill gaps
+    - A) É mais rápido que o BM25
+    - B) Ele re-pontua cada candidato codificando conjuntamente a consulta e o documento, capturando sinais de relevância mais profundos
+    - C) Remove todos os documentos irrelevantes perfeitamente
+    - D) Gera novos documentos para preencher lacunas
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) It re-scores each candidate by jointly encoding the query and document together, capturing deeper relevance signals**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) Ele re-pontua cada candidato codificando conjuntamente a consulta e o documento, capturando sinais de relevância mais profundos**
 
-        A cross-encoder takes both the query and a candidate document as input and produces a relevance score. Unlike bi-encoders (used for vector search), cross-encoders capture fine-grained interactions between query and document tokens. This is more accurate but too expensive to apply to the entire index — so it is used as a reranker on the top-N hybrid results.
+        Um cross-encoder recebe tanto a consulta quanto um documento candidato como entrada e produz uma pontuação de relevância. Diferente dos bi-encoders (usados para busca vetorial), cross-encoders capturam interações refinadas entre tokens da consulta e do documento. Isso é mais preciso, porém caro demais para aplicar ao índice inteiro — por isso é usado como reranqueador nos top-N resultados híbridos.
 
-??? question "**Q3 (Run the Lab):** What is the average recall of the hybrid + rerank strategy?"
+??? question "**Q3 (Execute o Lab):** Qual é o recall médio da estratégia hybrid + rerank?"
 
-    Compute `results['hybrid_rerank_recall'].mean()`.
+    Calcule `results['hybrid_rerank_recall'].mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **1.00 (perfect recall)**
+    ??? success "✅ Revelar Resposta"
+        **1.00 (recall perfeito)**
 
-        Hybrid + rerank achieves perfect recall across all 20 queries, meaning every relevant document is retrieved for every query. This is a significant improvement over BM25 alone (0.47) and demonstrates the value of combining keyword and semantic search with cross-encoder reranking.
+        Hybrid + rerank alcança recall perfeito em todas as 20 consultas, significando que todo documento relevante é recuperado para cada consulta. Isso é uma melhoria significativa em relação ao BM25 sozinho (0.47) e demonstra o valor de combinar busca por palavras-chave e semântica com reranqueamento por cross-encoder.
 
-??? question "**Q4 (Run the Lab):** What is the average recall of BM25 search alone?"
+??? question "**Q4 (Execute o Lab):** Qual é o recall médio da busca BM25 sozinha?"
 
-    Compute `results['bm25_recall'].mean()`.
+    Calcule `results['bm25_recall'].mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **0.47 average recall**
+    ??? success "✅ Revelar Resposta"
+        **0.47 de recall médio**
 
-        BM25 retrieves less than half of the relevant documents on average. This is because BM25 relies on keyword matching and cannot handle synonyms, paraphrases, or conceptual queries. For example, a query about "application crashes" would miss documents that discuss "software failures" or "system instability."
+        BM25 recupera menos da metade dos documentos relevantes em média. Isso ocorre porque BM25 depende de correspondência por palavras-chave e não consegue lidar com sinônimos, paráfrases ou consultas conceituais. Por exemplo, uma consulta sobre "application crashes" perderia documentos que discutem "software failures" ou "system instability."
 
-??? question "**Q5 (Run the Lab):** What is the average precision of the hybrid + rerank strategy?"
+??? question "**Q5 (Execute o Lab):** Qual é a precisão média da estratégia hybrid + rerank?"
 
-    Compute `results['hybrid_rerank_precision'].mean()`.
+    Calcule `results['hybrid_rerank_precision'].mean()`.
 
-    ??? success "✅ Reveal Answer"
-        **0.57 average precision**
+    ??? success "✅ Revelar Resposta"
+        **0.57 de precisão média**
 
-        While hybrid + rerank achieves perfect recall, its precision is 0.57 — meaning 43% of retrieved documents are not relevant. This is the recall-precision trade-off: maximizing recall ensures no relevant documents are missed, but includes some noise. The LLM must be robust enough to ignore irrelevant context when generating answers.
+        Embora hybrid + rerank alcance recall perfeito, sua precisão é 0.57 — significando que 43% dos documentos recuperados não são relevantes. Este é o trade-off entre recall e precisão: maximizar o recall garante que nenhum documento relevante seja perdido, mas inclui algum ruído. O LLM deve ser robusto o suficiente para ignorar contexto irrelevante ao gerar respostas.
 
 ---
 
-## Summary
+## Resumo
 
-| Topic | What You Learned |
+| Tópico | O que Você Aprendeu |
 |-------|-----------------|
-| BM25 Search | Keyword-based retrieval using TF-IDF scoring |
-| Vector Search | Semantic retrieval using embedding cosine similarity |
-| Hybrid Search | Combining BM25 + vector via Reciprocal Rank Fusion |
-| Semantic Ranker | Cross-encoder reranking for higher-quality result ordering |
-| Recall & Precision | Measuring retrieval quality with complementary metrics |
-| Strategy Selection | Choosing the right search strategy based on query characteristics |
+| BM25 Search | Recuperação baseada em palavras-chave usando pontuação TF-IDF |
+| Vector Search | Recuperação semântica usando similaridade de cosseno em embeddings |
+| Hybrid Search | Combinação de BM25 + vector via Reciprocal Rank Fusion |
+| Semantic Ranker | Reranqueamento com cross-encoder para ordenação de resultados de maior qualidade |
+| Recall & Precision | Medição da qualidade de recuperação com métricas complementares |
+| Seleção de Estratégia | Escolha da estratégia de busca adequada com base nas características da consulta |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 009](lab-009-rag-basic.md)** — RAG Basics (foundational retrieval patterns)
-- **[Lab 067](lab-067-graphrag.md)** — GraphRAG (cross-document synthesis with knowledge graphs)
-- **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (governance for search pipelines)
+- **[Lab 009](lab-009-rag-basic.md)** — Fundamentos de RAG (padrões fundamentais de recuperação)
+- **[Lab 067](lab-067-graphrag.md)** — GraphRAG (síntese entre documentos com grafos de conhecimento)
+- **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (governança para pipelines de busca)

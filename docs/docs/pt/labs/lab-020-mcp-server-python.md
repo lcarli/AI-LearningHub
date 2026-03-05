@@ -1,80 +1,75 @@
 ---
 tags: [mcp, python, free, github-models]
 ---
-# Lab 020: Build an MCP Server in Python
+# Lab 020: Construa um Servidor MCP em Python
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/mcp/">🔌 MCP</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Runs locally, no cloud account needed</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Caminho:</strong> <a href="../paths/mcp/">🔌 MCP</a></span>
+  <span><strong>Tempo:</strong> ~45 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Executa localmente, sem necessidade de conta na nuvem</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O Que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- How to build an MCP server from scratch using **FastMCP** (Python)
-- How to define **Tools** with proper schemas and descriptions
-- How to run the server and connect it to the **MCP Inspector** and **GitHub Copilot (VS Code)**
-- How to add HTTP/SSE transport for cloud-agent compatibility
+- Como construir um servidor MCP do zero usando **FastMCP** (Python)
+- Como definir **Tools** com esquemas e descrições adequados
+- Como executar o servidor e conectá-lo ao **MCP Inspector** e ao **GitHub Copilot (VS Code)**
+- Como adicionar transporte HTTP/SSE para compatibilidade com agentes na nuvem
 
 ---
 
-## Introduction
+## Introdução
 
-An MCP server is a program that exposes tools (functions) to AI agents via the MCP protocol. When an agent needs to perform an action — query a database, call an API, read a file — it calls your MCP server's tools.
+Um servidor MCP é um programa que expõe ferramentas (funções) para agentes de IA por meio do protocolo MCP. Quando um agente precisa realizar uma ação — consultar um banco de dados, chamar uma API, ler um arquivo — ele chama as ferramentas do seu servidor MCP.
 
-In this lab we build a **product search MCP server** with two tools:
+Neste laboratório, construímos um **servidor MCP de busca de produtos** com duas ferramentas:
 
-1. `list_categories` — returns product categories
-2. `search_products` — searches products by keyword
+1. `list_categories` — retorna categorias de produtos
+2. `search_products` — busca produtos por palavra-chave
 
 ---
 
-## Prerequisites Setup
+## Configuração de Pré-requisitos
 
 ```bash
 pip install fastmcp
 ```
 
-Make sure you have Python 3.10+:
+Certifique-se de ter Python 3.10+:
 ```bash
 python --version
 ```
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências já estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Apoio
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-020/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o laboratório"
+    Salve todos os arquivos em uma pasta `lab-020/` no seu diretório de trabalho.
 
-| File | Description | Download |
-|------|-------------|----------|
-| `outdoorgear_mcp_server_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-020/outdoorgear_mcp_server_starter.py) |
+| Arquivo | Descrição | Download |
+|---------|-----------|----------|
+| `outdoorgear_mcp_server_starter.py` | Script inicial com TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-020/outdoorgear_mcp_server_starter.py) |
 
 ---
 
-## Lab Exercise
+## Exercício do Laboratório
 
-### Step 1: Create the project
+### Passo 1: Crie o projeto
 
 ```bash
 mkdir products-mcp-server
 cd products-mcp-server
 ```
 
-Create `server.py`:
+Crie `server.py`:
 
 ```python
 from fastmcp import FastMCP
@@ -98,9 +93,9 @@ PRODUCTS = [
 ]
 ```
 
-### Step 2: Define your Tools
+### Passo 2: Defina suas Tools
 
-Add the tools after the `PRODUCTS` list:
+Adicione as ferramentas após a lista `PRODUCTS`:
 
 ```python
 @mcp.tool()
@@ -158,40 +153,40 @@ def get_product_by_id(product_id: int) -> dict | None:
     return None
 ```
 
-### Step 3: Run the server (stdio mode)
+### Passo 3: Execute o servidor (modo stdio)
 
-Add the entry point at the bottom of `server.py`:
+Adicione o ponto de entrada no final de `server.py`:
 
 ```python
 if __name__ == "__main__":
     mcp.run()
 ```
 
-Run it:
+Execute:
 ```bash
 python server.py
 ```
 
-The server is now listening on **stdio**. This is the default mode for local tools.
+O servidor agora está ouvindo em **stdio**. Este é o modo padrão para ferramentas locais.
 
-### Step 4: Test with the MCP Inspector
+### Passo 4: Teste com o MCP Inspector
 
-Open a **new terminal** and run:
+Abra um **novo terminal** e execute:
 ```bash
 npx @modelcontextprotocol/inspector python server.py
 ```
 
-The Inspector will open in your browser. Try:
+O Inspector será aberto no seu navegador. Experimente:
 
-1. Click **"Tools"** to see your three tools
-2. Click `list_categories` → **"Run tool"** → see the categories
-3. Click `search_products` → fill in `keyword: "tent"` → **"Run tool"**
+1. Clique em **"Tools"** para ver suas três ferramentas
+2. Clique em `list_categories` → **"Run tool"** → veja as categorias
+3. Clique em `search_products` → preencha `keyword: "tent"` → **"Run tool"**
 
-!!! success "You should see the Camping Tent in the results"
+!!! success "Você deverá ver a Camping Tent nos resultados"
 
-### Step 5: Run as HTTP/SSE server (for remote agents)
+### Passo 5: Execute como servidor HTTP/SSE (para agentes remotos)
 
-For cloud-hosted agents like Microsoft Foundry, we need HTTP/SSE transport. Add the startup option:
+Para agentes hospedados na nuvem como Microsoft Foundry, precisamos de transporte HTTP/SSE. Adicione a opção de inicialização:
 
 ```python
 if __name__ == "__main__":
@@ -204,24 +199,24 @@ if __name__ == "__main__":
         mcp.run()
 ```
 
-Run in HTTP mode:
+Execute no modo HTTP:
 ```bash
 python server.py --http
 ```
 
-You'll see:
+Você verá:
 ```
 INFO:     Uvicorn running on http://0.0.0.0:8000
 ```
 
-Test with curl:
+Teste com curl:
 ```bash
 curl http://localhost:8000/sse
 ```
 
-### Step 6: Connect to GitHub Copilot in VS Code
+### Passo 6: Conecte ao GitHub Copilot no VS Code
 
-1. In VS Code, create `.vscode/mcp.json` in your workspace:
+1. No VS Code, crie `.vscode/mcp.json` no seu workspace:
 
 ```json
 {
@@ -236,20 +231,20 @@ curl http://localhost:8000/sse
 }
 ```
 
-2. Open GitHub Copilot Chat in VS Code
-3. Type: `@copilot What product categories are available?`
+2. Abra o GitHub Copilot Chat no VS Code
+3. Digite: `@copilot What product categories are available?`
 
-GitHub Copilot will call your `list_categories` tool and include the result in its response!
+O GitHub Copilot chamará sua ferramenta `list_categories` e incluirá o resultado na resposta!
 
-!!! tip "VS Code MCP support"
-    Make sure you have the **GitHub Copilot** extension version 1.99+ installed.  
-    You may need to enable MCP in VS Code settings: `"chat.mcp.enabled": true`
+!!! tip "Suporte a MCP no VS Code"
+    Certifique-se de ter a extensão **GitHub Copilot** versão 1.99+ instalada.  
+    Pode ser necessário habilitar o MCP nas configurações do VS Code: `"chat.mcp.enabled": true`
 
 ---
 
-## Adding a Resource (Bonus)
+## Adicionando um Resource (Bônus)
 
-MCP also supports **Resources** — data the agent can read. Add a resource that exposes the full product catalog:
+O MCP também suporta **Resources** — dados que o agente pode ler. Adicione um recurso que expõe o catálogo completo de produtos:
 
 ```python
 @mcp.resource("products://catalog")
@@ -263,13 +258,13 @@ def get_product_catalog() -> str:
 
 ---
 
-## 📁 Starter File
+## 📁 Arquivo Inicial
 
-This lab includes a starter file with TODO markers to guide you through building the server:
+Este laboratório inclui um arquivo inicial com marcadores TODO para guiá-lo na construção do servidor:
 
 ```
 lab-020/
-└── outdoorgear_mcp_server_starter.py   ← 6 TODOs to complete
+└── outdoorgear_mcp_server_starter.py   ← 6 TODOs para completar
 ```
 
 ```bash
@@ -284,13 +279,13 @@ pip install fastmcp
 python server.py
 ```
 
-The starter contains the OutdoorGear product catalog (P001–P007) already populated. You implement: `list_categories`, `search_products`, `get_product_details`, and a challenge tool `compare_products`.
+O arquivo inicial contém o catálogo de produtos OutdoorGear (P001–P007) já preenchido. Você implementa: `list_categories`, `search_products`, `get_product_details` e uma ferramenta desafio `compare_products`.
 
 ---
 
-## 🏆 Challenge: Add a `compare_products` Tool
+## 🏆 Desafio: Adicione uma Tool `compare_products`
 
-Once you have the basic 3 tools working, add a fourth:
+Depois que suas 3 ferramentas básicas estiverem funcionando, adicione uma quarta:
 
 ```python
 @mcp.tool()
@@ -305,27 +300,27 @@ def compare_products(product_ids: list[str]) -> dict:
     # Return: {"products": [...], "not_found": [...], "lightest": "...", "cheapest": "..."}
 ```
 
-Test it in the MCP Inspector by asking:
-> *"Compare the TrailBlazer Tent 2P and the TrailBlazer Solo. Which is lighter?"*
+Teste no MCP Inspector perguntando:
+> *"Compare a TrailBlazer Tent 2P e a TrailBlazer Solo. Qual é mais leve?"*
 
-The agent should call `compare_products(["P001", "P003"])` and return a structured comparison.
-
----
-
-## Summary
-
-You've built a fully functional MCP server that:
-
-- ✅ Defines **3 tools** with proper descriptions (the LLM uses these to decide when to call)
-- ✅ Runs in **stdio mode** for local tools
-- ✅ Runs in **HTTP/SSE mode** for remote agents
-- ✅ Works with the **MCP Inspector** for testing
-- ✅ Integrates with **GitHub Copilot in VS Code**
+O agente deverá chamar `compare_products(["P001", "P003"])` e retornar uma comparação estruturada.
 
 ---
 
-## Next Steps
+## Resumo
 
-- **C# version:** → [Lab 021 — MCP Server in C#](lab-021-mcp-server-csharp.md)
-- **Connect to Microsoft Foundry Agent Service:** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)
-- **Add real database queries:** → [Lab 031 — pgvector Semantic Search](lab-031-pgvector-semantic-search.md)
+Você construiu um servidor MCP totalmente funcional que:
+
+- ✅ Define **3 ferramentas** com descrições adequadas (o LLM usa essas descrições para decidir quando chamar)
+- ✅ Executa em **modo stdio** para ferramentas locais
+- ✅ Executa em **modo HTTP/SSE** para agentes remotos
+- ✅ Funciona com o **MCP Inspector** para testes
+- ✅ Integra com o **GitHub Copilot no VS Code**
+
+---
+
+## Próximos Passos
+
+- **Versão em C#:** → [Lab 021 — Servidor MCP em C#](lab-021-mcp-server-csharp.md)
+- **Conectar ao Microsoft Foundry Agent Service:** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)
+- **Adicionar consultas reais a banco de dados:** → [Lab 031 — pgvector Busca Semântica](lab-031-pgvector-semantic-search.md)

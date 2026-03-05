@@ -1,48 +1,48 @@
-# 👥 Agent Builder — Microsoft Teams Path
+# 👥 Agent Builder — Parcours Microsoft Teams
 
 <span class="level-badge level-100">L100</span> <span class="level-badge level-200">L200</span> <span class="level-badge level-300">L300</span>
 
-Build AI agents that live inside **Microsoft Teams** — the daily hub for millions of workers. From no-code Copilot Studio agents to pro-code Teams AI Library bots.
+Construisez des agents IA qui vivent dans **Microsoft Teams** — le hub quotidien de millions de travailleurs. Des agents Copilot Studio sans code aux bots pro-code avec la Teams AI Library.
 
 ---
 
-## What You'll Build
+## Ce que Vous Allez Construire
 
-- ✅ A **Copilot Studio** Q&A agent (no-code)
-- ✅ A **Teams AI Library** conversational bot (pro-code, Node.js or C#)
-- ✅ A **custom engine agent** that connects to your own data
-
----
-
-## Path Labs (2 labs, ~90 min total)
-
-| Lab | Title | Level | Cost |
-|-----|-------|-------|------|
-| [Lab 011](../../labs/lab-011-copilot-studio-first-agent.md) | Copilot Studio — First Agent | <span class="level-badge level-100">L100</span> | ✅ Free |
-| [Lab 024](../../labs/lab-024-teams-ai-library.md) | Teams AI Library Bot | <span class="level-badge level-200">L200</span> | ✅ Free |
+- ✅ Un agent Q&R avec **Copilot Studio** (sans code)
+- ✅ Un bot conversationnel avec la **Teams AI Library** (pro-code, Node.js ou C#)
+- ✅ Un **agent à moteur personnalisé** connecté à vos propres données
 
 ---
 
-## Which tool to use?
+## Laboratoires du Parcours (2 laboratoires, ~90 min au total)
 
-| Scenario | Tool |
-|----------|------|
-| No-code / low-code | Copilot Studio |
-| Custom logic, code control | Teams AI Library |
-| Extend an existing M365 Copilot | Copilot Studio + custom connector |
-| Complex multi-step reasoning | Teams AI Library + Semantic Kernel |
+| Lab | Titre | Niveau | Coût |
+|-----|-------|--------|------|
+| [Lab 011](../../labs/lab-011-copilot-studio-first-agent.md) | Copilot Studio — Premier Agent | <span class="level-badge level-100">L100</span> | ✅ Free |
+| [Lab 024](../../labs/lab-024-teams-ai-library.md) | Bot Teams AI Library | <span class="level-badge level-200">L200</span> | ✅ Free |
 
 ---
 
-## Prerequisites
+## Quel outil utiliser ?
 
-- Free M365 Developer tenant → [developer.microsoft.com/microsoft-365/dev-program](https://developer.microsoft.com/microsoft-365/dev-program)
-- For Teams AI Library: Node.js 18+ or .NET 8
+| Scénario | Outil |
+|----------|-------|
+| Sans code / low-code | Copilot Studio |
+| Logique personnalisée, contrôle du code | Teams AI Library |
+| Étendre un M365 Copilot existant | Copilot Studio + connecteur personnalisé |
+| Raisonnement complexe en plusieurs étapes | Teams AI Library + Semantic Kernel |
 
 ---
 
-## External Resources
+## Prérequis
 
-- [Copilot Studio Docs](https://learn.microsoft.com/microsoft-copilot-studio/)
+- Tenant M365 Developer gratuit → [developer.microsoft.com/microsoft-365/dev-program](https://developer.microsoft.com/microsoft-365/dev-program)
+- Pour la Teams AI Library : Node.js 18+ ou .NET 8
+
+---
+
+## Ressources Externes
+
+- [Documentation Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/)
 - [Teams AI Library GitHub](https://github.com/microsoft/teams-ai)
-- [Teams AI Library Docs](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/teams-conversation-ai-overview)
+- [Documentation Teams AI Library](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/teams-conversation-ai-overview)

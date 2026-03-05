@@ -1,67 +1,62 @@
 ---
 tags: [observability, opentelemetry, multi-agent, genai-conventions, azure-monitor, foundry, python]
 ---
-# Lab 050: Multi-Agent Observability with GenAI Semantic Conventions
+# Lab 050: Observabilidade Multi-Agente com Convenções Semânticas GenAI
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
-  <span><strong>Time:</strong> ~120 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Offline trace analysis with provided dataset (Azure Monitor optional)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Tempo:</strong> ~120 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Análise de traces offline com conjunto de dados fornecido (Azure Monitor opcional)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
+- Aplicar **convenções semânticas GenAI** a sistemas multi-agente: spans de agente, spans de modelo, spans de ferramenta
+- Rastrear **transferências entre agentes**, decisões de roteamento e padrões de reprocessamento
+- Distinguir spans `INTERNAL` (lógica do agente) vs `CLIENT` (chamadas LLM/ferramenta)
+- Analisar **pontuações de qualidade**, **custos de tokens** e **latência** em um pipeline multi-agente
+- Construir **métricas de dashboard** de observabilidade a partir de dados brutos de spans
+- Entender como as convenções padronizam a telemetria entre **Foundry, Semantic Kernel, LangChain, AutoGen**
 
+!!! abstract "Pré-requisito"
+    Complete o **[Lab 049: Foundry IQ — Rastreamento de Agentes](lab-049-foundry-iq-agent-tracing.md)** primeiro. Este lab pressupõe familiaridade com spans, atributos e convenções GenAI do OpenTelemetry.
 
-## What You'll Learn
+## Introdução
 
-- Apply **GenAI semantic conventions** to multi-agent systems: agent spans, model spans, tool spans
-- Trace **agent-to-agent handoffs**, routing decisions, and retry patterns
-- Distinguish `INTERNAL` (agent logic) vs `CLIENT` (LLM/tool calls) span kinds
-- Analyze **quality scores**, **token costs**, and **latency** across a multi-agent pipeline
-- Build observability **dashboard metrics** from raw span data
-- Understand how conventions standardize telemetry across **Foundry, Semantic Kernel, LangChain, AutoGen**
+![Rastreamento Multi-Agente](../../assets/diagrams/multi-agent-tracing.svg)
 
-!!! abstract "Prerequisite"
-    Complete **[Lab 049: Foundry IQ — Agent Tracing](lab-049-foundry-iq-agent-tracing.md)** first. This lab assumes familiarity with OpenTelemetry spans, attributes, and GenAI conventions.
+O rastreamento de agente único é difícil. O rastreamento **multi-agente** é exponencialmente mais difícil. Quando um Roteador transfere para um Especialista, que chama ferramentas, que passa resultados para um Revisor — você precisa de uma forma padrão de capturar cada etapa para poder reconstruir o fluxo completo de execução.
 
-## Introduction
+As **convenções semânticas GenAI do OpenTelemetry** resolvem isso com três tipos de spans:
 
-![Multi-Agent Tracing](../../assets/diagrams/multi-agent-tracing.svg)
-
-Single-agent tracing is hard. **Multi-agent** tracing is exponentially harder. When a Router hands off to a Specialist, who calls tools, who passes results to a Reviewer — you need a standard way to capture every step so you can reconstruct the full execution flow.
-
-The **OpenTelemetry GenAI semantic conventions** solve this with three span types:
-
-| Span Type | Kind | Key Attributes | Example |
+| Tipo de Span | Tipo | Atributos Principais | Exemplo |
 |-----------|------|----------------|---------|
-| **Agent span** | `INTERNAL` | `gen_ai.agent.name`, `gen_ai.agent.id` | Router, ProductSpec, Reviewer |
-| **Model span** | `CLIENT` | `gen_ai.request.model`, `gen_ai.usage.*_tokens` | `chat gpt-4o` |
-| **Tool span** | `CLIENT` | `gen_ai.tool.name` | `search_products` |
+| **Span de Agente** | `INTERNAL` | `gen_ai.agent.name`, `gen_ai.agent.id` | Router, ProductSpec, Reviewer |
+| **Span de Modelo** | `CLIENT` | `gen_ai.request.model`, `gen_ai.usage.*_tokens` | `chat gpt-4o` |
+| **Span de Ferramenta** | `CLIENT` | `gen_ai.tool.name` | `search_products` |
 
-### The Scenario
+### O Cenário
 
-OutdoorGear Inc. has upgraded to a **multi-agent system** with 4 specialist agents orchestrated by a Router:
+A OutdoorGear Inc. fez upgrade para um **sistema multi-agente** com 4 agentes especialistas orquestrados por um Roteador:
 
-1. **Router Agent** — classifies incoming queries and dispatches to the right specialist
-2. **Product Specialist** — handles product search and recommendations
-3. **Order Specialist** — processes order status and shipping queries
-4. **Support Specialist** — handles complaints and sensitive issues
-5. **Reviewer Agent** — checks every response for quality and policy compliance
+1. **Agente Roteador** — classifica consultas recebidas e despacha para o especialista correto
+2. **Especialista em Produtos** — lida com busca de produtos e recomendações
+3. **Especialista em Pedidos** — processa status de pedidos e consultas de envio
+4. **Especialista em Suporte** — lida com reclamações e questões sensíveis
+5. **Agente Revisor** — verifica cada resposta quanto à qualidade e conformidade com políticas
 
-You have **5 complex traces** with 46 spans showing the full agent pipeline, including a trace with a **failed review and retry**.
+Você tem **5 traces complexos** com 46 spans mostrando o pipeline completo de agentes, incluindo um trace com **revisão falha e reprocessamento**.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-| Requirement | Why |
+| Requisito | Por quê |
 |---|---|
-| Python 3.10+ | Run analysis scripts |
-| `pandas` | Analyze span data |
-| Lab 049 completed | Understanding of OpenTelemetry basics |
+| Python 3.10+ | Executar scripts de análise |
+| `pandas` | Analisar dados de spans |
+| Lab 049 concluído | Entendimento dos conceitos básicos do OpenTelemetry |
 
 ```bash
 pip install pandas
@@ -69,28 +64,28 @@ pip install pandas
 
 ---
 
-!!! tip "Quick Start with GitHub Codespaces"
+!!! tip "Início Rápido com GitHub Codespaces"
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
 
-    All dependencies are pre-installed in the devcontainer.
+    Todas as dependências estão pré-instaladas no devcontainer.
 
 
-## 📦 Supporting Files
+## 📦 Arquivos de Suporte
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-050/` folder in your working directory.
+!!! note "Baixe estes arquivos antes de iniciar o lab"
+    Salve todos os arquivos em uma pasta `lab-050/` no seu diretório de trabalho.
 
-| File | Description | Download |
+| Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_conventions.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/broken_conventions.py) |
-| `dashboard_builder.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/dashboard_builder.py) |
-| `multi_agent_spans.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/multi_agent_spans.csv) |
+| `broken_conventions.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/broken_conventions.py) |
+| `dashboard_builder.py` | Script inicial com TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/dashboard_builder.py) |
+| `multi_agent_spans.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/multi_agent_spans.csv) |
 
 ---
 
-## Step 1: Understanding Multi-Agent Trace Structure
+## Passo 1: Entendendo a Estrutura de Traces Multi-Agente
 
-In a multi-agent system, the trace forms a **tree**:
+Em um sistema multi-agente, o trace forma uma **árvore**:
 
 ```
 root: router_agent (INTERNAL)
@@ -103,22 +98,22 @@ root: router_agent (INTERNAL)
     └── quality_check (CLIENT, gpt-4o-mini)
 ```
 
-Key conventions:
+Convenções principais:
 
-- **Agent spans** are `INTERNAL` — they represent the agent's own logic and orchestration
-- **LLM calls** are `CLIENT` — outgoing requests to model endpoints
-- **Tool calls** are `CLIENT` — outgoing requests to tools/APIs
-- **Parent-child** relationships show the handoff chain
-- **`gen_ai.agent.name`** is set ONLY on agent spans, not on LLM/tool spans
+- **Spans de agente** são `INTERNAL` — representam a lógica e orquestração próprias do agente
+- **Chamadas LLM** são `CLIENT` — requisições de saída para endpoints de modelo
+- **Chamadas de ferramenta** são `CLIENT` — requisições de saída para ferramentas/APIs
+- Relacionamentos **pai-filho** mostram a cadeia de transferência
+- **`gen_ai.agent.name`** é definido APENAS em spans de agente, não em spans de LLM/ferramenta
 
-!!! tip "Why `INTERNAL` for Agents?"
-    An agent's decision-making happens locally (routing, planning, memory retrieval). It doesn't cross a network boundary — so it's `INTERNAL`. The LLM call that the agent *makes* is `CLIENT` because it goes over the network to an API.
+!!! tip "Por que `INTERNAL` para Agentes?"
+    A tomada de decisão de um agente acontece localmente (roteamento, planejamento, recuperação de memória). Não cruza um limite de rede — então é `INTERNAL`. A chamada LLM que o agente *faz* é `CLIENT` porque vai pela rede até uma API.
 
 ---
 
-## Step 2: Load and Explore the Trace Data
+## Passo 2: Carregar e Explorar os Dados de Traces
 
-The dataset has **46 spans** across **5 traces**:
+O conjunto de dados tem **46 spans** em **5 traces**:
 
 ```python
 import pandas as pd
@@ -130,21 +125,21 @@ print(f"\nSpans per trace:")
 print(spans.groupby("trace_id")["span_id"].count())
 ```
 
-**Expected:**
+**Esperado:**
 
-| Trace | Spans | Scenario |
+| Trace | Spans | Cenário |
 |-------|-------|----------|
-| A001 | 8 | Product search (simple) |
-| A002 | 10 | Complex order query |
-| A003 | 9 | Complaint handling |
-| A004 | 5 | FAQ (no reviewer) |
-| A005 | 14 | Refund with failed review + retry |
+| A001 | 8 | Busca de produto (simples) |
+| A002 | 10 | Consulta de pedido complexa |
+| A003 | 9 | Tratamento de reclamação |
+| A004 | 5 | FAQ (sem revisor) |
+| A005 | 14 | Reembolso com revisão falha + reprocessamento |
 
 ---
 
-## Step 3: Agent Span Analysis
+## Passo 3: Análise de Spans de Agente
 
-Extract and analyze agent spans:
+Extraia e analise os spans de agente:
 
 ```python
 agent_spans = spans[(spans["kind"] == "INTERNAL") & (spans["agent_name"].notna())]
@@ -154,7 +149,7 @@ print(f"\nSpans per agent:")
 print(agent_spans["agent_name"].value_counts().sort_index())
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Total agent spans: 16
@@ -167,13 +162,13 @@ RefundSpec   2
 ```
 
 !!! tip "Insight"
-    **Router appears in all 5 traces** — it's the entry point. **Reviewer appears in 4 traces** (not A004, the simple FAQ). **RefundSpec appears twice** in trace A005 because the first attempt failed review and was retried.
+    **Router aparece em todos os 5 traces** — é o ponto de entrada. **Reviewer aparece em 4 traces** (não no A004, o FAQ simples). **RefundSpec aparece duas vezes** no trace A005 porque a primeira tentativa falhou na revisão e foi reprocessada.
 
 ---
 
-## Step 4: LLM Token Usage Analysis
+## Passo 4: Análise de Uso de Tokens LLM
 
-Analyze token consumption across all model calls:
+Analise o consumo de tokens em todas as chamadas de modelo:
 
 ```python
 llm_spans = spans[spans["model"].notna()]
@@ -191,20 +186,20 @@ total_tokens = int(llm_spans["input_tokens"].sum() + llm_spans["output_tokens"].
 print(f"\nGrand total: {total_tokens:,} tokens")
 ```
 
-**Expected:**
+**Esperado:**
 
-| Model | Calls | Input | Output | Total |
+| Modelo | Chamadas | Entrada | Saída | Total |
 |-------|-------|-------|--------|-------|
-| gpt-4o | 12 | 3,830 | 1,890 | 5,720 |
-| gpt-4o-mini | 10 | 1,045 | 177 | 1,222 |
-| **Total** | **22** | **4,875** | **2,067** | **6,942** |
+| gpt-4o | 12 | 3.830 | 1.890 | 5.720 |
+| gpt-4o-mini | 10 | 1.045 | 177 | 1.222 |
+| **Total** | **22** | **4.875** | **2.067** | **6.942** |
 
-!!! tip "Cost Insight"
-    gpt-4o handles the heavy reasoning (82% of tokens) while gpt-4o-mini does lightweight classification and quality checks (18%). This is a cost-efficient pattern — use expensive models only for complex reasoning.
+!!! tip "Insight de Custo"
+    O gpt-4o lida com o raciocínio pesado (82% dos tokens) enquanto o gpt-4o-mini faz classificação leve e verificações de qualidade (18%). Este é um padrão eficiente em custos — use modelos caros apenas para raciocínio complexo.
 
 ---
 
-## Step 5: Tool Call Analysis
+## Passo 5: Análise de Chamadas de Ferramentas
 
 ```python
 tool_spans = spans[spans["tool_name"].notna()]
@@ -216,7 +211,7 @@ trace_tools = tool_spans.groupby("trace_id").size()
 print(f"\nTrace with most tool calls: {trace_tools.idxmax()} ({trace_tools.max()} calls)")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Total tool calls: 8
@@ -235,9 +230,9 @@ Trace with most tool calls: A002 (3 calls)
 
 ---
 
-## Step 6: Quality Score Analysis
+## Passo 6: Análise de Pontuação de Qualidade
 
-Reviewer agents assign quality scores. Analyze them:
+Agentes revisores atribuem pontuações de qualidade. Analise-as:
 
 ```python
 quality_spans = spans[spans["quality_score"].notna()]
@@ -251,7 +246,7 @@ below_threshold = quality_spans[quality_spans["quality_score"] < 0.8]
 print(f"\nTraces below 0.8 threshold: {below_threshold['trace_id'].unique().tolist()}")
 ```
 
-**Expected:**
+**Esperado:**
 
 ```
 Quality assessments: 5
@@ -262,7 +257,7 @@ Max quality:         0.95
 Traces below 0.8 threshold: ['A003', 'A005']
 ```
 
-### Investigating the Failed Review (Trace A005)
+### Investigando a Revisão Falha (Trace A005)
 
 ```python
 a005 = spans[spans["trace_id"] == "A005"].sort_values("span_id")
@@ -270,13 +265,13 @@ print(a005[["span_id", "span_name", "agent_name", "kind", "quality_score", "stat
       .to_string(index=False))
 ```
 
-This shows the **retry pattern**: the first reviewer check (s40) scored 0.45 with status ERROR. The Refund Specialist was re-invoked (s42), produced a revised response, and the second reviewer check (s45) passed at 0.85.
+Isso mostra o **padrão de reprocessamento**: a primeira verificação do revisor (s40) pontuou 0.45 com status ERROR. O Especialista em Reembolso foi reinvocado (s42), produziu uma resposta revisada, e a segunda verificação do revisor (s45) passou com 0.85.
 
 ---
 
-## Step 7: Build Dashboard Metrics
+## Passo 7: Construir Métricas de Dashboard
 
-Combine everything into a dashboard summary:
+Combine tudo em um resumo de dashboard:
 
 ```python
 # Overall metrics
@@ -287,7 +282,6 @@ total_llm_calls = len(llm_spans)
 total_tools = len(tool_spans)
 error_spans = spans[spans["status"] == "ERROR"]
 avg_quality = quality_spans["quality_score"].mean()
-
 dashboard = f"""
 ╔══════════════════════════════════════════════════╗
 ║         Multi-Agent Observability Dashboard      ║
@@ -308,93 +302,93 @@ print(dashboard)
 
 ---
 
-## 🐛 Bug-Fix Exercise
+## 🐛 Exercício de Correção de Bugs
 
-The file `lab-050/broken_conventions.py` has **3 bugs** in how it interprets GenAI semantic conventions:
+O arquivo `lab-050/broken_conventions.py` tem **3 bugs** em como ele interpreta as convenções semânticas GenAI:
 
 ```bash
 python lab-050/broken_conventions.py
 ```
 
-| Test | What it checks | Hint |
+| Teste | O que verifica | Dica |
 |------|---------------|------|
-| Test 1 | Agent names come from `agent_name`, not `span_name` | Which column has the agent identity? |
-| Test 2 | Agent spans must be `INTERNAL` kind AND have an `agent_name` | Don't count LLM/tool spans |
-| Test 3 | Total tokens = input + output | Don't forget output_tokens |
+| Teste 1 | Nomes de agentes vêm de `agent_name`, não de `span_name` | Qual coluna tem a identidade do agente? |
+| Teste 2 | Spans de agente devem ser do tipo `INTERNAL` E ter um `agent_name` | Não conte spans de LLM/ferramenta |
+| Teste 3 | Total de tokens = entrada + saída | Não esqueça output_tokens |
 
 ---
 
 
-## 🧠 Knowledge Check
+## 🧠 Verificação de Conhecimento
 
-??? question "**Q1 (Multiple Choice):** In GenAI semantic conventions, which span kind should be used for an agent's internal routing/planning logic?"
+??? question "**Q1 (Múltipla Escolha):** Nas convenções semânticas GenAI, qual tipo de span deve ser usado para a lógica interna de roteamento/planejamento de um agente?"
 
-    - A) CLIENT — because the agent is a client of the LLM
-    - B) SERVER — because the agent serves user requests
-    - C) INTERNAL — because routing happens locally, not over the network
-    - D) PRODUCER — because the agent produces responses
+    - A) CLIENT — porque o agente é um cliente do LLM
+    - B) SERVER — porque o agente serve requisições de usuários
+    - C) INTERNAL — porque o roteamento acontece localmente, não pela rede
+    - D) PRODUCER — porque o agente produz respostas
 
-    ??? success "✅ Reveal Answer"
-        **Correct: C) INTERNAL**
+    ??? success "✅ Revelar Resposta"
+        **Correto: C) INTERNAL**
 
-        Agent decision-making (routing, planning, memory retrieval) happens within the process — it doesn't cross a network boundary. `CLIENT` is used for outgoing calls to LLMs and tools. The convention is: agent logic = `INTERNAL`, external calls = `CLIENT`.
+        A tomada de decisão do agente (roteamento, planejamento, recuperação de memória) acontece dentro do processo — não cruza um limite de rede. `CLIENT` é usado para chamadas de saída para LLMs e ferramentas. A convenção é: lógica do agente = `INTERNAL`, chamadas externas = `CLIENT`.
 
-??? question "**Q2 (Multiple Choice):** Why does trace A005 have 14 spans while A001 has only 8?"
+??? question "**Q2 (Múltipla Escolha):** Por que o trace A005 tem 14 spans enquanto o A001 tem apenas 8?"
 
-    - A) A005 uses a larger model
-    - B) A005 had a failed quality review and required a retry loop
-    - C) A005 has more user input tokens
-    - D) A005 uses a different routing algorithm
+    - A) A005 usa um modelo maior
+    - B) A005 teve uma revisão de qualidade falha e precisou de um loop de reprocessamento
+    - C) A005 tem mais tokens de entrada do usuário
+    - D) A005 usa um algoritmo de roteamento diferente
 
-    ??? success "✅ Reveal Answer"
-        **Correct: B) A005 had a failed quality review and required a retry loop**
+    ??? success "✅ Revelar Resposta"
+        **Correto: B) A005 teve uma revisão de qualidade falha e precisou de um loop de reprocessamento**
 
-        The Reviewer scored A005's first response at 0.45 (ERROR). The system re-invoked the Refund Specialist to revise the response, then the Reviewer checked again (score: 0.85, OK). This retry added extra spans: second specialist (2 LLM calls) + second reviewer (1 LLM call) = 5 additional spans.
+        O Revisor pontuou a primeira resposta do A005 em 0.45 (ERROR). O sistema reinvocou o Especialista em Reembolso para revisar a resposta, então o Revisor verificou novamente (pontuação: 0.85, OK). Esse reprocessamento adicionou spans extras: segundo especialista (2 chamadas LLM) + segundo revisor (1 chamada LLM) = 5 spans adicionais.
 
-??? question "**Q3 (Run the Lab):** How many total agent spans (kind=INTERNAL with an agent_name) are there across all 5 traces?"
+??? question "**Q3 (Execute o Lab):** Quantos spans de agente totais (kind=INTERNAL com um agent_name) existem em todos os 5 traces?"
 
-    Filter the spans DataFrame for `kind == "INTERNAL"` and `agent_name` not null.
+    Filtre o DataFrame de spans por `kind == "INTERNAL"` e `agent_name` não nulo.
 
-    ??? success "✅ Reveal Answer"
-        **16 agent spans**
+    ??? success "✅ Revelar Resposta"
+        **16 spans de agente**
 
-        Across 5 traces: A001(3) + A002(3) + A003(3) + A004(2) + A005(5) = **16**. A004 has fewer because it skips the Reviewer. A005 has more because of the retry (RefundSpec×2 + Reviewer×2).
+        Em 5 traces: A001(3) + A002(3) + A003(3) + A004(2) + A005(5) = **16**. A004 tem menos porque pula o Revisor. A005 tem mais por causa do reprocessamento (RefundSpec×2 + Reviewer×2).
 
-??? question "**Q4 (Run the Lab):** Which trace has the most tool calls, and how many?"
+??? question "**Q4 (Execute o Lab):** Qual trace tem mais chamadas de ferramentas, e quantas?"
 
-    Group tool spans by `trace_id` and find the maximum.
+    Agrupe spans de ferramentas por `trace_id` e encontre o máximo.
 
-    ??? success "✅ Reveal Answer"
-        **Trace A002 — 3 tool calls**
+    ??? success "✅ Revelar Resposta"
+        **Trace A002 — 3 chamadas de ferramentas**
 
-        A002 (complex order query) called: `get_order_status`, `get_shipping_info`, and `calculate_eta`. This is the most tool-intensive trace. A005 has 2 tool calls, and the rest have 1 each.
+        A002 (consulta de pedido complexa) chamou: `get_order_status`, `get_shipping_info` e `calculate_eta`. Este é o trace mais intensivo em ferramentas. A005 tem 2 chamadas de ferramentas, e os demais têm 1 cada.
 
-??? question "**Q5 (Run the Lab):** What is the average quality score across all reviewer assessments?"
+??? question "**Q5 (Execute o Lab):** Qual é a pontuação média de qualidade em todas as avaliações do revisor?"
 
-    Filter for spans with a non-null `quality_score` and calculate the mean.
+    Filtre por spans com `quality_score` não nulo e calcule a média.
 
-    ??? success "✅ Reveal Answer"
-        **0.790**
+    ??? success "✅ Revelar Resposta"
+        **0,790**
 
-        Quality scores from reviewer spans: A001 (0.95), A002 (0.92), A003 (0.78), A005-first (0.45), A005-retry (0.85). A004 (FAQ) has no reviewer. The data has 5 quality_score entries. Average = (0.95 + 0.92 + 0.78 + 0.45 + 0.85) / 5 = **0.790**. Two traces (A003 and A005) fell below the 0.8 quality threshold.
+        Pontuações de qualidade dos spans do revisor: A001 (0,95), A002 (0,92), A003 (0,78), A005-primeiro (0,45), A005-reprocessamento (0,85). A004 (FAQ) não tem revisor. Os dados têm 5 entradas de quality_score. Média = (0,95 + 0,92 + 0,78 + 0,45 + 0,85) / 5 = **0,790**. Dois traces (A003 e A005) ficaram abaixo do limiar de qualidade de 0,8.
 
 ---
 
-## Summary
+## Resumo
 
-| Topic | What You Learned |
+| Tópico | O que Você Aprendeu |
 |-------|-----------------|
-| GenAI Conventions | Standard attributes: agent.name, request.model, usage.tokens |
-| Span Kinds | INTERNAL (agent logic) vs CLIENT (LLM/tool calls) |
-| Trace Hierarchy | Parent-child spans showing agent handoffs |
-| Retry Patterns | Failed reviews trigger retry loops (visible in traces) |
-| Dashboard Metrics | Agent counts, token usage, tool calls, quality scores |
-| Cross-Framework | Same conventions work across Foundry, SK, LangChain, AutoGen |
+| Convenções GenAI | Atributos padrão: agent.name, request.model, usage.tokens |
+| Tipos de Span | INTERNAL (lógica do agente) vs CLIENT (chamadas LLM/ferramenta) |
+| Hierarquia de Traces | Spans pai-filho mostrando transferências entre agentes |
+| Padrões de Reprocessamento | Revisões falhas disparam loops de reprocessamento (visíveis nos traces) |
+| Métricas de Dashboard | Contagens de agentes, uso de tokens, chamadas de ferramentas, pontuações de qualidade |
+| Cross-Framework | Mesmas convenções funcionam em Foundry, SK, LangChain, AutoGen |
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **[Lab 033](lab-033-agent-observability.md)** — Agent Observability with Application Insights (complementary Azure-native approach)
-- **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agent Orchestration with Semantic Kernel (build the agents this lab traces)
-- **[Lab 035](lab-035-agent-evaluation.md)** — Agent Evaluation with Azure AI Eval SDK (quality scoring that feeds the Reviewer)
+- **[Lab 033](lab-033-agent-observability.md)** — Observabilidade de Agentes com Application Insights (abordagem complementar nativa do Azure)
+- **[Lab 034](lab-034-multi-agent-sk.md)** — Orquestração Multi-Agente com Semantic Kernel (construa os agentes que este lab rastreia)
+- **[Lab 035](lab-035-agent-evaluation.md)** — Avaliação de Agentes com Azure AI Eval SDK (pontuação de qualidade que alimenta o Revisor)

@@ -4,56 +4,51 @@ tags: [rag, agentic-rag, python, free, github-models]
 # Lab 026: Agentic RAG Pattern
 
 <div class="lab-meta">
-  <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">RAG</a></span>
-  <span><strong>Time:</strong> ~40 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> + Docker (local)</span>
+  <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Trilha:</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Tempo:</strong> ~40 min</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Gratuito</span> + Docker (local)</span>
 </div>
 
-!!! info "Tradução em andamento"
-    Este lab ainda está sendo traduzido. O conteúdo abaixo está em inglês.
+## O que Você Vai Aprender
 
-
-
-## What You'll Learn
-
-- Why naive RAG fails on complex questions
-- **Query rewriting** — improving retrieval before searching
-- **Hypothetical Document Embeddings (HyDE)** — generate to retrieve
-- **Multi-hop RAG** — iterative retrieval for multi-part questions
-- **Self-reflection** — agent evaluates its own answer quality
+- Por que o RAG ingênuo falha em perguntas complexas
+- **Reescrita de consulta** — melhorando a recuperação antes da busca
+- **Hypothetical Document Embeddings (HyDE)** — gerar para recuperar
+- **RAG multi-hop** — recuperação iterativa para perguntas de múltiplas partes
+- **Autorreflexão** — o agente avalia a qualidade de sua própria resposta
 
 ---
 
-## Introduction
+## Introdução
 
-Naive RAG: embed query → search → generate. Works fine for simple questions. Fails for:
+RAG ingênuo: incorporar consulta → buscar → gerar. Funciona bem para perguntas simples. Falha para:
 
-- Vague questions: *"Tell me about it"* (what is "it"?)
-- Multi-hop: *"What's cheaper — camping or climbing gear? What would I save?"*
-- Knowledge gaps: *"What's the newest product?"* (may need to know current date)
-- Hallucination: model invents facts not in context
+- Perguntas vagas: *"Me fale sobre isso"* (o que é "isso"?)
+- Multi-hop: *"O que é mais barato — equipamento de camping ou de escalada? Quanto eu economizaria?"*
+- Lacunas de conhecimento: *"Qual é o produto mais novo?"* (pode precisar saber a data atual)
+- Alucinação: o modelo inventa fatos que não estão no contexto
 
-Agentic RAG adds reasoning loops around retrieval. The agent *decides* how to search, *evaluates* results, and *retries* if needed.
+O RAG agêntico adiciona ciclos de raciocínio em torno da recuperação. O agente *decide* como buscar, *avalia* os resultados e *tenta novamente* se necessário.
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-- Completed [Lab 022](lab-022-rag-github-models-pgvector.md) (pgvector running + documents ingested)
+- Ter completado o [Lab 022](lab-022-rag-github-models-pgvector.md) (pgvector rodando + documentos ingeridos)
 - `GITHUB_TOKEN` set
 - pgvector container running: `docker start pgvector-rag`
 
-!!! tip "Sample data already loaded?"
-    If you ran Lab 022's ingest step with the sample dataset, you already have 42 documents in pgvector ready for this lab. If not, run Lab 022's Step 3 first.
+!!! tip "Dados de exemplo já carregados?"
+    Se você executou a etapa de ingestão do Lab 022 com o dataset de exemplo, você já tem 42 documentos no pgvector prontos para este lab. Caso contrário, execute o Passo 3 do Lab 022 primeiro.
 
 ---
 
-## Lab Exercise
+## Exercício do Lab
 
-### Step 1: Query rewriting
+### Passo 1: Reescrita de consulta
 
-Before searching, ask the LLM to rewrite the user's question into better search queries.
+Antes de buscar, peça ao LLM para reescrever a pergunta do usuário em melhores consultas de busca.
 
 ```python
 import os
@@ -97,7 +92,7 @@ for q in queries:
 # • camping shelter rain protection features
 ```
 
-### Step 2: Retrieve with multiple queries and deduplicate
+### Passo 2: Recuperar com múltiplas consultas e deduplicar
 
 ```python
 def retrieve_with_rewriting(question: str, top_k: int = 3) -> list[dict]:
@@ -118,9 +113,9 @@ def retrieve_with_rewriting(question: str, top_k: int = 3) -> list[dict]:
     return all_docs[:top_k]
 ```
 
-### Step 3: HyDE — Hypothetical Document Embeddings
+### Passo 3: HyDE — Hypothetical Document Embeddings
 
-Instead of embedding the question, generate a *hypothetical answer* and embed that. This often matches the real document better.
+Em vez de incorporar a pergunta, gere uma *resposta hipotética* e incorpore-a. Isso frequentemente corresponde melhor ao documento real.
 
 ```python
 def hyde_search(question: str, top_k: int = 3) -> list[dict]:
@@ -141,9 +136,9 @@ def hyde_search(question: str, top_k: int = 3) -> list[dict]:
     return search(hypothetical_answer, top_k=top_k)
 ```
 
-### Step 4: Multi-hop RAG
+### Passo 4: RAG Multi-hop
 
-For complex questions, retrieve → generate partial answer → retrieve again.
+Para perguntas complexas, recupere → gere resposta parcial → recupere novamente.
 
 ```python
 def multi_hop_answer(question: str) -> str:
@@ -208,7 +203,7 @@ def answer_with_context(question: str, docs: list[dict]) -> str:
 print(multi_hop_answer("What's the cheapest product suitable for a Rainier climb?"))
 ```
 
-### Step 5: Self-reflection (answer quality check)
+### Passo 5: Autorreflexão (verificação de qualidade da resposta)
 
 ```python
 from pydantic import BaseModel
@@ -240,7 +235,7 @@ def check_answer_quality(question: str, context: str, answer: str) -> AnswerQual
 
 ---
 
-## Agentic RAG Architecture Summary
+## Resumo da Arquitetura de RAG Agêntico
 
 ```
 User Question
@@ -266,7 +261,7 @@ Return Answer (or retry)
 
 ---
 
-## Next Steps
+## Próximos Passos
 
-- **Agent memory across sessions:** → [Lab 027 — Agent Memory Patterns](lab-027-agent-memory-patterns.md)
-- **Evaluate RAG quality at scale:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)
+- **Memória do agente entre sessões:** → [Lab 027 — Agent Memory Patterns](lab-027-agent-memory-patterns.md)
+- **Avaliar qualidade do RAG em escala:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)
