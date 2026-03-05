@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 460" width="860" height="460" font-family="Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 490" width="860" height="490" font-family="Segoe UI, Arial, sans-serif">
   <defs>
     <marker id="arrowdown" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto">
       <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
@@ -12,7 +12,7 @@
   </defs>
 
   <!-- Background -->
-  <rect width="860" height="460" fill="#f8fafc" rx="14"/>
+  <rect width="860" height="490" fill="#f8fafc" rx="14"/>
 
   <!-- Title -->
   <text x="430" y="36" text-anchor="middle" font-size="19" font-weight="bold" fill="#0f2d5e">Agent 365 Architecture — Layered Stack</text>

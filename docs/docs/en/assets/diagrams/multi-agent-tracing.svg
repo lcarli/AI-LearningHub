@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Segoe UI, Arial, sans-serif">
   <defs>
     <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
     <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
       <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
     </marker>
   </defs>
-  <rect width="900" height="440" fill="#f8f9fa" rx="12"/>
+  <rect width="900" height="470" fill="#f8f9fa" rx="12"/>
   <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Multi-Agent Observability — Trace Hierarchy</text>
 
   <!-- Trace timeline -->

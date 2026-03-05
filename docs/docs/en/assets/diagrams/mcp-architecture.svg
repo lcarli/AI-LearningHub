@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380" font-family="Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 410" width="900" height="410" font-family="Segoe UI, Arial, sans-serif">
   <!-- Background -->
-  <rect width="900" height="380" fill="#f8f9fa" rx="12"/>
+  <rect width="900" height="410" fill="#f8f9fa" rx="12"/>
 
   <!-- Title -->
   <text x="450" y="36" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">MCP Architecture — Model Context Protocol</text>
@@ -97,8 +97,8 @@
   <line x1="590" y1="328" x2="630" y2="290" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
 
   <!-- KEY POINT -->
-  <rect x="20" y="353" width="860" height="22" rx="4" fill="#fff" stroke="#dee2e6" stroke-width="1"/>
-  <text x="450" y="368" text-anchor="middle" font-size="11" fill="#495057">💡 Each MCP client maintains a 1:1 connection to one server. The host (AI application) coordinates multiple clients/servers simultaneously.</text>
+  <rect x="20" y="353" width="860" height="30" rx="4" fill="#fff" stroke="#dee2e6" stroke-width="1"/>
+  <text x="450" y="372" text-anchor="middle" font-size="11" fill="#495057">💡 Each MCP client maintains a 1:1 connection to one server. The host coordinates multiple clients/servers.</text>
 
   <defs>
     <marker id="arrowBi"     markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">  <path d="M0,0 L0,6 L8,3 z" fill="#888"/></marker>
