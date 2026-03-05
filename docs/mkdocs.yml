@@ -19,7 +19,6 @@ nav:
   - Prerequisites & Accounts: prerequisites.md
 
   - Learning Paths:
-      - All Paths: paths/index.md
       - By Technology:
           - 🤖 GitHub Copilot: paths/copilot/index.md
           - 🏭 Microsoft Foundry: paths/foundry/index.md
@@ -165,7 +164,6 @@ plugins:
             How to Use This Hub: Como Usar Este Hub
             Prerequisites & Accounts: Pré-requisitos e Contas
             Learning Paths: Trilhas de Aprendizado
-            All Paths: Todas as Trilhas
             By Technology: Por Tecnologia
             By Role: Por Perfil
             "👨‍💻 Developer": "👨‍💻 Desenvolvedor"
@@ -199,7 +197,6 @@ plugins:
             How to Use This Hub: Comment Utiliser Ce Hub
             Prerequisites & Accounts: Prérequis et Comptes
             Learning Paths: Parcours d'Apprentissage
-            All Paths: Tous les Parcours
             By Technology: Par Technologie
             By Role: Par Rôle
             "👨‍💻 Developer": "👨‍💻 Développeur"
