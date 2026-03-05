@@ -125,6 +125,14 @@
   accent-color: #198754;
 }
 
+.completion-note {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+  opacity: 0.5;
+  font-style: italic;
+}
+
 /* ─────────────────────────────────────────────
    Progress Bars
    ───────────────────────────────────────────── */
