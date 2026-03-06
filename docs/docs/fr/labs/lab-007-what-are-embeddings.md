@@ -43,17 +43,7 @@ L'idée clé est simple : **convertir n'importe quel morceau de texte en une lis
 
 Imaginez une carte 2D où chaque mot est placé en fonction de son sens :
 
-```
-                    Science
-                      │
-              Physics  │  Biology
-                    \  │  /
-Tech ───────────────────────────── Nature
-                    /  │  \
-               Code    │   Animals
-                      AI
-                      │
-```
+![Espace d'Embedding 2D](../../assets/diagrams/embedding-space-2d.svg)
 
 Les mots ayant des sens similaires se regroupent. « Dog » est proche de « Cat » et « Pet ». « Python » se regroupe près de « Code » et « Programming » — pas près de « Snake » (dans un corpus orienté code).
 

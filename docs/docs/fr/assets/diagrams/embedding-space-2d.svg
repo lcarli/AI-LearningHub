@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 500" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+  </defs>
+
+  <rect width="700" height="500" fill="#f8f9fa" rx="12"/>
+  <text x="350" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Embedding Space — Words as Points (2D simplified)</text>
+  <text x="350" y="46" text-anchor="middle" font-size="10" fill="#94a3b8">Similar meaning = nearby in space · Real models use 1,536+ dimensions</text>
+
+  <!-- Axes -->
+  <line x1="80" y1="420" x2="660" y2="420" stroke="#e2e8f0" stroke-width="1.5"/>
+  <line x1="80" y1="60" x2="80" y2="420" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="660" y="440" text-anchor="end" font-size="10" fill="#94a3b8">Nature / Living →</text>
+  <text x="80" y="55" font-size="10" fill="#94a3b8">↑ Abstract / Science</text>
+
+  <!-- Cluster 1: Technology (blue) -->
+  <ellipse cx="180" cy="310" rx="90" ry="65" fill="#dbeafe" fill-opacity="0.4" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="180" y="370" text-anchor="middle" font-size="9" fill="#3b82f6" font-weight="600">Technology</text>
+
+  <circle cx="150" cy="300" r="6" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="150" y="290" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">Code</text>
+
+  <circle cx="200" cy="280" r="6" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="200" y="270" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">Python</text>
+
+  <circle cx="170" cy="330" r="6" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="170" y="348" text-anchor="middle" font-size="10" fill="#3b82f6">JavaScript</text>
+
+  <circle cx="220" cy="320" r="6" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="232" y="335" font-size="10" fill="#3b82f6">GitHub</text>
+
+  <!-- Cluster 2: AI / Science (purple) -->
+  <ellipse cx="300" cy="150" rx="95" ry="65" fill="#ede9fe" fill-opacity="0.4" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="300" y="210" text-anchor="middle" font-size="9" fill="#8b5cf6" font-weight="600">AI &amp; Science</text>
+
+  <circle cx="280" cy="140" r="6" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="280" y="130" text-anchor="middle" font-size="11" font-weight="600" fill="#6d28d9">AI</text>
+
+  <circle cx="320" cy="120" r="6" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="320" y="110" text-anchor="middle" font-size="11" font-weight="600" fill="#6d28d9">Physics</text>
+
+  <circle cx="260" cy="170" r="6" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="248" y="185" text-anchor="end" font-size="10" fill="#8b5cf6">Neural Net</text>
+
+  <circle cx="340" cy="160" r="6" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="355" y="155" font-size="10" fill="#8b5cf6">Biology</text>
+
+  <!-- Cluster 3: Nature / Animals (green) -->
+  <ellipse cx="530" cy="280" rx="100" ry="75" fill="#dcfce7" fill-opacity="0.4" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="530" y="350" text-anchor="middle" font-size="9" fill="#22c55e" font-weight="600">Nature &amp; Animals</text>
+
+  <circle cx="500" cy="260" r="6" fill="#22c55e" filter="url(#shadow)"/>
+  <text x="500" y="250" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">Dog</text>
+
+  <circle cx="540" cy="245" r="6" fill="#22c55e" filter="url(#shadow)"/>
+  <text x="540" y="235" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">Cat</text>
+
+  <circle cx="520" cy="290" r="6" fill="#22c55e" filter="url(#shadow)"/>
+  <text x="520" y="308" text-anchor="middle" font-size="10" fill="#22c55e">Pet</text>
+
+  <circle cx="570" cy="270" r="6" fill="#22c55e" filter="url(#shadow)"/>
+  <text x="585" y="266" font-size="10" fill="#22c55e">Forest</text>
+
+  <circle cx="560" cy="310" r="6" fill="#22c55e" filter="url(#shadow)"/>
+  <text x="575" y="320" font-size="10" fill="#22c55e">Wildlife</text>
+
+  <!-- Cluster 4: Outdoor Gear (orange) -->
+  <ellipse cx="440" cy="390" rx="80" ry="40" fill="#ffedd5" fill-opacity="0.4" stroke="#f97316" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="440" y="425" text-anchor="middle" font-size="9" fill="#f97316" font-weight="600">Outdoor Gear</text>
+
+  <circle cx="410" cy="385" r="6" fill="#f97316" filter="url(#shadow)"/>
+  <text x="410" y="375" text-anchor="middle" font-size="11" font-weight="600" fill="#c2410c">Tent</text>
+
+  <circle cx="450" cy="380" r="6" fill="#f97316" filter="url(#shadow)"/>
+  <text x="450" y="370" text-anchor="middle" font-size="11" font-weight="600" fill="#c2410c">Backpack</text>
+
+  <circle cx="470" cy="400" r="6" fill="#f97316" filter="url(#shadow)"/>
+  <text x="482" y="410" font-size="10" fill="#f97316">Hiking</text>
+
+  <!-- Similarity lines -->
+  <line x1="500" y1="260" x2="540" y2="245" stroke="#16a34a" stroke-width="1.5" opacity="0.4"/>
+  <line x1="500" y1="260" x2="520" y2="290" stroke="#16a34a" stroke-width="1.5" opacity="0.4"/>
+  <line x1="150" y1="300" x2="200" y2="280" stroke="#3b82f6" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Python → snake indicator -->
+  <circle cx="490" cy="330" r="5" fill="#94a3b8" filter="url(#shadow)"/>
+  <text x="505" y="334" font-size="9" fill="#94a3b8" font-style="italic">Snake 🐍</text>
+  <line x1="200" y1="280" x2="490" y2="330" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
+  <text x="345" y="310" text-anchor="middle" font-size="8" fill="#94a3b8" font-style="italic">"Python" (code) is far from "snake"</text>
+
+  <!-- Legend -->
+  <rect x="100" y="450" width="500" height="30" rx="6" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="470" text-anchor="middle" font-size="10" fill="#475569">💡 Close points = similar meaning · "Dog" ≈ "Cat" ≈ "Pet" but far from "Code" or "Physics"</text>
+</svg>

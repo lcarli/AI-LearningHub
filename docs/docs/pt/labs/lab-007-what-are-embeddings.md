@@ -43,17 +43,7 @@ A ideia central é simples: **converter qualquer pedaco de texto em uma lista de
 
 Imagine um mapa 2D onde cada palavra é posicionada com base no seu significado:
 
-```
-                    Science
-                      |
-              Physics  |  Biology
-                    \  |  /
-Tech --------------------------------- Nature
-                    /  |  \
-               Code    |   Animals
-                      AI
-                      |
-```
+![Espaço de Embedding 2D](../../assets/diagrams/embedding-space-2d.svg)
 
 Palavras com significados similares se agrupam. "Dog" está perto de "Cat" e "Pet". "Python" se agrupa perto de "Code" e "Programming" -- não perto de "Snake" (em um corpus focado em codigo).
 

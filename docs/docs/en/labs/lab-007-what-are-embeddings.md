@@ -43,17 +43,7 @@ The key idea is simple: **convert any piece of text into a list of numbers (a ve
 
 Imagine a 2D map where every word is placed based on its meaning:
 
-```
-                    Science
-                      │
-              Physics  │  Biology
-                    \  │  /
-Tech ───────────────────────────── Nature
-                    /  │  \
-               Code    │   Animals
-                      AI
-                      │
-```
+![Embedding Space 2D](../../assets/diagrams/embedding-space-2d.svg)
 
 Words with similar meanings cluster together. "Dog" is near "Cat" and "Pet". "Python" clusters near "Code" and "Programming" — not near "Snake" (in a code-focused corpus).
 
