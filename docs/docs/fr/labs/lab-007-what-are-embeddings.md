@@ -74,16 +74,7 @@ Chaque nombre encode un aspect du sens — mais il n'y a pas d'interprétation l
 
 Pour comparer deux vecteurs, nous utilisons la **similarité cosinus** : l'angle entre eux.
 
-```
-Vector A ("waterproof hiking boots")
-      ↗
-
-Vector B ("weatherproof trekking shoes")  ← small angle → very similar
-      ↗ (almost same direction)
-
-Vector C ("chocolate birthday cake")      ← large angle → very different
-→  (completely different direction)
-```
+![Similarité Cosinus](../../assets/diagrams/cosine-similarity.svg)
 
 La similarité cosinus va de **-1 à 1** :
 - `1.0` = sens identique

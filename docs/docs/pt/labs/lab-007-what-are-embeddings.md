@@ -74,16 +74,7 @@ Cada numero codifica algum aspecto do significado -- mas não há interpretaçã
 
 Para comparar dois vetores, usamos **similaridade cosseno**: o ângulo entre eles.
 
-```
-Vector A ("waterproof hiking boots")
-      /
-
-Vector B ("weatherproof trekking shoes")  <- small angle -> very similar
-      / (almost same direction)
-
-Vector C ("chocolate birthday cake")      <- large angle -> very different
-->  (completely different direction)
-```
+![Similaridade Cosseno](../../assets/diagrams/cosine-similarity.svg)
 
 A similaridade cosseno varia de **-1 a 1**:
 - `1.0` = significado idêntico

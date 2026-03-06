@@ -74,16 +74,7 @@ Each number encodes some aspect of meaning — but there's no human-readable int
 
 To compare two vectors, we use **cosine similarity**: the angle between them.
 
-```
-Vector A ("waterproof hiking boots")
-      ↗
-
-Vector B ("weatherproof trekking shoes")  ← small angle → very similar
-      ↗ (almost same direction)
-
-Vector C ("chocolate birthday cake")      ← large angle → very different
-→  (completely different direction)
-```
+![Cosine Similarity](../../assets/diagrams/cosine-similarity.svg)
 
 Cosine similarity ranges from **-1 to 1**:
 - `1.0` = identical meaning
