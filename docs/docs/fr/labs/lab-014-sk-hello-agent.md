@@ -40,8 +40,6 @@ Dans ce lab, nous construisons un agent simple qui peut répondre à des questio
 Un fichier squelette de démarrage est fourni avec des commentaires `TODO` pour chaque étape :
 
 ```bash
-# From your cloned repo:
-cd AI-LearningHub/docs/docs/en/labs/lab-014
 pip install -r requirements.txt
 python hello_agent_starter.py
 ```

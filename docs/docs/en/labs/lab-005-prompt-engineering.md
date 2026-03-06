@@ -440,17 +440,10 @@ pip install openai
 export GITHUB_TOKEN=your_github_token   # github.com → Settings → Developer Settings → Tokens
 ```
 
-Download the challenge file:
+Run the challenge file you downloaded from the [📦 Supporting Files](#-supporting-files) section above:
+
 ```bash
-# From the cloned repo:
-cd AI-LearningHub/docs/docs/en/labs/lab-005
-python prompt_challenges.py
-```
-
-Or copy it from below:
-
-```python title="lab-005/prompt_challenges.py"
---8<-- "labs/lab-005/prompt_challenges.py"
+python lab-005/prompt_challenges.py
 ```
 
 ### What each challenge tests

@@ -221,8 +221,6 @@ for model in models.data:
 Téléchargez le fichier de démarrage pour suivre le lab :
 
 ```bash
-# From your cloned repo:
-cd AI-LearningHub/docs/docs/en/labs/lab-013
 pip install -r requirements.txt
 python starter.py
 ```

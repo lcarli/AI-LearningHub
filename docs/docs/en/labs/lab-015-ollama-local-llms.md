@@ -254,8 +254,6 @@ curl http://localhost:11434/api/chat -d '{
 Two files are provided to help you follow along:
 
 ```bash
-# From your cloned repo:
-cd AI-LearningHub/docs/docs/en/labs/lab-015
 
 # Chat with any local model
 python chat_starter.py

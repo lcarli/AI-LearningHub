@@ -40,8 +40,6 @@ In this lab, we build a simple agent that can answer questions **and** call a cu
 A skeleton starter file is provided with `TODO` comments for each step:
 
 ```bash
-# From your cloned repo:
-cd AI-LearningHub/docs/docs/en/labs/lab-014
 pip install -r requirements.txt
 python hello_agent_starter.py
 ```

@@ -40,8 +40,6 @@ Neste laboratório, construímos um agente simples que pode responder perguntas 
 Um arquivo inicial com estrutura básica é fornecido com comentários `TODO` para cada etapa:
 
 ```bash
-# From your cloned repo:
-cd AI-LearningHub/docs/docs/en/labs/lab-014
 pip install -r requirements.txt
 python hello_agent_starter.py
 ```
