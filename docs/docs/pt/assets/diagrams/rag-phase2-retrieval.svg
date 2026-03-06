@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 400" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="750" height="400" fill="#f8f9fa" rx="12"/>
+
+  <!-- Title -->
+  <text x="375" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Phase 2 — Retrieval + Generation</text>
+  <text x="375" y="46" text-anchor="middle" font-size="10" fill="#94a3b8">Runs on every user query — real-time</text>
+
+  <!-- User question -->
+  <rect x="30" y="65" width="300" height="50" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="180" y="87" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">💬 User: "What is the return policy</text>
+  <text x="180" y="103" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">for outdoor equipment?"</text>
+
+  <line x1="330" y1="90" x2="370" y2="90" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: Embed Query -->
+  <rect x="375" y="65" width="160" height="50" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="455" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="#a16207">🧮 5. Embed Query</text>
+  <text x="455" y="103" text-anchor="middle" font-size="9" fill="#ca8a04">Question → vector</text>
+
+  <line x1="535" y1="90" x2="575" y2="90" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 6: Search -->
+  <rect x="580" y="60" width="145" height="60" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="653" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">🔍 6. Search</text>
+  <text x="653" y="98" text-anchor="middle" font-size="9" fill="#8b5cf6">Cosine similarity</text>
+  <text x="653" y="112" text-anchor="middle" font-size="9" fill="#8b5cf6">Top-k closest chunks</text>
+
+  <!-- Arrow down from Search to retrieved chunks -->
+  <line x1="653" y1="120" x2="653" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Retrieved chunks -->
+  <rect x="430" y="155" width="290" height="70" rx="8" fill="#fff" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="575" y="174" text-anchor="middle" font-size="10" font-weight="600" fill="#6d28d9">📋 Retrieved Chunks (top-3)</text>
+
+  <rect x="442" y="183" width="82" height="32" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <text x="483" y="197" text-anchor="middle" font-size="8" font-weight="600" fill="#16a34a">Chunk 12</text>
+  <text x="483" y="209" text-anchor="middle" font-size="7" fill="#64748b">return policy...</text>
+
+  <rect x="530" y="183" width="82" height="32" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <text x="571" y="197" text-anchor="middle" font-size="8" font-weight="600" fill="#16a34a">Chunk 5</text>
+  <text x="571" y="209" text-anchor="middle" font-size="7" fill="#64748b">refund terms...</text>
+
+  <rect x="618" y="183" width="92" height="32" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <text x="664" y="197" text-anchor="middle" font-size="8" font-weight="600" fill="#16a34a">Chunk 31</text>
+  <text x="664" y="209" text-anchor="middle" font-size="7" fill="#64748b">outdoor equip...</text>
+
+  <!-- Arrow down to Augment -->
+  <line x1="575" y1="225" x2="375" y2="260" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 7: Augment -->
+  <rect x="30" y="245" width="690" height="55" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="375" y="268" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">📝 7. Augment — Build the Prompt</text>
+  <text x="375" y="288" text-anchor="middle" font-size="10" fill="#ea580c">"Answer the user's question based on these documents: [Chunk 12] [Chunk 5] [Chunk 31]"</text>
+
+  <!-- Arrow down to Generate -->
+  <line x1="375" y1="300" x2="375" y2="318" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 8: Generate -->
+  <rect x="180" y="322" width="200" height="45" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="280" y="342" text-anchor="middle" font-size="12" font-weight="700" fill="#be185d">🧠 8. LLM Generates</text>
+  <text x="280" y="358" text-anchor="middle" font-size="9" fill="#ec4899">Grounded in real data</text>
+
+  <line x1="380" y1="345" x2="420" y2="345" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Response -->
+  <rect x="425" y="322" width="295" height="45" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
+  <text x="573" y="342" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">✅ "Returns are allowed within</text>
+  <text x="573" y="358" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">30 days with original receipt..."</text>
+</svg>

@@ -69,46 +69,11 @@ RAG has two distinct phases:
 
 ### Phase 1 — Ingestion (runs once, or on schedule)
 
-```
-Your documents (PDFs, Word, web pages, databases...)
-         │
-         ▼
-    1. LOAD       ── Read content from source
-         │
-         ▼
-    2. CHUNK      ── Split into overlapping segments (~512 tokens each)
-         │
-         ▼
-    3. EMBED      ── Convert each chunk to a vector (list of numbers)
-         │
-         ▼
-    4. STORE      ── Save chunks + vectors in a vector database
-                     (pgvector, Azure AI Search, Chroma, Pinecone...)
-```
+![RAG Phase 1 — Ingestion](../../assets/diagrams/rag-phase1-ingestion.svg)
 
 ### Phase 2 — Retrieval + Generation (runs on every query)
 
-```
-User asks: "What is the return policy for outdoor equipment?"
-         │
-         ▼
-    5. EMBED QUERY ── Convert user question to a vector
-         │
-         ▼
-    6. SEARCH     ── Find the most similar chunks in the vector DB
-                     (cosine similarity / vector distance)
-         │
-         ▼
-    7. AUGMENT    ── Inject retrieved chunks into the prompt:
-                     "Answer based on these documents: [chunks]"
-         │
-         ▼
-    8. GENERATE   ── LLM answers, grounded in real data
-         │
-         ▼
-    User gets: "Our return policy for outdoor equipment allows returns
-               within 30 days with original receipt..."
-```
+![RAG Phase 2 — Retrieval + Generation](../../assets/diagrams/rag-phase2-retrieval.svg)
 
 ??? question "🤔 Check Your Understanding"
     In the RAG pipeline, what is the difference between the **ingestion phase** and the **retrieval phase**, and how often does each run?

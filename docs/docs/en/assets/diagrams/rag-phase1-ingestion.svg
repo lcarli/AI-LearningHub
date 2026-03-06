@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 380" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="750" height="380" fill="#f8f9fa" rx="12"/>
+
+  <!-- Title -->
+  <text x="375" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Phase 1 — Ingestion</text>
+  <text x="375" y="46" text-anchor="middle" font-size="10" fill="#94a3b8">Runs once (or on schedule) to prepare your documents</text>
+
+  <!-- Source documents -->
+  <rect x="30" y="70" width="160" height="75" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#475569">📄 Documents</text>
+  <text x="110" y="114" text-anchor="middle" font-size="9" fill="#64748b">PDFs · Word · Web pages</text>
+  <text x="110" y="128" text-anchor="middle" font-size="9" fill="#64748b">Databases · APIs</text>
+
+  <line x1="190" y1="108" x2="230" y2="108" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 1: Load -->
+  <rect x="235" y="75" width="130" height="65" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="100" text-anchor="middle" font-size="18">📥</text>
+  <text x="300" y="120" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">1. Load</text>
+  <text x="300" y="134" text-anchor="middle" font-size="9" fill="#3b82f6">Read raw content</text>
+
+  <line x1="365" y1="108" x2="405" y2="108" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: Chunk -->
+  <rect x="410" y="75" width="130" height="65" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="475" y="100" text-anchor="middle" font-size="18">✂️</text>
+  <text x="475" y="120" text-anchor="middle" font-size="12" font-weight="700" fill="#16a34a">2. Chunk</text>
+  <text x="475" y="134" text-anchor="middle" font-size="9" fill="#22c55e">Split into ~512 tokens</text>
+
+  <line x1="540" y1="108" x2="580" y2="108" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Embed -->
+  <rect x="585" y="75" width="130" height="65" rx="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="650" y="100" text-anchor="middle" font-size="18">🧮</text>
+  <text x="650" y="120" text-anchor="middle" font-size="12" font-weight="700" fill="#a16207">3. Embed</text>
+  <text x="650" y="134" text-anchor="middle" font-size="9" fill="#ca8a04">Text → vector [0.12, ...]</text>
+
+  <!-- Arrow down from Embed to Store -->
+  <line x1="650" y1="140" x2="650" y2="180" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: Store -->
+  <rect x="490" y="185" width="280" height="70" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+  <text x="630" y="210" text-anchor="middle" font-size="18">🗄️</text>
+  <text x="630" y="230" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">4. Store in Vector Database</text>
+  <text x="630" y="248" text-anchor="middle" font-size="10" fill="#8b5cf6">pgvector · Azure AI Search · Chroma · Pinecone</text>
+
+  <!-- Visual: chunk examples -->
+  <rect x="30" y="175" width="430" height="95" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="245" y="196" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">What the chunks look like:</text>
+
+  <rect x="45" y="206" width="125" height="50" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="108" y="224" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">Chunk 1</text>
+  <text x="108" y="238" text-anchor="middle" font-size="8" fill="#64748b">"Our return policy</text>
+  <text x="108" y="249" text-anchor="middle" font-size="8" fill="#64748b">allows 30 days..."</text>
+
+  <rect x="180" y="206" width="125" height="50" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <text x="243" y="224" text-anchor="middle" font-size="9" font-weight="600" fill="#16a34a">Chunk 2</text>
+  <text x="243" y="238" text-anchor="middle" font-size="8" fill="#64748b">"The Alpine tent</text>
+  <text x="243" y="249" text-anchor="middle" font-size="8" fill="#64748b">weighs 4.2 lbs..."</text>
+
+  <rect x="315" y="206" width="125" height="50" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1"/>
+  <text x="378" y="224" text-anchor="middle" font-size="9" font-weight="600" fill="#a16207">Chunk 3</text>
+  <text x="378" y="238" text-anchor="middle" font-size="8" fill="#64748b">"Free shipping on</text>
+  <text x="378" y="249" text-anchor="middle" font-size="8" fill="#64748b">orders over $50..."</text>
+
+  <!-- Overlap indicators -->
+  <text x="165" y="262" text-anchor="middle" font-size="7" fill="#94a3b8">↔ overlap</text>
+  <text x="300" y="262" text-anchor="middle" font-size="7" fill="#94a3b8">↔ overlap</text>
+
+  <!-- Footer -->
+  <rect x="30" y="295" width="690" height="55" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="375" y="315" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">💡 Key Insight</text>
+  <text x="375" y="332" text-anchor="middle" font-size="10" fill="#64748b">Chunks overlap by ~50 tokens so context isn't lost at boundaries.</text>
+  <text x="375" y="346" text-anchor="middle" font-size="10" fill="#64748b">The same embedding model must be used for both ingestion AND queries.</text>
+</svg>
