@@ -8,6 +8,7 @@ Desafios são menos guiados que os labs. Use-os depois de concluir os labs relac
 |---------|--------|-------|------|-------|
 | [Desafio 001](challenge-001-agent-loop.md) | Construa um Loop de Agente do Zero | <span class="level-badge level-100">L100</span> | Loop de agente, ferramentas, estado | ~60 min |
 | [Desafio 002](challenge-002-rag-pipeline.md) | Corrija um Pipeline RAG Quebrado | <span class="level-badge level-200">L200</span> | RAG, recuperação, avaliação | ~75 min |
+| [Desafio 003](challenge-003-prompt-injection.md) | Defenda um Agente contra Prompt Injection | <span class="level-badge level-200">L200</span> | Segurança, filtragem de contexto | ~60 min |
 
 ---
 
