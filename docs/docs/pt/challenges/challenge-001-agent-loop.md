@@ -22,7 +22,7 @@ Sua tarefa é finalizar um pequeno loop de agente em Python que escolhe ferramen
 
 ## Objetivo
 
-Faça todos os testes passarem implementando as funções faltantes em `starter_agent_loop.py`.
+Implemente a lógica faltante em `starter_agent_loop.py` para que o assistente local de produtos conclua as duas solicitações-alvo e gere um código de validação.
 
 Ao final, seu agente deve conseguir:
 
@@ -43,18 +43,13 @@ Salve estes arquivos em uma pasta chamada `challenge-001/`:
 | `products.json` | Catálogo mock da OutdoorGear | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/products.json) |
 | `starter_agent_loop.py` | Implementação inicial com TODOs | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/starter_agent_loop.py) |
 | `test_agent_loop.py` | Testes de aceite | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/test_agent_loop.py) |
+| `validate_agent_loop.py` | Gera o código final de conclusão | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/validate_agent_loop.py) |
 
 ---
 
-## Configuração
+## Briefing do Desafio
 
-```bash
-cd challenge-001
-python -m pip install pytest
-python -m pytest test_agent_loop.py
-```
-
-Os testes devem falhar no início. Sua tarefa é fazê-los passar.
+Você recebe um catálogo de produtos, uma implementação inicial e testes. Não há walkthrough: decida como interpretar a solicitação, escolher uma ferramenta, executá-la, armazenar a observação e produzir a resposta final.
 
 ---
 
@@ -91,19 +86,38 @@ Sua solução está completa quando:
 
 ---
 
+## Validação
+
+Quando sua implementação estiver pronta, execute:
+
+```bash
+python -m pytest test_agent_loop.py
+python validate_agent_loop.py
+```
+
+Digite o código de conclusão impresso por `validate_agent_loop.py`:
+
+<div class="challenge-validator" data-answer="CH001-4707D4F5">
+  <input type="text" aria-label="Código de conclusão" placeholder="CH001-XXXXXXXX" />
+  <button type="button">Validar</button>
+  <p class="challenge-validator-result" aria-live="polite"></p>
+</div>
+
+---
+
 ## Dicas
 
 ??? tip "Dica 1 — Comece pelas ferramentas"
-    Implemente `search_products`, `get_product_details` e `recommend_bundle` antes de mexer no loop. Um loop de agente só é útil se as ferramentas forem confiáveis.
+    O loop fica mais fácil de raciocinar quando cada ferramenta tem contrato claro e saída determinística.
 
 ??? tip "Dica 2 — Mantenha o parsing simples"
-    Você não precisa de NLP avançado. Checagens simples de palavras como `jacket`, `camping`, `under` e `SKU` são suficientes para este desafio.
+    Você não precisa de NLP avançado. As solicitações-alvo são propositalmente estreitas.
 
 ??? tip "Dica 3 — Use observações como memória"
     `state.observations` é a memória de curto prazo do loop. Depois que uma ferramenta roda, a resposta final deve se basear na observação mais recente, não no catálogo original.
 
 ??? tip "Dica 4 — Decida de forma determinística"
-    Se ainda não há observações, escolha uma ferramenta. Se já existe pelo menos uma observação útil, escolha `final`.
+    Uma boa solução toma a mesma decisão toda vez para o mesmo estado.
 
 ---
 

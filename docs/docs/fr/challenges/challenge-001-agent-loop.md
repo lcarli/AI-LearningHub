@@ -22,7 +22,7 @@ Votre tâche consiste à terminer une petite boucle d'agent en Python qui choisi
 
 ## Objectif
 
-Faites passer tous les tests en implémentant les fonctions manquantes dans `starter_agent_loop.py`.
+Implémentez la logique manquante dans `starter_agent_loop.py` afin que l'assistant produit local traite les deux requêtes cibles et génère un code de validation.
 
 À la fin, votre agent doit pouvoir :
 
@@ -43,18 +43,13 @@ Enregistrez ces fichiers dans un dossier nommé `challenge-001/` :
 | `products.json` | Catalogue mock OutdoorGear | [Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/products.json) |
 | `starter_agent_loop.py` | Implémentation de départ avec TODOs | [Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/starter_agent_loop.py) |
 | `test_agent_loop.py` | Tests d'acceptation | [Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/test_agent_loop.py) |
+| `validate_agent_loop.py` | Génère le code final de réussite | [Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/validate_agent_loop.py) |
 
 ---
 
-## Configuration
+## Brief du défi
 
-```bash
-cd challenge-001
-python -m pip install pytest
-python -m pytest test_agent_loop.py
-```
-
-Les tests doivent échouer au départ. Votre tâche est de les faire passer.
+Vous recevez un catalogue de produits, une implémentation de départ et des tests. Il n'y a pas de walkthrough : décidez comment interpréter la requête, choisir un outil, l'exécuter, stocker l'observation et produire la réponse finale.
 
 ---
 
@@ -91,19 +86,38 @@ Votre solution est complète lorsque :
 
 ---
 
+## Validation
+
+Lorsque votre implémentation est prête, exécutez :
+
+```bash
+python -m pytest test_agent_loop.py
+python validate_agent_loop.py
+```
+
+Saisissez le code de réussite imprimé par `validate_agent_loop.py` :
+
+<div class="challenge-validator" data-answer="CH001-4707D4F5">
+  <input type="text" aria-label="Code de réussite" placeholder="CH001-XXXXXXXX" />
+  <button type="button">Valider</button>
+  <p class="challenge-validator-result" aria-live="polite"></p>
+</div>
+
+---
+
 ## Indices
 
 ??? tip "Indice 1 — Commencez par les outils"
-    Implémentez `search_products`, `get_product_details` et `recommend_bundle` avant de toucher à la boucle. Une boucle d'agent n'est utile que si les outils sont fiables.
+    La boucle est plus facile à raisonner lorsque chaque outil a un contrat clair et une sortie déterministe.
 
 ??? tip "Indice 2 — Gardez le parsing simple"
-    Vous n'avez pas besoin de NLP avancé. De simples vérifications de mots comme `jacket`, `camping`, `under` et `SKU` suffisent pour ce défi.
+    Vous n'avez pas besoin de NLP avancé. Les requêtes cibles sont volontairement étroites.
 
 ??? tip "Indice 3 — Utilisez les observations comme mémoire"
     `state.observations` est la mémoire court terme de la boucle. Après l'exécution d'un outil, la réponse finale doit se baser sur la dernière observation, pas sur le catalogue d'origine.
 
 ??? tip "Indice 4 — Décidez de manière déterministe"
-    S'il n'y a pas encore d'observations, choisissez un outil. S'il existe déjà au moins une observation utile, choisissez `final`.
+    Une bonne solution prend toujours la même décision pour le même état.
 
 ---
 

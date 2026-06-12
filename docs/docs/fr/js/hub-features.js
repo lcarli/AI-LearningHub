@@ -32,7 +32,9 @@
       certCompleted: "has successfully completed all labs in",
       enterName: "Enter your name for the certificate:",
       progressSaved: "Progress is saved in your browser (localStorage)",
-      completedOf: "completed"
+      completedOf: "completed",
+      challengeValid: "✅ Correct code. Challenge completed!",
+      challengeInvalid: "❌ Code not recognized. Re-run the local validator and try again."
     },
     pt: {
       markComplete: "Marcar como concluído",
@@ -50,7 +52,9 @@
       certCompleted: "concluiu com sucesso todos os labs em",
       enterName: "Digite seu nome para o certificado:",
       progressSaved: "Progresso salvo no seu navegador (localStorage)",
-      completedOf: "concluído(s)"
+      completedOf: "concluído(s)",
+      challengeValid: "✅ Código correto. Desafio concluído!",
+      challengeInvalid: "❌ Código não reconhecido. Rode o validador local novamente e tente de novo."
     },
     fr: {
       markComplete: "Marquer comme terminé",
@@ -68,7 +72,9 @@
       certCompleted: "a terminé avec succès tous les labs de",
       enterName: "Entrez votre nom pour le certificat :",
       progressSaved: "Progrès sauvegardé dans votre navigateur (localStorage)",
-      completedOf: "terminé(s)"
+      completedOf: "terminé(s)",
+      challengeValid: "✅ Code correct. Défi terminé !",
+      challengeInvalid: "❌ Code non reconnu. Relancez le validateur local puis réessayez."
     }
   };
 
@@ -282,6 +288,24 @@
     URL.revokeObjectURL(url);
   }
 
+  // ── Challenge Completion Code Validator ───────────────────────────────
+  function addChallengeValidators() {
+    document.querySelectorAll(".challenge-validator").forEach(function (wrapper) {
+      var input = wrapper.querySelector("input");
+      var button = wrapper.querySelector("button");
+      var result = wrapper.querySelector(".challenge-validator-result");
+      var expected = (wrapper.dataset.answer || "").trim().toUpperCase();
+      if (!input || !button || !result || !expected) return;
+
+      button.addEventListener("click", function () {
+        var actual = input.value.trim().toUpperCase();
+        var ok = actual === expected;
+        result.textContent = ok ? t("challengeValid") : t("challengeInvalid");
+        result.className = "challenge-validator-result " + (ok ? "success" : "error");
+      });
+    });
+  }
+
   // ── Init ──────────────────────────────────────────────────────────────
   function init() {
     cleanup();
@@ -289,6 +313,7 @@
     addCostFilters();
     addStatsDashboard();
     addCertificateButton();
+    addChallengeValidators();
   }
 
   // MkDocs Material instant loading

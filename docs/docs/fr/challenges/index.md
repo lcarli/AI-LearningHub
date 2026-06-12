@@ -12,8 +12,7 @@ Les défis sont moins guidés que les labs. Utilisez-les après les labs associ�
 
 ## Fonctionnement des défis
 
-- **Commencez par le scénario** et les critères d'acceptation.
-- **Téléchargez les fichiers de départ** et lancez les tests.
-- **Implémentez uniquement ce qui manque**.
-- **Utilisez les indices progressivement** si vous êtes bloqué.
-- **Vérifiez la rubrique** avant de considérer votre solution terminée.
+- Vous recevez **un scénario, un objectif, des contraintes, des fichiers de départ et une rubrique**.
+- Vous ne recevez **pas** de walkthrough étape par étape.
+- Lorsque c'est possible, le défi inclut un **validateur local** qui génère un code de réussite.
+- Saisissez le code sur la page du défi pour confirmer le résultat final.

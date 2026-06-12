@@ -12,8 +12,7 @@ Desafios são menos guiados que os labs. Use-os depois de concluir os labs relac
 
 ## Como os Desafios Funcionam
 
-- **Comece pelo cenário** e pelos critérios de aceite.
-- **Baixe os arquivos iniciais** e rode os testes.
-- **Implemente apenas o que está faltando**.
-- **Use as dicas progressivamente** se travar.
-- **Confira a rubrica** antes de considerar a solução pronta.
+- Você recebe **cenário, objetivo, restrições, arquivos iniciais e rubrica**.
+- Você **não** recebe um passo a passo.
+- Quando possível, o desafio inclui um **validador local** que gera um código de conclusão.
+- Digite o código na página do desafio para confirmar o resultado final.

@@ -270,3 +270,47 @@
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(109, 40, 217, 0.3);
 }
+
+/* ─────────────────────────────────────────────
+   Challenge Validator
+   ───────────────────────────────────────────── */
+
+.challenge-validator {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--md-code-bg-color);
+  border-radius: 8px;
+}
+
+.challenge-validator input {
+  min-width: 220px;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 6px;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font-family: var(--md-code-font-family);
+}
+
+.challenge-validator button {
+  padding: 0.5rem 0.9rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--md-primary-fg-color);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.challenge-validator-result {
+  flex-basis: 100%;
+  margin: 0.25rem 0 0;
+  font-weight: 600;
+}
+
+.challenge-validator-result.success { color: #198754; }
+.challenge-validator-result.error { color: #dc3545; }

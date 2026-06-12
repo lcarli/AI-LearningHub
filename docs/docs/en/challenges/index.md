@@ -12,8 +12,7 @@ Challenges are less guided than labs. Use them after completing the related labs
 
 ## How Challenges Work
 
-- **Start with the scenario** and acceptance criteria.
-- **Download the starter files** and run the tests.
-- **Implement only what is missing**.
-- **Use hints progressively** if you get stuck.
-- **Check the rubric** before calling your solution done.
+- You get a **scenario, objective, constraints, starter files, and rubric**.
+- You do **not** get a step-by-step walkthrough.
+- When possible, a challenge includes a **local validator** that generates a completion code.
+- Enter the code on the challenge page to confirm the final result.
