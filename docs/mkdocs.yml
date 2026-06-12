@@ -132,6 +132,10 @@ nav:
           - "Lab 064: Securing MCP with APIM": labs/lab-064-securing-mcp-apim.md
           - "Lab 084: Capstone — OutdoorGear Agent": labs/lab-084-capstone-outdoorgear-agent.md
 
+  - Challenges:
+      - All Challenges: challenges/index.md
+      - "Challenge 001: Build an Agent Loop from Scratch": challenges/challenge-001-agent-loop.md
+
   - Glossary: glossary.md
   - What's New: whats-new.md
   - Tags: tags.md
@@ -177,6 +181,9 @@ plugins:
             "L200 — Intermediate": "L200 — Intermediário"
             "L300 — Advanced": "L300 — Avançado"
             "L400 — Expert": "L400 — Especialista"
+            Challenges: Desafios
+            All Challenges: Todos os Desafios
+            "Challenge 001: Build an Agent Loop from Scratch": "Desafio 001: Construa um Loop de Agente do Zero"
             Glossary: Glossário
             What's New: Novidades
             Tags: Tags
@@ -210,6 +217,9 @@ plugins:
             "L200 — Intermediate": "L200 — Intermédiaire"
             "L300 — Advanced": "L300 — Avancé"
             "L400 — Expert": "L400 — Expert"
+            Challenges: Défis
+            All Challenges: Tous les défis
+            "Challenge 001: Build an Agent Loop from Scratch": "Défi 001 : Construire une boucle d'agent à partir de zéro"
             Glossary: Glossaire
             What's New: Nouveautés
             Tags: Tags

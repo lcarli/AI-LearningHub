@@ -1,0 +1,82 @@
+[
+  {
+    "sku": "JKT-RAIN-001",
+    "name": "RainShell Pro Jacket",
+    "category": "jacket",
+    "price": 129.99,
+    "in_stock": true,
+    "weight_oz": 14,
+    "attributes": ["waterproof", "breathable", "packable"],
+    "use_cases": ["hiking", "rain", "travel"]
+  },
+  {
+    "sku": "JKT-FLEECE-002",
+    "name": "TrailWarm Fleece",
+    "category": "jacket",
+    "price": 89.99,
+    "in_stock": true,
+    "weight_oz": 16,
+    "attributes": ["warm", "layering", "quick-dry"],
+    "use_cases": ["hiking", "camping", "cold"]
+  },
+  {
+    "sku": "TENT-2P-003",
+    "name": "SummitLite 2P Tent",
+    "category": "tent",
+    "price": 219.99,
+    "in_stock": true,
+    "weight_oz": 72,
+    "attributes": ["two-person", "freestanding", "three-season"],
+    "use_cases": ["camping", "backpacking"]
+  },
+  {
+    "sku": "BAG-20F-004",
+    "name": "CloudRest 20F Sleeping Bag",
+    "category": "sleeping bag",
+    "price": 149.99,
+    "in_stock": true,
+    "weight_oz": 42,
+    "attributes": ["warm", "compressible", "synthetic"],
+    "use_cases": ["camping", "backpacking", "cold"]
+  },
+  {
+    "sku": "PAD-INS-005",
+    "name": "BaseCamp Insulated Pad",
+    "category": "sleeping pad",
+    "price": 79.99,
+    "in_stock": true,
+    "weight_oz": 20,
+    "attributes": ["insulated", "compact", "comfortable"],
+    "use_cases": ["camping", "backpacking", "cold"]
+  },
+  {
+    "sku": "STOVE-MINI-006",
+    "name": "SparkMini Camp Stove",
+    "category": "stove",
+    "price": 44.99,
+    "in_stock": true,
+    "weight_oz": 3,
+    "attributes": ["compact", "fuel-efficient", "lightweight"],
+    "use_cases": ["camping", "backpacking", "cooking"]
+  },
+  {
+    "sku": "PACK-45L-007",
+    "name": "RidgeLine 45L Pack",
+    "category": "backpack",
+    "price": 159.99,
+    "in_stock": false,
+    "weight_oz": 48,
+    "attributes": ["45-liter", "hydration-compatible", "adjustable"],
+    "use_cases": ["hiking", "backpacking", "travel"]
+  },
+  {
+    "sku": "LAMP-LED-008",
+    "name": "TrailGlow Headlamp",
+    "category": "lighting",
+    "price": 34.99,
+    "in_stock": true,
+    "weight_oz": 3,
+    "attributes": ["rechargeable", "water-resistant", "red-light"],
+    "use_cases": ["camping", "hiking", "night"]
+  }
+]

@@ -40,6 +40,16 @@ Chaque parcours a une **page d'index** avec la liste complète des labs, un ordr
 
 ---
 
+## 🧩 Labs vs défis
+
+- **Les labs** sont des walkthroughs guidés. Utilisez-les pour apprendre un concept ou un outil étape par étape.
+- **Les défis** sont des exercices plus ouverts. Utilisez-les après les labs associés pour prouver que vous pouvez appliquer le concept sans recette.
+- **Les capstones** combinent plusieurs compétences dans un projet plus large.
+
+Flux recommandé : **Lab → Défi → Capstone**.
+
+---
+
 ## 💡 Itinéraires d'apprentissage suggérés
 
 ### Itinéraire A — « De zéro à l'agent » (Aucun compte requis pour commencer)

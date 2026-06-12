@@ -40,6 +40,16 @@ Cada caminho tem uma **página índice** com a lista completa de laboratórios, 
 
 ---
 
+## 🧩 Labs vs. Desafios
+
+- **Labs** são passo a passo guiados. Use-os para aprender um conceito ou ferramenta em detalhes.
+- **Desafios** são exercícios mais abertos. Use-os depois dos labs relacionados para provar que consegue aplicar o conceito sem receita.
+- **Capstones** combinam várias habilidades em um projeto maior.
+
+Fluxo recomendado: **Lab → Desafio → Capstone**.
+
+---
+
 ## 💡 Rotas de Aprendizado Sugeridas
 
 ### Rota A — "Do Zero ao Agente" (Sem necessidade de conta para começar)

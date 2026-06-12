@@ -40,6 +40,16 @@ Each path has an **index page** with the full list of labs, a recommended order,
 
 ---
 
+## 🧩 Labs vs. Challenges
+
+- **Labs** are guided walkthroughs. Use them to learn a concept or tool step by step.
+- **Challenges** are open-ended exercises. Use them after related labs to prove you can apply the concept without a recipe.
+- **Capstones** combine several skills into one larger project.
+
+Recommended flow: **Lab → Challenge → Capstone**.
+
+---
+
 ## 💡 Suggested Learning Routes
 
 ### Route A — "Zero to Agent" (No account required to start)
