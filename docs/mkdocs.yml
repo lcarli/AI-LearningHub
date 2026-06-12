@@ -137,6 +137,7 @@ nav:
       - "Challenge 001: Build an Agent Loop from Scratch": challenges/challenge-001-agent-loop.md
       - "Challenge 002: Fix a Broken RAG Pipeline": challenges/challenge-002-rag-pipeline.md
       - "Challenge 003: Defend an Agent from Prompt Injection": challenges/challenge-003-prompt-injection.md
+      - "Challenge 004: Optimize a Token Budget": challenges/challenge-004-token-budget.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
@@ -188,6 +189,7 @@ plugins:
             "Challenge 001: Build an Agent Loop from Scratch": "Desafio 001: Construa um Loop de Agente do Zero"
             "Challenge 002: Fix a Broken RAG Pipeline": "Desafio 002: Corrija um Pipeline RAG Quebrado"
             "Challenge 003: Defend an Agent from Prompt Injection": "Desafio 003: Defenda um Agente contra Prompt Injection"
+            "Challenge 004: Optimize a Token Budget": "Desafio 004: Otimize um Orçamento de Tokens"
             Glossary: Glossário
             What's New: Novidades
             Tags: Tags
@@ -226,6 +228,7 @@ plugins:
             "Challenge 001: Build an Agent Loop from Scratch": "Défi 001 : Construire une boucle d'agent à partir de zéro"
             "Challenge 002: Fix a Broken RAG Pipeline": "Défi 002 : Corriger un pipeline RAG cassé"
             "Challenge 003: Defend an Agent from Prompt Injection": "Défi 003 : Défendre un agent contre le prompt injection"
+            "Challenge 004: Optimize a Token Budget": "Défi 004 : Optimiser un budget de tokens"
             Glossary: Glossaire
             What's New: Nouveautés
             Tags: Tags

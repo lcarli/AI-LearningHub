@@ -1,0 +1,27 @@
+[
+  {
+    "id": "returns-short",
+    "title": "Return Policy Summary",
+    "text": "Returns are accepted within 60 days for clean, unused gear with proof of purchase."
+  },
+  {
+    "id": "returns-long",
+    "title": "Return Policy Full Legal Text",
+    "text": "OutdoorGear return operations include inspection, payment reconciliation, fraud review, warehouse routing, seasonal exceptions, carrier coordination, and warranty separation. Most of this operational text is irrelevant to simple customer return questions. The key policy remains: returns are accepted within 60 days for clean, unused gear with proof of purchase."
+  },
+  {
+    "id": "stove-short",
+    "title": "SparkMini Fuel Summary",
+    "text": "SparkMini Camp Stove uses threaded isobutane canisters and must be used outdoors only."
+  },
+  {
+    "id": "shipping-short",
+    "title": "Canada Shipping Summary",
+    "text": "Canadian orders usually arrive in 5-8 business days after fulfillment with tracking."
+  },
+  {
+    "id": "brand-story",
+    "title": "OutdoorGear Brand Story",
+    "text": "OutdoorGear was founded by hikers who love durable equipment, clear trail maps, careful packing, and long weekends outdoors. This story is useful for marketing but rarely needed for support answers."
+  }
+]

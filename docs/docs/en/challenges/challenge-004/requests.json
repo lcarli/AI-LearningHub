@@ -1,0 +1,20 @@
+[
+  {
+    "id": "q1",
+    "question": "Can I return clean unused gear after 45 days?",
+    "expected_doc_id": "returns-short",
+    "max_prompt_tokens": 70
+  },
+  {
+    "id": "q2",
+    "question": "What fuel does SparkMini use?",
+    "expected_doc_id": "stove-short",
+    "max_prompt_tokens": 70
+  },
+  {
+    "id": "q3",
+    "question": "How long does shipping to Canada take?",
+    "expected_doc_id": "shipping-short",
+    "max_prompt_tokens": 70
+  }
+]
