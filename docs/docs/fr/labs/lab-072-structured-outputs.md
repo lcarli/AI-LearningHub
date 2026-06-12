@@ -1,7 +1,7 @@
 ---
 tags: [structured-outputs, json-schema, pydantic, reliability, python]
 ---
-# Lab 072 : Sorties structurées — JSON garanti pour les agents
+# Lab 072 : Benchmark de fiabilité des sorties structurées
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
@@ -10,9 +10,12 @@ tags: [structured-outputs, json-schema, pydantic, reliability, python]
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise des données d'extraction simulées</span>
 </div>
 
+!!! info "Type de pratique"
+    Ce lab analyse des résultats simulés de tests d'extraction. Pour le walkthrough hands-on avec API, complétez d'abord le [Lab 017 : Sortie structurée et mode JSON](lab-017-structured-output.md) ; ce lab se concentre sur la mesure de la fiabilité et des compromis.
+
 ## Ce que vous apprendrez
 
-- Ce que sont les **sorties structurées** et pourquoi les agents ont besoin de JSON garanti
+- Pourquoi les **sorties structurées** améliorent la fiabilité des pipelines d'extraction avec agents
 - En quoi l'application d'un JSON Schema diffère des prompts en forme libre « veuillez retourner du JSON »
 - Analyser les résultats de tests d'extraction comparant les sorties avec et sans schéma
 - Mesurer les **taux de validité de schéma** et la **précision des champs** selon les types d'entrée

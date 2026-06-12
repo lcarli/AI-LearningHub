@@ -12,33 +12,33 @@ Vous travaillez avec les données — analytics, BI, pipelines ETL — et souhai
 
 | Ordre | Lab | Titre | Niveau | Durée |
 |-------|-----|-------|--------|-------|
-| 1 | [Lab 004](../../labs/lab-004-how-llms-work.md) | How LLMs Work | L50 | ~20 min |
-| 2 | [Lab 006](../../labs/lab-006-what-is-rag.md) | What is RAG? | L50 | ~20 min |
-| 3 | [Lab 007](../../labs/lab-007-what-are-embeddings.md) | What are Embeddings? | L50 | ~15 min |
+| 1 | [Lab 004](../../labs/lab-004-how-llms-work.md) | Comment fonctionnent les LLMs | L50 | ~20 min |
+| 2 | [Lab 006](../../labs/lab-006-what-is-rag.md) | Qu'est-ce que RAG ? | L50 | ~20 min |
+| 3 | [Lab 007](../../labs/lab-007-what-are-embeddings.md) | Que sont les embeddings ? | L50 | ~15 min |
 
 ### Phase 2 — Work IQ et Analyse du Copilot
 
 | Ordre | Lab | Titre | Niveau | Durée |
 |-------|-----|-------|--------|-------|
-| 4 | [Lab 047](../../labs/lab-047-work-iq-copilot-analytics.md) | Work IQ — Copilot Adoption Analytics | L200 | ~45 min |
-| 5 | [Lab 048](../../labs/lab-048-work-iq-power-bi.md) | Work IQ — Impact Analytics & Power BI | L300 | ~90 min |
+| 4 | [Lab 047](../../labs/lab-047-work-iq-copilot-analytics.md) | Work IQ — Analyse de l'adoption de Copilot | L200 | ~45 min |
+| 5 | [Lab 048](../../labs/lab-048-work-iq-power-bi.md) | Work IQ — Analyse d'impact et Power BI | L300 | ~90 min |
 | 6 | [Lab 075](../../labs/lab-075-powerbi-copilot.md) | Power BI Copilot — Analytics | L100 | ~45 min |
 
 ### Phase 3 — Fabric IQ et Agents de Données
 
 | Ordre | Lab | Titre | Niveau | Durée |
 |-------|-----|-------|--------|-------|
-| 7 | [Lab 052](../../labs/lab-052-fabric-conversational-agent.md) | Fabric IQ — Conversational Data Agent (NL→SQL) | L200 | ~75 min |
-| 8 | [Lab 053](../../labs/lab-053-fabric-ai-functions.md) | Fabric IQ — Batch AI Enrichment | L300 | ~90 min |
-| 9 | [Lab 051](../../labs/lab-051-fabric-rti-agents.md) | Fabric IQ — Real-Time Intelligence | L300 | ~75 min |
+| 7 | [Lab 052](../../labs/lab-052-fabric-conversational-agent.md) | Fabric IQ — Agent conversationnel de données (NL→SQL) | L200 | ~75 min |
+| 8 | [Lab 053](../../labs/lab-053-fabric-ai-functions.md) | Fabric IQ — Enrichissement IA par lot | L300 | ~90 min |
+| 9 | [Lab 051](../../labs/lab-051-fabric-rti-agents.md) | Fabric IQ — Intelligence en temps réel | L300 | ~75 min |
 
 ### Phase 4 — RAG Avancé et Recherche
 
 | Ordre | Lab | Titre | Niveau | Durée |
 |-------|-----|-------|--------|-------|
-| 10 | [Lab 068](../../labs/lab-068-hybrid-search.md) | Hybrid Search — Vector + BM25 | L200 | ~60 min |
-| 11 | [Lab 067](../../labs/lab-067-graphrag.md) | GraphRAG — Knowledge Graphs | L300 | ~90 min |
-| 12 | [Lab 083](../../labs/lab-083-multimodal-rag.md) | Multi-Modal RAG | L300 | ~90 min |
+| 10 | [Lab 068](../../labs/lab-068-hybrid-search.md) | Recherche hybride — vecteur + BM25 | L200 | ~60 min |
+| 11 | [Lab 067](../../labs/lab-067-graphrag.md) | GraphRAG — Graphes de connaissances | L300 | ~90 min |
+| 12 | [Lab 083](../../labs/lab-083-multimodal-rag.md) | RAG multimodal | L300 | ~90 min |
 
 ---
 

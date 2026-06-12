@@ -10,6 +10,9 @@ tags: [multimodal, rag, images, tables, gpt4o-vision, python]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span></span>
 </div>
 
+!!! info "Practice type"
+    This lab analyzes pre-recorded retrieval scores. It teaches multi-modal RAG evaluation and design trade-offs without calling a live vision model.
+
 ## What You'll Learn
 
 - What **multi-modal RAG** is — retrieval-augmented generation that handles images, tables, and charts alongside text

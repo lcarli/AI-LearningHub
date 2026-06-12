@@ -2,13 +2,13 @@
 """Bug-fix: Broken GraphRAG Analyzer - Lab 067. Fix 3 bugs."""
 import io, pandas as pd
 def count_communities(graph):
-    # Bug #1: Counts unique entity_type instead of community_id
+    # Bug #1: Review which field identifies communities.
     return graph["entity_type"].nunique()
 def top_entity(graph):
-    # Bug #2: Returns entity with LOWEST importance instead of highest
+    # Bug #2: Review the ranking direction for importance.
     return graph.loc[graph["importance_score"].idxmin(), "entity_name"]
 def avg_connections(graph):
-    # Bug #3: Returns max connections instead of mean
+    # Bug #3: Review the aggregation method.
     return graph["connections"].max()
 def run_tests():
     csv="entity_id,entity_name,entity_type,community_id,importance_score,connections\nE1,Tent,Product,C1,0.95,8\nE2,Boot,Product,C2,0.78,5\nE3,Policy,Policy,C3,0.88,7\nE4,Warehouse,Location,C3,0.65,4"

@@ -1,7 +1,7 @@
 ---
 tags: [foundry, agent-service, multi-agent, production, enterprise, python]
 ---
-# Lab 074: Foundry Agent Service — Production Multi-Agent Deployment
+# Lab 074: Foundry Agent Service — Production Operations Simulation
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
@@ -13,10 +13,10 @@ tags: [foundry, agent-service, multi-agent, production, enterprise, python]
 ## What You'll Learn
 
 - What the **Foundry Agent Service** is and how it orchestrates production multi-agent systems
-- How agent types (specialist, orchestrator) work together in a deployment
+- How agent types (specialist, orchestrator) work together in a production architecture
 - Analyze agent fleet health: request volumes, latency, error rates, and status
 - Identify **degraded agents** and **configuration risks** (e.g., disabled content filters)
-- Build a **fleet health dashboard** for production monitoring
+- Build a **fleet health dashboard** from simulated monitoring data
 
 ## Introduction
 
@@ -36,7 +36,7 @@ You are a **Platform SRE** managing a multi-agent deployment for an e-commerce c
 Your dataset (`foundry_agents.csv`) contains the current fleet status. Your job: analyze health metrics, identify issues, and produce a fleet status report.
 
 !!! info "Mock Data"
-    This lab uses a mock agent fleet CSV that mirrors the metrics you'd see in Azure AI Foundry's monitoring dashboard. The patterns (latency spikes, error rates, degraded status) represent common production scenarios.
+    This is an operations-analysis lab, not a live deployment lab. It uses a mock agent fleet CSV that mirrors the metrics you'd see in Azure AI Foundry's monitoring dashboard. The patterns (latency spikes, error rates, degraded status) represent common production scenarios.
 
 ## Prerequisites
 

@@ -66,6 +66,12 @@ Lab 001 → Lab 011 → Lab 024
 ```
 Build Copilot Studio agents and Teams bots step by step.
 
+### Route E — "100% Local / No Cloud"
+```
+Lab 004 → Lab 015 → Lab 078 → Lab 020 → Lab 072
+```
+Learn the core concepts, run models locally, build a local MCP server, and practice reliability analysis without Azure or paid APIs.
+
 ---
 
 ## 🔖 Reading a Lab Page

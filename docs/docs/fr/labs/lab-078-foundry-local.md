@@ -341,7 +341,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ## Prochaines étapes
 
-- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (déployer des agents utilisant des modèles Foundry)
+- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (surveiller des flottes d'agents avec les concepts Foundry)
 - **[Lab 071](lab-071-context-caching.md)** — Mise en cache du contexte (optimiser l'inférence locale avec la mise en cache des prompts)
 - **[Lab 038](lab-038-cost-optimization.md)** — Optimisation des coûts IA (comparer les coûts d'inférence locale vs. cloud)
 - **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (utiliser Foundry Local comme backend d'inférence pour les agents MAF)

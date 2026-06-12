@@ -486,5 +486,5 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, 
 
 ## Prochaines étapes
 
-- **[Lab 051](lab-051-fabric-iq-event-streams.md)** *(bientôt disponible)* — Fabric IQ — Traitement de flux d'événements en temps réel
-- **[Lab 052](lab-052-fabric-iq-nl-to-sql.md)** *(bientôt disponible)* — Fabric IQ — Langage naturel vers SQL avec l'IA
+- **[Lab 051](lab-051-fabric-rti-agents.md)** — Fabric IQ — Agents d'intelligence en temps réel
+- **[Lab 052](lab-052-fabric-conversational-agent.md)** — Fabric IQ — Agent conversationnel de données

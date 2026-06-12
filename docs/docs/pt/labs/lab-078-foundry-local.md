@@ -341,7 +341,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 
 ## Próximos Passos
 
-- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (implante agentes usando modelos Foundry)
+- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (monitore frotas de agentes usando conceitos do Foundry)
 - **[Lab 071](lab-071-context-caching.md)** — Cache de Contexto (otimize a inferência local com cache de prompts)
 - **[Lab 038](lab-038-cost-optimization.md)** — Otimização de Custos de IA (compare custos de inferência local vs. nuvem)
 - **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (use o Foundry Local como backend de inferência para agentes MAF)

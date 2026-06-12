@@ -399,4 +399,4 @@ Corrigez les 3 bugs et relancez jusqu'à voir `🎉 All 3 tests passed`.
 
 - **[Lab 062](lab-062-ondevice-phi-silica.md)** — Agents on-device avec Phi Silica (confidentialité via l'inférence sur appareil)
 - **[Lab 061](lab-061-slm-phi4-mini.md)** — SLMs avec Phi-4 Mini (une autre approche de l'IA axée sur la confidentialité)
-- **[Lab 042](lab-042-enterprise-rag.md)** — RAG d'entreprise (application des contrôles d'identité à la récupération de données)
+- **[Lab 042](lab-042-enterprise-rag.md)** *(bientôt disponible)* — RAG d'entreprise (application des contrôles d'identité à la récupération de données)

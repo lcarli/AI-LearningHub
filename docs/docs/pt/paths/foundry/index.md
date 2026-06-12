@@ -28,7 +28,7 @@ Ao final desta trilha você terá:
 | [Lab 032](../../labs/lab-032-row-level-security.md) | Row Level Security para Agentes | <span class="level-badge level-300">L300</span> | ✅ Free |
 | [Lab 033](../../labs/lab-033-agent-observability.md) | Observabilidade de Agentes com Application Insights | <span class="level-badge level-300">L300</span> | ✅ Free |
 | [Lab 049](../../labs/lab-049-foundry-iq-agent-tracing.md) | Foundry IQ — Rastreamento de Agentes com OpenTelemetry | <span class="level-badge level-300">L300</span> | ✅ Free |
-| [Lab 074](../../labs/lab-074-foundry-agent-service.md) | Foundry Agent Service — Implantação Multi-Agente em Produção | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 074](../../labs/lab-074-foundry-agent-service.md) | Foundry Agent Service — Simulação de Operação em Produção | <span class="level-badge level-300">L300</span> | ✅ Free |
 | [Lab 050](../../labs/lab-050-multi-agent-observability.md) | Observabilidade Multi-Agente com Convenções Semânticas GenAI | <span class="level-badge level-400">L400</span> | ✅ Free |
 
 ---

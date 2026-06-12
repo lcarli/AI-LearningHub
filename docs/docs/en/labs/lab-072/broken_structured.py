@@ -2,15 +2,15 @@
 """Bug-fix: Broken Structured Output Analyzer - Lab 072. Fix 3 bugs."""
 import io, pandas as pd
 def schema_success_rate(df):
-    # Bug #1: Counts json_parse_success instead of structured_output_valid
+    # Bug #1: Review which validity column maps to schema compliance.
     schema=df[df["model"]=="gpt-4o"]
     return schema["json_parse_success"].mean() * 100
 def no_schema_accuracy(df):
-    # Bug #2: Uses field_accuracy from schema model instead of no-schema
+    # Bug #2: Review which model subset should be analyzed.
     no_schema=df[df["model"]=="gpt-4o"]
     return no_schema["field_accuracy_pct"].mean()
 def avg_tokens(df, model):
-    # Bug #3: Doesn't filter by model
+    # Bug #3: Review which rows belong in the comparison.
     return df["tokens"].mean()
 def run_tests():
     csv="test_id,model,structured_output_valid,json_parse_success,field_accuracy_pct,tokens\nT1,gpt-4o,true,true,100,120\nT2,gpt-4o,true,true,95,115\nT3,gpt-4o-no-schema,false,true,75,160\nT4,gpt-4o-no-schema,false,false,55,95"

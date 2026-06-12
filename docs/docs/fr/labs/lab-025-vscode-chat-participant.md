@@ -305,5 +305,5 @@ vsce publish
 
 ## Prochaines étapes
 
-- **Construire une extension Copilot complète (GitHub.com) :** → [Lab 041 — Extension GitHub Copilot personnalisée](lab-041-copilot-extension.md)
+- **Construire une extension Copilot complète (GitHub.com) :** → [Lab 041 — Extension GitHub Copilot personnalisée](lab-041-copilot-extension.md) *(bientôt disponible)*
 - **Connecter votre participant à un serveur MCP :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)

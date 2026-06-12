@@ -38,7 +38,7 @@ Navegue por todos os labs por nível. Cada lab é autocontido.
 | [Lab 019](lab-019-streaming-responses.md) | Respostas em Streaming em Agentes | ⚙️ Pro Code Agents | ~25 min | ✅ GitHub Free |
 | [Lab 069](lab-069-declarative-agents.md) | Agentes Declarativos para Microsoft 365 Copilot | Todas as trilhas | ~60 min | ✅ Gratuito |
 | [Lab 070](lab-070-agent-ux-patterns.md) | Padrões de UX de Agentes — Chat, Adaptive Cards e Notificações Proativas | Todas as trilhas | ~60 min | ✅ Gratuito |
-| [Lab 072](lab-072-structured-outputs.md) | Saídas Estruturadas — JSON Garantido para Agentes | Todas as trilhas | ~45 min | ✅ Gratuito |
+| [Lab 072](lab-072-structured-outputs.md) | Benchmark de Confiabilidade de Saídas Estruturadas | Todas as trilhas | ~45 min | ✅ Gratuito |
 | [Lab 075](lab-075-powerbi-copilot.md) | Power BI Copilot — Analytics Autônomo e Data Storytelling | Todas as trilhas | ~45 min | ✅ Gratuito |
 | [Lab 078](lab-078-foundry-local.md) | Foundry Local — Execute Modelos de IA Offline | Todas as trilhas | ~45 min | ✅ Gratuito |
 | [Lab 081](lab-081-agentic-coding-tools.md) | Ferramentas de Codificação Agêntica — Claude Code vs Copilot CLI | Todas as trilhas | ~45 min | ✅ Gratuito |
@@ -103,20 +103,20 @@ Navegue por todos os labs por nível. Cada lab é autocontido.
 | [Lab 067](lab-067-graphrag.md) | GraphRAG — Grafos de Conhecimento para Recuperação entre Documentos | Todas as trilhas | ~90 min | ✅ Gratuito |
 | [Lab 071](lab-071-context-caching.md) | Cache de Contexto — Reduzindo Custos para Agentes com Documentos Grandes | Todas as trilhas | ~60 min | ✅ Gratuito |
 | [Lab 073](lab-073-swe-bench.md) | Benchmarking de Agentes com SWE-bench | Todas as trilhas | ~90 min | ✅ Gratuito |
-| [Lab 074](lab-074-foundry-agent-service.md) | Foundry Agent Service — Deploy Multi-Agente em Produção | 🏭 Microsoft Foundry | ~120 min | ✅ Gratuito |
+| [Lab 074](lab-074-foundry-agent-service.md) | Foundry Agent Service — Simulação de Operação em Produção | 🏭 Microsoft Foundry | ~120 min | ✅ Gratuito |
 | [Lab 079](lab-079-deep-research-agents.md) | Agentes de Pesquisa Profunda — Síntese de Conhecimento Multi-Etapas | Todas as trilhas | ~90 min | ✅ Gratuito |
 | [Lab 082](lab-082-agent-guardrails.md) | Guardrails de Agentes — NeMo e Azure Content Safety | Todas as trilhas | ~75 min | ✅ Gratuito |
 | [Lab 083](lab-083-multimodal-rag.md) | RAG Multi-Modal — Imagens, Tabelas e Gráficos em Documentos | Todas as trilhas | ~90 min | ✅ Gratuito |
 
 ---
 
-## <span class="level-badge level-400">L400</span> Especialista (8 labs, ~900 min)
+## <span class="level-badge level-400">L400</span> Especialista (6 labs disponíveis + 2 planejados)
 
 | Lab | Título | Trilha | Tempo | Custo |
 |-----|-------|------|------|------|
 | [Lab 040](lab-040-autogen-multi-agent.md) | Multi-Agente em Produção com AutoGen | Pro Code Agents | ~90 min | ✅ GitHub Free |
-| [Lab 041](lab-041-copilot-extension.md) | Extensão GitHub Copilot Personalizada | GitHub Copilot | ~90 min | ⚠️ Azure |
-| [Lab 042](lab-042-enterprise-rag.md) | RAG Empresarial com Avaliações | RAG | ~120 min | ⚠️ Azure |
+| [Lab 041](lab-041-copilot-extension.md) | Extensão GitHub Copilot Personalizada *(em breve)* | GitHub Copilot | A definir | 🔜 Planejado |
+| [Lab 042](lab-042-enterprise-rag.md) | RAG Empresarial com Avaliações *(em breve)* | RAG | A definir | 🔜 Planejado |
 | [Lab 044](lab-044-phi4-ollama-production.md) | Phi-4 + Ollama em Produção | Pro Code | ~90 min | ✅ Gratuito |
 | [Lab 050](lab-050-multi-agent-observability.md) | Observabilidade Multi-Agente com Convenções Semânticas GenAI | 🏭 Microsoft Foundry | ~120 min | ✅ Gratuito |
 | [Lab 055](lab-055-a2a-mcp-capstone.md) | A2A + MCP Full Stack — Capstone de Interoperabilidade de Agentes | ⚙️ Pro Code | ~120 min | ✅ Gratuito |

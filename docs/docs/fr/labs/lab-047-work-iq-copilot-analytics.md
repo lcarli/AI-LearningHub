@@ -415,7 +415,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, 
 
 ## Prochaines étapes
 
-- **[Lab 048](lab-048-work-iq-power-bi.md)** *(à venir)* — Construire des tableaux de bord Power BI avancés avec Viva Insights Advanced Reporting
+- **[Lab 048](lab-048-work-iq-power-bi.md)** — Construire des tableaux de bord Power BI avancés avec Viva Insights Advanced Reporting
 - **[Lab 033](lab-033-agent-observability.md)** — Observabilité des agents avec Application Insights (même approche analytique pour les agents personnalisés)
 - **[Lab 035](lab-035-agent-evaluation.md)** — Évaluation des agents avec le SDK Azure AI Eval (mesurer la qualité des agents, pas seulement l'adoption)
 - **[Lab 038](lab-038-cost-optimization.md)** — Optimisation des coûts IA (le volet financier du ROI)

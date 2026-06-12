@@ -381,4 +381,4 @@ For the **OutdoorGear learning hub scenario** (< 10K products, Azure infrastruct
 
 - **Build the pgvector setup:** → [Lab 031 — pgvector Semantic Search](lab-031-pgvector-semantic-search.md)
 - **Full RAG application:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
-- **Enterprise RAG with evaluation:** → [Lab 042 — Enterprise RAG](lab-042-enterprise-rag.md)
+- **Enterprise RAG with evaluation:** → [Lab 042 — Enterprise RAG](lab-042-enterprise-rag.md) *(coming soon)*

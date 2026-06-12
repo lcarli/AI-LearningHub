@@ -232,5 +232,5 @@ async def safe_run(question: str, timeout: int = 120) -> TaskResult | None:
 
 ## Prochaines étapes
 
-- **Extension Copilot VS Code :** → [Lab 041 — Extension Copilot personnalisée](lab-041-copilot-extension.md)
+- **Extension Copilot VS Code :** → [Lab 041 — Extension Copilot personnalisée](lab-041-copilot-extension.md) *(bientôt disponible)*
 - **Ajouter l'évaluation :** → [Lab 035 — Évaluation des agents](lab-035-agent-evaluation.md)

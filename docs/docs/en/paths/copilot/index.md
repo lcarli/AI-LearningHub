@@ -13,11 +13,11 @@ By the end of this path you will have:
 - ✅ Set up GitHub Copilot in VS Code and used inline completions + chat
 - ✅ Used **GitHub Models** to interact with frontier LLMs for free
 - ✅ Created a custom **VS Code Chat Participant** (Copilot extension)
-- ✅ Published a **GitHub Copilot Extension** to the Marketplace
+- 🔜 Prepared for a future **GitHub Copilot Extension** publishing lab
 
 ---
 
-## Path Labs (5 labs, ~220 min total)
+## Path Labs (4 available labs + 1 planned)
 
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|
@@ -25,7 +25,7 @@ By the end of this path you will have:
 | [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Free LLM Inference | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
 | [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | GitHub Copilot Agent Mode | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
 | [Lab 045](../../labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
-| [Lab 041](../../labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension | <span class="level-badge level-400">L400</span> | ⚠️ Azure |
+| [Lab 041](../../labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension *(coming soon)* | <span class="level-badge level-400">L400</span> | 🔜 Planned |
 
 ---
 

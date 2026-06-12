@@ -171,7 +171,7 @@ Um sistema RAG pode falhar em dois pontos:
 | **Recuperação ruim** | Fragmentos recuperados não são relevantes | Melhor fragmentação, busca híbrida, re-ranking |
 | **Geração ruim** | LLM ignora ou usa mal o conteúdo recuperado | Prompt de sistema mais forte, exigência de citação |
 
-Métricas-chave usadas no [Lab 035](lab-035-agent-evaluation.md) e [Lab 042](lab-042-enterprise-rag.md):
+Métricas-chave usadas no [Lab 035](lab-035-agent-evaluation.md) e no [Lab 042](lab-042-enterprise-rag.md) planejado:
 
 - **Fundamentação**: A resposta é suportada pelos documentos recuperados?
 - **Relevância**: Os fragmentos recuperados são realmente relevantes para a pergunta?

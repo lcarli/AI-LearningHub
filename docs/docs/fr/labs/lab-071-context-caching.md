@@ -376,4 +376,4 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez \All passed!\, c'est termin
 - **[Lab 038](lab-038-cost-optimization.md)** — Optimisation des coûts IA (stratégies de coûts plus larges au-delà de la mise en cache)
 - **[Lab 019](lab-019-streaming-responses.md)** — Réponses en streaming (optimisation complémentaire de la latence)
 - **[Lab 033](lab-033-agent-observability.md)** — Observabilité des agents (surveiller les taux de succès du cache en production)
-- **[Lab 072](lab-072-structured-outputs.md)** — Sorties structurées (JSON garanti pour des pipelines d'agents efficaces en coûts)
+- **[Lab 072](lab-072-structured-outputs.md)** — Benchmark de fiabilité des sorties structurées pour des pipelines d'agents efficaces en coûts

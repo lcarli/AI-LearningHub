@@ -13,11 +13,11 @@ GitHub Copilot est l'outil de développement alimenté par l'IA de Microsoft, in
 - ✅ Configuré GitHub Copilot dans VS Code et utilisé les complétions inline + le chat
 - ✅ Utilisé **GitHub Models** pour interagir gratuitement avec des LLMs de pointe
 - ✅ Créé un **VS Code Chat Participant** personnalisé (extension Copilot)
-- ✅ Publié une **Extension GitHub Copilot** sur le Marketplace
+- 🔜 Préparé un futur lab de publication d'**Extension GitHub Copilot**
 
 ---
 
-## Laboratoires du Parcours (5 laboratoires, ~220 min au total)
+## Laboratoires du Parcours (4 disponibles + 1 prévu)
 
 | Lab | Titre | Niveau | Coût |
 |-----|-------|--------|------|
@@ -25,7 +25,7 @@ GitHub Copilot est l'outil de développement alimenté par l'IA de Microsoft, in
 | [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Inférence LLM Gratuite | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
 | [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | Mode Agent de GitHub Copilot | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
 | [Lab 045](../../labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
-| [Lab 041](../../labs/lab-041-copilot-extension.md) | Extension GitHub Copilot Personnalisée | <span class="level-badge level-400">L400</span> | ⚠️ Azure |
+| [Lab 041](../../labs/lab-041-copilot-extension.md) | Extension GitHub Copilot Personnalisée *(bientôt disponible)* | <span class="level-badge level-400">L400</span> | 🔜 Prévu |
 
 ---
 

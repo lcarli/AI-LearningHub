@@ -3,15 +3,15 @@
 import io, pandas as pd
 
 def count_dlp_violations(interactions: pd.DataFrame) -> int:
-    # 🐛 Bug #1: Counts audit_logged instead of dlp_violation
+    # Bug #1: Review which compliance signal is being counted.
     return (interactions["audit_logged"] == True).sum()
 
 def count_prompt_injections(interactions: pd.DataFrame) -> int:
-    # 🐛 Bug #2: Counts contains_pii instead of prompt_injection_detected
+    # Bug #2: Review which security signal is being counted.
     return (interactions["contains_pii"] == True).sum()
 
 def critical_risk_percentage(interactions: pd.DataFrame) -> float:
-    # 🐛 Bug #3: Counts 'high' instead of 'critical'
+    # Bug #3: Review which severity level is required.
     crit = (interactions["risk_score"] == "high").sum()
     return crit / len(interactions) * 100
 

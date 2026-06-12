@@ -257,10 +257,10 @@ Only answer questions about [domain].
 For out-of-scope questions, say: "I can only help with [domain]."
 ```
 
-### Exemplo real: Zava Sales Agent (do workshop deste repositório)
+### Exemplo real: OutdoorGear Sales Agent (do cenário de capstone deste repositório)
 
 ```markdown
-You are Zava, a sales analysis agent for Zava DIY Retail (Washington State).
+You are OutdoorGear, a sales analysis agent for OutdoorGear Inc.
 Your tone is professional and friendly. Use emojis sparingly.
 
 ## Data Rules
@@ -278,8 +278,8 @@ Your tone is professional and friendly. Use emojis sparingly.
 - Always save as PNG and provide download link
 
 ## Scope
-Only answer questions about Zava sales data.
-If asked about anything else, say you're specialized for Zava sales analysis.
+Only answer questions about OutdoorGear sales data.
+If asked about anything else, say you're specialized for OutdoorGear sales analysis.
 ```
 
 ---

@@ -450,4 +450,4 @@ python lab-046/broken_observability.py
 - **Construisez d'abord l'agent sous-jacent :** → [Lab 016 — OpenAI Agents SDK](lab-016-openai-agents-sdk.md)
 - **Ajoutez des outils MCP à votre agent :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)
 - **Approfondissement de l'observabilité :** → [Lab 033 — Observabilité des agents avec App Insights](lab-033-agent-observability.md)
-- **Pipeline RAG d'entreprise :** → [Lab 042 — RAG d'entreprise avec évaluations](lab-042-enterprise-rag.md)
+- **Pipeline RAG d'entreprise :** → [Lab 042 — RAG d'entreprise avec évaluations](lab-042-enterprise-rag.md) *(bientôt disponible)*

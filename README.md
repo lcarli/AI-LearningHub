@@ -8,7 +8,7 @@
 
 ## 📚 What's Inside
 
-A structured learning hub with **8 learning paths** and **20+ labs** covering:
+A structured learning hub with **8 learning paths** and **84 labs** covering:
 
 | Path | Levels |
 |------|--------|
@@ -35,8 +35,8 @@ A structured learning hub with **8 learning paths** and **20+ labs** covering:
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_ORG/ai-agents-learning-hub.git
-cd ai-agents-learning-hub
+git clone https://github.com/lcarli/AI-LearningHub.git
+cd AI-LearningHub
 
 # Install MkDocs dependencies
 pip install -r docs/requirements.txt

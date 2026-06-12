@@ -3,13 +3,12 @@
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
   <span><strong>Path:</strong> <a href="../paths/copilot/">GitHub Copilot</a></span>
-  <span><strong>Time:</strong> ~90 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-azure-paid">Azure paid</span></span>
+  <span><strong>Status:</strong> Coming soon</span>
+  <span><strong>💰 Cost:</strong> To be confirmed</span>
 </div>
 
-!!! danger "Cost warning"
-    This lab requires Azure paid resources. Estimated cost: $10-$50 depending on usage.
-    Always set budget alerts before starting.
+!!! info "Planned lab"
+    This lab is not available yet. It remains listed so learners can see the planned end state of the GitHub Copilot path.
 
 ## What You'll Learn
 
@@ -23,4 +22,4 @@ See [Prerequisites & Accounts](../prerequisites.md) for setup instructions.
 
 ---
 
-*Check back soon, or [contribute to this lab](https://github.com/YOUR_ORG/ai-agents-learning-hub)!*
+*Check back soon, or [contribute to this lab](https://github.com/lcarli/AI-LearningHub)!*

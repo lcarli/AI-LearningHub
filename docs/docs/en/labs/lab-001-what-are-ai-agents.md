@@ -87,7 +87,7 @@ The agent *does something*: calls an API, queries a database, writes a file, sen
 | Agent | What it does |
 |-------|-------------|
 | **GitHub Copilot** | Reads your code, suggests completions, chats, runs commands |
-| **Zava Sales Agent** *(this repo's workshop)* | Queries PostgreSQL, generates charts, interprets sales trends |
+| **OutdoorGear Sales Agent** *(this repo's capstone scenario)* | Queries product and order data, generates charts, interprets sales trends |
 | **Microsoft 365 Copilot** | Reads emails, calendar, files, drafts replies, summarizes meetings |
 | **AutoGen research agent** | Spawns sub-agents to search, synthesize, and write a report |
 

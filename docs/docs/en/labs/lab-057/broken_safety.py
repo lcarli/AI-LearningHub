@@ -3,17 +3,17 @@
 import io, pandas as pd
 
 def completion_rate(tasks: pd.DataFrame) -> float:
-    # 🐛 Bug #1: Counts all tasks as denominator including non-attempted
+    # Bug #1: Review which tasks belong in the denominator.
     #   Should count completed/total, but uses len(completed) / len(completed)
     completed = tasks[tasks["completed"] == True]
     return len(completed) / len(completed) * 100
 
 def count_high_risk(tasks: pd.DataFrame) -> int:
-    # 🐛 Bug #2: Checks for 'medium' instead of 'high' safety_risk
+    # Bug #2: Review which risk level should trigger this count.
     return (tasks["safety_risk"] == "medium").sum()
 
 def avg_time_completed(tasks: pd.DataFrame) -> float:
-    # 🐛 Bug #3: Averages ALL tasks instead of only completed ones
+    # Bug #3: Review which task status should be included.
     return tasks["time_sec"].mean()
 
 def run_tests():

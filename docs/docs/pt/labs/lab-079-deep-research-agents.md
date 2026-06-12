@@ -10,6 +10,9 @@ tags: [deep-research, multi-agent, synthesis, citations, python]
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados simulados de rastreamento de pesquisa</span>
 </div>
 
+!!! info "Tipo de prática"
+    Este lab analisa um trace simulado de deep research. Ele ensina o fluxo multiagente de pesquisa e métricas de qualidade sem executar um agente de pesquisa web ao vivo.
+
 ## O que Você Vai Aprender
 
 - Como **Deep Research Agents** usam um pipeline multi-agente para síntese de conhecimento

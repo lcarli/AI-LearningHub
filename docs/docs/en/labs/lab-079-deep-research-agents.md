@@ -10,6 +10,9 @@ tags: [deep-research, multi-agent, synthesis, citations, python]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock research trace data</span>
 </div>
 
+!!! info "Practice type"
+    This lab analyzes a mock deep-research trace. It teaches the multi-agent research workflow and quality metrics without running a live web research agent.
+
 ## What You'll Learn
 
 - How **Deep Research Agents** use a multi-agent pipeline for knowledge synthesis

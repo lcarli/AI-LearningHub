@@ -3,13 +3,12 @@
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-400">L400</span></span>
   <span><strong>Trilha:</strong> <a href="../paths/rag/">RAG</a></span>
-  <span><strong>Tempo:</strong> ~120 min</span>
-  <span><strong>💰 Custo:</strong> <span class="level-badge cost-azure-paid">Azure paid</span></span>
+  <span><strong>Status:</strong> Em breve</span>
+  <span><strong>💰 Custo:</strong> A confirmar</span>
 </div>
 
-!!! danger "Aviso de custo"
-    Este lab requer recursos pagos do Azure. Custo estimado: $10-$50 dependendo do uso.
-    Sempre configure alertas de orçamento antes de começar.
+!!! info "Lab planejado"
+    Este lab ainda não está disponível. Ele permanece listado para mostrar o estado final planejado da trilha RAG.
 
 ## O que Você Vai Aprender
 
@@ -23,4 +22,4 @@ Veja [Pré-requisitos e Contas](../prerequisites.md) para instruções de config
 
 ---
 
-*Volte em breve, ou [contribua com este lab](https://github.com/YOUR_ORG/ai-agents-learning-hub)!*
+*Volte em breve, ou [contribua com este lab](https://github.com/lcarli/AI-LearningHub)!*

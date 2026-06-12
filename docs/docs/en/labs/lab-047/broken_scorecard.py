@@ -20,7 +20,7 @@ def calculate_adoption_rate(df: pd.DataFrame, department: str) -> float:
     """
     dept_df = df[df["department"] == department]
     active = dept_df[dept_df["active_days"] > 0]
-    # 🐛 Bug #1: Uses total users as the denominator instead of enabled users
+    # Bug #1: Review which user population is the right denominator.
     total = len(dept_df)
     if total == 0:
         return 0.0
@@ -32,8 +32,7 @@ def find_enablement_gap(df: pd.DataFrame) -> pd.DataFrame:
     These users have a paid license sitting unused because admins haven't
     turned on Copilot for them.
     """
-    # 🐛 Bug #2: Logic is inverted — finds users who are NOT licensed
-    #            AND NOT enabled, instead of licensed AND NOT enabled
+    # Bug #2: Review the license/filter logic.
     gap = df[(df["licensed"] == False) & (df["enabled"] == False)]
     return gap
 
@@ -42,7 +41,7 @@ def calculate_time_saved_hours(df: pd.DataFrame) -> float:
     """Return total time saved across all active users, in hours."""
     active = df[df["active_days"] > 0]
     total_minutes = active["time_saved_min"].sum()
-    # 🐛 Bug #3: Divides by 100 instead of 60 to convert minutes → hours
+    # Bug #3: Review the unit conversion.
     return total_minutes / 100
 
 

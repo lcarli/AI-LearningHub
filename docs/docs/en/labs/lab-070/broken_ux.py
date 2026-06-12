@@ -2,13 +2,13 @@
 """Bug-fix: Broken UX Analyzer - Lab 070. Fix 3 bugs."""
 import io, pandas as pd
 def top_pattern(patterns):
-    # Bug #1: Returns pattern with LOWEST satisfaction
+    # Bug #1: Review the ranking direction for satisfaction.
     return patterns.loc[patterns["user_satisfaction"].idxmin(), "pattern_name"]
 def count_high_complexity(patterns):
-    # Bug #2: Counts 'low' instead of 'high'
+    # Bug #2: Review which severity should be counted.
     return (patterns["complexity"] == "low").sum()
 def avg_accessibility(patterns, category):
-    # Bug #3: Doesn't filter by category
+    # Bug #3: Review which category filter is required.
     return patterns["accessibility_score"].mean()
 def run_tests():
     csv="pattern_id,pattern_name,category,complexity,user_satisfaction,accessibility_score\nP1,Card,interactive,medium,4.5,90\nP2,Text,basic,low,3.2,95\nP3,Form,interactive,high,4.1,80"

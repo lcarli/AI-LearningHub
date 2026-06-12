@@ -15,7 +15,7 @@ import pandas as pd
 
 def classify_sentiment(rating: int) -> str:
     """Classify a review rating into sentiment categories."""
-    # 🐛 Bug #1: Threshold for positive is >= 3 instead of >= 4
+    # Bug #1: Review the sentiment threshold.
     #            This incorrectly classifies neutral reviews (rating=3) as positive
     if rating >= 3:
         return "positive"
@@ -26,7 +26,7 @@ def classify_sentiment(rating: int) -> str:
 
 def count_reviews_per_product(reviews: pd.DataFrame) -> pd.DataFrame:
     """Return a DataFrame with product_name and review_count, sorted descending."""
-    # 🐛 Bug #2: Groups by review_id instead of product_name
+    # Bug #2: Review the grouping key.
     #            Every row becomes its own group (count=1 for all)
     return (
         reviews.groupby("review_id")
@@ -38,7 +38,7 @@ def count_reviews_per_product(reviews: pd.DataFrame) -> pd.DataFrame:
 
 def avg_rating_by_sentiment(reviews: pd.DataFrame, sentiment: str) -> float:
     """Return the average rating for reviews of a given sentiment."""
-    # 🐛 Bug #3: Doesn't filter by sentiment — averages ALL reviews
+    # Bug #3: Review which reviews should be included.
     return reviews["rating"].mean()
 
 

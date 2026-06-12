@@ -376,4 +376,4 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 - **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (broader cost strategies beyond caching)
 - **[Lab 019](lab-019-streaming-responses.md)** — Streaming Responses (complementary latency optimization)
 - **[Lab 033](lab-033-agent-observability.md)** — Agent Observability (monitor cache hit rates in production)
-- **[Lab 072](lab-072-structured-outputs.md)** — Structured Outputs (guaranteed JSON for cost-efficient agent pipelines)
+- **[Lab 072](lab-072-structured-outputs.md)** — Structured Outputs reliability benchmarking for cost-efficient agent pipelines

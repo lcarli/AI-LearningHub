@@ -12,11 +12,12 @@
 - ✅ Carregar, fragmentar e gerar embeddings de documentos usando **GitHub Models (gratuito)**
 - ✅ Armazenar e consultar vetores com um **pgvector local** (Docker)
 - ✅ Construir busca semântica sobre **Azure PostgreSQL + pgvector**
-- ✅ Avaliar a qualidade do RAG com o Azure AI Evaluation SDK
+- ✅ Avaliar comportamento de agentes/RAG com o lab atual de avaliação
+- 🔜 Preparar-se para um futuro lab de avaliação RAG empresarial
 
 ---
 
-## Laboratórios da Trilha (7 laboratórios, ~355 min no total)
+## Laboratórios da Trilha (6 disponíveis + 1 planejado)
 
 | Lab | Título | Nível | Custo |
 |-----|--------|-------|-------|
@@ -26,7 +27,7 @@
 | [Lab 026](../../labs/lab-026-agentic-rag.md) | Padrão RAG Agêntico | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
 | [Lab 031](../../labs/lab-031-pgvector-semantic-search.md) | Busca Semântica com pgvector no Azure | <span class="level-badge level-300">L300</span> | Free |
 | [Lab 039](../../labs/lab-039-vector-db-comparison.md) | Comparação de Bancos de Dados Vetoriais | <span class="level-badge level-300">L300</span> | ✅ Free |
-| [Lab 042](../../labs/lab-042-enterprise-rag.md) | RAG Empresarial com Avaliações | <span class="level-badge level-400">L400</span> | ⚠️ Azure |
+| [Lab 042](../../labs/lab-042-enterprise-rag.md) | RAG Empresarial com Avaliações *(em breve)* | <span class="level-badge level-400">L400</span> | 🔜 Planejado |
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 tags: [foundry, agent-service, multi-agent, production, enterprise, python]
 ---
-# Lab 074 : Foundry Agent Service — Déploiement multi-agents en production
+# Lab 074 : Foundry Agent Service — Simulation d'exploitation en production
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
@@ -13,10 +13,10 @@ tags: [foundry, agent-service, multi-agent, production, enterprise, python]
 ## Ce que vous apprendrez
 
 - Ce qu'est le **Foundry Agent Service** et comment il orchestre les systèmes multi-agents en production
-- Comment les types d'agents (spécialiste, orchestrateur) collaborent dans un déploiement
+- Comment les types d'agents (spécialiste, orchestrateur) collaborent dans une architecture de production
 - Analyser la santé de la flotte d'agents : volumes de requêtes, latence, taux d'erreur et statut
 - Identifier les **agents dégradés** et les **risques de configuration** (par ex. filtres de contenu désactivés)
-- Construire un **tableau de bord de santé de la flotte** pour le monitoring en production
+- Construire un **tableau de bord de santé de la flotte** à partir de données de monitoring simulées
 
 ## Introduction
 
@@ -36,7 +36,7 @@ Vous êtes un **SRE plateforme** gérant un déploiement multi-agents pour une e
 Votre jeu de données (`foundry_agents.csv`) contient le statut actuel de la flotte. Votre mission : analyser les métriques de santé, identifier les problèmes et produire un rapport de statut de la flotte.
 
 !!! info "Données simulées"
-    Ce lab utilise un CSV de flotte d'agents simulé qui reflète les métriques que vous verriez dans le tableau de bord de monitoring d'Azure AI Foundry. Les patterns (pics de latence, taux d'erreur, statut dégradé) représentent des scénarios courants en production.
+    Il s'agit d'un lab d'analyse opérationnelle, pas d'un lab de déploiement réel. Il utilise un CSV de flotte d'agents simulé qui reflète les métriques que vous verriez dans le tableau de bord de monitoring d'Azure AI Foundry. Les patterns (pics de latence, taux d'erreur, statut dégradé) représentent des scénarios courants en production.
 
 ## Prérequis
 

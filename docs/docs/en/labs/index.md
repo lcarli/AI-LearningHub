@@ -38,7 +38,7 @@ Browse all labs by level. Each lab is self-contained.
 | [Lab 019](lab-019-streaming-responses.md) | Streaming Responses in Agents | ⚙️ Pro Code Agents | ~25 min | ✅ GitHub Free |
 | [Lab 069](lab-069-declarative-agents.md) | Declarative Agents for Microsoft 365 Copilot | All paths | ~60 min | ✅ Free |
 | [Lab 070](lab-070-agent-ux-patterns.md) | Agent UX Patterns — Chat, Adaptive Cards & Proactive Notifications | All paths | ~60 min | ✅ Free |
-| [Lab 072](lab-072-structured-outputs.md) | Structured Outputs — Guaranteed JSON for Agents | All paths | ~45 min | ✅ Free |
+| [Lab 072](lab-072-structured-outputs.md) | Structured Outputs Reliability Benchmark | All paths | ~45 min | ✅ Free |
 | [Lab 075](lab-075-powerbi-copilot.md) | Power BI Copilot — Autonomous Analytics & Data Storytelling | All paths | ~45 min | ✅ Free |
 | [Lab 078](lab-078-foundry-local.md) | Foundry Local — Run AI Models Offline | All paths | ~45 min | ✅ Free |
 | [Lab 081](lab-081-agentic-coding-tools.md) | Agentic Coding Tools — Claude Code vs Copilot CLI | All paths | ~45 min | ✅ Free |
@@ -103,20 +103,20 @@ Browse all labs by level. Each lab is self-contained.
 | [Lab 067](lab-067-graphrag.md) | GraphRAG — Knowledge Graphs for Cross-Document Retrieval | All paths | ~90 min | ✅ Free |
 | [Lab 071](lab-071-context-caching.md) | Context Caching — Cutting Costs for Large-Document Agents | All paths | ~60 min | ✅ Free |
 | [Lab 073](lab-073-swe-bench.md) | Agent Benchmarking with SWE-bench | All paths | ~90 min | ✅ Free |
-| [Lab 074](lab-074-foundry-agent-service.md) | Foundry Agent Service — Production Multi-Agent Deployment | 🏭 Microsoft Foundry | ~120 min | ✅ Free |
+| [Lab 074](lab-074-foundry-agent-service.md) | Foundry Agent Service — Production Operations Simulation | 🏭 Microsoft Foundry | ~120 min | ✅ Free |
 | [Lab 079](lab-079-deep-research-agents.md) | Deep Research Agents — Multi-Step Knowledge Synthesis | All paths | ~90 min | ✅ Free |
 | [Lab 082](lab-082-agent-guardrails.md) | Agent Guardrails — NeMo & Azure Content Safety | All paths | ~75 min | ✅ Free |
 | [Lab 083](lab-083-multimodal-rag.md) | Multi-Modal RAG — Images, Tables & Charts in Documents | All paths | ~90 min | ✅ Free |
 
 ---
 
-## <span class="level-badge level-400">L400</span> Expert (8 labs, ~900 min)
+## <span class="level-badge level-400">L400</span> Expert (6 available labs + 2 planned)
 
 | Lab | Title | Path | Time | Cost |
 |-----|-------|------|------|------|
 | [Lab 040](lab-040-autogen-multi-agent.md) | Production Multi-Agent with AutoGen | Pro Code Agents | ~90 min | ✅ GitHub Free |
-| [Lab 041](lab-041-copilot-extension.md) | Custom GitHub Copilot Extension | GitHub Copilot | ~90 min | ⚠️ Azure |
-| [Lab 042](lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | RAG | ~120 min | ⚠️ Azure |
+| [Lab 041](lab-041-copilot-extension.md) | Custom GitHub Copilot Extension *(coming soon)* | GitHub Copilot | TBD | 🔜 Planned |
+| [Lab 042](lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations *(coming soon)* | RAG | TBD | 🔜 Planned |
 | [Lab 044](lab-044-phi4-ollama-production.md) | Phi-4 + Ollama in Production | Pro Code | ~90 min | ✅ Free |
 | [Lab 050](lab-050-multi-agent-observability.md) | Multi-Agent Observability with GenAI Semantic Conventions | 🏭 Microsoft Foundry | ~120 min | ✅ Free |
 | [Lab 055](lab-055-a2a-mcp-capstone.md) | A2A + MCP Full Stack — Agent Interoperability Capstone | ⚙️ Pro Code | ~120 min | ✅ Free |

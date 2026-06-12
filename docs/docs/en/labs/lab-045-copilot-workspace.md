@@ -115,7 +115,7 @@ From your issue page:
 1. Click the **▾** dropdown next to **"Open a branch"** (or look for the Copilot icon)
 2. Click **"Open in Copilot Workspace"**
 
-   Or navigate directly: `github.com/YOUR_ORG/YOUR_REPO/issues/1/workspace`
+   Or navigate directly: `github.com/<OWNER>/<REPO>/issues/1/workspace`
 
 !!! tip "Alternative entry point"
     You can also open Workspace from the Copilot icon (✨) at the top right of any issue page.
@@ -316,5 +316,5 @@ The key insight: Workspace is not just code generation — it's **agentic issue 
 ## Next Steps
 
 - **Agentic coding in VS Code:** → [Lab 016 — Copilot Agent Mode](lab-016-copilot-agent-mode.md)
-- **Build a custom Copilot Extension:** → [Lab 041 — Custom GitHub Copilot Extension](lab-041-copilot-extension.md)
+- **Build a custom Copilot Extension:** → [Lab 041 — Custom GitHub Copilot Extension](lab-041-copilot-extension.md) *(coming soon)*
 - **Automate code review with CI/CD:** → [Lab 037 — CI/CD for AI Agents](lab-037-cicd-github-actions.md)

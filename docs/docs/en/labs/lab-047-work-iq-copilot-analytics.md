@@ -415,7 +415,7 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ## Next Steps
 
-- **[Lab 048](lab-048-work-iq-power-bi.md)** *(coming soon)* — Build advanced Power BI dashboards with Viva Insights Advanced Reporting
+- **[Lab 048](lab-048-work-iq-power-bi.md)** — Build advanced Power BI dashboards with Viva Insights Advanced Reporting
 - **[Lab 033](lab-033-agent-observability.md)** — Agent Observability with Application Insights (similar analytics mindset for custom agents)
 - **[Lab 035](lab-035-agent-evaluation.md)** — Agent Evaluation with Azure AI Eval SDK (measuring agent quality, not just adoption)
 - **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (the financial side of ROI)

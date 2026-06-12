@@ -10,7 +10,10 @@ tags: [voice, realtime-api, webrtc, azure-openai, multimodal, python]
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dataset de sessão (Azure OpenAI opcional)</span>
 </div>
 
-## O Que Você Vai Aprender
+!!! info "Tipo de prática"
+    Este lab analisa um conjunto de dados pré-gravado de sessões de voz. Ele ensina arquitetura da Realtime API e métricas operacionais, mas não conecta a um endpoint WebRTC ou GPT Realtime ao vivo.
+
+## O que Você Vai Aprender
 
 - Como a **GPT-4o Realtime API** permite conversas de voz full-duplex com latência de ~100 ms
 - Conectar clientes via **WebRTC** para streaming de áudio de baixa latência nativo do navegador

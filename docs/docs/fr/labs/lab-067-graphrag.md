@@ -10,10 +10,13 @@ tags: [graphrag, knowledge-graph, rag, python]
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Données simulées (aucun Azure OpenAI ni base de données graphe requis)</span>
 </div>
 
+!!! info "Type de pratique"
+    Ce lab utilise des données de graphe simulées pour pratiquer l'analyse GraphRAG. Il explique les concepts de construction de graphe, mais l'exercice se concentre sur l'interrogation et l'évaluation d'un graphe de connaissances préparé, pas sur l'exécution d'un pipeline d'extraction réel.
+
 ## Ce que vous apprendrez
 
 - Ce qu'est **GraphRAG** et en quoi il diffère du RAG traditionnel basé uniquement sur les vecteurs
-- Construire un **graphe de connaissances** à partir de l'extraction d'entités et de relations
+- Comprendre comment un **graphe de connaissances** est construit à partir de l'extraction d'entités et de relations
 - Détecter des **communautés** à l'aide d'algorithmes de clustering de graphes
 - Exécuter des **requêtes globales** qui synthétisent l'information à travers tous les documents
 - Exécuter des **requêtes locales** qui suivent des sous-graphes centrés sur les entités

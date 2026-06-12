@@ -10,6 +10,9 @@ tags: [voice, realtime-api, webrtc, azure-openai, multimodal, python]
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise un jeu de données de sessions (Azure OpenAI optionnel)</span>
 </div>
 
+!!! info "Type de pratique"
+    Ce lab analyse un jeu de données préenregistré de sessions vocales. Il enseigne l'architecture Realtime API et les métriques opérationnelles, mais ne se connecte pas à un endpoint WebRTC ou GPT Realtime réel.
+
 ## Ce que vous apprendrez
 
 - Comment le **GPT-4o Realtime API** permet des conversations vocales en duplex intégral avec une latence d'environ 100 ms

@@ -15,6 +15,12 @@ Uma construção do Semantic Kernel que permite que múltiplos agentes colaborem
 **Agentic RAG**
 Uma extensão do RAG básico onde um agente decide *quando* recuperar informações, *qual* consulta usar e *se* deve recuperar novamente caso o primeiro resultado seja insuficiente.
 
+**A2A (Agent-to-Agent Protocol)**
+Um padrão de protocolo para permitir que agentes independentes descubram capacidades uns dos outros, deleguem trabalho e troquem resultados entre sistemas.
+
+**AG-UI**
+Um protocolo para conectar agentes a interfaces de usuário, mantendo estado do agente, chamadas de ferramentas, mensagens e eventos de UI sincronizados.
+
 **ARM Template**
 Template do Azure Resource Manager — um arquivo JSON que descreve declarativamente a infraestrutura do Azure. Pode ser implantado com o botão "Deploy to Azure".
 
@@ -44,6 +50,9 @@ Uma integração do GitHub que adiciona um agente personalizado ao GitHub Copilo
 **Context Window**
 A quantidade máxima de texto (medida em tokens) que um LLM pode processar em uma única requisição. Em 2025, varia de 8k (modelos pequenos) a 1M+ tokens (Gemini 1.5).
 
+**Context Caching**
+Reutilização de contexto de prompt já processado para reduzir latência e custo de tokens em chamadas repetidas com contexto longo.
+
 ---
 
 ## D
@@ -64,6 +73,9 @@ Um vetor numérico de comprimento fixo que captura o significado semântico do t
 **Embedding Model**
 Um modelo que converte texto em embeddings. Exemplos: `text-embedding-3-small` (OpenAI), `text-embedding-ada-002`, `nomic-embed-text` (local/Ollama).
 
+**Evaluation**
+O processo de medir um agente ou modelo contra o comportamento esperado, geralmente com casos de teste, rubricas, métricas e verificações de regressão.
+
 ---
 
 ## F
@@ -81,8 +93,14 @@ Serviço gerenciado da Microsoft para implantar agentes de IA com integração d
 **GitHub Models**
 Um serviço gratuito (github.com/marketplace/models) que fornece acesso à API de LLMs líderes (GPT-4o, Llama 3, etc.) usando um token do GitHub. Sem necessidade de cartão de crédito.
 
+**GraphRAG**
+Um padrão de RAG que constrói um grafo de conhecimento de entidades e relacionamentos para responder perguntas que exigem síntese entre documentos.
+
 **Grounding**
 Veja *Document Grounding*.
+
+**Guardrails**
+Restrições em tempo de execução que inspecionam ou modificam entradas, chamadas de ferramentas e saídas de agentes para aplicar segurança, escopo, privacidade ou políticas.
 
 ---
 
@@ -100,6 +118,13 @@ Combinação de busca por vetores densos (similaridade semântica) com busca por
 
 **Intent Classification**
 Determinar o que um usuário deseja a partir de sua mensagem. Agentes usam isso para rotear para o especialista, ferramenta ou fluxo de trabalho correto.
+
+---
+
+## J
+
+**JSON Schema**
+Um schema legível por máquina que define campos obrigatórios, tipos e restrições para dados JSON. Usado por saídas estruturadas para impor o formato da resposta.
 
 ---
 
@@ -137,6 +162,12 @@ Uma arquitetura onde múltiplos agentes especializados colaboram para resolver u
 ---
 
 ## O
+
+**OBO (On-Behalf-Of Flow)**
+Um padrão de identidade em que um serviço troca o token de um usuário por outro token para chamar APIs downstream com permissões delegadas do usuário.
+
+**Observability**
+A capacidade de entender o que um sistema de agentes está fazendo por meio de traces, métricas, logs, avaliações e sinais de custo.
 
 **Ollama**
 Uma ferramenta open-source para executar LLMs localmente no seu laptop. Suporta Llama, Mistral, Phi, Gemma e mais de 100 modelos. Completamente gratuito, sem necessidade de internet.
@@ -191,6 +222,9 @@ Um vetor de alta dimensionalidade onde a maioria dos valores é zero. Usado em b
 
 **Streaming**
 Retornar a saída do LLM token por token à medida que é gerada, em vez de esperar pela resposta completa. Melhora a percepção de latência.
+
+**Structured Outputs**
+Saídas de modelo restringidas para corresponder a um schema, normalmente JSON Schema ou um modelo Pydantic, para que sistemas downstream recebam campos e tipos previsíveis.
 
 **System Prompt**
 Instruções dadas ao LLM no início de uma conversa que definem sua persona, capacidades e restrições. Não visível para o usuário na maioria das interfaces.

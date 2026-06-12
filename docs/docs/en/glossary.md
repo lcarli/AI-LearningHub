@@ -15,6 +15,12 @@ A Semantic Kernel construct that enables multiple agents to collaborate in a sha
 **Agentic RAG**
 An extension of basic RAG where an agent decides *when* to retrieve information, *what* query to use, and *whether* to retrieve again if the first result is insufficient.
 
+**A2A (Agent-to-Agent Protocol)**
+A protocol pattern for letting independent agents discover each other's capabilities, delegate work, and exchange task results across system boundaries.
+
+**AG-UI**
+A protocol for connecting agents to user interfaces so agent state, tool calls, messages, and UI events can stay synchronized.
+
 **ARM Template**
 Azure Resource Manager template — a JSON file that declaratively describes Azure infrastructure. Can be deployed with the "Deploy to Azure" button.
 
@@ -44,6 +50,9 @@ A GitHub integration that adds a custom agent to GitHub Copilot across github.co
 **Context Window**
 The maximum amount of text (measured in tokens) an LLM can process in a single request. As of 2025, ranges from 8k (small models) to 1M+ tokens (Gemini 1.5).
 
+**Context Caching**
+Reusing previously processed prompt context so repeated long-context calls can reduce latency and token cost.
+
 ---
 
 ## D
@@ -64,6 +73,9 @@ A fixed-length numerical vector that captures the semantic meaning of text. See 
 **Embedding Model**
 A model that converts text to embeddings. Examples: `text-embedding-3-small` (OpenAI), `text-embedding-ada-002`, `nomic-embed-text` (local/Ollama).
 
+**Evaluation**
+The process of measuring an agent or model against expected behavior, usually with test cases, rubrics, metrics, and regression checks.
+
 ---
 
 ## F
@@ -81,8 +93,14 @@ Microsoft's managed service for deploying AI agents with built-in tool integrati
 **GitHub Models**
 A free service (github.com/marketplace/models) providing API access to leading LLMs (GPT-4o, Llama 3, etc.) using a GitHub token. No credit card required.
 
+**GraphRAG**
+A RAG pattern that builds a knowledge graph of entities and relationships so retrieval can answer questions that require cross-document synthesis.
+
 **Grounding**
 See *Document Grounding*.
+
+**Guardrails**
+Runtime constraints that inspect or modify agent inputs, tool calls, and outputs to enforce safety, scope, privacy, or policy requirements.
 
 ---
 
@@ -100,6 +118,13 @@ Combining dense vector search (semantic similarity) with sparse keyword search (
 
 **Intent Classification**
 Determining what a user wants from their message. Agents use this to route to the correct specialist, tool, or workflow.
+
+---
+
+## J
+
+**JSON Schema**
+A machine-readable schema that defines required fields, types, and constraints for JSON data. Used by structured outputs to enforce response shape.
 
 ---
 
@@ -137,6 +162,12 @@ An architecture where multiple specialized agents collaborate to solve a task. I
 ---
 
 ## O
+
+**OBO (On-Behalf-Of Flow)**
+An identity pattern where a service exchanges a user's token for another token to call downstream APIs with delegated user permissions.
+
+**Observability**
+The ability to understand what an agent system is doing through traces, metrics, logs, evaluations, and cost signals.
 
 **Ollama**
 An open-source tool for running LLMs locally on your laptop. Supports Llama, Mistral, Phi, Gemma, and 100+ models. Completely free, no internet required.
@@ -191,6 +222,9 @@ A high-dimensional vector where most values are zero. Used in keyword/BM25 searc
 
 **Streaming**
 Returning LLM output token by token as it's generated, rather than waiting for the full response. Improves perceived latency.
+
+**Structured Outputs**
+Model outputs constrained to match a schema, usually JSON Schema or a Pydantic model, so downstream systems receive predictable fields and types.
 
 **System Prompt**
 Instructions given to the LLM at the start of a conversation that define its persona, capabilities, and constraints. Not visible to the user in most UIs.

@@ -286,4 +286,4 @@ Les scores vont de 1 à 5. En dessous de 3.0 en ancrage, cela indique générale
 ## Prochaines étapes
 
 - **CI/CD pour les agents :** → [Lab 037 — GitHub Actions pour les agents IA](lab-037-cicd-github-actions.md)
-- **Évaluation RAG d'entreprise :** → [Lab 042 — RAG d'entreprise avec évaluations](lab-042-enterprise-rag.md)
+- **Évaluation RAG d'entreprise :** → [Lab 042 — RAG d'entreprise avec évaluations](lab-042-enterprise-rag.md) *(bientôt disponible)*

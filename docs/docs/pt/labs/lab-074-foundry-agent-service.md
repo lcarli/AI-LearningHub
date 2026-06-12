@@ -1,7 +1,7 @@
 ---
 tags: [foundry, agent-service, multi-agent, production, enterprise, python]
 ---
-# Lab 074: Foundry Agent Service — Implantação Multi-Agente em Produção
+# Lab 074: Foundry Agent Service — Simulação de Operação em Produção
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
@@ -13,10 +13,10 @@ tags: [foundry, agent-service, multi-agent, production, enterprise, python]
 ## O que Você Vai Aprender
 
 - O que é o **Foundry Agent Service** e como ele orquestra sistemas multi-agente em produção
-- Como os tipos de agentes (especialista, orquestrador) trabalham juntos em uma implantação
+- Como os tipos de agentes (especialista, orquestrador) trabalham juntos em uma arquitetura de produção
 - Analisar a saúde da frota de agentes: volumes de requisições, latência, taxas de erro e status
 - Identificar **agentes degradados** e **riscos de configuração** (ex.: filtros de conteúdo desativados)
-- Construir um **painel de saúde da frota** para monitoramento em produção
+- Construir um **painel de saúde da frota** a partir de dados simulados de monitoramento
 
 ## Introdução
 
@@ -36,7 +36,7 @@ Você é um **SRE de Plataforma** gerenciando uma implantação multi-agente par
 Seu dataset (`foundry_agents.csv`) contém o status atual da frota. Sua tarefa: analisar métricas de saúde, identificar problemas e produzir um relatório de status da frota.
 
 !!! info "Dados Simulados"
-    Este lab usa um CSV simulado de frota de agentes que espelha as métricas que você veria no painel de monitoramento do Azure AI Foundry. Os padrões (picos de latência, taxas de erro, status degradado) representam cenários comuns de produção.
+    Este é um lab de análise operacional, não um lab de implantação real. Ele usa um CSV simulado de frota de agentes que espelha as métricas que você veria no painel de monitoramento do Azure AI Foundry. Os padrões (picos de latência, taxas de erro, status degradado) representam cenários comuns de produção.
 
 ## Pré-requisitos
 

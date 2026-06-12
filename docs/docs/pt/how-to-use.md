@@ -44,7 +44,7 @@ Cada caminho tem uma **página índice** com a lista completa de laboratórios, 
 
 ### Rota A — "Do Zero ao Agente" (Sem necessidade de conta para começar)
 ```
-Lab 001 → Lab 002 → Lab 003 → Lab 012 → Lab 020 (Python or C#)
+Lab 001 → Lab 002 → Lab 003 → Lab 012 → Lab 020 (Python ou C#)
 ```
 Vá do conhecimento zero até executar seu próprio servidor MCP localmente, sem necessidade de conta na nuvem.
 
@@ -65,6 +65,12 @@ Requer assinatura do Azure. Construa um Foundry Agent completo com MCP, pgvector
 Lab 001 → Lab 011 → Lab 024
 ```
 Construa agentes do Copilot Studio e bots do Teams passo a passo.
+
+### Rota E — "100% Local / Sem Nuvem"
+```
+Lab 004 → Lab 015 → Lab 078 → Lab 020 → Lab 072
+```
+Aprenda os conceitos centrais, execute modelos localmente, construa um servidor MCP local e pratique análise de confiabilidade sem Azure ou APIs pagas.
 
 ---
 

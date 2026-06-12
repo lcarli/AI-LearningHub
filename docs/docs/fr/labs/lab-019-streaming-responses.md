@@ -369,5 +369,5 @@ Ce pattern est utilisé dans les agents en production : les appels d'outils s'ex
 ## Prochaines étapes
 
 - **Approfondissement des appels d'outils :** → [Lab 018 — Appel de fonctions et utilisation d'outils](lab-018-function-calling.md)
-- **Construire une interface web pour votre agent :** → [Lab 041 — Extension GitHub Copilot personnalisée](lab-041-copilot-extension.md)
+- **Construire une interface web pour votre agent :** → [Lab 041 — Extension GitHub Copilot personnalisée](lab-041-copilot-extension.md) *(bientôt disponible)*
 - **Streaming en production avec Foundry :** → [Lab 030 — Foundry Agent Service](lab-030-foundry-agent-mcp.md)

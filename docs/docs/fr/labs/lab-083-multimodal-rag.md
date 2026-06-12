@@ -10,6 +10,9 @@ tags: [multimodal, rag, images, tables, gpt4o-vision, python]
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span></span>
 </div>
 
+!!! info "Type de pratique"
+    Ce lab analyse des scores de récupération préenregistrés. Il enseigne l'évaluation du RAG multimodal et les compromis de conception sans appeler un modèle de vision réel.
+
 ## Ce que vous apprendrez
 
 - Ce qu'est le **RAG multimodal** — la génération augmentée par récupération qui gère les images, tableaux et graphiques en plus du texte

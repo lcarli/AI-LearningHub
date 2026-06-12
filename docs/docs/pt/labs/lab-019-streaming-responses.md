@@ -369,5 +369,5 @@ Esse padrão é usado em agentes de produção: chamadas de ferramentas são exe
 ## Próximos Passos
 
 - **Aprofundamento em chamadas de ferramentas:** → [Lab 018 — Function Calling & Tool Use](lab-018-function-calling.md)
-- **Construir uma UI web para seu agente:** → [Lab 041 — Custom GitHub Copilot Extension](lab-041-copilot-extension.md)
+- **Construir uma UI web para seu agente:** → [Lab 041 — Extensão Personalizada do GitHub Copilot](lab-041-copilot-extension.md) *(em breve)*
 - **Streaming em produção com Foundry:** → [Lab 030 — Foundry Agent Service](lab-030-foundry-agent-mcp.md)

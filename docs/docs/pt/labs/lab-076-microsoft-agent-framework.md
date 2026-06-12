@@ -312,5 +312,5 @@ Corrija todos os 3 bugs e execute novamente. Quando você ver `All passed!`, est
 
 - **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agente com Semantic Kernel (entenda de onde você está migrando)
 - **[Lab 036](lab-036-autogen-basics.md)** — Fundamentos do AutoGen (entenda os padrões do AutoGen antes do MAF)
-- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (implante agentes MAF em produção)
+- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (opere e monitore frotas de agentes em produção)
 - **[Lab 073](lab-073-swe-bench.md)** — SWE-Bench (avalie agentes MAF em tarefas de codificação do mundo real)

@@ -415,7 +415,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `🎉 All 3 tests 
 
 ## Próximos Passos
 
-- **[Lab 048](lab-048-work-iq-power-bi.md)** *(em breve)* — Construa dashboards avançados no Power BI com Relatórios Avançados do Viva Insights
+- **[Lab 048](lab-048-work-iq-power-bi.md)** — Construa dashboards avançados no Power BI com Relatórios Avançados do Viva Insights
 - **[Lab 033](lab-033-agent-observability.md)** — Observabilidade de Agentes com Application Insights (mentalidade de análise similar para agentes personalizados)
 - **[Lab 035](lab-035-agent-evaluation.md)** — Avaliação de Agentes com Azure AI Eval SDK (medindo qualidade do agente, não apenas adoção)
 - **[Lab 038](lab-038-cost-optimization.md)** — Otimização de Custos de IA (o lado financeiro do ROI)

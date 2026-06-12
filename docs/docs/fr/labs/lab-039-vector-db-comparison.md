@@ -381,4 +381,4 @@ Pour le **scénario du hub d'apprentissage OutdoorGear** (< 10K produits, infras
 
 - **Construire la configuration pgvector :** → [Lab 031 — Recherche sémantique pgvector](lab-031-pgvector-semantic-search.md)
 - **Application RAG complète :** → [Lab 022 — RAG avec GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
-- **RAG d'entreprise avec évaluation :** → [Lab 042 — RAG d'entreprise](lab-042-enterprise-rag.md)
+- **RAG d'entreprise avec évaluation :** → [Lab 042 — RAG d'entreprise](lab-042-enterprise-rag.md) *(bientôt disponible)*

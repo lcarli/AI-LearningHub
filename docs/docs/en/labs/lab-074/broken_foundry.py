@@ -2,13 +2,13 @@
 """Bug-fix: Broken Foundry Analyzer - Lab 074. Fix 3 bugs."""
 import io, pandas as pd
 def total_requests(agents):
-    # Bug #1: Returns average instead of sum
+    # Bug #1: Review the aggregation method.
     return int(agents["requests_24h"].mean())
 def count_degraded(agents):
-    # Bug #2: Counts 'active' instead of 'degraded'
+    # Bug #2: Review which status should be counted.
     return (agents["status"] == "active").sum()
 def agents_without_memory(agents):
-    # Bug #3: Counts cosmos_db (has memory) instead of none/session_only
+    # Bug #3: Review which memory types indicate risk.
     return (agents["memory_type"] == "cosmos_db").sum()
 def run_tests():
     csv="agent_id,status,requests_24h,memory_type\nF1,active,1000,cosmos_db\nF2,degraded,500,session_only\nF3,active,800,none\nF4,active,1200,cosmos_db"

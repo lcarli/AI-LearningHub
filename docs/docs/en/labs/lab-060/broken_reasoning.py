@@ -3,19 +3,19 @@
 import io, pandas as pd
 
 def model_accuracy(bench: pd.DataFrame, model: str) -> float:
-    # 🐛 Bug #1: Sums time column instead of correct column
+    # Bug #1: Review which column represents token usage.
     col = f"{model}_time_sec"
     return bench[col].mean() * 100
 
 def fastest_model(bench: pd.DataFrame) -> str:
-    # 🐛 Bug #2: Returns model with HIGHEST avg time (slowest) instead of lowest
+    # Bug #2: Review the ranking direction for this metric.
     models = {"gpt4o": bench["gpt4o_time_sec"].mean(),
               "o3": bench["o3_time_sec"].mean(),
               "deepseek_r1": bench["deepseek_r1_time_sec"].mean()}
     return max(models, key=models.get)
 
 def hard_problem_accuracy(bench: pd.DataFrame, model: str) -> float:
-    # 🐛 Bug #3: Filters 'easy' instead of 'hard'
+    # Bug #3: Review which difficulty slice is required.
     hard = bench[bench["difficulty"] == "easy"]
     col = f"{model}_correct"
     return hard[col].mean() * 100

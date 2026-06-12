@@ -87,7 +87,7 @@ L'agent *fait quelque chose* : appeler une API, interroger une base de données,
 | Agent | Ce qu'il fait |
 |-------|-------------|
 | **GitHub Copilot** | Lit votre code, suggère des complétions, discute, exécute des commandes |
-| **Zava Sales Agent** *(l'atelier de ce dépôt)* | Interroge PostgreSQL, génère des graphiques, interprète les tendances de ventes |
+| **OutdoorGear Sales Agent** *(scénario capstone de ce dépôt)* | Interroge les données de produits et de commandes, génère des graphiques, interprète les tendances de ventes |
 | **Microsoft 365 Copilot** | Lit les e-mails, le calendrier, les fichiers, rédige des réponses, résume les réunions |
 | **Agent de recherche AutoGen** | Génère des sous-agents pour chercher, synthétiser et rédiger un rapport |
 

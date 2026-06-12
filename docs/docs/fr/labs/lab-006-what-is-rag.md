@@ -171,7 +171,7 @@ Un système RAG peut échouer à deux endroits :
 | **Mauvaise récupération** | Les morceaux récupérés ne sont pas pertinents | Meilleur découpage, recherche hybride, re-classement |
 | **Mauvaise génération** | Le LLM ignore ou mal utilise le contenu récupéré | Prompt système plus fort, obligation de citation |
 
-Métriques clés utilisées dans le [Lab 035](lab-035-agent-evaluation.md) et le [Lab 042](lab-042-enterprise-rag.md) :
+Métriques clés utilisées dans le [Lab 035](lab-035-agent-evaluation.md) et le [Lab 042](lab-042-enterprise-rag.md) prévu :
 
 - **Ancrage** : La réponse est-elle étayée par les documents récupérés ?
 - **Pertinence** : Les morceaux récupérés sont-ils réellement pertinents par rapport à la question ?

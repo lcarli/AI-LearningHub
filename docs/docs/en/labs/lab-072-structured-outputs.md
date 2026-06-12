@@ -1,7 +1,7 @@
 ---
 tags: [structured-outputs, json-schema, pydantic, reliability, python]
 ---
-# Lab 072: Structured Outputs — Guaranteed JSON for Agents
+# Lab 072: Structured Outputs Reliability Benchmark
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
@@ -10,9 +10,12 @@ tags: [structured-outputs, json-schema, pydantic, reliability, python]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock extraction data</span>
 </div>
 
+!!! info "Practice type"
+    This lab analyzes simulated extraction-test results. For the hands-on API walkthrough, complete [Lab 017: Structured Output & JSON Mode](lab-017-structured-output.md) first; this lab focuses on measuring reliability and trade-offs.
+
 ## What You'll Learn
 
-- What **Structured Outputs** are and why agents need guaranteed JSON
+- Why **Structured Outputs** improve reliability in agent extraction pipelines
 - How JSON Schema enforcement differs from free-form "please return JSON" prompts
 - Analyze extraction test results comparing schema-enforced vs. no-schema outputs
 - Measure **schema validity rates** and **field accuracy** across input types

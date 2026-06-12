@@ -25,7 +25,7 @@ You're new to AI agents and want to learn from scratch — completely free, no A
 | 6 | [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Free LLMs | L100 | ~25 min |
 | 7 | [Lab 078](../../labs/lab-078-foundry-local.md) | Foundry Local — Run Models Offline | L100 | ~45 min |
 | 8 | [Lab 015](../../labs/lab-015-ollama-local-llms.md) | Ollama — Local LLMs | L100 | ~30 min |
-| 9 | [Lab 072](../../labs/lab-072-structured-outputs.md) | Structured Outputs — Guaranteed JSON | L100 | ~45 min |
+| 9 | [Lab 072](../../labs/lab-072-structured-outputs.md) | Structured Outputs Reliability Benchmark | L100 | ~45 min |
 | 10 | [Lab 081](../../labs/lab-081-agentic-coding-tools.md) | Agentic Coding Tools | L100 | ~45 min |
 
 ### Phase 3 — Build Your First Agent (still free!)

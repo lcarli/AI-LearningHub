@@ -52,8 +52,8 @@ Track the latest labs, content updates, and improvements to the AI Agents Learni
 | [Lab 038](labs/lab-038-cost-optimization.md) | AI Cost Optimization | L300 | [💻 Pro Code](../paths/pro-code/) |
 | [Lab 039](labs/lab-039-vector-db-comparison.md) | Vector Database Comparison | L300 | [📚 RAG](../paths/rag/) |
 | [Lab 040](labs/lab-040-autogen-multi-agent.md) | Production Multi-Agent with AutoGen | L400 | [Pro Code Agents](../paths/pro-code/) |
-| [Lab 041](labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension | L400 | [GitHub Copilot](../paths/copilot/) |
-| [Lab 042](labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | L400 | [RAG](../paths/rag/) |
+| [Lab 041](labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension *(coming soon)* | L400 | [GitHub Copilot](../paths/copilot/) |
+| [Lab 042](labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations *(coming soon)* | L400 | [RAG](../paths/rag/) |
 | [Lab 043](labs/lab-043-multimodal-agents.md) | Multimodal Agents with GPT-4o Vision | L300 | [💻 Pro Code](../paths/pro-code/) |
 | [Lab 044](labs/lab-044-phi4-ollama-production.md) | Phi-4 + Ollama in Production | L400 | [Pro Code](../paths/pro-code/) |
 | [Lab 045](labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | L200 | [🤖 GitHub Copilot](../paths/copilot/) |
@@ -87,6 +87,13 @@ Deploy-to-Azure one-click buttons for three Bicep templates:
 
 ## 🗺️ Roadmap
 
-All 75 labs have been published! Want to contribute a new lab or suggest improvements?
+The hub currently tracks **84 lab entries**, including planned labs clearly marked as coming soon. Candidate curriculum gaps for future contributions:
+
+- Build an agent loop from scratch before using frameworks
+- Introductory agent evaluation with golden sets and rubrics
+- Production resilience: retries, timeouts, rate limits, and fallbacks
+- Token economy and context management hands-on
+- Early practical guardrails: PII redaction, validation, and prompt-injection checks
+- A fully local end-to-end path with local models, tools, RAG, and evaluation
 
 See [CONTRIBUTING.md](https://github.com/lcarli/AI-LearningHub/blob/main/CONTRIBUTING.md) or [open a proposal](https://github.com/lcarli/AI-LearningHub/issues/new?template=new_lab_proposal.md).

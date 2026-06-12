@@ -44,7 +44,7 @@ Chaque parcours a une **page d'index** avec la liste complète des labs, un ordr
 
 ### Itinéraire A — « De zéro à l'agent » (Aucun compte requis pour commencer)
 ```
-Lab 001 → Lab 002 → Lab 003 → Lab 012 → Lab 020 (Python or C#)
+Lab 001 → Lab 002 → Lab 003 → Lab 012 → Lab 020 (Python ou C#)
 ```
 Passez de zéro connaissance à l'exécution de votre propre serveur MCP en local, sans aucun compte cloud nécessaire.
 
@@ -65,6 +65,12 @@ Nécessite un abonnement Azure. Construisez un agent Foundry complet avec MCP, p
 Lab 001 → Lab 011 → Lab 024
 ```
 Construisez des agents Copilot Studio et des bots Teams étape par étape.
+
+### Itinéraire E — « 100 % local / sans cloud »
+```
+Lab 004 → Lab 015 → Lab 078 → Lab 020 → Lab 072
+```
+Apprenez les concepts centraux, exécutez des modèles localement, construisez un serveur MCP local et pratiquez l'analyse de fiabilité sans Azure ni API payantes.
 
 ---
 

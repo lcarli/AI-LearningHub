@@ -10,7 +10,10 @@ tags: [reasoning, o3, deepseek-r1, chain-of-thought, benchmark, python]
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa conjunto de dados de benchmark (Azure OpenAI opcional)</span>
 </div>
 
-## O Que Você Vai Aprender
+!!! info "Tipo de prática"
+    Este lab usa um conjunto de resultados de benchmark para comparar o comportamento de modelos de raciocínio. Ele não chama o3, DeepSeek R1 ou GPT-4o diretamente, a menos que você escolha estendê-lo com suas próprias execuções.
+
+## O que Você Vai Aprender
 
 - Como **modelos de raciocínio** (o3, DeepSeek R1) diferem de modelos padrão (GPT-4o) — pensamento estendido, chain-of-thought
 - O que é um **orçamento de pensamento** e como ele controla a profundidade do raciocínio do modelo

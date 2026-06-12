@@ -52,7 +52,14 @@ Deploy-to-Azure one-click buttons for three Bicep templates:
 
 ## 🗺️ Roadmap
 
-All 75 labs have been published! Want to contribute a new lab or suggest improvements?
+The hub currently tracks **84 lab entries**, including planned labs clearly marked as coming soon. Candidate curriculum gaps for future contributions:
+
+- Build an agent loop from scratch before using frameworks
+- Introductory agent evaluation with golden sets and rubrics
+- Production resilience: retries, timeouts, rate limits, and fallbacks
+- Token economy and context management hands-on
+- Early practical guardrails: PII redaction, validation, and prompt-injection checks
+- A fully local end-to-end path with local models, tools, RAG, and evaluation
 
 See [CONTRIBUTING.md](https://github.com/lcarli/AI-LearningHub/blob/main/CONTRIBUTING.md) or [open a proposal](https://github.com/lcarli/AI-LearningHub/issues/new?template=new_lab_proposal.md).
 """

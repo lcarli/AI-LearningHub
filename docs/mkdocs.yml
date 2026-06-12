@@ -62,7 +62,7 @@ nav:
           - "Lab 019: Streaming Responses in Agents": labs/lab-019-streaming-responses.md
           - "Lab 069: Declarative Agents for M365 Copilot": labs/lab-069-declarative-agents.md
           - "Lab 070: Agent UX Patterns": labs/lab-070-agent-ux-patterns.md
-          - "Lab 072: Structured Outputs — Guaranteed JSON": labs/lab-072-structured-outputs.md
+          - "Lab 072: Structured Outputs Reliability Benchmark": labs/lab-072-structured-outputs.md
           - "Lab 075: Power BI Copilot — Analytics": labs/lab-075-powerbi-copilot.md
           - "Lab 078: Foundry Local — Run Models Offline": labs/lab-078-foundry-local.md
           - "Lab 081: Agentic Coding Tools": labs/lab-081-agentic-coding-tools.md
@@ -124,8 +124,8 @@ nav:
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
-          - "Lab 041: Custom GitHub Copilot Extension": labs/lab-041-copilot-extension.md
-          - "Lab 042: Enterprise RAG with Evaluations": labs/lab-042-enterprise-rag.md
+          - "Lab 041: Custom GitHub Copilot Extension (Coming Soon)": labs/lab-041-copilot-extension.md
+          - "Lab 042: Enterprise RAG with Evaluations (Coming Soon)": labs/lab-042-enterprise-rag.md
           - "Lab 044: Phi-4 + Ollama in Production": labs/lab-044-phi4-ollama-production.md
           - "Lab 050: Multi-Agent Observability": labs/lab-050-multi-agent-observability.md
           - "Lab 055: A2A + MCP Capstone": labs/lab-055-a2a-mcp-capstone.md
@@ -139,8 +139,7 @@ nav:
 plugins:
   - search
   - glightbox
-  - tags:
-      tags_file: tags.md
+  - tags
   - i18n:
       docs_structure: folder
       languages:
@@ -284,7 +283,7 @@ extra_javascript:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/YOUR_ORG/ai-agents-learning-hub
+      link: https://github.com/lcarli/AI-LearningHub
 
 exclude_docs: |
   **/includes/**/_*

@@ -28,7 +28,7 @@ Microsoft Foundry (Azure AI Foundry) est la plateforme d'entreprise de Microsoft
 | [Lab 032](../../labs/lab-032-row-level-security.md) | Row Level Security pour les Agents | <span class="level-badge level-300">L300</span> | ✅ Free |
 | [Lab 033](../../labs/lab-033-agent-observability.md) | Observabilité des Agents avec Application Insights | <span class="level-badge level-300">L300</span> | ✅ Free |
 | [Lab 049](../../labs/lab-049-foundry-iq-agent-tracing.md) | Foundry IQ — Traçage d'Agents avec OpenTelemetry | <span class="level-badge level-300">L300</span> | ✅ Free |
-| [Lab 074](../../labs/lab-074-foundry-agent-service.md) | Foundry Agent Service — Déploiement Multi-Agent en Production | <span class="level-badge level-300">L300</span> | ✅ Free |
+| [Lab 074](../../labs/lab-074-foundry-agent-service.md) | Foundry Agent Service — Simulation d'exploitation en production | <span class="level-badge level-300">L300</span> | ✅ Free |
 | [Lab 050](../../labs/lab-050-multi-agent-observability.md) | Observabilité Multi-Agent avec les Conventions Sémantiques GenAI | <span class="level-badge level-400">L400</span> | ✅ Free |
 
 ---

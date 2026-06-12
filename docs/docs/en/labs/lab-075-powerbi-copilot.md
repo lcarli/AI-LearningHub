@@ -380,5 +380,5 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 - **[Lab 048](lab-048-work-iq-power-bi.md)** — Work IQ Power BI dashboards (advanced analytics with Viva Insights)
 - **[Lab 047](lab-047-work-iq-copilot-analytics.md)** — Work IQ Copilot Adoption Analytics (measuring Copilot usage across M365)
-- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (deploying AI agents that feed data to Power BI)
+- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (monitoring AI agent fleets that feed analytics)
 - **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (managing Copilot and AI costs)

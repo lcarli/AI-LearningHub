@@ -15,6 +15,12 @@ Un concept de Semantic Kernel qui permet à plusieurs agents de collaborer dans 
 **Agentic RAG**
 Une extension du RAG basique où un agent décide *quand* récupérer des informations, *quelle* requête utiliser et *s'il faut* récupérer à nouveau si le premier résultat est insuffisant.
 
+**A2A (Agent-to-Agent Protocol)**
+Un pattern de protocole permettant à des agents indépendants de découvrir leurs capacités respectives, déléguer du travail et échanger des résultats entre systèmes.
+
+**AG-UI**
+Un protocole pour connecter les agents aux interfaces utilisateur afin de synchroniser l'état de l'agent, les appels d'outils, les messages et les événements UI.
+
 **ARM Template**
 Modèle Azure Resource Manager — un fichier JSON qui décrit de manière déclarative l'infrastructure Azure. Peut être déployé avec le bouton « Déployer sur Azure ».
 
@@ -44,6 +50,9 @@ Une intégration GitHub qui ajoute un agent personnalisé à GitHub Copilot sur 
 **Context Window**
 La quantité maximale de texte (mesurée en tokens) qu'un LLM peut traiter en une seule requête. En 2025, varie de 8k (petits modèles) à plus de 1M de tokens (Gemini 1.5).
 
+**Context Caching**
+La réutilisation d'un contexte de prompt déjà traité afin de réduire la latence et le coût en tokens pour les appels répétés avec long contexte.
+
 ---
 
 ## D
@@ -64,6 +73,9 @@ Un vecteur numérique de longueur fixe qui capture le sens sémantique du texte.
 **Embedding Model**
 Un modèle qui convertit le texte en embeddings. Exemples : `text-embedding-3-small` (OpenAI), `text-embedding-ada-002`, `nomic-embed-text` (local/Ollama).
 
+**Evaluation**
+Le processus de mesure d'un agent ou d'un modèle par rapport au comportement attendu, généralement avec des cas de test, des rubriques, des métriques et des contrôles de régression.
+
 ---
 
 ## F
@@ -81,8 +93,14 @@ Le service géré de Microsoft pour déployer des agents IA avec intégration d'
 **GitHub Models**
 Un service gratuit (github.com/marketplace/models) fournissant un accès API aux principaux LLM (GPT-4o, Llama 3, etc.) à l'aide d'un jeton GitHub. Aucune carte bancaire requise.
 
+**GraphRAG**
+Un pattern RAG qui construit un graphe de connaissances d'entités et de relations pour répondre aux questions nécessitant une synthèse entre documents.
+
 **Grounding**
 Voir *Document Grounding*.
+
+**Guardrails**
+Des contraintes d'exécution qui inspectent ou modifient les entrées, appels d'outils et sorties d'agents pour appliquer sécurité, périmètre, confidentialité ou politiques.
 
 ---
 
@@ -100,6 +118,13 @@ La combinaison de la recherche vectorielle dense (similarité sémantique) avec 
 
 **Intent Classification**
 Déterminer ce que l'utilisateur veut à partir de son message. Les agents utilisent cela pour router vers le spécialiste, l'outil ou le workflow approprié.
+
+---
+
+## J
+
+**JSON Schema**
+Un schéma lisible par machine qui définit les champs requis, types et contraintes des données JSON. Utilisé par les sorties structurées pour imposer la forme de réponse.
 
 ---
 
@@ -137,6 +162,12 @@ Une architecture où plusieurs agents spécialisés collaborent pour résoudre u
 ---
 
 ## O
+
+**OBO (On-Behalf-Of Flow)**
+Un pattern d'identité où un service échange le jeton d'un utilisateur contre un autre jeton pour appeler des APIs downstream avec des permissions déléguées.
+
+**Observability**
+La capacité à comprendre ce qu'un système d'agents fait grâce aux traces, métriques, logs, évaluations et signaux de coût.
 
 **Ollama**
 Un outil open source pour exécuter des LLM localement sur votre ordinateur portable. Supporte Llama, Mistral, Phi, Gemma et plus de 100 modèles. Entièrement gratuit, aucune connexion internet requise.
@@ -191,6 +222,9 @@ Un vecteur de haute dimension où la plupart des valeurs sont nulles. Utilisé d
 
 **Streaming**
 Retourner la sortie du LLM token par token au fur et à mesure de la génération, plutôt que d'attendre la réponse complète. Améliore la latence perçue.
+
+**Structured Outputs**
+Des sorties de modèle contraintes à correspondre à un schéma, généralement JSON Schema ou un modèle Pydantic, afin que les systèmes downstream reçoivent des champs et types prévisibles.
 
 **System Prompt**
 Instructions données au LLM au début d'une conversation qui définissent sa personnalité, ses capacités et ses contraintes. Non visible par l'utilisateur dans la plupart des interfaces.

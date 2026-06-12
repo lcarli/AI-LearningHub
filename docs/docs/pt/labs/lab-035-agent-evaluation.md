@@ -286,4 +286,4 @@ Pontuações são de 1 a 5. Abaixo de 3.0 em fundamentação geralmente indica a
 ## Próximos Passos
 
 - **CI/CD para agentes:** → [Lab 037 — GitHub Actions for AI Agents](lab-037-cicd-github-actions.md)
-- **Avaliação RAG empresarial:** → [Lab 042 — Enterprise RAG with Evaluations](lab-042-enterprise-rag.md)
+- **Avaliação RAG empresarial:** → [Lab 042 — RAG Empresarial com Avaliações](lab-042-enterprise-rag.md) *(em breve)*

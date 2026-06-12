@@ -10,6 +10,9 @@ tags: [swe-bench, benchmarking, evaluation, coding-agents, python]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock benchmark results</span>
 </div>
 
+!!! info "Practice type"
+    This lab analyzes mock SWE-bench-style results. It teaches benchmarking methodology and trade-off analysis without running expensive coding-agent evaluations.
+
 ## What You'll Learn
 
 - What **SWE-bench** is and why it's the gold standard for evaluating coding agents
@@ -350,4 +353,4 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 - **[Lab 035](lab-035-agent-evaluation.md)** — Agent Evaluation with Azure AI Eval SDK (custom evaluation beyond SWE-bench)
 - **[Lab 038](lab-038-cost-optimization.md)** — AI Cost Optimization (managing the cost of agentic loops)
 - **[Lab 040](lab-040-autogen-multi-agent.md)** — AutoGen Multi-Agent (building agentic loops with AutoGen)
-- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (deploying agents to production)
+- **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (operating and monitoring agent fleets)

@@ -10,10 +10,13 @@ tags: [graphrag, knowledge-graph, rag, python]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Mock data (no Azure OpenAI or graph DB required)</span>
 </div>
 
+!!! info "Practice type"
+    This lab uses mock graph data to practice GraphRAG analysis. It explains graph construction concepts, but the exercise focuses on querying and evaluating a prepared knowledge graph rather than running a live extraction pipeline.
+
 ## What You'll Learn
 
 - What **GraphRAG** is and how it differs from traditional vector-only RAG
-- Build a **knowledge graph** from entity and relationship extraction
+- Understand how a **knowledge graph** is built from entity and relationship extraction
 - Detect **communities** using graph clustering algorithms
 - Execute **global queries** that synthesize across all documents
 - Execute **local queries** that follow entity-centric subgraphs

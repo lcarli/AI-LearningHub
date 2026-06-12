@@ -13,11 +13,11 @@ Ao final desta trilha você terá:
 - ✅ Configurado o GitHub Copilot no VS Code e usado completações inline + chat
 - ✅ Usado o **GitHub Models** para interagir com LLMs de ponta gratuitamente
 - ✅ Criado um **VS Code Chat Participant** personalizado (extensão do Copilot)
-- ✅ Publicado uma **Extensão do GitHub Copilot** no Marketplace
+- 🔜 Preparado para um futuro lab de publicação de **Extensão do GitHub Copilot**
 
 ---
 
-## Laboratórios da Trilha (5 laboratórios, ~220 min no total)
+## Laboratórios da Trilha (4 disponíveis + 1 planejado)
 
 | Lab | Título | Nível | Custo |
 |-----|--------|-------|-------|
@@ -25,7 +25,7 @@ Ao final desta trilha você terá:
 | [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Inferência LLM Gratuita | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
 | [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | Modo Agente do GitHub Copilot | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
 | [Lab 045](../../labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
-| [Lab 041](../../labs/lab-041-copilot-extension.md) | Extensão Personalizada do GitHub Copilot | <span class="level-badge level-400">L400</span> | ⚠️ Azure |
+| [Lab 041](../../labs/lab-041-copilot-extension.md) | Extensão Personalizada do GitHub Copilot *(em breve)* | <span class="level-badge level-400">L400</span> | 🔜 Planejado |
 
 ---
 

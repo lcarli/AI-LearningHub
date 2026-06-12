@@ -369,5 +369,5 @@ This pattern is used in production agents: tool calls run non-streamed (for simp
 ## Next Steps
 
 - **Tool calling deep dive:** → [Lab 018 — Function Calling & Tool Use](lab-018-function-calling.md)
-- **Build a web UI for your agent:** → [Lab 041 — Custom GitHub Copilot Extension](lab-041-copilot-extension.md)
+- **Build a web UI for your agent:** → [Lab 041 — Custom GitHub Copilot Extension](lab-041-copilot-extension.md) *(coming soon)*
 - **Production streaming with Foundry:** → [Lab 030 — Foundry Agent Service](lab-030-foundry-agent-mcp.md)

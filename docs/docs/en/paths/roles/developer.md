@@ -35,7 +35,7 @@ Foundry Local (free)            Framework, guardrails           deploy, evaluati
 | 6 | [Lab 076](../../labs/lab-076-microsoft-agent-framework.md) | Microsoft Agent Framework | L200 | ~75 min |
 | 7 | [Lab 020](../../labs/lab-020-mcp-server-python.md) | Build an MCP Server in Python | L200 | ~45 min |
 | 8 | [Lab 022](../../labs/lab-022-rag-github-models-pgvector.md) | RAG with GitHub Models | L200 | ~50 min |
-| 9 | [Lab 072](../../labs/lab-072-structured-outputs.md) | Structured Outputs — Guaranteed JSON | L100 | ~45 min |
+| 9 | [Lab 072](../../labs/lab-072-structured-outputs.md) | Structured Outputs Reliability Benchmark | L100 | ~45 min |
 | 10 | [Lab 082](../../labs/lab-082-agent-guardrails.md) | Agent Guardrails | L300 | ~75 min |
 
 ### Phase 3 — Production Patterns

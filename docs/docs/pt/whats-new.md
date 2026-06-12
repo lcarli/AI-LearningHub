@@ -52,8 +52,8 @@ Track the latest labs, content updates, and improvements to the AI Agents Learni
 | [Lab 038](labs/lab-038-cost-optimization.md) | AI Cost Optimization | L300 | [💻 Pro Code](../paths/pro-code/) |
 | [Lab 039](labs/lab-039-vector-db-comparison.md) | Vector Database Comparison | L300 | [📚 RAG](../paths/rag/) |
 | [Lab 040](labs/lab-040-autogen-multi-agent.md) | Production Multi-Agent with AutoGen | L400 | [Pro Code Agents](../paths/pro-code/) |
-| [Lab 041](labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension | L400 | [GitHub Copilot](../paths/copilot/) |
-| [Lab 042](labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | L400 | [RAG](../paths/rag/) |
+| [Lab 041](labs/lab-041-copilot-extension.md) | Extensão GitHub Copilot Personalizada *(em breve)* | L400 | [GitHub Copilot](../paths/copilot/) |
+| [Lab 042](labs/lab-042-enterprise-rag.md) | RAG Empresarial com Avaliações *(em breve)* | L400 | [RAG](../paths/rag/) |
 | [Lab 043](labs/lab-043-multimodal-agents.md) | Multimodal Agents with GPT-4o Vision | L300 | [💻 Pro Code](../paths/pro-code/) |
 | [Lab 044](labs/lab-044-phi4-ollama-production.md) | Phi-4 + Ollama in Production | L400 | [Pro Code](../paths/pro-code/) |
 | [Lab 045](labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | L200 | [🤖 GitHub Copilot](../paths/copilot/) |
@@ -87,6 +87,13 @@ Deploy-to-Azure one-click buttons for three Bicep templates:
 
 ## 🗺️ Roadmap
 
-All 75 labs have been published! Want to contribute a new lab or suggest improvements?
+O hub acompanha atualmente **84 entradas de labs**, incluindo labs planejados marcados claramente como em breve. Lacunas curriculares candidatas para contribuições futuras:
 
-See [CONTRIBUTING.md](https://github.com/lcarli/AI-LearningHub/blob/main/CONTRIBUTING.md) or [open a proposal](https://github.com/lcarli/AI-LearningHub/issues/new?template=new_lab_proposal.md).
+- Construir um loop de agente do zero antes de usar frameworks
+- Avaliação introdutória de agentes com golden sets e rubricas
+- Resiliência de produção: retries, timeouts, rate limits e fallbacks
+- Economia de tokens e gerenciamento de contexto na prática
+- Guardrails práticos cedo: redação de PII, validação e checagens de prompt injection
+- Um caminho totalmente local de ponta a ponta com modelos locais, ferramentas, RAG e avaliação
+
+Veja [CONTRIBUTING.md](https://github.com/lcarli/AI-LearningHub/blob/main/CONTRIBUTING.md) ou [abra uma proposta](https://github.com/lcarli/AI-LearningHub/issues/new?template=new_lab_proposal.md).

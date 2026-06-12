@@ -10,6 +10,9 @@ tags: [reasoning, o3, deepseek-r1, chain-of-thought, benchmark, python]
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses benchmark dataset (Azure OpenAI optional)</span>
 </div>
 
+!!! info "Practice type"
+    This lab uses a benchmark-results dataset to compare reasoning-model behavior. It does not call o3, DeepSeek R1, or GPT-4o directly unless you choose to extend it with your own model runs.
+
 ## What You'll Learn
 
 - How **reasoning models** (o3, DeepSeek R1) differ from standard models (GPT-4o) — extended thinking, chain-of-thought

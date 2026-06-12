@@ -12,11 +12,12 @@
 - ✅ Charger, découper et générer des embeddings de documents avec **GitHub Models (gratuit)**
 - ✅ Stocker et interroger des vecteurs avec un **pgvector local** (Docker)
 - ✅ Construire une recherche sémantique sur **Azure PostgreSQL + pgvector**
-- ✅ Évaluer la qualité du RAG avec le Azure AI Evaluation SDK
+- ✅ Évaluer le comportement des agents/RAG avec le lab d'évaluation actuel
+- 🔜 Préparer un futur lab d'évaluation RAG d'entreprise
 
 ---
 
-## Laboratoires du Parcours (7 laboratoires, ~355 min au total)
+## Laboratoires du Parcours (6 disponibles + 1 prévu)
 
 | Lab | Titre | Niveau | Coût |
 |-----|-------|--------|------|
@@ -26,7 +27,7 @@
 | [Lab 026](../../labs/lab-026-agentic-rag.md) | Patron RAG Agentique | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
 | [Lab 031](../../labs/lab-031-pgvector-semantic-search.md) | Recherche Sémantique pgvector sur Azure | <span class="level-badge level-300">L300</span> | Free |
 | [Lab 039](../../labs/lab-039-vector-db-comparison.md) | Comparaison de Bases de Données Vectorielles | <span class="level-badge level-300">L300</span> | ✅ Free |
-| [Lab 042](../../labs/lab-042-enterprise-rag.md) | RAG Entreprise avec Évaluations | <span class="level-badge level-400">L400</span> | ⚠️ Azure |
+| [Lab 042](../../labs/lab-042-enterprise-rag.md) | RAG Entreprise avec Évaluations *(bientôt disponible)* | <span class="level-badge level-400">L400</span> | 🔜 Prévu |
 
 ---
 

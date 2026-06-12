@@ -12,11 +12,12 @@
 - ✅ Load, chunk, and embed documents using **GitHub Models (free)**
 - ✅ Store and query vectors with a **local pgvector** (Docker)
 - ✅ Build semantic search over **Azure PostgreSQL + pgvector**
-- ✅ Evaluate RAG quality with the Azure AI Evaluation SDK
+- ✅ Evaluate agent/RAG behavior with the current evaluation lab
+- 🔜 Prepare for a future enterprise RAG evaluation lab
 
 ---
 
-## Path Labs (7 labs, ~355 min total)
+## Path Labs (6 available labs + 1 planned)
 
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|
@@ -26,7 +27,7 @@
 | [Lab 026](../../labs/lab-026-agentic-rag.md) | Agentic RAG Pattern | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
 | [Lab 031](../../labs/lab-031-pgvector-semantic-search.md) | pgvector Semantic Search on Azure | <span class="level-badge level-300">L300</span> | Free |
 | [Lab 039](../../labs/lab-039-vector-db-comparison.md) | Vector Database Comparison | <span class="level-badge level-300">L300</span> | ✅ Free |
-| [Lab 042](../../labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | <span class="level-badge level-400">L400</span> | ⚠️ Azure |
+| [Lab 042](../../labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations *(coming soon)* | <span class="level-badge level-400">L400</span> | 🔜 Planned |
 
 ---
 

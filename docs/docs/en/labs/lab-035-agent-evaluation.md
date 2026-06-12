@@ -286,4 +286,4 @@ Scores are 1–5. Below 3.0 on groundedness usually indicates hallucination.
 ## Next Steps
 
 - **CI/CD for agents:** → [Lab 037 — GitHub Actions for AI Agents](lab-037-cicd-github-actions.md)
-- **Enterprise RAG evaluation:** → [Lab 042 — Enterprise RAG with Evaluations](lab-042-enterprise-rag.md)
+- **Enterprise RAG evaluation:** → [Lab 042 — Enterprise RAG with Evaluations](lab-042-enterprise-rag.md) *(coming soon)*

@@ -171,7 +171,7 @@ A RAG system can fail in two places:
 | **Bad retrieval** | Retrieved chunks aren't relevant | Better chunking, hybrid search, re-ranking |
 | **Bad generation** | LLM ignores or misuses retrieved content | Stronger system prompt, citation enforcement |
 
-Key metrics used in [Lab 035](lab-035-agent-evaluation.md) and [Lab 042](lab-042-enterprise-rag.md):
+Key metrics used in [Lab 035](lab-035-agent-evaluation.md) and the planned [Lab 042](lab-042-enterprise-rag.md):
 
 - **Groundedness**: Is the answer supported by retrieved documents?
 - **Relevance**: Are the retrieved chunks actually relevant to the question?
