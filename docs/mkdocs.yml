@@ -139,6 +139,7 @@ nav:
       - "Challenge 003: Defend an Agent from Prompt Injection": challenges/challenge-003-prompt-injection.md
       - "Challenge 004: Optimize a Token Budget": challenges/challenge-004-token-budget.md
       - "Challenge 005: Build a Safe MCP-Style Tool": challenges/challenge-005-mcp-tool.md
+      - "Challenge 006: Investigate an Agent Observability Incident": challenges/challenge-006-observability.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
@@ -192,6 +193,7 @@ plugins:
             "Challenge 003: Defend an Agent from Prompt Injection": "Desafio 003: Defenda um Agente contra Prompt Injection"
             "Challenge 004: Optimize a Token Budget": "Desafio 004: Otimize um Orçamento de Tokens"
             "Challenge 005: Build a Safe MCP-Style Tool": "Desafio 005: Construa uma Ferramenta Segura no Estilo MCP"
+            "Challenge 006: Investigate an Agent Observability Incident": "Desafio 006: Investigue um Incidente de Observabilidade de Agente"
             Glossary: Glossário
             What's New: Novidades
             Tags: Tags
@@ -232,6 +234,7 @@ plugins:
             "Challenge 003: Defend an Agent from Prompt Injection": "Défi 003 : Défendre un agent contre le prompt injection"
             "Challenge 004: Optimize a Token Budget": "Défi 004 : Optimiser un budget de tokens"
             "Challenge 005: Build a Safe MCP-Style Tool": "Défi 005 : Construire un outil sûr de style MCP"
+            "Challenge 006: Investigate an Agent Observability Incident": "Défi 006 : Investiguer un incident d'observabilité d'agent"
             Glossary: Glossaire
             What's New: Nouveautés
             Tags: Tags

@@ -1,0 +1,11 @@
+[
+  {"trace_id": "tr-001", "span_id": "s1", "parent_id": null, "name": "SupportAgent", "kind": "agent", "status": "OK", "latency_ms": 640, "tokens": 820, "error_type": null},
+  {"trace_id": "tr-001", "span_id": "s2", "parent_id": "s1", "name": "search_products", "kind": "tool", "status": "OK", "latency_ms": 120, "tokens": 0, "error_type": null},
+  {"trace_id": "tr-002", "span_id": "s3", "parent_id": null, "name": "SupportAgent", "kind": "agent", "status": "OK", "latency_ms": 710, "tokens": 910, "error_type": null},
+  {"trace_id": "tr-002", "span_id": "s4", "parent_id": "s3", "name": "get_order_status", "kind": "tool", "status": "OK", "latency_ms": 180, "tokens": 0, "error_type": null},
+  {"trace_id": "tr-003", "span_id": "s5", "parent_id": null, "name": "SupportAgent", "kind": "agent", "status": "ERROR", "latency_ms": 2200, "tokens": 1370, "error_type": "tool_timeout"},
+  {"trace_id": "tr-003", "span_id": "s6", "parent_id": "s5", "name": "inventory_api", "kind": "tool", "status": "ERROR", "latency_ms": 1800, "tokens": 0, "error_type": "timeout"},
+  {"trace_id": "tr-003", "span_id": "s7", "parent_id": "s5", "name": "final_answer", "kind": "llm", "status": "ERROR", "latency_ms": 250, "tokens": 430, "error_type": "missing_observation"},
+  {"trace_id": "tr-004", "span_id": "s8", "parent_id": null, "name": "SupportAgent", "kind": "agent", "status": "OK", "latency_ms": 580, "tokens": 760, "error_type": null},
+  {"trace_id": "tr-004", "span_id": "s9", "parent_id": "s8", "name": "search_policies", "kind": "tool", "status": "OK", "latency_ms": 95, "tokens": 0, "error_type": null}
+]

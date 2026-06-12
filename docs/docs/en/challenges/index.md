@@ -11,6 +11,7 @@ Challenges are less guided than labs. Use them after completing the related labs
 | [Challenge 003](challenge-003-prompt-injection.md) | Defend an Agent from Prompt Injection | <span class="level-badge level-200">L200</span> | Security, context filtering | ~60 min |
 | [Challenge 004](challenge-004-token-budget.md) | Optimize a Token Budget | <span class="level-badge level-200">L200</span> | Cost, context, prompt budget | ~60 min |
 | [Challenge 005](challenge-005-mcp-tool.md) | Build a Safe MCP-Style Tool | <span class="level-badge level-200">L200</span> | MCP, schema, privacy | ~60 min |
+| [Challenge 006](challenge-006-observability.md) | Investigate an Agent Observability Incident | <span class="level-badge level-300">L300</span> | Tracing, metrics, root cause | ~60 min |
 
 ---
 
