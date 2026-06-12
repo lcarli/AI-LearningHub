@@ -7,6 +7,7 @@ Challenges are less guided than labs. Use them after completing the related labs
 | Challenge | Title | Level | Focus | Time |
 |-----------|-------|-------|-------|------|
 | [Challenge 001](challenge-001-agent-loop.md) | Build an Agent Loop from Scratch | <span class="level-badge level-100">L100</span> | Agent loop, tools, state | ~60 min |
+| [Challenge 002](challenge-002-rag-pipeline.md) | Fix a Broken RAG Pipeline | <span class="level-badge level-200">L200</span> | RAG, retrieval, evaluation | ~75 min |
 
 ---
 

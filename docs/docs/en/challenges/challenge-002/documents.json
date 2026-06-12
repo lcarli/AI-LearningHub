@@ -1,0 +1,32 @@
+[
+  {
+    "id": "returns-rain",
+    "title": "Rain Gear Return Policy",
+    "text": "RainShell Pro Jacket and other waterproof rain gear may be returned within a 60-day window. Returned waterproof items must be clean, dry, and free of trail mud. Warranty inspection is separate from normal returns."
+  },
+  {
+    "id": "product-rainshell",
+    "title": "RainShell Pro Jacket Product Guide",
+    "text": "RainShell Pro Jacket is a waterproof, breathable, packable hiking jacket priced at $129.99. It is designed for hiking, rain, and travel. Customers often compare it with fleece layers, but fleece is warm rather than waterproof."
+  },
+  {
+    "id": "camp-stove-fuel",
+    "title": "SparkMini Camp Stove Fuel Guide",
+    "text": "SparkMini Camp Stove uses threaded isobutane canisters. Use the stove outdoors only, keep it away from tents, and let it cool before packing. The stove is compact, fuel-efficient, and intended for backpacking meals."
+  },
+  {
+    "id": "shipping-canada",
+    "title": "Shipping to Canada",
+    "text": "OutdoorGear ships to Canada using tracked international shipping. Most Canadian orders arrive in 5-8 business days after fulfillment. Duties and taxes may be collected by the carrier at delivery."
+  },
+  {
+    "id": "tent-warranty",
+    "title": "SummitLite Tent Warranty",
+    "text": "SummitLite tents include a two-year warranty for manufacturing defects. Broken poles caused by normal use are covered, but damage from storms, fires, or improper storage is excluded."
+  },
+  {
+    "id": "sleeping-bag-ratings",
+    "title": "Sleeping Bag Temperature Ratings",
+    "text": "CloudRest sleeping bags use comfort and lower-limit ratings. A 20F sleeping bag is suitable for cold spring and fall nights when paired with an insulated sleeping pad and dry base layers."
+  }
+]

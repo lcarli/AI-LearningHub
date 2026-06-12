@@ -135,6 +135,7 @@ nav:
   - Challenges:
       - All Challenges: challenges/index.md
       - "Challenge 001: Build an Agent Loop from Scratch": challenges/challenge-001-agent-loop.md
+      - "Challenge 002: Fix a Broken RAG Pipeline": challenges/challenge-002-rag-pipeline.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
@@ -184,6 +185,7 @@ plugins:
             Challenges: Desafios
             All Challenges: Todos os Desafios
             "Challenge 001: Build an Agent Loop from Scratch": "Desafio 001: Construa um Loop de Agente do Zero"
+            "Challenge 002: Fix a Broken RAG Pipeline": "Desafio 002: Corrija um Pipeline RAG Quebrado"
             Glossary: Glossário
             What's New: Novidades
             Tags: Tags
@@ -220,6 +222,7 @@ plugins:
             Challenges: Défis
             All Challenges: Tous les défis
             "Challenge 001: Build an Agent Loop from Scratch": "Défi 001 : Construire une boucle d'agent à partir de zéro"
+            "Challenge 002: Fix a Broken RAG Pipeline": "Défi 002 : Corriger un pipeline RAG cassé"
             Glossary: Glossaire
             What's New: Nouveautés
             Tags: Tags

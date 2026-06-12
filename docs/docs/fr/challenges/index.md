@@ -7,6 +7,7 @@ Les défis sont moins guidés que les labs. Utilisez-les après les labs associ�
 | Défi | Titre | Niveau | Focus | Durée |
 |------|-------|--------|-------|-------|
 | [Défi 001](challenge-001-agent-loop.md) | Construire une boucle d'agent à partir de zéro | <span class="level-badge level-100">L100</span> | Boucle d'agent, outils, état | ~60 min |
+| [Défi 002](challenge-002-rag-pipeline.md) | Corriger un pipeline RAG cassé | <span class="level-badge level-200">L200</span> | RAG, récupération, évaluation | ~75 min |
 
 ---
 

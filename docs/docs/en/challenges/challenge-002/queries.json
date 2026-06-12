@@ -1,0 +1,20 @@
+[
+  {
+    "id": "q1",
+    "query": "Can I return a RainShell jacket after 45 days?",
+    "expected_doc_id": "returns-rain",
+    "required_terms": ["60-day", "clean", "dry"]
+  },
+  {
+    "id": "q2",
+    "query": "What fuel does the SparkMini stove use?",
+    "expected_doc_id": "camp-stove-fuel",
+    "required_terms": ["isobutane", "canisters"]
+  },
+  {
+    "id": "q3",
+    "query": "How long does shipping to Canada take?",
+    "expected_doc_id": "shipping-canada",
+    "required_terms": ["5-8", "business days"]
+  }
+]
