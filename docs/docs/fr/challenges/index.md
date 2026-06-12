@@ -10,6 +10,7 @@ Les défis sont moins guidés que les labs. Utilisez-les après les labs associ�
 | [Défi 002](challenge-002-rag-pipeline.md) | Corriger un pipeline RAG cassé | <span class="level-badge level-200">L200</span> | RAG, récupération, évaluation | ~75 min |
 | [Défi 003](challenge-003-prompt-injection.md) | Défendre un agent contre le prompt injection | <span class="level-badge level-200">L200</span> | Sécurité, filtrage du contexte | ~60 min |
 | [Défi 004](challenge-004-token-budget.md) | Optimiser un budget de tokens | <span class="level-badge level-200">L200</span> | Coût, contexte, budget de prompt | ~60 min |
+| [Défi 005](challenge-005-mcp-tool.md) | Construire un outil sûr de style MCP | <span class="level-badge level-200">L200</span> | MCP, schéma, confidentialité | ~60 min |
 
 ---
 

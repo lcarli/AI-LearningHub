@@ -1,0 +1,17 @@
+[
+  {
+    "id": "valid-delivered",
+    "tool": "get_order_status",
+    "arguments": {"order_id": "OG-1001"}
+  },
+  {
+    "id": "valid-processing",
+    "tool": "get_order_status",
+    "arguments": {"order_id": "OG-1002"}
+  },
+  {
+    "id": "invalid-extra-pii",
+    "tool": "get_order_status",
+    "arguments": {"order_id": "OG-1003", "customer_email": "riley@example.com"}
+  }
+]

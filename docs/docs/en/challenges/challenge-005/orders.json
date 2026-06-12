@@ -1,0 +1,23 @@
+[
+  {
+    "order_id": "OG-1001",
+    "customer_email": "avery@example.com",
+    "status": "delivered",
+    "items": ["RainShell Pro Jacket", "TrailGlow Headlamp"],
+    "tracking_number": "1Z999AA10123456784"
+  },
+  {
+    "order_id": "OG-1002",
+    "customer_email": "sam@example.com",
+    "status": "processing",
+    "items": ["SummitLite 2P Tent"],
+    "tracking_number": null
+  },
+  {
+    "order_id": "OG-1003",
+    "customer_email": "riley@example.com",
+    "status": "shipped",
+    "items": ["CloudRest 20F Sleeping Bag"],
+    "tracking_number": "1Z999AA10123456785"
+  }
+]
