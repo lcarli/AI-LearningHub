@@ -1,0 +1,12 @@
+{
+  "products": [
+    {"sku": "JKT-RAIN-001", "name": "RainShell Pro Jacket", "category": "jacket", "price": 129.99, "in_stock": true, "tags": ["waterproof", "hiking", "rain"]},
+    {"sku": "PAD-INS-005", "name": "BaseCamp Insulated Pad", "category": "sleeping pad", "price": 79.99, "in_stock": true, "tags": ["camping", "sleep", "insulated"]},
+    {"sku": "STOVE-MINI-006", "name": "SparkMini Camp Stove", "category": "stove", "price": 44.99, "in_stock": true, "tags": ["camping", "cooking", "lightweight"]},
+    {"sku": "LAMP-LED-008", "name": "TrailGlow Headlamp", "category": "lighting", "price": 34.99, "in_stock": true, "tags": ["camping", "night", "lighting"]}
+  ],
+  "policies": [
+    {"id": "returns", "text": "OutdoorGear accepts returns within 60 days for clean, unused gear with proof of purchase."},
+    {"id": "shipping", "text": "Canadian orders usually arrive in 5-8 business days after fulfillment with tracking."}
+  ]
+}

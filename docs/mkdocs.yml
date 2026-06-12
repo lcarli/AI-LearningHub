@@ -141,6 +141,7 @@ nav:
       - "Challenge 005: Build a Safe MCP-Style Tool": challenges/challenge-005-mcp-tool.md
       - "Challenge 006: Investigate an Agent Observability Incident": challenges/challenge-006-observability.md
       - "Challenge 007: Red-Team Agent Guardrails": challenges/challenge-007-guardrails-red-team.md
+      - "Challenge 008: Build a Local-Only Agent": challenges/challenge-008-local-only-agent.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
@@ -196,6 +197,7 @@ plugins:
             "Challenge 005: Build a Safe MCP-Style Tool": "Desafio 005: Construa uma Ferramenta Segura no Estilo MCP"
             "Challenge 006: Investigate an Agent Observability Incident": "Desafio 006: Investigue um Incidente de Observabilidade de Agente"
             "Challenge 007: Red-Team Agent Guardrails": "Desafio 007: Red Team de Guardrails de Agentes"
+            "Challenge 008: Build a Local-Only Agent": "Desafio 008: Construa um Agente 100% Local"
             Glossary: Glossário
             What's New: Novidades
             Tags: Tags
@@ -238,6 +240,7 @@ plugins:
             "Challenge 005: Build a Safe MCP-Style Tool": "Défi 005 : Construire un outil sûr de style MCP"
             "Challenge 006: Investigate an Agent Observability Incident": "Défi 006 : Investiguer un incident d'observabilité d'agent"
             "Challenge 007: Red-Team Agent Guardrails": "Défi 007 : Red team des garde-fous d'agents"
+            "Challenge 008: Build a Local-Only Agent": "Défi 008 : Construire un agent 100 % local"
             Glossary: Glossaire
             What's New: Nouveautés
             Tags: Tags

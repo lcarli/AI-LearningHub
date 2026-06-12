@@ -1,0 +1,5 @@
+[
+  {"id": "product", "text": "Find a waterproof hiking jacket", "expected_intent": "product_search", "required_output": "RainShell Pro Jacket"},
+  {"id": "policy", "text": "What is the return window?", "expected_intent": "policy_lookup", "required_output": "60 days"},
+  {"id": "bundle", "text": "Build a camping bundle under $170", "expected_intent": "bundle_recommendation", "required_output": "TrailGlow Headlamp"}
+]
