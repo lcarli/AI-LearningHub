@@ -1,5 +1,29 @@
 ---
-tags: [enterprise, work-iq, copilot-analytics, python, power-bi, viva-insights, roi]
+tags:
+- enterprise
+- work-iq
+- copilot-analytics
+- python
+- power-bi
+- viva-insights
+- roi
+lab:
+  id: 048
+  level: L300
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 048: Work IQ — Copilot Impact Analytics & Power BI
 

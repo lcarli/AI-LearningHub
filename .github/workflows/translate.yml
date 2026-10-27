@@ -15,9 +15,20 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  id-token: write
 
 jobs:
+  configuration:
+    if: ${{ vars.AZURE_CLIENT_ID == '' || vars.AZURE_TENANT_ID == '' || vars.AZURE_SUBSCRIPTION_ID == '' || vars.AZURE_OPENAI_ENDPOINT == '' || vars.AZURE_OPENAI_DEPLOYMENT == '' || vars.AZURE_OPENAI_API_VERSION == '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report missing translation configuration
+        run: |
+          echo "::warning::Automatic translation is paused until the AZURE_* and AZURE_OPENAI_* repository variables are configured. PT/FR content must be updated in the same pull request as English changes."
+
   translate:
+    if: ${{ vars.AZURE_CLIENT_ID != '' && vars.AZURE_TENANT_ID != '' && vars.AZURE_SUBSCRIPTION_ID != '' && vars.AZURE_OPENAI_ENDPOINT != '' && vars.AZURE_OPENAI_DEPLOYMENT != '' && vars.AZURE_OPENAI_API_VERSION != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,7 +42,14 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install openai
+        run: pip install openai azure-identity
+
+      - name: Sign in to Azure with OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
       - name: Get changed markdown files
         id: changed
@@ -52,26 +70,36 @@ jobs:
       - name: Translate to Portuguese and French
         if: steps.changed.outputs.skip != 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.MODELS_PAT }}
+          AZURE_OPENAI_ENDPOINT: ${{ vars.AZURE_OPENAI_ENDPOINT }}
+          AZURE_OPENAI_DEPLOYMENT: ${{ vars.AZURE_OPENAI_DEPLOYMENT }}
+          AZURE_OPENAI_API_VERSION: ${{ vars.AZURE_OPENAI_API_VERSION }}
         run: |
           if [ "${{ steps.changed.outputs.mode }}" = "force" ]; then
             python scripts/translate_docs.py --lang pt,fr --force
           else
             for file in ${{ steps.changed.outputs.files }}; do
-              python scripts/translate_docs.py --lang pt,fr --file "$file" || true
+              python scripts/translate_docs.py --lang pt,fr --file "$file"
             done
           fi
 
-      - name: Commit translations
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/docs/pt/ docs/docs/fr/ scripts/.translation-hashes.json
-          if git diff --cached --quiet; then
-            echo "No translation changes to commit"
-          else
-            git commit -m "Auto-translate: update PT/FR translations
+      - name: Validate translated content
+        if: steps.changed.outputs.skip != 'true'
+        run: python scripts/validate_content.py
 
-          Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-            git push
-          fi
+      - name: Open translation pull request
+        if: steps.changed.outputs.skip != 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automation/update-translations
+          delete-branch: true
+          commit-message: |
+            Auto-translate: update PT/FR translations
+
+            Co-authored-by: Copilot App <223556219+Copilot@users.noreply.github.com>
+          title: "Auto-translate: update PT/FR translations"
+          body: |
+            Automated PT/FR translation update generated from changed English documentation.
+
+            - Authenticates to Microsoft Foundry with GitHub OIDC
+            - Preserves code, frontmatter, URLs, and Markdown structure
+            - Runs content parity validation before opening this PR

@@ -1,5 +1,26 @@
 ---
-tags: [vscode, typescript, github-copilot, free]
+tags:
+- vscode
+- typescript
+- github-copilot
+- free
+lab:
+  id: '025'
+  level: L200
+  journey: github-copilot
+  time_min: 45
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 025: Participante do Chat do VS Code Copilot
 

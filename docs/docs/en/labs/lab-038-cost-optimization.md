@@ -1,6 +1,32 @@
 ---
-tags: [cost-optimization, azure, production, monitoring, L300]
+tags:
+- cost-optimization
+- azure
+- production
+- monitoring
+- L300
+lab:
+  id: 038
+  level: L300
+  journey: ai-agents
+  time_min: 45
+  cost:
+    tier: paid
+    requires:
+    - paid-service
+    estimate_usd: Varies by selected service; see the lab cost section.
+    simulation: false
+    cleanup: true
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Backend update (October 2026)"
+    GitHub Models inference was retired on July 30, 2026. Any references below are retained only for historical context while this lab is migrated. Use [Lab 013 — Free LLM backends](../labs/lab-013-github-models.md) to configure Foundry Local or Ollama before continuing.
+
 # Lab 038: AI Cost Optimization
 
 <div class="lab-meta">

@@ -1,6 +1,32 @@
 ---
-tags: [cicd, github-actions, python, free]
+tags:
+- cicd
+- github-actions
+- python
+- free
+lab:
+  id: '037'
+  level: L300
+  journey: ai-agents
+  time_min: 45
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Atualização de backend (outubro de 2026)"
+    A inferência do GitHub Models foi descontinuada em 30 de julho de 2026. As referências abaixo são mantidas apenas como contexto histórico enquanto este lab é migrado. Use o [Lab 013 — Backends de LLM gratuitos](../labs/lab-013-github-models.md) para configurar o Foundry Local ou o Ollama antes de continuar.
+
 # Lab 037: CI/CD para Agentes de IA com GitHub Actions
 
 <div class="lab-meta">

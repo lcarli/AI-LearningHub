@@ -1,5 +1,26 @@
 ---
-tags: [mcp, csharp, free, github-models]
+tags:
+- mcp
+- csharp
+- free
+- github-models
+lab:
+  id: '021'
+  level: L200
+  journey: mcp
+  time_min: 45
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 021: Build an MCP Server in C#
 

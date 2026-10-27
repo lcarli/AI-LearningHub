@@ -1,5 +1,28 @@
 ---
-tags: [security, entra-id, obo, identity, oauth, enterprise]
+tags:
+- security
+- entra-id
+- obo
+- identity
+- oauth
+- enterprise
+lab:
+  id: '063'
+  level: L300
+  journey: ai-agents
+  time_min: 75
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 063 : Identité des agents — Flux Entra OBO & moindre privilège
 

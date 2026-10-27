@@ -1,5 +1,27 @@
 ---
-tags: [foundry, mcp, azure, azure-required]
+tags:
+- foundry
+- mcp
+- azure
+- azure-required
+lab:
+  id: '030'
+  level: L300
+  journey: microsoft-foundry
+  time_min: 90
+  cost:
+    tier: paid
+    requires:
+    - paid-service
+    estimate_usd: Varies by selected service; see the lab cost section.
+    simulation: false
+    cleanup: true
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 030 : Microsoft Foundry Agent Service + MCP
 

@@ -1,5 +1,26 @@
 ---
-tags: [graphrag, knowledge-graph, rag, python]
+tags:
+- graphrag
+- knowledge-graph
+- rag
+- python
+lab:
+  id: '067'
+  level: L300
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 067: GraphRAG — Grafos de Conhecimento para Recuperação Entre Documentos
 
@@ -23,7 +44,7 @@ tags: [graphrag, knowledge-graph, rag, python]
 - Avaliar a qualidade da recuperação usando **pontuação de importância** e cobertura de comunidades
 
 !!! abstract "Pré-requisitos"
-    Complete primeiro o **[Lab 009: Geração Aumentada por Recuperação](lab-009-rag-basic.md)**. Este laboratório pressupõe familiaridade com conceitos básicos de RAG, incluindo chunking, embedding e busca vetorial.
+    Complete primeiro o **[Lab 009: Geração Aumentada por Recuperação](lab-006-what-is-rag.md)**. Este laboratório pressupõe familiaridade com conceitos básicos de RAG, incluindo chunking, embedding e busca vetorial.
 
 ## Introdução
 
@@ -317,6 +338,6 @@ python lab-067/broken_graphrag.py
 
 ## Próximos Passos
 
-- **[Lab 009](lab-009-rag-basic.md)** — Fundamentos de RAG (padrões básicos de recuperação)
+- **[Lab 009](lab-006-what-is-rag.md)** — Fundamentos de RAG (padrões básicos de recuperação)
 - **[Lab 068](lab-068-hybrid-search.md)** — Busca Híbrida (estratégias complementares de recuperação)
 - **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (governança para pipelines de RAG)

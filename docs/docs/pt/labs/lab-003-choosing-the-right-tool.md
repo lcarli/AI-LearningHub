@@ -1,6 +1,35 @@
 ---
-tags: [free, beginner, no-account-needed, awareness, persona-student, persona-developer, persona-analyst, persona-architect, persona-admin]
+tags:
+- free
+- beginner
+- no-account-needed
+- awareness
+- persona-student
+- persona-developer
+- persona-analyst
+- persona-architect
+- persona-admin
+lab:
+  id: '003'
+  level: L50
+  journey: ai-agents
+  time_min: 15
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Atualização de backend (outubro de 2026)"
+    A inferência do GitHub Models foi descontinuada em 30 de julho de 2026. As referências abaixo são mantidas apenas como contexto histórico enquanto este lab é migrado. Use o [Lab 013 — Backends de LLM gratuitos](../labs/lab-013-github-models.md) para configurar o Foundry Local ou o Ollama antes de continuar.
+
 # Lab 003: Escolhendo a Ferramenta Certa
 
 <div class="lab-meta">

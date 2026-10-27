@@ -1,5 +1,28 @@
 ---
-tags: [mcp, azure, container-apps, bicep, azure-required]
+tags:
+- mcp
+- azure
+- container-apps
+- bicep
+- azure-required
+lab:
+  id: 028
+  level: L300
+  journey: mcp
+  time_min: 60
+  cost:
+    tier: paid
+    requires:
+    - paid-service
+    estimate_usd: Varies by selected service; see the lab cost section.
+    simulation: false
+    cleanup: true
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 028 : Déployer un serveur MCP sur Azure Container Apps
 

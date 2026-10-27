@@ -24,7 +24,7 @@ Track the latest labs, content updates, and improvements to the AI Agents Learni
 | [Lab 010](labs/lab-010-github-copilot-first-steps.md) | GitHub Copilot — First Steps | L100 | [🤖 GitHub Copilot](../paths/copilot/) |
 | [Lab 011](labs/lab-011-copilot-studio-first-agent.md) | Copilot Studio — First Agent | L100 | [Agent Builder — Teams](../paths/agent-builder-teams/) |
 | [Lab 012](labs/lab-012-what-is-mcp.md) | What is MCP? Anatomy of the Protocol | L100 | [🔌 MCP](../paths/mcp/) |
-| [Lab 013](labs/lab-013-github-models.md) | GitHub Models — Free LLM Inference | L100 | [🤖 GitHub Copilot](../paths/copilot/) |
+| [Lab 013](labs/lab-013-github-models.md) | Free LLM Backends — Foundry Local and Ollama | L100 | — |
 | [Lab 014](labs/lab-014-sk-hello-agent.md) | Semantic Kernel — Hello Agent | L100 | [🧠 Semantic Kernel](../paths/semantic-kernel/) |
 | [Lab 015](labs/lab-015-ollama-local-llms.md) | Ollama — Run LLMs Locally for Free | L100 | All paths |
 | [Lab 016](labs/lab-016-copilot-agent-mode.md) | GitHub Copilot Agent Mode | L100 | [🤖 GitHub Copilot](../paths/copilot/) |
@@ -52,12 +52,50 @@ Track the latest labs, content updates, and improvements to the AI Agents Learni
 | [Lab 038](labs/lab-038-cost-optimization.md) | AI Cost Optimization | L300 | [💻 Pro Code](../paths/pro-code/) |
 | [Lab 039](labs/lab-039-vector-db-comparison.md) | Vector Database Comparison | L300 | [📚 RAG](../paths/rag/) |
 | [Lab 040](labs/lab-040-autogen-multi-agent.md) | Production Multi-Agent with AutoGen | L400 | [Pro Code Agents](../paths/pro-code/) |
-| [Lab 041](labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension *(coming soon)* | L400 | [GitHub Copilot](../paths/copilot/) |
-| [Lab 042](labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations *(coming soon)* | L400 | [RAG](../paths/rag/) |
+| [Lab 041](labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension — Retired | ? | — |
+| [Lab 042](labs/lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | L400 | [RAG](../paths/rag/) |
 | [Lab 043](labs/lab-043-multimodal-agents.md) | Multimodal Agents with GPT-4o Vision | L300 | [💻 Pro Code](../paths/pro-code/) |
 | [Lab 044](labs/lab-044-phi4-ollama-production.md) | Phi-4 + Ollama in Production | L400 | [Pro Code](../paths/pro-code/) |
-| [Lab 045](labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | L200 | [🤖 GitHub Copilot](../paths/copilot/) |
+| [Lab 045](labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace — Retired | ? | — |
 | [Lab 046](labs/lab-046-agent-365.md) | Microsoft Agent 365 — Enterprise Agent Governance | L300 | [⚙️ Pro Code](../paths/pro-code/) |
+| [Lab 047](labs/lab-047-work-iq-copilot-analytics.md) | Work IQ — Copilot Adoption Analytics | L200 | All paths |
+| [Lab 048](labs/lab-048-work-iq-power-bi.md) | Work IQ — Copilot Impact Analytics & Power BI | L300 | All paths |
+| [Lab 049](labs/lab-049-foundry-iq-agent-tracing.md) | Foundry IQ — Agent Tracing with OpenTelemetry | L300 | [🏭 Microsoft Foundry](../paths/foundry/) |
+| [Lab 050](labs/lab-050-multi-agent-observability.md) | Multi-Agent Observability with GenAI Semantic Conventions | L400 | [🏭 Microsoft Foundry](../paths/foundry/) |
+| [Lab 051](labs/lab-051-fabric-rti-agents.md) | Fabric IQ — Real-Time Intelligence Agents | L300 | All paths |
+| [Lab 052](labs/lab-052-fabric-conversational-agent.md) | Fabric IQ — Conversational Data Agent (NL → SQL) | L200 | — |
+| [Lab 053](labs/lab-053-fabric-ai-functions.md) | Fabric IQ — Batch AI Enrichment with AI Functions | L300 | All paths |
+| [Lab 054](labs/lab-054-a2a-protocol.md) | A2A Protocol — Build Interoperable Multi-Agent Systems | L200 | All paths |
+| [Lab 055](labs/lab-055-a2a-mcp-capstone.md) | A2A + MCP Full Stack — Agent Interoperability Capstone | L400 | [⚙️ Pro Code](../paths/pro-code/) |
+| [Lab 056](labs/lab-056-federated-connectors.md) | Federated M365 Copilot Connectors with MCP | L300 | All paths |
+| [Lab 057](labs/lab-057-computer-use-agents.md) | Computer-Using Agents — Desktop Automation | L300 | [⚙️ Pro Code](../paths/pro-code/) |
+| [Lab 058](labs/lab-058-browser-automation-cua.md) | Browser Automation Agents with OpenAI CUA | L300 | [⚙️ Pro Code](../paths/pro-code/) |
+| [Lab 059](labs/lab-059-voice-agents-realtime.md) | Voice Agents with GPT Realtime API | L200 | All paths |
+| [Lab 060](labs/lab-060-reasoning-models.md) | Reasoning Models — Chain-of-Thought with o3 and DeepSeek R1 | L200 | All paths |
+| [Lab 061](labs/lab-061-slm-phi4-mini.md) | SLMs — Phi-4 Mini for Low-Cost Agent Skills | L200 | All paths |
+| [Lab 062](labs/lab-062-ondevice-phi-silica.md) | On-Device Agents with Phi Silica — Windows AI APIs | L300 | All paths |
+| [Lab 063](labs/lab-063-agent-identity-entra.md) | Agent Identity — Entra OBO Flow & Least Privilege | L300 | All paths |
+| [Lab 064](labs/lab-064-securing-mcp-apim.md) | Securing MCP at Scale with Azure API Management | L400 | [⚙️ Pro Code](../paths/pro-code/) |
+| [Lab 065](labs/lab-065-purview-dspm-ai.md) | Purview DSPM for AI — Govern Agent Data Flows | L300 | All paths |
+| [Lab 066](labs/lab-066-copilot-studio-governance.md) | Copilot Studio Enterprise Governance | L300 | All paths |
+| [Lab 067](labs/lab-067-graphrag.md) | GraphRAG — Knowledge Graphs for Cross-Document Retrieval | L300 | All paths |
+| [Lab 068](labs/lab-068-hybrid-search.md) | Hybrid Search — Vector + BM25 + Semantic Ranker | L200 | All paths |
+| [Lab 069](labs/lab-069-declarative-agents.md) | Declarative Agents for Microsoft 365 Copilot | L100 | All paths |
+| [Lab 070](labs/lab-070-agent-ux-patterns.md) | Agent UX Patterns — Chat, Adaptive Cards & Proactive Notifications | L100 | All paths |
+| [Lab 071](labs/lab-071-context-caching.md) | Context Caching — Cutting Costs for Large-Document Agents | L300 | All paths |
+| [Lab 072](labs/lab-072-structured-outputs.md) | Structured Outputs Reliability Benchmark | L100 | All paths |
+| [Lab 073](labs/lab-073-swe-bench.md) | Agent Benchmarking with SWE-bench | L300 | All paths |
+| [Lab 074](labs/lab-074-foundry-agent-service.md) | Foundry Agent Service — Production Operations Simulation | L300 | [🏭 Microsoft Foundry](../paths/foundry/) |
+| [Lab 075](labs/lab-075-powerbi-copilot.md) | Power BI Copilot — Autonomous Analytics & Data Storytelling | L100 | All paths |
+| [Lab 076](labs/lab-076-microsoft-agent-framework.md) | Microsoft Agent Framework — From SK to MAF | L200 | All paths |
+| [Lab 077](labs/lab-077-agui-protocol.md) | AG-UI Protocol — Connect Agents to User Interfaces | L200 | All paths |
+| [Lab 078](labs/lab-078-foundry-local.md) | Foundry Local — Run AI Models Offline | L100 | All paths |
+| [Lab 079](labs/lab-079-deep-research-agents.md) | Deep Research Agents — Multi-Step Knowledge Synthesis | L300 | All paths |
+| [Lab 080](labs/lab-080-markitdown-mcp.md) | MarkItDown + MCP — Document Ingestion for Agents | L200 | All paths |
+| [Lab 081](labs/lab-081-agentic-coding-tools.md) | Agentic Coding Tools — Claude Code vs Copilot CLI | L100 | All paths |
+| [Lab 082](labs/lab-082-agent-guardrails.md) | Agent Guardrails — NeMo & Azure Content Safety | L300 | All paths |
+| [Lab 083](labs/lab-083-multimodal-rag.md) | Multi-Modal RAG — Images, Tables & Charts in Documents | L300 | All paths |
+| [Lab 084](labs/lab-084-capstone-outdoorgear-agent.md) | Capstone — Build the Complete OutdoorGear Agent | L400 | All paths |
 
 ---
 

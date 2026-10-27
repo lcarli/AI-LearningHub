@@ -1,20 +1,45 @@
 ---
-tags: [github-copilot, free, foundations]
+tags:
+- github-copilot
+- free
+- foundations
+lab:
+  id: '010'
+  level: L100
+  journey: github-copilot
+  time_min: 45
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Backend update (October 2026)"
+    GitHub Models inference was retired on July 30, 2026. Any references below are retained only for historical context while this lab is migrated. Use [Lab 013 — Free LLM backends](../labs/lab-013-github-models.md) to configure Foundry Local or Ollama before continuing.
+
 # Lab 010: GitHub Copilot — First Steps
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
   <span><strong>Path:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
   <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free tier (2,000 completions + 50 chat/month)</span>
+  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — completion quota plus a limited monthly AI Credits allowance</span>
 </div>
 
 ## What You'll Learn
 
 - Use **inline code completion** to write code from comments
 - Use **Copilot Chat `/fix`** to find and understand real bugs
-- Use **Copilot Edits** to refactor an entire file with natural language
+- Use **Agent mode** to refactor an entire file with natural language
 - Use **inline chat** to extend code without leaving the editor
 - Write prompts that get better results
 
@@ -29,8 +54,8 @@ This lab uses **hands-on exercises** — you'll open files with real bugs and in
 1. Go to [github.com/features/copilot](https://github.com/features/copilot) → **"Start for free"**
 2. Sign in and follow the setup wizard
 
-!!! tip "Students get Copilot Pro for free"
-    → [GitHub Student Developer Pack](https://education.github.com/pack)
+!!! info "Student availability changes"
+    Copilot Free is the reliable path for this lab. Check the [GitHub Student Developer Pack](https://education.github.com/pack) for current eligibility, but do not assume a paid Copilot plan is included.
 
 ### 2. Install VS Code + Copilot extension
 
@@ -200,9 +225,9 @@ The file mentions a `sort_by_price()` function that doesn't exist yet.
 
 ---
 
-## Exercise 4 — Copilot Edits: Refactor an Entire File
+## Exercise 4 — Agent Mode: Refactor an Entire File
 
-**Goal:** Use Copilot Edits to improve code quality with natural language instructions — without changing behavior.
+**Goal:** Use Agent mode to improve code quality with natural language instructions — without changing behavior.
 
 ### File: [📥 `exercise4_refactor_me.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
 
@@ -210,10 +235,10 @@ The file mentions a `sort_by_price()` function that doesn't exist yet.
 --8<-- "labs/lab-010/exercise4_refactor_me.py"
 ```
 
-This code **works correctly** but is hard to read and maintain. Use **Copilot Edits** to improve it step by step:
+This code **works correctly** but is hard to read and maintain. Use **Agent mode** to improve it step by step:
 
-1. Open the Copilot Edits panel: `Ctrl+Shift+I` → click **"Open Copilot Edits"** (pencil icon)
-2. Click **"Add Files"** and add `exercise4_refactor_me.py`
+1. Open Copilot Chat (`Ctrl+Shift+I`) and select **Agent**
+2. Add `exercise4_refactor_me.py` to the chat context
 3. Run each of these prompts **one at a time**, reviewing changes before moving on:
 
 **Prompt 1:**
@@ -273,7 +298,7 @@ Is there a more Pythonic way to write this?
 | Inline completion | Exercise 1 | Write new code from comments |
 | Chat `/fix` | Exercise 2 | Understand and fix bugs |
 | Inline chat `Ctrl+I` | Exercise 3 | Fix + extend in-place |
-| Copilot Edits | Exercise 4 | Refactor entire files |
+| Agent mode | Exercise 4 | Refactor entire files and verify changes |
 
 ---
 

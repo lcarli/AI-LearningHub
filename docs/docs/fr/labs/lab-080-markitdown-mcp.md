@@ -1,5 +1,27 @@
 ---
-tags: [markitdown, mcp, document-ingestion, pdf, python]
+tags:
+- markitdown
+- mcp
+- document-ingestion
+- pdf
+- python
+lab:
+  id: 080
+  level: L200
+  journey: ai-agents
+  time_min: 60
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 080 : MarkItDown + MCP — Ingestion de documents pour agents
 

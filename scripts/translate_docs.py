@@ -15,7 +15,7 @@ Usage:
     python scripts/translate_docs.py --lang pt --force  # Re-translate all
     python scripts/translate_docs.py --lang pt --file labs/lab-001-what-are-ai-agents.md
 
-Requires: GITHUB_TOKEN env var (for GitHub Models free API)
+Requires Azure OIDC authentication and the AZURE_OPENAI_* environment variables.
 """
 
 import argparse
@@ -27,11 +27,11 @@ import sys
 import shutil
 from pathlib import Path
 
-# Try to import OpenAI client
 try:
-    from openai import OpenAI
+    from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+    from openai import AzureOpenAI
 except ImportError:
-    print("pip install openai")
+    print("pip install openai azure-identity")
     sys.exit(1)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -65,15 +65,25 @@ CRITICAL RULES:
 
 
 def get_client():
-    """Get OpenAI client configured for GitHub Models (free)."""
-    token = os.environ.get("GITHUB_TOKEN")
-    if not token:
-        print("ERROR: Set GITHUB_TOKEN environment variable")
-        print("  Get a free token at: https://github.com/settings/tokens")
+    """Get an Azure OpenAI client authenticated with GitHub OIDC."""
+    required = [
+        "AZURE_OPENAI_ENDPOINT",
+        "AZURE_OPENAI_DEPLOYMENT",
+        "AZURE_OPENAI_API_VERSION",
+    ]
+    missing = [name for name in required if not os.environ.get(name)]
+    if missing:
+        print(f"ERROR: Missing environment variables: {', '.join(missing)}")
         sys.exit(1)
-    return OpenAI(
-        base_url="https://models.inference.ai.azure.com",
-        api_key=token,
+
+    token_provider = get_bearer_token_provider(
+        DefaultAzureCredential(),
+        "https://cognitiveservices.azure.com/.default",
+    )
+    return AzureOpenAI(
+        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+        api_version=os.environ["AZURE_OPENAI_API_VERSION"],
+        azure_ad_token_provider=token_provider,
     )
 
 
@@ -91,7 +101,7 @@ def file_hash(path: Path) -> str:
     return hashlib.md5(path.read_bytes()).hexdigest()
 
 
-def translate_markdown(client: OpenAI, content: str, lang: str) -> str:
+def translate_markdown(client: AzureOpenAI, content: str, lang: str) -> str:
     """Translate a markdown file's content."""
     lang_name = LANG_NAMES.get(lang, lang)
 
@@ -100,7 +110,7 @@ def translate_markdown(client: OpenAI, content: str, lang: str) -> str:
         return translate_large_file(client, content, lang, lang_name)
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model=os.environ["AZURE_OPENAI_DEPLOYMENT"],
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT_TEMPLATE.format(lang_name=lang_name)},
             {"role": "user", "content": content},
@@ -111,7 +121,7 @@ def translate_markdown(client: OpenAI, content: str, lang: str) -> str:
     return response.choices[0].message.content
 
 
-def translate_large_file(client: OpenAI, content: str, lang: str, lang_name: str) -> str:
+def translate_large_file(client: AzureOpenAI, content: str, lang: str, lang_name: str) -> str:
     """Split large files by ## sections and translate each chunk."""
     sections = re.split(r"(\n## )", content)
 
@@ -128,20 +138,16 @@ def translate_large_file(client: OpenAI, content: str, lang: str, lang_name: str
         if not chunk.strip():
             translated_parts.append(chunk)
             continue
-        try:
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT_TEMPLATE.format(lang_name=lang_name)},
-                    {"role": "user", "content": chunk},
-                ],
-                temperature=0.1,
-                max_tokens=16000,
-            )
-            translated_parts.append(response.choices[0].message.content)
-        except Exception as e:
-            print(f"    WARNING: chunk {i} failed: {e}, keeping original")
-            translated_parts.append(chunk)
+        response = client.chat.completions.create(
+            model=os.environ["AZURE_OPENAI_DEPLOYMENT"],
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT_TEMPLATE.format(lang_name=lang_name)},
+                {"role": "user", "content": chunk},
+            ],
+            temperature=0.1,
+            max_tokens=16000,
+        )
+        translated_parts.append(response.choices[0].message.content)
 
     return "\n".join(translated_parts)
 
@@ -157,7 +163,7 @@ def copy_non_md_assets(lang: str):
             print(f"  Copied {subdir}/ to {lang}/")
 
 
-def translate_file(client: OpenAI, rel_path: str, lang: str, hashes: dict) -> bool:
+def translate_file(client: AzureOpenAI, rel_path: str, lang: str, hashes: dict) -> bool:
     """Translate a single file. Returns True if translated."""
     src = EN_DIR / rel_path
     dst = DOCS_DIR / lang / rel_path
@@ -231,14 +237,11 @@ def main():
         translated = 0
         skipped = 0
         for rel_path in files:
-            try:
-                if translate_file(client, rel_path, lang, hashes):
-                    translated += 1
-                    print(f"  ✅ {rel_path}")
-                else:
-                    skipped += 1
-            except Exception as e:
-                print(f"  ❌ {rel_path}: {e}")
+            if translate_file(client, rel_path, lang, hashes):
+                translated += 1
+                print(f"  ✅ {rel_path}")
+            else:
+                skipped += 1
 
         print(f"\n{lang}: {translated} translated, {skipped} skipped (unchanged)")
 

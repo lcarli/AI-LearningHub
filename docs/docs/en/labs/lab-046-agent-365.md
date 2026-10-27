@@ -1,6 +1,33 @@
 ---
-tags: [enterprise, microsoft-365, agent-governance, pro-code, mcp, observability]
+tags:
+- enterprise
+- microsoft-365
+- agent-governance
+- pro-code
+- mcp
+- observability
+lab:
+  id: '046'
+  level: L300
+  journey: ai-agents
+  time_min: 75
+  cost:
+    tier: paid
+    requires:
+    - paid-service
+    estimate_usd: Varies by selected service; see the lab cost section.
+    simulation: false
+    cleanup: true
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Backend update (October 2026)"
+    GitHub Models inference was retired on July 30, 2026. Any references below are retained only for historical context while this lab is migrated. Use [Lab 013 — Free LLM backends](../labs/lab-013-github-models.md) to configure Foundry Local or Ollama before continuing.
+
 # Lab 046: Microsoft Agent 365 — Enterprise Agent Governance
 
 <div class="lab-meta">
@@ -447,7 +474,7 @@ python lab-046/broken_observability.py
 
 ## Next Steps
 
-- **Build the underlying agent first:** → [Lab 016 — OpenAI Agents SDK](lab-016-openai-agents-sdk.md)
+- **Build the underlying agent first:** → [Lab 016 — OpenAI Agents SDK](lab-016-copilot-agent-mode.md)
 - **Add MCP tools to your agent:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
 - **Observability deep dive:** → [Lab 033 — Agent Observability with App Insights](lab-033-agent-observability.md)
 - **Enterprise RAG pipeline:** → [Lab 042 — Enterprise RAG with Evaluations](lab-042-enterprise-rag.md) *(coming soon)*

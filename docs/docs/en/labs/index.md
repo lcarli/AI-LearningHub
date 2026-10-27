@@ -1,3 +1,6 @@
+!!! warning "Backend update (October 2026)"
+    GitHub Models inference was retired on July 30, 2026. Any references below are retained only for historical context while this lab is migrated. Use [Lab 013 — Free LLM backends](../labs/lab-013-github-models.md) to configure Foundry Local or Ollama before continuing.
+
 # All Labs
 
 Browse all labs by level. Each lab is self-contained.
@@ -21,15 +24,15 @@ Browse all labs by level. Each lab is self-contained.
 
 ---
 
-## <span class="level-badge level-100">L100</span> Foundations (17 labs, ~625 min)
+## <span class="level-badge level-100">L100</span> Foundations (17 labs, ~645 min)
 
 | Lab | Title | Path | Time | Cost |
 |-----|-------|------|------|------|
-| [Lab 009](lab-009-azure-openai.md) | Azure OpenAI Service Quickstart | 🏭 Microsoft Foundry | ~30 min | ⚠️ Azure |
+| [Lab 009](lab-009-azure-openai.md) | Azure OpenAI Service Quickstart | 🏭 Microsoft Foundry | ~30 min | 💳 Paid |
 | [Lab 010](lab-010-github-copilot-first-steps.md) | GitHub Copilot — First Steps | 🤖 GitHub Copilot | ~45 min | ✅ GitHub Free |
 | [Lab 011](lab-011-copilot-studio-first-agent.md) | Copilot Studio — First Agent | Agent Builder — Teams | ~30 min | ✅ Free |
 | [Lab 012](lab-012-what-is-mcp.md) | What is MCP? Anatomy of the Protocol | 🔌 MCP | ~20 min | ✅ Free |
-| [Lab 013](lab-013-github-models.md) | GitHub Models — Free LLM Inference | 🤖 GitHub Copilot | ~25 min | ✅ GitHub Free |
+| [Lab 013](lab-013-github-models.md) | Free LLM Backends — Foundry Local and Ollama | All paths | ~45 min | ✅ Free |
 | [Lab 014](lab-014-sk-hello-agent.md) | Semantic Kernel — Hello Agent | 🧠 Semantic Kernel | ~30 min | ✅ GitHub Free |
 | [Lab 015](lab-015-ollama-local-llms.md) | Ollama — Run LLMs Locally for Free | All paths | ~30 min | ✅ Free |
 | [Lab 016](lab-016-copilot-agent-mode.md) | GitHub Copilot Agent Mode | 🤖 GitHub Copilot | ~30 min | ✅ GitHub Free |
@@ -45,20 +48,19 @@ Browse all labs by level. Each lab is self-contained.
 
 ---
 
-## <span class="level-badge level-200">L200</span> Intermediate (20 labs, ~1115 min)
+## <span class="level-badge level-200">L200</span> Intermediate (19 labs, ~1085 min)
 
 | Lab | Title | Path | Time | Cost |
 |-----|-------|------|------|------|
 | [Lab 020](lab-020-mcp-server-python.md) | Build an MCP Server in Python | 🔌 MCP | ~45 min | ✅ Free |
 | [Lab 021](lab-021-mcp-server-csharp.md) | Build an MCP Server in C# | MCP | ~45 min | ✅ Free |
-| [Lab 022](lab-022-rag-github-models-pgvector.md) | RAG Pipeline with GitHub Models + pgvector | RAG | ~50 min | ✅ Free |
+| [Lab 022](lab-022-rag-github-models-pgvector.md) | RAG Pipeline with GitHub Models + pgvector | RAG | ~50 min | ✅ GitHub Free |
 | [Lab 023](lab-023-sk-plugins-memory.md) | Semantic Kernel — Plugins, Memory & Planners | Semantic Kernel | ~45 min | ✅ GitHub Free |
 | [Lab 024](lab-024-teams-ai-library.md) | Teams AI Library Bot | Agent Builder — Teams | ~60 min | ✅ Free |
 | [Lab 025](lab-025-vscode-chat-participant.md) | VS Code Copilot Chat Participant | Agent Builder — VS Code | ~45 min | ✅ Free |
 | [Lab 026](lab-026-agentic-rag.md) | Agentic RAG Pattern | RAG | ~40 min | ✅ GitHub Free |
 | [Lab 027](lab-027-agent-memory-patterns.md) | Agent Memory Patterns | Pro Code | ~35 min | ✅ Free |
 | [Lab 029](lab-029-langchain-langgraph.md) | LangChain & LangGraph Basics | 💻 Pro Code | ~60 min | ✅ Free |
-| [Lab 045](lab-045-copilot-workspace.md) | GitHub Copilot Workspace | 🤖 GitHub Copilot | ~30 min | ✅ GitHub Free |
 | [Lab 047](lab-047-work-iq-copilot-analytics.md) | Work IQ — Copilot Adoption Analytics | All paths | ~45 min | ✅ Free |
 | [Lab 052](lab-052-fabric-conversational-agent.md) | Fabric IQ — Conversational Data Agent (NL → SQL) | All paths | ~75 min | ✅ Free |
 | [Lab 054](lab-054-a2a-protocol.md) | A2A Protocol — Build Interoperable Multi-Agent Systems | All paths | ~75 min | ✅ Free |
@@ -76,19 +78,19 @@ Browse all labs by level. Each lab is self-contained.
 
 | Lab | Title | Path | Time | Cost |
 |-----|-------|------|------|------|
-| [Lab 028](lab-028-deploy-mcp-azure.md) | Deploy MCP Server to Azure Container Apps | MCP | ~60 min | ⚠️ Azure |
-| [Lab 030](lab-030-foundry-agent-mcp.md) | Microsoft Foundry Agent Service + MCP | Foundry + MCP | ~90 min | ⚠️ Azure |
-| [Lab 031](lab-031-pgvector-semantic-search.md) | pgvector Semantic Search on Azure | RAG | ~60 min | ⚠️ Azure |
+| [Lab 028](lab-028-deploy-mcp-azure.md) | Deploy MCP Server to Azure Container Apps | MCP | ~60 min | 💳 Paid |
+| [Lab 030](lab-030-foundry-agent-mcp.md) | Microsoft Foundry Agent Service + MCP | Foundry + MCP | ~90 min | 💳 Paid |
+| [Lab 031](lab-031-pgvector-semantic-search.md) | pgvector Semantic Search on Azure | RAG | ~60 min | 💳 Paid |
 | [Lab 032](lab-032-row-level-security.md) | Row Level Security for Agents | Foundry + Security | ~45 min | ✅ Free |
 | [Lab 033](lab-033-agent-observability.md) | Agent Observability with Application Insights | Microsoft Foundry | ~45 min | ✅ Free |
 | [Lab 034](lab-034-multi-agent-sk.md) | Multi-Agent Orchestration with Semantic Kernel | Semantic Kernel | ~60 min | ✅ GitHub Free |
 | [Lab 035](lab-035-agent-evaluation.md) | Agent Evaluation with Azure AI Eval SDK | Pro Code | ~60 min | ✅ GitHub Free |
 | [Lab 036](lab-036-prompt-injection-security.md) | Prompt Injection Defense & Agent Security | Pro Code | ~40 min | ✅ GitHub Free |
 | [Lab 037](lab-037-cicd-github-actions.md) | CI/CD for AI Agents with GitHub Actions | Pro Code | ~45 min | ✅ GitHub Free |
-| [Lab 038](lab-038-cost-optimization.md) | AI Cost Optimization | 💻 Pro Code | ~45 min | ⚠️ Azure |
+| [Lab 038](lab-038-cost-optimization.md) | AI Cost Optimization | 💻 Pro Code | ~45 min | 💳 Paid |
 | [Lab 039](lab-039-vector-db-comparison.md) | Vector Database Comparison | 📚 RAG | ~50 min | ✅ Free |
 | [Lab 043](lab-043-multimodal-agents.md) | Multimodal Agents with GPT-4o Vision | 💻 Pro Code | ~50 min | ✅ Free |
-| [Lab 046](lab-046-agent-365.md) | Microsoft Agent 365 — Enterprise Agent Governance | ⚙️ Pro Code | ~75 min | ⚠️ M365 |
+| [Lab 046](lab-046-agent-365.md) | Microsoft Agent 365 — Enterprise Agent Governance | ⚙️ Pro Code | ~75 min | 💳 Paid |
 | [Lab 048](lab-048-work-iq-power-bi.md) | Work IQ — Copilot Impact Analytics & Power BI | All paths | ~90 min | ✅ Free |
 | [Lab 049](lab-049-foundry-iq-agent-tracing.md) | Foundry IQ — Agent Tracing with OpenTelemetry | 🏭 Microsoft Foundry | ~75 min | ✅ Free |
 | [Lab 051](lab-051-fabric-rti-agents.md) | Fabric IQ — Real-Time Intelligence Agents | All paths | ~75 min | ✅ Free |
@@ -110,13 +112,12 @@ Browse all labs by level. Each lab is self-contained.
 
 ---
 
-## <span class="level-badge level-400">L400</span> Expert (6 available labs + 2 planned)
+## <span class="level-badge level-400">L400</span> Expert (7 labs, ~720 min)
 
 | Lab | Title | Path | Time | Cost |
 |-----|-------|------|------|------|
 | [Lab 040](lab-040-autogen-multi-agent.md) | Production Multi-Agent with AutoGen | Pro Code Agents | ~90 min | ✅ GitHub Free |
-| [Lab 041](lab-041-copilot-extension.md) | Custom GitHub Copilot Extension *(coming soon)* | GitHub Copilot | TBD | 🔜 Planned |
-| [Lab 042](lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations *(coming soon)* | RAG | TBD | 🔜 Planned |
+| [Lab 042](lab-042-enterprise-rag.md) | Enterprise RAG with Evaluations | RAG | ~30 min | 💳 Paid |
 | [Lab 044](lab-044-phi4-ollama-production.md) | Phi-4 + Ollama in Production | Pro Code | ~90 min | ✅ Free |
 | [Lab 050](lab-050-multi-agent-observability.md) | Multi-Agent Observability with GenAI Semantic Conventions | 🏭 Microsoft Foundry | ~120 min | ✅ Free |
 | [Lab 055](lab-055-a2a-mcp-capstone.md) | A2A + MCP Full Stack — Agent Interoperability Capstone | ⚙️ Pro Code | ~120 min | ✅ Free |
@@ -125,4 +126,4 @@ Browse all labs by level. Each lab is self-contained.
 
 ---
 
-**Total: 84 labs**
+**Total: 82 active labs · 2 retired**

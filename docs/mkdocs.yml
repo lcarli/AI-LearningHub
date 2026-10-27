@@ -17,6 +17,7 @@ nav:
   - Home: index.md
   - How to Use This Hub: how-to-use.md
   - Prerequisites & Accounts: prerequisites.md
+  - Cost Guide: cost-guide.md
 
   - Learning Paths:
       - By Technology:
@@ -77,7 +78,6 @@ nav:
           - "Lab 026: Agentic RAG Pattern": labs/lab-026-agentic-rag.md
           - "Lab 027: Agent Memory Patterns": labs/lab-027-agent-memory-patterns.md
           - "Lab 029: LangChain & LangGraph Basics": labs/lab-029-langchain-langgraph.md
-          - "Lab 045: GitHub Copilot Workspace": labs/lab-045-copilot-workspace.md
           - "Lab 047: Work IQ — Copilot Analytics": labs/lab-047-work-iq-copilot-analytics.md
           - "Lab 052: Fabric IQ — Conversational Data Agent": labs/lab-052-fabric-conversational-agent.md
           - "Lab 054: A2A Protocol": labs/lab-054-a2a-protocol.md
@@ -124,7 +124,6 @@ nav:
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
-          - "Lab 041: Custom GitHub Copilot Extension (Coming Soon)": labs/lab-041-copilot-extension.md
           - "Lab 042: Enterprise RAG with Evaluations (Coming Soon)": labs/lab-042-enterprise-rag.md
           - "Lab 044: Phi-4 + Ollama in Production": labs/lab-044-phi4-ollama-production.md
           - "Lab 050: Multi-Agent Observability": labs/lab-050-multi-agent-observability.md
@@ -173,6 +172,7 @@ plugins:
             Home: Início
             How to Use This Hub: Como Usar Este Hub
             Prerequisites & Accounts: Pré-requisitos e Contas
+            Cost Guide: Guia de Custos
             Learning Paths: Trilhas de Aprendizado
             By Technology: Por Tecnologia
             By Role: Por Perfil
@@ -216,6 +216,7 @@ plugins:
             Home: Accueil
             How to Use This Hub: Comment Utiliser Ce Hub
             Prerequisites & Accounts: Prérequis et Comptes
+            Cost Guide: Guide des Coûts
             Learning Paths: Parcours d'Apprentissage
             By Technology: Par Technologie
             By Role: Par Rôle

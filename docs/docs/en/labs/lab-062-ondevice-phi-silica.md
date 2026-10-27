@@ -1,5 +1,28 @@
 ---
-tags: [on-device, phi-silica, windows-ai, npu, edge-ai, csharp]
+tags:
+- on-device
+- phi-silica
+- windows-ai
+- npu
+- edge-ai
+- csharp
+lab:
+  id: '062'
+  level: L300
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 062: On-Device Agents with Phi Silica — Windows AI APIs
 

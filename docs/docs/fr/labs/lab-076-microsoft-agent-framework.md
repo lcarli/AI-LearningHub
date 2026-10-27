@@ -1,5 +1,28 @@
 ---
-tags: [agent-framework, semantic-kernel, autogen, migration, python, dotnet]
+tags:
+- agent-framework
+- semantic-kernel
+- autogen
+- migration
+- python
+- dotnet
+lab:
+  id: '076'
+  level: L200
+  journey: ai-agents
+  time_min: 75
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 076 : Microsoft Agent Framework — De SK à MAF
 
@@ -311,6 +334,6 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 ## Prochaines étapes
 
 - **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agent avec Semantic Kernel (comprendre ce que vous migrez)
-- **[Lab 036](lab-036-autogen-basics.md)** — Bases d'AutoGen (comprendre les modèles AutoGen avant MAF)
+- **[Lab 036](lab-040-autogen-multi-agent.md)** — Bases d'AutoGen (comprendre les modèles AutoGen avant MAF)
 - **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (exploiter et surveiller des flottes d'agents en production)
 - **[Lab 073](lab-073-swe-bench.md)** — SWE-Bench (évaluer les agents MAF sur des tâches de codage réelles)

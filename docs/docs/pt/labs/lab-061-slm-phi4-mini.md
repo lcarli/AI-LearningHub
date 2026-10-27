@@ -1,5 +1,28 @@
 ---
-tags: [slm, phi-4, onnx, privacy, local-inference, python]
+tags:
+- slm
+- phi-4
+- onnx
+- privacy
+- local-inference
+- python
+lab:
+  id: '061'
+  level: L200
+  journey: ai-agents
+  time_min: 60
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 061: SLMs — Phi-4 Mini para Habilidades de Agentes de Baixo Custo
 

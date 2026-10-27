@@ -1,5 +1,27 @@
 ---
-tags: [github-copilot, free, vscode]
+tags:
+- github-copilot
+- free
+- vscode
+lab:
+  id: '016'
+  level: L100
+  journey: github-copilot
+  time_min: 30
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 016: GitHub Copilot Agent Mode
 
@@ -27,7 +49,7 @@ GitHub Copilot in VS Code has three modes:
 | Mode | What it does |
 |------|-------------|
 | **Ask** | Answers questions about code; read-only |
-| **Edit** | Makes changes to files you specify |
+| **Plan** | Explores the repository and proposes a reviewable implementation plan |
 | **Agent** ⭐ | Autonomously explores your codebase, runs commands, uses tools, and completes multi-step tasks |
 
 **Agent mode** is the newest and most powerful. You describe a goal, and Copilot acts like a junior developer: it reads files, writes code, runs tests, and iterates until done — asking for your approval at key decision points.
@@ -240,14 +262,14 @@ Python API project for OutdoorGear Inc.
 
 ---
 
-## Agent Mode vs. Edit Mode: When to Use Which
+## Plan Mode vs. Agent Mode: When to Use Which
 
-| Use Edit mode when | Use Agent mode when |
+| Use Plan mode when | Use Agent mode when |
 |-------------------|---------------------|
-| You know exactly what to change | You have a goal but not a plan |
-| Simple, targeted edits | Multi-file, multi-step tasks |
-| You want full control of each edit | You want the agent to figure it out |
-| Quick fixes, refactors | Debugging, adding features, writing tests |
+| You need to understand scope before changing files | You have approved the approach and want it implemented |
+| Requirements or affected files are unclear | The task requires multi-file, multi-step execution |
+| You want a reviewable plan and checkpoints | You want the agent to run tools and verify the result |
+| Architecture and trade-offs still need decisions | The expected behavior and boundaries are clear |
 
 ---
 

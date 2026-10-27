@@ -1,3 +1,6 @@
+!!! warning "Mise à jour du backend (octobre 2026)"
+    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
+
 # Tous les labs
 
 Parcourez tous les labs par niveau. Chaque lab est autonome.

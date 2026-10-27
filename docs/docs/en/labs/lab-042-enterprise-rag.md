@@ -1,3 +1,23 @@
+---
+lab:
+  id: '042'
+  level: L400
+  journey: llm-foundations
+  time_min: 30
+  cost:
+    tier: paid
+    requires:
+    - paid-service
+    estimate_usd: Varies by selected service; see the lab cost section.
+    simulation: false
+    cleanup: true
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
+---
 # Lab 042: Enterprise RAG with Evaluations
 
 <div class="lab-meta">

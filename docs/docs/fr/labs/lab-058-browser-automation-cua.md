@@ -1,5 +1,28 @@
 ---
-tags: [browser-automation, cua, openai, playwright, python, safety]
+tags:
+- browser-automation
+- cua
+- openai
+- playwright
+- python
+- safety
+lab:
+  id: 058
+  level: L300
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 058 : Agents d'automatisation de navigateur avec OpenAI CUA
 

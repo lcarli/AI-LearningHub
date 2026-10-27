@@ -1,5 +1,28 @@
 ---
-tags: [a2a, protocol, multi-agent, interoperability, python, free]
+tags:
+- a2a
+- protocol
+- multi-agent
+- interoperability
+- python
+- free
+lab:
+  id: '054'
+  level: L200
+  journey: ai-agents
+  time_min: 75
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 054: Protocolo A2A — Construa Sistemas Multi-Agente Interoperáveis
 

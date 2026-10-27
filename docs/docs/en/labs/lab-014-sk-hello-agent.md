@@ -1,6 +1,32 @@
 ---
-tags: [semantic-kernel, free, python, github-models]
+tags:
+- semantic-kernel
+- free
+- python
+- github-models
+lab:
+  id: '014'
+  level: L100
+  journey: agent-framework
+  time_min: 30
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Backend update (October 2026)"
+    GitHub Models inference was retired on July 30, 2026. Any references below are retained only for historical context while this lab is migrated. Use [Lab 013 — Free LLM backends](../labs/lab-013-github-models.md) to configure Foundry Local or Ollama before continuing.
+
 # Lab 014: Semantic Kernel — Hello Agent
 
 <div class="lab-meta">
@@ -62,7 +88,7 @@ cd HelloSkAgent
 dotnet add package Microsoft.SemanticKernel
 ```
 
-Make sure `GITHUB_TOKEN` is set (see [Lab 013](lab-013-github-models.md#prerequisites-setup)).
+Make sure `GITHUB_TOKEN` is set (see [Lab 013](lab-013-github-models.md)).
 
 ---
 

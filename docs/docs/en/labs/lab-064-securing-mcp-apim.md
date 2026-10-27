@@ -1,5 +1,28 @@
 ---
-tags: [security, apim, mcp, oauth, enterprise, governance]
+tags:
+- security
+- apim
+- mcp
+- oauth
+- enterprise
+- governance
+lab:
+  id: '064'
+  level: L400
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 064: Securing MCP at Scale with Azure API Management
 

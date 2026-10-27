@@ -1,5 +1,28 @@
 ---
-tags: [fabric, real-time-intelligence, kql, eventstreams, iot, python]
+tags:
+- fabric
+- real-time-intelligence
+- kql
+- eventstreams
+- iot
+- python
+lab:
+  id: '051'
+  level: L300
+  journey: ai-agents
+  time_min: 75
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 051: Fabric IQ — Real-Time Intelligence Agents
 
@@ -439,5 +462,5 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 
 ## Next Steps
 
-- **[Lab 052](lab-052-fabric-rti-advanced.md)** — Fabric RTI Advanced: Sliding-Window Aggregations & Trend Detection
-- **[Lab 053](lab-053-fabric-agent-activator.md)** — Building an AI Agent with Fabric Activator & Semantic Kernel
+- **[Lab 052](lab-052-fabric-conversational-agent.md)** — Fabric RTI Advanced: Sliding-Window Aggregations & Trend Detection
+- **[Lab 053](lab-053-fabric-ai-functions.md)** — Building an AI Agent with Fabric Activator & Semantic Kernel

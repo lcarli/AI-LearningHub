@@ -1,5 +1,28 @@
 ---
-tags: [observability, opentelemetry, azure-monitor, foundry, python, tracing]
+tags:
+- observability
+- opentelemetry
+- azure-monitor
+- foundry
+- python
+- tracing
+lab:
+  id: 049
+  level: L300
+  journey: microsoft-foundry
+  time_min: 75
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 049: Foundry IQ — Agent Tracing with OpenTelemetry
 

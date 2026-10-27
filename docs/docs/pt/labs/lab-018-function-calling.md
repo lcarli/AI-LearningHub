@@ -1,6 +1,33 @@
 ---
-tags: [python, free, github-models, tool-calling, function-calling]
+tags:
+- python
+- free
+- github-models
+- tool-calling
+- function-calling
+lab:
+  id: 018
+  level: L100
+  journey: ai-agents
+  time_min: 35
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Atualização de backend (outubro de 2026)"
+    A inferência do GitHub Models foi descontinuada em 30 de julho de 2026. As referências abaixo são mantidas apenas como contexto histórico enquanto este lab é migrado. Use o [Lab 013 — Backends de LLM gratuitos](../labs/lab-013-github-models.md) para configurar o Foundry Local ou o Ollama antes de continuar.
+
 # Lab 018: Function Calling & Tool Use
 
 <div class="lab-meta">

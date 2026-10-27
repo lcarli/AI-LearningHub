@@ -12,9 +12,9 @@ Every lab is tagged with a level from **50 to 400**, inspired by Microsoft's con
 |-------|-------|------|----------------|----------------|
 | 50 | <span class="level-badge level-50">L50</span> | Awareness | Reading and concepts. No tools, no account. | ❌ None |
 | 100 | <span class="level-badge level-100">L100</span> | Foundations | First hands-on labs. Minimal setup. | ✅ GitHub free |
-| 200 | <span class="level-badge level-200">L200</span> | Intermediate | Code + free-tier cloud (GitHub Models). | ✅ GitHub free |
-| 300 | <span class="level-badge level-300">L300</span> | Advanced | Cloud services, integration patterns. | ✅ Azure subscription |
-| 400 | <span class="level-badge level-400">L400</span> | Expert | Production architecture, evaluations, cost. | ✅ Azure paid |
+| 200 | <span class="level-badge level-200">L200</span> | Intermediate | Local models or Copilot Free. | ✅ Free/local |
+| 300 | <span class="level-badge level-300">L300</span> | Advanced | Simulation or metered cloud services. | ⚠️ Varies |
+| 400 | <span class="level-badge level-400">L400</span> | Expert | Production architecture, evaluations, and cost controls. | ⚠️ Usually paid |
 
 !!! tip "Start at the right level"
     Don't skip L50/L100 even if you're an experienced developer — the conceptual framing helps you make better decisions later.
@@ -115,8 +115,8 @@ Each lab page follows this standard structure:
 We believe the best learning resources are accessible. Our goals:
 
 - ✅ **L50 and L100**: Zero cost, zero credit card, just a free GitHub account
-- ✅ **L200**: Use [GitHub Models](https://github.com/marketplace/models) — free inference, no credit card
-- ⚠️ **L300**: Azure free tier where possible; clearly marked when an Azure subscription is needed
-- ⚠️ **L400**: Paid Azure resources required — estimated costs noted in each lab
+- ✅ **L200**: Use [Foundry Local or Ollama](labs/lab-013-github-models.md), or Copilot Free
+- ⚠️ **L300**: A free simulation is provided where possible; real cloud use includes an estimate
+- ⚠️ **L400**: Paid resources include an estimate, cleanup steps, and the closest free alternative
 
-→ See [Prerequisites & Accounts](prerequisites.md) for the full setup guide.
+→ See the [Cost Guide](cost-guide.md) and [Prerequisites & Accounts](prerequisites.md).

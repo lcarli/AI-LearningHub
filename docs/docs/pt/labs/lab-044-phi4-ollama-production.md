@@ -1,6 +1,31 @@
 ---
-tags: [phi4, ollama, local-llm, free, python]
+tags:
+- phi4
+- ollama
+- local-llm
+- free
+- python
+lab:
+  id: '044'
+  level: L400
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Atualização de backend (outubro de 2026)"
+    A inferência do GitHub Models foi descontinuada em 30 de julho de 2026. As referências abaixo são mantidas apenas como contexto histórico enquanto este lab é migrado. Use o [Lab 013 — Backends de LLM gratuitos](../labs/lab-013-github-models.md) para configurar o Foundry Local ou o Ollama antes de continuar.
+
 # Lab 044: Phi-4 + Ollama em Produção
 
 <div class="lab-meta">

@@ -1,5 +1,28 @@
 ---
-tags: [enterprise, work-iq, copilot-analytics, python, viva-insights, m365]
+tags:
+- enterprise
+- work-iq
+- copilot-analytics
+- python
+- viva-insights
+- m365
+lab:
+  id: '047'
+  level: L200
+  journey: ai-agents
+  time_min: 45
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 047: Work IQ — Copilot Adoption Analytics
 

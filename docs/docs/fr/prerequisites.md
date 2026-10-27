@@ -24,37 +24,29 @@ Inscrivez-vous sur [github.com](https://github.com/signup) — c'est gratuit, sa
 
 Avec un compte GitHub gratuit, vous avez accès à :
 
-- ✅ **GitHub Copilot niveau gratuit** — 2 000 complétions de code/mois + 50 messages de chat/mois
-- ✅ **GitHub Models** — API d'inférence gratuite pour GPT-4o, Llama, Phi, et plus (avec limites de débit)
+- ✅ **GitHub Copilot Free** — quota de complétions et allocation mensuelle limitée d'AI Credits
 - ✅ **GitHub Codespaces** — 60 heures/mois d'environnement de développement cloud gratuit
 - ✅ **GitHub Actions** — 2 000 minutes/mois de CI/CD gratuit
 
-!!! tip "GitHub Copilot pour les étudiants"
-    Si vous êtes étudiant, obtenez **GitHub Copilot Pro gratuitement** via le [GitHub Student Developer Pack](https://education.github.com/pack).
+!!! info "Éligibilité des étudiants"
+    Consultez le [GitHub Student Developer Pack](https://education.github.com/pack) pour connaître les avantages actuels. Ce hub ne suppose pas qu'un abonnement Copilot payant est disponible.
 
 ---
 
-## 2. GitHub Models (inférence LLM gratuite)
+## 2. Backend LLM Local (Gratuit)
 
 **Requis pour :** Les labs L200 qui utilisent des LLM sans Azure.
 
-GitHub Models fournit un accès API gratuit aux LLM de pointe depuis votre compte GitHub. Aucune carte bancaire requise.
+Utilisez Foundry Local ou Ollama. Les deux s'exécutent sur votre machine et exposent un endpoint compatible OpenAI.
 
 **Configuration :**
 
-1. Allez sur [github.com/marketplace/models](https://github.com/marketplace/models)
-2. Choisissez un modèle (par ex., `gpt-4o`, `Phi-4`, `Llama-3.3-70B`)
-3. Cliquez sur **« Use this model »** → **« Get API key »** pour obtenir votre jeton d'accès personnel
-4. Stockez-le comme `GITHUB_TOKEN` dans votre environnement
+1. Suivez le [Lab 013 — Backends LLM Gratuits](labs/lab-013-github-models.md).
+2. Configurez `LOCAL_LLM_BASE_URL` et `LOCAL_LLM_MODEL`.
+3. Gardez le runtime local actif pendant les labs dépendants.
 
-**Les modèles disponibles incluent :**
-- OpenAI : `gpt-4o`, `gpt-4o-mini`, `o1-mini`
-- Meta : `Llama-3.3-70B-Instruct`, `Llama-3.2-90B-Vision`
-- Microsoft : `Phi-4`, `Phi-3.5-MoE`
-- Mistral : `Mistral-Large`
-
-!!! warning "Limites de débit"
-    GitHub Models est limité en débit pour les comptes gratuits. Pour les besoins des labs, c'est largement suffisant. Si vous atteignez les limites, attendez quelques minutes et réessayez.
+!!! note "Matériel"
+    Les petits modèles peuvent s'exécuter sur CPU. Les modèles plus grands ou plus rapides peuvent exiger un GPU/NPU compatible et portent le label **GRÁTIS***.
 
 ---
 

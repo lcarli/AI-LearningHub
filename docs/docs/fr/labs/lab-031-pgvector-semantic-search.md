@@ -1,6 +1,31 @@
 ---
-tags: [pgvector, rag, azure, azure-required]
+tags:
+- pgvector
+- rag
+- azure
+- azure-required
+lab:
+  id: '031'
+  level: L300
+  journey: llm-foundations
+  time_min: 60
+  cost:
+    tier: paid
+    requires:
+    - paid-service
+    estimate_usd: Varies by selected service; see the lab cost section.
+    simulation: false
+    cleanup: true
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Mise à jour du backend (octobre 2026)"
+    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
+
 # Lab 031 : Recherche sémantique pgvector sur Azure
 
 <div class="lab-meta">

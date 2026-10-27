@@ -1,5 +1,28 @@
 ---
-tags: [reasoning, o3, deepseek-r1, chain-of-thought, benchmark, python]
+tags:
+- reasoning
+- o3
+- deepseek-r1
+- chain-of-thought
+- benchmark
+- python
+lab:
+  id: '060'
+  level: L200
+  journey: ai-agents
+  time_min: 75
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 060: Modelos de Raciocínio — Chain-of-Thought com o3 e DeepSeek R1
 

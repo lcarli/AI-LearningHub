@@ -1,11 +1,28 @@
 ---
 tags:
-  - fabric
-  - data-agent
-  - nl-to-sql
-  - sqlite
-  - python
-  - entra-id
+- fabric
+- data-agent
+- nl-to-sql
+- sqlite
+- python
+- entra-id
+lab:
+  id: '052'
+  level: L200
+  journey: ai-agents
+  time_min: 75
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 
 # Lab 052: Fabric IQ — Conversational Data Agent (NL → SQL)
@@ -571,5 +588,5 @@ if __name__ == "__main__":
 
 ## Next Steps
 
-- [← Lab 051: Previous Lab](lab-051-previous-lab.md) — continue your learning path
-- [→ Lab 053: Next Lab](lab-053-next-lab.md) — advance to the next topic
+- [← Lab 051: Previous Lab](lab-051-fabric-rti-agents.md) — continue your learning path
+- [→ Lab 053: Next Lab](lab-053-fabric-ai-functions.md) — advance to the next topic

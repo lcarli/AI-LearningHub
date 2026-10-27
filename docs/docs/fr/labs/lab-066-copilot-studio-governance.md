@@ -1,5 +1,27 @@
 ---
-tags: [copilot-studio, governance, dlp, power-platform, enterprise]
+tags:
+- copilot-studio
+- governance
+- dlp
+- power-platform
+- enterprise
+lab:
+  id: '066'
+  level: L300
+  journey: ai-agents
+  time_min: 75
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 066 : Gouvernance d'entreprise avec Copilot Studio
 

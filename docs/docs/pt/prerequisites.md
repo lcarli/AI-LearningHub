@@ -24,37 +24,29 @@ Cadastre-se em [github.com](https://github.com/signup) — é gratuito, sem nece
 
 Com uma conta gratuita do GitHub você tem acesso a:
 
-- ✅ **GitHub Copilot Free Tier** — 2.000 completações de código/mês + 50 mensagens de chat/mês
-- ✅ **GitHub Models** — API de inferência gratuita para GPT-4o, Llama, Phi e mais (com limite de taxa)
+- ✅ **GitHub Copilot Free** — cota de completações e franquia mensal limitada de AI Credits
 - ✅ **GitHub Codespaces** — 60 horas/mês de ambiente de desenvolvimento na nuvem gratuito
 - ✅ **GitHub Actions** — 2.000 minutos/mês de CI/CD gratuito
 
-!!! tip "GitHub Copilot para Estudantes"
-    Se você é estudante, obtenha o **GitHub Copilot Pro gratuitamente** pelo [GitHub Student Developer Pack](https://education.github.com/pack).
+!!! info "Elegibilidade estudantil"
+    Consulte o [GitHub Student Developer Pack](https://education.github.com/pack) para verificar os benefícios atuais. Este hub não presume que um plano pago do Copilot esteja disponível.
 
 ---
 
-## 2. GitHub Models (Inferência LLM Gratuita)
+## 2. Backend de LLM Local (Grátis)
 
 **Necessário para:** Laboratórios L200 que usam LLMs sem Azure.
 
-GitHub Models fornece acesso gratuito à API de LLMs de fronteira com sua conta do GitHub. Sem necessidade de cartão de crédito.
+Use Foundry Local ou Ollama. Ambos executam na sua máquina e expõem um endpoint compatível com OpenAI.
 
 **Configuração:**
 
-1. Acesse [github.com/marketplace/models](https://github.com/marketplace/models)
-2. Escolha um modelo (ex.: `gpt-4o`, `Phi-4`, `Llama-3.3-70B`)
-3. Clique em **"Use this model"** → **"Get API key"** para obter seu token de acesso pessoal
-4. Armazene-o como `GITHUB_TOKEN` no seu ambiente
+1. Conclua o [Lab 013 — Backends de LLM Gratuitos](labs/lab-013-github-models.md).
+2. Configure `LOCAL_LLM_BASE_URL` e `LOCAL_LLM_MODEL`.
+3. Mantenha o runtime local ativo durante os labs dependentes.
 
-**Modelos disponíveis incluem:**
-- OpenAI: `gpt-4o`, `gpt-4o-mini`, `o1-mini`
-- Meta: `Llama-3.3-70B-Instruct`, `Llama-3.2-90B-Vision`
-- Microsoft: `Phi-4`, `Phi-3.5-MoE`
-- Mistral: `Mistral-Large`
-
-!!! warning "Limites de taxa"
-    GitHub Models tem limite de taxa para contas gratuitas. Para fins de laboratório, isso é mais que suficiente. Se você atingir os limites, aguarde alguns minutos e tente novamente.
+!!! note "Hardware"
+    Modelos pequenos podem executar em CPU. Modelos maiores ou mais rápidos podem exigir GPU/NPU compatível e recebem o selo **GRÁTIS***.
 
 ---
 

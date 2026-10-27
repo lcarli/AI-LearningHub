@@ -1,3 +1,22 @@
+---
+lab:
+  id: 068
+  level: L200
+  journey: ai-agents
+  time_min: 60
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
+---
 ﻿---
 tags: [search, rag, bm25, vector, semantic-ranker, python]
 ---
@@ -20,7 +39,7 @@ tags: [search, rag, bm25, vector, semantic-ranker, python]
 - Identifier quels types de requêtes bénéficient le plus de l'hybride + reranking
 
 !!! abstract "Prérequis"
-    Complétez d'abord le **[Lab 009 : Génération augmentée par la recherche](lab-009-rag-basic.md)**. Ce lab suppose une familiarité avec la recherche basée sur les embeddings et les concepts de base de la recherche.
+    Complétez d'abord le **[Lab 009 : Génération augmentée par la recherche](lab-006-what-is-rag.md)**. Ce lab suppose une familiarité avec la recherche basée sur les embeddings et les concepts de base de la recherche.
 
 ## Introduction
 
@@ -258,7 +277,8 @@ python lab-068/broken_search.py
 
 ??? question "**Q3 (Exécuter le lab) :** Quel est le rappel moyen de la stratégie hybride + rerank ?"
 
-    Calculez esults['hybrid_rerank_recall'].mean().
+    Calculez
+esults['hybrid_rerank_recall'].mean().
 
     ??? success "✅ Révéler la réponse"
         **1,00 (rappel parfait)**
@@ -267,7 +287,8 @@ python lab-068/broken_search.py
 
 ??? question "**Q4 (Exécuter le lab) :** Quel est le rappel moyen de la recherche BM25 seule ?"
 
-    Calculez esults['bm25_recall'].mean().
+    Calculez
+esults['bm25_recall'].mean().
 
     ??? success "✅ Révéler la réponse"
         **0,47 de rappel moyen**
@@ -276,7 +297,8 @@ python lab-068/broken_search.py
 
 ??? question "**Q5 (Exécuter le lab) :** Quelle est la précision moyenne de la stratégie hybride + rerank ?"
 
-    Calculez esults['hybrid_rerank_precision'].mean().
+    Calculez
+esults['hybrid_rerank_precision'].mean().
 
     ??? success "✅ Révéler la réponse"
         **0,57 de précision moyenne**
@@ -300,6 +322,6 @@ python lab-068/broken_search.py
 
 ## Prochaines étapes
 
-- **[Lab 009](lab-009-rag-basic.md)** — Les bases du RAG (schémas fondamentaux de recherche)
+- **[Lab 009](lab-006-what-is-rag.md)** — Les bases du RAG (schémas fondamentaux de recherche)
 - **[Lab 067](lab-067-graphrag.md)** — GraphRAG (synthèse inter-documents avec graphes de connaissances)
 - **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (gouvernance pour les pipelines de recherche)

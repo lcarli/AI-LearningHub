@@ -1,6 +1,30 @@
 ---
-tags: [free, beginner, no-account-needed, awareness]
+tags:
+- free
+- beginner
+- no-account-needed
+- awareness
+lab:
+  id: '002'
+  level: L50
+  journey: ai-agents
+  time_min: 20
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Mise à jour du backend (octobre 2026)"
+    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
+
 # Laboratoire 002 : Paysage des agents IA 2025
 
 <div class="lab-meta">

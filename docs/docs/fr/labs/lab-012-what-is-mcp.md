@@ -1,3 +1,22 @@
+---
+lab:
+  id: '012'
+  level: L100
+  journey: mcp
+  time_min: 20
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
+---
 # Lab 012 : Qu'est-ce que MCP ? Anatomie du protocole
 
 <div class="lab-meta">
