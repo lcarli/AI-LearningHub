@@ -8,7 +8,7 @@
 
 ## 📚 What's Inside
 
-A structured learning hub with **8 learning paths** and **84 labs** covering:
+A structured learning hub with **three learner journeys**, **9 learning paths**, and **93 labs** covering:
 
 | Path | Levels |
 |------|--------|
@@ -20,6 +20,7 @@ A structured learning hub with **8 learning paths** and **84 labs** covering:
 | 👥 Agent Builder — Teams | L100–L300 |
 | 💻 Agent Builder — VS Code | L100–L300 |
 | ⚙️ Pro Code Agents | L200–L400 |
+| 🎓 GH-300 GitHub Copilot | Four-week certification cohort |
 
 ## 🎯 Level System
 
@@ -27,9 +28,9 @@ A structured learning hub with **8 learning paths** and **84 labs** covering:
 |-------|------|---------------|
 | L50   | Awareness | None |
 | L100  | Foundations | GitHub free |
-| L200  | Intermediate | GitHub free (GitHub Models) |
-| L300  | Advanced | Azure subscription |
-| L400  | Expert | Azure paid |
+| L200  | Intermediate | Copilot Free or local tools |
+| L300  | Advanced | Free simulation or optional paid service |
+| L400  | Expert | Production patterns with explicit cost controls |
 
 ## 🚀 Getting Started Locally
 

@@ -18,7 +18,8 @@ from pathlib import Path
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-LABS_DIR = REPO_ROOT / "docs" / "docs" / "en" / "labs"
+DOCS_DIR = REPO_ROOT / "docs" / "docs"
+LABS_DIR = DOCS_DIR / "en" / "labs"
 PATHS_DIR = REPO_ROOT / "docs" / "docs" / "en" / "paths"
 INDEX_FILE = LABS_DIR / "index.md"
 
@@ -91,65 +92,32 @@ def extract_lab_meta(filepath: Path) -> dict | None:
     }
 
 
-def generate_labs_index(labs: list[dict]) -> str:
-    """Generate the full labs/index.md content."""
-    lines = [
-        "# All Labs",
-        "",
-        "Browse all labs by level. Each lab is self-contained.",
-        "",
-        "→ [How to read a lab page](../how-to-use.md#reading-a-lab-page)",
-        "",
-    ]
-
-    level_groups = {
-        50: ("L50", "Awareness — No account required"),
-        100: ("L100", "Foundations"),
-        200: ("L200", "Intermediate"),
-        300: ("L300", "Advanced"),
-        400: ("L400", "Expert"),
+def generate_labs_index(lang: str) -> str:
+    """Generate the localized catalog shell rendered from labs.json."""
+    copy = {
+        "en": (
+            "Lab Catalog",
+            "Combine search, journey, level, cost, simulation, role, time, "
+            "technology, language, and sorting. The cards are generated from lab frontmatter.",
+        ),
+        "pt": (
+            "Catálogo de Labs",
+            "Combine busca, jornada, nível, custo, simulação, papel, tempo, "
+            "tecnologia, idioma e ordenação. Os cards são gerados do frontmatter dos labs.",
+        ),
+        "fr": (
+            "Catalogue des Labs",
+            "Combinez recherche, parcours, niveau, coût, simulation, rôle, durée, "
+            "technologie, langue et tri. Les cartes proviennent du frontmatter.",
+        ),
     }
-
-    for level_num, (badge, desc) in level_groups.items():
-        level_labs = sorted(
-            [
-                l
-                for l in labs
-                if l["level_num"] == level_num and l["status"] != "retired"
-            ],
-            key=lambda x: x["num"],
-        )
-        if not level_labs:
-            continue
-
-        total_time = sum(l["time_min"] for l in level_labs)
-        lines.append("---")
-        lines.append("")
-        lines.append(
-            f'## <span class="level-badge level-{level_num}">{badge}</span> '
-            f"{desc} ({len(level_labs)} labs, ~{total_time} min)"
-        )
-        lines.append("")
-        lines.append("| Lab | Title | Path | Time | Cost |")
-        lines.append("|-----|-------|------|------|------|")
-        for l in level_labs:
-            lines.append(
-                f"| [Lab {l['num']:03d}]({l['file']}) "
-                f"| {l['title']} "
-                f"| {l['path_name']} "
-                f"| ~{l['time_min']} min "
-                f"| {l['cost']} |"
-            )
-        lines.append("")
-
-    lines.append("---")
-    lines.append("")
-    active_count = sum(lab["status"] != "retired" for lab in labs)
-    retired_count = len(labs) - active_count
-    lines.append(f"**Total: {active_count} active labs · {retired_count} retired**")
-    lines.append("")
-
-    return "\n".join(lines)
+    title, intro = copy[lang]
+    return (
+        f"# {title}\n\n{intro}\n\n"
+        '<div data-lab-catalog data-source="../labs.json" data-catalog-error></div>\n\n'
+        "<noscript>This catalog requires JavaScript. "
+        "Use the navigation menu to open individual labs.</noscript>\n"
+    )
 
 
 def main():
@@ -160,10 +128,10 @@ def main():
         if meta:
             labs.append(meta)
 
-    # Generate labs index
-    index_content = generate_labs_index(labs)
-    INDEX_FILE.write_text(index_content, encoding="utf-8")
-    print(f"Generated {INDEX_FILE} ({len(labs)} labs)")
+    for lang in ("en", "pt", "fr"):
+        index_file = DOCS_DIR / lang / "labs" / "index.md"
+        index_file.write_text(generate_labs_index(lang), encoding="utf-8")
+        print(f"Generated {index_file} ({len(labs)} labs)")
 
 
 if __name__ == "__main__":

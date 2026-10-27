@@ -82,6 +82,12 @@ Lab 004 → Lab 015 → Lab 078 → Lab 020 → Lab 072
 ```
 Learn the core concepts, run models locally, build a local MCP server, and practice reliability analysis without Azure or paid APIs.
 
+### Route F — "Copilot Free to GH-300"
+```
+Lab 107 → Lab 010 → Lab 085 → Lab 086 → Lab 087 → Lab 088 → Lab 089
+```
+Continue with the free simulations in Labs 091 and 094, then use the [GH-300 four-week path](paths/gh-300/).
+
 ---
 
 ## 🔖 Reading a Lab Page

@@ -14,6 +14,7 @@ Les défis sont moins guidés que les labs. Utilisez-les après les labs associ�
 | [Défi 006](challenge-006-observability.md) | Investiguer un incident d'observabilité d'agent | <span class="level-badge level-300">L300</span> | Traces, métriques, cause racine | ~60 min |
 | [Défi 007](challenge-007-guardrails-red-team.md) | Red team des garde-fous d'agents | <span class="level-badge level-300">L300</span> | Garde-fous, PII, sécurité | ~60 min |
 | [Défi 008](challenge-008-local-only-agent.md) | Construire un agent 100 % local | <span class="level-badge level-200">L200</span> | Outils locaux, routage, sans cloud | ~75 min |
+| [Défi 009](challenge-009-copilot-free.md) | Réussir uniquement avec Copilot Free | <span class="level-badge level-200">L200</span> | Offre gratuite, contexte, validation locale | ~60 min |
 
 ---
 

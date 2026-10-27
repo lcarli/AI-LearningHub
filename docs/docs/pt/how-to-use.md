@@ -82,6 +82,12 @@ Lab 004 → Lab 015 → Lab 078 → Lab 020 → Lab 072
 ```
 Aprenda os conceitos centrais, execute modelos localmente, construa um servidor MCP local e pratique análise de confiabilidade sem Azure ou APIs pagas.
 
+### Rota F — "Do Copilot Free ao GH-300"
+```
+Lab 107 → Lab 010 → Lab 085 → Lab 086 → Lab 087 → Lab 088 → Lab 089
+```
+Continue com as simulações grátis dos Labs 091 e 094 e use a [trilha GH-300 de quatro semanas](paths/gh-300/).
+
 ---
 
 ## 🔖 Lendo uma Página de Laboratório

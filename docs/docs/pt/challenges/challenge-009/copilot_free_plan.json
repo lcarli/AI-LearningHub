@@ -1,0 +1,13 @@
+{
+  "free_only": true,
+  "auto_model_selection": true,
+  "context_strategy": "selected files and repository instructions",
+  "steps": [
+    "ask for a plan",
+    "inspect the affected files",
+    "implement one bounded change",
+    "run local tests"
+  ],
+  "validation_commands": ["python -m unittest"],
+  "manual_fallback": "Follow the accepted plan manually and run the same local tests."
+}
