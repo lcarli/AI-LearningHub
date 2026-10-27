@@ -46,3 +46,6 @@ You design production AI systems — multi-agent architectures, observability, g
 ---
 
 **Total: 15 labs · ~18 hours · From architecture to production governance**
+## Phase 2 additions
+
+Use Labs 095, 098, 100 and 101 to connect architecture decisions to evidence, risk, and cost.

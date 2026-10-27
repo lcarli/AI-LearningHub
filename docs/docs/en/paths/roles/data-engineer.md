@@ -43,3 +43,6 @@ You work with data — analytics, BI, ETL pipelines — and want to add AI agent
 ---
 
 **Total: 12 labs · ~11 hours · From data fundamentals to AI-powered analytics**
+## Phase 2 additions
+
+Use Labs 022, 095 and 099 plus Challenge 011 for retrieval and evaluation evidence.

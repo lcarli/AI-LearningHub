@@ -1,23 +1,31 @@
 ---
 tags:
 - rag
-- pgvector
-- python
-- free
-- github-models
+- embeddings
+- retrieval
+- local
+- evaluation
 lab:
   id: '022'
   level: L200
-  journey: llm-foundations
-  time_min: 50
+  journey: rag
+  time_min: 90
   cost:
-    tier: free-gh
-    requires:
-    - github
-    - copilot-free
-    estimate_usd: 0 within the documented free path or quota.
-    simulation: false
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or simulation.
+    simulation: true
     cleanup: false
+  roles:
+  - developer
+  - data-engineer
+  - architect
+  technologies:
+  - rag
+  - embeddings
+  - retrieval
+  - local
+  - evaluation
   status: active
   last_verified: '2026-10-27'
   languages:
@@ -25,352 +33,191 @@ lab:
   - pt
   - fr
 ---
-!!! warning "Mise à jour du backend (octobre 2026)"
-    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
-
-# Lab 022 : Pipeline RAG avec GitHub Models + pgvector
+# Lab 022: RAG local : découpage → embedding → recherche → réponse
 
 <div class="lab-meta">
-  <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/rag/">RAG</a></span>
-  <span><strong>Durée :</strong> ~50 min</span>
-  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> + <span class="level-badge cost-free">Docker (local)</span></span>
+  <span><strong>Niveau:</strong> <span class="level-badge level-200">L200</span></span>
+  <span><strong>Parcours:</strong> rag</span>
+  <span><strong>Durée:</strong> ~90 min</span>
+  <span><strong>Coût:</strong> <span class="level-badge cost-free">Gratuit</span></span>
 </div>
+
+!!! info "Conception gratuite d'abord"
+    Le parcours obligatoire est local, simulé ou compatible avec GitHub Copilot Free. Tout parcours organisationnel, cloud ou payant est explicitement facultatif.
+
+!!! tip "Impact sur les AI Credits"
+    Limitez la tâche, utilisez le plus petit contexte utile et validez localement. Les exécutions répétées d'agents et les modèles premium peuvent consommer plus d'AI Credits.
 
 ## Ce que vous apprendrez
 
-- Démarrer **pgvector** (PostgreSQL + vecteurs) localement via Docker
-- Générer des embeddings avec **GitHub Models** (`text-embedding-3-small`) — gratuit
-- **Ingérer** des documents : découper, vectoriser, stocker dans pgvector
-- **Interroger** avec la recherche par similarité sémantique (opérateur cosinus `<=>`)
-- Construire un **pipeline RAG complet** (récupérer → augmenter → générer)
-
----
-
-## Introduction
-
-Dans le [Lab 006](lab-006-what-is-rag.md) vous avez appris la théorie du RAG. Ici vous construisez la vraie chose — un système RAG fonctionnel utilisant uniquement des outils gratuits : GitHub Models pour les embeddings + la génération, et pgvector fonctionnant localement dans Docker.
-
-!!! tip "Jeu de données pré-construit inclus"
-    Ce lab utilise le **jeu de données OutdoorGear** — 25 produits, FAQs et politiques d'entreprise, prêts à être ingérés.
-    📥 [`data/products.csv`](https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv) · [`data/knowledge-base.json`](https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json)
-
-    ```bash
-    # Download the sample data
-    curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
-    curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
-    ```
-
----
+- Construire un pipeline explicite d'ingestion et récupération
+- Utiliser un baseline d'embeddings local sans dépendance
+- Séparer preuves récupérées et génération de réponse
+- Évaluer rappel, couverture des citations et affirmations non étayées
 
 ## Prérequis
 
-- Docker Desktop — gratuit : https://www.docker.com/products/docker-desktop
-- Python 3.11+
-- `GITHUB_TOKEN` configuré (depuis le [Lab 013](lab-013-github-models.md))
+- Python 3.10+ pour l'exercice local
+- Un éditeur de texte et un terminal
+- Challenge 011
+
+## Résultat et preuves
+
+Le lab n'est terminé que lorsque l'apprenant montre des preuves, pas seulement le concept.
+
+| Capacité | Preuve requise |
+|---|---|
+| Construire un pipeline explicite d'ingestion et récupération | `evidence/step-1.txt` plus un contrôle local réussi |
+| Utiliser un baseline d'embeddings local sans dépendance | `evidence/step-2.txt` plus un contrôle local réussi |
+| Séparer preuves récupérées et génération de réponse | `evidence/step-3.txt` plus un contrôle local réussi |
+| Évaluer rappel, couverture des citations et affirmations non étayées | `evidence/step-4.txt` plus un contrôle local réussi |
+
+## Plan du lab
+
+| Phase | Minutes | Activité |
+|---|---:|---|
+| Préparer | 10 | Lire le scénario, examiner les fixtures et noter les hypothèses |
+| Base | 15 | Exécuter le comportement actuel et conserver le résultat |
+| Implémenter | 25 | Réaliser les quatre étapes par petites modifications |
+| Valider | 15 | Exécuter les tests, examiner les échecs et collecter les preuves |
+| Réviser | 10+ | Expliquer les compromis et comparer le parcours réel facultatif |
+
+## Modèle visuel
+
+```mermaid
+flowchart LR
+  D[Documents] --> C[Chunking]
+  C --> E[Local embeddings]
+  E --> I[In-memory index]
+  Q[Question] --> QE[Query embedding]
+  QE --> S[Similarity search]
+  I --> S
+  S --> A[Answer with citations]
+  A --> V[Retrieval and groundedness eval]
+```
+
+## Scénario
+
+OutdoorGear a besoin d'une solution explicable, testable et sûre pour un atelier. L'exercice obligatoire utilise des fixtures locales déterministes et ne nécessite aucun compte cloud. Un service réel pourra ensuite remplacer uniquement l'adaptateur.
+
+## Exercice guidé
+
+### Step 1
+
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
+
+**Action:** Exécutez `local_rag.py ingest` pour découper et vectoriser `documents.json`.
+
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
+
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
+
+### Step 2
+
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
+
+**Action:** Lancez trois recherches et examinez scores, limites et sources.
+
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
+
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
+
+### Step 3
+
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
+
+**Action:** Générez une réponse extractive citant uniquement les chunks récupérés.
+
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
+
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
+
+### Step 4
+
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
+
+**Action:** Modifiez la taille des chunks et comparez recall@3 avant un backend réel.
+
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
+
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
+
+### Exécuter localement
 
 ```bash
-pip install openai psycopg2-binary python-dotenv
+cd docs/docs/fr/labs/lab-022
+python -m unittest discover -v
 ```
 
----
+Créez un dossier `evidence/` hors du dépôt pour conserver les sorties. Ne commitez ni identifiants, ni code privé, ni données personnelles.
 
-## Exercice du lab
+## Grille de revue
 
-### Étape 1 : Démarrer pgvector avec Docker
+| Catégorie | Preuve d'achèvement |
+|---|---|
+| Correction | Les tests prouvent le comportement et les limites importantes. |
+| Preuves | Commandes, résultats et hypothèses sont reproductibles. |
+| Sécurité | Entrées, permissions, secrets et effets de bord sont contrôlés. |
+| Maintenabilité | La solution est bornée, lisible et réversible. |
 
-```bash
-docker run -d \
-  --name pgvector-rag \
-  -e POSTGRES_PASSWORD=ragpass \
-  -e POSTGRES_DB=ragdb \
-  -p 5432:5432 \
-  pgvector/pgvector:pg16
-```
+## Échecs fréquents et récupération
 
-Vérifiez qu'il fonctionne :
-```bash
-docker ps | grep pgvector-rag
-```
+| Échec | Récupération |
+|---|---|
+| Le chemin nominal réussit mais les limites échouent. | Ajoutez cas négatifs, vides, maximaux et mal formés. |
+| Le modèle propose une réécriture générale. | Revenez au plus petit changement et rejouez la base. |
+| Un outil ou document récupéré contient des instructions. | Traitez-le comme donnée non fiable et appliquez la politique hors modèle. |
+| Le résultat n'est pas reproductible. | Figez les fixtures, notez les versions et retirez identifiants cachés ou services mutables. |
 
-### Étape 2 : Créer le schéma de base de données
+## Accessibilité et usage responsable
 
-```python
-# setup_db.py
-import psycopg2
+- Ne dépendez pas uniquement des couleurs dans les diagrammes ou résultats.
+- Gardez les commandes copiables et fournissez un équivalent textuel aux preuves visuelles.
+- Ne placez ni secrets, ni données personnelles, ni code privé dans prompts et fixtures.
+- Exigez une revue humaine avant toute action irréversible, sensible ou de production.
 
-conn = psycopg2.connect(
-    host="localhost", port=5432,
-    dbname="ragdb", user="postgres", password="ragpass"
-)
-cur = conn.cursor()
+## Kit d'accompagnement
 
-cur.execute("CREATE EXTENSION IF NOT EXISTS vector;")
-cur.execute("""
-    CREATE TABLE IF NOT EXISTS documents (
-        id          SERIAL PRIMARY KEY,
-        title       TEXT NOT NULL,
-        content     TEXT NOT NULL,
-        embedding   vector(1536),   -- text-embedding-3-small dimension
-        source      TEXT
-    );
-""")
-cur.execute("""
-    CREATE INDEX IF NOT EXISTS documents_embedding_idx
-    ON documents USING ivfflat (embedding vector_cosine_ops)
-    WITH (lists = 10);
-""")
+Le kit téléchargeable contient le guide, les exercices locaux, une fiche mémo et les diagrammes cités. La CI publie des artefacts PDF et ZIP déterministes.
 
-conn.commit()
-cur.close()
-conn.close()
-print("Database ready.")
-```
+| Élément | Objectif |
+|---|---|
+| `README.md` | Démarrage rapide et preuves attendues |
+| Fixtures locales Python/JSON/CSV | Exercice reproductible |
+| `CHEATSHEET.md` | Concepts, commandes et liste de vérification |
+| PDF généré | Guide imprimable produit en CI |
+| ZIP généré | Kit hors ligne produit en CI |
 
-```bash
-python setup_db.py
-```
+## Parcours réel facultatif
 
-### Étape 3 : Ingérer les documents du jeu de données
+Remplacez uniquement l'adaptateur par un service hébergé approuvé. Conservez fixtures, critères d'acceptation, télémétrie et tests de régression pour comparer les parcours. Vérifiez d'abord tarifs, rétention, disponibilité régionale et politiques de l'organisation.
 
-Le jeu de données se trouve dans le dépôt. Téléchargez-le (ou utilisez l'URL directement) :
+## Vérification des connaissances
 
-```bash
-curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
-curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
-```
+??? question "Que mesurer avant de changer de base vectorielle ?"
 
-```python
-# ingest.py
-import os, csv, json, psycopg2
-from openai import OpenAI
+    ??? success "Réponse"
+        Qualité et latence de récupération sur un jeu d'évaluation stable.
 
-client = OpenAI(
-    base_url="https://models.inference.ai.azure.com",
-    api_key=os.environ["GITHUB_TOKEN"],
-)
+??? question "Quelles preuves conserver ?"
 
-def build_documents() -> list[dict]:
-    """Load products.csv and knowledge-base.json into a flat list of documents."""
-    docs = []
+    ??? success "Réponse"
+        Commande, résultat, fichier modifié, hypothèses et brève explication de confiance.
 
-    # --- Products from CSV ---
-    with open("products.csv") as f:
-        for p in csv.DictReader(f):
-            docs.append({
-                "title": f"{p['name']} — Product Info",
-                "content": (
-                    f"{p['name']} ({p['category']}/{p['subcategory']}). "
-                    f"SKU: {p['sku']}. Price: ${p['price']}. "
-                    f"In stock: {p['in_stock']}. Weight: {p['weight_kg']}kg. "
-                    f"Rating: {p['rating']}/5. {p['description']}"
-                ),
-                "source": "product-catalog",
-            })
+??? question "Quand utiliser le parcours réel facultatif ?"
 
-    # --- Policies, FAQs, and guides from JSON ---
-    with open("knowledge-base.json") as f:
-        kb = json.load(f)
+    ??? success "Réponse"
+        Après réussite du contrat local et compréhension des coûts, politiques, données et nettoyage.
 
-    for section in kb["sections"].values():
-        docs.append({
-            "title": section["title"],
-            "content": section["content"],
-            "source": "policies",
-        })
+## Critères de sortie
 
-    for faq in kb["faqs"]:
-        docs.append({
-            "title": f"FAQ: {faq['question']}",
-            "content": f"Q: {faq['question']}\nA: {faq['answer']}",
-            "source": "faq",
-        })
+- [ ] L'exercice local réussit sans identifiants.
+- [ ] Les preuves et hypothèses sont consignées.
+- [ ] Les fonctions payantes ou organisationnelles restent facultatives.
+- [ ] Sécurité, accessibilité et comportements d'échec ont été vérifiés.
+- [ ] Le kit peut être reproduit depuis les sources.
 
-    for guide in kb["product_guides"]:
-        docs.append({
-            "title": guide["title"],
-            "content": guide["content"],
-            "source": "guide",
-        })
+## Sources publiques
 
-    return docs
-
-def get_embedding(text: str) -> list[float]:
-    response = client.embeddings.create(
-        model="text-embedding-3-small",
-        input=text,
-    )
-    return response.data[0].embedding
-
-documents = build_documents()
-print(f"Prepared {len(documents)} documents to ingest")
-
-conn = psycopg2.connect(
-    host="localhost", port=5432,
-    dbname="ragdb", user="postgres", password="ragpass"
-)
-cur = conn.cursor()
-
-for doc in documents:
-    print(f"  Embedding: {doc['title'][:60]}")
-    embedding = get_embedding(doc["content"])
-    cur.execute(
-        "INSERT INTO documents (title, content, embedding, source) VALUES (%s, %s, %s, %s)",
-        (doc["title"], doc["content"], embedding, doc["source"])
-    )
-
-conn.commit()
-cur.close()
-conn.close()
-print(f"\n✅ Ingested {len(documents)} documents.")
-```
-
-```bash
-python ingest.py
-# Prepared 42 documents to ingest
-# ✅ Ingested 42 documents.
-```
-
-### Étape 4 : Interroger avec la recherche sémantique
-
-```python
-# search.py
-import os, psycopg2
-from openai import OpenAI
-
-client = OpenAI(
-    base_url="https://models.inference.ai.azure.com",
-    api_key=os.environ["GITHUB_TOKEN"],
-)
-
-def search(query: str, top_k: int = 3) -> list[dict]:
-    # Embed the query
-    response = client.embeddings.create(
-        model="text-embedding-3-small",
-        input=query,
-    )
-    query_embedding = response.data[0].embedding
-
-    # Cosine similarity search in pgvector
-    conn = psycopg2.connect(
-        host="localhost", port=5432,
-        dbname="ragdb", user="postgres", password="ragpass"
-    )
-    cur = conn.cursor()
-    cur.execute("""
-        SELECT title, content, source,
-               1 - (embedding <=> %s::vector) AS similarity
-        FROM documents
-        ORDER BY embedding <=> %s::vector
-        LIMIT %s
-    """, (query_embedding, query_embedding, top_k))
-
-    results = [
-        {"title": row[0], "content": row[1], "source": row[2], "similarity": row[3]}
-        for row in cur.fetchall()
-    ]
-    cur.close()
-    conn.close()
-    return results
-
-# Test
-results = search("how waterproof are the boots?")
-for r in results:
-    print(f"[{r['similarity']:.3f}] {r['title']}")
-```
-
-### Étape 5 : Le pipeline de réponse RAG
-
-```python
-# rag.py
-import os
-from openai import OpenAI
-from search import search
-
-client = OpenAI(
-    base_url="https://models.inference.ai.azure.com",
-    api_key=os.environ["GITHUB_TOKEN"],
-)
-
-def answer(question: str) -> str:
-    # 1. Retrieve
-    docs = search(question, top_k=3)
-
-    # 2. Augment — build context
-    context = "\n\n".join([
-        f"**{d['title']}** (similarity: {d['similarity']:.2f})\n{d['content']}"
-        for d in docs
-    ])
-
-    # 3. Generate
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        temperature=0,
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are a helpful outdoor gear assistant. "
-                    "Answer questions using ONLY the provided context. "
-                    "If the context doesn't contain the answer, say so honestly. "
-                    "Always cite which document your answer comes from."
-                )
-            },
-            {
-                "role": "user",
-                "content": f"Context:\n{context}\n\nQuestion: {question}"
-            }
-        ],
-    )
-    return response.choices[0].message.content
-
-# Test the full pipeline
-questions = [
-    "Can I return hiking boots I've already worn?",
-    "How much does express shipping cost?",
-    "What certification does the harness have?",
-    "What are the tent dimensions?",
-]
-
-for q in questions:
-    print(f"\n❓ {q}")
-    print(f"💬 {answer(q)}")
-    print("—" * 60)
-```
-
-```bash
-python rag.py
-```
-
----
-
-## Comprendre les résultats
-
-!!! tip "Scores de similarité"
-    - **> 0.85** — correspondance très forte (le document répond directement à la question)
-    - **0.70–0.85** — lié (peut être pertinent)
-    - **< 0.70** — correspondance faible (probablement pas utile, envisagez de filtrer)
-
-Ajoutez un filtre de seuil pour éviter d'utiliser des documents à faible confiance :
-
-```python
-docs = [d for d in search(question, top_k=5) if d["similarity"] > 0.75]
-if not docs:
-    return "I don't have information about that in my knowledge base."
-```
-
----
-
-## Nettoyage
-
-```bash
-docker stop pgvector-rag && docker rm pgvector-rag
-```
-
----
-
-## Prochaines étapes
-
-- **RAG agentique** (réécriture de requêtes, multi-hop) : → [Lab 026 — Pattern RAG agentique](lab-026-agentic-rag.md)
-- **RAG avec Semantic Kernel** : → [Lab 023 — Plugins SK, mémoire & planificateurs](lab-023-sk-plugins-memory.md)
-- **pgvector en production sur Azure** : → [Lab 031 — pgvector sur Azure](lab-031-pgvector-semantic-search.md)
+- [RAG paper](https://arxiv.org/abs/2005.11401)
+- [Sentence Transformers semantic search](https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html)

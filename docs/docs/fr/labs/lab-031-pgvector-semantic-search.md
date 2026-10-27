@@ -187,7 +187,7 @@ curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/produc
 curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
 ```
 
-Réutilisez le `ingest.py` du [Lab 022](lab-022-rag-github-models-pgvector.md#step-3-ingest-documents-from-the-sample-dataset), mais mettez à jour la connexion pour utiliser Azure :
+Réutilisez le contrat de découpage et d'embedding du [Lab 022](lab-022-rag-github-models-pgvector.md#step-1), puis remplacez uniquement l'adaptateur mémoire par Azure Database for PostgreSQL :
 
 ```python
 # Use environment variables instead of hardcoded local values

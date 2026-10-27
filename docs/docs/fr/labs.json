@@ -92,56 +92,66 @@
   },
   {
     "id": "004",
-    "title": "Lab 004 : Comment fonctionnent les LLM",
-    "summary": "- Ce qu'est vraiment un Grand Modèle de Langage (LLM) sous le capot - Comment fonctionne l'entraînement : pré-entraînement, affinage, RLHF - Ce que signifient en pratique les tokens, les fenêtres de contexte et la température - Pourquoi les LLM hallucinent — et comment atténuer c",
+    "title": "Lab 004: Fonctionnement des LLM : tokens, attention, entraînement et hallucination",
+    "summary": "- Suivre le texte de la tokenisation à la prédiction puis au décodage - Expliquer préentraînement, réglage par instructions, alignement et évaluation - Présenter l'attention comme un mécanisme de relations, pas une mémoire humaine - Diagnostiquer l'hallucination comme un problème",
     "url": "labs/lab-004-how-llms-work.md",
     "level": "L50",
-    "journey": "ai-agents",
-    "time_min": 20,
+    "journey": "llm-foundations",
+    "time_min": 45,
     "cost": "free",
-    "simulation": false,
-    "roles": [],
+    "simulation": true,
+    "roles": [
+      "student",
+      "developer",
+      "architect"
+    ],
     "technologies": [
-      "free",
-      "beginner",
-      "no-account-needed",
-      "llm"
+      "llm",
+      "tokens",
+      "attention",
+      "training",
+      "hallucination"
     ],
     "language": "fr",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "free",
-      "beginner",
-      "no-account-needed",
-      "llm"
+      "llm",
+      "tokens",
+      "attention",
+      "training",
+      "hallucination"
     ]
   },
   {
     "id": "005",
-    "title": "Lab 005 : Ingénierie de prompts",
-    "summary": "- L'anatomie d'un prompt : messages système, utilisateur, assistant - Les techniques fondamentales : zero-shot, few-shot, chaîne de pensée, prompting par rôle - Comment écrire des **prompts système** efficaces pour les agents IA - Les schémas d'échec courants — et comment les cor",
+    "title": "Lab 005: Prompting et ingénierie du contexte",
+    "summary": "- Écrire des prompts avec objectif, preuves, contraintes, contrat de sortie et validation - Séparer instructions durables, contexte de tâche et preuves récupérées - N'utiliser des exemples que s'ils améliorent un comportement mesurable - Traiter les prompts comme des composants v",
     "url": "labs/lab-005-prompt-engineering.md",
     "level": "L50",
-    "journey": "ai-agents",
-    "time_min": 25,
+    "journey": "llm-foundations",
+    "time_min": 60,
     "cost": "free",
-    "simulation": false,
-    "roles": [],
+    "simulation": true,
+    "roles": [
+      "student",
+      "developer",
+      "architect"
+    ],
     "technologies": [
-      "free",
-      "beginner",
-      "no-account-needed",
-      "prompt-engineering"
+      "prompting",
+      "context-engineering",
+      "evaluation",
+      "llm"
     ],
     "language": "fr",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "free",
-      "beginner",
-      "no-account-needed",
-      "prompt-engineering"
+      "prompting",
+      "context-engineering",
+      "evaluation",
+      "llm"
     ]
   },
   {
@@ -173,20 +183,34 @@
   },
   {
     "id": "007",
-    "title": "Lab 007 : Que sont les embeddings ?",
-    "summary": "- Ce qu'est un embedding (un vecteur / une liste de nombres) - Comment le texte est projeté dans un espace de haute dimension - Ce que signifie la **similarité cosinus** et pourquoi elle est importante - Pourquoi les embeddings sont au cœur de la recherche sémantique, du RAG et d",
+    "title": "Lab 007: Embeddings et recherche de similarité locale",
+    "summary": "- Représenter le sens par des vecteurs sans modèle hébergé - Calculer la similarité cosinus et examiner les voisins - Distinguer chevauchement lexical et similarité sémantique - Évaluer la récupération avec des documents pertinents étiquetés",
     "url": "labs/lab-007-what-are-embeddings.md",
     "level": "L50",
     "journey": "llm-foundations",
-    "time_min": 15,
+    "time_min": 60,
     "cost": "free",
-    "simulation": false,
-    "roles": [],
-    "technologies": [],
+    "simulation": true,
+    "roles": [
+      "student",
+      "developer",
+      "data-engineer"
+    ],
+    "technologies": [
+      "embeddings",
+      "similarity",
+      "retrieval",
+      "local"
+    ],
     "language": "fr",
     "status": "active",
     "last_verified": "2026-10-27",
-    "tags": []
+    "tags": [
+      "embeddings",
+      "similarity",
+      "retrieval",
+      "local"
+    ]
   },
   {
     "id": "008",
@@ -429,75 +453,93 @@
   },
   {
     "id": "017",
-    "title": "Lab 017 : Sortie structurée & mode JSON",
-    "summary": "- Pourquoi la sortie non structurée des LLM est fragile dans les systèmes d'agents - Comment utiliser le **mode JSON** pour forcer une sortie JSON valide - Comment définir des **schémas** avec Pydantic (Python) et des classes C# - Comment utiliser la **sortie structurée** avec l'",
+    "title": "Lab 017: Sorties structurées fiables avec validation locale",
+    "summary": "- Définir un contrat de sortie avec JSON Schema - Valider types, champs requis, énumérations et propriétés supplémentaires - Séparer nouvelle tentative du modèle et réparation déterministe - Mesurer le taux de validité sur un jeu de régression",
     "url": "labs/lab-017-structured-output.md",
     "level": "L100",
-    "journey": "ai-agents",
-    "time_min": 25,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
-    "technologies": [],
-    "language": "fr",
-    "status": "active",
-    "last_verified": "2026-10-27",
-    "tags": []
-  },
-  {
-    "id": "018",
-    "title": "Lab 018 : Appel de fonctions & utilisation d'outils",
-    "summary": "- Ce qu'est l'appel de fonctions (utilisation d'outils) et comment il fonctionne au niveau de l'API - Comment définir des outils que le LLM peut appeler - Comment **analyser et exécuter les appels d'outils** à partir de la réponse du modèle - Comment implémenter une **boucle d'ex",
-    "url": "labs/lab-018-function-calling.md",
-    "level": "L100",
-    "journey": "ai-agents",
-    "time_min": 35,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "journey": "llm-foundations",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student"
+    ],
     "technologies": [
-      "python",
-      "free",
-      "github-models",
-      "tool-calling",
-      "function-calling"
+      "structured-output",
+      "json-schema",
+      "validation",
+      "local"
     ],
     "language": "fr",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "python",
-      "free",
-      "github-models",
-      "tool-calling",
-      "function-calling"
+      "structured-output",
+      "json-schema",
+      "validation",
+      "local"
+    ]
+  },
+  {
+    "id": "018",
+    "title": "Lab 018: Appel d'outils avec contrats locaux typés",
+    "summary": "- Décrire les outils avec noms, arguments et résultats étroits - Valider arguments avant exécution et résultats avant réutilisation - Exiger une approbation pour effets de bord et données sensibles - Traiter descriptions et sorties d'outils comme entrées non fiables",
+    "url": "labs/lab-018-function-calling.md",
+    "level": "L100",
+    "journey": "llm-foundations",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "tools",
+      "function-calling",
+      "security",
+      "local"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "tools",
+      "function-calling",
+      "security",
+      "local"
     ]
   },
   {
     "id": "019",
-    "title": "Lab 019 : Réponses en streaming dans les agents",
-    "summary": "- Pourquoi le streaming est important pour l'expérience utilisateur des agents IA - Comment utiliser `stream=True` avec le SDK Python OpenAI - Comment gérer les appels d'outils en streaming (délicat — différent du streaming classique) - Comment renvoyer des tokens en streaming de",
+    "title": "Lab 019: Réponses en streaming : événements, annulation et UX sûre",
+    "summary": "- Modéliser le streaming par événements typés plutôt que fragments bruts - Gérer JSON partiel, annulation, reprise et métadonnées finales - Séparer modération et approbations de la boucle d'affichage - Mesurer temps au premier événement et durée totale",
     "url": "labs/lab-019-streaming-responses.md",
     "level": "L100",
-    "journey": "ai-agents",
-    "time_min": 25,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "journey": "llm-foundations",
+    "time_min": 50,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student"
+    ],
     "technologies": [
-      "python",
-      "free",
-      "github-models",
-      "streaming"
+      "streaming",
+      "sse",
+      "ux",
+      "local"
     ],
     "language": "fr",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "python",
-      "free",
-      "github-models",
-      "streaming"
+      "streaming",
+      "sse",
+      "ux",
+      "local"
     ]
   },
   {
@@ -556,31 +598,35 @@
   },
   {
     "id": "022",
-    "title": "Lab 022 : Pipeline RAG avec GitHub Models + pgvector",
-    "summary": "- Démarrer **pgvector** (PostgreSQL + vecteurs) localement via Docker - Générer des embeddings avec **GitHub Models** (`text-embedding-3-small`) — gratuit - **Ingérer** des documents : découper, vectoriser, stocker dans pgvector - **Interroger** avec la recherche par similarité s",
+    "title": "Lab 022: RAG local : découpage → embedding → recherche → réponse",
+    "summary": "- Construire un pipeline explicite d'ingestion et récupération - Utiliser un baseline d'embeddings local sans dépendance - Séparer preuves récupérées et génération de réponse - Évaluer rappel, couverture des citations et affirmations non étayées",
     "url": "labs/lab-022-rag-github-models-pgvector.md",
     "level": "L200",
-    "journey": "llm-foundations",
-    "time_min": 50,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "journey": "rag",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "data-engineer",
+      "architect"
+    ],
     "technologies": [
       "rag",
-      "pgvector",
-      "python",
-      "free",
-      "github-models"
+      "embeddings",
+      "retrieval",
+      "local",
+      "evaluation"
     ],
     "language": "fr",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
       "rag",
-      "pgvector",
-      "python",
-      "free",
-      "github-models"
+      "embeddings",
+      "retrieval",
+      "local",
+      "evaluation"
     ]
   },
   {
@@ -2525,6 +2571,37 @@
     ]
   },
   {
+    "id": "090",
+    "title": "Lab 090: Tests, refactorisation et modernisation du code existant avec Copilot",
+    "summary": "- Caractériser le comportement avant modification - Générer des tests ciblés et vérifier chaque assertion - Refactoriser par étapes sans changer le comportement - Planifier une mise à niveau avec retour arrière",
+    "url": "labs/lab-090-copilot-testing-legacy-modernization.md",
+    "level": "L200",
+    "journey": "copilot",
+    "time_min": 75,
+    "cost": "free-gh",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "github-copilot",
+      "testing",
+      "refactoring",
+      "legacy"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "testing",
+      "refactoring",
+      "legacy"
+    ]
+  },
+  {
     "id": "091",
     "title": "Lab 091: Agent cloud et revue de code Copilot : de l'issue à la PR",
     "summary": "- Tracer le cycle issue-vers-PR de l'agent cloud - Vérifier pare-feu, permissions et instructions - Évaluer les commentaires de revue Copilot - Estimer AI Credits et minutes Actions",
@@ -2553,6 +2630,70 @@
       "cloud-agent",
       "code-review",
       "github-actions"
+    ]
+  },
+  {
+    "id": "092",
+    "title": "Lab 092: Code sécurisé avec Copilot : Autofix, secret scanning et risques des agents",
+    "summary": "- Trier les alertes avant d'accepter Autofix - Prévenir, détecter et renouveler les secrets exposés - Appliquer moindre privilège et approbations aux agents - Se défendre contre descriptions et sorties MCP empoisonnées",
+    "url": "labs/lab-092-secure-code-copilot.md",
+    "level": "L300",
+    "journey": "copilot",
+    "time_min": 75,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "github-copilot",
+      "security",
+      "autofix",
+      "secret-scanning",
+      "mcp"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "security",
+      "autofix",
+      "secret-scanning",
+      "mcp"
+    ]
+  },
+  {
+    "id": "093",
+    "title": "Lab 093: Copilot SDK : intégrer un agent dans votre application",
+    "summary": "- Séparer application hôte, runtime agent et contrats d'extension - Reconnaître la dépréciation de Chat Participant API pour les nouvelles intégrations - Utiliser agent plugins et MCP comme frontières actuelles - Choisir explicitement Copilot ou BYOK local",
+    "url": "labs/lab-093-copilot-sdk-agent-app.md",
+    "level": "L300",
+    "journey": "copilot",
+    "time_min": 90,
+    "cost": "free-gh",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "github-copilot",
+      "copilot-sdk",
+      "chat-participant",
+      "mcp"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "copilot-sdk",
+      "chat-participant",
+      "mcp"
     ]
   },
   {
@@ -2590,6 +2731,72 @@
     ]
   },
   {
+    "id": "095",
+    "title": "Lab 095: Mesurer l'impact de Copilot : API de métriques, DORA et SPACE",
+    "summary": "- Distinguer adoption, engagement, acceptation, livraison et expérience - Éviter d'attribuer DORA à un seul outil sans contrôles - Utiliser SPACE comme cadre équilibré - Créer un scorecard respectueux de la vie privée avec données simulées",
+    "url": "labs/lab-095-copilot-impact-metrics.md",
+    "level": "L300",
+    "journey": "copilot",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "github-copilot",
+      "metrics",
+      "dora",
+      "space",
+      "simulation"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "metrics",
+      "dora",
+      "space",
+      "simulation"
+    ]
+  },
+  {
+    "id": "096",
+    "title": "Lab 096: Capstone — DevOps agentique : spec → plan → agent → revue → déploiement",
+    "summary": "- Transformer une demande ambiguë en spécification testable - Utiliser plan et agent avec points de contrôle - Conditionner CI/CD aux tests, sécurité et approbation - Relier déploiement, observabilité et retour arrière",
+    "url": "labs/lab-096-agentic-devops-capstone.md",
+    "level": "L400",
+    "journey": "copilot",
+    "time_min": 210,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "github-copilot",
+      "devops",
+      "spec-driven",
+      "cicd",
+      "observability"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "devops",
+      "spec-driven",
+      "cicd",
+      "observability"
+    ]
+  },
+  {
     "id": "097",
     "title": "Lab 097: Interactif : tokens, échantillonnage et fenêtres de contexte",
     "summary": "- Estimer les tokens d'un texte - Expliquer température, top-k et top-p - Budgéter une fenêtre de contexte - Reconnaître troncature et dilution du contexte",
@@ -2618,6 +2825,136 @@
       "sampling",
       "context-window",
       "llm"
+    ]
+  },
+  {
+    "id": "098",
+    "title": "Lab 098: Ingénierie du contexte pour les agents",
+    "summary": "- Composer instructions, mémoire, récupération, outils et état - Budgéter la fenêtre et réserver la sortie - Compresser l'historique sans perdre décisions ni preuves - Détecter contexte périmé, contradictoire ou empoisonné",
+    "url": "labs/lab-098-context-engineering-agents.md",
+    "level": "L200",
+    "journey": "llm-foundations",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "context-engineering",
+      "agents",
+      "memory",
+      "retrieval",
+      "tools"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "context-engineering",
+      "agents",
+      "memory",
+      "retrieval",
+      "tools"
+    ]
+  },
+  {
+    "id": "099",
+    "title": "Lab 099: Évaluations LLM 101 : jeux de référence, LLM juge et régression CI",
+    "summary": "- Définir exemples, étiquettes, rubriques et seuils par tâche - Séparer contrôles déterministes et jugement par modèle - Calibrer le LLM juge sur des labels humains - Échouer la CI sur régressions significatives, pas un score bruité",
+    "url": "labs/lab-099-llm-evaluations.md",
+    "level": "L200",
+    "journey": "llm-foundations",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "llm-evaluation",
+      "golden-set",
+      "llm-as-judge",
+      "ci"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "llm-evaluation",
+      "golden-set",
+      "llm-as-judge",
+      "ci"
+    ]
+  },
+  {
+    "id": "100",
+    "title": "Lab 100: OWASP Top 10 pour LLM et applications agentiques : modélisation des menaces",
+    "summary": "- Cartographier actifs, frontières, acteurs, flux et capacités - Utiliser les risques OWASP GenAI actuels sans inventer de contrôles - Modéliser injection, agence excessive, chaîne logistique et divulgation - Transformer menaces en contrôles préventifs, détectifs et de reprise",
+    "url": "labs/lab-100-owasp-llm-agentic-threat-modeling.md",
+    "level": "L200",
+    "journey": "llm-foundations",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "owasp",
+      "security",
+      "threat-modeling",
+      "agentic-ai"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "owasp",
+      "security",
+      "threat-modeling",
+      "agentic-ai"
+    ]
+  },
+  {
+    "id": "101",
+    "title": "Lab 101: Économie des tokens : coût, cache, lot et routage",
+    "summary": "- Estimer coûts d'entrée, cache, sortie et outils - Identifier les préfixes stables à mettre en cache - Choisir le traitement par lot si la latence est flexible - Router selon valeur, qualité, latence et politique d'AI Credits",
+    "url": "labs/lab-101-token-economics.md",
+    "level": "L200",
+    "journey": "llm-foundations",
+    "time_min": 60,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student",
+      "architect"
+    ],
+    "technologies": [
+      "tokens",
+      "cost",
+      "cache",
+      "batch",
+      "routing",
+      "ai-credits"
+    ],
+    "language": "fr",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "tokens",
+      "cost",
+      "cache",
+      "batch",
+      "routing",
+      "ai-credits"
     ]
   },
   {

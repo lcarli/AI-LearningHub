@@ -42,3 +42,6 @@ You govern AI deployments — identity, compliance, DLP, monitoring, and securit
 ---
 
 **Total: 11 labs · ~10 hours · From zero to enterprise AI governance**
+## Phase 2 additions
+
+Use Labs 092, 094 and 100 for policy, security controls, threat modeling, and review boundaries.

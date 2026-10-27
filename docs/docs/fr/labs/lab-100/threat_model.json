@@ -1,0 +1,26 @@
+{
+  "assets": [
+    "customer-data",
+    "deployment-token",
+    "agent-memory"
+  ],
+  "boundaries": [
+    "user-to-agent",
+    "agent-to-retrieval",
+    "agent-to-tools"
+  ],
+  "threats": [
+    {
+      "id": "prompt-injection",
+      "control": "isolate-untrusted-content"
+    },
+    {
+      "id": "excessive-agency",
+      "control": "least-privilege-and-approval"
+    },
+    {
+      "id": "sensitive-disclosure",
+      "control": "data-minimization-and-redaction"
+    }
+  ]
+}

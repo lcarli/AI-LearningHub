@@ -18,10 +18,12 @@ nav:
   - How to Use This Hub: how-to-use.md
   - Prerequisites & Accounts: prerequisites.md
   - Cost Guide: cost-guide.md
+  - Zensical Compatibility: zensical-compatibility.md
 
   - Learning Paths:
       - By Technology:
           - 🤖 GitHub Copilot: paths/copilot/index.md
+          - 🧠 LLM Foundations 2.0: paths/llm-foundations/index.md
           - 🏭 Microsoft Foundry: paths/foundry/index.md
           - 🔌 Model Context Protocol (MCP): paths/mcp/index.md
           - 🧠 Semantic Kernel: paths/semantic-kernel/index.md
@@ -45,10 +47,10 @@ nav:
           - "Lab 001: What are AI Agents?": labs/lab-001-what-are-ai-agents.md
           - "Lab 002: AI Agent Landscape": labs/lab-002-agent-landscape.md
           - "Lab 003: Choosing the Right Tool": labs/lab-003-choosing-the-right-tool.md
-          - "Lab 004: How LLMs Work": labs/lab-004-how-llms-work.md
-          - "Lab 005: Prompt Engineering": labs/lab-005-prompt-engineering.md
+          - "Lab 004: How LLMs Work 2.0": labs/lab-004-how-llms-work.md
+          - "Lab 005: Prompting & Context Engineering": labs/lab-005-prompt-engineering.md
           - "Lab 006: What is RAG?": labs/lab-006-what-is-rag.md
-          - "Lab 007: What are Embeddings?": labs/lab-007-what-are-embeddings.md
+          - "Lab 007: Local Embeddings & Similarity": labs/lab-007-what-are-embeddings.md
           - "Lab 008: Responsible AI for Agents": labs/lab-008-responsible-ai.md
           - "Lab 097: Tokens, Sampling & Context Windows": labs/lab-097-tokens-sampling-context.md
           - "Lab 107: How GitHub Copilot Works": labs/lab-107-how-copilot-works.md
@@ -62,9 +64,9 @@ nav:
           - "Lab 014: SK Hello Agent": labs/lab-014-sk-hello-agent.md
           - "Lab 015: Ollama — Local LLMs": labs/lab-015-ollama-local-llms.md
           - "Lab 016: Copilot Agent Mode": labs/lab-016-copilot-agent-mode.md
-          - "Lab 017: Structured Output & JSON Mode": labs/lab-017-structured-output.md
-          - "Lab 018: Function Calling & Tool Use": labs/lab-018-function-calling.md
-          - "Lab 019: Streaming Responses in Agents": labs/lab-019-streaming-responses.md
+          - "Lab 017: Reliable Structured Output": labs/lab-017-structured-output.md
+          - "Lab 018: Typed Tool Calling": labs/lab-018-function-calling.md
+          - "Lab 019: Safe Streaming Responses": labs/lab-019-streaming-responses.md
           - "Lab 069: Declarative Agents for M365 Copilot": labs/lab-069-declarative-agents.md
           - "Lab 070: Agent UX Patterns": labs/lab-070-agent-ux-patterns.md
           - "Lab 072: Structured Outputs Reliability Benchmark": labs/lab-072-structured-outputs.md
@@ -97,6 +99,11 @@ nav:
           - "Lab 087: Copilot + MCP": labs/lab-087-copilot-mcp.md
           - "Lab 088: Copilot CLI": labs/lab-088-copilot-cli.md
           - "Lab 089: Spec-Driven Development with Spec Kit": labs/lab-089-spec-kit.md
+          - "Lab 090: Testing & Legacy Modernization": labs/lab-090-copilot-testing-legacy-modernization.md
+          - "Lab 098: Context Engineering for Agents": labs/lab-098-context-engineering-agents.md
+          - "Lab 099: LLM Evaluations 101": labs/lab-099-llm-evaluations.md
+          - "Lab 100: OWASP Threat Modeling for LLM Apps": labs/lab-100-owasp-llm-agentic-threat-modeling.md
+          - "Lab 101: Token Economics": labs/lab-101-token-economics.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
@@ -132,6 +139,9 @@ nav:
           - "Lab 083: Multi-Modal RAG": labs/lab-083-multimodal-rag.md
           - "Lab 091: Copilot Cloud Agent & Code Review": labs/lab-091-cloud-agent-code-review.md
           - "Lab 094: Copilot Governance & FinOps": labs/lab-094-copilot-governance-finops.md
+          - "Lab 092: Secure Code with Copilot": labs/lab-092-secure-code-copilot.md
+          - "Lab 093: Copilot SDK": labs/lab-093-copilot-sdk-agent-app.md
+          - "Lab 095: Measuring Copilot Impact": labs/lab-095-copilot-impact-metrics.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
@@ -141,6 +151,7 @@ nav:
           - "Lab 055: A2A + MCP Capstone": labs/lab-055-a2a-mcp-capstone.md
           - "Lab 064: Securing MCP with APIM": labs/lab-064-securing-mcp-apim.md
           - "Lab 084: Capstone — OutdoorGear Agent": labs/lab-084-capstone-outdoorgear-agent.md
+          - "Lab 096: Capstone — Agentic DevOps": labs/lab-096-agentic-devops-capstone.md
 
   - Challenges:
       - All Challenges: challenges/index.md
@@ -153,6 +164,8 @@ nav:
       - "Challenge 007: Red-Team Agent Guardrails": challenges/challenge-007-guardrails-red-team.md
       - "Challenge 008: Build a Local-Only Agent": challenges/challenge-008-local-only-agent.md
       - "Challenge 009: Pass Using Only Copilot Free": challenges/challenge-009-copilot-free.md
+      - "Challenge 010: From Spec to PR": challenges/challenge-010-spec-to-pr.md
+      - "Challenge 011: Evaluation-Driven RAG": challenges/challenge-011-evaluation-driven-rag.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
@@ -185,8 +198,10 @@ plugins:
             How to Use This Hub: Como Usar Este Hub
             Prerequisites & Accounts: Pré-requisitos e Contas
             Cost Guide: Guia de Custos
+            Zensical Compatibility: Compatibilidade com Zensical
             Learning Paths: Trilhas de Aprendizado
             By Technology: Por Tecnologia
+            "🧠 LLM Foundations 2.0": "🧠 Fundamentos de LLM 2.0"
             By Role: Por Perfil
             "👨‍💻 Developer": "👨‍💻 Desenvolvedor"
             "🏗️ Solution Architect": "🏗️ Arquiteto de Soluções"
@@ -212,6 +227,8 @@ plugins:
             "Challenge 007: Red-Team Agent Guardrails": "Desafio 007: Red Team de Guardrails de Agentes"
             "Challenge 008: Build a Local-Only Agent": "Desafio 008: Construa um Agente 100% Local"
             "Challenge 009: Pass Using Only Copilot Free": "Desafio 009: Passe Usando Só o Copilot Free"
+            "Challenge 010: From Spec to PR": "Desafio 010: Da Spec ao PR"
+            "Challenge 011: Evaluation-Driven RAG": "Desafio 011: RAG Guiado por Avaliação"
             Glossary: Glossário
             What's New: Novidades
             Tags: Tags
@@ -231,8 +248,10 @@ plugins:
             How to Use This Hub: Comment Utiliser Ce Hub
             Prerequisites & Accounts: Prérequis et Comptes
             Cost Guide: Guide des Coûts
+            Zensical Compatibility: Compatibilité Zensical
             Learning Paths: Parcours d'Apprentissage
             By Technology: Par Technologie
+            "🧠 LLM Foundations 2.0": "🧠 Fondamentaux LLM 2.0"
             By Role: Par Rôle
             "👨‍💻 Developer": "👨‍💻 Développeur"
             "🏗️ Solution Architect": "🏗️ Architecte Solutions"
@@ -258,6 +277,8 @@ plugins:
             "Challenge 007: Red-Team Agent Guardrails": "Défi 007 : Red team des garde-fous d'agents"
             "Challenge 008: Build a Local-Only Agent": "Défi 008 : Construire un agent 100 % local"
             "Challenge 009: Pass Using Only Copilot Free": "Défi 009 : Réussir uniquement avec Copilot Free"
+            "Challenge 010: From Spec to PR": "Défi 010 : De la spécification à la pull request"
+            "Challenge 011: Evaluation-Driven RAG": "Défi 011 : RAG guidé par l'évaluation"
             Glossary: Glossaire
             What's New: Nouveautés
             Tags: Tags

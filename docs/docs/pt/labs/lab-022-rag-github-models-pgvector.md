@@ -1,23 +1,31 @@
 ---
 tags:
 - rag
-- pgvector
-- python
-- free
-- github-models
+- embeddings
+- retrieval
+- local
+- evaluation
 lab:
   id: '022'
   level: L200
-  journey: llm-foundations
-  time_min: 50
+  journey: rag
+  time_min: 90
   cost:
-    tier: free-gh
-    requires:
-    - github
-    - copilot-free
-    estimate_usd: 0 within the documented free path or quota.
-    simulation: false
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or simulation.
+    simulation: true
     cleanup: false
+  roles:
+  - developer
+  - data-engineer
+  - architect
+  technologies:
+  - rag
+  - embeddings
+  - retrieval
+  - local
+  - evaluation
   status: active
   last_verified: '2026-10-27'
   languages:
@@ -25,356 +33,191 @@ lab:
   - pt
   - fr
 ---
-!!! warning "Atualização de backend (outubro de 2026)"
-    A inferência do GitHub Models foi descontinuada em 30 de julho de 2026. As referências abaixo são mantidas apenas como contexto histórico enquanto este lab é migrado. Use o [Lab 013 — Backends de LLM gratuitos](../labs/lab-013-github-models.md) para configurar o Foundry Local ou o Ollama antes de continuar.
-
-# Lab 022: Pipeline RAG com GitHub Models + pgvector
+# Lab 022: RAG Local: Chunking → Embedding → Busca → Resposta
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/rag/">RAG</a></span>
-  <span><strong>Tempo:</strong> ~50 min</span>
-  <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Gratuito</span> + <span class="level-badge cost-free">Docker (local)</span></span>
+  <span><strong>Jornada:</strong> rag</span>
+  <span><strong>Tempo:</strong> ~90 min</span>
+  <span><strong>Custo:</strong> <span class="level-badge cost-free">Grátis</span></span>
 </div>
 
-## O que Você Vai Aprender
+!!! info "Desenho gratuito primeiro"
+    O caminho obrigatório é local, simulado ou funciona com GitHub Copilot Free. Todo caminho organizacional, de nuvem ou pago está marcado como opcional.
 
-- Iniciar o **pgvector** (PostgreSQL + vetores) localmente via Docker
-- Gerar embeddings com o **GitHub Models** (`text-embedding-3-small`) — gratuito
-- **Ingerir** documentos: fragmentar, gerar embeddings, armazenar no pgvector
-- **Consultar** com busca por similaridade semântica (operador cosseno `<=>`)
-- Construir um pipeline completo de **resposta RAG** (recuperar → aumentar → gerar)
+!!! tip "Impacto em AI Credits"
+    Mantenha a tarefa limitada, use o menor contexto útil e valide localmente. Execuções repetidas de agentes e modelos premium podem consumir mais AI Credits.
 
----
+## O que você aprenderá
 
-## Introdução
-
-No [Lab 006](lab-006-what-is-rag.md) você aprendeu a teoria do RAG. Aqui você constrói a coisa real — um sistema RAG funcional usando apenas ferramentas gratuitas: GitHub Models para embeddings + geração, e pgvector rodando localmente no Docker.
-
-!!! tip "Dataset pré-construído incluído"
-    Este lab usa o **dataset de exemplo OutdoorGear** — 25 produtos, FAQs e políticas da empresa, prontos para ingestão.  
-    📥 [`data/products.csv`](https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv) · [`data/knowledge-base.json`](https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json)
-
-    ```bash
-    # Baixar os dados de exemplo
-    curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
-    curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
-    ```
-
----
+- Construir pipeline explícito de ingestão e recuperação
+- Usar baseline local de embeddings sem dependências
+- Separar evidência recuperada da geração da resposta
+- Avaliar recall, cobertura de citações e afirmações sem suporte
 
 ## Pré-requisitos
 
-- Docker Desktop — gratuito: https://www.docker.com/products/docker-desktop
-- Python 3.11+
-- `GITHUB_TOKEN` configurado (do [Lab 013](lab-013-github-models.md))
+- Python 3.10+ para o exercício local
+- Um editor de texto e terminal
+- Challenge 011
+
+## Resultado e evidência
+
+O lab só termina quando o aluno mostra evidência, não apenas descreve o conceito.
+
+| Capacidade | Evidência obrigatória |
+|---|---|
+| Construir pipeline explícito de ingestão e recuperação | `evidence/step-1.txt` mais um check local aprovado |
+| Usar baseline local de embeddings sem dependências | `evidence/step-2.txt` mais um check local aprovado |
+| Separar evidência recuperada da geração da resposta | `evidence/step-3.txt` mais um check local aprovado |
+| Avaliar recall, cobertura de citações e afirmações sem suporte | `evidence/step-4.txt` mais um check local aprovado |
+
+## Plano do lab
+
+| Fase | Minutos | Atividade |
+|---|---:|---|
+| Preparar | 10 | Ler o cenário, inspecionar fixtures e registrar premissas |
+| Linha de base | 15 | Executar o comportamento atual e salvar o resultado |
+| Implementar | 25 | Concluir os quatro passos em mudanças pequenas |
+| Validar | 15 | Executar testes, inspecionar falhas e coletar evidências |
+| Revisar | 10+ | Explicar trade-offs e comparar o caminho real opcional |
+
+## Modelo visual
+
+```mermaid
+flowchart LR
+  D[Documents] --> C[Chunking]
+  C --> E[Local embeddings]
+  E --> I[In-memory index]
+  Q[Question] --> QE[Query embedding]
+  QE --> S[Similarity search]
+  I --> S
+  S --> A[Answer with citations]
+  A --> V[Retrieval and groundedness eval]
+```
+
+## Cenário
+
+A OutdoorGear precisa de uma solução explicável, testável e segura para workshops. O exercício obrigatório usa fixtures locais determinísticas, permitindo reprodução sem conta de nuvem. Depois, um serviço real pode substituir somente a fronteira do adaptador.
+
+## Exercício guiado
+
+### Step 1
+
+**Objetivo:** Fazer uma melhoria observável preservando o contrato declarado.
+
+**Ação:** Execute `local_rag.py ingest` para dividir e vetorizar `documents.json`.
+
+**Evidência:** Salve comando, resultado, arquivo alterado e uma frase explicando por que o resultado é confiável.
+
+**Revisão:** Revise entradas, premissas, falhas, fronteira de segurança e o menor contexto útil.
+
+### Step 2
+
+**Objetivo:** Fazer uma melhoria observável preservando o contrato declarado.
+
+**Ação:** Faça três buscas e inspecione scores, limites e IDs de fonte.
+
+**Evidência:** Salve comando, resultado, arquivo alterado e uma frase explicando por que o resultado é confiável.
+
+**Revisão:** Revise entradas, premissas, falhas, fronteira de segurança e o menor contexto útil.
+
+### Step 3
+
+**Objetivo:** Fazer uma melhoria observável preservando o contrato declarado.
+
+**Ação:** Gere resposta extrativa citando somente chunks recuperados.
+
+**Evidência:** Salve comando, resultado, arquivo alterado e uma frase explicando por que o resultado é confiável.
+
+**Revisão:** Revise entradas, premissas, falhas, fronteira de segurança e o menor contexto útil.
+
+### Step 4
+
+**Objetivo:** Fazer uma melhoria observável preservando o contrato declarado.
+
+**Ação:** Altere o tamanho dos chunks e compare recall@3 antes de escolher backend real.
+
+**Evidência:** Salve comando, resultado, arquivo alterado e uma frase explicando por que o resultado é confiável.
+
+**Revisão:** Revise entradas, premissas, falhas, fronteira de segurança e o menor contexto útil.
+
+### Execute localmente
 
 ```bash
-pip install openai psycopg2-binary python-dotenv
+cd docs/docs/pt/labs/lab-022
+python -m unittest discover -v
 ```
 
----
+Crie uma pasta `evidence/` fora do repositório para guardar saídas. Não faça commit de credenciais, código privado ou dados pessoais.
 
-## Exercício do Lab
+## Rubrica de revisão
 
-### Passo 1: Iniciar o pgvector com Docker
+| Categoria | Evidência de conclusão |
+|---|---|
+| Correção | Testes provam o comportamento e os limites importantes. |
+| Evidência | Comandos, resultados e premissas são reproduzíveis. |
+| Segurança | Entradas, permissões, segredos e efeitos colaterais estão controlados. |
+| Manutenibilidade | A solução é limitada, legível e reversível. |
 
-```bash
-docker run -d   --name pgvector-rag   -e POSTGRES_PASSWORD=ragpass   -e POSTGRES_DB=ragdb   -p 5432:5432   pgvector/pgvector:pg16
-```
+## Falhas comuns e recuperação
 
-Verifique se está rodando:
-```bash
-docker ps | grep pgvector-rag
-```
+| Falha | Recuperação |
+|---|---|
+| O caminho feliz passa, mas os limites falham. | Adicione casos negativos, vazios, máximos e malformados. |
+| O modelo propõe reescrita ampla. | Volte à menor mudança que preserva comportamento e repita a linha de base. |
+| Ferramenta ou documento recuperado contém instruções. | Trate como dado não confiável e aplique política fora do modelo. |
+| O resultado não é reproduzível. | Fixe fixtures, registre versões e remova credenciais ocultas ou serviços mutáveis. |
 
-### Passo 2: Criar o schema do banco de dados
+## Acessibilidade e uso responsável
 
-```python
-# setup_db.py
-import psycopg2
+- Não dependa apenas de cores em diagramas ou resultados.
+- Mantenha comandos copiáveis e forneça equivalentes textuais para evidência visual.
+- Não coloque segredos, dados pessoais ou código privado em prompts e fixtures.
+- Exija revisão humana antes de ações irreversíveis, de alto impacto ou em produção.
 
-conn = psycopg2.connect(
-    host="localhost", port=5432,
-    dbname="ragdb", user="postgres", password="ragpass"
-)
-cur = conn.cursor()
+## Kit de apoio
 
-cur.execute("CREATE EXTENSION IF NOT EXISTS vector;")
-cur.execute("""
-    CREATE TABLE IF NOT EXISTS documents (
-        id          SERIAL PRIMARY KEY,
-        title       TEXT NOT NULL,
-        content     TEXT NOT NULL,
-        embedding   vector(1536),   -- text-embedding-3-small dimension
-        source      TEXT
-    );
-""")
-cur.execute("""
-    CREATE INDEX IF NOT EXISTS documents_embedding_idx
-    ON documents USING ivfflat (embedding vector_cosine_ops)
-    WITH (lists = 10);
-""")
+O kit para download contém o guia do lab, exercícios locais, uma folha de consulta e os diagramas citados. A CI publica artefatos PDF e ZIP determinísticos.
 
-conn.commit()
-cur.close()
-conn.close()
-print("Database ready.")
-```
+| Item | Finalidade |
+|---|---|
+| `README.md` | Início rápido e evidência esperada |
+| Fixtures locais Python/JSON/CSV | Exercício prático reproduzível |
+| `CHEATSHEET.md` | Conceitos, comandos e checklist de revisão |
+| PDF gerado | Guia imprimível produzido na CI |
+| ZIP gerado | Kit offline produzido na CI |
 
-```bash
-python setup_db.py
-```
+## Caminho real opcional
 
-### Passo 3: Ingerir documentos do dataset de exemplo
+Substitua somente a fronteira do adaptador por um serviço hospedado aprovado. Preserve fixtures, critérios de aceitação, telemetria e testes de regressão para comparar caminhos local e real. Verifique preço, retenção, região e políticas da organização antes.
 
-O dataset de exemplo está no repositório. Baixe-o (ou use a URL diretamente):
+## Verificação de conhecimento
 
-```bash
-curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/products.csv
-curl -O https://raw.githubusercontent.com/lcarli/AI-LearningHub/main/data/knowledge-base.json
-```
+??? question "O que medir antes de trocar o banco vetorial?"
 
-```python
-# ingest.py
-import os, csv, json, psycopg2
-from openai import OpenAI
+    ??? success "Resposta"
+        Qualidade e latência de recuperação com conjunto estável de avaliação.
 
-client = OpenAI(
-    base_url="https://models.inference.ai.azure.com",
-    api_key=os.environ["GITHUB_TOKEN"],
-)
+??? question "Que evidência deve ser salva?"
 
-def build_documents() -> list[dict]:
-    """Load products.csv and knowledge-base.json into a flat list of documents."""
-    docs = []
+    ??? success "Resposta"
+        Comando, resultado, arquivo alterado, premissas e uma explicação curta de confiança.
 
-    # --- Products from CSV ---
-    with open("products.csv") as f:
-        for p in csv.DictReader(f):
-            docs.append({
-                "title": f"{p['name']} — Product Info",
-                "content": (
-                    f"{p['name']} ({p['category']}/{p['subcategory']}). "
-                    f"SKU: {p['sku']}. Price: ${p['price']}. "
-                    f"In stock: {p['in_stock']}. Weight: {p['weight_kg']}kg. "
-                    f"Rating: {p['rating']}/5. {p['description']}"
-                ),
-                "source": "product-catalog",
-            })
+??? question "Quando usar o caminho real opcional?"
 
-    # --- Policies, FAQs, and guides from JSON ---
-    with open("knowledge-base.json") as f:
-        kb = json.load(f)
+    ??? success "Resposta"
+        Depois que o contrato local passar e preço, política, dados e limpeza forem compreendidos.
 
-    for section in kb["sections"].values():
-        docs.append({
-            "title": section["title"],
-            "content": section["content"],
-            "source": "policies",
-        })
+## Critérios de saída
 
-    for faq in kb["faqs"]:
-        docs.append({
-            "title": f"FAQ: {faq['question']}",
-            "content": f"Q: {faq['question']}
-A: {faq['answer']}",
-            "source": "faq",
-        })
+- [ ] O exercício local passa sem credenciais.
+- [ ] Evidências e premissas estão registradas.
+- [ ] Recursos pagos ou organizacionais continuam opcionais.
+- [ ] Segurança, acessibilidade e falhas foram revisadas.
+- [ ] O kit gerado pode ser reproduzido a partir do código-fonte.
 
-    for guide in kb["product_guides"]:
-        docs.append({
-            "title": guide["title"],
-            "content": guide["content"],
-            "source": "guide",
-        })
+## Fontes públicas
 
-    return docs
-
-def get_embedding(text: str) -> list[float]:
-    response = client.embeddings.create(
-        model="text-embedding-3-small",
-        input=text,
-    )
-    return response.data[0].embedding
-
-documents = build_documents()
-print(f"Prepared {len(documents)} documents to ingest")
-
-conn = psycopg2.connect(
-    host="localhost", port=5432,
-    dbname="ragdb", user="postgres", password="ragpass"
-)
-cur = conn.cursor()
-
-for doc in documents:
-    print(f"  Embedding: {doc['title'][:60]}")
-    embedding = get_embedding(doc["content"])
-    cur.execute(
-        "INSERT INTO documents (title, content, embedding, source) VALUES (%s, %s, %s, %s)",
-        (doc["title"], doc["content"], embedding, doc["source"])
-    )
-
-conn.commit()
-cur.close()
-conn.close()
-print(f"
-✅ Ingested {len(documents)} documents.")
-```
-
-```bash
-python ingest.py
-# Prepared 42 documents to ingest
-# ✅ Ingested 42 documents.
-```
-
-### Passo 4: Consultar com busca semântica
-
-```python
-# search.py
-import os, psycopg2
-from openai import OpenAI
-
-client = OpenAI(
-    base_url="https://models.inference.ai.azure.com",
-    api_key=os.environ["GITHUB_TOKEN"],
-)
-
-def search(query: str, top_k: int = 3) -> list[dict]:
-    # Embed the query
-    response = client.embeddings.create(
-        model="text-embedding-3-small",
-        input=query,
-    )
-    query_embedding = response.data[0].embedding
-
-    # Cosine similarity search in pgvector
-    conn = psycopg2.connect(
-        host="localhost", port=5432,
-        dbname="ragdb", user="postgres", password="ragpass"
-    )
-    cur = conn.cursor()
-    cur.execute("""
-        SELECT title, content, source,
-               1 - (embedding <=> %s::vector) AS similarity
-        FROM documents
-        ORDER BY embedding <=> %s::vector
-        LIMIT %s
-    """, (query_embedding, query_embedding, top_k))
-
-    results = [
-        {"title": row[0], "content": row[1], "source": row[2], "similarity": row[3]}
-        for row in cur.fetchall()
-    ]
-    cur.close()
-    conn.close()
-    return results
-
-# Test
-results = search("how waterproof are the boots?")
-for r in results:
-    print(f"[{r['similarity']:.3f}] {r['title']}")
-```
-
-### Passo 5: O pipeline de resposta RAG
-
-```python
-# rag.py
-import os
-from openai import OpenAI
-from search import search
-
-client = OpenAI(
-    base_url="https://models.inference.ai.azure.com",
-    api_key=os.environ["GITHUB_TOKEN"],
-)
-
-def answer(question: str) -> str:
-    # 1. Retrieve
-    docs = search(question, top_k=3)
-
-    # 2. Augment — build context
-    context = "
-
-".join([
-        f"**{d['title']}** (similarity: {d['similarity']:.2f})
-{d['content']}"
-        for d in docs
-    ])
-
-    # 3. Generate
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        temperature=0,
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are a helpful outdoor gear assistant. "
-                    "Answer questions using ONLY the provided context. "
-                    "If the context doesn't contain the answer, say so honestly. "
-                    "Always cite which document your answer comes from."
-                )
-            },
-            {
-                "role": "user",
-                "content": f"Context:
-{context}
-
-Question: {question}"
-            }
-        ],
-    )
-    return response.choices[0].message.content
-
-# Test the full pipeline
-questions = [
-    "Can I return hiking boots I've already worn?",
-    "How much does express shipping cost?",
-    "What certification does the harness have?",
-    "What are the tent dimensions?",
-]
-
-for q in questions:
-    print(f"
-❓ {q}")
-    print(f"💬 {answer(q)}")
-    print("—" * 60)
-```
-
-```bash
-python rag.py
-```
-
----
-
-## Entendendo os Resultados
-
-!!! tip "Scores de similaridade"
-    - **> 0.85** — correspondência muito forte (o documento responde diretamente à pergunta)
-    - **0.70–0.85** — relacionado (pode ser relevante)  
-    - **< 0.70** — correspondência fraca (provavelmente não é útil, considere filtrar)
-
-Adicione um filtro de limiar para evitar usar documentos de baixa confiança:
-
-```python
-docs = [d for d in search(question, top_k=5) if d["similarity"] > 0.75]
-if not docs:
-    return "I don't have information about that in my knowledge base."
-```
-
----
-
-## Limpeza
-
-```bash
-docker stop pgvector-rag && docker rm pgvector-rag
-```
-
----
-
-## Próximos Passos
-
-- **RAG Agêntico** (reescrita de consulta, multi-hop): → [Lab 026 — Padrão RAG Agêntico](lab-026-agentic-rag.md)
-- **RAG com Semantic Kernel**: → [Lab 023 — Plugins, Memória e Planners do SK](lab-023-sk-plugins-memory.md)
-- **pgvector em produção no Azure**: → [Lab 031 — pgvector no Azure](lab-031-pgvector-semantic-search.md)
+- [RAG paper](https://arxiv.org/abs/2005.11401)
+- [Sentence Transformers semantic search](https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html)

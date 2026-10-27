@@ -1,0 +1,27 @@
+version: 1
+output: artifacts/kits
+labs:
+  - {id: "004", priority: P0, kind: llm-foundations}
+  - {id: "005", priority: P0, kind: llm-foundations}
+  - {id: "007", priority: P0, kind: llm-foundations}
+  - {id: "017", priority: P1, kind: llm-foundations}
+  - {id: "018", priority: P1, kind: llm-foundations}
+  - {id: "019", priority: P1, kind: llm-foundations}
+  - {id: "022", priority: P0, kind: rag}
+  - {id: "085", priority: P0, kind: copilot}
+  - {id: "086", priority: P0, kind: copilot}
+  - {id: "087", priority: P0, kind: copilot}
+  - {id: "088", priority: P1, kind: copilot}
+  - {id: "089", priority: P0, kind: copilot}
+  - {id: "090", priority: P0, kind: copilot}
+  - {id: "091", priority: P1, kind: copilot}
+  - {id: "092", priority: P0, kind: copilot-security}
+  - {id: "093", priority: P1, kind: copilot-sdk}
+  - {id: "094", priority: P1, kind: copilot-governance}
+  - {id: "095", priority: P1, kind: copilot-metrics}
+  - {id: "096", priority: P0, kind: capstone}
+  - {id: "097", priority: P0, kind: llm-foundations}
+  - {id: "098", priority: P0, kind: llm-foundations}
+  - {id: "099", priority: P0, kind: llm-evaluation}
+  - {id: "100", priority: P0, kind: llm-security}
+  - {id: "101", priority: P1, kind: llm-economics}

@@ -46,3 +46,6 @@ Vous concevez des systèmes d'IA en production — architectures multi-agents, o
 ---
 
 **Total : 15 labs · ~18 heures · De l'architecture à la gouvernance en production**
+## Ajouts de la Phase 2
+
+Utilisez les Labs 095, 098, 100 et 101 pour relier décisions, preuves, risques et coûts.

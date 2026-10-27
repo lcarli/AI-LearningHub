@@ -1,0 +1,50 @@
+name: Learning Kits
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "kits/**"
+      - "scripts/generate_kits.py"
+      - "scripts/test_generate_kits.py"
+      - ".github/workflows/kits.yml"
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build-kits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r docs/requirements.txt
+
+      - name: Generate derived curriculum
+        run: |
+          python scripts/phase2_content.py
+          python scripts/generate_labs_json.py
+
+      - name: Test kit generator
+        run: python -m unittest scripts/test_generate_kits.py -v
+
+      - name: Generate PDF and ZIP kits
+        run: python scripts/generate_kits.py --check
+
+      - name: Upload learning kits
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-learning-hub-kits
+          path: artifacts/kits
+          if-no-files-found: error
+          retention-days: 30

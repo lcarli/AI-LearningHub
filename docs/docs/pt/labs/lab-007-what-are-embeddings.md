@@ -1,21 +1,29 @@
 ---
 tags:
-- free
-- beginner
-- no-account-needed
 - embeddings
-- rag
+- similarity
+- retrieval
+- local
 lab:
   id: '007'
   level: L50
   journey: llm-foundations
-  time_min: 15
+  time_min: 60
   cost:
     tier: free
     requires: []
-    estimate_usd: 0 within the documented free path or quota.
-    simulation: false
+    estimate_usd: 0 within the documented free path or simulation.
+    simulation: true
     cleanup: false
+  roles:
+  - student
+  - developer
+  - data-engineer
+  technologies:
+  - embeddings
+  - similarity
+  - retrieval
+  - local
   status: active
   last_verified: '2026-10-27'
   languages:
@@ -23,279 +31,188 @@ lab:
   - pt
   - fr
 ---
-!!! warning "Atualização de backend (outubro de 2026)"
-    A inferência do GitHub Models foi descontinuada em 30 de julho de 2026. As referências abaixo são mantidas apenas como contexto histórico enquanto este lab é migrado. Use o [Lab 013 — Backends de LLM gratuitos](../labs/lab-013-github-models.md) para configurar o Foundry Local ou o Ollama antes de continuar.
-
-# Lab 007: O que são Embeddings?
+# Lab 007: Embeddings e Busca de Similaridade Local
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-50">L50</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/rag/">&#128218; RAG</a> &middot; <a href="../paths/semantic-kernel/">&#129504; Semantic Kernel</a></span>
-  <span><strong>Tempo:</strong> ~15 min</span>
-  <span><strong>&#128176; Custo:</strong> <span class="level-badge cost-free">Gratuito</span> &mdash; Nenhuma conta necessária</span>
+  <span><strong>Jornada:</strong> llm-foundations</span>
+  <span><strong>Tempo:</strong> ~60 min</span>
+  <span><strong>Custo:</strong> <span class="level-badge cost-free">Grátis</span></span>
 </div>
 
-## O que Você Vai Aprender
+!!! info "Desenho gratuito primeiro"
+    O caminho obrigatório é local, simulado ou funciona com GitHub Copilot Free. Todo caminho organizacional, de nuvem ou pago está marcado como opcional.
 
-- O que é um embedding (um vetor / lista de números)
-- Como texto é mapeado para um espaço de alta dimensão
-- O que **similaridade cosseno** significa e por que importa
-- Por que embeddings alimentam busca semântica, RAG e memória de agentes
-- Quais modelos de embedding usar e quando
+!!! tip "Impacto em AI Credits"
+    Mantenha a tarefa limitada, use o menor contexto útil e valide localmente. Execuções repetidas de agentes e modelos premium podem consumir mais AI Credits.
 
----
+## O que você aprenderá
 
-## Introdução
+- Representar significado como vetores sem depender de modelo hospedado
+- Calcular similaridade de cosseno e inspecionar vizinhos próximos
+- Distinguir sobreposição lexical de similaridade semântica
+- Avaliar recuperação com documentos relevantes rotulados
 
-Embeddings são o motor por trás da busca semântica, RAG e memoria vetorial em agentes de IA. Uma vez que você entende o que sao, muita "mágica" em sistemas de IA se torna óbvia.
+## Pré-requisitos
 
-A ideia central é simples: **converter qualquer pedaco de texto em uma lista de números (um vetor) de forma que textos similares produzam vetores similares.**
+- Python 3.10+ para o exercício local
+- Um editor de texto e terminal
+- Lab 022
 
----
+## Resultado e evidência
 
-## &#128230; Arquivos de Apoio
+O lab só termina quando o aluno mostra evidência, não apenas descreve o conceito.
 
-!!! note "Baixe estes arquivos antes de iniciar o lab"
-    Salve todos os arquivos em uma pasta `lab-007/` no seu diretório de trabalho.
+| Capacidade | Evidência obrigatória |
+|---|---|
+| Representar significado como vetores sem depender de modelo hospedado | `evidence/step-1.txt` mais um check local aprovado |
+| Calcular similaridade de cosseno e inspecionar vizinhos próximos | `evidence/step-2.txt` mais um check local aprovado |
+| Distinguir sobreposição lexical de similaridade semântica | `evidence/step-3.txt` mais um check local aprovado |
+| Avaliar recuperação com documentos relevantes rotulados | `evidence/step-4.txt` mais um check local aprovado |
 
-| Arquivo | Descrição | Download |
-|------|-------------|----------|
-| `embedding_explorer.py` | Script de exercícios interativos | [&#128229; Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-007/embedding_explorer.py) |
+## Plano do lab
 
----
+| Fase | Minutos | Atividade |
+|---|---:|---|
+| Preparar | 10 | Ler o cenário, inspecionar fixtures e registrar premissas |
+| Linha de base | 15 | Executar o comportamento atual e salvar o resultado |
+| Implementar | 25 | Concluir os quatro passos em mudanças pequenas |
+| Validar | 15 | Executar testes, inspecionar falhas e coletar evidências |
+| Revisar | 10+ | Explicar trade-offs e comparar o caminho real opcional |
 
-## Parte 1: Texto como um Ponto no Espaço
+## Modelo visual
 
-Imagine um mapa 2D onde cada palavra é posicionada com base no seu significado:
-
-![Espaço de Embedding 2D](../../assets/diagrams/embedding-space-2d.svg)
-
-Palavras com significados similares se agrupam. "Dog" está perto de "Cat" e "Pet". "Python" se agrupa perto de "Code" e "Programming" -- não perto de "Snake" (em um corpus focado em codigo).
-
-Modelos de embedding reais não usam 2 dimensões -- eles usam **1.536** (OpenAI) ou **3.072** dimensões. Mas o princípio é o mesmo: significado similar = ponto próximo no espaço.
-
-??? question "&#129300; Verifique Seu Entendimento"
-    Por que modelos de embedding usam 1.536 dimensões em vez de apenas 2 ou 3?
-
-    ??? success "Resposta"
-        A linguagem humana tem enorme complexidade -- sinônimos, contexto, tom, significado específico de domínio. Duas ou tres dimensoes não conseguem capturar todas essas nuances. **Dimensões mais altas** permitem que o modelo codifique muitos aspectos diferentes de significado simultaneamente, para que distinções sutis (como "Python a linguagem" vs. "python a cobra") possam ser representadas como direções diferentes no espaço vetorial.
-
----
-
-## Parte 2: Como um Embedding Realmente É
-
-Quando você faz o embedding do texto `"waterproof hiking boots"`, você recebe de volta algo como:
-
-```python
-[0.023, -0.157, 0.842, 0.001, -0.334, 0.711, ..., 0.089]
-# ^ 1,536 numbers for text-embedding-3-small
+```mermaid
+flowchart LR
+  D[Documents] --> E[Local vectorizer]
+  Q[Query] --> E
+  E --> V[Vectors]
+  V --> C[Cosine similarity]
+  C --> R[Ranked results]
+  R --> M[Recall@k]
 ```
 
-Cada numero codifica algum aspecto do significado -- mas não há interpretação legível por humanos de dimensoes individuais. O significado vive nas *relações* entre vetores.
+## Cenário
 
----
+A OutdoorGear precisa de uma solução explicável, testável e segura para workshops. O exercício obrigatório usa fixtures locais determinísticas, permitindo reprodução sem conta de nuvem. Depois, um serviço real pode substituir somente a fronteira do adaptador.
 
-## Parte 3: Medindo Similaridade -- Distância Cosseno
+## Exercício guiado
 
-Para comparar dois vetores, usamos **similaridade cosseno**: o ângulo entre eles.
+### Step 1
 
-![Similaridade Cosseno](../../assets/diagrams/cosine-similarity.svg)
+**Objetivo:** Fazer uma melhoria observável preservando o contrato declarado.
 
-A similaridade cosseno varia de **-1 a 1**:
-- `1.0` = significado idêntico
-- `0.0` = sem relação
-- `-1.0` = significado oposto
+**Ação:** Execute `embedding_explorer.py` com o corpus OutdoorGear incluído.
 
-Na pratica, a maioria dos documentos similares tem pontuação entre **0,7 e 0,95**.
+**Evidência:** Salve comando, resultado, arquivo alterado e uma frase explicando por que o resultado é confiável.
 
-??? question "&#129300; Verifique Seu Entendimento"
-    Dois textos tem uma similaridade cosseno de 0,05. O que isso diz sobre a relação deles?
+**Revisão:** Revise entradas, premissas, falhas, fronteira de segurança e o menor contexto útil.
 
-    ??? success "Resposta"
-        Uma similaridade cosseno de 0,05 significa que os textos sao **essencialmente sem relação** -- seus vetores apontam em direções quase perpendiculares. Na escala de -1 a 1, uma pontuacao proxima de 0 indica nenhuma conexão semântica significativa. Documentos similares tipicamente pontuam entre 0,7 e 0,95.
+### Step 2
 
----
+**Objetivo:** Fazer uma melhoria observável preservando o contrato declarado.
 
-```python
-# Simplified cosine similarity
-import numpy as np
+**Ação:** Compare vetores de hashing por palavras e por n-gramas de caracteres.
 
-def cosine_similarity(a, b):
-    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+**Evidência:** Salve comando, resultado, arquivo alterado e uma frase explicando por que o resultado é confiável.
 
-# "king" - "man" + "woman" ~ "queen"  (the famous word2vec example)
-similarity = cosine_similarity(embed("king"), embed("queen"))
-# -> ~0.89 (very similar)
+**Revisão:** Revise entradas, premissas, falhas, fronteira de segurança e o menor contexto útil.
 
-similarity = cosine_similarity(embed("king"), embed("pizza"))
-# -> ~0.12 (unrelated)
-```
+### Step 3
 
----
+**Objetivo:** Fazer uma melhoria observável preservando o contrato declarado.
 
-## Parte 4: Onde Embeddings São Usados em Sistemas de Agentes
+**Ação:** Altere uma consulta e explique a mudança no ranking.
 
-### 1. Busca Semântica (RAG)
-```
-User query: "something to keep rain out while hiking"
-         | embed
-[0.023, -0.157, ...]
-         | compare with all document vectors
-Matches: "waterproof hiking jacket" (0.91)
-         "rain-resistant trekking gear" (0.88)
-         "chocolate cake recipe" (0.08) <- filtered out
-```
+**Evidência:** Salve comando, resultado, arquivo alterado e uma frase explicando por que o resultado é confiável.
 
-### 2. Memória do Agente (Semantic Kernel / LangChain)
-A memória de longo prazo do agente armazena interações passadas como embeddings. Quando o usuário menciona um tópico, o agente recupera memórias semanticamente relevantes:
+**Revisão:** Revise entradas, premissas, falhas, fronteira de segurança e o menor contexto útil.
 
-```
-User: "Let's continue our discussion about the camping budget"
-         | embed query
-Retrieves: previous conversation about camping (0.87 similarity)
-Not: unrelated conversation about software (0.12 similarity)
-```
+### Step 4
 
-### 3. Detecção de Duplicatas
-```
-"How do I return a product?" (0.94 similarity)
-"What's your return policy?"
--> Detected as duplicates -> merge/deduplicate FAQs
-```
+**Objetivo:** Fazer uma melhoria observável preservando o contrato declarado.
 
-### 4. Clusterização / Categorização
-Agrupe documentos automaticamente por significado sem categorias predefinidas.
+**Ação:** Calcule recall@3 com os rótulos de relevância incluídos.
 
----
+**Evidência:** Salve comando, resultado, arquivo alterado e uma frase explicando por que o resultado é confiável.
 
-## Parte 5: Modelos de Embedding
+**Revisão:** Revise entradas, premissas, falhas, fronteira de segurança e o menor contexto útil.
 
-| Modelo | Dimensões | Contexto | Custo | Melhor para |
-|-------|-----------|---------|------|---------|
-| `text-embedding-3-small` (OpenAI) | 1.536 | 8.191 tokens | Baixo | Maioria dos casos de uso |
-| `text-embedding-3-large` (OpenAI) | 3.072 | 8.191 tokens | Mais alto | Maior precisão |
-| `text-embedding-ada-002` (OpenAI) | 1.536 | 8.191 tokens | Baixo | Legado |
-| `nomic-embed-text` (Ollama) | 768 | 8.192 tokens | **Gratuito (local)** | Offline/privado |
-| `mxbai-embed-large` (Ollama) | 1.024 | 512 tokens | **Gratuito (local)** | Produção local |
-
-??? question "&#129300; Verifique Seu Entendimento"
-    Seu sistema RAG ingeriu todos os documentos usando `text-embedding-3-small`. Voce depois muda para `text-embedding-3-large` para consultas. O sistema ainda funcionará corretamente?
-
-    ??? success "Resposta"
-        **Não.** Vetores de modelos de embedding diferentes sao **incompatíveis** -- eles mapeiam para espaços vetoriais diferentes com dimensões diferentes (1.536 vs. 3.072). Compara-los produziria pontuações de similaridade sem significado. Voce deve **sempre usar o mesmo modelo** tanto para ingestao quanto para consulta, ou refazer o embedding de todos os documentos com o novo modelo.
-
-!!! tip "Use text-embedding-3-small via GitHub Models (gratuito)"
-    Nos labs L200 deste hub, usamos `text-embedding-3-small` via a API do GitHub Models -- gratuito, sem cartão de crédito, mesma qualidade do Azure OpenAI pago.
-
----
-
-## Parte 6: Propriedades-Chave e Armadilhas
-
-### Embeddings capturam significado entre idiomas
-```
-embed("waterproof jacket") ~ embed("veste impermeable")  # French
-```
-Modelos multilingues funcionam entre idiomas -- consultas em um idioma podem encontrar documentos em outro.
-
-### Embeddings sao específicos do modelo
-Vetores de `text-embedding-3-small` **não são comparáveis** com vetores de `nomic-embed-text`. Nunca misture modelos no mesmo banco vetorial.
-
-### Embeddings nao capturam correspondências exatas bem
-```
-embed("SKU-12345") may not match embed("product SKU-12345")
-```
-Para IDs exatos, códigos ou palavras-chave, use busca por palavras-chave/BM25 junto com embeddings (busca híbrida).
-
-### Texto longo perde detalhes
-Fazer embedding de um documento de 10 páginas em um vetor único perde significado detalhado. E por isso que **fragmentamos** primeiro, depois fazemos embedding de cada fragmento separadamente.
-
----
-
-## Prática: Explorador de Embeddings
-
-Este lab inclui um script Python que permite **ver embeddings em acao** usando o nível gratuito do GitHub Models.
-
-```
-lab-007/
- embedding_explorer.py   <- Cosine similarity demo with OutdoorGear products
-```
-
-**Pré-requisitos:** Python 3.9+ e um token GitHub (gratuito)
+### Execute localmente
 
 ```bash
-# Install dependencies
-pip install openai
-
-# Set your GitHub token
-export GITHUB_TOKEN=<your_PAT>    # Linux/macOS
-set GITHUB_TOKEN=<your_PAT>       # Windows
-
-# Run the explorer
-python lab-007/embedding_explorer.py
+cd docs/docs/pt/labs/lab-007
+python -m unittest discover -v
 ```
 
-**O que você verá:**
+Crie uma pasta `evidence/` fora do repositório para guardar saídas. Não faça commit de credenciais, código privado ou dados pessoais.
 
-1. **Busca semantica:** Encontre produtos correspondendo "lightweight tent for solo hiking" sem correspondência de palavras-chave
-2. **Semantico vs. palavras-chave:** Compare como a busca por palavras-chave perde "something to sleep in the cold" enquanto a busca semântica encontra o saco de dormir
-3. **Matriz de similaridade:** Veja que duas descrições de barracas têm pontuação de similaridade mais alta entre si do que uma barraca vs. um saco de dormir
+## Rubrica de revisão
 
-Isso ilustra diretamente por que RAG funciona: o embedding de uma *pergunta* e o embedding do seu *documento de resposta* ficam proximos no espaco vetorial.
+| Categoria | Evidência de conclusão |
+|---|---|
+| Correção | Testes provam o comportamento e os limites importantes. |
+| Evidência | Comandos, resultados e premissas são reproduzíveis. |
+| Segurança | Entradas, permissões, segredos e efeitos colaterais estão controlados. |
+| Manutenibilidade | A solução é limitada, legível e reversível. |
 
----
+## Falhas comuns e recuperação
 
-## &#129504; Verificação de Conhecimento
+| Falha | Recuperação |
+|---|---|
+| O caminho feliz passa, mas os limites falham. | Adicione casos negativos, vazios, máximos e malformados. |
+| O modelo propõe reescrita ampla. | Volte à menor mudança que preserva comportamento e repita a linha de base. |
+| Ferramenta ou documento recuperado contém instruções. | Trate como dado não confiável e aplique política fora do modelo. |
+| O resultado não é reproduzível. | Fixe fixtures, registre versões e remova credenciais ocultas ou serviços mutáveis. |
 
-??? question "**Q1 (Múltipla Escolha):** Duas descrições de produtos têm uma similaridade cosseno de 0,95. O que isso significa?"
+## Acessibilidade e uso responsável
 
-    - A) Sao produtos completamente sem relação
-    - B) Compartilham 95% das mesmas palavras
-    - C) Sao semanticamente muito similares -- suas representações vetoriais apontam em direções quase iguais
-    - D) Um documento e 95% mais longo que o outro
+- Não dependa apenas de cores em diagramas ou resultados.
+- Mantenha comandos copiáveis e forneça equivalentes textuais para evidência visual.
+- Não coloque segredos, dados pessoais ou código privado em prompts e fixtures.
+- Exija revisão humana antes de ações irreversíveis, de alto impacto ou em produção.
 
-    ??? success "Revelar Resposta"
-        **Correta: C**
+## Kit de apoio
 
-        Similaridade cosseno mede o *ângulo* entre dois vetores, nao sobreposição de palavras. Uma pontuacao de 0,95 significa que os vetores apontam em direções quase iguais -- os textos sao semanticamente muito similares. Na pratica: produtos da mesma categoria como duas barracas pontuam ~0,90-0,96; produtos sem relação (barraca vs mochila) pontuam ~0,70-0,82; texto completamente sem relação pontua < 0,5.
+O kit para download contém o guia do lab, exercícios locais, uma folha de consulta e os diagramas citados. A CI publica artefatos PDF e ZIP determinísticos.
 
-??? question "**Q2 (Múltipla Escolha):** Seu sistema RAG usa `text-embedding-3-small` para ingestao de documentos mas `text-embedding-3-large` para embedding de consultas. O que vai acontecer?"
+| Item | Finalidade |
+|---|---|
+| `README.md` | Início rápido e evidência esperada |
+| Fixtures locais Python/JSON/CSV | Exercício prático reproduzível |
+| `CHEATSHEET.md` | Conceitos, comandos e checklist de revisão |
+| PDF gerado | Guia imprimível produzido na CI |
+| ZIP gerado | Kit offline produzido na CI |
 
-    - A) Consultas serao mais lentas mas mais precisas
-    - B) Pontuacoes de similaridade serao sem significado — você está comparando vetores de espacos diferentes
-    - C) O sistema normalizara automaticamente os vetores para serem compatíveis
-    - D) O desempenho melhora porque o modelo maior fornece compreensão mais rica da consulta
+## Caminho real opcional
 
-    ??? success "Revelar Resposta"
-        **Correta: B -- Vetores de modelos diferentes sao incompatíveis**
+Substitua somente a fronteira do adaptador por um serviço hospedado aprovado. Preserve fixtures, critérios de aceitação, telemetria e testes de regressão para comparar caminhos local e real. Verifique preço, retenção, região e políticas da organização antes.
 
-        Cada modelo de embedding mapeia texto para seu proprio espaço de alta dimensão único. `text-embedding-3-small` produz vetores de 1.536 dimensoes; `text-embedding-3-large` produz vetores de 3.072 dimensoes. Mesmo se voce forçasse as mesmas dimensões, os significados numéricos são completamente diferentes. Voce obteria pontuações de similaridade aleatorias. **Sempre use o mesmo modelo tanto para ingestao quanto para consulta.**
+## Verificação de conhecimento
 
-??? question "**Q3 (Execute o Lab):** Execute `python lab-007/embedding_explorer.py`. Na saida da matriz de similaridade, quais dois produtos (além de um produto comparado consigo mesmo) têm a MAIOR pontuação de similaridade cosseno entre si?"
+??? question "O que a similaridade de cosseno compara?"
 
-    Execute o script e observe a seção da matriz de similaridade no final da saída.
+    ??? success "Resposta"
+        A direção dos vetores; ela não depende da magnitude total.
 
-    ??? success "Revelar Resposta"
-        **P001 (TrailBlazer Tent 2P) e P003 (TrailBlazer Solo)**
+??? question "Que evidência deve ser salva?"
 
-        Ambas sao barracas de mochileiro de 3 estações com descrições muito similares -- mesma categoria, mesma estacao, mesmos materiais de construção. Suas descrições compartilham a maior sobreposição semântica no catálogo. Pontuação típica: **~0,93-0,97**. Em contraste, uma barraca vs. um saco de dormir pontua muito mais baixo (~0,75-0,85) porque servem a propósitos diferentes apesar de ambos serem equipamento de camping.
+    ??? success "Resposta"
+        Comando, resultado, arquivo alterado, premissas e uma explicação curta de confiança.
 
----
+??? question "Quando usar o caminho real opcional?"
 
-## Resumo
+    ??? success "Resposta"
+        Depois que o contrato local passar e preço, política, dados e limpeza forem compreendidos.
 
-| Conceito | Principal aprendizado |
-|---------|-------------|
-| **Embedding** | Uma lista de ~1.536 números representando significado de texto |
-| **Similaridade cosseno** | Mede ângulo entre vetores; mais próximo = mais similar |
-| **Busca semantica** | Encontra conteúdo relevante por significado, nao palavras exatas |
-| **Específico do modelo** | Nunca misture vetores de modelos de embedding diferentes |
-| **Fragmentar primeiro** | Faça embedding de fragmentos, nao documentos inteiros |
-| **Opção gratuita** | `text-embedding-3-small` via GitHub Models ou `nomic-embed-text` via Ollama |
+## Critérios de saída
 
----
+- [ ] O exercício local passa sem credenciais.
+- [ ] Evidências e premissas estão registradas.
+- [ ] Recursos pagos ou organizacionais continuam opcionais.
+- [ ] Segurança, acessibilidade e falhas foram revisadas.
+- [ ] O kit gerado pode ser reproduzido a partir do código-fonte.
 
-## Próximos Passos
+## Fontes públicas
 
-- **Veja embeddings em um app RAG:** -> [Lab 022 -- RAG com GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
-- **Execute embeddings localmente de graça:** -> [Lab 015 -- Ollama LLMs Locais](lab-015-ollama-local-llms.md)
-- **Use embeddings no Semantic Kernel:** -> [Lab 023 -- SK Plugins, Memória e Planejadores](lab-023-sk-plugins-memory.md)
+- [Sentence Transformers semantic search](https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html)

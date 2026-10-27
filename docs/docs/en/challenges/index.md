@@ -24,3 +24,9 @@ Challenges are less guided than labs. Use them after completing the related labs
 - You do **not** get a step-by-step walkthrough.
 - When possible, a challenge includes a **local validator** that generates a completion code.
 - Enter the code on the challenge page to confirm the final result.
+## Phase 2 Challenges
+
+- [Challenge 010](challenge-010-spec-to-pr.md) — From Spec to PR
+- [Challenge 011](challenge-011-evaluation-driven-rag.md) — Evaluation-Driven RAG
+
+Both challenges include local unit tests and a completion-code validator.

@@ -1,0 +1,2 @@
+{"id":"return-policy","input":"How long is the return window?","expected":"30 days","candidate":"Returns are accepted for 30 days.","human_score":4}
+{"id":"unsupported","input":"Is international shipping free?","expected":"unknown","candidate":"International shipping is always free.","human_score":0}

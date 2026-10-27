@@ -52,3 +52,6 @@ Le simulateur couvre le parcours avec cinq personas. Seul le score final est sto
 - [GH-300 certification](https://learn.microsoft.com/credentials/certifications/github-copilot/)
 - [GitHub Copilot documentation](https://docs.github.com/copilot)
 - [Copilot plans](https://docs.github.com/copilot/get-started/plans)
+## Défis de la Phase 2
+
+- [Challenge 010](../../challenges/challenge-010-spec-to-pr.md) valide le flux de la spécification à la pull request avec des tests locaux.

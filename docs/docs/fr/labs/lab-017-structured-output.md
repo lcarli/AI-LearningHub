@@ -1,17 +1,28 @@
 ---
+tags:
+- structured-output
+- json-schema
+- validation
+- local
 lab:
   id: '017'
   level: L100
-  journey: ai-agents
-  time_min: 25
+  journey: llm-foundations
+  time_min: 60
   cost:
-    tier: free-gh
-    requires:
-    - github
-    - copilot-free
-    estimate_usd: 0 within the documented free path or quota.
-    simulation: false
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or simulation.
+    simulation: true
     cleanup: false
+  roles:
+  - developer
+  - student
+  technologies:
+  - structured-output
+  - json-schema
+  - validation
+  - local
   status: active
   last_verified: '2026-10-27'
   languages:
@@ -19,302 +30,188 @@ lab:
   - pt
   - fr
 ---
-!!! warning "Mise à jour du backend (octobre 2026)"
-    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
-
-# Lab 017 : Sortie structurée & mode JSON
+# Lab 017: Sorties structurées fiables avec validation locale
 
 <div class="lab-meta">
-  <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Parcours :</strong> Tous les parcours</span>
-  <span><strong>Durée :</strong> ~25 min</span>
-  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Compte GitHub gratuit, sans carte de crédit</span>
+  <span><strong>Niveau:</strong> <span class="level-badge level-100">L100</span></span>
+  <span><strong>Parcours:</strong> llm-foundations</span>
+  <span><strong>Durée:</strong> ~60 min</span>
+  <span><strong>Coût:</strong> <span class="level-badge cost-free">Gratuit</span></span>
 </div>
+
+!!! info "Conception gratuite d'abord"
+    Le parcours obligatoire est local, simulé ou compatible avec GitHub Copilot Free. Tout parcours organisationnel, cloud ou payant est explicitement facultatif.
+
+!!! tip "Impact sur les AI Credits"
+    Limitez la tâche, utilisez le plus petit contexte utile et validez localement. Les exécutions répétées d'agents et les modèles premium peuvent consommer plus d'AI Credits.
 
 ## Ce que vous apprendrez
 
-- Pourquoi la sortie non structurée des LLM est fragile dans les systèmes d'agents
-- Comment utiliser le **mode JSON** pour forcer une sortie JSON valide
-- Comment définir des **schémas** avec Pydantic (Python) et des classes C#
-- Comment utiliser la **sortie structurée** avec l'API OpenAI
-- Modèles pratiques : extraction, classification, sortie de fonction
+- Définir un contrat de sortie avec JSON Schema
+- Valider types, champs requis, énumérations et propriétés supplémentaires
+- Séparer nouvelle tentative du modèle et réparation déterministe
+- Mesurer le taux de validité sur un jeu de régression
 
----
+## Prérequis
 
-## Introduction
+- Python 3.10+ pour l'exercice local
+- Un éditeur de texte et un terminal
+- Lab 072
 
-Dans les systèmes d'agents en production, vous affichez rarement le texte du LLM directement aux utilisateurs. Vous l'analysez, le stockez dans des bases de données, le transmettez à d'autres services ou déclenchez des actions en fonction de celui-ci.
+## Résultat et preuves
 
-Le problème : les LLM sont bavards. Demandez du JSON et vous pourriez obtenir :
+Le lab n'est terminé que lorsque l'apprenant montre des preuves, pas seulement le concept.
 
+| Capacité | Preuve requise |
+|---|---|
+| Définir un contrat de sortie avec JSON Schema | `evidence/step-1.txt` plus un contrôle local réussi |
+| Valider types, champs requis, énumérations et propriétés supplémentaires | `evidence/step-2.txt` plus un contrôle local réussi |
+| Séparer nouvelle tentative du modèle et réparation déterministe | `evidence/step-3.txt` plus un contrôle local réussi |
+| Mesurer le taux de validité sur un jeu de régression | `evidence/step-4.txt` plus un contrôle local réussi |
+
+## Plan du lab
+
+| Phase | Minutes | Activité |
+|---|---:|---|
+| Préparer | 10 | Lire le scénario, examiner les fixtures et noter les hypothèses |
+| Base | 15 | Exécuter le comportement actuel et conserver le résultat |
+| Implémenter | 25 | Réaliser les quatre étapes par petites modifications |
+| Valider | 15 | Exécuter les tests, examiner les échecs et collecter les preuves |
+| Réviser | 10+ | Expliquer les compromis et comparer le parcours réel facultatif |
+
+## Modèle visuel
+
+```mermaid
+flowchart LR
+  P[Prompt plus schema] --> M[Model or fixture]
+  M --> J[JSON parse]
+  J --> S[Schema validation]
+  S --> B[Business rules]
+  B --> A[Accepted result]
+  S --> R[Bounded retry]
 ```
-Sure! Here's the JSON you asked for:
-```json
-{"name": "hiking boots", "price": 129.99}
-```
-I hope that helps!
-```
 
-Maintenant votre analyseur JSON plante à cause du texte supplémentaire. C'est un vrai problème que la sortie structurée résout complètement.
+## Scénario
 
----
+OutdoorGear a besoin d'une solution explicable, testable et sûre pour un atelier. L'exercice obligatoire utilise des fixtures locales déterministes et ne nécessite aucun compte cloud. Un service réel pourra ensuite remplacer uniquement l'adaptateur.
 
-## Prérequis et configuration
+## Exercice guidé
+
+### Step 1
+
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
+
+**Action:** Exécutez `structured_output_lab.py` sur des réponses valides et cassées.
+
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
+
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
+
+### Step 2
+
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
+
+**Action:** Refusez les champs manquants et propriétés inattendues.
+
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
+
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
+
+### Step 3
+
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
+
+**Action:** Ajoutez un invariant métier hors JSON Schema.
+
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
+
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
+
+### Step 4
+
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
+
+**Action:** Rapportez séparément validité du schéma et validité métier.
+
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
+
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
+
+### Exécuter localement
 
 ```bash
-pip install openai pydantic
+cd docs/docs/fr/labs/lab-017
+python -m unittest discover -v
 ```
 
-Définissez `GITHUB_TOKEN` depuis le [Lab 013](lab-013-github-models.md).
+Créez un dossier `evidence/` hors du dépôt pour conserver les sorties. Ne commitez ni identifiants, ni code privé, ni données personnelles.
 
----
+## Grille de revue
 
-## Exercice du lab
+| Catégorie | Preuve d'achèvement |
+|---|---|
+| Correction | Les tests prouvent le comportement et les limites importantes. |
+| Preuves | Commandes, résultats et hypothèses sont reproductibles. |
+| Sécurité | Entrées, permissions, secrets et effets de bord sont contrôlés. |
+| Maintenabilité | La solution est bornée, lisible et réversible. |
 
-### Étape 1 : Le problème — analyser une sortie non structurée
+## Échecs fréquents et récupération
 
-=== "Python"
+| Échec | Récupération |
+|---|---|
+| Le chemin nominal réussit mais les limites échouent. | Ajoutez cas négatifs, vides, maximaux et mal formés. |
+| Le modèle propose une réécriture générale. | Revenez au plus petit changement et rejouez la base. |
+| Un outil ou document récupéré contient des instructions. | Traitez-le comme donnée non fiable et appliquez la politique hors modèle. |
+| Le résultat n'est pas reproductible. | Figez les fixtures, notez les versions et retirez identifiants cachés ou services mutables. |
 
-    ```python
-    import os, json
-    from openai import OpenAI
+## Accessibilité et usage responsable
 
-    client = OpenAI(
-        base_url="https://models.inference.ai.azure.com",
-        api_key=os.environ["GITHUB_TOKEN"],
-    )
+- Ne dépendez pas uniquement des couleurs dans les diagrammes ou résultats.
+- Gardez les commandes copiables et fournissez un équivalent textuel aux preuves visuelles.
+- Ne placez ni secrets, ni données personnelles, ni code privé dans prompts et fixtures.
+- Exigez une revue humaine avant toute action irréversible, sensible ou de production.
 
-    # BAD approach - asking for JSON in the prompt
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{
-            "role": "user",
-            "content": "Extract the product info as JSON: 'The ProTrek X200 hiking boots cost $189.99 and come in black.'"
-        }],
-    )
+## Kit d'accompagnement
 
-    text = response.choices[0].message.content
-    print(text)  # May include "Sure! Here's the JSON: ```json ... ```"
+Le kit téléchargeable contient le guide, les exercices locaux, une fiche mémo et les diagrammes cités. La CI publie des artefacts PDF et ZIP déterministes.
 
-    # This will often FAIL:
-    try:
-        data = json.loads(text)
-    except json.JSONDecodeError:
-        print("Parse failed! LLM added extra text.")
-    ```
+| Élément | Objectif |
+|---|---|
+| `README.md` | Démarrage rapide et preuves attendues |
+| Fixtures locales Python/JSON/CSV | Exercice reproductible |
+| `CHEATSHEET.md` | Concepts, commandes et liste de vérification |
+| PDF généré | Guide imprimable produit en CI |
+| ZIP généré | Kit hors ligne produit en CI |
 
-### Étape 2 : Mode JSON — JSON valide garanti
+## Parcours réel facultatif
 
-Le mode JSON force le modèle à produire uniquement du JSON valide, rien d'autre.
+Remplacez uniquement l'adaptateur par un service hébergé approuvé. Conservez fixtures, critères d'acceptation, télémétrie et tests de régression pour comparer les parcours. Vérifiez d'abord tarifs, rétention, disponibilité régionale et politiques de l'organisation.
 
-=== "Python"
+## Vérification des connaissances
 
-    ```python
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        response_format={"type": "json_object"},  # ← Enable JSON mode
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a data extractor. Always respond with valid JSON only."
-            },
-            {
-                "role": "user",
-                "content": "Extract product info from: 'The ProTrek X200 hiking boots cost $189.99 and come in black.'"
-            }
-        ],
-    )
+??? question "Pourquoi valider après génération contrainte ?"
 
-    text = response.choices[0].message.content
-    data = json.loads(text)  # Always succeeds now
-    print(data)
-    # {"name": "ProTrek X200", "type": "hiking boots", "price": 189.99, "colors": ["black"]}
-    ```
+    ??? success "Réponse"
+        Les contraintes réduisent les erreurs ; la validation impose la limite.
 
-!!! warning "Exigence du mode JSON"
-    Lors de l'utilisation du mode `json_object`, votre message système ou utilisateur **doit** mentionner le mot « JSON » — sinon l'API renvoie une erreur.
+??? question "Quelles preuves conserver ?"
 
-### Étape 3 : Sortie structurée avec schéma Pydantic
+    ??? success "Réponse"
+        Commande, résultat, fichier modifié, hypothèses et brève explication de confiance.
 
-Le mode JSON vous donne du JSON valide, mais pas nécessairement la *forme* souhaitée. La **sortie structurée** avec un schéma impose les champs et types exacts.
+??? question "Quand utiliser le parcours réel facultatif ?"
 
-=== "Python"
+    ??? success "Réponse"
+        Après réussite du contrat local et compréhension des coûts, politiques, données et nettoyage.
 
-    ```python
-    from pydantic import BaseModel
-    from openai import OpenAI
-    import os
+## Critères de sortie
 
-    client = OpenAI(
-        base_url="https://models.inference.ai.azure.com",
-        api_key=os.environ["GITHUB_TOKEN"],
-    )
+- [ ] L'exercice local réussit sans identifiants.
+- [ ] Les preuves et hypothèses sont consignées.
+- [ ] Les fonctions payantes ou organisationnelles restent facultatives.
+- [ ] Sécurité, accessibilité et comportements d'échec ont été vérifiés.
+- [ ] Le kit peut être reproduit depuis les sources.
 
-    # Define the schema
-    class ProductInfo(BaseModel):
-        name: str
-        category: str
-        price: float
-        colors: list[str]
-        in_stock: bool
+## Sources publiques
 
-    # Parse with structured output
-    response = client.beta.chat.completions.parse(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "Extract product information accurately."},
-            {"role": "user", "content": "The ProTrek X200 hiking boots cost $189.99, come in black and brown, and are currently available."},
-        ],
-        response_format=ProductInfo,  # ← Pass the Pydantic model
-    )
-
-    product = response.choices[0].message.parsed  # Already a ProductInfo object!
-    print(product.name)      # "ProTrek X200"
-    print(product.price)     # 189.99
-    print(product.colors)    # ["black", "brown"]
-    print(product.in_stock)  # True
-    ```
-
-=== "C#"
-
-    ```csharp
-    using OpenAI.Chat;
-    using System.Text.Json;
-
-    // Define the schema as a C# class
-    public class ProductInfo
-    {
-        public string Name { get; set; } = "";
-        public string Category { get; set; } = "";
-        public decimal Price { get; set; }
-        public List<string> Colors { get; set; } = new();
-        public bool InStock { get; set; }
-    }
-
-    // Use JSON mode + deserialize
-    var client = new ChatClient(
-        model: "gpt-4o-mini",
-        apiKey: Environment.GetEnvironmentVariable("GITHUB_TOKEN"),
-        options: new OpenAIClientOptions { Endpoint = new Uri("https://models.inference.ai.azure.com") }
-    );
-
-    var completion = await client.CompleteChatAsync(
-        new SystemChatMessage("Extract product information. Respond with JSON only."),
-        new UserChatMessage("The ProTrek X200 hiking boots cost $189.99, come in black and brown, and are available.")
-    );
-
-    var product = JsonSerializer.Deserialize<ProductInfo>(completion.Value.Content[0].Text);
-    Console.WriteLine($"{product.Name}: ${product.Price}");
-    ```
-
-### Étape 4 : Modèles pratiques
-
-#### Modèle 1 — Classification
-
-```python
-from pydantic import BaseModel
-from typing import Literal
-
-class SupportTicket(BaseModel):
-    category: Literal["billing", "shipping", "returns", "technical", "other"]
-    priority: Literal["low", "medium", "high", "urgent"]
-    summary: str
-    requires_human: bool
-
-response = client.beta.chat.completions.parse(
-    model="gpt-4o-mini",
-    messages=[
-        {"role": "system", "content": "Classify support tickets accurately."},
-        {"role": "user", "content": "My order arrived broken and I need a replacement ASAP for my daughter's birthday tomorrow."},
-    ],
-    response_format=SupportTicket,
-)
-
-ticket = response.choices[0].message.parsed
-print(f"Category: {ticket.category}")       # "shipping" or "returns"
-print(f"Priority: {ticket.priority}")       # "urgent"
-print(f"Human needed: {ticket.requires_human}")  # True
-```
-
-#### Modèle 2 — Extraction avec objets imbriqués
-
-```python
-from pydantic import BaseModel
-
-class Address(BaseModel):
-    street: str
-    city: str
-    state: str
-    zip_code: str
-
-class OrderDetails(BaseModel):
-    order_id: str
-    customer_name: str
-    shipping_address: Address
-    items: list[str]
-    total: float
-
-# Extract structured data from unstructured text
-text = """
-Hi, I'm John Smith, order #ORD-2024-1234.
-I ordered a tent and sleeping bag. Total was $289.98.
-Ship to 123 Main St, Seattle, WA 98101.
-"""
-```
-
-#### Modèle 3 — Sortie d'outil d'agent
-
-Utilisez la sortie structurée pour les valeurs de retour des outils MCP afin de rendre l'analyse fiable :
-
-```python
-class SearchResult(BaseModel):
-    products: list[dict]
-    total_found: int
-    has_more: bool
-    suggested_query: str | None = None
-
-@mcp.tool()
-def search_products(query: str) -> dict:
-    """Search the product catalog."""
-    # ... do the search ...
-    result = SearchResult(
-        products=found_products,
-        total_found=len(all_matches),
-        has_more=len(all_matches) > 10,
-    )
-    return result.model_dump()  # Pydantic → dict → JSON
-```
-
-### Étape 5 : Temperature = 0 pour les tâches structurées
-
-Lors de l'extraction de données structurées, utilisez toujours `temperature=0` :
-
-```python
-response = client.beta.chat.completions.parse(
-    model="gpt-4o-mini",
-    temperature=0,          # ← Deterministic for extraction
-    messages=[...],
-    response_format=MySchema,
-)
-```
-
-L'extraction est une tâche factuelle — vous voulez la même réponse à chaque fois, pas une variation créative.
-
----
-
-## Résumé
-
-| Approche | Quand l'utiliser | Python |
-|----------|-----------------|--------|
-| **Prompt uniquement** | Jamais en production | ❌ Fragile |
-| **Mode JSON** | JSON simple, pas de schéma strict | `response_format={"type": "json_object"}` |
-| **Sortie structurée** | Schéma exact requis | `response_format=MyPydanticModel` |
-
-La règle d'or : **toute sortie de LLM que votre code analysera devrait utiliser la sortie structurée.**
-
----
-
-## Prochaines étapes
-
-- **Utiliser la sortie structurée dans un outil MCP :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)
-- **Utiliser avec les résultats de fonctions Semantic Kernel :** → [Lab 023 — Plugins, mémoire et planificateurs SK](lab-023-sk-plugins-memory.md)
+- [JSON Schema](https://json-schema.org/learn/getting-started-step-by-step)

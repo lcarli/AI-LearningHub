@@ -43,3 +43,6 @@ Vous travaillez avec les données — analytics, BI, pipelines ETL — et souhai
 ---
 
 **Total : 12 labs · ~11 heures · Des fondamentaux des données à l'analyse propulsée par l'IA**
+## Ajouts de la Phase 2
+
+Utilisez les Labs 022, 095 et 099 avec le Défi 011 pour la récupération et l'évaluation.

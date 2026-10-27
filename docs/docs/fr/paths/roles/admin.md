@@ -42,3 +42,6 @@ Vous gérez les déploiements d'IA — identité, conformité, DLP, surveillance
 ---
 
 **Total : 11 labs · ~10 heures · Du zéro à la gouvernance IA d'entreprise**
+## Ajouts de la Phase 2
+
+Utilisez les Labs 092, 094 et 100 pour politiques, contrôles, menaces et limites de revue.
