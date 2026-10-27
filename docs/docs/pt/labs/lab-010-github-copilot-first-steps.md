@@ -1,20 +1,45 @@
 ---
-tags: [github-copilot, free, foundations]
+tags:
+- github-copilot
+- free
+- foundations
+lab:
+  id: '010'
+  level: L100
+  journey: github-copilot
+  time_min: 45
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Atualização de backend (outubro de 2026)"
+    A inferência do GitHub Models foi descontinuada em 30 de julho de 2026. As referências abaixo são mantidas apenas como contexto histórico enquanto este lab é migrado. Use o [Lab 013 — Backends de LLM gratuitos](../labs/lab-013-github-models.md) para configurar o Foundry Local ou o Ollama antes de continuar.
+
 # Lab 010: GitHub Copilot — Primeiros Passos
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-100">L100</span></span>
   <span><strong>Trilha:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
   <span><strong>Tempo:</strong> ~45 min</span>
-  <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Free</span> — Plano gratuito (2.000 completações + 50 chats/mês)</span>
+  <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Free</span> — cota de completações e franquia mensal limitada de AI Credits</span>
 </div>
 
 ## O Que Você Vai Aprender
 
 - Usar **completação de código inline** para escrever código a partir de comentários
 - Usar **Copilot Chat `/fix`** para encontrar e entender bugs reais
-- Usar **Copilot Edits** para refatorar um arquivo inteiro com linguagem natural
+- Usar o **modo Agent** para refatorar um arquivo inteiro com linguagem natural
 - Usar **chat inline** para estender código sem sair do editor
 - Escrever prompts que geram melhores resultados
 
@@ -29,8 +54,8 @@ Este laboratório usa **exercícios práticos** — você abrirá arquivos com b
 1. Acesse [github.com/features/copilot](https://github.com/features/copilot) → **"Start for free"**
 2. Faça login e siga o assistente de configuração
 
-!!! tip "Estudantes recebem o Copilot Pro gratuitamente"
-    → [GitHub Student Developer Pack](https://education.github.com/pack)
+!!! info "A disponibilidade para estudantes muda"
+    O Copilot Free é o caminho confiável para este lab. Consulte o [GitHub Student Developer Pack](https://education.github.com/pack) para verificar a elegibilidade atual, sem presumir que um plano pago esteja incluído.
 
 ### 2. Instalar o VS Code + extensão do Copilot
 
@@ -200,9 +225,9 @@ O arquivo menciona uma função `sort_by_price()` que ainda não existe.
 
 ---
 
-## Exercício 4 — Copilot Edits: Refatorar um Arquivo Inteiro
+## Exercício 4 — Modo Agent: Refatorar um Arquivo Inteiro
 
-**Objetivo:** Usar o Copilot Edits para melhorar a qualidade do código com instruções em linguagem natural — sem alterar o comportamento.
+**Objetivo:** Usar o modo Agent para melhorar a qualidade do código com instruções em linguagem natural — sem alterar o comportamento.
 
 ### Arquivo: [📥 `exercise4_refactor_me.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
 
@@ -210,10 +235,10 @@ O arquivo menciona uma função `sort_by_price()` que ainda não existe.
 --8<-- "labs/lab-010/exercise4_refactor_me.py"
 ```
 
-Este código **funciona corretamente** mas é difícil de ler e manter. Use o **Copilot Edits** para melhorá-lo passo a passo:
+Este código **funciona corretamente** mas é difícil de ler e manter. Use o **modo Agent** para melhorá-lo passo a passo:
 
-1. Abra o painel do Copilot Edits: `Ctrl+Shift+I` → clique em **"Open Copilot Edits"** (ícone de lápis)
-2. Clique em **"Add Files"** e adicione `exercise4_refactor_me.py`
+1. Abra o Copilot Chat (`Ctrl+Shift+I`) e selecione **Agent**
+2. Adicione `exercise4_refactor_me.py` ao contexto do chat
 3. Execute cada um destes prompts **um de cada vez**, revisando as alterações antes de prosseguir:
 
 **Prompt 1:**
@@ -273,7 +298,7 @@ Is there a more Pythonic way to write this?
 | Completação inline | Exercício 1 | Escrever código novo a partir de comentários |
 | Chat `/fix` | Exercício 2 | Entender e corrigir bugs |
 | Chat inline `Ctrl+I` | Exercício 3 | Corrigir + estender no local |
-| Copilot Edits | Exercício 4 | Refatorar arquivos inteiros |
+| Modo Agent | Exercício 4 | Refatorar arquivos inteiros e verificar as alterações |
 
 ---
 

@@ -1,5 +1,28 @@
 ---
-tags: [foundry, agent-service, multi-agent, production, enterprise, python]
+tags:
+- foundry
+- agent-service
+- multi-agent
+- production
+- enterprise
+- python
+lab:
+  id: '074'
+  level: L300
+  journey: microsoft-foundry
+  time_min: 120
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 074 : Foundry Agent Service — Simulation d'exploitation en production
 

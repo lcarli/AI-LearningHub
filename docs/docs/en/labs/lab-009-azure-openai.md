@@ -1,6 +1,33 @@
 ---
-tags: [azure, foundry, free, python, llm, azure-required]
+tags:
+- azure
+- foundry
+- free
+- python
+- llm
+- azure-required
+lab:
+  id: 009
+  level: L100
+  journey: microsoft-foundry
+  time_min: 30
+  cost:
+    tier: paid
+    requires:
+    - paid-service
+    estimate_usd: Varies by selected service; see the lab cost section.
+    simulation: false
+    cleanup: true
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Backend update (October 2026)"
+    GitHub Models inference was retired on July 30, 2026. Any references below are retained only for historical context while this lab is migrated. Use [Lab 013 — Free LLM backends](../labs/lab-013-github-models.md) to configure Foundry Local or Ollama before continuing.
+
 # Lab 009: Azure OpenAI Service Quickstart
 
 <div class="lab-meta">

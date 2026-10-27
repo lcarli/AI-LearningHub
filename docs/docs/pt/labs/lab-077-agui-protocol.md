@@ -1,5 +1,28 @@
 ---
-tags: [ag-ui, protocol, frontend, copilotkit, events, python]
+tags:
+- ag-ui
+- protocol
+- frontend
+- copilotkit
+- events
+- python
+lab:
+  id: '077'
+  level: L200
+  journey: ai-agents
+  time_min: 60
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 077: Protocolo AG-UI — Conecte Agentes a Interfaces de Usuário
 
@@ -346,7 +369,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 
 ## Próximos Passos
 
-- **[Lab 029](lab-029-mcp-protocol.md)** — Protocolo MCP (o pilar de ferramentas da trilogia)
+- **[Lab 029](lab-012-what-is-mcp.md)** — Protocolo MCP (o pilar de ferramentas da trilogia)
 - **[Lab 070](lab-070-agent-ux-patterns.md)** — Padrões de UX para Agentes (padrões de design para UIs com agentes)
 - **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (construa agentes que falam AG-UI)
 - **[Lab 034](lab-034-multi-agent-sk.md)** — Multi-Agente com Semantic Kernel (agentes que colaboram via A2A)

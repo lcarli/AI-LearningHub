@@ -1,5 +1,26 @@
 ---
-tags: [mcp, python, free, github-models]
+tags:
+- mcp
+- python
+- free
+- github-models
+lab:
+  id: '020'
+  level: L200
+  journey: mcp
+  time_min: 45
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 020: Construa um Servidor MCP em Python
 

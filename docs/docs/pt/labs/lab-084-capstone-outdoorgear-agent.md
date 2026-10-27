@@ -1,5 +1,29 @@
 ---
-tags: [capstone, full-stack, rag, mcp, guardrails, observability, production]
+tags:
+- capstone
+- full-stack
+- rag
+- mcp
+- guardrails
+- observability
+- production
+lab:
+  id: 084
+  level: L400
+  journey: ai-agents
+  time_min: 180
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 084: Capstone — Construa o Agente OutdoorGear Completo
 

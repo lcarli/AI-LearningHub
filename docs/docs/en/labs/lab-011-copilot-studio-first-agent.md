@@ -1,5 +1,26 @@
 ---
-tags: [copilot-studio, teams, free-trial, no-code]
+tags:
+- copilot-studio
+- teams
+- free-trial
+- no-code
+lab:
+  id: '011'
+  level: L100
+  journey: m365-agents
+  time_min: 30
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 011: Copilot Studio — First Agent
 

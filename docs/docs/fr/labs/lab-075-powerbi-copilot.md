@@ -1,5 +1,28 @@
 ---
-tags: [power-bi, copilot, fabric, dax, analytics, low-code]
+tags:
+- power-bi
+- copilot
+- fabric
+- dax
+- analytics
+- low-code
+lab:
+  id: '075'
+  level: L100
+  journey: ai-agents
+  time_min: 45
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 075 : Power BI Copilot — Analytique autonome et narration de données
 

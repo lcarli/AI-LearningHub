@@ -1,5 +1,27 @@
 ---
-tags: [structured-outputs, json-schema, pydantic, reliability, python]
+tags:
+- structured-outputs
+- json-schema
+- pydantic
+- reliability
+- python
+lab:
+  id: '072'
+  level: L100
+  journey: ai-agents
+  time_min: 45
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 072 : Benchmark de fiabilité des sorties structurées
 

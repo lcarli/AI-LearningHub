@@ -1,5 +1,27 @@
 ---
-tags: [github-copilot, free, vscode]
+tags:
+- github-copilot
+- free
+- vscode
+lab:
+  id: '016'
+  level: L100
+  journey: github-copilot
+  time_min: 30
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 016: GitHub Copilot Agent Mode
 
@@ -27,7 +49,7 @@ O GitHub Copilot no VS Code possui três modos:
 | Modo | O que faz |
 |------|-----------|
 | **Ask** | Responde perguntas sobre código; somente leitura |
-| **Edit** | Faz alterações nos arquivos que você especificar |
+| **Plan** | Explora o repositório e propõe um plano de implementação revisável |
 | **Agent** ⭐ | Explora autonomamente sua base de código, executa comandos, usa ferramentas e conclui tarefas em múltiplas etapas |
 
 O **Agent mode** é o mais novo e mais poderoso. Você descreve um objetivo, e o Copilot age como um desenvolvedor júnior: ele lê arquivos, escreve código, executa testes e itera até concluir — pedindo sua aprovação em pontos-chave de decisão.
@@ -240,14 +262,14 @@ Python API project for OutdoorGear Inc.
 
 ---
 
-## Agent Mode vs. Edit Mode: Quando Usar Cada Um
+## Modo Plan vs. Modo Agent: Quando Usar Cada Um
 
-| Use o Edit mode quando | Use o Agent mode quando |
+| Use o modo Plan quando | Use o modo Agent quando |
 |------------------------|-------------------------|
-| Você sabe exatamente o que mudar | Você tem um objetivo, mas não um plano |
-| Edições simples e direcionadas | Tarefas em múltiplos arquivos e múltiplas etapas |
-| Você quer controle total de cada edição | Você quer que o agente descubra sozinho |
-| Correções rápidas, refatorações | Depuração, adição de funcionalidades, escrita de testes |
+| Você precisa entender o escopo antes de alterar arquivos | Você aprovou a abordagem e quer implementá-la |
+| Requisitos ou arquivos afetados não estão claros | A tarefa exige vários arquivos e etapas |
+| Você quer um plano revisável e checkpoints | Você quer que o agente execute ferramentas e valide o resultado |
+| Arquitetura e trade-offs ainda exigem decisões | O comportamento esperado e os limites estão claros |
 
 ---
 

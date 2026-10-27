@@ -1,5 +1,27 @@
 ---
-tags: [github-copilot, free, vscode]
+tags:
+- github-copilot
+- free
+- vscode
+lab:
+  id: '016'
+  level: L100
+  journey: github-copilot
+  time_min: 30
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 016 : GitHub Copilot Agent Mode
 
@@ -27,7 +49,7 @@ GitHub Copilot dans VS Code dispose de trois modes :
 | Mode | Ce qu'il fait |
 |------|---------------|
 | **Ask** | Répond aux questions sur le code ; lecture seule |
-| **Edit** | Effectue des modifications sur les fichiers que vous spécifiez |
+| **Plan** | Explore le dépôt et propose un plan d'implémentation vérifiable |
 | **Agent** ⭐ | Explore de manière autonome votre code source, exécute des commandes, utilise des outils et accomplit des tâches en plusieurs étapes |
 
 Le **mode agent** est le plus récent et le plus puissant. Vous décrivez un objectif, et Copilot agit comme un développeur junior : il lit les fichiers, écrit du code, exécute les tests et itère jusqu'à ce que ce soit terminé — en vous demandant votre approbation aux points de décision clés.
@@ -240,14 +262,14 @@ Python API project for OutdoorGear Inc.
 
 ---
 
-## Mode agent vs. mode édition : quand utiliser lequel
+## Mode Plan vs. mode Agent : quand utiliser lequel
 
-| Utilisez le mode édition quand | Utilisez le mode agent quand |
+| Utilisez le mode Plan quand | Utilisez le mode Agent quand |
 |--------------------------------|------------------------------|
-| Vous savez exactement quoi modifier | Vous avez un objectif mais pas de plan |
-| Modifications simples et ciblées | Tâches multi-fichiers et multi-étapes |
-| Vous voulez un contrôle total sur chaque modification | Vous voulez que l'agent trouve la solution |
-| Corrections rapides, refactorisations | Débogage, ajout de fonctionnalités, écriture de tests |
+| Vous devez comprendre la portée avant de modifier les fichiers | Vous avez approuvé l'approche et souhaitez l'implémenter |
+| Les exigences ou les fichiers concernés ne sont pas clairs | La tâche nécessite plusieurs fichiers et plusieurs étapes |
+| Vous voulez un plan vérifiable et des points de contrôle | Vous voulez que l'agent exécute des outils et vérifie le résultat |
+| L'architecture et les compromis restent à décider | Le comportement attendu et les limites sont clairs |
 
 ---
 

@@ -1,5 +1,26 @@
 ---
-tags: [free, beginner, no-account-needed, awareness]
+tags:
+- free
+- beginner
+- no-account-needed
+- awareness
+lab:
+  id: '001'
+  level: L50
+  journey: ai-agents
+  time_min: 15
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 001: What are AI Agents?
 

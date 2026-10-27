@@ -1,3 +1,22 @@
+---
+lab:
+  id: '071'
+  level: L300
+  journey: ai-agents
+  time_min: 60
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
+---
 ﻿---
 tags: [caching, cost-optimization, anthropic, google, openai, python]
 ---

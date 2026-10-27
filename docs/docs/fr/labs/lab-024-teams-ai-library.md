@@ -1,6 +1,30 @@
 ---
-tags: [teams, javascript, free, github-models]
+tags:
+- teams
+- javascript
+- free
+- github-models
+lab:
+  id: '024'
+  level: L200
+  journey: m365-agents
+  time_min: 60
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Mise à jour du backend (octobre 2026)"
+    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
+
 # Lab 024 : Bot Teams AI Library
 
 <div class="lab-meta">

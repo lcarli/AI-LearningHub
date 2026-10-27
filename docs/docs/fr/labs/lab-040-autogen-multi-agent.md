@@ -1,6 +1,33 @@
 ---
-tags: [autogen, multi-agent, python, free, github-models]
+tags:
+- autogen
+- multi-agent
+- python
+- free
+- github-models
+lab:
+  id: '040'
+  level: L400
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Mise à jour du backend (octobre 2026)"
+    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
+
 # Lab 040 : Multi-agent en production avec AutoGen
 
 <div class="lab-meta">

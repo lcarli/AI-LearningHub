@@ -1,254 +1,140 @@
 ---
-tags: [github-models, free, python, llm]
+tags: [local-models, foundry-local, ollama, free, python, llm]
+lab:
+  id: '013'
+  level: L100
+  journey: llm-foundations
+  time_min: 45
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: US$ 0; runs on local hardware.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages: [en, pt, fr]
 ---
-# Lab 013: GitHub Models — Free LLM Inference
+# Lab 013: Free LLM Backends — Foundry Local and Ollama
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a> · <a href="../paths/rag/">📚 RAG</a></span>
-  <span><strong>Time:</strong> ~25 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account, no credit card</span>
+  <span><strong>Journey:</strong> LLM Foundations</span>
+  <span><strong>Time:</strong> ~45 min</span>
+  <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — local execution, no account or credit card</span>
 </div>
+
+!!! info "Why this lab changed"
+    GitHub Models inference was retired on July 30, 2026. This lab now provides the shared free backend used by the hub: Foundry Local on supported Windows devices or Ollama on Windows, macOS, and Linux.
 
 ## What You'll Learn
 
-- What GitHub Models is and which models are available
-- How to use the GitHub Models **playground** (browser, no code)
-- How to call GitHub Models via the **REST API** and **Python SDK**
-- How to generate **text embeddings** for free (needed for RAG labs)
+- Choose between Foundry Local and Ollama
+- Start an OpenAI-compatible local endpoint
+- Call a local chat model from Python
+- Configure the environment variables used by other labs
+- Verify that no prompts or data leave your machine
 
----
+## Choose a Runtime
 
-## Introduction
+=== "Foundry Local"
+    Best for supported Windows devices and DirectML acceleration.
 
-**GitHub Models** gives you free API access to frontier LLMs — GPT-4o, Llama, Phi, Mistral, and more — using your GitHub personal access token. No Azure account, no credit card, no sign-up beyond what you already have.
-
-This is the LLM backend used in all **L200 labs** in this hub.
-
----
-
-## Prerequisites Setup
-
-### 1. Create a GitHub personal access token
-
-1. Go to [github.com/settings/tokens](https://github.com/settings/tokens)
-2. Click **"Generate new token (classic)"**
-3. Name: `github-models-labs`
-4. Expiration: 90 days
-5. Scopes: none needed (read-only access is sufficient for Models API)
-6. Click **"Generate token"** — copy and save it immediately
-
-### 2. Store the token as an environment variable
-
-=== "Windows (PowerShell)"
     ```powershell
-    $env:GITHUB_TOKEN = "ghp_your_token_here"
+    winget install Microsoft.FoundryLocal
+    foundry model run phi-4-mini
+    $env:LOCAL_LLM_BASE_URL = "http://localhost:5273/v1"
+    $env:LOCAL_LLM_MODEL = "phi-4-mini"
     ```
 
-=== "macOS / Linux"
+=== "Ollama"
+    Cross-platform and easy to use on Windows, macOS, and Linux.
+
+    1. Install [Ollama](https://ollama.com/download).
+    2. Start a small model:
+
     ```bash
-    export GITHUB_TOKEN="ghp_your_token_here"
+    ollama run phi4-mini
     ```
 
-=== "VS Code / Codespaces"
-    Add to your `.env` file (never commit this file to git!):
-    ```
-    GITHUB_TOKEN=ghp_your_token_here
-    ```
+    Configure the shared endpoint:
 
----
+    === "PowerShell"
+        ```powershell
+        $env:LOCAL_LLM_BASE_URL = "http://localhost:11434/v1"
+        $env:LOCAL_LLM_MODEL = "phi4-mini"
+        ```
 
-## 📦 Supporting Files
+    === "macOS / Linux"
+        ```bash
+        export LOCAL_LLM_BASE_URL="http://localhost:11434/v1"
+        export LOCAL_LLM_MODEL="phi4-mini"
+        ```
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-013/` folder in your working directory.
+## Supporting Files
 
 | File | Description | Download |
 |------|-------------|----------|
-| `requirements.txt` | Python dependencies | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/requirements.txt) |
-| `starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) |
+| `requirements.txt` | Python dependency | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/requirements.txt) |
+| `starter.py` | Local-backend exercises | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) |
 
----
+## Exercise 1 — Verify the Endpoint
 
-## Lab Exercise
-
-### Step 1: Explore the Playground
-
-1. Go to [github.com/marketplace/models](https://github.com/marketplace/models)
-2. Click on **"gpt-4o"**
-3. Click **"Playground"**
-4. Type a message and press Enter
-
-You're now chatting with GPT-4o for free, directly in the browser.
-
-Try different models:
-- `gpt-4o-mini` — faster and cheaper
-- `Phi-4` — Microsoft's small but powerful model
-- `Llama-3.3-70B-Instruct` — Meta's open-source model
-
-### Step 2: Make your first API call
-
-=== "Python"
-
-    Install the OpenAI Python SDK (it's compatible with GitHub Models):
-    ```bash
-    pip install openai
-    ```
-
-    Create `hello_models.py`:
-    ```python
-    import os
-    from openai import OpenAI
-
-    client = OpenAI(
-        base_url="https://models.inference.ai.azure.com",
-        api_key=os.environ["GITHUB_TOKEN"],
-    )
-
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": "What is the Model Context Protocol?"},
-        ],
-        max_tokens=500,
-    )
-
-    print(response.choices[0].message.content)
-    ```
-
-    Run it:
-    ```bash
-    python hello_models.py
-    ```
-
-=== "C#"
-
-    Add the NuGet package:
-    ```bash
-    dotnet add package Azure.AI.Inference
-    ```
-
-    Create `Program.cs`:
-    ```csharp
-    using Azure;
-    using Azure.AI.Inference;
-
-    var endpoint = new Uri("https://models.inference.ai.azure.com");
-    var credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("GITHUB_TOKEN")!);
-    var client = new ChatCompletionsClient(endpoint, credential);
-
-    var response = await client.CompleteAsync(new ChatCompletionsOptions
-    {
-        Model = "gpt-4o-mini",
-        Messages =
-        {
-            new ChatRequestSystemMessage("You are a helpful assistant."),
-            new ChatRequestUserMessage("What is the Model Context Protocol?"),
-        },
-        MaxTokens = 500,
-    });
-
-    Console.WriteLine(response.Value.Content);
-    ```
-
-=== "REST (curl)"
-
-    ```bash
-    curl https://models.inference.ai.azure.com/chat/completions \
-      -H "Authorization: Bearer $GITHUB_TOKEN" \
-      -H "Content-Type: application/json" \
-      -d '{
-        "model": "gpt-4o-mini",
-        "messages": [
-          {"role": "user", "content": "What is the Model Context Protocol?"}
-        ]
-      }'
-    ```
-
-### Step 3: Generate text embeddings
-
-Embeddings are the key ingredient for RAG. Let's generate one:
-
-=== "Python"
-
-    ```python
-    import os
-    from openai import OpenAI
-
-    client = OpenAI(
-        base_url="https://models.inference.ai.azure.com",
-        api_key=os.environ["GITHUB_TOKEN"],
-    )
-
-    response = client.embeddings.create(
-        model="text-embedding-3-small",
-        input="A waterproof outdoor camping tent",
-    )
-
-    vector = response.data[0].embedding
-    print(f"Embedding dimensions: {len(vector)}")
-    print(f"First 5 values: {vector[:5]}")
-    ```
-
-!!! info "What is an embedding?"
-    An embedding is a list of numbers (a vector) that represents the *meaning* of a piece of text.  
-    Similar texts produce vectors that are close together in vector space.  
-    This is how semantic search works: compare the query vector to all document vectors and return the closest ones.
-
-### Step 4: Available Models
-
-Check what models are available via the API:
-
-```python
-import os
-from openai import OpenAI
-
-client = OpenAI(
-    base_url="https://models.inference.ai.azure.com",
-    api_key=os.environ["GITHUB_TOKEN"],
-)
-
-models = client.models.list()
-for model in models.data:
-    print(model.id)
-```
-
----
-
-## 📁 Starter Files
-
-Download the starter file to follow along:
+Install the client and run the starter:
 
 ```bash
 pip install -r requirements.txt
 python starter.py
 ```
 
-The [📥 `starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) contains 4 exercises with `TODO` comments. Complete each TODO to build a working GitHub Models client.
+The OpenAI SDK accepts both runtimes because they expose an OpenAI-compatible API:
 
----
+```python
+import os
+from openai import OpenAI
 
-## Rate Limits
+client = OpenAI(
+    base_url=os.environ["LOCAL_LLM_BASE_URL"],
+    api_key="local",
+)
 
-GitHub Models is free but rate-limited:
+response = client.chat.completions.create(
+    model=os.environ["LOCAL_LLM_MODEL"],
+    messages=[{"role": "user", "content": "Explain MCP in two sentences."}],
+)
+print(response.choices[0].message.content)
+```
 
-| Tier | Requests/min | Tokens/day |
-|------|-------------|-----------|
-| Free | ~15 | ~150,000 |
-| Copilot Pro/Business | Higher | Higher |
+## Exercise 2 — Confirm Local Processing
 
-For lab purposes, these limits are more than sufficient. If you hit a limit, wait 1 minute.
+1. Disconnect from the internet after the model download completes.
+2. Run `python starter.py` again.
+3. Confirm the response still succeeds.
+4. Stop the runtime and confirm the script reports a connection error rather than silently switching to a cloud service.
 
----
+## Shared Configuration for Other Labs
 
-## Summary
+The migrated labs use these variables:
 
-GitHub Models gives you **free access to frontier LLMs** using just your GitHub account. You can use the playground browser UI or call the API from Python/C#/REST. The API is OpenAI-compatible, so any code that works with OpenAI works here too.
+| Variable | Example | Purpose |
+|----------|---------|---------|
+| `LOCAL_LLM_BASE_URL` | `http://localhost:11434/v1` | OpenAI-compatible endpoint |
+| `LOCAL_LLM_MODEL` | `phi4-mini` | Installed chat model |
+| `LOCAL_EMBEDDING_MODEL` | Runtime-specific | Optional embedding model |
 
----
+!!! warning "Model capabilities vary"
+    Tool calling, structured output, embeddings, and context limits depend on the selected model and runtime. Each lab lists the capabilities it requires.
+
+## Knowledge Check
+
+??? question "Why do the labs use environment variables instead of hardcoding the endpoint?"
+    They let the same code work with Foundry Local, Ollama, or a documented paid backend without rewriting the exercise.
+
+??? question "Does the OpenAI SDK mean the request is sent to OpenAI?"
+    No. The SDK is only the client library. `base_url` determines where the request is sent.
 
 ## Next Steps
 
-- **Build an agent with Semantic Kernel:** → [Lab 014 — SK Hello Agent](lab-014-sk-hello-agent.md)
-- **Build a RAG app:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
+- [Lab 015 — Ollama: Local LLMs](lab-015-ollama-local-llms.md)
+- [Lab 078 — Foundry Local](lab-078-foundry-local.md)
+- [Lab 017 — Structured Output](lab-017-structured-output.md)

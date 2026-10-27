@@ -1,5 +1,28 @@
 ---
-tags: [a2a, mcp, multi-agent, architecture, capstone, python]
+tags:
+- a2a
+- mcp
+- multi-agent
+- architecture
+- capstone
+- python
+lab:
+  id: '055'
+  level: L400
+  journey: ai-agents
+  time_min: 120
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 055: A2A + MCP Full Stack — Agent Interoperability Capstone
 

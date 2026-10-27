@@ -1,5 +1,27 @@
 ---
-tags: [claude-code, copilot-cli, coding-tools, developer-experience, comparison]
+tags:
+- claude-code
+- copilot-cli
+- coding-tools
+- developer-experience
+- comparison
+lab:
+  id: 081
+  level: L100
+  journey: ai-agents
+  time_min: 45
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 081: Ferramentas de Codificação Agênticas — Claude Code vs Copilot CLI
 

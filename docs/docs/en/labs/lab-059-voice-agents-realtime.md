@@ -1,5 +1,28 @@
 ---
-tags: [voice, realtime-api, webrtc, azure-openai, multimodal, python]
+tags:
+- voice
+- realtime-api
+- webrtc
+- azure-openai
+- multimodal
+- python
+lab:
+  id: 059
+  level: L200
+  journey: ai-agents
+  time_min: 75
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 059: Voice Agents with GPT Realtime API
 

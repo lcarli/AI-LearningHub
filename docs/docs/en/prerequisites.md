@@ -24,37 +24,29 @@ Sign up at [github.com](https://github.com/signup) — it's free, no credit card
 
 With a free GitHub account you get access to:
 
-- ✅ **GitHub Copilot Free Tier** — 2,000 code completions/month + 50 chat messages/month
-- ✅ **GitHub Models** — free inference API for GPT-4o, Llama, Phi, and more (rate limited)
+- ✅ **GitHub Copilot Free** — completion quota plus a limited monthly AI Credits allowance
 - ✅ **GitHub Codespaces** — 60 hours/month free cloud dev environment
 - ✅ **GitHub Actions** — 2,000 minutes/month free CI/CD
 
-!!! tip "GitHub Copilot for Students"
-    If you're a student, get **GitHub Copilot Pro for free** via the [GitHub Student Developer Pack](https://education.github.com/pack).
+!!! info "Student eligibility"
+    Check the [GitHub Student Developer Pack](https://education.github.com/pack) for current benefits. This hub does not assume that a paid Copilot plan is available.
 
 ---
 
-## 2. GitHub Models (Free LLM Inference)
+## 2. Local LLM Backend (Free)
 
 **Required for:** L200 labs that use LLMs without Azure.
 
-GitHub Models provides free API access to frontier LLMs from your GitHub account. No credit card required.
+Use Foundry Local or Ollama. Both run on your machine and expose an OpenAI-compatible endpoint.
 
 **Setup:**
 
-1. Go to [github.com/marketplace/models](https://github.com/marketplace/models)
-2. Pick a model (e.g., `gpt-4o`, `Phi-4`, `Llama-3.3-70B`)
-3. Click **"Use this model"** → **"Get API key"** to get your personal access token
-4. Store it as `GITHUB_TOKEN` in your environment
+1. Complete [Lab 013 — Free LLM Backends](labs/lab-013-github-models.md).
+2. Set `LOCAL_LLM_BASE_URL` and `LOCAL_LLM_MODEL`.
+3. Keep the local runtime running while completing dependent labs.
 
-**Available models include:**
-- OpenAI: `gpt-4o`, `gpt-4o-mini`, `o1-mini`
-- Meta: `Llama-3.3-70B-Instruct`, `Llama-3.2-90B-Vision`
-- Microsoft: `Phi-4`, `Phi-3.5-MoE`
-- Mistral: `Mistral-Large`
-
-!!! warning "Rate limits"
-    GitHub Models is rate-limited for free accounts. For lab purposes this is more than sufficient. If you hit limits, wait a few minutes and retry.
+!!! note "Hardware"
+    Small models can run on CPU. Larger or faster models may require compatible GPU/NPU hardware and are marked **GRÁTIS***.
 
 ---
 

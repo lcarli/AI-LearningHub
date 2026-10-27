@@ -1,20 +1,11 @@
-"""
-Lab 013: GitHub Models — Free LLM Inference
-============================================
-Starter file — complete the TODOs to finish each exercise.
+"""Lab 013 starter for Foundry Local or Ollama."""
 
-Prerequisites:
-  pip install openai
-  export GITHUB_TOKEN=your_token_here   (get from github.com → Settings → Developer Settings → Tokens)
-"""
-
-import os
 from openai import OpenAI
+import os
 
-# TODO 1: Initialize the OpenAI client pointing at GitHub Models
-# Hint: base_url="https://models.inference.ai.azure.com"
-#       api_key=os.environ["GITHUB_TOKEN"]
-client = None  # Replace with the correct client initialization
+BASE_URL = os.environ.get("LOCAL_LLM_BASE_URL", "http://localhost:11434/v1")
+MODEL = os.environ.get("LOCAL_LLM_MODEL", "phi4-mini")
+client = OpenAI(base_url=BASE_URL, api_key="local")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -22,11 +13,11 @@ client = None  # Replace with the correct client initialization
 # ─────────────────────────────────────────────────────────────────────────────
 def simple_chat(user_message: str) -> str:
     """Send a single message and return the response text."""
-    # TODO 2: Call client.chat.completions.create() with:
-    #   model="gpt-4o-mini"
-    #   messages=[{"role": "user", "content": user_message}]
-    # Return response.choices[0].message.content
-    raise NotImplementedError("TODO 2: implement simple_chat()")
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[{"role": "user", "content": user_message}],
+    )
+    return response.choices[0].message.content or ""
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -40,11 +31,14 @@ Never recommend products you don't know exist."""
 
 def outdoor_advisor(user_question: str) -> str:
     """Answer outdoor gear questions using the system prompt above."""
-    # TODO 3: Call client.chat.completions.create() with:
-    #   model="gpt-4o-mini"
-    #   messages=[system message + user message]
-    # Use SYSTEM_PROMPT as the system content
-    raise NotImplementedError("TODO 3: implement outdoor_advisor()")
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_question},
+        ],
+    )
+    return response.choices[0].message.content or ""
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -71,11 +65,7 @@ def multi_turn_chat():
 # ─────────────────────────────────────────────────────────────────────────────
 # Exercise 4: Try different models
 # ─────────────────────────────────────────────────────────────────────────────
-MODELS_TO_TRY = [
-    "gpt-4o-mini",
-    "gpt-4o",
-    "Phi-4",
-]
+MODELS_TO_TRY = [MODEL]
 
 QUESTION = "What sleeping bag temperature rating do I need for winter camping at -10°C?"
 

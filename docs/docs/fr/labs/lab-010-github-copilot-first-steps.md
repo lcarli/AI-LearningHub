@@ -1,20 +1,45 @@
 ---
-tags: [github-copilot, free, foundations]
+tags:
+- github-copilot
+- free
+- foundations
+lab:
+  id: '010'
+  level: L100
+  journey: github-copilot
+  time_min: 45
+  cost:
+    tier: free-gh
+    requires:
+    - github
+    - copilot-free
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: false
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
+!!! warning "Mise à jour du backend (octobre 2026)"
+    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
+
 # Lab 010 : GitHub Copilot — Premiers pas
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
   <span><strong>Parcours :</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
   <span><strong>Durée :</strong> ~45 min</span>
-  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Niveau gratuit (2 000 complétions + 50 chats/mois)</span>
+  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — quota de complétions et allocation mensuelle limitée d'AI Credits</span>
 </div>
 
 ## Ce que vous apprendrez
 
 - Utiliser la **complétion de code en ligne** pour écrire du code à partir de commentaires
 - Utiliser **Copilot Chat `/fix`** pour trouver et comprendre de vrais bugs
-- Utiliser **Copilot Edits** pour refactoriser un fichier entier en langage naturel
+- Utiliser le **mode Agent** pour refactoriser un fichier entier en langage naturel
 - Utiliser le **chat en ligne** pour étendre le code sans quitter l'éditeur
 - Écrire des prompts qui donnent de meilleurs résultats
 
@@ -29,8 +54,8 @@ Ce lab utilise des **exercices pratiques** — vous ouvrirez des fichiers conten
 1. Rendez-vous sur [github.com/features/copilot](https://github.com/features/copilot) → **« Commencer gratuitement »**
 2. Connectez-vous et suivez l'assistant de configuration
 
-!!! tip "Les étudiants obtiennent Copilot Pro gratuitement"
-    → [GitHub Student Developer Pack](https://education.github.com/pack)
+!!! info "La disponibilité pour les étudiants évolue"
+    Copilot Free est le parcours fiable pour ce lab. Consultez le [GitHub Student Developer Pack](https://education.github.com/pack) pour vérifier l'éligibilité actuelle, sans supposer qu'un abonnement payant est inclus.
 
 ### 2. Installer VS Code + l'extension Copilot
 
@@ -200,9 +225,9 @@ Le fichier mentionne une fonction `sort_by_price()` qui n'existe pas encore.
 
 ---
 
-## Exercice 4 — Copilot Edits : Refactoriser un fichier entier
+## Exercice 4 — Mode Agent : Refactoriser un fichier entier
 
-**Objectif :** Utiliser Copilot Edits pour améliorer la qualité du code avec des instructions en langage naturel — sans changer le comportement.
+**Objectif :** Utiliser le mode Agent pour améliorer la qualité du code avec des instructions en langage naturel — sans changer le comportement.
 
 ### Fichier : [📥 `exercise4_refactor_me.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
 
@@ -210,10 +235,10 @@ Le fichier mentionne une fonction `sort_by_price()` qui n'existe pas encore.
 --8<-- "labs/lab-010/exercise4_refactor_me.py"
 ```
 
-Ce code **fonctionne correctement** mais est difficile à lire et à maintenir. Utilisez **Copilot Edits** pour l'améliorer étape par étape :
+Ce code **fonctionne correctement** mais est difficile à lire et à maintenir. Utilisez le **mode Agent** pour l'améliorer étape par étape :
 
-1. Ouvrez le panneau Copilot Edits : `Ctrl+Shift+I` → cliquez sur **« Ouvrir Copilot Edits »** (icône crayon)
-2. Cliquez sur **« Ajouter des fichiers »** et ajoutez `exercise4_refactor_me.py`
+1. Ouvrez Copilot Chat (`Ctrl+Shift+I`) et sélectionnez **Agent**
+2. Ajoutez `exercise4_refactor_me.py` au contexte du chat
 3. Exécutez chacun de ces prompts **un à la fois**, en examinant les modifications avant de continuer :
 
 **Prompt 1 :**
@@ -273,7 +298,7 @@ Is there a more Pythonic way to write this?
 | Complétion en ligne | Exercice 1 | Écrire du nouveau code à partir de commentaires |
 | Chat `/fix` | Exercice 2 | Comprendre et corriger des bugs |
 | Chat en ligne `Ctrl+I` | Exercice 3 | Corriger + étendre sur place |
-| Copilot Edits | Exercice 4 | Refactoriser des fichiers entiers |
+| Mode Agent | Exercice 4 | Refactoriser des fichiers entiers et vérifier les modifications |
 
 ---
 

@@ -1,5 +1,26 @@
 ---
-tags: [graphrag, knowledge-graph, rag, python]
+tags:
+- graphrag
+- knowledge-graph
+- rag
+- python
+lab:
+  id: '067'
+  level: L300
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 067: GraphRAG — Knowledge Graphs for Cross-Document Retrieval
 
@@ -23,7 +44,7 @@ tags: [graphrag, knowledge-graph, rag, python]
 - Evaluate retrieval quality using **importance scoring** and community coverage
 
 !!! abstract "Prerequisite"
-    Complete **[Lab 009: Retrieval-Augmented Generation](lab-009-rag-basic.md)** first. This lab assumes familiarity with basic RAG concepts including chunking, embedding, and vector search.
+    Complete **[Lab 009: Retrieval-Augmented Generation](lab-006-what-is-rag.md)** first. This lab assumes familiarity with basic RAG concepts including chunking, embedding, and vector search.
 
 ## Introduction
 
@@ -317,6 +338,6 @@ python lab-067/broken_graphrag.py
 
 ## Next Steps
 
-- **[Lab 009](lab-009-rag-basic.md)** — RAG Basics (foundational retrieval patterns)
+- **[Lab 009](lab-006-what-is-rag.md)** — RAG Basics (foundational retrieval patterns)
 - **[Lab 068](lab-068-hybrid-search.md)** — Hybrid Search (complementary retrieval strategies)
 - **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (governance for RAG pipelines)

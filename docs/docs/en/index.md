@@ -68,9 +68,9 @@
 | <span class="level-badge level-50">L50</span> | **Awareness** | Conceptual only — no code, no account required |
 |---|---|---|
 | <span class="level-badge level-100">L100</span> | **Foundations** | First labs — free GitHub account only |
-| <span class="level-badge level-200">L200</span> | **Intermediate** | Coding + GitHub Models (free, no credit card) |
-| <span class="level-badge level-300">L300</span> | **Advanced** | Cloud services — Azure subscription needed |
-| <span class="level-badge level-400">L400</span> | **Expert** | Production patterns — Azure paid resources |
+| <span class="level-badge level-200">L200</span> | **Intermediate** | Local models or Copilot Free — still US$ 0 |
+| <span class="level-badge level-300">L300</span> | **Advanced** | Free simulation or cloud services with an explicit estimate |
+| <span class="level-badge level-400">L400</span> | **Expert** | Production patterns with cost and cleanup guidance |
 
 → [Read the full level guide](how-to-use.md)
 
@@ -83,9 +83,9 @@
     Then follow the conceptual labs (L50) before picking a path.
 
 === "I know AI basics, want hands-on labs"
-    Head to **[Lab 013 — GitHub Models](labs/lab-013-github-models.md)** or  
+    Head to **[Lab 013 — Free LLM Backends](labs/lab-013-github-models.md)** or
     **[Lab 014 — SK Hello Agent](labs/lab-014-sk-hello-agent.md)**.  
-    Both use free GitHub Models — no credit card needed.
+    Start with Foundry Local or Ollama — no account or credit card needed.
 
 === "I have an Azure subscription"
     Jump to **[Lab 030 — Foundry Agent Service + MCP](labs/lab-030-foundry-agent-mcp.md)**  

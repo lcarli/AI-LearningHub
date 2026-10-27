@@ -1,25 +1,29 @@
-# Lab 041: Extensão Personalizada do GitHub Copilot
-
-<div class="lab-meta">
-  <span><strong>Nível:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/copilot/">GitHub Copilot</a></span>
-  <span><strong>Status:</strong> Em breve</span>
-  <span><strong>💰 Custo:</strong> A confirmar</span>
-</div>
-
-!!! info "Lab planejado"
-    Este lab ainda não está disponível. Ele permanece listado para mostrar o estado final planejado da trilha GitHub Copilot.
-
-## O que Você Vai Aprender
-
-> 🚧 **Este lab estará disponível em breve.** O conteúdo está sendo desenvolvido.
->
-> **Visão Geral:** Construa e publique uma Extensão do GitHub Copilot (GitHub App + backend de agente) no GitHub Marketplace.
-
-## Pré-requisitos
-
-Veja [Pré-requisitos e Contas](../prerequisites.md) para instruções de configuração.
-
 ---
+tags: [github-copilot, aposentado]
+lab:
+  id: '041'
+  level: L400
+  journey: github-copilot
+  time_min: 5
+  cost:
+    tier: free-gh
+    requires: [github, copilot-free]
+    estimate_usd: US$ 0.
+    simulation: false
+    cleanup: false
+  status: retired
+  last_verified: '2026-10-27'
+  languages: [en, pt, fr]
+---
+# Lab 041: Extensão Personalizada do GitHub Copilot — Aposentado
 
-*Volte em breve, ou [contribua com este lab](https://github.com/lcarli/AI-LearningHub)!*
+!!! danger "Este lab foi aposentado"
+    As GitHub Copilot Extensions implementadas como GitHub Apps foram descontinuadas em 10 de novembro de 2025. O exercício planejado nunca foi publicado, portanto não há uma configuração legada a concluir.
+
+## Use os Caminhos Atuais de Extensão
+
+- Use o [Lab 020](lab-020-mcp-server-python.md) ou o [Lab 021](lab-021-mcp-server-csharp.md) para expor ferramentas via MCP.
+- Use o [Lab 025](lab-025-vscode-chat-participant.md) para um chat participant do VS Code.
+- O roadmap substitui esta página pelo **Lab 093: Copilot SDK**.
+
+A URL permanece disponível para não quebrar favoritos.

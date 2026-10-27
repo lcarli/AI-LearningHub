@@ -1,5 +1,27 @@
 ---
-tags: [declarative-agents, m365-copilot, teams, manifest, low-code]
+tags:
+- declarative-agents
+- m365-copilot
+- teams
+- manifest
+- low-code
+lab:
+  id: 069
+  level: L100
+  journey: ai-agents
+  time_min: 60
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 069: Declarative Agents for Microsoft 365 Copilot
 

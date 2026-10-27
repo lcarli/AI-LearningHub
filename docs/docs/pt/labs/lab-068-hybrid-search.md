@@ -1,5 +1,28 @@
 ---
-tags: [search, rag, bm25, vector, semantic-ranker, python]
+tags:
+- search
+- rag
+- bm25
+- vector
+- semantic-ranker
+- python
+lab:
+  id: 068
+  level: L200
+  journey: ai-agents
+  time_min: 60
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 068: Hybrid Search — Vector + BM25 + Semantic Ranker
 
@@ -20,7 +43,7 @@ tags: [search, rag, bm25, vector, semantic-ranker, python]
 - Identificar quais tipos de consulta mais se beneficiam da busca híbrida + reranqueamento
 
 !!! abstract "Pré-requisito"
-    Complete primeiro o **[Lab 009: Retrieval-Augmented Generation](lab-009-rag-basic.md)**. Este lab pressupõe familiaridade com recuperação baseada em embeddings e conceitos básicos de busca.
+    Complete primeiro o **[Lab 009: Retrieval-Augmented Generation](lab-006-what-is-rag.md)**. Este lab pressupõe familiaridade com recuperação baseada em embeddings e conceitos básicos de busca.
 
 ## Introdução
 
@@ -300,6 +323,6 @@ python lab-068/broken_search.py
 
 ## Próximos Passos
 
-- **[Lab 009](lab-009-rag-basic.md)** — Fundamentos de RAG (padrões fundamentais de recuperação)
+- **[Lab 009](lab-006-what-is-rag.md)** — Fundamentos de RAG (padrões fundamentais de recuperação)
 - **[Lab 067](lab-067-graphrag.md)** — GraphRAG (síntese entre documentos com grafos de conhecimento)
 - **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (governança para pipelines de busca)

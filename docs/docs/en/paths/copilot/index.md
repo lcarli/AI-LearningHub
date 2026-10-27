@@ -2,51 +2,31 @@
 
 <span class="level-badge level-100">L100</span> <span class="level-badge level-200">L200</span> <span class="level-badge level-300">L300</span> <span class="level-badge level-400">L400</span>
 
-GitHub Copilot is Microsoft's AI-powered developer tool, embedded directly in your IDE. It goes far beyond code completion — it's a full AI development platform.
+Learn the current Copilot workflow: completions, Ask, Plan, Agent, inline chat, MCP, secure approvals, and repository instructions.
 
----
-
-## What You'll Build
-
-By the end of this path you will have:
-
-- ✅ Set up GitHub Copilot in VS Code and used inline completions + chat
-- ✅ Used **GitHub Models** to interact with frontier LLMs for free
-- ✅ Created a custom **VS Code Chat Participant** (Copilot extension)
-- 🔜 Prepared for a future **GitHub Copilot Extension** publishing lab
-
----
-
-## Path Labs (4 available labs + 1 planned)
+## Current Labs
 
 | Lab | Title | Level | Cost |
 |-----|-------|-------|------|
-| [Lab 010](../../labs/lab-010-github-copilot-first-steps.md) | GitHub Copilot — First Steps | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Free LLM Inference | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | GitHub Copilot Agent Mode | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 045](../../labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
-| [Lab 041](../../labs/lab-041-copilot-extension.md) | Custom GitHub Copilot Extension *(coming soon)* | <span class="level-badge level-400">L400</span> | 🔜 Planned |
+| [Lab 010](../../labs/lab-010-github-copilot-first-steps.md) | GitHub Copilot — First Steps | L100 | GRÁTIS·GH |
+| [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | Copilot Agent and Plan | L100 | GRÁTIS·GH |
+| [Lab 025](../../labs/lab-025-vscode-chat-participant.md) | VS Code Chat Participant | L200 | GRÁTIS·GH |
+| [Lab 081](../../labs/lab-081-agentic-coding-tools.md) | Agentic Coding Tools | L100 | GRÁTIS |
 
----
+## 2026 Migration Status
 
-## GitHub Copilot Free Tier
+- Lab 041 is retired because GitHub App-based Copilot Extensions were discontinued. Use MCP, the VS Code API, or the upcoming Copilot SDK lab.
+- Lab 045 is retired because Copilot Workspace was discontinued. Use Plan and Agent today; the roadmap adds a Spec Kit lab.
+- The next curriculum release adds custom instructions, skills, MCP, CLI, cloud agent, code review, governance, FinOps, and a capstone.
 
-You get access to GitHub Copilot free with a GitHub account:
+## Copilot Free
 
-| Feature | Free Tier |
-|---------|-----------|
-| Code completions | 2,000 / month |
-| Copilot Chat messages | 50 / month |
-| Models available | GPT-4o, Claude 3.5 Sonnet |
-| GitHub Models API | ✅ Included |
+This path is designed to work with Copilot Free unless a lab is explicitly marked paid or simulated. Copilot Free includes a completion quota and a limited AI Credits allowance; exact availability can change, so labs avoid hardcoded chat or model quotas.
 
-→ [Sign up for GitHub Copilot Free](https://github.com/features/copilot)
-
----
+→ [Enable GitHub Copilot Free](https://github.com/features/copilot)
 
 ## External Resources
 
-- [GitHub Copilot Docs](https://docs.github.com/copilot)
-- [GitHub Models Marketplace](https://github.com/marketplace/models)
-- [Copilot Studio Docs](https://learn.microsoft.com/microsoft-copilot-studio/)
-- [Building Copilot Extensions](https://docs.github.com/copilot/building-copilot-extensions)
+- [GitHub Copilot documentation](https://docs.github.com/copilot)
+- [Customize Copilot](https://docs.github.com/copilot/customizing-copilot)
+- [Model Context Protocol](https://modelcontextprotocol.io/)

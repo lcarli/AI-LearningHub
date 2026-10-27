@@ -2,51 +2,31 @@
 
 <span class="level-badge level-100">L100</span> <span class="level-badge level-200">L200</span> <span class="level-badge level-300">L300</span> <span class="level-badge level-400">L400</span>
 
-GitHub Copilot é a ferramenta de desenvolvimento com IA da Microsoft, integrada diretamente ao seu IDE. Vai muito além do autocompletar de código — é uma plataforma completa de desenvolvimento com IA.
+Aprenda o fluxo atual do Copilot: completações, Ask, Plan, Agent, chat inline, MCP, aprovações seguras e instruções do repositório.
 
----
-
-## O que Você Vai Construir
-
-Ao final desta trilha você terá:
-
-- ✅ Configurado o GitHub Copilot no VS Code e usado completações inline + chat
-- ✅ Usado o **GitHub Models** para interagir com LLMs de ponta gratuitamente
-- ✅ Criado um **VS Code Chat Participant** personalizado (extensão do Copilot)
-- 🔜 Preparado para um futuro lab de publicação de **Extensão do GitHub Copilot**
-
----
-
-## Laboratórios da Trilha (4 disponíveis + 1 planejado)
+## Labs Atuais
 
 | Lab | Título | Nível | Custo |
 |-----|--------|-------|-------|
-| [Lab 010](../../labs/lab-010-github-copilot-first-steps.md) | GitHub Copilot — Primeiros Passos | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 013](../../labs/lab-013-github-models.md) | GitHub Models — Inferência LLM Gratuita | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | Modo Agente do GitHub Copilot | <span class="level-badge level-100">L100</span> | ✅ GitHub Free |
-| [Lab 045](../../labs/lab-045-copilot-workspace.md) | GitHub Copilot Workspace | <span class="level-badge level-200">L200</span> | ✅ GitHub Free |
-| [Lab 041](../../labs/lab-041-copilot-extension.md) | Extensão Personalizada do GitHub Copilot *(em breve)* | <span class="level-badge level-400">L400</span> | 🔜 Planejado |
+| [Lab 010](../../labs/lab-010-github-copilot-first-steps.md) | GitHub Copilot — Primeiros Passos | L100 | GRÁTIS·GH |
+| [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | Copilot Agent e Plan | L100 | GRÁTIS·GH |
+| [Lab 025](../../labs/lab-025-vscode-chat-participant.md) | VS Code Chat Participant | L200 | GRÁTIS·GH |
+| [Lab 081](../../labs/lab-081-agentic-coding-tools.md) | Ferramentas de Programação Agêntica | L100 | GRÁTIS |
 
----
+## Status da Migração 2026
 
-## Nível Gratuito do GitHub Copilot
+- O Lab 041 foi aposentado porque as Copilot Extensions baseadas em GitHub Apps foram descontinuadas. Use MCP, a API do VS Code ou o futuro lab do Copilot SDK.
+- O Lab 045 foi aposentado porque o Copilot Workspace foi descontinuado. Use Plan e Agent; o roadmap adiciona um lab de Spec Kit.
+- A próxima versão curricular adiciona instruções, skills, MCP, CLI, cloud agent, code review, governança, FinOps e um capstone.
 
-Você obtém acesso ao GitHub Copilot gratuitamente com uma conta GitHub:
+## Copilot Free
 
-| Recurso | Nível Gratuito |
-|---------|----------------|
-| Completações de código | 2.000 / mês |
-| Mensagens do Copilot Chat | 50 / mês |
-| Modelos disponíveis | GPT-4o, Claude 3.5 Sonnet |
-| API do GitHub Models | ✅ Incluída |
+Esta trilha foi desenhada para funcionar no Copilot Free, salvo quando um lab estiver explicitamente marcado como pago ou simulado. O plano inclui uma cota de completações e uma franquia limitada de AI Credits; a disponibilidade exata pode mudar, por isso os labs não fixam cotas de chat ou modelos.
 
-→ [Cadastre-se no GitHub Copilot Free](https://github.com/features/copilot)
-
----
+→ [Ativar o GitHub Copilot Free](https://github.com/features/copilot)
 
 ## Recursos Externos
 
 - [Documentação do GitHub Copilot](https://docs.github.com/copilot)
-- [Marketplace do GitHub Models](https://github.com/marketplace/models)
-- [Documentação do Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/)
-- [Construindo Extensões do Copilot](https://docs.github.com/copilot/building-copilot-extensions)
+- [Personalizar o Copilot](https://docs.github.com/copilot/customizing-copilot)
+- [Model Context Protocol](https://modelcontextprotocol.io/)

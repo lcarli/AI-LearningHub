@@ -68,9 +68,9 @@
 | <span class="level-badge level-50">L50</span> | **Conscientização** | Apenas conceitual — sem código, sem conta necessária |
 |---|---|---|
 | <span class="level-badge level-100">L100</span> | **Fundamentos** | Primeiros laboratórios — apenas conta gratuita do GitHub |
-| <span class="level-badge level-200">L200</span> | **Intermediário** | Codificação + GitHub Models (gratuito, sem cartão de crédito) |
-| <span class="level-badge level-300">L300</span> | **Avançado** | Serviços em nuvem — assinatura do Azure necessária |
-| <span class="level-badge level-400">L400</span> | **Especialista** | Padrões de produção — recursos pagos do Azure |
+| <span class="level-badge level-200">L200</span> | **Intermediário** | Modelos locais ou Copilot Free — continua US$ 0 |
+| <span class="level-badge level-300">L300</span> | **Avançado** | Simulação grátis ou nuvem com estimativa explícita |
+| <span class="level-badge level-400">L400</span> | **Especialista** | Padrões de produção com orientação de custo e limpeza |
 
 → [Leia o guia completo de níveis](how-to-use.md)
 
@@ -83,9 +83,9 @@
     Depois siga os laboratórios conceituais (L50) antes de escolher um caminho.
 
 === "Conheço o básico de IA, quero laboratórios práticos"
-    Vá para o **[Lab 013 — GitHub Models](labs/lab-013-github-models.md)** ou  
+    Vá para o **[Lab 013 — Backends de LLM Gratuitos](labs/lab-013-github-models.md)** ou
     **[Lab 014 — SK Hello Agent](labs/lab-014-sk-hello-agent.md)**.  
-    Ambos usam GitHub Models gratuito — sem necessidade de cartão de crédito.
+    Comece com Foundry Local ou Ollama — sem conta ou cartão.
 
 === "Tenho uma assinatura do Azure"
     Pule para o **[Lab 030 — Foundry Agent Service + MCP](labs/lab-030-foundry-agent-mcp.md)**  

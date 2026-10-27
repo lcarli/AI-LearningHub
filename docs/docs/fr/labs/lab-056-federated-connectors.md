@@ -1,5 +1,28 @@
 ---
-tags: [connectors, mcp, m365, copilot, federation, enterprise]
+tags:
+- connectors
+- mcp
+- m365
+- copilot
+- federation
+- enterprise
+lab:
+  id: '056'
+  level: L300
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 056 : Connecteurs fédérés M365 Copilot avec MCP
 

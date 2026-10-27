@@ -12,9 +12,9 @@ Cada laboratório é marcado com um nível de **50 a 400**, inspirado na numera�
 |-------|-------|------|---------------|------------------|
 | 50 | <span class="level-badge level-50">L50</span> | Conscientização | Leitura e conceitos. Sem ferramentas, sem conta. | ❌ Nenhuma |
 | 100 | <span class="level-badge level-100">L100</span> | Fundamentos | Primeiros laboratórios práticos. Configuração mínima. | ✅ GitHub gratuito |
-| 200 | <span class="level-badge level-200">L200</span> | Intermediário | Código + nuvem gratuita (GitHub Models). | ✅ GitHub gratuito |
-| 300 | <span class="level-badge level-300">L300</span> | Avançado | Serviços em nuvem, padrões de integração. | ✅ Assinatura do Azure |
-| 400 | <span class="level-badge level-400">L400</span> | Especialista | Arquitetura de produção, avaliações, custos. | ✅ Azure pago |
+| 200 | <span class="level-badge level-200">L200</span> | Intermediário | Modelos locais ou Copilot Free. | ✅ Grátis/local |
+| 300 | <span class="level-badge level-300">L300</span> | Avançado | Simulação ou serviços de nuvem medidos. | ⚠️ Varia |
+| 400 | <span class="level-badge level-400">L400</span> | Especialista | Arquitetura de produção, avaliações e controles de custo. | ⚠️ Geralmente pago |
 
 !!! tip "Comece no nível certo"
     Não pule L50/L100 mesmo se você for um desenvolvedor experiente — o enquadramento conceitual ajuda você a tomar melhores decisões depois.
@@ -115,8 +115,8 @@ Cada página de laboratório segue esta estrutura padrão:
 Acreditamos que os melhores recursos de aprendizado são acessíveis. Nossos objetivos:
 
 - ✅ **L50 e L100**: Custo zero, sem cartão de crédito, apenas uma conta gratuita do GitHub
-- ✅ **L200**: Use [GitHub Models](https://github.com/marketplace/models) — inferência gratuita, sem cartão de crédito
-- ⚠️ **L300**: Nível gratuito do Azure quando possível; claramente marcado quando uma assinatura do Azure é necessária
-- ⚠️ **L400**: Recursos pagos do Azure necessários — custos estimados indicados em cada laboratório
+- ✅ **L200**: Use [Foundry Local ou Ollama](labs/lab-013-github-models.md), ou Copilot Free
+- ⚠️ **L300**: Uma simulação gratuita é fornecida quando possível; a nuvem real inclui estimativa
+- ⚠️ **L400**: Recursos pagos incluem estimativa, limpeza e a alternativa gratuita mais próxima
 
-→ Veja [Pré-requisitos e Contas](prerequisites.md) para o guia completo de configuração.
+→ Veja o [Guia de Custos](cost-guide.md) e [Pré-requisitos e Contas](prerequisites.md).

@@ -1,5 +1,26 @@
 ---
-tags: [graphrag, knowledge-graph, rag, python]
+tags:
+- graphrag
+- knowledge-graph
+- rag
+- python
+lab:
+  id: '067'
+  level: L300
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 067 : GraphRAG — Graphes de connaissances pour la recherche inter-documents
 
@@ -23,7 +44,7 @@ tags: [graphrag, knowledge-graph, rag, python]
 - Évaluer la qualité de la recherche à l'aide du **score d'importance** et de la couverture des communautés
 
 !!! abstract "Prérequis"
-    Complétez d'abord le **[Lab 009 : Génération augmentée par la recherche](lab-009-rag-basic.md)**. Ce lab suppose une familiarité avec les concepts de base du RAG, notamment le découpage, l'embedding et la recherche vectorielle.
+    Complétez d'abord le **[Lab 009 : Génération augmentée par la recherche](lab-006-what-is-rag.md)**. Ce lab suppose une familiarité avec les concepts de base du RAG, notamment le découpage, l'embedding et la recherche vectorielle.
 
 ## Introduction
 
@@ -317,6 +338,6 @@ python lab-067/broken_graphrag.py
 
 ## Prochaines étapes
 
-- **[Lab 009](lab-009-rag-basic.md)** — Les bases du RAG (schémas fondamentaux de recherche)
+- **[Lab 009](lab-006-what-is-rag.md)** — Les bases du RAG (schémas fondamentaux de recherche)
 - **[Lab 068](lab-068-hybrid-search.md)** — Recherche hybride (stratégies de recherche complémentaires)
 - **[Lab 065](lab-065-purview-dspm-ai.md)** — Purview DSPM for AI (gouvernance pour les pipelines RAG)

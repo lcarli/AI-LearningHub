@@ -1,5 +1,28 @@
 ---
-tags: [computer-use, automation, anthropic, desktop, python, safety]
+tags:
+- computer-use
+- automation
+- anthropic
+- desktop
+- python
+- safety
+lab:
+  id: '057'
+  level: L300
+  journey: ai-agents
+  time_min: 90
+  cost:
+    tier: free
+    requires: []
+    estimate_usd: 0 within the documented free path or quota.
+    simulation: true
+    cleanup: false
+  status: active
+  last_verified: '2026-10-27'
+  languages:
+  - en
+  - pt
+  - fr
 ---
 # Lab 057: Agentes de Uso de Computador — Automação de Desktop
 

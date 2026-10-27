@@ -15,6 +15,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+import yaml
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 LABS_DIR = REPO_ROOT / "docs" / "docs" / "en" / "labs"
 PATHS_DIR = REPO_ROOT / "docs" / "docs" / "en" / "paths"
@@ -33,6 +35,12 @@ def extract_lab_meta(filepath: Path) -> dict | None:
         return None
     lab_num = int(num_match.group(1))
 
+    frontmatter = {}
+    if content.startswith("---\n"):
+        _, raw, _ = content.split("---\n", 2)
+        frontmatter = yaml.safe_load(raw) or {}
+    structured = frontmatter.get("lab", {})
+
     # Title
     title_match = re.search(r"^# Lab \d+[^:]*: (.+)$", content, re.MULTILINE)
     if not title_match:
@@ -41,8 +49,8 @@ def extract_lab_meta(filepath: Path) -> dict | None:
 
     # Level
     level_match = re.search(r'level-(\d+)">(L\d+)<', content)
-    level = level_match.group(2) if level_match else "?"
-    level_num = int(level_match.group(1)) if level_match else 0
+    level = structured.get("level") or (level_match.group(2) if level_match else "?")
+    level_num = int(level.removeprefix("L")) if level.startswith("L") else 0
 
     # Path
     path_link = re.search(r'<a href="(\.\./paths/[^"]+)">([^<]+)</a>', content)
@@ -59,20 +67,15 @@ def extract_lab_meta(filepath: Path) -> dict | None:
 
     # Time
     time_match = re.search(r"~(\d+)\s*min", content)
-    time_min = int(time_match.group(1)) if time_match else 0
+    time_min = structured.get("time_min") or (int(time_match.group(1)) if time_match else 0)
 
-    # Cost
-    cost = "Free"
-    if "cost-free" in content:
-        cost = "✅ Free"
-    elif "cost-github" in content:
-        cost = "✅ GitHub Free"
-    elif "cost-azure" in content or "Azure" in content[:500]:
-        cost = "⚠️ Azure"
-    if "M365" in content[:600] or "Copilot license" in content[:600]:
-        cost = "⚠️ M365"
-    if "cost-free" in content:
-        cost = "✅ Free"
+    tier_labels = {
+        "free": "✅ Free",
+        "free-gh": "✅ GitHub Free",
+        "free-conditional": "⚠️ Free with conditions",
+        "paid": "💳 Paid",
+    }
+    cost = tier_labels.get(structured.get("cost", {}).get("tier"), "Unknown")
 
     return {
         "num": lab_num,
@@ -83,6 +86,7 @@ def extract_lab_meta(filepath: Path) -> dict | None:
         "path_key": path_key,
         "time_min": time_min,
         "cost": cost,
+        "status": structured.get("status", "active"),
         "file": filepath.name,
     }
 
@@ -108,7 +112,12 @@ def generate_labs_index(labs: list[dict]) -> str:
 
     for level_num, (badge, desc) in level_groups.items():
         level_labs = sorted(
-            [l for l in labs if l["level_num"] == level_num], key=lambda x: x["num"]
+            [
+                l
+                for l in labs
+                if l["level_num"] == level_num and l["status"] != "retired"
+            ],
+            key=lambda x: x["num"],
         )
         if not level_labs:
             continue
@@ -135,7 +144,9 @@ def generate_labs_index(labs: list[dict]) -> str:
 
     lines.append("---")
     lines.append("")
-    lines.append(f"**Total: {len(labs)} labs**")
+    active_count = sum(lab["status"] != "retired" for lab in labs)
+    retired_count = len(labs) - active_count
+    lines.append(f"**Total: {active_count} active labs · {retired_count} retired**")
     lines.append("")
 
     return "\n".join(lines)
@@ -152,7 +163,7 @@ def main():
     # Generate labs index
     index_content = generate_labs_index(labs)
     INDEX_FILE.write_text(index_content, encoding="utf-8")
-    print(f"✅ Generated {INDEX_FILE} ({len(labs)} labs)")
+    print(f"Generated {INDEX_FILE} ({len(labs)} labs)")
 
 
 if __name__ == "__main__":
