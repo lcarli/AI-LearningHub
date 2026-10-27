@@ -14,6 +14,7 @@ Challenges are less guided than labs. Use them after completing the related labs
 | [Challenge 006](challenge-006-observability.md) | Investigate an Agent Observability Incident | <span class="level-badge level-300">L300</span> | Tracing, metrics, root cause | ~60 min |
 | [Challenge 007](challenge-007-guardrails-red-team.md) | Red-Team Agent Guardrails | <span class="level-badge level-300">L300</span> | Guardrails, PII, safety | ~60 min |
 | [Challenge 008](challenge-008-local-only-agent.md) | Build a Local-Only Agent | <span class="level-badge level-200">L200</span> | Local tools, routing, no cloud | ~75 min |
+| [Challenge 009](challenge-009-copilot-free.md) | Pass Using Only Copilot Free | <span class="level-badge level-200">L200</span> | Free plan, context, local validation | ~60 min |
 
 ---
 

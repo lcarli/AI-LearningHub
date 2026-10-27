@@ -30,9 +30,13 @@ jobs:
         run: |
           python scripts/generate_whats_new.py
           python scripts/generate_labs_index.py
+          python scripts/generate_labs_json.py
 
       - name: Validate content
         run: python scripts/validate_content.py
+
+      - name: Test catalog interactions
+        run: node --test scripts/test_hub_features.js
 
       - name: Build documentation
         working-directory: docs

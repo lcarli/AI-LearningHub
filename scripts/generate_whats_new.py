@@ -52,14 +52,15 @@ Deploy-to-Azure one-click buttons for three Bicep templates:
 
 ## 🗺️ Roadmap
 
-The hub currently tracks **84 lab entries**, including planned labs clearly marked as coming soon. Candidate curriculum gaps for future contributions:
+The hub currently tracks **93 lab entries** across three languages. The 2026 release adds:
 
-- Build an agent loop from scratch before using frameworks
-- Introductory agent evaluation with golden sets and rubrics
-- Production resilience: retries, timeouts, rate limits, and fallbacks
-- Token economy and context management hands-on
-- Early practical guardrails: PII redaction, validation, and prompt-injection checks
-- A fully local end-to-end path with local models, tools, RAG, and evaluation
+- Copilot Free-first prompt and context engineering
+- Repository instructions, prompt files, custom agents, and skills
+- GitHub MCP Server, Playwright MCP, and Copilot CLI
+- Spec-driven development with Spec Kit
+- Free simulations for cloud agent, code review, governance, and FinOps
+- An interactive token, sampling, and context-window lab
+- A four-week GH-300 certification path
 
 See [CONTRIBUTING.md](https://github.com/lcarli/AI-LearningHub/blob/main/CONTRIBUTING.md) or [open a proposal](https://github.com/lcarli/AI-LearningHub/issues/new?template=new_lab_proposal.md).
 """
@@ -209,4 +210,4 @@ def build_whats_new() -> str:
 if __name__ == "__main__":
     content = build_whats_new()
     OUTPUT_FILE.write_text(content, encoding="utf-8")
-    print(f"✅ Generated {OUTPUT_FILE} ({len(content)} chars)")
+    print(f"Generated {OUTPUT_FILE} ({len(content)} chars)")

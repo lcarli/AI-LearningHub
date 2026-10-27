@@ -1,0 +1,2695 @@
+[
+  {
+    "id": "001",
+    "title": "Lab 001: O que são Agentes de IA?",
+    "summary": "",
+    "url": "labs/lab-001-what-are-ai-agents.md",
+    "level": "L50",
+    "journey": "ai-agents",
+    "time_min": 15,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "awareness"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "awareness"
+    ]
+  },
+  {
+    "id": "002",
+    "title": "Lab 002: Paisagem do Agente de IA 2025",
+    "summary": "",
+    "url": "labs/lab-002-agent-landscape.md",
+    "level": "L50",
+    "journey": "ai-agents",
+    "time_min": 20,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "awareness"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "awareness"
+    ]
+  },
+  {
+    "id": "003",
+    "title": "Lab 003: Escolhendo a Ferramenta Certa",
+    "summary": "",
+    "url": "labs/lab-003-choosing-the-right-tool.md",
+    "level": "L50",
+    "journey": "ai-agents",
+    "time_min": 15,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "awareness",
+      "persona-student",
+      "persona-developer",
+      "persona-analyst",
+      "persona-architect",
+      "persona-admin"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "awareness",
+      "persona-student",
+      "persona-developer",
+      "persona-analyst",
+      "persona-architect",
+      "persona-admin"
+    ]
+  },
+  {
+    "id": "004",
+    "title": "Lab 004: Como LLMs Funcionam",
+    "summary": "",
+    "url": "labs/lab-004-how-llms-work.md",
+    "level": "L50",
+    "journey": "ai-agents",
+    "time_min": 20,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "llm"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "llm"
+    ]
+  },
+  {
+    "id": "005",
+    "title": "Lab 005: Engenharia de Prompt",
+    "summary": "",
+    "url": "labs/lab-005-prompt-engineering.md",
+    "level": "L50",
+    "journey": "ai-agents",
+    "time_min": 25,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "prompt-engineering"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "prompt-engineering"
+    ]
+  },
+  {
+    "id": "006",
+    "title": "Lab 006: O que é RAG?",
+    "summary": "",
+    "url": "labs/lab-006-what-is-rag.md",
+    "level": "L50",
+    "journey": "llm-foundations",
+    "time_min": 20,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "rag"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "rag"
+    ]
+  },
+  {
+    "id": "007",
+    "title": "Lab 007: O que são Embeddings?",
+    "summary": "",
+    "url": "labs/lab-007-what-are-embeddings.md",
+    "level": "L50",
+    "journey": "llm-foundations",
+    "time_min": 15,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "embeddings",
+      "rag"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "embeddings",
+      "rag"
+    ]
+  },
+  {
+    "id": "008",
+    "title": "Lab 008: IA Responsável para Construtores de Agentes",
+    "summary": "",
+    "url": "labs/lab-008-responsible-ai.md",
+    "level": "L50",
+    "journey": "ai-agents",
+    "time_min": 20,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "responsible-ai",
+      "security"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "free",
+      "beginner",
+      "no-account-needed",
+      "responsible-ai",
+      "security"
+    ]
+  },
+  {
+    "id": "009",
+    "title": "Lab 009: Início Rápido com Azure OpenAI Service",
+    "summary": "",
+    "url": "labs/lab-009-azure-openai.md",
+    "level": "L100",
+    "journey": "microsoft-foundry",
+    "time_min": 30,
+    "cost": "paid",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "azure",
+      "foundry",
+      "free",
+      "python",
+      "llm",
+      "azure-required"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "azure",
+      "foundry",
+      "free",
+      "python",
+      "llm",
+      "azure-required"
+    ]
+  },
+  {
+    "id": "010",
+    "title": "Lab 010: GitHub Copilot — Primeiros Passos",
+    "summary": "",
+    "url": "labs/lab-010-github-copilot-first-steps.md",
+    "level": "L100",
+    "journey": "github-copilot",
+    "time_min": 45,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "github-copilot",
+      "free",
+      "foundations"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "free",
+      "foundations"
+    ]
+  },
+  {
+    "id": "011",
+    "title": "Lab 011: Copilot Studio — Primeiro Agente",
+    "summary": "",
+    "url": "labs/lab-011-copilot-studio-first-agent.md",
+    "level": "L100",
+    "journey": "m365-agents",
+    "time_min": 30,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "copilot-studio",
+      "teams",
+      "free-trial",
+      "no-code"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "copilot-studio",
+      "teams",
+      "free-trial",
+      "no-code"
+    ]
+  },
+  {
+    "id": "012",
+    "title": "Lab 012: O que é MCP? Anatomia do Protocolo",
+    "summary": "",
+    "url": "labs/lab-012-what-is-mcp.md",
+    "level": "L100",
+    "journey": "mcp",
+    "time_min": 20,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": []
+  },
+  {
+    "id": "013",
+    "title": "Lab 013: Backends de LLM Gratuitos — Foundry Local e Ollama",
+    "summary": "",
+    "url": "labs/lab-013-github-models.md",
+    "level": "L100",
+    "journey": "llm-foundations",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "modelos-locais",
+      "foundry-local",
+      "ollama",
+      "gratis",
+      "python",
+      "llm"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "modelos-locais",
+      "foundry-local",
+      "ollama",
+      "gratis",
+      "python",
+      "llm"
+    ]
+  },
+  {
+    "id": "014",
+    "title": "Lab 014: Semantic Kernel — Hello Agent",
+    "summary": "",
+    "url": "labs/lab-014-sk-hello-agent.md",
+    "level": "L100",
+    "journey": "agent-framework",
+    "time_min": 30,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "semantic-kernel",
+      "free",
+      "python",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "semantic-kernel",
+      "free",
+      "python",
+      "github-models"
+    ]
+  },
+  {
+    "id": "015",
+    "title": "Lab 015: Ollama — Execute LLMs Localmente de Graça",
+    "summary": "",
+    "url": "labs/lab-015-ollama-local-llms.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 30,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "ollama",
+      "local-llm",
+      "free",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "ollama",
+      "local-llm",
+      "free",
+      "python"
+    ]
+  },
+  {
+    "id": "016",
+    "title": "Lab 016: GitHub Copilot Agent Mode",
+    "summary": "",
+    "url": "labs/lab-016-copilot-agent-mode.md",
+    "level": "L100",
+    "journey": "github-copilot",
+    "time_min": 30,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "github-copilot",
+      "free",
+      "vscode"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "free",
+      "vscode"
+    ]
+  },
+  {
+    "id": "017",
+    "title": "Lab 017: Saída Estruturada e Modo JSON",
+    "summary": "",
+    "url": "labs/lab-017-structured-output.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 25,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": []
+  },
+  {
+    "id": "018",
+    "title": "Lab 018: Function Calling & Tool Use",
+    "summary": "",
+    "url": "labs/lab-018-function-calling.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 35,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "python",
+      "free",
+      "github-models",
+      "tool-calling",
+      "function-calling"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "python",
+      "free",
+      "github-models",
+      "tool-calling",
+      "function-calling"
+    ]
+  },
+  {
+    "id": "019",
+    "title": "Lab 019: Respostas em Streaming com Agentes",
+    "summary": "",
+    "url": "labs/lab-019-streaming-responses.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 25,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "python",
+      "free",
+      "github-models",
+      "streaming"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "python",
+      "free",
+      "github-models",
+      "streaming"
+    ]
+  },
+  {
+    "id": "020",
+    "title": "Lab 020: Construa um Servidor MCP em Python",
+    "summary": "",
+    "url": "labs/lab-020-mcp-server-python.md",
+    "level": "L200",
+    "journey": "mcp",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "mcp",
+      "python",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "mcp",
+      "python",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "021",
+    "title": "Lab 021: Construa um Servidor MCP em C#",
+    "summary": "",
+    "url": "labs/lab-021-mcp-server-csharp.md",
+    "level": "L200",
+    "journey": "mcp",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "mcp",
+      "csharp",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "mcp",
+      "csharp",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "022",
+    "title": "Lab 022: Pipeline RAG com GitHub Models + pgvector",
+    "summary": "",
+    "url": "labs/lab-022-rag-github-models-pgvector.md",
+    "level": "L200",
+    "journey": "llm-foundations",
+    "time_min": 50,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "rag",
+      "pgvector",
+      "python",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "rag",
+      "pgvector",
+      "python",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "023",
+    "title": "Lab 023: Semantic Kernel — Plugins, Memória e Planners",
+    "summary": "",
+    "url": "labs/lab-023-sk-plugins-memory.md",
+    "level": "L200",
+    "journey": "agent-framework",
+    "time_min": 45,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "semantic-kernel",
+      "python",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "semantic-kernel",
+      "python",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "024",
+    "title": "Lab 024: Bot com Teams AI Library",
+    "summary": "",
+    "url": "labs/lab-024-teams-ai-library.md",
+    "level": "L200",
+    "journey": "m365-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "teams",
+      "javascript",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "teams",
+      "javascript",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "025",
+    "title": "Lab 025: Participante do Chat do VS Code Copilot",
+    "summary": "",
+    "url": "labs/lab-025-vscode-chat-participant.md",
+    "level": "L200",
+    "journey": "github-copilot",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "vscode",
+      "typescript",
+      "github-copilot",
+      "free"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "vscode",
+      "typescript",
+      "github-copilot",
+      "free"
+    ]
+  },
+  {
+    "id": "026",
+    "title": "Lab 026: Agentic RAG Pattern",
+    "summary": "",
+    "url": "labs/lab-026-agentic-rag.md",
+    "level": "L200",
+    "journey": "llm-foundations",
+    "time_min": 40,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "rag",
+      "agentic-rag",
+      "python",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "rag",
+      "agentic-rag",
+      "python",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "027",
+    "title": "Lab 027: Agent Memory Patterns",
+    "summary": "",
+    "url": "labs/lab-027-agent-memory-patterns.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 35,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "memory",
+      "python",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "memory",
+      "python",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "028",
+    "title": "Lab 028: Implantar Servidor MCP no Azure Container Apps",
+    "summary": "",
+    "url": "labs/lab-028-deploy-mcp-azure.md",
+    "level": "L300",
+    "journey": "mcp",
+    "time_min": 60,
+    "cost": "paid",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "mcp",
+      "azure",
+      "container-apps",
+      "bicep",
+      "azure-required"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "mcp",
+      "azure",
+      "container-apps",
+      "bicep",
+      "azure-required"
+    ]
+  },
+  {
+    "id": "029",
+    "title": "Lab 029: LangChain & LangGraph Básico",
+    "summary": "",
+    "url": "labs/lab-029-langchain-langgraph.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "langchain",
+      "langgraph",
+      "python",
+      "free",
+      "github-models",
+      "agents"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "langchain",
+      "langgraph",
+      "python",
+      "free",
+      "github-models",
+      "agents"
+    ]
+  },
+  {
+    "id": "030",
+    "title": "Lab 030: Microsoft Foundry Agent Service + MCP",
+    "summary": "",
+    "url": "labs/lab-030-foundry-agent-mcp.md",
+    "level": "L300",
+    "journey": "microsoft-foundry",
+    "time_min": 90,
+    "cost": "paid",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "foundry",
+      "mcp",
+      "azure",
+      "azure-required"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "foundry",
+      "mcp",
+      "azure",
+      "azure-required"
+    ]
+  },
+  {
+    "id": "031",
+    "title": "Lab 031: pgvector Semantic Search on Azure",
+    "summary": "",
+    "url": "labs/lab-031-pgvector-semantic-search.md",
+    "level": "L300",
+    "journey": "llm-foundations",
+    "time_min": 60,
+    "cost": "paid",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "pgvector",
+      "rag",
+      "azure",
+      "azure-required"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "pgvector",
+      "rag",
+      "azure",
+      "azure-required"
+    ]
+  },
+  {
+    "id": "032",
+    "title": "Lab 032: Row Level Security para Agentes",
+    "summary": "",
+    "url": "labs/lab-032-row-level-security.md",
+    "level": "L300",
+    "journey": "microsoft-foundry",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "security",
+      "postgresql",
+      "python",
+      "free"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "security",
+      "postgresql",
+      "python",
+      "free"
+    ]
+  },
+  {
+    "id": "033",
+    "title": "Lab 033: Observabilidade de Agentes com Application Insights",
+    "summary": "",
+    "url": "labs/lab-033-agent-observability.md",
+    "level": "L300",
+    "journey": "microsoft-foundry",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "observability",
+      "opentelemetry",
+      "python",
+      "free"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "observability",
+      "opentelemetry",
+      "python",
+      "free"
+    ]
+  },
+  {
+    "id": "034",
+    "title": "Lab 034: Orquestração Multi-Agente com Semantic Kernel",
+    "summary": "",
+    "url": "labs/lab-034-multi-agent-sk.md",
+    "level": "L300",
+    "journey": "agent-framework",
+    "time_min": 60,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "semantic-kernel",
+      "multi-agent",
+      "python",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "semantic-kernel",
+      "multi-agent",
+      "python",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "035",
+    "title": "Lab 035: Avaliação de Agentes com Azure AI Eval SDK",
+    "summary": "",
+    "url": "labs/lab-035-agent-evaluation.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "evaluation",
+      "python",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "evaluation",
+      "python",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "036",
+    "title": "Lab 036: Defesa contra Injeção de Prompt e Segurança de Agentes",
+    "summary": "",
+    "url": "labs/lab-036-prompt-injection-security.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 40,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "security",
+      "prompt-injection",
+      "python",
+      "free"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "security",
+      "prompt-injection",
+      "python",
+      "free"
+    ]
+  },
+  {
+    "id": "037",
+    "title": "Lab 037: CI/CD para Agentes de IA com GitHub Actions",
+    "summary": "",
+    "url": "labs/lab-037-cicd-github-actions.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 45,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "cicd",
+      "github-actions",
+      "python",
+      "free"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "cicd",
+      "github-actions",
+      "python",
+      "free"
+    ]
+  },
+  {
+    "id": "038",
+    "title": "Lab 038: Otimização de Custos de IA",
+    "summary": "",
+    "url": "labs/lab-038-cost-optimization.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 45,
+    "cost": "paid",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "cost-optimization",
+      "azure",
+      "production",
+      "monitoring",
+      "L300"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "cost-optimization",
+      "azure",
+      "production",
+      "monitoring",
+      "L300"
+    ]
+  },
+  {
+    "id": "039",
+    "title": "Lab 039: Comparação de Bancos de Dados Vetoriais",
+    "summary": "",
+    "url": "labs/lab-039-vector-db-comparison.md",
+    "level": "L300",
+    "journey": "llm-foundations",
+    "time_min": 50,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "vector-db",
+      "rag",
+      "azure",
+      "production",
+      "L300"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "vector-db",
+      "rag",
+      "azure",
+      "production",
+      "L300"
+    ]
+  },
+  {
+    "id": "040",
+    "title": "Lab 040: Multi-Agente em Produção com AutoGen",
+    "summary": "",
+    "url": "labs/lab-040-autogen-multi-agent.md",
+    "level": "L400",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "autogen",
+      "multi-agent",
+      "python",
+      "free",
+      "github-models"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "autogen",
+      "multi-agent",
+      "python",
+      "free",
+      "github-models"
+    ]
+  },
+  {
+    "id": "041",
+    "title": "Lab 041: Extensão Personalizada do GitHub Copilot — Aposentado",
+    "summary": "",
+    "url": "labs/lab-041-copilot-extension.md",
+    "level": "L400",
+    "journey": "github-copilot",
+    "time_min": 5,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "github-copilot",
+      "aposentado"
+    ],
+    "language": "pt",
+    "status": "retired",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "aposentado"
+    ]
+  },
+  {
+    "id": "042",
+    "title": "Lab 042: RAG Empresarial com Avaliações",
+    "summary": "",
+    "url": "labs/lab-042-enterprise-rag.md",
+    "level": "L400",
+    "journey": "llm-foundations",
+    "time_min": 30,
+    "cost": "paid",
+    "simulation": false,
+    "roles": [],
+    "technologies": [],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": []
+  },
+  {
+    "id": "043",
+    "title": "Lab 043: Agentes Multimodais com GPT-4o Vision",
+    "summary": "",
+    "url": "labs/lab-043-multimodal-agents.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 50,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "multimodal",
+      "gpt-4o",
+      "vision",
+      "python",
+      "github-models",
+      "L300"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "multimodal",
+      "gpt-4o",
+      "vision",
+      "python",
+      "github-models",
+      "L300"
+    ]
+  },
+  {
+    "id": "044",
+    "title": "Lab 044: Phi-4 + Ollama em Produção",
+    "summary": "",
+    "url": "labs/lab-044-phi4-ollama-production.md",
+    "level": "L400",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "phi4",
+      "ollama",
+      "local-llm",
+      "free",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "phi4",
+      "ollama",
+      "local-llm",
+      "free",
+      "python"
+    ]
+  },
+  {
+    "id": "045",
+    "title": "Lab 045: GitHub Copilot Workspace — Aposentado",
+    "summary": "",
+    "url": "labs/lab-045-copilot-workspace.md",
+    "level": "L200",
+    "journey": "github-copilot",
+    "time_min": 5,
+    "cost": "free-gh",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "github-copilot",
+      "aposentado",
+      "spec-driven"
+    ],
+    "language": "pt",
+    "status": "retired",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "aposentado",
+      "spec-driven"
+    ]
+  },
+  {
+    "id": "046",
+    "title": "Lab 046: Microsoft Agent 365 — Governança de Agentes Empresariais",
+    "summary": "",
+    "url": "labs/lab-046-agent-365.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "paid",
+    "simulation": false,
+    "roles": [],
+    "technologies": [
+      "enterprise",
+      "microsoft-365",
+      "agent-governance",
+      "pro-code",
+      "mcp",
+      "observability"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "enterprise",
+      "microsoft-365",
+      "agent-governance",
+      "pro-code",
+      "mcp",
+      "observability"
+    ]
+  },
+  {
+    "id": "047",
+    "title": "Lab 047: Work IQ — Análise de Adoção do Copilot",
+    "summary": "",
+    "url": "labs/lab-047-work-iq-copilot-analytics.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "enterprise",
+      "work-iq",
+      "copilot-analytics",
+      "python",
+      "viva-insights",
+      "m365"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "enterprise",
+      "work-iq",
+      "copilot-analytics",
+      "python",
+      "viva-insights",
+      "m365"
+    ]
+  },
+  {
+    "id": "048",
+    "title": "Lab 048: Work IQ — Análise de Impacto do Copilot e Power BI",
+    "summary": "",
+    "url": "labs/lab-048-work-iq-power-bi.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "enterprise",
+      "work-iq",
+      "copilot-analytics",
+      "python",
+      "power-bi",
+      "viva-insights",
+      "roi"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "enterprise",
+      "work-iq",
+      "copilot-analytics",
+      "python",
+      "power-bi",
+      "viva-insights",
+      "roi"
+    ]
+  },
+  {
+    "id": "049",
+    "title": "Lab 049: Foundry IQ — Rastreamento de Agentes com OpenTelemetry",
+    "summary": "",
+    "url": "labs/lab-049-foundry-iq-agent-tracing.md",
+    "level": "L300",
+    "journey": "microsoft-foundry",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "observability",
+      "opentelemetry",
+      "azure-monitor",
+      "foundry",
+      "python",
+      "tracing"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "observability",
+      "opentelemetry",
+      "azure-monitor",
+      "foundry",
+      "python",
+      "tracing"
+    ]
+  },
+  {
+    "id": "050",
+    "title": "Lab 050: Observabilidade Multi-Agente com Convenções Semânticas GenAI",
+    "summary": "",
+    "url": "labs/lab-050-multi-agent-observability.md",
+    "level": "L400",
+    "journey": "microsoft-foundry",
+    "time_min": 120,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "observability",
+      "opentelemetry",
+      "multi-agent",
+      "genai-conventions",
+      "azure-monitor",
+      "foundry",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "observability",
+      "opentelemetry",
+      "multi-agent",
+      "genai-conventions",
+      "azure-monitor",
+      "foundry",
+      "python"
+    ]
+  },
+  {
+    "id": "051",
+    "title": "Lab 051: Fabric IQ — Real-Time Intelligence Agents",
+    "summary": "",
+    "url": "labs/lab-051-fabric-rti-agents.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "fabric",
+      "real-time-intelligence",
+      "kql",
+      "eventstreams",
+      "iot",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "fabric",
+      "real-time-intelligence",
+      "kql",
+      "eventstreams",
+      "iot",
+      "python"
+    ]
+  },
+  {
+    "id": "052",
+    "title": "Lab 052: Fabric IQ — Conversational Data Agent (NL → SQL)",
+    "summary": "",
+    "url": "labs/lab-052-fabric-conversational-agent.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "fabric",
+      "data-agent",
+      "nl-to-sql",
+      "sqlite",
+      "python",
+      "entra-id"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "fabric",
+      "data-agent",
+      "nl-to-sql",
+      "sqlite",
+      "python",
+      "entra-id"
+    ]
+  },
+  {
+    "id": "053",
+    "title": "Lab 053: Fabric IQ — Enriquecimento em Lote com AI Functions",
+    "summary": "",
+    "url": "labs/lab-053-fabric-ai-functions.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "fabric",
+      "ai-functions",
+      "batch-enrichment",
+      "etl",
+      "python",
+      "pandas"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "fabric",
+      "ai-functions",
+      "batch-enrichment",
+      "etl",
+      "python",
+      "pandas"
+    ]
+  },
+  {
+    "id": "054",
+    "title": "Lab 054: Protocolo A2A — Construa Sistemas Multi-Agente Interoperáveis",
+    "summary": "",
+    "url": "labs/lab-054-a2a-protocol.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "a2a",
+      "protocol",
+      "multi-agent",
+      "interoperability",
+      "python",
+      "free"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "a2a",
+      "protocol",
+      "multi-agent",
+      "interoperability",
+      "python",
+      "free"
+    ]
+  },
+  {
+    "id": "055",
+    "title": "Lab 055: A2A + MCP Full Stack — Capstone de Interoperabilidade de Agentes",
+    "summary": "",
+    "url": "labs/lab-055-a2a-mcp-capstone.md",
+    "level": "L400",
+    "journey": "ai-agents",
+    "time_min": 120,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "a2a",
+      "mcp",
+      "multi-agent",
+      "architecture",
+      "capstone",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "a2a",
+      "mcp",
+      "multi-agent",
+      "architecture",
+      "capstone",
+      "python"
+    ]
+  },
+  {
+    "id": "056",
+    "title": "Lab 056: Conectores Federados M365 Copilot com MCP",
+    "summary": "",
+    "url": "labs/lab-056-federated-connectors.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "connectors",
+      "mcp",
+      "m365",
+      "copilot",
+      "federation",
+      "enterprise"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "connectors",
+      "mcp",
+      "m365",
+      "copilot",
+      "federation",
+      "enterprise"
+    ]
+  },
+  {
+    "id": "057",
+    "title": "Lab 057: Agentes de Uso de Computador — Automação de Desktop",
+    "summary": "",
+    "url": "labs/lab-057-computer-use-agents.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "computer-use",
+      "automation",
+      "anthropic",
+      "desktop",
+      "python",
+      "safety"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "computer-use",
+      "automation",
+      "anthropic",
+      "desktop",
+      "python",
+      "safety"
+    ]
+  },
+  {
+    "id": "058",
+    "title": "Lab 058: Agentes de Automação de Navegador com OpenAI CUA",
+    "summary": "",
+    "url": "labs/lab-058-browser-automation-cua.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "browser-automation",
+      "cua",
+      "openai",
+      "playwright",
+      "python",
+      "safety"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "browser-automation",
+      "cua",
+      "openai",
+      "playwright",
+      "python",
+      "safety"
+    ]
+  },
+  {
+    "id": "059",
+    "title": "Lab 059: Agentes de Voz com GPT Realtime API",
+    "summary": "",
+    "url": "labs/lab-059-voice-agents-realtime.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "voice",
+      "realtime-api",
+      "webrtc",
+      "azure-openai",
+      "multimodal",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "voice",
+      "realtime-api",
+      "webrtc",
+      "azure-openai",
+      "multimodal",
+      "python"
+    ]
+  },
+  {
+    "id": "060",
+    "title": "Lab 060: Modelos de Raciocínio — Chain-of-Thought com o3 e DeepSeek R1",
+    "summary": "",
+    "url": "labs/lab-060-reasoning-models.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "reasoning",
+      "o3",
+      "deepseek-r1",
+      "chain-of-thought",
+      "benchmark",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "reasoning",
+      "o3",
+      "deepseek-r1",
+      "chain-of-thought",
+      "benchmark",
+      "python"
+    ]
+  },
+  {
+    "id": "061",
+    "title": "Lab 061: SLMs — Phi-4 Mini para Habilidades de Agentes de Baixo Custo",
+    "summary": "",
+    "url": "labs/lab-061-slm-phi4-mini.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "slm",
+      "phi-4",
+      "onnx",
+      "privacy",
+      "local-inference",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "slm",
+      "phi-4",
+      "onnx",
+      "privacy",
+      "local-inference",
+      "python"
+    ]
+  },
+  {
+    "id": "062",
+    "title": "Lab 062: Agentes On-Device com Phi Silica — Windows AI APIs",
+    "summary": "",
+    "url": "labs/lab-062-ondevice-phi-silica.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "on-device",
+      "phi-silica",
+      "windows-ai",
+      "npu",
+      "edge-ai",
+      "csharp"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "on-device",
+      "phi-silica",
+      "windows-ai",
+      "npu",
+      "edge-ai",
+      "csharp"
+    ]
+  },
+  {
+    "id": "063",
+    "title": "Lab 063: Agent Identity — Entra OBO Flow & Least Privilege",
+    "summary": "",
+    "url": "labs/lab-063-agent-identity-entra.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "security",
+      "entra-id",
+      "obo",
+      "identity",
+      "oauth",
+      "enterprise"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "security",
+      "entra-id",
+      "obo",
+      "identity",
+      "oauth",
+      "enterprise"
+    ]
+  },
+  {
+    "id": "064",
+    "title": "Lab 064: Protegendo MCP em Escala com Azure API Management",
+    "summary": "",
+    "url": "labs/lab-064-securing-mcp-apim.md",
+    "level": "L400",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "security",
+      "apim",
+      "mcp",
+      "oauth",
+      "enterprise",
+      "governance"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "security",
+      "apim",
+      "mcp",
+      "oauth",
+      "enterprise",
+      "governance"
+    ]
+  },
+  {
+    "id": "065",
+    "title": "Lab 065: Purview DSPM for AI — Governar Fluxos de Dados de Agentes",
+    "summary": "",
+    "url": "labs/lab-065-purview-dspm-ai.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "purview",
+      "dspm",
+      "dlp",
+      "governance",
+      "compliance",
+      "enterprise"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "purview",
+      "dspm",
+      "dlp",
+      "governance",
+      "compliance",
+      "enterprise"
+    ]
+  },
+  {
+    "id": "066",
+    "title": "Lab 066: Governança Corporativa do Copilot Studio",
+    "summary": "",
+    "url": "labs/lab-066-copilot-studio-governance.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "copilot-studio",
+      "governance",
+      "dlp",
+      "power-platform",
+      "enterprise"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "copilot-studio",
+      "governance",
+      "dlp",
+      "power-platform",
+      "enterprise"
+    ]
+  },
+  {
+    "id": "067",
+    "title": "Lab 067: GraphRAG — Grafos de Conhecimento para Recuperação Entre Documentos",
+    "summary": "",
+    "url": "labs/lab-067-graphrag.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "graphrag",
+      "knowledge-graph",
+      "rag",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "graphrag",
+      "knowledge-graph",
+      "rag",
+      "python"
+    ]
+  },
+  {
+    "id": "068",
+    "title": "Lab 068: Hybrid Search — Vector + BM25 + Semantic Ranker",
+    "summary": "",
+    "url": "labs/lab-068-hybrid-search.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "search",
+      "rag",
+      "bm25",
+      "vector",
+      "semantic-ranker",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "search",
+      "rag",
+      "bm25",
+      "vector",
+      "semantic-ranker",
+      "python"
+    ]
+  },
+  {
+    "id": "069",
+    "title": "Lab 069: Declarative Agents para Microsoft 365 Copilot",
+    "summary": "",
+    "url": "labs/lab-069-declarative-agents.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "declarative-agents",
+      "m365-copilot",
+      "teams",
+      "manifest",
+      "low-code"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "declarative-agents",
+      "m365-copilot",
+      "teams",
+      "manifest",
+      "low-code"
+    ]
+  },
+  {
+    "id": "070",
+    "title": "Lab 070: Padrões de UX para Agentes — Chat, Adaptive Cards e Notificações Proativas",
+    "summary": "",
+    "url": "labs/lab-070-agent-ux-patterns.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "ux",
+      "adaptive-cards",
+      "teams",
+      "proactive",
+      "accessibility",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "ux",
+      "adaptive-cards",
+      "teams",
+      "proactive",
+      "accessibility",
+      "python"
+    ]
+  },
+  {
+    "id": "071",
+    "title": "Lab 071: Cache de Contexto — Reduzindo Custos para Agentes com Documentos Grandes",
+    "summary": "",
+    "url": "labs/lab-071-context-caching.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "caching",
+      "cost-optimization",
+      "anthropic",
+      "google",
+      "openai",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "caching",
+      "cost-optimization",
+      "anthropic",
+      "google",
+      "openai",
+      "python"
+    ]
+  },
+  {
+    "id": "072",
+    "title": "Lab 072: Benchmark de Confiabilidade de Saídas Estruturadas",
+    "summary": "",
+    "url": "labs/lab-072-structured-outputs.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "structured-outputs",
+      "json-schema",
+      "pydantic",
+      "reliability",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "structured-outputs",
+      "json-schema",
+      "pydantic",
+      "reliability",
+      "python"
+    ]
+  },
+  {
+    "id": "073",
+    "title": "Lab 073: Benchmarking de Agentes com SWE-bench",
+    "summary": "",
+    "url": "labs/lab-073-swe-bench.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "swe-bench",
+      "benchmarking",
+      "evaluation",
+      "coding-agents",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "swe-bench",
+      "benchmarking",
+      "evaluation",
+      "coding-agents",
+      "python"
+    ]
+  },
+  {
+    "id": "074",
+    "title": "Lab 074: Foundry Agent Service — Simulação de Operação em Produção",
+    "summary": "",
+    "url": "labs/lab-074-foundry-agent-service.md",
+    "level": "L300",
+    "journey": "microsoft-foundry",
+    "time_min": 120,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "foundry",
+      "agent-service",
+      "multi-agent",
+      "production",
+      "enterprise",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "foundry",
+      "agent-service",
+      "multi-agent",
+      "production",
+      "enterprise",
+      "python"
+    ]
+  },
+  {
+    "id": "075",
+    "title": "Lab 075: Power BI Copilot — Análise Autônoma e Storytelling com Dados",
+    "summary": "",
+    "url": "labs/lab-075-powerbi-copilot.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "power-bi",
+      "copilot",
+      "fabric",
+      "dax",
+      "analytics",
+      "low-code"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "power-bi",
+      "copilot",
+      "fabric",
+      "dax",
+      "analytics",
+      "low-code"
+    ]
+  },
+  {
+    "id": "076",
+    "title": "Lab 076: Microsoft Agent Framework — De SK para MAF",
+    "summary": "",
+    "url": "labs/lab-076-microsoft-agent-framework.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "agent-framework",
+      "semantic-kernel",
+      "autogen",
+      "migration",
+      "python",
+      "dotnet"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "agent-framework",
+      "semantic-kernel",
+      "autogen",
+      "migration",
+      "python",
+      "dotnet"
+    ]
+  },
+  {
+    "id": "077",
+    "title": "Lab 077: Protocolo AG-UI — Conecte Agentes a Interfaces de Usuário",
+    "summary": "",
+    "url": "labs/lab-077-agui-protocol.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "ag-ui",
+      "protocol",
+      "frontend",
+      "copilotkit",
+      "events",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "ag-ui",
+      "protocol",
+      "frontend",
+      "copilotkit",
+      "events",
+      "python"
+    ]
+  },
+  {
+    "id": "078",
+    "title": "Lab 078: Foundry Local — Execute Modelos de IA Offline",
+    "summary": "",
+    "url": "labs/lab-078-foundry-local.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "foundry-local",
+      "local-inference",
+      "free",
+      "ollama-alternative",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "foundry-local",
+      "local-inference",
+      "free",
+      "ollama-alternative",
+      "python"
+    ]
+  },
+  {
+    "id": "079",
+    "title": "Lab 079: Deep Research Agents — Síntese de Conhecimento em Múltiplas Etapas",
+    "summary": "",
+    "url": "labs/lab-079-deep-research-agents.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "deep-research",
+      "multi-agent",
+      "synthesis",
+      "citations",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "deep-research",
+      "multi-agent",
+      "synthesis",
+      "citations",
+      "python"
+    ]
+  },
+  {
+    "id": "080",
+    "title": "Lab 080: MarkItDown + MCP — Ingestão de Documentos para Agentes",
+    "summary": "",
+    "url": "labs/lab-080-markitdown-mcp.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "markitdown",
+      "mcp",
+      "document-ingestion",
+      "pdf",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "markitdown",
+      "mcp",
+      "document-ingestion",
+      "pdf",
+      "python"
+    ]
+  },
+  {
+    "id": "081",
+    "title": "Lab 081: Ferramentas de Codificação Agênticas — Claude Code vs Copilot CLI",
+    "summary": "",
+    "url": "labs/lab-081-agentic-coding-tools.md",
+    "level": "L100",
+    "journey": "ai-agents",
+    "time_min": 45,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "claude-code",
+      "copilot-cli",
+      "coding-tools",
+      "developer-experience",
+      "comparison"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "claude-code",
+      "copilot-cli",
+      "coding-tools",
+      "developer-experience",
+      "comparison"
+    ]
+  },
+  {
+    "id": "082",
+    "title": "Lab 082: Guardrails para Agentes — NeMo & Azure Content Safety",
+    "summary": "",
+    "url": "labs/lab-082-agent-guardrails.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "guardrails",
+      "safety",
+      "nemo",
+      "content-safety",
+      "pii",
+      "jailbreak"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "guardrails",
+      "safety",
+      "nemo",
+      "content-safety",
+      "pii",
+      "jailbreak"
+    ]
+  },
+  {
+    "id": "083",
+    "title": "Lab 083: RAG Multi-Modal — Imagens, Tabelas e Gráficos em Documentos",
+    "summary": "",
+    "url": "labs/lab-083-multimodal-rag.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "multimodal",
+      "rag",
+      "images",
+      "tables",
+      "gpt4o-vision",
+      "python"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "multimodal",
+      "rag",
+      "images",
+      "tables",
+      "gpt4o-vision",
+      "python"
+    ]
+  },
+  {
+    "id": "084",
+    "title": "Lab 084: Capstone — Construa o Agente OutdoorGear Completo",
+    "summary": "",
+    "url": "labs/lab-084-capstone-outdoorgear-agent.md",
+    "level": "L400",
+    "journey": "ai-agents",
+    "time_min": 180,
+    "cost": "free",
+    "simulation": true,
+    "roles": [],
+    "technologies": [
+      "capstone",
+      "full-stack",
+      "rag",
+      "mcp",
+      "guardrails",
+      "observability",
+      "production"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "capstone",
+      "full-stack",
+      "rag",
+      "mcp",
+      "guardrails",
+      "observability",
+      "production"
+    ]
+  },
+  {
+    "id": "085",
+    "title": "Lab 085: Engenharia de Prompt e de Contexto no GitHub Copilot",
+    "summary": "",
+    "url": "labs/lab-085-copilot-prompt-context-engineering.md",
+    "level": "L100",
+    "journey": "copilot",
+    "time_min": 45,
+    "cost": "free-gh",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "student"
+    ],
+    "technologies": [
+      "github-copilot",
+      "prompt-engineering",
+      "context"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "prompt-engineering",
+      "context"
+    ]
+  },
+  {
+    "id": "086",
+    "title": "Lab 086: Personalize o Copilot: Instruções, Prompt Files, Agentes Customizados e Skills",
+    "summary": "",
+    "url": "labs/lab-086-customize-copilot.md",
+    "level": "L200",
+    "journey": "copilot",
+    "time_min": 60,
+    "cost": "free-gh",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect"
+    ],
+    "technologies": [
+      "github-copilot",
+      "custom-instructions",
+      "skills",
+      "agents"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "custom-instructions",
+      "skills",
+      "agents"
+    ]
+  },
+  {
+    "id": "087",
+    "title": "Lab 087: Copilot + MCP: GitHub MCP Server, Playwright e Seu Próprio Servidor",
+    "summary": "",
+    "url": "labs/lab-087-copilot-mcp.md",
+    "level": "L200",
+    "journey": "copilot",
+    "time_min": 60,
+    "cost": "free-gh",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect"
+    ],
+    "technologies": [
+      "github-copilot",
+      "mcp",
+      "playwright",
+      "github-mcp-server"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "mcp",
+      "playwright",
+      "github-mcp-server"
+    ]
+  },
+  {
+    "id": "088",
+    "title": "Lab 088: Copilot CLI: o Agente no Terminal",
+    "summary": "",
+    "url": "labs/lab-088-copilot-cli.md",
+    "level": "L200",
+    "journey": "copilot",
+    "time_min": 60,
+    "cost": "free-gh",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "devops"
+    ],
+    "technologies": [
+      "github-copilot",
+      "copilot-cli",
+      "mcp",
+      "hooks"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "copilot-cli",
+      "mcp",
+      "hooks"
+    ]
+  },
+  {
+    "id": "089",
+    "title": "Lab 089: Desenvolvimento Orientado a Especificação com Spec Kit",
+    "summary": "",
+    "url": "labs/lab-089-spec-kit.md",
+    "level": "L200",
+    "journey": "copilot",
+    "time_min": 75,
+    "cost": "free-gh",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "github-copilot",
+      "spec-kit",
+      "spec-driven-development"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "spec-kit",
+      "spec-driven-development"
+    ]
+  },
+  {
+    "id": "091",
+    "title": "Lab 091: Cloud Agent e Code Review do Copilot: da Issue ao PR",
+    "summary": "",
+    "url": "labs/lab-091-cloud-agent-code-review.md",
+    "level": "L300",
+    "journey": "copilot",
+    "time_min": 90,
+    "cost": "paid",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "tech-lead",
+      "admin"
+    ],
+    "technologies": [
+      "github-copilot",
+      "cloud-agent",
+      "code-review",
+      "github-actions"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "cloud-agent",
+      "code-review",
+      "github-actions"
+    ]
+  },
+  {
+    "id": "094",
+    "title": "Lab 094: Governança e FinOps do Copilot: AI Controls, Políticas, Orçamentos e AI Credits",
+    "summary": "",
+    "url": "labs/lab-094-copilot-governance-finops.md",
+    "level": "L300",
+    "journey": "enterprise",
+    "time_min": 90,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "admin",
+      "architect",
+      "finops",
+      "tech-lead"
+    ],
+    "technologies": [
+      "github-copilot",
+      "ai-controls",
+      "ai-credits",
+      "governance",
+      "finops"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "ai-controls",
+      "ai-credits",
+      "governance",
+      "finops"
+    ]
+  },
+  {
+    "id": "097",
+    "title": "Lab 097: Interativo: Tokens, Amostragem e Janelas de Contexto",
+    "summary": "",
+    "url": "labs/lab-097-tokens-sampling-context.md",
+    "level": "L50",
+    "journey": "llm-foundations",
+    "time_min": 30,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "student",
+      "developer",
+      "architect"
+    ],
+    "technologies": [
+      "tokens",
+      "sampling",
+      "context-window",
+      "llm"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "tokens",
+      "sampling",
+      "context-window",
+      "llm"
+    ]
+  },
+  {
+    "id": "107",
+    "title": "Lab 107: Como o GitHub Copilot Funciona: Contexto, Modelos, Agentes e Fluxo de Dados",
+    "summary": "",
+    "url": "labs/lab-107-how-copilot-works.md",
+    "level": "L50",
+    "journey": "copilot",
+    "time_min": 25,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "student",
+      "developer",
+      "admin",
+      "architect"
+    ],
+    "technologies": [
+      "github-copilot",
+      "ai-credits",
+      "models",
+      "agents"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "github-copilot",
+      "ai-credits",
+      "models",
+      "agents"
+    ]
+  }
+]

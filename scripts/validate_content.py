@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Validate language parity, lab metadata, and Phase 0 retirement notices."""
+"""Validate language parity, metadata, catalogs, and retirement notices."""
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -57,6 +58,10 @@ def validate_lab(path: Path, errors: list[str]) -> None:
         errors.append(f"{path}: lab id {lab['id']} does not match {expected_id}")
     if lab["languages"] != list(LANGS):
         errors.append(f"{path}: languages must be {list(LANGS)}")
+    if not isinstance(lab.get("journey"), str) or not lab["journey"]:
+        errors.append(f"{path}: journey must be a non-empty string")
+    if not isinstance(lab.get("time_min"), int) or lab["time_min"] <= 0:
+        errors.append(f"{path}: time_min must be a positive integer")
 
     cost = lab["cost"]
     if not isinstance(cost, dict) or cost.get("tier") not in ALLOWED_TIERS:
@@ -79,10 +84,51 @@ def main() -> int:
     }
     if lab_sets["en"] != lab_sets["pt"] or lab_sets["en"] != lab_sets["fr"]:
         errors.append("Lab file parity differs across EN/PT/FR.")
+    challenge_sets = {
+        lang: {
+            path.name
+            for path in (DOCS / lang / "challenges").glob("challenge-*.md")
+        }
+        for lang in LANGS
+    }
+    if (
+        challenge_sets["en"] != challenge_sets["pt"]
+        or challenge_sets["en"] != challenge_sets["fr"]
+    ):
+        errors.append("Challenge file parity differs across EN/PT/FR.")
 
     for lang in LANGS:
         for path in sorted((DOCS / lang / "labs").glob("lab-*.md")):
             validate_lab(path, errors)
+
+        catalog_path = DOCS / lang / "labs.json"
+        if not catalog_path.exists():
+            errors.append(f"{catalog_path}: generated catalog is missing")
+        else:
+            try:
+                catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError as exc:
+                errors.append(f"{catalog_path}: invalid JSON ({exc})")
+            else:
+                expected = len(lab_sets[lang])
+                if len(catalog) != expected:
+                    errors.append(
+                        f"{catalog_path}: expected {expected} entries, found {len(catalog)}"
+                    )
+                ids = [entry.get("id") for entry in catalog]
+                if len(ids) != len(set(ids)):
+                    errors.append(f"{catalog_path}: duplicate lab ids")
+
+        question_path = DOCS / lang / "paths" / "gh-300" / "questions.json"
+        try:
+            questions = json.loads(question_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"{question_path}: invalid or missing question bank ({exc})")
+        else:
+            if len(questions) != 50:
+                errors.append(f"{question_path}: expected 50 questions")
+            if any(len(question.get("options", [])) != 4 for question in questions):
+                errors.append(f"{question_path}: every question requires four options")
 
     for lang in LANGS:
         for lab_id in ("041", "045"):

@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "prompt": "As a student, what is the best first step for a cross-file Copilot change?",
+    "options": [
+      "Start Agent with the whole repository",
+      "Use Plan with focused context and acceptance criteria",
+      "Disable validation",
+      "Select the most expensive model"
+    ],
+    "correct": 1,
+    "explanation": "Plan first, provide the smallest useful context, and define observable success."
+  },
+  {
+    "id": 2,
+    "prompt": "As a student, which artifact stores repository-wide Copilot guidance?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README only"
+    ],
+    "correct": 1,
+    "explanation": "Repository-wide custom instructions belong in .github/copilot-instructions.md."
+  },
+  {
+    "id": 3,
+    "prompt": "As a student, how should an MCP server be introduced?",
+    "options": [
+      "Trust every public server",
+      "Inventory tools, credentials, data boundaries, and allowlists",
+      "Grant write access first",
+      "Disable approvals"
+    ],
+    "correct": 1,
+    "explanation": "Review the server and apply least privilege before connecting it."
+  },
+  {
+    "id": 4,
+    "prompt": "As a student, what does a default Copilot code review provide?",
+    "options": [
+      "A required approval",
+      "An advisory comment review",
+      "A production deployment",
+      "A billing exemption"
+    ],
+    "correct": 1,
+    "explanation": "By default Copilot submits a comment review, not a required approval."
+  },
+  {
+    "id": 5,
+    "prompt": "As a student, what is the safest cloud-agent network decision?",
+    "options": [
+      "Allow the entire internet",
+      "Approve only justified destinations",
+      "Ignore firewall requests",
+      "Store tokens in the issue"
+    ],
+    "correct": 1,
+    "explanation": "Use a narrow allowlist and reject unrelated dependency downloads."
+  },
+  {
+    "id": 6,
+    "prompt": "As a student, which action usually reduces AI Credit usage?",
+    "options": [
+      "Add unrelated context",
+      "Keep context focused and plan before acting",
+      "Run parallel sessions",
+      "Repeat failed prompts unchanged"
+    ],
+    "correct": 1,
+    "explanation": "Focused context and planned steps reduce unnecessary model work."
+  },
+  {
+    "id": 7,
+    "prompt": "As a student, what should content exclusion be combined with?",
+    "options": [
+      "No audit log",
+      "Policy, least privilege, and verification",
+      "Public secrets",
+      "Unlimited MCP tools"
+    ],
+    "correct": 1,
+    "explanation": "Content exclusion is one safeguard within a broader governance design."
+  },
+  {
+    "id": 8,
+    "prompt": "As a student, what is the Spec Kit sequence?",
+    "options": [
+      "Implement → guess → deploy",
+      "Specify → plan → tasks → implement → converge",
+      "Prompt → pay → publish",
+      "Fork → delete → merge"
+    ],
+    "correct": 1,
+    "explanation": "Spec-driven development preserves traceability from specification to evidence."
+  },
+  {
+    "id": 9,
+    "prompt": "As a student, are code completions billed in AI Credits?",
+    "options": [
+      "Yes, always",
+      "No, current documentation excludes completions and next-edit suggestions",
+      "Only on weekends",
+      "Only in local files"
+    ],
+    "correct": 1,
+    "explanation": "AI Credits apply to model interactions such as chat and agents, not completions."
+  },
+  {
+    "id": 10,
+    "prompt": "As a student, what is the correct response to legacy 'Copilot Edits' wording in GH-300?",
+    "options": [
+      "Ignore current products",
+      "Learn current Ask, Plan, and Agent while recognizing the legacy term",
+      "Use Copilot Workspace",
+      "Skip the domain"
+    ],
+    "correct": 1,
+    "explanation": "The current product experience should be learned alongside the exam's legacy vocabulary."
+  },
+  {
+    "id": 11,
+    "prompt": "As a developer, what is the best first step for a cross-file Copilot change?",
+    "options": [
+      "Start Agent with the whole repository",
+      "Use Plan with focused context and acceptance criteria",
+      "Disable validation",
+      "Select the most expensive model"
+    ],
+    "correct": 1,
+    "explanation": "Plan first, provide the smallest useful context, and define observable success."
+  },
+  {
+    "id": 12,
+    "prompt": "As a developer, which artifact stores repository-wide Copilot guidance?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README only"
+    ],
+    "correct": 1,
+    "explanation": "Repository-wide custom instructions belong in .github/copilot-instructions.md."
+  },
+  {
+    "id": 13,
+    "prompt": "As a developer, how should an MCP server be introduced?",
+    "options": [
+      "Trust every public server",
+      "Inventory tools, credentials, data boundaries, and allowlists",
+      "Grant write access first",
+      "Disable approvals"
+    ],
+    "correct": 1,
+    "explanation": "Review the server and apply least privilege before connecting it."
+  },
+  {
+    "id": 14,
+    "prompt": "As a developer, what does a default Copilot code review provide?",
+    "options": [
+      "A required approval",
+      "An advisory comment review",
+      "A production deployment",
+      "A billing exemption"
+    ],
+    "correct": 1,
+    "explanation": "By default Copilot submits a comment review, not a required approval."
+  },
+  {
+    "id": 15,
+    "prompt": "As a developer, what is the safest cloud-agent network decision?",
+    "options": [
+      "Allow the entire internet",
+      "Approve only justified destinations",
+      "Ignore firewall requests",
+      "Store tokens in the issue"
+    ],
+    "correct": 1,
+    "explanation": "Use a narrow allowlist and reject unrelated dependency downloads."
+  },
+  {
+    "id": 16,
+    "prompt": "As a developer, which action usually reduces AI Credit usage?",
+    "options": [
+      "Add unrelated context",
+      "Keep context focused and plan before acting",
+      "Run parallel sessions",
+      "Repeat failed prompts unchanged"
+    ],
+    "correct": 1,
+    "explanation": "Focused context and planned steps reduce unnecessary model work."
+  },
+  {
+    "id": 17,
+    "prompt": "As a developer, what should content exclusion be combined with?",
+    "options": [
+      "No audit log",
+      "Policy, least privilege, and verification",
+      "Public secrets",
+      "Unlimited MCP tools"
+    ],
+    "correct": 1,
+    "explanation": "Content exclusion is one safeguard within a broader governance design."
+  },
+  {
+    "id": 18,
+    "prompt": "As a developer, what is the Spec Kit sequence?",
+    "options": [
+      "Implement → guess → deploy",
+      "Specify → plan → tasks → implement → converge",
+      "Prompt → pay → publish",
+      "Fork → delete → merge"
+    ],
+    "correct": 1,
+    "explanation": "Spec-driven development preserves traceability from specification to evidence."
+  },
+  {
+    "id": 19,
+    "prompt": "As a developer, are code completions billed in AI Credits?",
+    "options": [
+      "Yes, always",
+      "No, current documentation excludes completions and next-edit suggestions",
+      "Only on weekends",
+      "Only in local files"
+    ],
+    "correct": 1,
+    "explanation": "AI Credits apply to model interactions such as chat and agents, not completions."
+  },
+  {
+    "id": 20,
+    "prompt": "As a developer, what is the correct response to legacy 'Copilot Edits' wording in GH-300?",
+    "options": [
+      "Ignore current products",
+      "Learn current Ask, Plan, and Agent while recognizing the legacy term",
+      "Use Copilot Workspace",
+      "Skip the domain"
+    ],
+    "correct": 1,
+    "explanation": "The current product experience should be learned alongside the exam's legacy vocabulary."
+  },
+  {
+    "id": 21,
+    "prompt": "As a tech lead, what is the best first step for a cross-file Copilot change?",
+    "options": [
+      "Start Agent with the whole repository",
+      "Use Plan with focused context and acceptance criteria",
+      "Disable validation",
+      "Select the most expensive model"
+    ],
+    "correct": 1,
+    "explanation": "Plan first, provide the smallest useful context, and define observable success."
+  },
+  {
+    "id": 22,
+    "prompt": "As a tech lead, which artifact stores repository-wide Copilot guidance?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README only"
+    ],
+    "correct": 1,
+    "explanation": "Repository-wide custom instructions belong in .github/copilot-instructions.md."
+  },
+  {
+    "id": 23,
+    "prompt": "As a tech lead, how should an MCP server be introduced?",
+    "options": [
+      "Trust every public server",
+      "Inventory tools, credentials, data boundaries, and allowlists",
+      "Grant write access first",
+      "Disable approvals"
+    ],
+    "correct": 1,
+    "explanation": "Review the server and apply least privilege before connecting it."
+  },
+  {
+    "id": 24,
+    "prompt": "As a tech lead, what does a default Copilot code review provide?",
+    "options": [
+      "A required approval",
+      "An advisory comment review",
+      "A production deployment",
+      "A billing exemption"
+    ],
+    "correct": 1,
+    "explanation": "By default Copilot submits a comment review, not a required approval."
+  },
+  {
+    "id": 25,
+    "prompt": "As a tech lead, what is the safest cloud-agent network decision?",
+    "options": [
+      "Allow the entire internet",
+      "Approve only justified destinations",
+      "Ignore firewall requests",
+      "Store tokens in the issue"
+    ],
+    "correct": 1,
+    "explanation": "Use a narrow allowlist and reject unrelated dependency downloads."
+  },
+  {
+    "id": 26,
+    "prompt": "As a tech lead, which action usually reduces AI Credit usage?",
+    "options": [
+      "Add unrelated context",
+      "Keep context focused and plan before acting",
+      "Run parallel sessions",
+      "Repeat failed prompts unchanged"
+    ],
+    "correct": 1,
+    "explanation": "Focused context and planned steps reduce unnecessary model work."
+  },
+  {
+    "id": 27,
+    "prompt": "As a tech lead, what should content exclusion be combined with?",
+    "options": [
+      "No audit log",
+      "Policy, least privilege, and verification",
+      "Public secrets",
+      "Unlimited MCP tools"
+    ],
+    "correct": 1,
+    "explanation": "Content exclusion is one safeguard within a broader governance design."
+  },
+  {
+    "id": 28,
+    "prompt": "As a tech lead, what is the Spec Kit sequence?",
+    "options": [
+      "Implement → guess → deploy",
+      "Specify → plan → tasks → implement → converge",
+      "Prompt → pay → publish",
+      "Fork → delete → merge"
+    ],
+    "correct": 1,
+    "explanation": "Spec-driven development preserves traceability from specification to evidence."
+  },
+  {
+    "id": 29,
+    "prompt": "As a tech lead, are code completions billed in AI Credits?",
+    "options": [
+      "Yes, always",
+      "No, current documentation excludes completions and next-edit suggestions",
+      "Only on weekends",
+      "Only in local files"
+    ],
+    "correct": 1,
+    "explanation": "AI Credits apply to model interactions such as chat and agents, not completions."
+  },
+  {
+    "id": 30,
+    "prompt": "As a tech lead, what is the correct response to legacy 'Copilot Edits' wording in GH-300?",
+    "options": [
+      "Ignore current products",
+      "Learn current Ask, Plan, and Agent while recognizing the legacy term",
+      "Use Copilot Workspace",
+      "Skip the domain"
+    ],
+    "correct": 1,
+    "explanation": "The current product experience should be learned alongside the exam's legacy vocabulary."
+  },
+  {
+    "id": 31,
+    "prompt": "As a platform administrator, what is the best first step for a cross-file Copilot change?",
+    "options": [
+      "Start Agent with the whole repository",
+      "Use Plan with focused context and acceptance criteria",
+      "Disable validation",
+      "Select the most expensive model"
+    ],
+    "correct": 1,
+    "explanation": "Plan first, provide the smallest useful context, and define observable success."
+  },
+  {
+    "id": 32,
+    "prompt": "As a platform administrator, which artifact stores repository-wide Copilot guidance?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README only"
+    ],
+    "correct": 1,
+    "explanation": "Repository-wide custom instructions belong in .github/copilot-instructions.md."
+  },
+  {
+    "id": 33,
+    "prompt": "As a platform administrator, how should an MCP server be introduced?",
+    "options": [
+      "Trust every public server",
+      "Inventory tools, credentials, data boundaries, and allowlists",
+      "Grant write access first",
+      "Disable approvals"
+    ],
+    "correct": 1,
+    "explanation": "Review the server and apply least privilege before connecting it."
+  },
+  {
+    "id": 34,
+    "prompt": "As a platform administrator, what does a default Copilot code review provide?",
+    "options": [
+      "A required approval",
+      "An advisory comment review",
+      "A production deployment",
+      "A billing exemption"
+    ],
+    "correct": 1,
+    "explanation": "By default Copilot submits a comment review, not a required approval."
+  },
+  {
+    "id": 35,
+    "prompt": "As a platform administrator, what is the safest cloud-agent network decision?",
+    "options": [
+      "Allow the entire internet",
+      "Approve only justified destinations",
+      "Ignore firewall requests",
+      "Store tokens in the issue"
+    ],
+    "correct": 1,
+    "explanation": "Use a narrow allowlist and reject unrelated dependency downloads."
+  },
+  {
+    "id": 36,
+    "prompt": "As a platform administrator, which action usually reduces AI Credit usage?",
+    "options": [
+      "Add unrelated context",
+      "Keep context focused and plan before acting",
+      "Run parallel sessions",
+      "Repeat failed prompts unchanged"
+    ],
+    "correct": 1,
+    "explanation": "Focused context and planned steps reduce unnecessary model work."
+  },
+  {
+    "id": 37,
+    "prompt": "As a platform administrator, what should content exclusion be combined with?",
+    "options": [
+      "No audit log",
+      "Policy, least privilege, and verification",
+      "Public secrets",
+      "Unlimited MCP tools"
+    ],
+    "correct": 1,
+    "explanation": "Content exclusion is one safeguard within a broader governance design."
+  },
+  {
+    "id": 38,
+    "prompt": "As a platform administrator, what is the Spec Kit sequence?",
+    "options": [
+      "Implement → guess → deploy",
+      "Specify → plan → tasks → implement → converge",
+      "Prompt → pay → publish",
+      "Fork → delete → merge"
+    ],
+    "correct": 1,
+    "explanation": "Spec-driven development preserves traceability from specification to evidence."
+  },
+  {
+    "id": 39,
+    "prompt": "As a platform administrator, are code completions billed in AI Credits?",
+    "options": [
+      "Yes, always",
+      "No, current documentation excludes completions and next-edit suggestions",
+      "Only on weekends",
+      "Only in local files"
+    ],
+    "correct": 1,
+    "explanation": "AI Credits apply to model interactions such as chat and agents, not completions."
+  },
+  {
+    "id": 40,
+    "prompt": "As a platform administrator, what is the correct response to legacy 'Copilot Edits' wording in GH-300?",
+    "options": [
+      "Ignore current products",
+      "Learn current Ask, Plan, and Agent while recognizing the legacy term",
+      "Use Copilot Workspace",
+      "Skip the domain"
+    ],
+    "correct": 1,
+    "explanation": "The current product experience should be learned alongside the exam's legacy vocabulary."
+  },
+  {
+    "id": 41,
+    "prompt": "As a solution architect, what is the best first step for a cross-file Copilot change?",
+    "options": [
+      "Start Agent with the whole repository",
+      "Use Plan with focused context and acceptance criteria",
+      "Disable validation",
+      "Select the most expensive model"
+    ],
+    "correct": 1,
+    "explanation": "Plan first, provide the smallest useful context, and define observable success."
+  },
+  {
+    "id": 42,
+    "prompt": "As a solution architect, which artifact stores repository-wide Copilot guidance?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README only"
+    ],
+    "correct": 1,
+    "explanation": "Repository-wide custom instructions belong in .github/copilot-instructions.md."
+  },
+  {
+    "id": 43,
+    "prompt": "As a solution architect, how should an MCP server be introduced?",
+    "options": [
+      "Trust every public server",
+      "Inventory tools, credentials, data boundaries, and allowlists",
+      "Grant write access first",
+      "Disable approvals"
+    ],
+    "correct": 1,
+    "explanation": "Review the server and apply least privilege before connecting it."
+  },
+  {
+    "id": 44,
+    "prompt": "As a solution architect, what does a default Copilot code review provide?",
+    "options": [
+      "A required approval",
+      "An advisory comment review",
+      "A production deployment",
+      "A billing exemption"
+    ],
+    "correct": 1,
+    "explanation": "By default Copilot submits a comment review, not a required approval."
+  },
+  {
+    "id": 45,
+    "prompt": "As a solution architect, what is the safest cloud-agent network decision?",
+    "options": [
+      "Allow the entire internet",
+      "Approve only justified destinations",
+      "Ignore firewall requests",
+      "Store tokens in the issue"
+    ],
+    "correct": 1,
+    "explanation": "Use a narrow allowlist and reject unrelated dependency downloads."
+  },
+  {
+    "id": 46,
+    "prompt": "As a solution architect, which action usually reduces AI Credit usage?",
+    "options": [
+      "Add unrelated context",
+      "Keep context focused and plan before acting",
+      "Run parallel sessions",
+      "Repeat failed prompts unchanged"
+    ],
+    "correct": 1,
+    "explanation": "Focused context and planned steps reduce unnecessary model work."
+  },
+  {
+    "id": 47,
+    "prompt": "As a solution architect, what should content exclusion be combined with?",
+    "options": [
+      "No audit log",
+      "Policy, least privilege, and verification",
+      "Public secrets",
+      "Unlimited MCP tools"
+    ],
+    "correct": 1,
+    "explanation": "Content exclusion is one safeguard within a broader governance design."
+  },
+  {
+    "id": 48,
+    "prompt": "As a solution architect, what is the Spec Kit sequence?",
+    "options": [
+      "Implement → guess → deploy",
+      "Specify → plan → tasks → implement → converge",
+      "Prompt → pay → publish",
+      "Fork → delete → merge"
+    ],
+    "correct": 1,
+    "explanation": "Spec-driven development preserves traceability from specification to evidence."
+  },
+  {
+    "id": 49,
+    "prompt": "As a solution architect, are code completions billed in AI Credits?",
+    "options": [
+      "Yes, always",
+      "No, current documentation excludes completions and next-edit suggestions",
+      "Only on weekends",
+      "Only in local files"
+    ],
+    "correct": 1,
+    "explanation": "AI Credits apply to model interactions such as chat and agents, not completions."
+  },
+  {
+    "id": 50,
+    "prompt": "As a solution architect, what is the correct response to legacy 'Copilot Edits' wording in GH-300?",
+    "options": [
+      "Ignore current products",
+      "Learn current Ask, Plan, and Agent while recognizing the legacy term",
+      "Use Copilot Workspace",
+      "Skip the domain"
+    ],
+    "correct": 1,
+    "explanation": "The current product experience should be learned alongside the exam's legacy vocabulary."
+  }
+]

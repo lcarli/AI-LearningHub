@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "prompt": "En tant que étudiant, quelle est la première étape d'un changement Copilot multi-fichiers ?",
+    "options": [
+      "Lancer Agent sur tout le dépôt",
+      "Utiliser Plan avec contexte ciblé et critères",
+      "Désactiver les tests",
+      "Choisir le modèle le plus cher"
+    ],
+    "correct": 1,
+    "explanation": "Planifiez d'abord avec le plus petit contexte utile et un succès observable."
+  },
+  {
+    "id": 2,
+    "prompt": "En tant que étudiant, quel artefact porte les consignes globales du dépôt ?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README uniquement"
+    ],
+    "correct": 1,
+    "explanation": "Les instructions globales résident dans .github/copilot-instructions.md."
+  },
+  {
+    "id": 3,
+    "prompt": "En tant que étudiant, comment introduire un serveur MCP ?",
+    "options": [
+      "Faire confiance à tous",
+      "Inventorier outils, identifiants, frontières et listes",
+      "Accorder l'écriture d'abord",
+      "Désactiver les approbations"
+    ],
+    "correct": 1,
+    "explanation": "Vérifiez le serveur et appliquez le moindre privilège."
+  },
+  {
+    "id": 4,
+    "prompt": "En tant que étudiant, que fournit une revue Copilot par défaut ?",
+    "options": [
+      "Une approbation obligatoire",
+      "Une revue consultative de type commentaire",
+      "Un déploiement",
+      "Une exemption de coût"
+    ],
+    "correct": 1,
+    "explanation": "Par défaut Copilot publie un commentaire, pas une approbation obligatoire."
+  },
+  {
+    "id": 5,
+    "prompt": "En tant que étudiant, quelle décision réseau est la plus sûre pour l'agent cloud ?",
+    "options": [
+      "Autoriser tout Internet",
+      "Approuver uniquement les destinations justifiées",
+      "Ignorer le pare-feu",
+      "Mettre les tokens dans l'issue"
+    ],
+    "correct": 1,
+    "explanation": "Utilisez une liste étroite et refusez les téléchargements sans rapport."
+  },
+  {
+    "id": 6,
+    "prompt": "En tant que étudiant, quelle action réduit généralement les AI Credits ?",
+    "options": [
+      "Ajouter du contexte inutile",
+      "Cibler le contexte et planifier",
+      "Multiplier les sessions",
+      "Répéter le même échec"
+    ],
+    "correct": 1,
+    "explanation": "Un contexte ciblé et des étapes planifiées réduisent le travail inutile."
+  },
+  {
+    "id": 7,
+    "prompt": "En tant que étudiant, avec quoi combiner l'exclusion de contenu ?",
+    "options": [
+      "Aucun audit",
+      "Politique, moindre privilège et vérification",
+      "Secrets publics",
+      "Outils MCP illimités"
+    ],
+    "correct": 1,
+    "explanation": "L'exclusion est une protection au sein d'une gouvernance plus large."
+  },
+  {
+    "id": 8,
+    "prompt": "En tant que étudiant, quelle est la séquence Spec Kit ?",
+    "options": [
+      "Implémenter → deviner → livrer",
+      "Spécifier → planifier → tâches → implémenter → converger",
+      "Prompt → payer → publier",
+      "Fork → supprimer → fusionner"
+    ],
+    "correct": 1,
+    "explanation": "Le développement piloté par les spécifications garde la traçabilité."
+  },
+  {
+    "id": 9,
+    "prompt": "En tant que étudiant, les complétions consomment-elles des AI Credits ?",
+    "options": [
+      "Oui, toujours",
+      "Non ; la documentation exclut complétions et next-edit",
+      "Le week-end seulement",
+      "Dans les fichiers locaux"
+    ],
+    "correct": 1,
+    "explanation": "Les crédits couvrent chat et agents, pas les complétions."
+  },
+  {
+    "id": 10,
+    "prompt": "En tant que étudiant, comment traiter l'ancien terme « Copilot Edits » au GH-300 ?",
+    "options": [
+      "Ignorer les produits actuels",
+      "Apprendre Ask, Plan et Agent tout en reconnaissant le terme",
+      "Utiliser Copilot Workspace",
+      "Sauter le domaine"
+    ],
+    "correct": 1,
+    "explanation": "Apprenez l'expérience actuelle et le vocabulaire historique de l'examen."
+  },
+  {
+    "id": 11,
+    "prompt": "En tant que développeur, quelle est la première étape d'un changement Copilot multi-fichiers ?",
+    "options": [
+      "Lancer Agent sur tout le dépôt",
+      "Utiliser Plan avec contexte ciblé et critères",
+      "Désactiver les tests",
+      "Choisir le modèle le plus cher"
+    ],
+    "correct": 1,
+    "explanation": "Planifiez d'abord avec le plus petit contexte utile et un succès observable."
+  },
+  {
+    "id": 12,
+    "prompt": "En tant que développeur, quel artefact porte les consignes globales du dépôt ?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README uniquement"
+    ],
+    "correct": 1,
+    "explanation": "Les instructions globales résident dans .github/copilot-instructions.md."
+  },
+  {
+    "id": 13,
+    "prompt": "En tant que développeur, comment introduire un serveur MCP ?",
+    "options": [
+      "Faire confiance à tous",
+      "Inventorier outils, identifiants, frontières et listes",
+      "Accorder l'écriture d'abord",
+      "Désactiver les approbations"
+    ],
+    "correct": 1,
+    "explanation": "Vérifiez le serveur et appliquez le moindre privilège."
+  },
+  {
+    "id": 14,
+    "prompt": "En tant que développeur, que fournit une revue Copilot par défaut ?",
+    "options": [
+      "Une approbation obligatoire",
+      "Une revue consultative de type commentaire",
+      "Un déploiement",
+      "Une exemption de coût"
+    ],
+    "correct": 1,
+    "explanation": "Par défaut Copilot publie un commentaire, pas une approbation obligatoire."
+  },
+  {
+    "id": 15,
+    "prompt": "En tant que développeur, quelle décision réseau est la plus sûre pour l'agent cloud ?",
+    "options": [
+      "Autoriser tout Internet",
+      "Approuver uniquement les destinations justifiées",
+      "Ignorer le pare-feu",
+      "Mettre les tokens dans l'issue"
+    ],
+    "correct": 1,
+    "explanation": "Utilisez une liste étroite et refusez les téléchargements sans rapport."
+  },
+  {
+    "id": 16,
+    "prompt": "En tant que développeur, quelle action réduit généralement les AI Credits ?",
+    "options": [
+      "Ajouter du contexte inutile",
+      "Cibler le contexte et planifier",
+      "Multiplier les sessions",
+      "Répéter le même échec"
+    ],
+    "correct": 1,
+    "explanation": "Un contexte ciblé et des étapes planifiées réduisent le travail inutile."
+  },
+  {
+    "id": 17,
+    "prompt": "En tant que développeur, avec quoi combiner l'exclusion de contenu ?",
+    "options": [
+      "Aucun audit",
+      "Politique, moindre privilège et vérification",
+      "Secrets publics",
+      "Outils MCP illimités"
+    ],
+    "correct": 1,
+    "explanation": "L'exclusion est une protection au sein d'une gouvernance plus large."
+  },
+  {
+    "id": 18,
+    "prompt": "En tant que développeur, quelle est la séquence Spec Kit ?",
+    "options": [
+      "Implémenter → deviner → livrer",
+      "Spécifier → planifier → tâches → implémenter → converger",
+      "Prompt → payer → publier",
+      "Fork → supprimer → fusionner"
+    ],
+    "correct": 1,
+    "explanation": "Le développement piloté par les spécifications garde la traçabilité."
+  },
+  {
+    "id": 19,
+    "prompt": "En tant que développeur, les complétions consomment-elles des AI Credits ?",
+    "options": [
+      "Oui, toujours",
+      "Non ; la documentation exclut complétions et next-edit",
+      "Le week-end seulement",
+      "Dans les fichiers locaux"
+    ],
+    "correct": 1,
+    "explanation": "Les crédits couvrent chat et agents, pas les complétions."
+  },
+  {
+    "id": 20,
+    "prompt": "En tant que développeur, comment traiter l'ancien terme « Copilot Edits » au GH-300 ?",
+    "options": [
+      "Ignorer les produits actuels",
+      "Apprendre Ask, Plan et Agent tout en reconnaissant le terme",
+      "Utiliser Copilot Workspace",
+      "Sauter le domaine"
+    ],
+    "correct": 1,
+    "explanation": "Apprenez l'expérience actuelle et le vocabulaire historique de l'examen."
+  },
+  {
+    "id": 21,
+    "prompt": "En tant que tech lead, quelle est la première étape d'un changement Copilot multi-fichiers ?",
+    "options": [
+      "Lancer Agent sur tout le dépôt",
+      "Utiliser Plan avec contexte ciblé et critères",
+      "Désactiver les tests",
+      "Choisir le modèle le plus cher"
+    ],
+    "correct": 1,
+    "explanation": "Planifiez d'abord avec le plus petit contexte utile et un succès observable."
+  },
+  {
+    "id": 22,
+    "prompt": "En tant que tech lead, quel artefact porte les consignes globales du dépôt ?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README uniquement"
+    ],
+    "correct": 1,
+    "explanation": "Les instructions globales résident dans .github/copilot-instructions.md."
+  },
+  {
+    "id": 23,
+    "prompt": "En tant que tech lead, comment introduire un serveur MCP ?",
+    "options": [
+      "Faire confiance à tous",
+      "Inventorier outils, identifiants, frontières et listes",
+      "Accorder l'écriture d'abord",
+      "Désactiver les approbations"
+    ],
+    "correct": 1,
+    "explanation": "Vérifiez le serveur et appliquez le moindre privilège."
+  },
+  {
+    "id": 24,
+    "prompt": "En tant que tech lead, que fournit une revue Copilot par défaut ?",
+    "options": [
+      "Une approbation obligatoire",
+      "Une revue consultative de type commentaire",
+      "Un déploiement",
+      "Une exemption de coût"
+    ],
+    "correct": 1,
+    "explanation": "Par défaut Copilot publie un commentaire, pas une approbation obligatoire."
+  },
+  {
+    "id": 25,
+    "prompt": "En tant que tech lead, quelle décision réseau est la plus sûre pour l'agent cloud ?",
+    "options": [
+      "Autoriser tout Internet",
+      "Approuver uniquement les destinations justifiées",
+      "Ignorer le pare-feu",
+      "Mettre les tokens dans l'issue"
+    ],
+    "correct": 1,
+    "explanation": "Utilisez une liste étroite et refusez les téléchargements sans rapport."
+  },
+  {
+    "id": 26,
+    "prompt": "En tant que tech lead, quelle action réduit généralement les AI Credits ?",
+    "options": [
+      "Ajouter du contexte inutile",
+      "Cibler le contexte et planifier",
+      "Multiplier les sessions",
+      "Répéter le même échec"
+    ],
+    "correct": 1,
+    "explanation": "Un contexte ciblé et des étapes planifiées réduisent le travail inutile."
+  },
+  {
+    "id": 27,
+    "prompt": "En tant que tech lead, avec quoi combiner l'exclusion de contenu ?",
+    "options": [
+      "Aucun audit",
+      "Politique, moindre privilège et vérification",
+      "Secrets publics",
+      "Outils MCP illimités"
+    ],
+    "correct": 1,
+    "explanation": "L'exclusion est une protection au sein d'une gouvernance plus large."
+  },
+  {
+    "id": 28,
+    "prompt": "En tant que tech lead, quelle est la séquence Spec Kit ?",
+    "options": [
+      "Implémenter → deviner → livrer",
+      "Spécifier → planifier → tâches → implémenter → converger",
+      "Prompt → payer → publier",
+      "Fork → supprimer → fusionner"
+    ],
+    "correct": 1,
+    "explanation": "Le développement piloté par les spécifications garde la traçabilité."
+  },
+  {
+    "id": 29,
+    "prompt": "En tant que tech lead, les complétions consomment-elles des AI Credits ?",
+    "options": [
+      "Oui, toujours",
+      "Non ; la documentation exclut complétions et next-edit",
+      "Le week-end seulement",
+      "Dans les fichiers locaux"
+    ],
+    "correct": 1,
+    "explanation": "Les crédits couvrent chat et agents, pas les complétions."
+  },
+  {
+    "id": 30,
+    "prompt": "En tant que tech lead, comment traiter l'ancien terme « Copilot Edits » au GH-300 ?",
+    "options": [
+      "Ignorer les produits actuels",
+      "Apprendre Ask, Plan et Agent tout en reconnaissant le terme",
+      "Utiliser Copilot Workspace",
+      "Sauter le domaine"
+    ],
+    "correct": 1,
+    "explanation": "Apprenez l'expérience actuelle et le vocabulaire historique de l'examen."
+  },
+  {
+    "id": 31,
+    "prompt": "En tant que administrateur plateforme, quelle est la première étape d'un changement Copilot multi-fichiers ?",
+    "options": [
+      "Lancer Agent sur tout le dépôt",
+      "Utiliser Plan avec contexte ciblé et critères",
+      "Désactiver les tests",
+      "Choisir le modèle le plus cher"
+    ],
+    "correct": 1,
+    "explanation": "Planifiez d'abord avec le plus petit contexte utile et un succès observable."
+  },
+  {
+    "id": 32,
+    "prompt": "En tant que administrateur plateforme, quel artefact porte les consignes globales du dépôt ?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README uniquement"
+    ],
+    "correct": 1,
+    "explanation": "Les instructions globales résident dans .github/copilot-instructions.md."
+  },
+  {
+    "id": 33,
+    "prompt": "En tant que administrateur plateforme, comment introduire un serveur MCP ?",
+    "options": [
+      "Faire confiance à tous",
+      "Inventorier outils, identifiants, frontières et listes",
+      "Accorder l'écriture d'abord",
+      "Désactiver les approbations"
+    ],
+    "correct": 1,
+    "explanation": "Vérifiez le serveur et appliquez le moindre privilège."
+  },
+  {
+    "id": 34,
+    "prompt": "En tant que administrateur plateforme, que fournit une revue Copilot par défaut ?",
+    "options": [
+      "Une approbation obligatoire",
+      "Une revue consultative de type commentaire",
+      "Un déploiement",
+      "Une exemption de coût"
+    ],
+    "correct": 1,
+    "explanation": "Par défaut Copilot publie un commentaire, pas une approbation obligatoire."
+  },
+  {
+    "id": 35,
+    "prompt": "En tant que administrateur plateforme, quelle décision réseau est la plus sûre pour l'agent cloud ?",
+    "options": [
+      "Autoriser tout Internet",
+      "Approuver uniquement les destinations justifiées",
+      "Ignorer le pare-feu",
+      "Mettre les tokens dans l'issue"
+    ],
+    "correct": 1,
+    "explanation": "Utilisez une liste étroite et refusez les téléchargements sans rapport."
+  },
+  {
+    "id": 36,
+    "prompt": "En tant que administrateur plateforme, quelle action réduit généralement les AI Credits ?",
+    "options": [
+      "Ajouter du contexte inutile",
+      "Cibler le contexte et planifier",
+      "Multiplier les sessions",
+      "Répéter le même échec"
+    ],
+    "correct": 1,
+    "explanation": "Un contexte ciblé et des étapes planifiées réduisent le travail inutile."
+  },
+  {
+    "id": 37,
+    "prompt": "En tant que administrateur plateforme, avec quoi combiner l'exclusion de contenu ?",
+    "options": [
+      "Aucun audit",
+      "Politique, moindre privilège et vérification",
+      "Secrets publics",
+      "Outils MCP illimités"
+    ],
+    "correct": 1,
+    "explanation": "L'exclusion est une protection au sein d'une gouvernance plus large."
+  },
+  {
+    "id": 38,
+    "prompt": "En tant que administrateur plateforme, quelle est la séquence Spec Kit ?",
+    "options": [
+      "Implémenter → deviner → livrer",
+      "Spécifier → planifier → tâches → implémenter → converger",
+      "Prompt → payer → publier",
+      "Fork → supprimer → fusionner"
+    ],
+    "correct": 1,
+    "explanation": "Le développement piloté par les spécifications garde la traçabilité."
+  },
+  {
+    "id": 39,
+    "prompt": "En tant que administrateur plateforme, les complétions consomment-elles des AI Credits ?",
+    "options": [
+      "Oui, toujours",
+      "Non ; la documentation exclut complétions et next-edit",
+      "Le week-end seulement",
+      "Dans les fichiers locaux"
+    ],
+    "correct": 1,
+    "explanation": "Les crédits couvrent chat et agents, pas les complétions."
+  },
+  {
+    "id": 40,
+    "prompt": "En tant que administrateur plateforme, comment traiter l'ancien terme « Copilot Edits » au GH-300 ?",
+    "options": [
+      "Ignorer les produits actuels",
+      "Apprendre Ask, Plan et Agent tout en reconnaissant le terme",
+      "Utiliser Copilot Workspace",
+      "Sauter le domaine"
+    ],
+    "correct": 1,
+    "explanation": "Apprenez l'expérience actuelle et le vocabulaire historique de l'examen."
+  },
+  {
+    "id": 41,
+    "prompt": "En tant que architecte solutions, quelle est la première étape d'un changement Copilot multi-fichiers ?",
+    "options": [
+      "Lancer Agent sur tout le dépôt",
+      "Utiliser Plan avec contexte ciblé et critères",
+      "Désactiver les tests",
+      "Choisir le modèle le plus cher"
+    ],
+    "correct": 1,
+    "explanation": "Planifiez d'abord avec le plus petit contexte utile et un succès observable."
+  },
+  {
+    "id": 42,
+    "prompt": "En tant que architecte solutions, quel artefact porte les consignes globales du dépôt ?",
+    "options": [
+      "SKILL.md",
+      ".github/copilot-instructions.md",
+      "package.json",
+      "README uniquement"
+    ],
+    "correct": 1,
+    "explanation": "Les instructions globales résident dans .github/copilot-instructions.md."
+  },
+  {
+    "id": 43,
+    "prompt": "En tant que architecte solutions, comment introduire un serveur MCP ?",
+    "options": [
+      "Faire confiance à tous",
+      "Inventorier outils, identifiants, frontières et listes",
+      "Accorder l'écriture d'abord",
+      "Désactiver les approbations"
+    ],
+    "correct": 1,
+    "explanation": "Vérifiez le serveur et appliquez le moindre privilège."
+  },
+  {
+    "id": 44,
+    "prompt": "En tant que architecte solutions, que fournit une revue Copilot par défaut ?",
+    "options": [
+      "Une approbation obligatoire",
+      "Une revue consultative de type commentaire",
+      "Un déploiement",
+      "Une exemption de coût"
+    ],
+    "correct": 1,
+    "explanation": "Par défaut Copilot publie un commentaire, pas une approbation obligatoire."
+  },
+  {
+    "id": 45,
+    "prompt": "En tant que architecte solutions, quelle décision réseau est la plus sûre pour l'agent cloud ?",
+    "options": [
+      "Autoriser tout Internet",
+      "Approuver uniquement les destinations justifiées",
+      "Ignorer le pare-feu",
+      "Mettre les tokens dans l'issue"
+    ],
+    "correct": 1,
+    "explanation": "Utilisez une liste étroite et refusez les téléchargements sans rapport."
+  },
+  {
+    "id": 46,
+    "prompt": "En tant que architecte solutions, quelle action réduit généralement les AI Credits ?",
+    "options": [
+      "Ajouter du contexte inutile",
+      "Cibler le contexte et planifier",
+      "Multiplier les sessions",
+      "Répéter le même échec"
+    ],
+    "correct": 1,
+    "explanation": "Un contexte ciblé et des étapes planifiées réduisent le travail inutile."
+  },
+  {
+    "id": 47,
+    "prompt": "En tant que architecte solutions, avec quoi combiner l'exclusion de contenu ?",
+    "options": [
+      "Aucun audit",
+      "Politique, moindre privilège et vérification",
+      "Secrets publics",
+      "Outils MCP illimités"
+    ],
+    "correct": 1,
+    "explanation": "L'exclusion est une protection au sein d'une gouvernance plus large."
+  },
+  {
+    "id": 48,
+    "prompt": "En tant que architecte solutions, quelle est la séquence Spec Kit ?",
+    "options": [
+      "Implémenter → deviner → livrer",
+      "Spécifier → planifier → tâches → implémenter → converger",
+      "Prompt → payer → publier",
+      "Fork → supprimer → fusionner"
+    ],
+    "correct": 1,
+    "explanation": "Le développement piloté par les spécifications garde la traçabilité."
+  },
+  {
+    "id": 49,
+    "prompt": "En tant que architecte solutions, les complétions consomment-elles des AI Credits ?",
+    "options": [
+      "Oui, toujours",
+      "Non ; la documentation exclut complétions et next-edit",
+      "Le week-end seulement",
+      "Dans les fichiers locaux"
+    ],
+    "correct": 1,
+    "explanation": "Les crédits couvrent chat et agents, pas les complétions."
+  },
+  {
+    "id": 50,
+    "prompt": "En tant que architecte solutions, comment traiter l'ancien terme « Copilot Edits » au GH-300 ?",
+    "options": [
+      "Ignorer les produits actuels",
+      "Apprendre Ask, Plan et Agent tout en reconnaissant le terme",
+      "Utiliser Copilot Workspace",
+      "Sauter le domaine"
+    ],
+    "correct": 1,
+    "explanation": "Apprenez l'expérience actuelle et le vocabulaire historique de l'examen."
+  }
+]

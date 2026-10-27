@@ -35,6 +35,8 @@ nav:
           - 📊 Data Engineer / Analyst: paths/roles/data-engineer.md
           - 🔒 Enterprise Admin: paths/roles/admin.md
           - 🎓 Student / Learner: paths/roles/student.md
+      - Certification:
+          - 🎓 GH-300 GitHub Copilot: paths/gh-300/index.md
 
   - Labs:
       - All Labs: labs/index.md
@@ -48,6 +50,8 @@ nav:
           - "Lab 006: What is RAG?": labs/lab-006-what-is-rag.md
           - "Lab 007: What are Embeddings?": labs/lab-007-what-are-embeddings.md
           - "Lab 008: Responsible AI for Agents": labs/lab-008-responsible-ai.md
+          - "Lab 097: Tokens, Sampling & Context Windows": labs/lab-097-tokens-sampling-context.md
+          - "Lab 107: How GitHub Copilot Works": labs/lab-107-how-copilot-works.md
 
       - "L100 — Foundations":
           - "Lab 009: Azure OpenAI Service Quickstart": labs/lab-009-azure-openai.md
@@ -67,6 +71,7 @@ nav:
           - "Lab 075: Power BI Copilot — Analytics": labs/lab-075-powerbi-copilot.md
           - "Lab 078: Foundry Local — Run Models Offline": labs/lab-078-foundry-local.md
           - "Lab 081: Agentic Coding Tools": labs/lab-081-agentic-coding-tools.md
+          - "Lab 085: Copilot Prompt & Context Engineering": labs/lab-085-copilot-prompt-context-engineering.md
 
       - "L200 — Intermediate":
           - "Lab 020: MCP Server in Python": labs/lab-020-mcp-server-python.md
@@ -88,6 +93,10 @@ nav:
           - "Lab 076: Microsoft Agent Framework": labs/lab-076-microsoft-agent-framework.md
           - "Lab 077: AG-UI Protocol": labs/lab-077-agui-protocol.md
           - "Lab 080: MarkItDown + MCP": labs/lab-080-markitdown-mcp.md
+          - "Lab 086: Customize Copilot": labs/lab-086-customize-copilot.md
+          - "Lab 087: Copilot + MCP": labs/lab-087-copilot-mcp.md
+          - "Lab 088: Copilot CLI": labs/lab-088-copilot-cli.md
+          - "Lab 089: Spec-Driven Development with Spec Kit": labs/lab-089-spec-kit.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
@@ -121,6 +130,8 @@ nav:
           - "Lab 079: Deep Research Agents": labs/lab-079-deep-research-agents.md
           - "Lab 082: Agent Guardrails — NeMo & Content Safety": labs/lab-082-agent-guardrails.md
           - "Lab 083: Multi-Modal RAG": labs/lab-083-multimodal-rag.md
+          - "Lab 091: Copilot Cloud Agent & Code Review": labs/lab-091-cloud-agent-code-review.md
+          - "Lab 094: Copilot Governance & FinOps": labs/lab-094-copilot-governance-finops.md
 
       - "L400 — Expert":
           - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
@@ -141,6 +152,7 @@ nav:
       - "Challenge 006: Investigate an Agent Observability Incident": challenges/challenge-006-observability.md
       - "Challenge 007: Red-Team Agent Guardrails": challenges/challenge-007-guardrails-red-team.md
       - "Challenge 008: Build a Local-Only Agent": challenges/challenge-008-local-only-agent.md
+      - "Challenge 009: Pass Using Only Copilot Free": challenges/challenge-009-copilot-free.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
@@ -181,6 +193,7 @@ plugins:
             "📊 Data Engineer / Analyst": "📊 Engenheiro de Dados / Analista"
             "🔒 Enterprise Admin": "🔒 Admin Corporativo"
             "🎓 Student / Learner": "🎓 Estudante"
+            Certification: Certificação
             Labs: Laboratórios
             All Labs: Todos os Labs
             "L50 — Awareness": "L50 — Conscientização"
@@ -198,6 +211,7 @@ plugins:
             "Challenge 006: Investigate an Agent Observability Incident": "Desafio 006: Investigue um Incidente de Observabilidade de Agente"
             "Challenge 007: Red-Team Agent Guardrails": "Desafio 007: Red Team de Guardrails de Agentes"
             "Challenge 008: Build a Local-Only Agent": "Desafio 008: Construa um Agente 100% Local"
+            "Challenge 009: Pass Using Only Copilot Free": "Desafio 009: Passe Usando Só o Copilot Free"
             Glossary: Glossário
             What's New: Novidades
             Tags: Tags
@@ -225,6 +239,7 @@ plugins:
             "📊 Data Engineer / Analyst": "📊 Ingénieur Données / Analyste"
             "🔒 Enterprise Admin": "🔒 Admin Entreprise"
             "🎓 Student / Learner": "🎓 Étudiant"
+            Certification: Certification
             Labs: Laboratoires
             All Labs: Tous les Labs
             "L50 — Awareness": "L50 — Sensibilisation"
@@ -242,6 +257,7 @@ plugins:
             "Challenge 006: Investigate an Agent Observability Incident": "Défi 006 : Investiguer un incident d'observabilité d'agent"
             "Challenge 007: Red-Team Agent Guardrails": "Défi 007 : Red team des garde-fous d'agents"
             "Challenge 008: Build a Local-Only Agent": "Défi 008 : Construire un agent 100 % local"
+            "Challenge 009: Pass Using Only Copilot Free": "Défi 009 : Réussir uniquement avec Copilot Free"
             Glossary: Glossaire
             What's New: Nouveautés
             Tags: Tags
