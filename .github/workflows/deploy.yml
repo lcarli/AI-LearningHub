@@ -36,6 +36,7 @@ jobs:
       - name: Generate What's New page
         run: |
           python scripts/phase2_content.py
+          python scripts/phase3_content.py
           python scripts/generate_whats_new.py
 
       - name: Generate Labs Index

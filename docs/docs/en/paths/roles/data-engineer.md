@@ -46,3 +46,9 @@ You work with data — analytics, BI, ETL pipelines — and want to add AI agent
 ## Phase 2 additions
 
 Use Labs 022, 095 and 099 plus Challenge 011 for retrieval and evaluation evidence.
+
+<!-- phase3-role:start -->
+## Phase 3 route
+
+Use Labs 102–106, the modernized Agent Framework/MCP/Foundry labs, and the Instructor Hub delivery formats appropriate to this role.
+<!-- phase3-role:end -->

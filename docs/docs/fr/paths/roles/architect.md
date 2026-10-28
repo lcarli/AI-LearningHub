@@ -49,3 +49,9 @@ Vous concevez des systèmes d'IA en production — architectures multi-agents, o
 ## Ajouts de la Phase 2
 
 Utilisez les Labs 095, 098, 100 et 101 pour relier décisions, preuves, risques et coûts.
+
+<!-- phase3-role:start -->
+## Parcours de Phase 3
+
+Utilisez les Labs 102–106, les labs Agent Framework/MCP/Foundry modernisés et les formats du Hub instructeur adaptés à ce rôle.
+<!-- phase3-role:end -->

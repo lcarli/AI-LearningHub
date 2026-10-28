@@ -296,6 +296,42 @@
     });
   }
 
+  function addPhase3Tabs() {
+    document.querySelectorAll("[data-phase3-tabs]").forEach(function (wrapper) {
+      var tabs = Array.from(wrapper.querySelectorAll("[data-phase3-tab]"));
+      var panels = Array.from(wrapper.querySelectorAll("[data-phase3-panel]"));
+      if (tabs.length !== 2 || panels.length !== 2) return;
+
+      function select(name, focus) {
+        tabs.forEach(function (tab) {
+          var active = tab.dataset.phase3Tab === name;
+          tab.setAttribute("aria-selected", String(active));
+          tab.tabIndex = active ? 0 : -1;
+          if (active && focus) tab.focus();
+        });
+        panels.forEach(function (panel) {
+          panel.hidden = panel.dataset.phase3Panel !== name;
+        });
+      }
+
+      tabs.forEach(function (tab, index) {
+        tab.addEventListener("click", function () {
+          select(tab.dataset.phase3Tab, false);
+        });
+        tab.addEventListener("keydown", function (event) {
+          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+          event.preventDefault();
+          var offset = event.key === "ArrowRight" ? 1 : -1;
+          var next = tabs[(index + offset + tabs.length) % tabs.length];
+          select(next.dataset.phase3Tab, true);
+        });
+      });
+      select(tabs.find(function (tab) {
+        return tab.getAttribute("aria-selected") === "true";
+      }).dataset.phase3Tab, false);
+    });
+  }
+
   function addTokenPlaygrounds() {
     document.querySelectorAll("[data-token-playground]").forEach(function (widget) {
       var text = widget.querySelector("textarea");
@@ -323,60 +359,61 @@
           (temp <= 0.3 ? t("deterministic") : temp >= 1.2 ? t("diverse") : t("balanced"));
       }
 
-      function addGh300Quiz() {
-        var host = document.querySelector("[data-gh300-quiz]");
-        if (!host) return;
-        fetch(host.dataset.source).then(function (response) {
-          if (!response.ok) throw new Error("Question bank request failed: " + response.status);
-          return response.json();
-        }).then(function (questions) {
-          var index = 0;
-          var score = 0;
-          function render() {
-            var question = questions[index];
-            host.innerHTML = '<section class="gh300-quiz-card"><p><strong>' + t("question") +
-              " " + (index + 1) + "/" + questions.length + '</strong></p><h3>' +
-              escapeHtml(question.prompt) + '</h3><form><fieldset><legend class="sr-only">' +
-              escapeHtml(question.prompt) + "</legend>" +
-              question.options.map(function (option, optionIndex) {
-                return '<label><input type="radio" name="answer" value="' + optionIndex +
-                  '"> <span>' + escapeHtml(option) + "</span></label>";
-              }).join("") + '</fieldset><button type="submit" class="hub-button hub-button--primary">' +
-              t("submit") + '</button></form><p class="gh300-feedback" aria-live="polite"></p>' +
-              '<p class="gh300-score">' + t("score") + ": " + score + "/" + index + "</p></section>";
-            var form = host.querySelector("form");
-            form.addEventListener("submit", function (event) {
-              event.preventDefault();
-              var selected = form.querySelector('input[name="answer"]:checked');
-              if (!selected) return;
-              var correct = scoreAnswer(question, selected.value);
-              if (correct) score += 1;
-              var feedback = host.querySelector(".gh300-feedback");
-              feedback.textContent = (correct ? t("correct") : t("incorrect")) + ": " + question.explanation;
-              form.querySelectorAll("input, button").forEach(function (control) { control.disabled = true; });
-              var next = document.createElement("button");
-              next.type = "button";
-              next.className = "hub-button";
-              next.textContent = index + 1 === questions.length ? t("score") : t("next");
-              next.addEventListener("click", function () {
-                index += 1;
-                if (index < questions.length) render();
-                else {
-                  localStorage.setItem("ai-hub-gh300-score", JSON.stringify({ score: score, total: questions.length }));
-                  host.innerHTML = '<div class="gh300-final"><h3>' + t("score") + ": " +
-                    score + "/" + questions.length + "</h3></div>";
-                }
-              });
-              feedback.after(next);
-            });
-          }
-          render();
-        }).catch(function (error) {
-          host.textContent = error.message;
-        });
-      }
       widget.addEventListener("input", render);
       render();
+    });
+  }
+
+  function addGh300Quiz() {
+    var host = document.querySelector("[data-gh300-quiz]");
+    if (!host) return;
+    fetch(host.dataset.source).then(function (response) {
+      if (!response.ok) throw new Error("Question bank request failed: " + response.status);
+      return response.json();
+    }).then(function (questions) {
+      var index = 0;
+      var score = 0;
+      function render() {
+        var question = questions[index];
+        host.innerHTML = '<section class="gh300-quiz-card"><p><strong>' + t("question") +
+          " " + (index + 1) + "/" + questions.length + '</strong></p><h3>' +
+          escapeHtml(question.prompt) + '</h3><form><fieldset><legend class="sr-only">' +
+          escapeHtml(question.prompt) + "</legend>" +
+          question.options.map(function (option, optionIndex) {
+            return '<label><input type="radio" name="answer" value="' + optionIndex +
+              '"> <span>' + escapeHtml(option) + "</span></label>";
+          }).join("") + '</fieldset><button type="submit" class="hub-button hub-button--primary">' +
+          t("submit") + '</button></form><p class="gh300-feedback" aria-live="polite"></p>' +
+          '<p class="gh300-score">' + t("score") + ": " + score + "/" + index + "</p></section>";
+        var form = host.querySelector("form");
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          var selected = form.querySelector('input[name="answer"]:checked');
+          if (!selected) return;
+          var correct = scoreAnswer(question, selected.value);
+          if (correct) score += 1;
+          var feedback = host.querySelector(".gh300-feedback");
+          feedback.textContent = (correct ? t("correct") : t("incorrect")) + ": " + question.explanation;
+          form.querySelectorAll("input, button").forEach(function (control) { control.disabled = true; });
+          var next = document.createElement("button");
+          next.type = "button";
+          next.className = "hub-button";
+          next.textContent = index + 1 === questions.length ? t("score") : t("next");
+          next.addEventListener("click", function () {
+            index += 1;
+            if (index < questions.length) render();
+            else {
+              localStorage.setItem("ai-hub-gh300-score", JSON.stringify({ score: score, total: questions.length }));
+              host.innerHTML = '<div class="gh300-final"><h3>' + t("score") + ": " +
+                score + "/" + questions.length + "</h3></div>";
+            }
+          });
+          feedback.after(next);
+        });
+      }
+      render();
+    }).catch(function (error) {
+      host.textContent = error.message;
     });
   }
 
@@ -384,6 +421,7 @@
     document.querySelectorAll(".lab-completion").forEach(function (node) { node.remove(); });
     addCompletionCheckbox();
     addChallengeValidators();
+    addPhase3Tabs();
     addTokenPlaygrounds();
     addGh300Quiz();
     fetchCatalog().then(function (labs) {

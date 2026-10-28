@@ -313,3 +313,23 @@ Pontuações são de 1 a 5. Abaixo de 3.0 em fundamentação geralmente indica a
 
 - **CI/CD para agentes:** → [Lab 037 — GitHub Actions for AI Agents](lab-037-cicd-github-actions.md)
 - **Avaliação RAG empresarial:** → [Lab 042 — RAG Empresarial com Avaliações](lab-042-enterprise-rag.md) *(em breve)*
+
+<!-- phase3-modernization:start -->
+## Modernização da Fase 3
+
+!!! warning "Verified 2026-10-27"
+    Use o nome Microsoft Foundry e o Agent Service GA baseado na Responses API. Avaliações estão GA; hosted agents continuam preview e devem ser identificados assim. Não crie dependência nova de Workflows do portal, descontinuados em 01/12/2026.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Foundry Agent Service GA announcement](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/)
+- [Foundry Agent Service](https://learn.microsoft.com/azure/ai-foundry/agents/)
+- [Foundry evaluation](https://learn.microsoft.com/azure/ai-foundry/concepts/evaluation-approach-gen-ai)
+- [Foundry Workflows retirement](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow)
+<!-- phase3-modernization:end -->

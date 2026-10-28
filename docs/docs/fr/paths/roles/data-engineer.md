@@ -46,3 +46,9 @@ Vous travaillez avec les données — analytics, BI, pipelines ETL — et souhai
 ## Ajouts de la Phase 2
 
 Utilisez les Labs 022, 095 et 099 avec le Défi 011 pour la récupération et l'évaluation.
+
+<!-- phase3-role:start -->
+## Parcours de Phase 3
+
+Utilisez les Labs 102–106, les labs Agent Framework/MCP/Foundry modernisés et les formats du Hub instructeur adaptés à ce rôle.
+<!-- phase3-role:end -->

@@ -1,0 +1,4 @@
+import subprocess, sys
+result = subprocess.run([sys.executable, '-m', 'unittest', '-v'])
+if result.returncode: raise SystemExit('Validation failed.')
+print('CH012-HARDENMCP')

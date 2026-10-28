@@ -8,6 +8,11 @@ labs:
   - {id: "018", priority: P1, kind: llm-foundations}
   - {id: "019", priority: P1, kind: llm-foundations}
   - {id: "022", priority: P0, kind: rag}
+  - {id: "014", priority: P0, kind: agent-framework}
+  - {id: "023", priority: P0, kind: agent-framework}
+  - {id: "034", priority: P0, kind: agent-framework}
+  - {id: "040", priority: P0, kind: agent-framework}
+  - {id: "042", priority: P0, kind: enterprise-rag}
   - {id: "085", priority: P0, kind: copilot}
   - {id: "086", priority: P0, kind: copilot}
   - {id: "087", priority: P0, kind: copilot}
@@ -25,3 +30,8 @@ labs:
   - {id: "099", priority: P0, kind: llm-evaluation}
   - {id: "100", priority: P0, kind: llm-security}
   - {id: "101", priority: P1, kind: llm-economics}
+  - {id: "102", priority: P0, kind: llm-adaptation}
+  - {id: "103", priority: P1, kind: llm-training}
+  - {id: "104", priority: P0, kind: mcp}
+  - {id: "105", priority: P0, kind: mcp-apps}
+  - {id: "106", priority: P0, kind: agent-framework}

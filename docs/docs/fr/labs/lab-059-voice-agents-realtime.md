@@ -465,3 +465,20 @@ Corrigez les 3 bugs et relancez jusqu'à voir `🎉 All 3 tests passed`.
 - **[Lab 043](lab-043-multimodal-agents.md)** — Agents multimodaux avec GPT-4o Vision (modalité complémentaire)
 - **[Lab 060](lab-060-reasoning-models.md)** — Modèles de raisonnement : Chain-of-Thought avec o3 et DeepSeek R1
 - **[Lab 019](lab-019-streaming-responses.md)** — Réponses en streaming (concepts fondamentaux du streaming)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Parcours Réel
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Parcours Réel">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Parcours Réel</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Supprimez déploiements, points de terminaison, index, traces et données de test après validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

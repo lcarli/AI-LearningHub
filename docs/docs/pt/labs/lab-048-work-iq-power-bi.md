@@ -510,3 +510,20 @@ Corrija os 3 bugs e execute novamente até ver `🎉 All 3 tests passed`.
 - **[Lab 033](lab-033-agent-observability.md)** — Observabilidade de Agentes com Application Insights (monitorando agentes personalizados da mesma forma que o Viva monitora o Copilot)
 - **[Lab 038](lab-038-cost-optimization.md)** — Otimização de Custos de IA (o lado financeiro do ROI para implantações personalizadas de IA)
 - **[Lab 035](lab-035-agent-evaluation.md)** — Avaliação de Agentes com Azure AI Eval SDK (métricas de qualidade, não apenas adoção)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulação / Caminho Real
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulação / Caminho Real">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulação</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Caminho Real</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Exclua implantações, endpoints, índices, traces e dados de teste após a validação.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

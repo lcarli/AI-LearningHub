@@ -176,3 +176,22 @@ O agente deve usar o fluxo do seu tópico personalizado, não o fallback de IA. 
 
 - **Teams AI Library (bot de Teams code-first):** → [Lab 024 — Teams AI Library](lab-024-teams-ai-library.md)
 - **Adicionar ferramentas MCP ao Copilot Studio:** → [Lab 012 — O que é MCP?](lab-012-what-is-mcp.md)
+
+<!-- phase3-modernization:start -->
+## Modernização da Fase 3
+
+!!! warning "Verified 2026-10-27"
+    Use Microsoft 365 Agents SDK e Agents Toolkit. Valide agentes declarativos com manifesto v1.9. Mantenha trial do Copilot Studio e Agents Playground opcionais.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Microsoft 365 Agents SDK](https://learn.microsoft.com/microsoft-365/agents-sdk/)
+- [Microsoft 365 Agents Toolkit](https://learn.microsoft.com/microsoft-365/agents-toolkit/)
+- [Declarative agent schema](https://learn.microsoft.com/microsoft-365-copilot/extensibility/declarative-agent-manifest)
+<!-- phase3-modernization:end -->

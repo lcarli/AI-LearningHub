@@ -337,3 +337,38 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 - **[Lab 036](lab-040-autogen-multi-agent.md)** — AutoGen Basics (understand AutoGen patterns before MAF)
 - **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (operate and monitor production agent fleets)
 - **[Lab 073](lab-073-swe-bench.md)** — SWE-Bench (evaluate MAF agents on real-world coding tasks)
+
+<!-- phase3-modernization:start -->
+## Phase 3 modernization
+
+!!! warning "Verified 2026-10-27"
+    Use Microsoft Agent Framework 1.0 for new agent work. Semantic Kernel remains a legacy migration source; AutoGen is maintenance-oriented. Remove obsolete planner patterns and use explicit workflows, tools, memory, checkpoints, and stop conditions.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Microsoft Agent Framework 1.0 GA](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/)
+- [AutoGen to Agent Framework migration](https://learn.microsoft.com/agent-framework/migration-guide/from-autogen/)
+<!-- phase3-modernization:end -->
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Real path
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Real path">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Real path</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Delete hosted deployments, endpoints, indexes, traces, and test data after validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

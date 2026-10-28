@@ -206,3 +206,22 @@ Ready to build your own MCP server?
 
 - **Python:** → [Lab 020 — Build an MCP Server in Python](lab-020-mcp-server-python.md)
 - **C#:** → [Lab 021 — Build an MCP Server in C#](lab-021-mcp-server-csharp.md)
+
+<!-- phase3-modernization:start -->
+## Phase 3 modernization
+
+!!! warning "Verified 2026-10-27"
+    Target MCP specification 2026-07-28. Prefer stateless server design, capability discovery, current Tier 1 SDKs, and explicit multi-round-trip state. Add Registry and authorization only where the trust model requires them.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Model Context Protocol specification](https://modelcontextprotocol.io/specification/2026-07-28)
+- [MCP authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
+- [MCP Registry](https://registry.modelcontextprotocol.io/)
+<!-- phase3-modernization:end -->

@@ -417,3 +417,38 @@ python lab-050/broken_conventions.py
 - **[Lab 033](lab-033-agent-observability.md)** — Observabilité des agents avec Application Insights (approche complémentaire Azure-native)
 - **[Lab 034](lab-034-multi-agent-sk.md)** — Orchestration multi-agents avec Semantic Kernel (construire les agents que ce lab trace)
 - **[Lab 035](lab-035-agent-evaluation.md)** — Évaluation des agents avec le SDK Azure AI Eval (le scoring de qualité qui alimente le Reviewer)
+
+<!-- phase3-modernization:start -->
+## Modernisation de Phase 3
+
+!!! warning "Verified 2026-10-27"
+    Émettez spans et attributs alignés OpenTelemetry GenAI et utilisez le Foundry Control Plane via les surfaces stables documentées. Marquez les conventions expérimentales.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [OpenTelemetry generative AI conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/)
+- [Foundry observability](https://learn.microsoft.com/azure/ai-foundry/concepts/trace-agent-concept)
+<!-- phase3-modernization:end -->
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Parcours Réel
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Parcours Réel">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Parcours Réel</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Supprimez déploiements, points de terminaison, index, traces et données de test après validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

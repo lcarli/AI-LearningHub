@@ -52,7 +52,7 @@ Deploy-to-Azure one-click buttons for three Bicep templates:
 
 ## 🗺️ Roadmap
 
-The hub currently tracks **93 lab entries** across three languages. The 2026 release adds:
+The hub currently tracks **107 lab entries** across three languages. The 2026–2027 releases add:
 
 - Copilot Free-first prompt and context engineering
 - Repository instructions, prompt files, custom agents, and skills
@@ -61,6 +61,9 @@ The hub currently tracks **93 lab entries** across three languages. The 2026 rel
 - Free simulations for cloud agent, code review, governance, and FinOps
 - An interactive token, sampling, and context-window lab
 - A four-week GH-300 certification path
+- Microsoft Agent Framework 1.0 and MCP 2026-07-28 modernization
+- Labs 102–106, Challenge 012, AI-103/GH-600 maps, and the Instructor Hub
+- Local/Real paths with cost and cleanup controls for simulated enterprise labs
 
 See [CONTRIBUTING.md](https://github.com/lcarli/AI-LearningHub/blob/main/CONTRIBUTING.md) or [open a proposal](https://github.com/lcarli/AI-LearningHub/issues/new?template=new_lab_proposal.md).
 """
@@ -140,7 +143,10 @@ def lab_link(info: dict) -> str:
 
 def path_link(info: dict) -> str:
     if info["path_url"]:
-        return f"[{info['path_name']}]({info['path_url']})"
+        normalized = info["path_url"].removeprefix("../")
+        if normalized.endswith("/"):
+            normalized += "index.md"
+        return f"[{info['path_name']}]({normalized})"
     return info["path_name"]
 
 

@@ -42,3 +42,9 @@ You're new to AI agents and want to learn from scratch — completely free, no A
 ## Phase 2 additions
 
 Use Labs 004, 005, 007, 097–101 and Challenge 011 for a free local LLM foundations route.
+
+<!-- phase3-role:start -->
+## Phase 3 route
+
+Use Labs 102–106, the modernized Agent Framework/MCP/Foundry labs, and the Instructor Hub delivery formats appropriate to this role.
+<!-- phase3-role:end -->

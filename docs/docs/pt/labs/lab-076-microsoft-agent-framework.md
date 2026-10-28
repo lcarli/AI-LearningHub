@@ -337,3 +337,38 @@ Corrija todos os 3 bugs e execute novamente. Quando você ver `All passed!`, est
 - **[Lab 036](lab-040-autogen-multi-agent.md)** — Fundamentos do AutoGen (entenda os padrões do AutoGen antes do MAF)
 - **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (opere e monitore frotas de agentes em produção)
 - **[Lab 073](lab-073-swe-bench.md)** — SWE-Bench (avalie agentes MAF em tarefas de codificação do mundo real)
+
+<!-- phase3-modernization:start -->
+## Modernização da Fase 3
+
+!!! warning "Verified 2026-10-27"
+    Use Microsoft Agent Framework 1.0 em novos agentes. Semantic Kernel fica como origem legada de migração; AutoGen está orientado a manutenção. Remova planners obsoletos e use workflows, ferramentas, memória, checkpoints e parada explícitos.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Microsoft Agent Framework 1.0 GA](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/)
+- [AutoGen to Agent Framework migration](https://learn.microsoft.com/agent-framework/migration-guide/from-autogen/)
+<!-- phase3-modernization:end -->
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulação / Caminho Real
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulação / Caminho Real">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulação</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Caminho Real</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Exclua implantações, endpoints, índices, traces e dados de teste após a validação.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

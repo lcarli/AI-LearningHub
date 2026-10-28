@@ -214,3 +214,21 @@ The Microsoft ecosystem has tools for **every skill level and use case**— from
 ## Next Steps
 
 → **[Lab 003: Choosing the Right Tool](lab-003-choosing-the-right-tool.md)**
+
+<!-- phase3-modernization:start -->
+## Phase 3 modernization
+
+!!! warning "Verified 2026-10-27"
+    Use Microsoft Agent Framework 1.0 for new agent work. Semantic Kernel remains a legacy migration source; AutoGen is maintenance-oriented. Remove obsolete planner patterns and use explicit workflows, tools, memory, checkpoints, and stop conditions.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Microsoft Agent Framework 1.0 GA](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/)
+- [AutoGen to Agent Framework migration](https://learn.microsoft.com/agent-framework/migration-guide/from-autogen/)
+<!-- phase3-modernization:end -->

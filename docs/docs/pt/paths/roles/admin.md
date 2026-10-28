@@ -45,3 +45,9 @@ Você gerencia implantações de IA — identidade, conformidade, DLP, monitoram
 ## Adições da Fase 2
 
 Use os Labs 092, 094 e 100 para políticas, controles, modelagem de ameaças e revisão.
+
+<!-- phase3-role:start -->
+## Rota da Fase 3
+
+Use os Labs 102–106, os labs modernizados de Agent Framework/MCP/Foundry e os formatos do Hub do Instrutor adequados a este perfil.
+<!-- phase3-role:end -->

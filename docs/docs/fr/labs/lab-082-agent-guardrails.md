@@ -446,3 +446,20 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 - **[Lab 083](lab-083-multimodal-rag.md)** — RAG multimodal : images, tableaux et graphiques dans les documents
 - Explorez [NVIDIA NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) pour l'implémentation de rails personnalisés
 - Essayez [Azure AI Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/) pour la modération de contenu basée sur le cloud
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Parcours Réel
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Parcours Réel">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Parcours Réel</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Supprimez déploiements, points de terminaison, index, traces et données de test après validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

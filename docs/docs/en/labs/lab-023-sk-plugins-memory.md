@@ -1,22 +1,29 @@
 ---
 tags:
-- semantic-kernel
-- python
-- free
-- github-models
+- kit
+- local-first
+- maf
+- phase-3
+- quiz
 lab:
   id: '023'
   level: L200
-  journey: agent-framework
-  time_min: 45
+  journey: ai-agents
+  time_min: 90
   cost:
-    tier: free-gh
-    requires:
-    - github
-    - copilot-free
-    estimate_usd: 0 within the documented free path or quota.
-    simulation: false
+    tier: free
+    requires: []
+    estimate_usd: 0 for the local simulation; optional Real usage varies by service
+      and must be capped.
+    simulation: true
     cleanup: false
+  roles:
+  - developer
+  - architect
+  - student
+  technologies:
+  - maf
+  - phase-3
   status: active
   last_verified: '2026-10-27'
   languages:
@@ -24,345 +31,136 @@ lab:
   - pt
   - fr
 ---
-!!! warning "Backend update (October 2026)"
-    GitHub Models inference was retired on July 30, 2026. Any references below are retained only for historical context while this lab is migrated. Use [Lab 013 — Free LLM backends](../labs/lab-013-github-models.md) to configure Foundry Local or Ollama before continuing.
-
-# Lab 023: Semantic Kernel — Plugins, Memory & Planners
+# Lab 023: Tools and Memory in Microsoft Agent Framework
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/semantic-kernel/">Semantic Kernel</a></span>
-  <span><strong>Time:</strong> ~45 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span></span>
+  <span><strong>Journey:</strong> ai-agents</span>
+  <span><strong>Time:</strong> ~90 min</span>
+  <span><strong>Cost:</strong> free</span>
 </div>
-!!! warning "Semantic Kernel -> Microsoft Agent Framework"
-    Semantic Kernel is now part of **Microsoft Agent Framework (MAF)**, which unifies SK and AutoGen into a single framework. The concepts in this lab still apply — MAF builds on top of them. See **[Lab 076: Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** for the migration guide.
 
-
+!!! info "Phase 3 · local first"
+    The required route is deterministic and local. The Real route is optional and includes an estimate and cleanup.
 
 ## What You'll Learn
 
-- Create **native function plugins** in Python and C#
-- Use **KernelArguments** to pass typed data between plugins
-- Add **in-memory vector store** for semantic memory
-- Use **auto function calling** to let the LLM orchestrate plugins
-- Understand how SK planners work
-
----
-
-## Introduction
-
-[Lab 014](lab-014-sk-hello-agent.md) built a minimal SK agent. This lab goes deeper: multiple plugins working together, semantic memory, and letting the kernel decide which tools to call.
-
----
+- Expose typed tools with explicit authorization
+- Use bounded short-term and durable memory
+- Replace obsolete SK planners with explicit orchestration
+- Test injection and memory-isolation boundaries
 
 ## Prerequisites
 
-=== "Python"
-    ```bash
-    pip install semantic-kernel openai
-    ```
+- Python 3.10+ and a terminal
+- No credentials for the required route
+- Read the linked official specification before using a hosted adapter
 
-=== "C#"
-    ```bash
-    dotnet add package Microsoft.SemanticKernel
-    dotnet add package Microsoft.SemanticKernel.Connectors.InMemory --prerelease
-    ```
+## Visual model
 
-Set `GITHUB_TOKEN`.
-
----
-
-!!! tip "Quick Start with GitHub Codespaces"
-    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
-
-    All dependencies are pre-installed in the devcontainer.
-
-
-## 📦 Supporting Files
-
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-023/` folder in your working directory.
-
-| File | Description | Download |
-|------|-------------|----------|
-| `broken_plugin.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py) |
-
----
-
-## Lab Exercise
-
-### Step 1: Create a multi-plugin agent
-
-=== "Python"
-
-    ```python
-    import os, asyncio
-    from semantic_kernel import Kernel
-    from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion
-    from semantic_kernel.functions import kernel_function
-    from semantic_kernel.connectors.ai.open_ai import OpenAIChatPromptExecutionSettings
-    from semantic_kernel.connectors.ai.function_choice_behavior import FunctionChoiceBehavior
-
-    # --- Plugin 1: Products ---
-    class ProductPlugin:
-        @kernel_function(description="Search products by keyword")
-        def search_products(self, query: str) -> str:
-            catalog = [
-                {"id": "P001", "name": "TrailBlazer X200", "price": 189.99, "category": "footwear"},
-                {"id": "P002", "name": "Summit Pro Tent",  "price": 349.00, "category": "camping"},
-                {"id": "P003", "name": "ClimbTech Harness","price": 129.99, "category": "climbing"},
-            ]
-            results = [p for p in catalog if query.lower() in p["name"].lower() or query.lower() in p["category"].lower()]
-            return str(results) if results else "No products found."
-
-        @kernel_function(description="Get the current shopping cart total")
-        def get_cart_total(self) -> str:
-            return "Current cart: 1x TrailBlazer X200 ($189.99). Total: $189.99"
-
-    # --- Plugin 2: Weather (for trip planning) ---
-    class WeatherPlugin:
-        @kernel_function(description="Get trail conditions for a location")
-        def get_trail_conditions(self, location: str) -> str:
-            conditions = {
-                "olympic": "Muddy, 45°F, light rain. Waterproof boots recommended.",
-                "rainier": "Snow above 5000ft. Crampons required above treeline.",
-                "cascades": "Clear, 62°F. Ideal conditions.",
-            }
-            for key, val in conditions.items():
-                if key in location.lower():
-                    return val
-            return f"No trail data for {location}. Check local ranger station."
-
-    # --- Plugin 3: Math/Utilities ---
-    class UtilityPlugin:
-        @kernel_function(description="Calculate total price with tax")
-        def calculate_with_tax(self, subtotal: float, tax_rate: float = 0.098) -> str:
-            total = subtotal * (1 + tax_rate)
-            return f"${subtotal:.2f} + {tax_rate*100:.1f}% tax = ${total:.2f}"
-
-    async def main():
-        kernel = Kernel()
-        kernel.add_service(OpenAIChatCompletion(
-            ai_model_id="gpt-4o-mini",
-            api_key=os.environ["GITHUB_TOKEN"],
-            base_url="https://models.inference.ai.azure.com/openai",
-        ))
-
-        # Register all plugins
-        kernel.add_plugin(ProductPlugin(), plugin_name="Products")
-        kernel.add_plugin(WeatherPlugin(), plugin_name="Weather")
-        kernel.add_plugin(UtilityPlugin(), plugin_name="Utils")
-
-        # Auto function calling — kernel decides which tools to use
-        settings = OpenAIChatPromptExecutionSettings(
-            function_choice_behavior=FunctionChoiceBehavior.Auto()
-        )
-
-        questions = [
-            "What camping gear do you have, and what's the total with Washington state tax?",
-            "I'm planning a hike on Mount Rainier — what gear and conditions should I expect?",
-        ]
-
-        for question in questions:
-            print(f"\n❓ {question}")
-            result = await kernel.invoke_prompt(
-                question,
-                execution_settings=settings,
-            )
-            print(f"💬 {result}")
-
-    asyncio.run(main())
-    ```
-
-### Step 2: Add semantic memory
-
-Semantic memory lets you store facts and retrieve them by meaning (not keyword).
-
-=== "Python"
-
-    ```python
-    import os, asyncio
-    from semantic_kernel import Kernel
-    from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion, OpenAITextEmbedding
-    from semantic_kernel.memory import SemanticTextMemory, VolatileMemoryStore
-
-    async def demo_memory():
-        kernel = Kernel()
-        kernel.add_service(OpenAIChatCompletion(
-            ai_model_id="gpt-4o-mini",
-            api_key=os.environ["GITHUB_TOKEN"],
-            base_url="https://models.inference.ai.azure.com/openai",
-        ))
-        embedding_service = OpenAITextEmbedding(
-            ai_model_id="text-embedding-3-small",
-            api_key=os.environ["GITHUB_TOKEN"],
-            base_url="https://models.inference.ai.azure.com/openai",
-        )
-
-        memory = SemanticTextMemory(
-            storage=VolatileMemoryStore(),
-            embeddings_generator=embedding_service,
-        )
-
-        # Store facts
-        facts = [
-            ("boot-care",    "Clean boots after each use. Apply waterproofing spray every 3 months."),
-            ("tent-setup",   "Always stake tent before raising poles in wind."),
-            ("harness-check","Inspect harness stitching and buckles before every climb."),
-            ("layering",     "Base layer wicks moisture. Mid layer insulates. Shell blocks wind/rain."),
-        ]
-
-        collection = "outdoor-tips"
-        for key, fact in facts:
-            await memory.save_information(collection, id=key, text=fact)
-
-        # Retrieve by meaning
-        queries = ["how do I maintain my footwear?", "safety check before climbing"]
-        for q in queries:
-            results = await memory.search(collection, q, limit=2, min_relevance_score=0.7)
-            print(f"\n🔍 '{q}'")
-            for r in results:
-                print(f"  [{r.relevance:.2f}] {r.text}")
-
-    asyncio.run(demo_memory())
-    ```
-
-### Step 3: Combining plugins with memory
-
-```python
-from semantic_kernel.core_plugins.text_memory_plugin import TextMemoryPlugin
-
-async def agent_with_memory():
-    kernel = Kernel()
-    # ... (add services as above) ...
-
-    memory = SemanticTextMemory(
-        storage=VolatileMemoryStore(),
-        embeddings_generator=embedding_service,
-    )
-
-    # TextMemoryPlugin exposes memory as a kernel function
-    kernel.add_plugin(TextMemoryPlugin(memory), plugin_name="Memory")
-    kernel.add_plugin(ProductPlugin(), plugin_name="Products")
-
-    # Now the agent can use memory AND product search together
-    settings = OpenAIChatPromptExecutionSettings(
-        function_choice_behavior=FunctionChoiceBehavior.Auto()
-    )
-
-    result = await kernel.invoke_prompt(
-        "I'm going hiking in wet weather — what should I remember about gear maintenance?",
-        execution_settings=settings,
-    )
-    print(result)
+```mermaid
+flowchart LR
+  A[MAF Agent] --> P[Policy]
+  P --> T[Typed tools]
+  P --> S[Session memory]
+  P --> D[Durable store]
+  T --> E[Evidence]
 ```
 
-### Step 4: Understanding planners
+## Scenario
 
-SK planners decompose a goal into steps. The modern approach is **auto function calling** (as used above) — the LLM generates a plan and executes it in one loop.
+OutdoorGear needs a reviewable workshop implementation with deterministic fixtures, explicit trust boundaries, measurable acceptance criteria, and a reversible optional hosted adapter.
 
-For explainability, you can log each function call:
+## Guided exercise
 
-```python
-from semantic_kernel.filters import FunctionInvocationContext
+### Step 1: `define_tools`
 
-async def log_function_calls(context: FunctionInvocationContext, next):
-    print(f"  📞 Calling: {context.function.plugin_name}.{context.function.name}")
-    print(f"     Args: {context.arguments}")
-    await next(context)
-    print(f"     Result: {str(context.result)[:100]}")
+1. Run the deterministic fixture for this step.
+2. Record the declared input, output, policy decision, and failure behavior.
+3. Change one bounded behavior and run the local test again.
 
-kernel.add_filter("function_invocation", log_function_calls)
-```
+**Evidence:** Save the command, result, and one sentence explaining why the evidence is trustworthy.
 
----
+### Step 2: `bound_memory`
 
-## Key Concepts Summary
+1. Run the deterministic fixture for this step.
+2. Record the declared input, output, policy decision, and failure behavior.
+3. Change one bounded behavior and run the local test again.
 
-| Concept | What it does |
-|---------|-------------|
-| **Plugin** | Groups related `@kernel_function` methods |
-| **KernelArguments** | Typed dict passed between functions |
-| **Auto Function Calling** | LLM decides which plugins to call |
-| **Semantic Memory** | Vector store for meaning-based retrieval |
-| **TextMemoryPlugin** | Bridges memory store into the plugin system |
-| **Filter** | Middleware — log, auth, or modify function calls |
+**Evidence:** Save the command, result, and one sentence explaining why the evidence is trustworthy.
 
----
+### Step 3: `route_explicitly`
 
-## 🐛 Bug-Fix Exercise: Fix the Broken SK Plugin
+1. Run the deterministic fixture for this step.
+2. Record the declared input, output, policy decision, and failure behavior.
+3. Change one bounded behavior and run the local test again.
 
-This lab includes a deliberately broken Semantic Kernel plugin. Find and fix 3 bugs!
+**Evidence:** Save the command, result, and one sentence explaining why the evidence is trustworthy.
 
-```
-lab-023/
-└── broken_plugin.py    ← 3 intentional bugs to find and fix
-```
+### Step 4: `red_team`
 
-**Setup:**
+1. Run the deterministic fixture for this step.
+2. Record the declared input, output, policy decision, and failure behavior.
+3. Change one bounded behavior and run the local test again.
+
+**Evidence:** Save the command, result, and one sentence explaining why the evidence is trustworthy.
+
+### Run locally
+
 ```bash
-pip install semantic-kernel openai
-
-# Run the test suite to see which tests fail
-python lab-023/broken_plugin.py
+cd docs/docs/en/labs/lab-023
+python -m unittest discover -v
 ```
 
-**The 3 bugs:**
+## Simulation / Real path
 
-| # | Function | Symptom | Type |
-|---|----------|---------|------|
-| 1 | `search_products` | SK doesn't discover the function | Missing `@kernel_function` decorator |
-| 2 | `get_cart_total` | Returns `$2.00` instead of `$339.98` | Accumulates quantity not price |
-| 3 | `calculate_price_with_tax` | Returns `$291.59` instead of `$269.99` | Tax applied twice |
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Real path">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Real path</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Use the included deterministic fixtures and local validator. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Replace only the adapter boundary. Set a spending cap before execution, retain the same acceptance tests, and record region, retention, identity, telemetry, and pricing assumptions. Delete hosted deployments, endpoints, indexes, traces, and test data after validation.
+  </section>
+</div>
 
-**Verify your fixes:** The built-in test runner checks each function:
-```bash
-python lab-023/broken_plugin.py
-# Expected output:
-# ✅ Passed — found 3 tents
-# ✅ Passed — cart total = $339.98
-# ✅ Passed — price with tax = $269.99
-# 🎉 All tests passed! Your plugin is bug-free.
-```
+## Supporting kit
 
----
+- `README.md`: quick start and evidence checklist
+- `CHEATSHEET.md`: decision and review guide
+- `scenario.json`: deterministic exercise contract
+- `test_scenario.py`: local acceptance tests
+- Generated PDF and ZIP through the existing kit pipeline
 
-## 🧠 Knowledge Check
+## Scored knowledge check
 
-??? question "**Q1 (Run the Lab):** After fixing bug #2, what does `get_cart_total()` return when the cart contains P001 (×1) at $249.99 and P007 (×1) at $89.99?"
+??? question "Why keep a local contract?"
 
-    Fix bug #2 in [📥 `broken_plugin.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-023/broken_plugin.py) and run it, or calculate manually: P001 price × 1 + P007 price × 1.
+    ??? success "Answer"
+        It provides a deterministic baseline before adding hosted variability and cost.
 
-    ??? success "✅ Reveal Answer"
-        **$339.98**
+??? question "When is the Real route complete?"
 
-        The cart contains 1× P001 (TrailBlazer Tent 2P, $249.99) and 1× P007 (DayHiker 22L, $89.99). `total = 249.99 + 89.99 = $339.98`. Bug #2 was accumulating the item *quantity* instead of `price * quantity`, so single-item carts returned the quantity number (e.g., `$1.00`, `$2.00`) instead of the price.
+    ??? success "Answer"
+        Only after validation evidence and cleanup are recorded.
 
-??? question "**Q2 (Run the Lab):** After fixing ALL 3 bugs, run `python lab-023/broken_plugin.py`. How many SK functions does the test runner discover in the OutdoorGearPlugin?"
+??? question "How should tool output be treated?"
 
-    After all fixes, run the script. Look for the "SK discovers N functions" line in the output.
+    ??? success "Answer"
+        As untrusted data until policy and schema validation succeed.
 
-    ??? success "✅ Reveal Answer"
-        **3 functions: `search_products`, `get_cart_total`, and `calculate_price_with_tax`**
+## Exit criteria
 
-        Before fixing bug #1 (missing `@kernel_function` decorator), SK could only discover 2 functions. After adding the decorator back to `search_products`, all 3 are visible to the SK planner. This is why decorators matter — without `@kernel_function`, SK simply ignores the function.
+- [ ] Local tests pass without credentials.
+- [ ] The diagram has a text explanation and does not depend on color.
+- [ ] The scored quiz was reviewed.
+- [ ] The Real path has a cost cap and cleanup plan.
+- [ ] Sources and stability status were checked.
 
-??? question "**Q3 (Multiple Choice):** Bug #3 caused `calculate_price_with_tax(249.99, tax_rate=0.08)` to return ~$291.59 instead of $269.99. What was the root cause?"
+## Official public sources
 
-    - A) The base price was doubled before tax was applied
-    - B) Tax was applied to the result of a previous tax calculation (applied twice)
-    - C) The function used the wrong tax rate variable
-    - D) The tax was subtracted instead of added
-
-    ??? success "✅ Reveal Answer"
-        **Correct: B — Tax was applied twice**
-
-        The buggy code first computed `price_with_tax = price * (1 + tax_rate)` → $269.99, then applied tax *again* on that result: `$269.99 * 1.08 = $291.59`. The fix: compute and return in a single step — `return round(price * (1 + tax_rate), 2)`.
-
----
-
-## Next Steps
-
-- **Multi-agent orchestration with SK:** → [Lab 034 — SK Multi-Agent Systems](lab-034-multi-agent-sk.md)
-- **RAG pipeline with SK:** → [Lab 022 — RAG with pgvector](lab-022-rag-github-models-pgvector.md)
+- [Microsoft Agent Framework 1.0 GA](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/)
+- [AutoGen to Agent Framework migration](https://learn.microsoft.com/agent-framework/migration-guide/from-autogen/)

@@ -41,6 +41,8 @@ PHASE2_LABS = {
     "101",
 }
 PHASE2_CHALLENGES = {"010", "011"}
+PHASE3_LABS = {"014", "023", "034", "040", "042", "102", "103", "104", "105", "106"}
+PHASE3_CHALLENGES = {"012"}
 
 
 def parse_frontmatter(path: Path) -> tuple[dict, str]:
@@ -168,6 +170,33 @@ def main() -> int:
                 if not (support / required_file).exists():
                     errors.append(f"{support}: missing {required_file}")
 
+        for lab_id in PHASE3_LABS:
+            matches = list((DOCS / lang / "labs").glob(f"lab-{lab_id}-*.md"))
+            if len(matches) != 1:
+                errors.append(f"{lang}: expected one Phase 3 Lab {lab_id}")
+                continue
+            support = DOCS / lang / "labs" / f"lab-{lab_id}"
+            for required_file in ("README.md", "CHEATSHEET.md", "scenario.json", "test_scenario.py"):
+                if not (support / required_file).exists():
+                    errors.append(f"{support}: missing {required_file}")
+            body = matches[0].read_text(encoding="utf-8")
+            if "data-phase3-tabs" not in body or "??? question" not in body or "```mermaid" not in body:
+                errors.append(f"{matches[0]}: Phase 3 lab requires tabs, scored questions, and Mermaid")
+
+        for challenge_id in PHASE3_CHALLENGES:
+            matches = list((DOCS / lang / "challenges").glob(f"challenge-{challenge_id}-*.md"))
+            support = DOCS / lang / "challenges" / f"challenge-{challenge_id}"
+            if len(matches) != 1:
+                errors.append(f"{lang}: expected one Phase 3 Challenge {challenge_id}")
+            for required_file in ("test_challenge.py", "validate.py"):
+                if not (support / required_file).exists():
+                    errors.append(f"{support}: missing {required_file}")
+
+        instructor = DOCS / lang / "instructor"
+        for required_file in ("index.md", "two-hour.md", "four-hour.md", "four-week-cohort.md", "hackathon.md"):
+            if not (instructor / required_file).exists():
+                errors.append(f"{instructor}: missing {required_file}")
+
     for lang in LANGS:
         for lab_id in ("041", "045"):
             matches = list((DOCS / lang / "labs").glob(f"lab-{lab_id}-*.md"))
@@ -187,6 +216,9 @@ def main() -> int:
         missing_kits = PHASE2_LABS - kit_ids
         if missing_kits:
             errors.append(f"{KIT_MANIFEST}: missing Phase 2 kits {sorted(missing_kits)}")
+        missing_phase3_kits = PHASE3_LABS - kit_ids
+        if missing_phase3_kits:
+            errors.append(f"{KIT_MANIFEST}: missing Phase 3 kits {sorted(missing_phase3_kits)}")
         if any(item.get("priority") not in {"P0", "P1"} for item in kit_manifest.get("labs", [])):
             errors.append(f"{KIT_MANIFEST}: every kit must declare priority P0 or P1")
 

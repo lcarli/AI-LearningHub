@@ -8,7 +8,7 @@
 
 ## 📚 What's Inside
 
-A structured learning hub with **three learner journeys**, **9 learning paths**, and **93 labs** covering:
+A structured learning hub with **three learner journeys**, **modern role and certification maps**, and **100+ labs** covering:
 
 | Path | Levels |
 |------|--------|
@@ -58,4 +58,4 @@ Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
 
 ## 📄 License
 
-Content: [CC BY 4.0](LICENSE-DOCS) · Code samples: [MIT](LICENSE)
+Content: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) · Code samples: [MIT](https://opensource.org/license/mit)

@@ -1,0 +1,16 @@
+{
+  "lab": "023",
+  "steps": [
+    "define_tools",
+    "bound_memory",
+    "route_explicitly",
+    "red_team"
+  ],
+  "required_route": "local",
+  "credentials_required": false,
+  "real_path": {
+    "optional": true,
+    "cost_cap_required": true,
+    "cleanup_required": true
+  }
+}

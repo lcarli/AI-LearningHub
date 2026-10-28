@@ -53,3 +53,11 @@ By the end of this path you will have:
 - [MCP for Beginners (Microsoft)](https://github.com/microsoft/mcp-for-beginners)
 - [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/)
 - [MCP Inspector (debugging tool)](https://github.com/modelcontextprotocol/inspector)
+
+<!-- phase3-path:start -->
+## Phase 3 additions
+
+- [Lab 104](../../labs/lab-104-mcp-2026-stateless-discovery.md): MCP 2026-07-28.
+- [Lab 105](../../labs/lab-105-mcp-apps-interactive-ui.md): MCP Apps.
+- [Challenge 012](../../challenges/challenge-012-harden-mcp-server.md): attack, defend, map to OWASP.
+<!-- phase3-path:end -->

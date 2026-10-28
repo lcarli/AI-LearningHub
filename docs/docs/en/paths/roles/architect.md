@@ -49,3 +49,9 @@ You design production AI systems — multi-agent architectures, observability, g
 ## Phase 2 additions
 
 Use Labs 095, 098, 100 and 101 to connect architecture decisions to evidence, risk, and cost.
+
+<!-- phase3-role:start -->
+## Phase 3 route
+
+Use Labs 102–106, the modernized Agent Framework/MCP/Foundry labs, and the Instructor Hub delivery formats appropriate to this role.
+<!-- phase3-role:end -->

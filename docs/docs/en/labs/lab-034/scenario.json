@@ -1,0 +1,16 @@
+{
+  "lab": "034",
+  "steps": [
+    "run_sequential",
+    "run_concurrent",
+    "test_handoff_group",
+    "compare_magentic"
+  ],
+  "required_route": "local",
+  "credentials_required": false,
+  "real_path": {
+    "optional": true,
+    "cost_cap_required": true,
+    "cleanup_required": true
+  }
+}

@@ -478,3 +478,21 @@ python lab-046/broken_observability.py
 - **Ajoutez des outils MCP à votre agent :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)
 - **Approfondissement de l'observabilité :** → [Lab 033 — Observabilité des agents avec App Insights](lab-033-agent-observability.md)
 - **Pipeline RAG d'entreprise :** → [Lab 042 — RAG d'entreprise avec évaluations](lab-042-enterprise-rag.md) *(bientôt disponible)*
+
+<!-- phase3-modernization:start -->
+## Modernisation de Phase 3
+
+!!! warning "Verified 2026-10-27"
+    Utilisez Entra Agent ID et Agent 365 GA à la frontière identité-gouvernance. Séparez identité agent, délégation, permissions, inventaire, politique et audit.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Microsoft Entra Agent ID GA](https://learn.microsoft.com/entra/agent-id/whats-new-agent-id)
+- [Microsoft Agent 365 GA](https://www.microsoft.com/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/)
+<!-- phase3-modernization:end -->

@@ -503,3 +503,38 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, 
 
 - **[Lab 055](lab-055-a2a-mcp-capstone.md)** — A2A + MCP Full Stack — Capstone d'interopérabilité des agents
 - **[Lab 056](lab-056-federated-connectors.md)** — Connecteurs fédérés M365 Copilot avec MCP
+
+<!-- phase3-modernization:start -->
+## Modernisation de Phase 3
+
+!!! warning "Verified 2026-10-27"
+    Utilisez A2A 1.0 et AG-UI 1.0. Versionnez agent cards, événements, état, streaming, interruption et erreurs ; ne déduisez pas les garanties depuis une démo.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [A2A 1.0 changes](https://a2a-protocol.org/latest/whats-new-v1/)
+- [AG-UI 1.0 specification](https://docs.ag-ui.com/spec/1.0)
+<!-- phase3-modernization:end -->
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Parcours Réel
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Parcours Réel">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Parcours Réel</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Supprimez déploiements, points de terminaison, index, traces et données de test après validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

@@ -301,3 +301,22 @@ dotnet run
 
 - **Déployer ce serveur dans le cloud :** → [Lab 028 — Déployer MCP sur Azure Container Apps](lab-028-deploy-mcp-azure.md)
 - **Version Python du serveur MCP :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)
+
+<!-- phase3-modernization:start -->
+## Modernisation de Phase 3
+
+!!! warning "Verified 2026-10-27"
+    Ciblez MCP 2026-07-28. Préférez serveur stateless, discovery, SDK Tier 1 actuel et état multi round-trip explicite. Ajoutez Registry et autorisation selon le modèle de confiance.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Model Context Protocol specification](https://modelcontextprotocol.io/specification/2026-07-28)
+- [MCP authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
+- [MCP Registry](https://registry.modelcontextprotocol.io/)
+<!-- phase3-modernization:end -->

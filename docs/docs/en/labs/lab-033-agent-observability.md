@@ -323,3 +323,21 @@ Get the connection string from:
 
 - **Multi-Agent Orchestration:** → [Lab 034 — SK Multi-Agent](lab-034-multi-agent-sk.md)
 - **Agent Evaluation:** → [Lab 035 — Evaluation SDK](lab-035-agent-evaluation.md)
+
+<!-- phase3-modernization:start -->
+## Phase 3 modernization
+
+!!! warning "Verified 2026-10-27"
+    Emit OpenTelemetry GenAI-aligned spans and attributes, and connect to Foundry Control Plane only through documented stable surfaces. Label experimental semantic conventions explicitly.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [OpenTelemetry generative AI conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/)
+- [Foundry observability](https://learn.microsoft.com/azure/ai-foundry/concepts/trace-agent-concept)
+<!-- phase3-modernization:end -->

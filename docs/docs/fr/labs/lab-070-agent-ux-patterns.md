@@ -326,3 +326,20 @@ python lab-070/broken_ux.py
 - **[Lab 069](lab-069-declarative-agents.md)** — Agents déclaratifs (configurer le comportement d'un agent via des manifestes)
 - **[Lab 066](lab-066-copilot-studio-governance.md)** — Gouvernance Copilot Studio (gouverner les déploiements d'agents)
 - **[Lab 008](lab-008-responsible-ai.md)** — IA responsable (principes fondamentaux d'UX et de sécurité)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Parcours Réel
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Parcours Réel">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Parcours Réel</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Supprimez déploiements, points de terminaison, index, traces et données de test après validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

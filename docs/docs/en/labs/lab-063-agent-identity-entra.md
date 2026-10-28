@@ -423,3 +423,38 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 - **[Lab 062](lab-062-ondevice-phi-silica.md)** — On-Device Agents with Phi Silica (privacy through on-device inference)
 - **[Lab 061](lab-061-slm-phi4-mini.md)** — SLMs with Phi-4 Mini (another approach to privacy-first AI)
 - **[Lab 042](lab-042-enterprise-rag.md)** *(coming soon)* — Enterprise RAG (applying identity controls to data retrieval)
+
+<!-- phase3-modernization:start -->
+## Phase 3 modernization
+
+!!! warning "Verified 2026-10-27"
+    Use Entra Agent ID and Agent 365 GA concepts at the identity and governance boundary. Separate agent identity, user delegation, workload permissions, inventory, policy, and audit.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Microsoft Entra Agent ID GA](https://learn.microsoft.com/entra/agent-id/whats-new-agent-id)
+- [Microsoft Agent 365 GA](https://www.microsoft.com/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/)
+<!-- phase3-modernization:end -->
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Real path
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Real path">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Real path</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Delete hosted deployments, endpoints, indexes, traces, and test data after validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

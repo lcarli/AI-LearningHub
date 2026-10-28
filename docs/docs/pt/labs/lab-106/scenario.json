@@ -1,0 +1,16 @@
+{
+  "lab": "106",
+  "steps": [
+    "sequential",
+    "concurrent",
+    "handoff",
+    "decision_record"
+  ],
+  "required_route": "local",
+  "credentials_required": false,
+  "real_path": {
+    "optional": true,
+    "cost_cap_required": true,
+    "cleanup_required": true
+  }
+}

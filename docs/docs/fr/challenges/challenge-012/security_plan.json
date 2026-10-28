@@ -1,0 +1,15 @@
+{
+  "attacks": [
+    "oversized_input",
+    "unknown_tool",
+    "missing_scope",
+    "untrusted_tool_output"
+  ],
+  "controls": [
+    "size_limit",
+    "allowlist",
+    "scope_check",
+    "output_schema"
+  ],
+  "owasp_mapping_required": true
+}

@@ -1,23 +1,29 @@
 ---
 tags:
-- semantic-kernel
-- multi-agent
-- python
-- free
-- github-models
+- kit
+- local-first
+- maf
+- phase-3
+- quiz
 lab:
   id: '034'
   level: L300
-  journey: agent-framework
-  time_min: 60
+  journey: ai-agents
+  time_min: 120
   cost:
-    tier: free-gh
-    requires:
-    - github
-    - copilot-free
-    estimate_usd: 0 within the documented free path or quota.
-    simulation: false
+    tier: free
+    requires: []
+    estimate_usd: 0 for the local simulation; optional Real usage varies by service
+      and must be capped.
+    simulation: true
     cleanup: false
+  roles:
+  - developer
+  - architect
+  - student
+  technologies:
+  - maf
+  - phase-3
   status: active
   last_verified: '2026-10-27'
   languages:
@@ -25,324 +31,137 @@ lab:
   - pt
   - fr
 ---
-!!! warning "Mise à jour du backend (octobre 2026)"
-    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
-
-# Lab 034 : Orchestration multi-agents avec Semantic Kernel
+# Lab 034: Patrons d'orchestration Microsoft Agent Framework
 
 <div class="lab-meta">
-  <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/semantic-kernel/">Semantic Kernel</a></span>
-  <span><strong>Durée :</strong> ~60 min</span>
-  <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Gratuit</span> — API GitHub Models</span>
+  <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
+  <span><strong>Parcours:</strong> ai-agents</span>
+  <span><strong>Durée:</strong> ~120 min</span>
+  <span><strong>Coût:</strong> free</span>
 </div>
-!!! warning "Semantic Kernel -> Microsoft Agent Framework"
-    Semantic Kernel fait désormais partie de **Microsoft Agent Framework (MAF)**, qui unifie SK et AutoGen en un seul framework. Les concepts de ce lab restent applicables — MAF s'appuie sur eux. Voir **[Lab 076 : Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** pour le guide de migration.
 
-
+!!! info "Phase 3 · local first"
+    Le parcours obligatoire est déterministe et local. Le parcours Réel est facultatif, estimé et nettoyé.
 
 ## Ce que vous apprendrez
 
-- Concevoir un **système multi-agents** avec un orchestrateur et des agents spécialistes
-- Utiliser **SK `AgentGroupChat`** pour une collaboration structurée entre agents
-- Créer `ProductAgent`, `PolicyAgent` et `OrderAgent` comme spécialistes
-- Router automatiquement les requêtes utilisateur vers le bon spécialiste
-- Agréger les réponses de plusieurs agents en une réponse cohérente
-
----
-
-## Introduction
-
-Un seul agent gérant chaque tâche devient rapidement impossible à maintenir. Le **pattern multi-agents** répartit les responsabilités :
-
-- **Orchestrateur** — comprend l'intention de l'utilisateur et délègue
-- **Agents spécialistes** — concentration approfondie sur un domaine (produits, politiques, commandes)
-
-Le `AgentGroupChat` de Semantic Kernel fournit l'infrastructure pour que les agents collaborent : prendre la parole à tour de rôle, appeler les fonctions les uns des autres et aboutir à une réponse coordonnée.
-
-```
-User Query
-    │
-    ▼
-OrchestratorAgent
-    ├─→ ProductAgent   (catalog, specs, recommendations)
-    ├─→ PolicyAgent    (returns, shipping, warranties)
-    └─→ OrderAgent     (order history, status, tracking)
-         │
-         ▼
-    Final Answer
-```
-
----
+- Comparer séquentiel, concurrent, handoff, group chat et magentic
+- Choisir selon des besoins mesurables
+- Ajouter checkpoints, budgets et conditions d'arrêt
+- Évaluer résultat et surcharge
 
 ## Prérequis
 
-- Python 3.11+
-- `pip install semantic-kernel openai`
-- `GITHUB_TOKEN` configuré
+- Python 3.10+ et un terminal
+- Aucun identifiant pour le parcours obligatoire
+- Lisez la spécification officielle avant un adaptateur hébergé
 
----
+## Modèle visuel
 
-## Exercice du lab
+```mermaid
+flowchart TB
+  O[Orchestrator] --> S[Sequential]
+  O --> C[Concurrent]
+  O --> H[Handoff]
+  O --> G[Group chat]
+  O --> M[Magentic]
+  S & C & H & G & M --> E[Evaluation]
+```
 
-### Étape 1 : Installer les dépendances
+## Scénario
+
+OutdoorGear a besoin d'une implémentation révisable pour atelier, avec fixtures déterministes, frontières de confiance explicites, critères mesurables et adaptateur hébergé facultatif et réversible.
+
+## Exercice guidé
+
+### Step 1: `run_sequential`
+
+1. Exécutez la fixture déterministe de cette étape.
+2. Notez entrée, sortie, décision de politique et comportement d'échec.
+3. Modifiez un comportement borné et relancez le test local.
+
+**Evidence:** Conservez la commande, le résultat et une phrase expliquant pourquoi la preuve est fiable.
+
+### Step 2: `run_concurrent`
+
+1. Exécutez la fixture déterministe de cette étape.
+2. Notez entrée, sortie, décision de politique et comportement d'échec.
+3. Modifiez un comportement borné et relancez le test local.
+
+**Evidence:** Conservez la commande, le résultat et une phrase expliquant pourquoi la preuve est fiable.
+
+### Step 3: `test_handoff_group`
+
+1. Exécutez la fixture déterministe de cette étape.
+2. Notez entrée, sortie, décision de politique et comportement d'échec.
+3. Modifiez un comportement borné et relancez le test local.
+
+**Evidence:** Conservez la commande, le résultat et une phrase expliquant pourquoi la preuve est fiable.
+
+### Step 4: `compare_magentic`
+
+1. Exécutez la fixture déterministe de cette étape.
+2. Notez entrée, sortie, décision de politique et comportement d'échec.
+3. Modifiez un comportement borné et relancez le test local.
+
+**Evidence:** Conservez la commande, le résultat et une phrase expliquant pourquoi la preuve est fiable.
+
+### Exécuter localement
 
 ```bash
-pip install semantic-kernel openai
-export GITHUB_TOKEN=your_github_token_here
+cd docs/docs/fr/labs/lab-034
+python -m unittest discover -v
 ```
 
-### Étape 2 : Définir les outils des agents (plugins)
+## Simulation / Parcours Réel
 
-```python
-# plugins.py
-from semantic_kernel.functions import kernel_function
-from typing import Annotated
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Parcours Réel">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Parcours Réel</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Utilisez les fixtures déterministes et le validateur local. Coût estimé : **0 USD**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Remplacez uniquement la frontière de l'adaptateur. Fixez un plafond, gardez les mêmes tests et notez région, rétention, identité, télémétrie et prix. Supprimez déploiements, points de terminaison, index, traces et données de test après validation.
+  </section>
+</div>
 
-PRODUCTS = [
-    {"name": "TrailBlazer X200", "category": "footwear", "price": 189.99,
-     "description": "Waterproof Gore-Tex hiking boot. Vibram outsole. 3-season."},
-    {"name": "Summit Pro Tent",   "category": "camping",  "price": 349.00,
-     "description": "2-person 4-season tent. DAC aluminum poles. 2.1kg."},
-    {"name": "ClimbTech Pro Harness", "category": "climbing", "price": 129.99,
-     "description": "CE EN12277. 15kN rated. Dyneema blend."},
-    {"name": "OmniPack 45L",     "category": "packs",    "price": 279.99,
-     "description": "Technical 45L pack. Hip belt. Hydration sleeve."},
-    {"name": "StormShell Jacket", "category": "clothing", "price": 349.00,
-     "description": "3-layer Gore-Tex Pro. 20k/20k waterproof."},
-]
+## Kit d'accompagnement
 
-ORDERS = [
-    {"order_id": "ORD-001", "customer": "Alex Chen", "product": "TrailBlazer X200", "status": "delivered", "date": "2024-11-15"},
-    {"order_id": "ORD-002", "customer": "Alex Chen", "product": "OmniPack 45L",     "status": "shipped",   "date": "2025-01-10"},
-]
+- `README.md` : démarrage et preuves
+- `CHEATSHEET.md` : guide de décision
+- `scenario.json` : contrat déterministe
+- `test_scenario.py` : tests locaux
+- PDF et ZIP générés par le pipeline existant
 
-POLICIES = {
-    "return":   "60-day return window. Unused in original packaging. Worn footwear non-refundable unless defective.",
-    "shipping": "Standard $5.99 (3-5 days). Express $14.99 (1-2 days). Free on orders $75+.",
-    "warranty": "2-year warranty. Lifetime on climbing gear. Proof of purchase required.",
-}
+## Quiz noté
 
-class ProductPlugin:
-    @kernel_function(description="Search products by keyword, category, or feature")
-    def search_products(
-        self,
-        query: Annotated[str, "Search term e.g. 'hiking boots' or 'waterproof'"]
-    ) -> str:
-        q = query.lower()
-        matches = [
-            p for p in PRODUCTS
-            if q in p["name"].lower() or q in p["category"].lower() or q in p["description"].lower()
-        ]
-        if not matches:
-            return f"No products found for '{query}'."
-        return "\n".join(
-            f"- {p['name']} (${p['price']}): {p['description']}"
-            for p in matches
-        )
+??? question "Pourquoi garder un contrat local ?"
 
-    @kernel_function(description="Get all products in a specific category")
-    def get_by_category(
-        self,
-        category: Annotated[str, "Category name: footwear, camping, climbing, packs, clothing"]
-    ) -> str:
-        matches = [p for p in PRODUCTS if p["category"].lower() == category.lower()]
-        if not matches:
-            return f"No products in category '{category}'."
-        return "\n".join(f"- {p['name']} (${p['price']})" for p in matches)
+    ??? success "Réponse"
+        Il fournit une base déterministe avant la variabilité et le coût hébergés.
 
+??? question "Quand le parcours Réel est-il terminé ?"
 
-class PolicyPlugin:
-    @kernel_function(description="Get information about return, shipping, or warranty policy")
-    def get_policy(
-        self,
-        policy_type: Annotated[str, "One of: return, shipping, warranty"]
-    ) -> str:
-        key = policy_type.lower().strip()
-        if key not in POLICIES:
-            return f"Unknown policy type '{policy_type}'. Options: return, shipping, warranty."
-        return POLICIES[key]
+    ??? success "Réponse"
+        Après enregistrement des preuves de validation et de nettoyage.
 
+??? question "Comment traiter la sortie des outils ?"
 
-class OrderPlugin:
-    @kernel_function(description="Look up order history or status for a customer")
-    def get_orders(
-        self,
-        customer_name: Annotated[str, "Customer's full name"]
-    ) -> str:
-        matches = [o for o in ORDERS if customer_name.lower() in o["customer"].lower()]
-        if not matches:
-            return f"No orders found for customer '{customer_name}'."
-        return "\n".join(
-            f"- {o['order_id']}: {o['product']} — {o['status']} (ordered {o['date']})"
-            for o in matches
-        )
+    ??? success "Réponse"
+        Comme donnée non fiable avant validation de politique et de schéma.
 
-    @kernel_function(description="Get status of a specific order by order ID")
-    def get_order_status(
-        self,
-        order_id: Annotated[str, "Order ID like ORD-001"]
-    ) -> str:
-        for o in ORDERS:
-            if o["order_id"].upper() == order_id.upper():
-                return f"Order {o['order_id']}: {o['product']} is **{o['status']}** (ordered {o['date']})."
-        return f"Order '{order_id}' not found."
-```
+## Critères de sortie
 
-### Étape 3 : Construire le système multi-agents
+- [ ] Les tests locaux passent sans identifiants.
+- [ ] Le diagramme a une explication textuelle et ne dépend pas de la couleur.
+- [ ] Le quiz noté a été revu.
+- [ ] Le parcours Réel a un plafond et un plan de nettoyage.
+- [ ] Sources et stabilité ont été vérifiées.
 
-```python
-# multi_agent.py
-import asyncio, os
-from semantic_kernel import Kernel
-from semantic_kernel.agents import ChatCompletionAgent, AgentGroupChat
-from semantic_kernel.agents.strategies import TerminationStrategy
-from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion
-from semantic_kernel.contents import ChatMessageContent, AuthorRole
-from plugins import ProductPlugin, PolicyPlugin, OrderPlugin
+## Sources publiques officielles
 
-
-def create_kernel_with_model() -> Kernel:
-    """Create a kernel using GitHub Models (OpenAI-compatible)."""
-    kernel = Kernel()
-    service = OpenAIChatCompletion(
-        ai_model_id="gpt-4o-mini",
-        api_key=os.environ["GITHUB_TOKEN"],
-        base_url="https://models.inference.ai.azure.com",
-        service_id="github_models",
-    )
-    kernel.add_service(service)
-    return kernel
-
-
-class DoneWhenConcluded(TerminationStrategy):
-    """End the group chat when the Orchestrator says [DONE]."""
-    async def should_agent_terminate(self, agent, history):
-        return any("[DONE]" in str(msg.content) for msg in history if msg.role == AuthorRole.ASSISTANT)
-
-
-async def run_customer_service(user_query: str, customer_name: str = "Alex Chen"):
-    product_kernel = create_kernel_with_model()
-    product_kernel.add_plugin(ProductPlugin(), "products")
-    product_agent = ChatCompletionAgent(
-        kernel=product_kernel,
-        name="ProductAgent",
-        instructions=(
-            "You are a product specialist for OutdoorGear Inc. "
-            "Use the products plugin to answer questions about catalog items, specs, prices, and recommendations."
-        ),
-    )
-
-    policy_kernel = create_kernel_with_model()
-    policy_kernel.add_plugin(PolicyPlugin(), "policy")
-    policy_agent = ChatCompletionAgent(
-        kernel=policy_kernel,
-        name="PolicyAgent",
-        instructions=(
-            "You are a policy specialist for OutdoorGear Inc. "
-            "Use the policy plugin to answer questions about returns, shipping, and warranties. "
-            "Always quote the exact policy text."
-        ),
-    )
-
-    order_kernel = create_kernel_with_model()
-    order_kernel.add_plugin(OrderPlugin(), "orders")
-    order_agent = ChatCompletionAgent(
-        kernel=order_kernel,
-        name="OrderAgent",
-        instructions=(
-            f"You are an order specialist for OutdoorGear Inc. "
-            f"The current customer is: {customer_name}. "
-            "Use the orders plugin to look up order history and status."
-        ),
-    )
-
-    orchestrator_kernel = create_kernel_with_model()
-    orchestrator = ChatCompletionAgent(
-        kernel=orchestrator_kernel,
-        name="Orchestrator",
-        instructions=(
-            "You are the customer service orchestrator for OutdoorGear Inc. "
-            "Coordinate specialist agents to answer customer questions.\n\n"
-            "1. Determine which specialists are needed\n"
-            "2. Ask them by mentioning: @ProductAgent, @PolicyAgent, @OrderAgent\n"
-            "3. Synthesize their answers into a final response\n"
-            "4. End your final answer with [DONE]\n\n"
-            "Do NOT answer from memory — always delegate to specialists first."
-        ),
-    )
-
-    chat = AgentGroupChat(
-        agents=[orchestrator, product_agent, policy_agent, order_agent],
-        termination_strategy=DoneWhenConcluded(agents=[orchestrator], maximum_iterations=10),
-    )
-
-    await chat.add_chat_message(ChatMessageContent(role=AuthorRole.USER, content=user_query))
-
-    print(f"\n{'='*60}\nCustomer ({customer_name}): {user_query}\n{'='*60}")
-    async for response in chat.invoke():
-        agent_name = response.name or "Unknown"
-        content = str(response.content).replace("[DONE]", "").strip()
-        if content:
-            print(f"\n[{agent_name}]\n{content}")
-    print(f"\n{'='*60}\n")
-
-
-async def main():
-    queries = [
-        ("What waterproof boots do you have, and can I return them if they don't fit?", "Alex Chen"),
-        ("What's the status of my order ORD-002?", "Alex Chen"),
-        ("I need gear for a winter mountaineering trip — what do you recommend?", "Jordan Kim"),
-    ]
-    for query, customer in queries:
-        await run_customer_service(query, customer)
-        await asyncio.sleep(1)
-
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-
-### Étape 4 : Exécuter le système multi-agents
-
-```bash
-python multi_agent.py
-```
-
-Sortie attendue (abrégée) :
-```
-============================================================
-Customer (Alex Chen): What waterproof boots do you have, and can I return them?
-============================================================
-
-[Orchestrator]
-@ProductAgent find waterproof boots. @PolicyAgent what is our footwear return policy?
-
-[ProductAgent]
-- TrailBlazer X200 ($189.99): Waterproof Gore-Tex hiking boot. Vibram outsole. 3-season.
-
-[PolicyAgent]
-Return Policy: 60-day return window. Unused in original packaging.
-Worn footwear non-refundable unless defective.
-
-[Orchestrator]
-We have the **TrailBlazer X200** ($189.99) — a Gore-Tex waterproof hiking boot.
-Returns: 60 days from purchase, must be unused. Once worn, non-refundable unless defective. [DONE]
-```
-
----
-
-## Comparaison des patterns d'orchestration
-
-| Pattern | Quand l'utiliser |
-|---------|-------------|
-| **Séquentiel** | Les étapes doivent se dérouler dans l'ordre (A → B → C) |
-| **Parallèle** | Tâches indépendantes pouvant s'exécuter simultanément |
-| **AgentGroupChat** | Routage collaboratif, conversationnel et dynamique |
-| **Transfert (Handoff)** | Un agent transmet le contexte complet à un autre |
-
----
-
-## Prochaines étapes
-
-- **Évaluation des agents :** → [Lab 035 — Évaluer la qualité des agents](lab-035-agent-evaluation.md)
-- **AutoGen en production :** → [Lab 040 — Multi-agents en production avec AutoGen](lab-040-autogen-multi-agent.md)
+- [Microsoft Agent Framework 1.0 GA](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/)
+- [AutoGen to Agent Framework migration](https://learn.microsoft.com/agent-framework/migration-guide/from-autogen/)

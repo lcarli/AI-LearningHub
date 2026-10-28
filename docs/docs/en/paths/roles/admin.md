@@ -45,3 +45,9 @@ You govern AI deployments — identity, compliance, DLP, monitoring, and securit
 ## Phase 2 additions
 
 Use Labs 092, 094 and 100 for policy, security controls, threat modeling, and review boundaries.
+
+<!-- phase3-role:start -->
+## Phase 3 route
+
+Use Labs 102–106, the modernized Agent Framework/MCP/Foundry labs, and the Instructor Hub delivery formats appropriate to this role.
+<!-- phase3-role:end -->

@@ -220,3 +220,21 @@ Pick your path and dive in!
 - **MCP route:** → [Lab 012 — What is MCP?](lab-012-what-is-mcp.md)
 - **Full Azure route:** → [Lab 030 — Foundry + MCP](lab-030-foundry-agent-mcp.md)
 - **Want to understand LLMs first?** → [Lab 004 — How LLMs Work](lab-004-how-llms-work.md)
+
+<!-- phase3-modernization:start -->
+## Phase 3 modernization
+
+!!! warning "Verified 2026-10-27"
+    Use Microsoft Agent Framework 1.0 for new agent work. Semantic Kernel remains a legacy migration source; AutoGen is maintenance-oriented. Remove obsolete planner patterns and use explicit workflows, tools, memory, checkpoints, and stop conditions.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Microsoft Agent Framework 1.0 GA](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/)
+- [AutoGen to Agent Framework migration](https://learn.microsoft.com/agent-framework/migration-guide/from-autogen/)
+<!-- phase3-modernization:end -->
