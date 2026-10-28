@@ -1,0 +1,2 @@
+OutdoorGear workshop fixture.
+Policy-safe local sample.

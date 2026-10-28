@@ -85,3 +85,9 @@ Split work into independently verifiable tasks and record real dependencies. Eve
 
 Execute one task at a time, run the smallest relevant tests, compare the result with the specification, and update artifacts when reality changes.
 
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-089-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-089-kit-en.zip)

@@ -175,15 +175,15 @@ Crie uma pasta `evidence/` fora do repositório para guardar saídas. Não faça
 
 ## Kit de apoio
 
-O kit para download contém o guia do lab, exercícios locais, uma folha de consulta e os diagramas citados. A CI publica artefatos PDF e ZIP determinísticos.
+O kit para download contém o guia do lab, exercícios locais, uma folha de consulta e os diagramas citados. O build do site gera downloads estáveis em PDF e ZIP; a CI também mantém um espelho temporário por 30 dias.
 
 | Item | Finalidade |
 |---|---|
-| `README.md` | Início rápido e evidência esperada |
+| [`README.md`](lab-095/README.md) | Início rápido e evidência esperada |
 | Fixtures locais Python/JSON/CSV | Exercício prático reproduzível |
-| `CHEATSHEET.md` | Conceitos, comandos e checklist de revisão |
-| PDF gerado | Guia imprimível produzido na CI |
-| ZIP gerado | Kit offline produzido na CI |
+| [`CHEATSHEET.md`](lab-095/CHEATSHEET.md) | Conceitos, comandos e checklist de revisão |
+| [PDF gerado](../downloads/kits/lab-095-kit-pt.pdf) | Guia imprimível produzido na CI |
+| [ZIP gerado](../downloads/kits/lab-095-kit-pt.zip) | Kit offline produzido na CI |
 
 ## Caminho real opcional
 

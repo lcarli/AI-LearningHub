@@ -92,8 +92,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_graphrag.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/broken_graphrag.py) |
-| `knowledge_graph.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-067/knowledge_graph.csv) |
+| `broken_graphrag.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-067/broken_graphrag.py) |
+| `knowledge_graph.csv` | Conjunto de dados | [📥 Download](lab-067/knowledge_graph.csv) |
 
 ---
 

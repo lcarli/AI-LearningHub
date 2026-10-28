@@ -93,8 +93,8 @@ Ollama runs as a background service on `http://localhost:11434`.
 
 | File | Description | Download |
 |------|-------------|----------|
-| `Modelfile` | Ollama model configuration | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) |
-| `chat_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) |
+| `Modelfile` | Ollama model configuration | [📥 Download](lab-015/Modelfile) |
+| `chat_starter.py` | Starter script with TODOs | [📥 Download](lab-015/chat_starter.py) |
 
 ---
 
@@ -287,7 +287,7 @@ ollama create outdoorgear -f Modelfile
 ollama run outdoorgear
 ```
 
-The [📥 `Modelfile`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) creates a custom **OutdoorGear Advisor** persona on top of Phi-4. The [📥 `chat_starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) has 5 exercises covering basic completion, custom models, comparison, and streaming.
+The [📥 `Modelfile`](lab-015/Modelfile) creates a custom **OutdoorGear Advisor** persona on top of Phi-4. The [📥 `chat_starter.py`](lab-015/chat_starter.py) has 5 exercises covering basic completion, custom models, comparison, and streaming.
 
 ---
 
@@ -320,3 +320,10 @@ You now have a fully local LLM stack:
 - **Build a RAG app with local embeddings:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
 - **Use with Semantic Kernel plugins:** → [Lab 023 — SK Plugins, Memory & Planners](lab-023-sk-plugins-memory.md)
 - **Production local AI:** → [Lab 044 — Phi-4 + Ollama in Production](lab-044-phi4-ollama-production.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-015-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-015-kit-en.zip)

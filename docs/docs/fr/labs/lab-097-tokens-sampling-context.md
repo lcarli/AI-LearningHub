@@ -83,3 +83,9 @@ Déplacez température, top-k et top-p. Prévoyez si la sortie devient détermin
 
 Allouez instructions, entrée, contexte récupéré, outils et réponse. Gardez une marge et retirez d'abord le contexte à faible valeur.
 
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-097-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-097-kit-fr.zip)

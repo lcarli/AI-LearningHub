@@ -98,8 +98,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_migration.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/broken_migration.py) |
-| `migration_matrix.csv` | 15-feature comparison: SK vs AutoGen vs MAF | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/migration_matrix.csv) |
+| `broken_migration.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-076/broken_migration.py) |
+| `migration_matrix.csv` | 15-feature comparison: SK vs AutoGen vs MAF | [📥 Download](lab-076/migration_matrix.csv) |
 
 ---
 
@@ -291,7 +291,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** How many features have a 'low' migration effort?"
 
-    Run the Step 3 analysis on [📥 `migration_matrix.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/migration_matrix.csv) and count the low-effort features.
+    Run the Step 3 analysis on [📥 `migration_matrix.csv`](lab-076/migration_matrix.csv) and count the low-effort features.
 
     ??? success "✅ Reveal Answer"
         **7 features**
@@ -372,3 +372,10 @@ flowchart LR
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-076-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-076-kit-en.zip)

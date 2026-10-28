@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code</a> / <a href="../paths/semantic-kernel/">SK</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">Pro Code</a> / <a href="../../paths/semantic-kernel/">SK</a></span>
   <span><strong>Time:</strong> ~35 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free (local)</span></span>
 </div>
@@ -330,3 +330,10 @@ Is it a summary of past sessions?
 
 - **Agentic RAG uses retrieval memory:** → [Lab 026 — Agentic RAG](lab-026-agentic-rag.md)
 - **SK has built-in memory abstractions:** → [Lab 023 — SK Plugins & Memory](lab-023-sk-plugins-memory.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-027-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-027-kit-en.zip)

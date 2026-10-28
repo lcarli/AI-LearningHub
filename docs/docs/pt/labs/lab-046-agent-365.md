@@ -32,7 +32,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Tempo:</strong> ~75 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-azure">Pago — Licença Microsoft 365 Copilot + assinatura Azure + programa Frontier</span></span>
 </div>
@@ -108,9 +108,9 @@ O SDK do Agent 365 fica *acima* do seu framework de agentes. Ele **não** o subs
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `a365.config.sample.json` | Arquivo de configuração / dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/a365.config.sample.json) |
-| `broken_observability.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/broken_observability.py) |
-| `outdoorgear_a365_starter.py` | Script inicial com TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/outdoorgear_a365_starter.py) |
+| `a365.config.sample.json` | Arquivo de configuração / dados | [📥 Download](lab-046/a365.config.sample.json) |
+| `broken_observability.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-046/broken_observability.py) |
+| `outdoorgear_a365_starter.py` | Script inicial com TODOs | [📥 Download](lab-046/outdoorgear_a365_starter.py) |
 
 ---
 
@@ -496,3 +496,10 @@ flowchart LR
 - [Microsoft Entra Agent ID GA](https://learn.microsoft.com/entra/agent-id/whats-new-agent-id)
 - [Microsoft Agent 365 GA](https://www.microsoft.com/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/)
 <!-- phase3-modernization:end -->
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-046-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-046-kit-pt.zip)

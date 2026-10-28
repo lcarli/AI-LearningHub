@@ -86,7 +86,7 @@ Learn the core concepts, run models locally, build a local MCP server, and pract
 ```
 Lab 107 → Lab 010 → Lab 085 → Lab 086 → Lab 087 → Lab 088 → Lab 089
 ```
-Continue with the free simulations in Labs 091 and 094, then use the [GH-300 four-week path](paths/gh-300/).
+Continue with the free simulations in Labs 091 and 094, then use the [GH-300 four-week path](paths/gh-300/index.md).
 
 ---
 

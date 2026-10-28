@@ -26,7 +26,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/mcp/">🔌 MCP</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/mcp/">🔌 MCP</a></span>
   <span><strong>Durée :</strong> ~45 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — S'exécute localement, aucun compte cloud nécessaire</span>
 </div>
@@ -77,7 +77,7 @@ python --version
 
 | Fichier | Description | Téléchargement |
 |---------|-------------|----------------|
-| `outdoorgear_mcp_server_starter.py` | Script de démarrage avec des TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-020/outdoorgear_mcp_server_starter.py) |
+| `outdoorgear_mcp_server_starter.py` | Script de démarrage avec des TODOs | [📥 Télécharger](lab-020/outdoorgear_mcp_server_starter.py) |
 
 ---
 
@@ -364,3 +364,10 @@ flowchart LR
 - [MCP authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
 - [MCP Registry](https://registry.modelcontextprotocol.io/)
 <!-- phase3-modernization:end -->
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-020-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-020-kit-fr.zip)

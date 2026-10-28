@@ -52,6 +52,9 @@ jobs:
           cd docs
           mkdocs build --strict
 
+      - name: Validate rendered site links
+        run: python scripts/validate_site_links.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -32,7 +32,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Caminho:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Caminho:</strong> <a href="../../paths/foundry/">🏭 Microsoft Foundry</a></span>
   <span><strong>Tempo:</strong> ~30 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-azure-free">Azure Free</span> — Conta gratuita do Azure, uso mínimo</span>
 </div>
@@ -356,3 +356,10 @@ flowchart LR
 - [Foundry evaluation](https://learn.microsoft.com/azure/ai-foundry/concepts/evaluation-approach-gen-ai)
 - [Foundry Workflows retirement](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow)
 <!-- phase3-modernization:end -->
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-009-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-009-kit-pt.zip)

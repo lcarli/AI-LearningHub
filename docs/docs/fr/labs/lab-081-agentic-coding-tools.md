@@ -86,8 +86,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_tools.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/broken_tools.py) |
-| `coding_tools_comparison.csv` | Jeu de données — 10 tâches comparées entre les outils | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/coding_tools_comparison.csv) |
+| `broken_tools.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-081/broken_tools.py) |
+| `coding_tools_comparison.csv` | Jeu de données — 10 tâches comparées entre les outils | [📥 Télécharger](lab-081/coding_tools_comparison.csv) |
 
 ---
 
@@ -334,7 +334,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécutez le lab) :** Quel est le taux de réussite de Claude Code sur les 10 tâches ?"
 
-    Chargez [📥 `coding_tools_comparison.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/coding_tools_comparison.csv) et comptez `claude_code_success == True`.
+    Chargez [📥 `coding_tools_comparison.csv`](lab-081/coding_tools_comparison.csv) et comptez `claude_code_success == True`.
 
     ??? success "✅ Révéler la réponse"
         **100% (10/10)**

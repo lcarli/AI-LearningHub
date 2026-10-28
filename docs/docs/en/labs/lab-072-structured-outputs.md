@@ -90,8 +90,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_structured.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/broken_structured.py) |
-| `structured_outputs.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) |
+| `broken_structured.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-072/broken_structured.py) |
+| `structured_outputs.csv` | Dataset | [📥 Download](lab-072/structured_outputs.csv) |
 
 ---
 
@@ -329,7 +329,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** What is the schema validity rate for schema-enforced extraction tests?"
 
-    Run the Step 3 analysis on [📥 `structured_outputs.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) and check the results.
+    Run the Step 3 analysis on [📥 `structured_outputs.csv`](lab-072/structured_outputs.csv) and check the results.
 
     ??? success "✅ Reveal Answer"
         **100%**

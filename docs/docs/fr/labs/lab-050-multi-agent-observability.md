@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/foundry/">🏭 Microsoft Foundry</a></span>
   <span><strong>Durée :</strong> ~120 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Analyse de traces hors ligne avec le jeu de données fourni (Azure Monitor optionnel)</span>
 </div>
@@ -101,9 +101,9 @@ pip install pandas
 
 | Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `broken_conventions.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/broken_conventions.py) |
-| `dashboard_builder.py` | Script de démarrage avec TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/dashboard_builder.py) |
-| `multi_agent_spans.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-050/multi_agent_spans.csv) |
+| `broken_conventions.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-050/broken_conventions.py) |
+| `dashboard_builder.py` | Script de démarrage avec TODOs | [📥 Télécharger](lab-050/dashboard_builder.py) |
+| `multi_agent_spans.csv` | Jeu de données | [📥 Télécharger](lab-050/multi_agent_spans.csv) |
 
 ---
 

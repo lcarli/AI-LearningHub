@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-50">L50</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/rag/">📚 RAG</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/rag/">📚 RAG</a></span>
   <span><strong>Tempo:</strong> ~20 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Nenhuma conta necessária</span>
 </div>
@@ -63,11 +63,11 @@ O LLM não sabe. Seus dados de treinamento têm uma data de corte. E mesmo que a
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `faq_backpacks.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_backpacks.txt) |
-| `faq_clothing.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_clothing.txt) |
-| `faq_footwear.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_footwear.txt) |
-| `faq_sleeping_bags.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_sleeping_bags.txt) |
-| `faq_tents.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_tents.txt) |
+| `faq_backpacks.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](lab-006/faq_backpacks.txt) |
+| `faq_clothing.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](lab-006/faq_clothing.txt) |
+| `faq_footwear.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](lab-006/faq_footwear.txt) |
+| `faq_sleeping_bags.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](lab-006/faq_sleeping_bags.txt) |
+| `faq_tents.txt` | Arquivo de base de conhecimento FAQ | [📥 Download](lab-006/faq_tents.txt) |
 
 ---
 
@@ -261,7 +261,7 @@ User → Retrieve → Grade relevance → If poor: web search fallback
     ??? success "✅ Revelar Resposta"
         **5 pares de P&R. A última pergunta é: "Can I use a 2-person tent solo?"**
 
-        [📥 `faq_tents.txt`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_tents.txt) contém exatamente 5 pares de P&R cobrindo: escolha de barraca para mochileiro solo, 3-estações vs 4-estações, impermeabilização, materiais de hastes e uso de barraca 2P solo. Este é o tipo de base de conhecimento que um sistema RAG ingeriria — cada par de P&R é um fragmento natural para embedding.
+        [📥 `faq_tents.txt`](lab-006/faq_tents.txt) contém exatamente 5 pares de P&R cobrindo: escolha de barraca para mochileiro solo, 3-estações vs 4-estações, impermeabilização, materiais de hastes e uso de barraca 2P solo. Este é o tipo de base de conhecimento que um sistema RAG ingeriria — cada par de P&R é um fragmento natural para embedding.
 
 ---
 
@@ -283,3 +283,10 @@ User → Retrieve → Grade relevance → If poor: web search fallback
 - **Entenda os vetores de embedding:** → [Lab 007 — O que são Embeddings?](lab-007-what-are-embeddings.md)
 - **Construa um app RAG gratuitamente:** → [Lab 022 — RAG com GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
 - **RAG em produção no Azure:** → [Lab 031 — Busca Semântica pgvector no Azure](lab-031-pgvector-semantic-search.md)
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-006-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-006-kit-pt.zip)

@@ -80,8 +80,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_markitdown.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/broken_markitdown.py) |
-| `conversion_results.csv` | Dataset — 12 conversões de arquivos em 7 formatos | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) |
+| `broken_markitdown.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-080/broken_markitdown.py) |
+| `conversion_results.csv` | Dataset — 12 conversões de arquivos em 7 formatos | [📥 Download](lab-080/conversion_results.csv) |
 
 ---
 
@@ -369,7 +369,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 
 ??? question "**Q3 (Execute o Laboratório):** Quantas das 12 conversões de arquivos foram bem-sucedidas?"
 
-    Carregue [📥 `conversion_results.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) e conte as linhas onde `conversion_success == True`.
+    Carregue [📥 `conversion_results.csv`](lab-080/conversion_results.csv) e conte as linhas onde `conversion_success == True`.
 
     ??? success "✅ Revelar Resposta"
         **11 de 12**

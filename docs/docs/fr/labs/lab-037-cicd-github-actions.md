@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/pro-code/">Pro Code</a></span>
   <span><strong>Durée :</strong> ~45 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Niveau gratuit GitHub Actions (2000 min/mois)</span>
 </div>
@@ -73,7 +73,7 @@ Le CI/CD pour les agents IA nécessite :
 
 | Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `ai-agent-ci.yml` | Modèle de workflow CI/CD | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) |
+| `ai-agent-ci.yml` | Modèle de workflow CI/CD | [📥 Télécharger](lab-037/ai-agent-ci.yml) |
 
 ---
 
@@ -397,7 +397,7 @@ jobs:
 
         Le workflow définit : `unit-tests`, `integration-tests`, `security-scan`, `agent-evaluation`, `docker-build`, `deploy-staging` et `deploy-production`. Chaque job a une responsabilité distincte dans le pipeline de déploiement de l'agent.
 
-??? question "**Q2 (Exécutez le lab) :** Quel job dans [📥 `ai-agent-ci.yml`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) ne s'exécute PAS sur les pull requests — uniquement sur les pushs vers la branche `main` ?"
+??? question "**Q2 (Exécutez le lab) :** Quel job dans [📥 `ai-agent-ci.yml`](lab-037/ai-agent-ci.yml) ne s'exécute PAS sur les pull requests — uniquement sur les pushs vers la branche `main` ?"
 
     Regardez la condition `if:` de chaque job, ou le déclencheur au niveau du workflow vs les conditions par job.
 
@@ -424,3 +424,10 @@ jobs:
 
 - **Évaluer à grande échelle avec Azure AI :** → [Lab 035 — Évaluation des agents avec Azure AI Eval SDK](lab-035-agent-evaluation.md)
 - **Déployer votre agent sur Azure Container Apps :** → [Lab 028 — Déployer MCP sur Azure Container Apps](lab-028-deploy-mcp-azure.md)
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-037-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-037-kit-fr.zip)

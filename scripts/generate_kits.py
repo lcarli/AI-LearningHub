@@ -31,8 +31,8 @@ def find_lab(lang: str, lab_id: str) -> Path:
     return matches[0]
 
 
-def markdown_text(path: Path) -> list[str]:
-    text = path.read_text(encoding="utf-8")
+def plain_text(path: Path) -> list[str]:
+    text = path.read_text(encoding="utf-8", errors="replace")
     text = re.sub(r"^---\n.*?\n---\n", "", text, flags=re.DOTALL)
     text = re.sub(r"```.*?```", "[diagram or code sample]", text, flags=re.DOTALL)
     text = re.sub(r"<[^>]+>", "", text)
@@ -54,10 +54,22 @@ def markdown_text(path: Path) -> list[str]:
     return lines
 
 
+def kit_text(markdown: Path, support_dir: Path) -> list[str]:
+    lines = plain_text(markdown)
+    supported = {".md", ".txt", ".csv", ".json", ".jsonl", ".yml", ".yaml", ".py", ".ps1"}
+    if support_dir.exists():
+        for path in sorted(item for item in support_dir.rglob("*") if item.is_file()):
+            if path.suffix.lower() not in supported:
+                continue
+            lines.extend(["", f"Supporting file: {path.relative_to(support_dir).as_posix()}"])
+            lines.extend(plain_text(path))
+    return lines
+
+
 def pdf_bytes(lines: list[str]) -> bytes:
     """Create a small deterministic Latin-1 PDF with wrapped lab text."""
     safe_lines = []
-    for line in lines[:250]:
+    for line in lines[:500]:
         normalized = unicodedata.normalize("NFKC", line)
         encoded = normalized.encode("latin-1", errors="replace").decode("latin-1")
         safe_lines.append(encoded.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)"))
@@ -128,17 +140,28 @@ def zip_add(archive: zipfile.ZipFile, path: Path, name: str) -> None:
     archive.writestr(info, path.read_bytes())
 
 
-def build_kit(lang: str, lab: dict, output_root: Path) -> dict:
+def record_path(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(ROOT).as_posix()
+    except ValueError:
+        return resolved.as_posix()
+
+
+def build_kit(lang: str, lab: dict, output_root: Path, site_layout: bool = False) -> dict:
     lab_id = str(lab["id"]).zfill(3)
     markdown = find_lab(lang, lab_id)
-    destination = output_root / lang
+    destination = (
+        output_root / lang / "downloads" / "kits"
+        if site_layout
+        else output_root / lang
+    )
     destination.mkdir(parents=True, exist_ok=True)
     stem = f"lab-{lab_id}-kit-{lang}"
     pdf_path = destination / f"{stem}.pdf"
     zip_path = destination / f"{stem}.zip"
-    pdf_path.write_bytes(pdf_bytes(markdown_text(markdown)))
-
     support_dir = markdown.parent / f"lab-{lab_id}"
+    pdf_path.write_bytes(pdf_bytes(kit_text(markdown, support_dir)))
     metadata = {
         "lab_id": lab_id,
         "language": lang,
@@ -157,35 +180,67 @@ def build_kit(lang: str, lab: dict, output_root: Path) -> dict:
         archive.writestr(info, json.dumps(metadata, indent=2, sort_keys=True) + "\n")
     return {
         **metadata,
-        "pdf": pdf_path.relative_to(ROOT).as_posix(),
-        "zip": zip_path.relative_to(ROOT).as_posix(),
+        "pdf": record_path(pdf_path),
+        "zip": record_path(zip_path),
         "pdf_sha256": hashlib.sha256(pdf_path.read_bytes()).hexdigest(),
         "zip_sha256": hashlib.sha256(zip_path.read_bytes()).hexdigest(),
     }
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--output", type=Path)
-    parser.add_argument("--check", action="store_true")
-    args = parser.parse_args()
+def generate_all(output_root: Path, site_layout: bool = False, check: bool = False) -> list[dict]:
+    output_root = output_root.resolve()
     manifest = load_manifest()
-    output_root = args.output or ROOT / manifest["output"]
     records = [
-        build_kit(lang, lab, output_root)
+        build_kit(lang, lab, output_root, site_layout=site_layout)
         for lab in manifest["labs"]
         for lang in LANGS
     ]
-    index_path = output_root / "index.json"
-    index_path.parent.mkdir(parents=True, exist_ok=True)
-    index_path.write_text(json.dumps(records, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    if site_layout:
+        for lang in LANGS:
+            index_path = output_root / lang / "downloads" / "kits" / "index.json"
+            localized = [record for record in records if record["language"] == lang]
+            index_path.write_text(
+                json.dumps(localized, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+    else:
+        index_path = output_root / "index.json"
+        index_path.parent.mkdir(parents=True, exist_ok=True)
+        index_path.write_text(
+            json.dumps(records, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
     expected = len(manifest["labs"]) * len(LANGS)
     if len(records) != expected:
-        raise SystemExit(f"Expected {expected} kits, generated {len(records)}")
-    if args.check:
+        raise ValueError(f"Expected {expected} kits, generated {len(records)}")
+    if check:
         for record in records:
-            if not (ROOT / record["pdf"]).exists() or not (ROOT / record["zip"]).exists():
-                raise SystemExit(f"Missing artifact for Lab {record['lab_id']} {record['language']}")
+            for key in ("pdf", "zip"):
+                path = Path(record[key])
+                if not path.is_absolute():
+                    path = ROOT / path
+                if not path.exists():
+                    raise ValueError(
+                        f"Missing artifact for Lab {record['lab_id']} "
+                        f"{record['language']}: {record[key]}"
+                    )
+    return records
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--site",
+        action="store_true",
+        help="Write kits under each language's downloads/kits directory for MkDocs.",
+    )
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    manifest = load_manifest()
+    output_root = args.output or (DOCS if args.site else ROOT / manifest["output"])
+    records = generate_all(output_root, site_layout=args.site, check=args.check)
     print(f"Generated {len(records)} deterministic PDF/ZIP kits in {output_root}")
 
 

@@ -232,3 +232,10 @@ flowchart LR
 - [Microsoft Agent Framework 1.0 GA](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/)
 - [AutoGen to Agent Framework migration](https://learn.microsoft.com/agent-framework/migration-guide/from-autogen/)
 <!-- phase3-modernization:end -->
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-002-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-002-kit-fr.zip)

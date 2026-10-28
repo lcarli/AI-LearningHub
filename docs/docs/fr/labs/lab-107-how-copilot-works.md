@@ -85,3 +85,9 @@ Les complétions prédisent dans le flux d'édition ; le chat répond ; les agen
 
 Documentez contrôle du dépôt, contexte transmis, rétention, exclusions et interactions consommant des crédits IA.
 
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-107-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-107-kit-fr.zip)

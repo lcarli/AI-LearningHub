@@ -90,9 +90,9 @@ pip install pandas
 
 | Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `broken_scorecard.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/broken_scorecard.py) |
-| `copilot_usage_data.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) |
-| `scorecard_builder.py` | Script de démarrage avec TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/scorecard_builder.py) |
+| `broken_scorecard.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-047/broken_scorecard.py) |
+| `copilot_usage_data.csv` | Jeu de données | [📥 Télécharger](lab-047/copilot_usage_data.csv) |
+| `scorecard_builder.py` | Script de démarrage avec TODOs | [📥 Télécharger](lab-047/scorecard_builder.py) |
 
 ---
 
@@ -393,7 +393,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, 
 
 ??? question "**Q3 (Exécutez le lab) :** Quel département a le taux d'adoption Copilot le plus élevé (actifs ÷ activés × 100) ?"
 
-    Exécutez l'analyse de l'étape 3 sur [📥 `copilot_usage_data.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) et vérifiez les résultats.
+    Exécutez l'analyse de l'étape 3 sur [📥 `copilot_usage_data.csv`](lab-047/copilot_usage_data.csv) et vérifiez les résultats.
 
     ??? success "✅ Révéler la réponse"
         **Finance — 100,0 %**

@@ -90,8 +90,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_ux.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/broken_ux.py) |
-| `ux_patterns.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-070/ux_patterns.csv) |
+| `broken_ux.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-070/broken_ux.py) |
+| `ux_patterns.csv` | Conjunto de dados | [📥 Download](lab-070/ux_patterns.csv) |
 
 ---
 

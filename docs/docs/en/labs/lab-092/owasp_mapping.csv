@@ -1,0 +1,3 @@
+finding,owasp_area,control
+unsafe command,excessive agency,approval gate
+embedded secret,sensitive disclosure,secret scanning

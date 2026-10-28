@@ -130,11 +130,14 @@ python -m unittest discover -v
 
 ## Kit d'accompagnement
 
-- `README.md` : démarrage et preuves
-- `CHEATSHEET.md` : guide de décision
-- `scenario.json` : contrat déterministe
-- `test_scenario.py` : tests locaux
-- PDF et ZIP générés par le pipeline existant
+Le build du site génère des téléchargements PDF et ZIP stables. La CI conserve aussi un miroir temporaire pendant 30 jours.
+
+- [`README.md` ](lab-105/README.md): démarrage et preuves
+- [`CHEATSHEET.md` ](lab-105/CHEATSHEET.md): guide de décision
+- [`scenario.json` ](lab-105/scenario.json): contrat déterministe
+- [`test_scenario.py` ](lab-105/test_scenario.py): tests locaux
+- [Télécharger le PDF généré](../downloads/kits/lab-105-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-105-kit-fr.zip)
 
 ## Quiz noté
 

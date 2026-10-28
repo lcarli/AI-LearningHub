@@ -85,3 +85,9 @@ Use a prompt file for a user-invoked workflow, a `*.agent.md` file for a special
 
 Inspect `AGENTS.md` and every matching instruction file. Remove duplicates, state conflicts explicitly, and keep tool permissions least-privileged.
 
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-086-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-086-kit-en.zip)

@@ -30,7 +30,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">Pro Code</a></span>
   <span><strong>Time:</strong> ~90 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free (local)</span> — 8GB+ RAM for Phi-4-mini</span>
 </div>
@@ -311,3 +311,10 @@ asyncio.run(main())
 
 - **Containerize your local AI setup:** Add Ollama to the devcontainer (already pre-configured in `.devcontainer/devcontainer.json`)
 - **Embed Phi-4 in RAG:** → [Lab 022 — RAG with pgvector](lab-022-rag-github-models-pgvector.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-044-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-044-kit-en.zip)

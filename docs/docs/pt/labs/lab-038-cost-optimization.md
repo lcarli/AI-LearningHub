@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/pro-code/">💻 Pro Code</a></span>
   <span><strong>Tempo:</strong> ~45 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-azure">Azure Free Tier</span> — A maioria das estratégias são gratuitas para implementar</span>
 </div>
@@ -428,3 +428,10 @@ Action: Email engineering@outdoorgear.example.com
 - **Observe o que você otimizou:** → [Lab 033 — Observabilidade de Agentes](lab-033-agent-observability.md)
 - **Avalie a qualidade após otimização:** → [Lab 035 — Avaliação de Agentes](lab-035-agent-evaluation.md)
 - **Deploy completo em produção:** → [Lab 028 — Deploy MCP no Azure](lab-028-deploy-mcp-azure.md)
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-038-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-038-kit-pt.zip)

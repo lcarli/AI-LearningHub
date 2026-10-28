@@ -87,8 +87,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_guardrails.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-082/broken_guardrails.py) |
-| `guardrail_tests.csv` | Dataset — 15 cenários de teste de guardrails | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-082/guardrail_tests.csv) |
+| `broken_guardrails.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-082/broken_guardrails.py) |
+| `guardrail_tests.csv` | Dataset — 15 cenários de teste de guardrails | [📥 Download](lab-082/guardrail_tests.csv) |
 
 ---
 
@@ -400,7 +400,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você ver `All passed!`, est
 
 ??? question "**Q3 (Execute o Laboratório):** Quantos dos 15 testes ativaram um guardrail?"
 
-    Carregue [📥 `guardrail_tests.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-082/guardrail_tests.csv) e conte as linhas onde `triggered == True`.
+    Carregue [📥 `guardrail_tests.csv`](lab-082/guardrail_tests.csv) e conte as linhas onde `triggered == True`.
 
     ??? success "✅ Revelar Resposta"
         **10**

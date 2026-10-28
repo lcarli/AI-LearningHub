@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-50">L50</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">📚 RAG</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/rag/">📚 RAG</a></span>
   <span><strong>Time:</strong> ~20 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — No account needed</span>
 </div>
@@ -63,11 +63,11 @@ The LLM doesn't know. Its training data has a cutoff date. And even if the infor
 
 | File | Description | Download |
 |------|-------------|----------|
-| `faq_backpacks.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_backpacks.txt) |
-| `faq_clothing.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_clothing.txt) |
-| `faq_footwear.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_footwear.txt) |
-| `faq_sleeping_bags.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_sleeping_bags.txt) |
-| `faq_tents.txt` | FAQ knowledge base file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_tents.txt) |
+| `faq_backpacks.txt` | FAQ knowledge base file | [📥 Download](lab-006/faq_backpacks.txt) |
+| `faq_clothing.txt` | FAQ knowledge base file | [📥 Download](lab-006/faq_clothing.txt) |
+| `faq_footwear.txt` | FAQ knowledge base file | [📥 Download](lab-006/faq_footwear.txt) |
+| `faq_sleeping_bags.txt` | FAQ knowledge base file | [📥 Download](lab-006/faq_sleeping_bags.txt) |
+| `faq_tents.txt` | FAQ knowledge base file | [📥 Download](lab-006/faq_tents.txt) |
 
 ---
 
@@ -261,7 +261,7 @@ User → Retrieve → Grade relevance → If poor: web search fallback
     ??? success "✅ Reveal Answer"
         **5 Q&A pairs. The last question is: "Can I use a 2-person tent solo?"**
 
-        [📥 `faq_tents.txt`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-006/faq_tents.txt) contains exactly 5 Q&A pairs covering: solo backpacking tent choice, 3-season vs 4-season, waterproofing, pole materials, and using a 2P tent solo. This is the kind of knowledge base a RAG system would ingest — each Q&A pair is a natural chunk for embedding.
+        [📥 `faq_tents.txt`](lab-006/faq_tents.txt) contains exactly 5 Q&A pairs covering: solo backpacking tent choice, 3-season vs 4-season, waterproofing, pole materials, and using a 2P tent solo. This is the kind of knowledge base a RAG system would ingest — each Q&A pair is a natural chunk for embedding.
 
 ---
 
@@ -283,3 +283,10 @@ User → Retrieve → Grade relevance → If poor: web search fallback
 - **Understand the embedding vectors:** → [Lab 007 — What are Embeddings?](lab-007-what-are-embeddings.md)
 - **Build a RAG app for free:** → [Lab 022 — RAG with GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
 - **Production RAG on Azure:** → [Lab 031 — pgvector Semantic Search on Azure](lab-031-pgvector-semantic-search.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-006-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-006-kit-en.zip)

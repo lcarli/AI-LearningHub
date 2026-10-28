@@ -85,3 +85,9 @@ Utilisez un fichier de prompt pour un workflow déclenché, `*.agent.md` pour un
 
 Inspectez `AGENTS.md` et toutes les instructions applicables. Supprimez les doublons, explicitez les conflits et limitez les outils.
 
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-086-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-086-kit-fr.zip)

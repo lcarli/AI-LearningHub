@@ -27,7 +27,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/copilot/">🤖 GitHub Copilot</a></span>
   <span><strong>Tempo:</strong> ~30 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Free</span> — Conta GitHub gratuita (o plano gratuito inclui o agent mode)</span>
 </div>
@@ -80,7 +80,7 @@ O **Agent mode** é o mais novo e mais poderoso. Você descreve um objetivo, e o
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `outdoorgear_api.py` | Script Python | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) |
+| `outdoorgear_api.py` | Script Python | [📥 Download](lab-016/outdoorgear_api.py) |
 
 ---
 
@@ -105,7 +105,7 @@ Este exercício oferece um **projeto Python realmente quebrado** para corrigir u
 cd AI-LearningHub/docs/docs/en/labs/lab-016
 ```
 
-Ou copie o arquivo [📥 `outdoorgear_api.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) abaixo:
+Ou copie o arquivo [📥 `outdoorgear_api.py`](lab-016/outdoorgear_api.py) abaixo:
 
 ```python title="lab-016/outdoorgear_api.py — 5 bugs, 1 funcionalidade ausente, sem testes"
 --8<-- "labs/lab-016/outdoorgear_api.py"
@@ -313,3 +313,10 @@ Your request: "Fix all bugs"
 
 - **Construa um servidor MCP para estender o agent mode:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
 - **Construa um Chat Participant do VS Code (@agent personalizado):** → [Lab 025 — VS Code Chat Participant](lab-025-vscode-chat-participant.md)
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-016-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-016-kit-pt.zip)

@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Tempo:</strong> ~120 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados de trace simulados (sem necessidade de recursos na nuvem)</span>
 </div>
@@ -113,8 +113,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_delegation.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/broken_delegation.py) |
-| `delegation_traces.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv) |
+| `broken_delegation.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-055/broken_delegation.py) |
+| `delegation_traces.csv` | Dataset | [📥 Download](lab-055/delegation_traces.csv) |
 
 ---
 
@@ -438,7 +438,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você ver `🎉 All 3 tests 
 
 ??? question "**Q3 (Execute o Lab):** Quantas chamadas A2A existem nos traces de delegação?"
 
-    Filtre [📥 `delegation_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv) por `protocol == "A2A"` e conte as linhas.
+    Filtre [📥 `delegation_traces.csv`](lab-055/delegation_traces.csv) por `protocol == "A2A"` e conte as linhas.
 
     ??? success "✅ Revelar Resposta"
         **8**

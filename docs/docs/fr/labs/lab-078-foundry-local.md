@@ -103,8 +103,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_foundry_local.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-078/broken_foundry_local.py) |
-| `foundry_models.csv` | Catalogue de 8 modèles avec tailles, matériel et scores de qualité | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-078/foundry_models.csv) |
+| `broken_foundry_local.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-078/broken_foundry_local.py) |
+| `foundry_models.csv` | Catalogue de 8 modèles avec tailles, matériel et scores de qualité | [📥 Télécharger](lab-078/foundry_models.csv) |
 
 ---
 
@@ -321,7 +321,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécutez le lab) :** Quel est le plus petit modèle du catalogue et quelle est sa taille ?"
 
-    Exécutez l'analyse de l'étape 3 sur [📥 `foundry_models.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-078/foundry_models.csv) pour trouver le plus petit modèle.
+    Exécutez l'analyse de l'étape 3 sur [📥 `foundry_models.csv`](lab-078/foundry_models.csv) pour trouver le plus petit modèle.
 
     ??? success "✅ Révéler la réponse"
         **qwen2.5-0.5b à 0.4 Go**

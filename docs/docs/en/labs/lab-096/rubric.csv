@@ -1,0 +1,4 @@
+criterion,weight,evidence
+correctness,40,tests
+safety,30,review
+maintainability,30,diff

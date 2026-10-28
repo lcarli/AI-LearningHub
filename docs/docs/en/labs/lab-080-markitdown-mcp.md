@@ -80,8 +80,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_markitdown.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/broken_markitdown.py) |
-| `conversion_results.csv` | Dataset — 12 file conversions across 7 formats | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) |
+| `broken_markitdown.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-080/broken_markitdown.py) |
+| `conversion_results.csv` | Dataset — 12 file conversions across 7 formats | [📥 Download](lab-080/conversion_results.csv) |
 
 ---
 
@@ -368,7 +368,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** How many of the 12 file conversions were successful?"
 
-    Load [📥 `conversion_results.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) and count rows where `conversion_success == True`.
+    Load [📥 `conversion_results.csv`](lab-080/conversion_results.csv) and count rows where `conversion_success == True`.
 
     ??? success "✅ Reveal Answer"
         **11 of 12**

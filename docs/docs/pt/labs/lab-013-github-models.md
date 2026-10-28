@@ -75,8 +75,8 @@ lab:
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `requirements.txt` | Dependência Python | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/requirements.txt) |
-| `starter.py` | Exercícios com backend local | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) |
+| `requirements.txt` | Dependência Python | [Download](lab-013/requirements.txt) |
+| `starter.py` | Exercícios com backend local | [Download](lab-013/starter.py) |
 
 ## Exercício 1 — Verifique o Endpoint
 
@@ -132,3 +132,10 @@ print(response.choices[0].message.content)
 - [Lab 015 — Ollama: LLMs Locais](lab-015-ollama-local-llms.md)
 - [Lab 078 — Foundry Local](lab-078-foundry-local.md)
 - [Lab 017 — Saída Estruturada](lab-017-structured-output.md)
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-013-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-013-kit-pt.zip)

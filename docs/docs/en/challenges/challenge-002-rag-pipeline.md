@@ -38,11 +38,11 @@ Save these files in one folder named `challenge-002/`:
 
 | File | Purpose | Download |
 |------|---------|----------|
-| `documents.json` | Mock OutdoorGear knowledge base | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-002/documents.json) |
-| `queries.json` | Evaluation queries and expected evidence | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-002/queries.json) |
-| `starter_rag_pipeline.py` | Broken RAG pipeline | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-002/starter_rag_pipeline.py) |
-| `test_rag_pipeline.py` | Acceptance tests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-002/test_rag_pipeline.py) |
-| `validate_rag_pipeline.py` | Generates the final completion code | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-002/validate_rag_pipeline.py) |
+| `documents.json` | Mock OutdoorGear knowledge base | [Download](challenge-002/documents.json) |
+| `queries.json` | Evaluation queries and expected evidence | [Download](challenge-002/queries.json) |
+| `starter_rag_pipeline.py` | Broken RAG pipeline | [Download](challenge-002/starter_rag_pipeline.py) |
+| `test_rag_pipeline.py` | Acceptance tests | [Download](challenge-002/test_rag_pipeline.py) |
+| `validate_rag_pipeline.py` | Generates the final completion code | [Download](challenge-002/validate_rag_pipeline.py) |
 
 ---
 

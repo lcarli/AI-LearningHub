@@ -30,7 +30,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/rag/">📚 RAG</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/rag/">📚 RAG</a></span>
   <span><strong>Tempo:</strong> ~50 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Free</span> — Todas as opções têm planos gratuitos ou modo local</span>
 </div>
@@ -407,3 +407,10 @@ Para o **cenário do OutdoorGear learning hub** (< 10K produtos, infraestrutura 
 - **Monte a configuração pgvector:** → [Lab 031 — Busca Semântica com pgvector](lab-031-pgvector-semantic-search.md)
 - **Aplicação RAG completa:** → [Lab 022 — RAG com GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
 - **RAG empresarial com avaliação:** → [Lab 042 — RAG Empresarial](lab-042-enterprise-rag.md) *(em breve)*
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-039-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-039-kit-pt.zip)

@@ -1,0 +1,3 @@
+threat,control,evidence
+untrusted-tool-output,schema validation,negative test
+excess-permission,allowlist,approved server list

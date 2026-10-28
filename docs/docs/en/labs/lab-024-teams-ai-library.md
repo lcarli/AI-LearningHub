@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/agent-builder-teams/">Agent Builder — Teams</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/agent-builder-teams/">Agent Builder — Teams</a></span>
   <span><strong>Time:</strong> ~60 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Microsoft 365 Developer Program (free) + GitHub Models</span>
 </div>
@@ -296,3 +296,10 @@ flowchart LR
 - [Microsoft 365 Agents Toolkit](https://learn.microsoft.com/microsoft-365/agents-toolkit/)
 - [Declarative agent schema](https://learn.microsoft.com/microsoft-365-copilot/extensibility/declarative-agent-manifest)
 <!-- phase3-modernization:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-024-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-024-kit-en.zip)

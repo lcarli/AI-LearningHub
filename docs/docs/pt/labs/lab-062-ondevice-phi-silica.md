@@ -86,8 +86,8 @@ Este lab analisa resultados de benchmark pré-computados — nenhum hardware NPU
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_ondevice.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/broken_ondevice.py) |
-| `ondevice_tasks.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv) |
+| `broken_ondevice.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-062/broken_ondevice.py) |
+| `ondevice_tasks.csv` | Conjunto de dados | [📥 Download](lab-062/ondevice_tasks.csv) |
 
 ---
 
@@ -124,7 +124,7 @@ Conceitos-chave:
 
 ## Parte 2: Carregar Dados de Benchmark
 
-### Etapa 2: Carregar [📥 `ondevice_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv)
+### Etapa 2: Carregar [📥 `ondevice_tasks.csv`](lab-062/ondevice_tasks.csv)
 
 O conjunto de dados de benchmark contém resultados da execução de 15 tarefas através de inferência NPU e nuvem:
 

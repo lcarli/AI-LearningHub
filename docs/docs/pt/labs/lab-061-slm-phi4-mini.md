@@ -87,8 +87,8 @@ Este lab analisa resultados de benchmark pré-computados — nenhuma chave de AP
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_slm.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/broken_slm.py) |
-| `slm_benchmark.csv` | Conjunto de dados de benchmark | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv) |
+| `broken_slm.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-061/broken_slm.py) |
+| `slm_benchmark.csv` | Conjunto de dados de benchmark | [📥 Download](lab-061/slm_benchmark.csv) |
 
 ---
 
@@ -122,7 +122,7 @@ Conceitos-chave:
 
 ## Parte 2: Carregar Dados de Benchmark
 
-### Etapa 2: Carregar [📥 `slm_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv)
+### Etapa 2: Carregar [📥 `slm_benchmark.csv`](lab-061/slm_benchmark.csv)
 
 O conjunto de dados de benchmark contém resultados da execução de todas as 15 tarefas em ambos os modelos:
 

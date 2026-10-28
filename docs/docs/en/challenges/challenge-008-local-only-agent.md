@@ -39,11 +39,11 @@ Save these files in one folder named `challenge-008/`:
 
 | File | Purpose | Download |
 |------|---------|----------|
-| `local_data.json` | Local product and policy data | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-008/local_data.json) |
-| `eval_requests.json` | Evaluation requests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-008/eval_requests.json) |
-| `starter_local_agent.py` | Broken local-only agent | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-008/starter_local_agent.py) |
-| `test_local_agent.py` | Acceptance tests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-008/test_local_agent.py) |
-| `validate_local_agent.py` | Generates the final completion code | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-008/validate_local_agent.py) |
+| `local_data.json` | Local product and policy data | [Download](challenge-008/local_data.json) |
+| `eval_requests.json` | Evaluation requests | [Download](challenge-008/eval_requests.json) |
+| `starter_local_agent.py` | Broken local-only agent | [Download](challenge-008/starter_local_agent.py) |
+| `test_local_agent.py` | Acceptance tests | [Download](challenge-008/test_local_agent.py) |
+| `validate_local_agent.py` | Generates the final completion code | [Download](challenge-008/validate_local_agent.py) |
 
 ---
 

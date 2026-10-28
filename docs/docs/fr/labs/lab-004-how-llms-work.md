@@ -176,15 +176,15 @@ Créez un dossier `evidence/` hors du dépôt pour conserver les sorties. Ne com
 
 ## Kit d'accompagnement
 
-Le kit téléchargeable contient le guide, les exercices locaux, une fiche mémo et les diagrammes cités. La CI publie des artefacts PDF et ZIP déterministes.
+Le kit téléchargeable contient le guide, les exercices locaux, une fiche mémo et les diagrammes cités. Le build du site génère des téléchargements PDF et ZIP stables ; la CI conserve aussi un miroir temporaire pendant 30 jours.
 
 | Élément | Objectif |
 |---|---|
-| `README.md` | Démarrage rapide et preuves attendues |
+| [`README.md`](lab-004/README.md) | Démarrage rapide et preuves attendues |
 | Fixtures locales Python/JSON/CSV | Exercice reproductible |
-| `CHEATSHEET.md` | Concepts, commandes et liste de vérification |
-| PDF généré | Guide imprimable produit en CI |
-| ZIP généré | Kit hors ligne produit en CI |
+| [`CHEATSHEET.md`](lab-004/CHEATSHEET.md) | Concepts, commandes et liste de vérification |
+| [PDF généré](../downloads/kits/lab-004-kit-fr.pdf) | Guide imprimable produit en CI |
+| [ZIP généré](../downloads/kits/lab-004-kit-fr.zip) | Kit hors ligne produit en CI |
 
 ## Parcours réel facultatif
 

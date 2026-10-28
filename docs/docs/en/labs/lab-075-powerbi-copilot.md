@@ -93,8 +93,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_powerbi.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/broken_powerbi.py) |
-| `powerbi_reports.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) |
+| `broken_powerbi.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-075/broken_powerbi.py) |
+| `powerbi_reports.csv` | Dataset | [📥 Download](lab-075/powerbi_reports.csv) |
 
 ---
 
@@ -359,7 +359,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** How many reports were created using Copilot (either assisted or generated)?"
 
-    Run the Step 3 analysis on [📥 `powerbi_reports.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) and count copilot reports.
+    Run the Step 3 analysis on [📥 `powerbi_reports.csv`](lab-075/powerbi_reports.csv) and count copilot reports.
 
     ??? success "✅ Reveal Answer"
         **8 reports**

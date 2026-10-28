@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/foundry/">Microsoft Foundry</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/foundry/">Microsoft Foundry</a></span>
   <span><strong>Tempo:</strong> ~45 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito (local)</span> + opcional Azure Application Insights (nível gratuito)</span>
 </div>

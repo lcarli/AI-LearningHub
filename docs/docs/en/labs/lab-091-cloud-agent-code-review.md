@@ -113,3 +113,10 @@ Write a short review containing:
 2. The rejected scope and why it was rejected.
 3. Which review comment you would apply.
 4. A cost record: **medium AI Credits**, **7 Actions minutes**, and the optimization you would try next.
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-091-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-091-kit-en.zip)

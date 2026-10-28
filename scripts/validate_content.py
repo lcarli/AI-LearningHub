@@ -11,6 +11,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs" / "docs"
 KIT_MANIFEST = ROOT / "kits" / "manifest.yml"
+MATERIALS_MANIFEST = ROOT / "kits" / "materials.yml"
 LANGS = ("en", "pt", "fr")
 ALLOWED_TIERS = {"free", "free-gh", "free-conditional", "paid"}
 NOTICE_MARKERS = (
@@ -207,6 +208,7 @@ def main() -> int:
             if frontmatter.get("lab", {}).get("status") != "retired":
                 errors.append(f"{matches[0]}: retired lab must declare status: retired")
 
+    kit_manifest: dict = {}
     try:
         kit_manifest = yaml.safe_load(KIT_MANIFEST.read_text(encoding="utf-8"))
     except (OSError, yaml.YAMLError) as exc:
@@ -221,6 +223,40 @@ def main() -> int:
             errors.append(f"{KIT_MANIFEST}: missing Phase 3 kits {sorted(missing_phase3_kits)}")
         if any(item.get("priority") not in {"P0", "P1"} for item in kit_manifest.get("labs", [])):
             errors.append(f"{KIT_MANIFEST}: every kit must declare priority P0 or P1")
+
+    try:
+        materials_manifest = yaml.safe_load(
+            MATERIALS_MANIFEST.read_text(encoding="utf-8")
+        )
+    except (OSError, yaml.YAMLError) as exc:
+        errors.append(
+            f"{MATERIALS_MANIFEST}: invalid or missing materials manifest ({exc})"
+        )
+    else:
+        kit_ids = {
+            str(item["id"]).zfill(3) for item in (kit_manifest or {}).get("labs", [])
+        }
+        priority_scope = materials_manifest.get("priority_scope", {})
+        missing_priority = set(priority_scope.get("required", [])) - kit_ids
+        if missing_priority:
+            errors.append(
+                f"{KIT_MANIFEST}: missing roadmap P0/P1 kits {sorted(missing_priority)}"
+            )
+        retired_kits = set(priority_scope.get("excluded_retired", [])) & kit_ids
+        if retired_kits:
+            errors.append(
+                f"{KIT_MANIFEST}: retired/replaced labs must not promise kits {sorted(retired_kits)}"
+            )
+        for lab_id, spec in materials_manifest.get("labs", {}).items():
+            if lab_id not in kit_ids:
+                errors.append(f"{MATERIALS_MANIFEST}: Lab {lab_id} is not in kit manifest")
+            for lang in LANGS:
+                support = DOCS / lang / "labs" / f"lab-{lab_id}"
+                for relative in spec.get("required", []):
+                    if not (support / relative).is_file():
+                        errors.append(
+                            f"{support}: missing roadmap material {relative}"
+                        )
 
     if errors:
         print("Content validation failed:")

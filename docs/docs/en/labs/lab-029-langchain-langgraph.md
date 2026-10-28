@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">💻 Pro Code</a></span>
   <span><strong>Time:</strong> ~60 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — GitHub Models free tier</span>
 </div>
@@ -348,3 +348,10 @@ print(result["messages"][-1].content)
 - **Full function-calling deep dive:** → [Lab 018 — Function Calling & Tool Use](lab-018-function-calling.md)
 - **Multi-agent with Semantic Kernel:** → [Lab 034 — Multi-Agent Systems](lab-034-multi-agent-sk.md)
 - **Production AutoGen agents:** → [Lab 040 — Production Multi-Agent](lab-040-autogen-multi-agent.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-029-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-029-kit-en.zip)

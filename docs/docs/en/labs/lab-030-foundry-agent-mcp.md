@@ -27,7 +27,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">Foundry + MCP</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/foundry/">Foundry + MCP</a></span>
   <span><strong>Time:</strong> ~90 min</span>
   <span><strong>💰 Cost:</strong> Azure subscription — gpt-4o-mini token costs</span>
 </div>
@@ -228,3 +228,10 @@ flowchart LR
 - [Foundry evaluation](https://learn.microsoft.com/azure/ai-foundry/concepts/evaluation-approach-gen-ai)
 - [Foundry Workflows retirement](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow)
 <!-- phase3-modernization:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-030-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-030-kit-en.zip)

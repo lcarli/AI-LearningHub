@@ -89,3 +89,9 @@ Créez un agent de qualité documentaire, un hook bloquant l'affichage de secret
 
 Produisez une sortie lisible par machine pour une tâche bornée. Échouez en cas d'écriture non approuvée ou commande destructive.
 
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-088-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-088-kit-fr.zip)

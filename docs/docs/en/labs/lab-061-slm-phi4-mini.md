@@ -87,8 +87,8 @@ This lab analyzes pre-computed benchmark results — no API key, GPU, or ONNX Ru
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_slm.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/broken_slm.py) |
-| `slm_benchmark.csv` | Benchmark dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv) |
+| `broken_slm.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-061/broken_slm.py) |
+| `slm_benchmark.csv` | Benchmark dataset | [📥 Download](lab-061/slm_benchmark.csv) |
 
 ---
 
@@ -122,7 +122,7 @@ Key concepts:
 
 ## Part 2: Load Benchmark Data
 
-### Step 2: Load [📥 `slm_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv)
+### Step 2: Load [📥 `slm_benchmark.csv`](lab-061/slm_benchmark.csv)
 
 The benchmark dataset contains results from running all 15 tasks through both models:
 

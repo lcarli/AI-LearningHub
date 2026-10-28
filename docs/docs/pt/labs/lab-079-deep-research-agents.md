@@ -106,8 +106,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_research.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/broken_research.py) |
-| `research_trace.csv` | Rastreamento de pesquisa de 14 etapas com papéis de agentes, tokens e qualidade | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) |
+| `broken_research.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-079/broken_research.py) |
+| `research_trace.csv` | Rastreamento de pesquisa de 14 etapas com papéis de agentes, tokens e qualidade | [📥 Download](lab-079/research_trace.csv) |
 
 ---
 
@@ -330,7 +330,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 
 ??? question "**Q3 (Execute o Laboratório):** Qual é o número total de fontes citadas em todas as etapas?"
 
-    Execute a análise da Etapa 4 em [📥 `research_trace.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) e some a coluna `sources_cited`.
+    Execute a análise da Etapa 4 em [📥 `research_trace.csv`](lab-079/research_trace.csv) e some a coluna `sources_cited`.
 
     ??? success "✅ Revelar Resposta"
         **10 fontes**
@@ -393,3 +393,10 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-079-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-079-kit-pt.zip)

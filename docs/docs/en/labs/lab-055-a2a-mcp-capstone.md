@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Time:</strong> ~120 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock trace data (no cloud resources required)</span>
 </div>
@@ -113,8 +113,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_delegation.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/broken_delegation.py) |
-| `delegation_traces.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv) |
+| `broken_delegation.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-055/broken_delegation.py) |
+| `delegation_traces.csv` | Dataset | [📥 Download](lab-055/delegation_traces.csv) |
 
 ---
 
@@ -438,7 +438,7 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ??? question "**Q3 (Run the Lab):** How many A2A calls are in the delegation traces?"
 
-    Filter [📥 `delegation_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-055/delegation_traces.csv) by `protocol == "A2A"` and count the rows.
+    Filter [📥 `delegation_traces.csv`](lab-055/delegation_traces.csv) by `protocol == "A2A"` and count the rows.
 
     ??? success "✅ Reveal Answer"
         **8**

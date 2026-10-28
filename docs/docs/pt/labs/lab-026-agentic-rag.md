@@ -32,7 +32,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/rag/">RAG</a></span>
   <span><strong>Tempo:</strong> ~40 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Gratuito</span> + Docker (local)</span>
 </div>
@@ -292,3 +292,10 @@ Return Answer (or retry)
 
 - **Memória do agente entre sessões:** → [Lab 027 — Agent Memory Patterns](lab-027-agent-memory-patterns.md)
 - **Avaliar qualidade do RAG em escala:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-026-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-026-kit-pt.zip)

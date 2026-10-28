@@ -39,10 +39,10 @@ Save these files in one folder named `challenge-007/`:
 
 | File | Purpose | Download |
 |------|---------|----------|
-| `scenarios.json` | Red-team and safe scenarios | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-007/scenarios.json) |
-| `starter_guardrails.py` | Broken guardrail layer | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-007/starter_guardrails.py) |
-| `test_guardrails.py` | Acceptance tests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-007/test_guardrails.py) |
-| `validate_guardrails.py` | Generates the final completion code | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-007/validate_guardrails.py) |
+| `scenarios.json` | Red-team and safe scenarios | [Download](challenge-007/scenarios.json) |
+| `starter_guardrails.py` | Broken guardrail layer | [Download](challenge-007/starter_guardrails.py) |
+| `test_guardrails.py` | Acceptance tests | [Download](challenge-007/test_guardrails.py) |
+| `validate_guardrails.py` | Generates the final completion code | [Download](challenge-007/validate_guardrails.py) |
 
 ---
 

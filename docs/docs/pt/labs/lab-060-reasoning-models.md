@@ -89,8 +89,8 @@ Este lab analisa resultados de benchmark pré-computados — nenhuma chave de AP
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_reasoning.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/broken_reasoning.py) |
-| `reasoning_benchmark.csv` | Conjunto de dados de benchmark | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv) |
+| `broken_reasoning.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-060/broken_reasoning.py) |
+| `reasoning_benchmark.csv` | Conjunto de dados de benchmark | [📥 Download](lab-060/reasoning_benchmark.csv) |
 
 ---
 
@@ -124,7 +124,7 @@ Conceitos-chave:
 
 ## Parte 2: Carregar Dados de Benchmark
 
-### Etapa 2: Carregar [📥 `reasoning_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv)
+### Etapa 2: Carregar [📥 `reasoning_benchmark.csv`](lab-060/reasoning_benchmark.csv)
 
 O conjunto de dados de benchmark contém resultados da execução de todos os 12 problemas em cada modelo:
 

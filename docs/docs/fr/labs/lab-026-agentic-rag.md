@@ -32,7 +32,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/rag/">RAG</a></span>
   <span><strong>Durée :</strong> ~40 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> + Docker (local)</span>
 </div>
@@ -292,3 +292,10 @@ Retourner la réponse (ou réessayer)
 
 - **Mémoire d'agent entre sessions :** → [Lab 027 — Patterns de mémoire d'agent](lab-027-agent-memory-patterns.md)
 - **Évaluer la qualité du RAG à grande échelle :** → [Lab 035 — Évaluation d'agent](lab-035-agent-evaluation.md)
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-026-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-026-kit-fr.zip)

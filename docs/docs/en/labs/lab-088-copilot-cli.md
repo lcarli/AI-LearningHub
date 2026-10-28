@@ -89,3 +89,9 @@ Create a custom agent for documentation quality, a pre-command hook that blocks 
 
 Produce machine-readable output for a bounded task. Fail the workflow if the CLI proposes an unapproved write or destructive command.
 
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-088-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-088-kit-en.zip)

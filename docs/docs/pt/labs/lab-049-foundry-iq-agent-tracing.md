@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/foundry/">🏭 Microsoft Foundry</a></span>
   <span><strong>Tempo:</strong> ~75 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Modo local com ConsoleSpanExporter (Azure Monitor opcional)</span>
 </div>
@@ -96,9 +96,9 @@ pip install azure-ai-projects azure-monitor-opentelemetry opentelemetry-instrume
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_tracing.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/broken_tracing.py) |
-| `sample_traces.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) |
-| `traced_agent.py` | Script inicial com TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/traced_agent.py) |
+| `broken_tracing.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-049/broken_tracing.py) |
+| `sample_traces.csv` | Conjunto de dados | [📥 Download](lab-049/sample_traces.csv) |
+| `traced_agent.py` | Script inicial com TODOs | [📥 Download](lab-049/traced_agent.py) |
 
 ---
 
@@ -335,7 +335,7 @@ python lab-049/broken_tracing.py
 
 ??? question "**Q3 (Execute o Lab):** Qual é a duração média dos traces em todos os 10 traces de amostra?"
 
-    Carregue [📥 `sample_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) e calcule `traces["duration_ms"].mean()`.
+    Carregue [📥 `sample_traces.csv`](lab-049/sample_traces.csv) e calcule `traces["duration_ms"].mean()`.
 
     ??? success "✅ Revelar Resposta"
         **3.150,0 ms (3,15 segundos)**

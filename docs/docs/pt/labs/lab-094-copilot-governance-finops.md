@@ -116,3 +116,10 @@ Use este cenário transparente:
 Fórmula: `USD = tokens_entrada / 1.000.000 × preço_entrada + tokens_saída / 1.000.000 × preço_saída`; `AI Credits = USD / 0,01`.
 
 Os preços são entradas ilustrativas do exercício, não promessa de preço atual. Substitua pela tabela oficial antes de uma decisão real.
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-094-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-094-kit-pt.zip)

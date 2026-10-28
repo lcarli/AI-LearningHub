@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/pro-code/">Pro Code</a></span>
   <span><strong>Durée :</strong> ~40 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span></span>
 </div>
@@ -329,3 +329,10 @@ def safe_prompt(user_message: str) -> list[dict]:
 
 - **Évaluez la robustesse de votre agent :** → [Lab 035 — Évaluation des agents](lab-035-agent-evaluation.md)
 - **Fondamentaux de l'IA responsable :** → [Lab 008 — IA responsable pour les agents](lab-008-responsible-ai.md)
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-036-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-036-kit-fr.zip)

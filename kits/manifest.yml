@@ -1,37 +1,201 @@
 version: 1
 output: artifacts/kits
 labs:
-  - {id: "004", priority: P0, kind: llm-foundations}
-  - {id: "005", priority: P0, kind: llm-foundations}
-  - {id: "007", priority: P0, kind: llm-foundations}
-  - {id: "017", priority: P1, kind: llm-foundations}
-  - {id: "018", priority: P1, kind: llm-foundations}
-  - {id: "019", priority: P1, kind: llm-foundations}
-  - {id: "022", priority: P0, kind: rag}
-  - {id: "014", priority: P0, kind: agent-framework}
-  - {id: "023", priority: P0, kind: agent-framework}
-  - {id: "034", priority: P0, kind: agent-framework}
-  - {id: "040", priority: P0, kind: agent-framework}
-  - {id: "042", priority: P0, kind: enterprise-rag}
-  - {id: "085", priority: P0, kind: copilot}
-  - {id: "086", priority: P0, kind: copilot}
-  - {id: "087", priority: P0, kind: copilot}
-  - {id: "088", priority: P1, kind: copilot}
-  - {id: "089", priority: P0, kind: copilot}
-  - {id: "090", priority: P0, kind: copilot}
-  - {id: "091", priority: P1, kind: copilot}
-  - {id: "092", priority: P0, kind: copilot-security}
-  - {id: "093", priority: P1, kind: copilot-sdk}
-  - {id: "094", priority: P1, kind: copilot-governance}
-  - {id: "095", priority: P1, kind: copilot-metrics}
-  - {id: "096", priority: P0, kind: capstone}
-  - {id: "097", priority: P0, kind: llm-foundations}
-  - {id: "098", priority: P0, kind: llm-foundations}
-  - {id: "099", priority: P0, kind: llm-evaluation}
-  - {id: "100", priority: P0, kind: llm-security}
-  - {id: "101", priority: P1, kind: llm-economics}
-  - {id: "102", priority: P0, kind: llm-adaptation}
-  - {id: "103", priority: P1, kind: llm-training}
-  - {id: "104", priority: P0, kind: mcp}
-  - {id: "105", priority: P0, kind: mcp-apps}
-  - {id: "106", priority: P0, kind: agent-framework}
+- id: '001'
+  priority: P1
+  kind: ai-agents
+- id: '002'
+  priority: P0
+  kind: ai-agents
+- id: '003'
+  priority: P0
+  kind: ai-agents
+- id: '004'
+  priority: P1
+  kind: llm-foundations
+- id: '005'
+  priority: P0
+  kind: llm-foundations
+- id: '006'
+  priority: P0
+  kind: llm-foundations
+- id: '007'
+  priority: P1
+  kind: llm-foundations
+- id: 009
+  priority: P1
+  kind: microsoft-foundry
+- id: '010'
+  priority: P0
+  kind: github-copilot
+- id: '012'
+  priority: P1
+  kind: mcp
+- id: '013'
+  priority: P0
+  kind: llm-foundations
+- id: '014'
+  priority: P1
+  kind: agent-framework
+- id: '015'
+  priority: P0
+  kind: ai-agents
+- id: '016'
+  priority: P0
+  kind: github-copilot
+- id: '017'
+  priority: P0
+  kind: llm-foundations
+- id: 018
+  priority: P0
+  kind: llm-foundations
+- id: 019
+  priority: P0
+  kind: llm-foundations
+- id: '020'
+  priority: P1
+  kind: mcp
+- id: '021'
+  priority: P1
+  kind: mcp
+- id: '022'
+  priority: P0
+  kind: rag
+- id: '023'
+  priority: P1
+  kind: agent-framework
+- id: '024'
+  priority: P1
+  kind: m365-agents
+- id: '026'
+  priority: P0
+  kind: llm-foundations
+- id: '027'
+  priority: P0
+  kind: ai-agents
+- id: 029
+  priority: P1
+  kind: ai-agents
+- id: '030'
+  priority: P1
+  kind: microsoft-foundry
+- id: '031'
+  priority: P0
+  kind: llm-foundations
+- id: '032'
+  priority: P0
+  kind: microsoft-foundry
+- id: '034'
+  priority: P1
+  kind: agent-framework
+- id: '035'
+  priority: P1
+  kind: ai-agents
+- id: '036'
+  priority: P0
+  kind: ai-agents
+- id: '037'
+  priority: P0
+  kind: ai-agents
+- id: 038
+  priority: P0
+  kind: ai-agents
+- id: 039
+  priority: P0
+  kind: llm-foundations
+- id: '040'
+  priority: P1
+  kind: agent-framework
+- id: '042'
+  priority: P0
+  kind: enterprise-rag
+- id: '044'
+  priority: P0
+  kind: ai-agents
+- id: '046'
+  priority: P0
+  kind: ai-agents
+- id: '051'
+  priority: P1
+  kind: ai-agents
+- id: '073'
+  priority: P1
+  kind: ai-agents
+- id: '074'
+  priority: P1
+  kind: microsoft-foundry
+- id: '076'
+  priority: P1
+  kind: ai-agents
+- id: 079
+  priority: P1
+  kind: ai-agents
+- id: 085
+  priority: P0
+  kind: copilot
+- id: 086
+  priority: P0
+  kind: copilot
+- id: 087
+  priority: P0
+  kind: copilot
+- id: 088
+  priority: P1
+  kind: copilot
+- id: 089
+  priority: P0
+  kind: copilot
+- id: 090
+  priority: P0
+  kind: copilot
+- id: 091
+  priority: P1
+  kind: copilot
+- id: 092
+  priority: P0
+  kind: copilot-security
+- id: 093
+  priority: P1
+  kind: copilot-sdk
+- id: 094
+  priority: P1
+  kind: copilot-governance
+- id: 095
+  priority: P1
+  kind: copilot-metrics
+- id: 096
+  priority: P0
+  kind: capstone
+- id: 097
+  priority: P0
+  kind: llm-foundations
+- id: 098
+  priority: P0
+  kind: llm-foundations
+- id: 099
+  priority: P0
+  kind: llm-evaluation
+- id: '100'
+  priority: P0
+  kind: llm-security
+- id: '101'
+  priority: P1
+  kind: llm-economics
+- id: '102'
+  priority: P0
+  kind: llm-adaptation
+- id: '103'
+  priority: P1
+  kind: llm-training
+- id: '104'
+  priority: P0
+  kind: mcp
+- id: '105'
+  priority: P0
+  kind: mcp-apps
+- id: '106'
+  priority: P0
+  kind: agent-framework
+- id: '107'
+  priority: P1
+  kind: copilot

@@ -116,3 +116,10 @@ Use this transparent scenario:
 Formula: `USD = input_tokens / 1,000,000 × input_price + output_tokens / 1,000,000 × output_price`; `AI Credits = USD / 0.01`.
 
 These prices are illustrative inputs for the exercise, not a promise of current model pricing. Replace them with the official billing table before a real budget decision.
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-094-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-094-kit-en.zip)

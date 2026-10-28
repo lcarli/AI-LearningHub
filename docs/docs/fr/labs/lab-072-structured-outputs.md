@@ -90,8 +90,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |---------|-------------|----------------|
-| `broken_structured.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/broken_structured.py) |
-| `structured_outputs.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) |
+| `broken_structured.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-072/broken_structured.py) |
+| `structured_outputs.csv` | Jeu de données | [📥 Télécharger](lab-072/structured_outputs.csv) |
 
 ---
 
@@ -329,7 +329,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécuter le lab) :** Quel est le taux de validité de schéma pour les tests d'extraction avec schéma ?"
 
-    Exécutez l'analyse de l'étape 3 sur [📥 `structured_outputs.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) et vérifiez les résultats.
+    Exécutez l'analyse de l'étape 3 sur [📥 `structured_outputs.csv`](lab-072/structured_outputs.csv) et vérifiez les résultats.
 
     ??? success "✅ Révéler la réponse"
         **100 %**

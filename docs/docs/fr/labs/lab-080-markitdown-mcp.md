@@ -80,8 +80,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_markitdown.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/broken_markitdown.py) |
-| `conversion_results.csv` | Jeu de données — 12 conversions de fichiers sur 7 formats | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) |
+| `broken_markitdown.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-080/broken_markitdown.py) |
+| `conversion_results.csv` | Jeu de données — 12 conversions de fichiers sur 7 formats | [📥 Télécharger](lab-080/conversion_results.csv) |
 
 ---
 
@@ -368,7 +368,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécutez le lab) :** Combien des 12 conversions de fichiers ont réussi ?"
 
-    Chargez [📥 `conversion_results.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-080/conversion_results.csv) et comptez les lignes où `conversion_success == True`.
+    Chargez [📥 `conversion_results.csv`](lab-080/conversion_results.csv) et comptez les lignes où `conversion_success == True`.
 
     ??? success "✅ Révéler la réponse"
         **11 sur 12**

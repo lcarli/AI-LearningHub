@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">💻 Pro Code</a></span>
   <span><strong>Time:</strong> ~50 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — GitHub Models free tier supports GPT-4o vision</span>
 </div>

@@ -1,0 +1,3 @@
+command,purpose,approval
+copilot -p,bounded prompt,not required
+copilot --allow-tool,tool execution,required

@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Durée :</strong> ~90 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise un jeu de données de benchmark ; API Anthropic optionnelle</span>
 </div>
@@ -83,8 +83,8 @@ pip install pandas
 
 | Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `broken_safety.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/broken_safety.py) |
-| `desktop_tasks.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) |
+| `broken_safety.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-057/broken_safety.py) |
+| `desktop_tasks.csv` | Jeu de données | [📥 Télécharger](lab-057/desktop_tasks.csv) |
 
 ---
 
@@ -353,7 +353,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, 
 
 ??? question "**Q3 (Exécuter le lab) :** Quel est le taux global de complétion des tâches ?"
 
-    Chargez [📥 `desktop_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) et calculez `completed.sum() / total`.
+    Chargez [📥 `desktop_tasks.csv`](lab-057/desktop_tasks.csv) et calculez `completed.sum() / total`.
 
     ??? success "✅ Révéler la réponse"
         **70%**

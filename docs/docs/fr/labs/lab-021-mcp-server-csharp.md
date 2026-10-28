@@ -26,7 +26,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/mcp/">MCP</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/mcp/">MCP</a></span>
   <span><strong>Durée :</strong> ~45 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit (local + Ollama)</span></span>
 </div>
@@ -61,7 +61,7 @@ Python est idéal pour le prototypage rapide MCP, mais .NET est courant dans les
 
 | Fichier | Description | Téléchargement |
 |---------|-------------|----------------|
-| `BrokenMcpServer.cs` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs) |
+| `BrokenMcpServer.cs` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-021/BrokenMcpServer.cs) |
 
 ---
 
@@ -276,7 +276,7 @@ dotnet run
 
 ??? question "**Q2 (Exécutez le lab) :** Après avoir corrigé le bug #3 (le bug de comparaison sensible à la casse), quelle valeur de `StringComparison` remplace `StringComparison.Ordinal` dans la correction ?"
 
-    Lisez attentivement la description du bug #3, puis regardez la correction que vous avez appliquée dans [📥 `BrokenMcpServer.cs`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs).
+    Lisez attentivement la description du bug #3, puis regardez la correction que vous avez appliquée dans [📥 `BrokenMcpServer.cs`](lab-021/BrokenMcpServer.cs).
 
     ??? success "✅ Révéler la réponse"
         **`StringComparison.OrdinalIgnoreCase`**
@@ -320,3 +320,10 @@ flowchart LR
 - [MCP authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
 - [MCP Registry](https://registry.modelcontextprotocol.io/)
 <!-- phase3-modernization:end -->
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-021-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-021-kit-fr.zip)

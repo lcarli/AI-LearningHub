@@ -83,9 +83,9 @@ Non-technical users — store managers, marketing analysts, supply-chain planner
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_query_gen.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/broken_query_gen.py) |
-| `orders.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/orders.csv) |
-| `products.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/products.csv) |
+| `broken_query_gen.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-052/broken_query_gen.py) |
+| `orders.csv` | Dataset | [📥 Download](lab-052/orders.csv) |
+| `products.csv` | Dataset | [📥 Download](lab-052/products.csv) |
 
 ---
 

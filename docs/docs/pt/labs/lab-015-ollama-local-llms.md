@@ -93,8 +93,8 @@ O Ollama roda como um serviço em segundo plano em `http://localhost:11434`.
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `Modelfile` | Configuração de modelo do Ollama | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) |
-| `chat_starter.py` | Script inicial com TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) |
+| `Modelfile` | Configuração de modelo do Ollama | [📥 Download](lab-015/Modelfile) |
+| `chat_starter.py` | Script inicial com TODOs | [📥 Download](lab-015/chat_starter.py) |
 
 ---
 
@@ -287,7 +287,7 @@ ollama create outdoorgear -f Modelfile
 ollama run outdoorgear
 ```
 
-O [📥 `Modelfile`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) cria uma persona personalizada de **Consultor de Equipamentos Outdoor** em cima do Phi-4. O [📥 `chat_starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) tem 5 exercícios cobrindo completação básica, modelos personalizados, comparação e streaming.
+O [📥 `Modelfile`](lab-015/Modelfile) cria uma persona personalizada de **Consultor de Equipamentos Outdoor** em cima do Phi-4. O [📥 `chat_starter.py`](lab-015/chat_starter.py) tem 5 exercícios cobrindo completação básica, modelos personalizados, comparação e streaming.
 
 ---
 
@@ -320,3 +320,10 @@ Agora você tem uma stack de LLM totalmente local:
 - **Construa um app RAG com embeddings locais:** → [Lab 022 — RAG com GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
 - **Use com plugins do Semantic Kernel:** → [Lab 023 — Plugins, Memória e Planejadores do SK](lab-023-sk-plugins-memory.md)
 - **IA local em produção:** → [Lab 044 — Phi-4 + Ollama em Produção](lab-044-phi4-ollama-production.md)
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-015-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-015-kit-pt.zip)

@@ -88,8 +88,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_search.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/broken_search.py) |
-| `search_comparison.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/search_comparison.csv) |
+| `broken_search.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-068/broken_search.py) |
+| `search_comparison.csv` | Dataset | [📥 Download](lab-068/search_comparison.csv) |
 
 ---
 

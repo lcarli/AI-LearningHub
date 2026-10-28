@@ -75,8 +75,8 @@ lab:
 
 | File | Description | Download |
 |------|-------------|----------|
-| `requirements.txt` | Python dependency | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/requirements.txt) |
-| `starter.py` | Local-backend exercises | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-013/starter.py) |
+| `requirements.txt` | Python dependency | [Download](lab-013/requirements.txt) |
+| `starter.py` | Local-backend exercises | [Download](lab-013/starter.py) |
 
 ## Exercise 1 — Verify the Endpoint
 
@@ -138,3 +138,10 @@ The migrated labs use these variables:
 - [Lab 015 — Ollama: Local LLMs](lab-015-ollama-local-llms.md)
 - [Lab 078 — Foundry Local](lab-078-foundry-local.md)
 - [Lab 017 — Structured Output](lab-017-structured-output.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-013-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-013-kit-en.zip)

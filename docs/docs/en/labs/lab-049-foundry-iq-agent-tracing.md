@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/foundry/">🏭 Microsoft Foundry</a></span>
   <span><strong>Time:</strong> ~75 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Local mode with ConsoleSpanExporter (Azure Monitor optional)</span>
 </div>
@@ -96,9 +96,9 @@ pip install azure-ai-projects azure-monitor-opentelemetry opentelemetry-instrume
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_tracing.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/broken_tracing.py) |
-| `sample_traces.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) |
-| `traced_agent.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/traced_agent.py) |
+| `broken_tracing.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-049/broken_tracing.py) |
+| `sample_traces.csv` | Dataset | [📥 Download](lab-049/sample_traces.csv) |
+| `traced_agent.py` | Starter script with TODOs | [📥 Download](lab-049/traced_agent.py) |
 
 ---
 
@@ -335,7 +335,7 @@ python lab-049/broken_tracing.py
 
 ??? question "**Q3 (Run the Lab):** What is the average trace duration across all 10 sample traces?"
 
-    Load [📥 `sample_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) and calculate `traces["duration_ms"].mean()`.
+    Load [📥 `sample_traces.csv`](lab-049/sample_traces.csv) and calculate `traces["duration_ms"].mean()`.
 
     ??? success "✅ Reveal Answer"
         **3,150.0 ms (3.15 seconds)**

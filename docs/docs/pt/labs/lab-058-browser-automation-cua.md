@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Caminho:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Caminho:</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Tempo:</strong> ~90 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dataset de benchmark; API da OpenAI opcional</span>
 </div>
@@ -87,8 +87,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_cua.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/broken_cua.py) |
-| `browser_tasks.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/browser_tasks.csv) |
+| `broken_cua.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-058/broken_cua.py) |
+| `browser_tasks.csv` | Dataset | [📥 Download](lab-058/browser_tasks.csv) |
 
 ---
 

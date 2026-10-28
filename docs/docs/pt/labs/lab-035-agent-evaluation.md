@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/pro-code/">Pro Code</a></span>
   <span><strong>Tempo:</strong> ~60 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Gratuito</span> — usa GitHub Models para avaliação</span>
 </div>
@@ -76,7 +76,7 @@ Este lab constrói um pipeline de avaliação automatizado para o assistente Out
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `eval_dataset.jsonl` | Conjunto de dados de avaliação | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl) |
+| `eval_dataset.jsonl` | Conjunto de dados de avaliação | [📥 Download](lab-035/eval_dataset.jsonl) |
 
 ---
 
@@ -90,7 +90,7 @@ pip install azure-ai-evaluation openai
 
 ### Passo 2: Criar um golden dataset
 
-Um **golden dataset** é um conjunto de perguntas de teste com respostas corretas conhecidas. Crie [📥 `eval_dataset.jsonl`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl):
+Um **golden dataset** é um conjunto de perguntas de teste com respostas corretas conhecidas. Crie [📥 `eval_dataset.jsonl`](lab-035/eval_dataset.jsonl):
 
 ```jsonl
 {"query": "What is the return policy?", "response": "We offer a 60-day return window. Items must be unused in original packaging.", "context": "60-day return window. Items must be unused in original packaging. Worn footwear non-refundable unless defective."}
@@ -333,3 +333,10 @@ flowchart LR
 - [Foundry evaluation](https://learn.microsoft.com/azure/ai-foundry/concepts/evaluation-approach-gen-ai)
 - [Foundry Workflows retirement](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow)
 <!-- phase3-modernization:end -->
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-035-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-035-kit-pt.zip)

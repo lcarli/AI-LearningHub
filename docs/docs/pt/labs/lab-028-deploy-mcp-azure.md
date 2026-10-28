@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/mcp/">MCP</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/mcp/">MCP</a></span>
   <span><strong>Tempo:</strong> ~60 min</span>
   <span><strong>💰 Custo:</strong> ~$0 (scale-to-zero) + Azure Container Registry ~$5/month</span>
 </div>

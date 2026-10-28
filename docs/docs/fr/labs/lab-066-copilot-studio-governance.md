@@ -95,8 +95,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |---------|-------------|----------------|
-| `broken_governance.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/broken_governance.py) |
-| `studio_agents.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/studio_agents.csv) |
+| `broken_governance.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-066/broken_governance.py) |
+| `studio_agents.csv` | Jeu de données | [📥 Télécharger](lab-066/studio_agents.csv) |
 
 ---
 

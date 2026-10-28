@@ -182,3 +182,10 @@ An AI agent is an LLM-powered system that **perceives, remembers, reasons, and a
 ## Next Steps
 
 → **[Lab 002: AI Agent Landscape 2025](lab-002-agent-landscape.md)** — Compare all the tools and platforms available today.
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-001-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-001-kit-en.zip)

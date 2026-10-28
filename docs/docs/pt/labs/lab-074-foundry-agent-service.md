@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/foundry/">🏭 Microsoft Foundry</a></span>
   <span><strong>Tempo:</strong> ~120 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito</span> — Usa dados simulados de agentes</span>
 </div>
@@ -87,8 +87,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_foundry.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/broken_foundry.py) |
-| `foundry_agents.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) |
+| `broken_foundry.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-074/broken_foundry.py) |
+| `foundry_agents.csv` | Dataset | [📥 Download](lab-074/foundry_agents.csv) |
 
 ---
 
@@ -357,7 +357,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 
 ??? question "**Q3 (Execute o Lab):** Qual é o número total de requisições em toda a frota nas últimas 24 horas?"
 
-    Execute a análise da Etapa 3 no [📥 `foundry_agents.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) e verifique os resultados.
+    Execute a análise da Etapa 3 no [📥 `foundry_agents.csv`](lab-074/foundry_agents.csv) e verifique os resultados.
 
     ??? success "✅ Revelar Resposta"
         **9.380 requisições**
@@ -440,3 +440,10 @@ flowchart LR
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-074-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-074-kit-pt.zip)

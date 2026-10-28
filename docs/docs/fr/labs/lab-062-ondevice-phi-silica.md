@@ -86,8 +86,8 @@ Ce lab analyse des résultats de benchmark pré-calculés — aucun matériel NP
 
 | Fichier | Description | Télécharger |
 |---------|-------------|-------------|
-| `broken_ondevice.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/broken_ondevice.py) |
-| `ondevice_tasks.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv) |
+| `broken_ondevice.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-062/broken_ondevice.py) |
+| `ondevice_tasks.csv` | Jeu de données | [📥 Télécharger](lab-062/ondevice_tasks.csv) |
 
 ---
 
@@ -124,7 +124,7 @@ Concepts clés :
 
 ## Partie 2 : Charger les données du benchmark
 
-### Étape 2 : Charger [📥 `ondevice_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv)
+### Étape 2 : Charger [📥 `ondevice_tasks.csv`](lab-062/ondevice_tasks.csv)
 
 Le jeu de données de benchmark contient les résultats de l'exécution de 15 tâches via l'inférence NPU et cloud :
 

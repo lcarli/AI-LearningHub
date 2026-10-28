@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/pro-code/">Pro Code</a></span>
   <span><strong>Durée :</strong> ~60 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Gratuit</span> — utilise GitHub Models pour l'évaluation</span>
 </div>
@@ -76,7 +76,7 @@ Ce lab construit un pipeline d'évaluation automatisé pour l'assistant OutdoorG
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `eval_dataset.jsonl` | Jeu de données d'évaluation | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl) |
+| `eval_dataset.jsonl` | Jeu de données d'évaluation | [📥 Télécharger](lab-035/eval_dataset.jsonl) |
 
 ---
 
@@ -90,7 +90,7 @@ pip install azure-ai-evaluation openai
 
 ### Étape 2 : Créer un jeu de données de référence
 
-Un **jeu de données de référence** est un ensemble de questions de test avec des réponses de qualité connue. Créez [📥 `eval_dataset.jsonl`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl) :
+Un **jeu de données de référence** est un ensemble de questions de test avec des réponses de qualité connue. Créez [📥 `eval_dataset.jsonl`](lab-035/eval_dataset.jsonl) :
 
 ```jsonl
 {"query": "What is the return policy?", "response": "We offer a 60-day return window. Items must be unused in original packaging.", "context": "60-day return window. Items must be unused in original packaging. Worn footwear non-refundable unless defective."}
@@ -333,3 +333,10 @@ flowchart LR
 - [Foundry evaluation](https://learn.microsoft.com/azure/ai-foundry/concepts/evaluation-approach-gen-ai)
 - [Foundry Workflows retirement](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow)
 <!-- phase3-modernization:end -->
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-035-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-035-kit-fr.zip)

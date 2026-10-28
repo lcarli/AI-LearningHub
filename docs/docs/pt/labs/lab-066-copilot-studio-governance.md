@@ -95,8 +95,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_governance.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/broken_governance.py) |
-| `studio_agents.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-066/studio_agents.csv) |
+| `broken_governance.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-066/broken_governance.py) |
+| `studio_agents.csv` | Conjunto de dados | [📥 Download](lab-066/studio_agents.csv) |
 
 ---
 

@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/foundry/">Foundry + Security</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/foundry/">Foundry + Security</a></span>
   <span><strong>Tempo:</strong> ~45 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito (Docker local)</span> ou Azure PostgreSQL (~$15/mês)</span>
 </div>
@@ -67,7 +67,7 @@ Quando seu agente consulta o banco de dados, ele pode estar atendendo o Cliente 
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `migrations` | Arquivos de migração do banco de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-032/migrations) |
+| `002_rls.sql` | Migração de segurança em nível de linha | [📥 Download](lab-032/migrations/002_rls.sql) |
 
 ---
 
@@ -337,3 +337,10 @@ docker stop pg-rls-demo && docker rm pg-rls-demo
 
 - **Observabilidade de Agentes:** → [Lab 033 — App Insights Tracing](lab-033-agent-observability.md)
 - **RLS no Azure PostgreSQL:** → [Lab 031 — pgvector on Azure](lab-031-pgvector-semantic-search.md)
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-032-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-032-kit-pt.zip)

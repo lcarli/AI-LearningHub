@@ -129,11 +129,14 @@ python -m unittest discover -v
 
 ## Supporting kit
 
-- `README.md`: quick start and evidence checklist
-- `CHEATSHEET.md`: decision and review guide
-- `scenario.json`: deterministic exercise contract
-- `test_scenario.py`: local acceptance tests
-- Generated PDF and ZIP through the existing kit pipeline
+The site build generates stable PDF and ZIP downloads. CI also keeps a temporary artifact mirror for 30 days.
+
+- [`README.md`](lab-103/README.md): quick start and evidence checklist
+- [`CHEATSHEET.md`](lab-103/CHEATSHEET.md): decision and review guide
+- [`scenario.json`](lab-103/scenario.json): deterministic exercise contract
+- [`test_scenario.py`](lab-103/test_scenario.py): local acceptance tests
+- [Download generated PDF](../downloads/kits/lab-103-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-103-kit-en.zip)
 
 ## Scored knowledge check
 

@@ -85,3 +85,9 @@ Completions predict code locally in your editing flow; chat answers a conversati
 
 Document who controls the repository, which context leaves the client, applicable retention and exclusion policies, and which interactions consume AI Credits.
 
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-107-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-107-kit-en.zip)

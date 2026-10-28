@@ -87,8 +87,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_guardrails.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-082/broken_guardrails.py) |
-| `guardrail_tests.csv` | Jeu de données — 15 scénarios de test de garde-fous | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-082/guardrail_tests.csv) |
+| `broken_guardrails.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-082/broken_guardrails.py) |
+| `guardrail_tests.csv` | Jeu de données — 15 scénarios de test de garde-fous | [📥 Télécharger](lab-082/guardrail_tests.csv) |
 
 ---
 
@@ -400,7 +400,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécutez le lab) :** Combien des 15 tests ont déclenché un garde-fou ?"
 
-    Chargez [📥 `guardrail_tests.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-082/guardrail_tests.csv) et comptez les lignes où `triggered == True`.
+    Chargez [📥 `guardrail_tests.csv`](lab-082/guardrail_tests.csv) et comptez les lignes où `triggered == True`.
 
     ??? success "✅ Révéler la réponse"
         **10**

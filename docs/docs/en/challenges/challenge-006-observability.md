@@ -38,10 +38,10 @@ Save these files in one folder named `challenge-006/`:
 
 | File | Purpose | Download |
 |------|---------|----------|
-| `traces.json` | Mock agent trace export | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-006/traces.json) |
-| `starter_observability.py` | Broken incident analyzer | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-006/starter_observability.py) |
-| `test_observability.py` | Acceptance tests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-006/test_observability.py) |
-| `validate_observability.py` | Generates the final completion code | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-006/validate_observability.py) |
+| `traces.json` | Mock agent trace export | [Download](challenge-006/traces.json) |
+| `starter_observability.py` | Broken incident analyzer | [Download](challenge-006/starter_observability.py) |
+| `test_observability.py` | Acceptance tests | [Download](challenge-006/test_observability.py) |
+| `validate_observability.py` | Generates the final completion code | [Download](challenge-006/validate_observability.py) |
 
 ---
 

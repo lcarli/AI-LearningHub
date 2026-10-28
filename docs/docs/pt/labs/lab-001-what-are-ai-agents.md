@@ -182,3 +182,10 @@ Um agente de IA é um sistema alimentado por LLM que **percebe, lembra, raciocin
 ## Próximos Passos
 
 → **[Lab 002: Panorama dos Agentes de IA 2025](lab-002-agent-landscape.md)** — Compare todas as ferramentas e plataformas disponíveis hoje.
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-001-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-001-kit-pt.zip)

@@ -88,8 +88,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_multimodal.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/broken_multimodal.py) |
-| `multimodal_chunks.csv` | Dataset — 15 document chunks with retrieval scores | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/multimodal_chunks.csv) |
+| `broken_multimodal.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-083/broken_multimodal.py) |
+| `multimodal_chunks.csv` | Dataset — 15 document chunks with retrieval scores | [📥 Download](lab-083/multimodal_chunks.csv) |
 
 ---
 
@@ -360,7 +360,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** How many chunks contain images (`has_image == True`)?"
 
-    Load [📥 `multimodal_chunks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/multimodal_chunks.csv) and count rows where `has_image == True`.
+    Load [📥 `multimodal_chunks.csv`](lab-083/multimodal_chunks.csv) and count rows where `has_image == True`.
 
     ??? success "✅ Reveal Answer"
         **6**

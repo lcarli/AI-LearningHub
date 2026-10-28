@@ -3,7 +3,7 @@
   <h1>Développez des compétences IA pratiques pour 2026</h1>
   <p>Des labs gratuits d'abord pour apprenants et ateliers de production : GitHub Copilot, agents, MCP, fondamentaux LLM, gouvernance et GH-300.</p>
   <div class="hero-actions">
-    <a class="hub-button hub-button--primary" href="labs/lab-097-tokens-sampling-context.md">Commencer gratuitement</a>
+    <a class="hub-button hub-button--primary" href="labs/lab-097-tokens-sampling-context/">Commencer gratuitement</a>
     <a class="hub-button" href="labs/">Explorer le catalogue</a>
   </div>
 </div>
@@ -13,17 +13,17 @@
 ## Choisissez l'un des trois parcours
 
 <div class="journey-grid">
-<a class="journey-card" href="labs/lab-097-tokens-sampling-context.md"><h3>Fondamentaux</h3><p>Comprenez modèles, tokens, contexte, sécurité et patterns d'agents.</p></a>
+<a class="journey-card" href="labs/lab-097-tokens-sampling-context/"><h3>Fondamentaux</h3><p>Comprenez modèles, tokens, contexte, sécurité et patterns d'agents.</p></a>
 <a class="journey-card" href="paths/copilot/"><h3>GitHub Copilot</h3><p>Passez de Copilot Free à la personnalisation, MCP, CLI et livraison issue-vers-PR.</p></a>
-<a class="journey-card" href="labs/lab-094-copilot-governance-finops.md"><h3>IA d'entreprise</h3><p>Pratiquez gouvernance, FinOps, observabilité et architecture avec simulations gratuites.</p></a>
+<a class="journey-card" href="labs/lab-094-copilot-governance-finops/"><h3>IA d'entreprise</h3><p>Pratiquez gouvernance, FinOps, observabilité et architecture avec simulations gratuites.</p></a>
 </div>
 
 ## Commencer par persona
 
 <div class="persona-grid">
-<a class="persona-card" href="labs/lab-097-tokens-sampling-context.md"><h3>Étudiant / communauté</h3><p>Commencez par 097 → 004 → 085 et restez sur le parcours gratuit.</p></a>
+<a class="persona-card" href="labs/lab-097-tokens-sampling-context/"><h3>Étudiant / communauté</h3><p>Commencez par 097 → 004 → 085 et restez sur le parcours gratuit.</p></a>
 <a class="persona-card" href="paths/copilot/"><h3>Développeur</h3><p>Apprenez contexte, personnalisation, MCP, CLI et Spec Kit.</p></a>
-<a class="persona-card" href="labs/lab-107-how-copilot-works.md"><h3>Admin / plateforme</h3><p>Commencez par le fonctionnement de Copilot, puis gouvernance et simulation.</p></a>
+<a class="persona-card" href="labs/lab-107-how-copilot-works/"><h3>Admin / plateforme</h3><p>Commencez par le fonctionnement de Copilot, puis gouvernance et simulation.</p></a>
 <a class="persona-card" href="paths/gh-300/"><h3>Candidat GH-300</h3><p>Suivez la cohorte structurée de quatre semaines.</p></a>
 </div>
 

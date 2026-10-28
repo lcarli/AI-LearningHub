@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">Microsoft Foundry</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/foundry/">Microsoft Foundry</a></span>
   <span><strong>Time:</strong> ~45 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free (local)</span> + optional Azure Application Insights (free tier)</span>
 </div>

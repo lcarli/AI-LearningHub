@@ -85,3 +85,9 @@ Use prompt file para um fluxo acionado pelo usuário, `*.agent.md` para uma pers
 
 Inspecione `AGENTS.md` e todos os arquivos aplicáveis. Remova duplicações, explicite conflitos e mantenha permissões de ferramentas mínimas.
 
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-086-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-086-kit-pt.zip)

@@ -86,8 +86,8 @@ This lab analyzes pre-computed benchmark results — no NPU hardware, Windows AI
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_ondevice.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/broken_ondevice.py) |
-| `ondevice_tasks.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv) |
+| `broken_ondevice.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-062/broken_ondevice.py) |
+| `ondevice_tasks.csv` | Dataset | [📥 Download](lab-062/ondevice_tasks.csv) |
 
 ---
 
@@ -124,7 +124,7 @@ Key concepts:
 
 ## Part 2: Load Benchmark Data
 
-### Step 2: Load [📥 `ondevice_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-062/ondevice_tasks.csv)
+### Step 2: Load [📥 `ondevice_tasks.csv`](lab-062/ondevice_tasks.csv)
 
 The benchmark dataset contains results from running 15 tasks through NPU and cloud inference:
 

@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "outdoorgear": {
+      "command": "python",
+      "args": [
+        "server.py"
+      ]
+    }
+  }
+}

@@ -40,8 +40,9 @@ jobs:
       - name: Test catalog interactions
         run: node --test scripts/test_hub_features.js
 
-      - name: Test Phase 2 and Phase 3 exercises and kits
+      - name: Test content links, exercises, and kits
         run: |
+          python -m unittest scripts/test_content_links.py -v
           python -m unittest scripts/test_generate_kits.py -v
           python scripts/run_phase2_tests.py
           python scripts/generate_kits.py --check
@@ -49,3 +50,6 @@ jobs:
       - name: Build documentation
         working-directory: docs
         run: mkdocs build --strict
+
+      - name: Validate rendered site links
+        run: python scripts/validate_site_links.py
