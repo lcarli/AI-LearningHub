@@ -45,3 +45,9 @@ Vous gérez les déploiements d'IA — identité, conformité, DLP, surveillance
 ## Ajouts de la Phase 2
 
 Utilisez les Labs 092, 094 et 100 pour politiques, contrôles, menaces et limites de revue.
+
+<!-- phase3-role:start -->
+## Parcours de Phase 3
+
+Utilisez les Labs 102–106, les labs Agent Framework/MCP/Foundry modernisés et les formats du Hub instructeur adaptés à ce rôle.
+<!-- phase3-role:end -->

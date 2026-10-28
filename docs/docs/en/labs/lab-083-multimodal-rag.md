@@ -406,3 +406,20 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 - Explore [Azure AI Document Intelligence](https://learn.microsoft.com/azure/ai-services/document-intelligence/) for production-grade document parsing
 - Try building a multi-modal RAG pipeline with [LangChain's multi-modal support](https://python.langchain.com/docs/how_to/multimodal_inputs/)
 - Review **[Lab 080](lab-080-markitdown-mcp.md)** for document-to-Markdown conversion as a preprocessing step
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Real path
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Real path">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Real path</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Delete hosted deployments, endpoints, indexes, traces, and test data after validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

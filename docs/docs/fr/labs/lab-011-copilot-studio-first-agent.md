@@ -176,3 +176,22 @@ L'agent devrait utiliser le flux de votre sujet personnalisé, et non le repli I
 
 - **Teams AI Library (bot Teams code-first) :** → [Lab 024 — Teams AI Library](lab-024-teams-ai-library.md)
 - **Ajouter des outils MCP à Copilot Studio :** → [Lab 012 — Qu'est-ce que MCP ?](lab-012-what-is-mcp.md)
+
+<!-- phase3-modernization:start -->
+## Modernisation de Phase 3
+
+!!! warning "Verified 2026-10-27"
+    Utilisez Microsoft 365 Agents SDK et Agents Toolkit. Validez les agents déclaratifs avec le manifeste v1.9. Gardez Copilot Studio trial et Agents Playground facultatifs.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Microsoft 365 Agents SDK](https://learn.microsoft.com/microsoft-365/agents-sdk/)
+- [Microsoft 365 Agents Toolkit](https://learn.microsoft.com/microsoft-365/agents-toolkit/)
+- [Declarative agent schema](https://learn.microsoft.com/microsoft-365-copilot/extensibility/declarative-agent-manifest)
+<!-- phase3-modernization:end -->

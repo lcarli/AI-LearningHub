@@ -509,3 +509,20 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 - **[Lab 059](lab-059-voice-agents-realtime.md)** — Voice Agents with GPT Realtime API (real-time interaction, different modality)
 - **[Lab 043](lab-043-multimodal-agents.md)** — Multimodal Agents with GPT-4o Vision (another GPT-4o capability)
 - **[Lab 038](lab-038-cost-optimization.md)** — Cost Optimization (applying the cost-performance trade-offs from this lab)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Real path
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Real path">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Real path</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Delete hosted deployments, endpoints, indexes, traces, and test data after validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

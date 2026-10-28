@@ -345,3 +345,22 @@ Vous avez construit un serveur MCP entièrement fonctionnel qui :
 - **Version C# :** → [Lab 021 — Serveur MCP en C#](lab-021-mcp-server-csharp.md)
 - **Connecter à Microsoft Foundry Agent Service :** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)
 - **Ajouter des requêtes sur une vraie base de données :** → [Lab 031 — Recherche sémantique pgvector](lab-031-pgvector-semantic-search.md)
+
+<!-- phase3-modernization:start -->
+## Modernisation de Phase 3
+
+!!! warning "Verified 2026-10-27"
+    Ciblez MCP 2026-07-28. Préférez serveur stateless, discovery, SDK Tier 1 actuel et état multi round-trip explicite. Ajoutez Registry et autorisation selon le modèle de confiance.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Model Context Protocol specification](https://modelcontextprotocol.io/specification/2026-07-28)
+- [MCP authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
+- [MCP Registry](https://registry.modelcontextprotocol.io/)
+<!-- phase3-modernization:end -->

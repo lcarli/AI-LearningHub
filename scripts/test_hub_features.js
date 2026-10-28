@@ -98,4 +98,14 @@ test("catalog CSS includes accessible focus, responsive, and reduced-motion stat
   assert.match(css, /:focus-visible/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /\.token-playground/);
+  assert.match(css, /\.phase3-path-tabs/);
+});
+
+test("Phase 3 local and real tabs are initialized", () => {
+  const source = fs.readFileSync(
+    path.join(__dirname, "../docs/docs/en/js/hub-features.js"),
+    "utf8"
+  );
+  assert.match(source, /function addPhase3Tabs/);
+  assert.match(source, /data-phase3-panel/);
 });

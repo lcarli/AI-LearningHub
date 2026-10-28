@@ -414,3 +414,20 @@ Corrija todos os 3 bugs e execute novamente até ver `🎉 All 3 tests passed`.
 - **[Lab 062](lab-062-ondevice-phi-silica.md)** — Agentes On-Device com Phi Silica (inferência on-device acelerada por NPU)
 - **[Lab 060](lab-060-reasoning-models.md)** — Modelos de Raciocínio (quando você precisa de precisão máxima em vez de velocidade)
 - **[Lab 044](lab-044-phi4-ollama-production.md)** — Phi-4 com Ollama em Produção (implantação local alternativa)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulação / Caminho Real
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulação / Caminho Real">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulação</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Caminho Real</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Exclua implantações, endpoints, índices, traces e dados de teste após a validação.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

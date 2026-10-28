@@ -405,3 +405,20 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 - **[Lab 047](lab-047-work-iq-copilot-analytics.md)** — Work IQ Copilot Adoption Analytics (medindo o uso do Copilot no M365)
 - **[Lab 074](lab-074-foundry-agent-service.md)** — Foundry Agent Service (monitorando frotas de agentes de IA que alimentam analytics)
 - **[Lab 038](lab-038-cost-optimization.md)** — Otimização de Custos de IA (gerenciando custos do Copilot e IA)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulação / Caminho Real
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulação / Caminho Real">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulação</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Caminho Real</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Exclua implantações, endpoints, índices, traces e dados de teste após a validação.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

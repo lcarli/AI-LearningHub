@@ -277,3 +277,22 @@ Teams AI Library Application
 
 - **Agente Teams sem código:** → [Lab 011 — Copilot Studio](lab-011-copilot-studio-first-agent.md)
 - **Implantar no Azure:** → [Lab 028 — Implantar no Container Apps](lab-028-deploy-mcp-azure.md)
+
+<!-- phase3-modernization:start -->
+## Modernização da Fase 3
+
+!!! warning "Verified 2026-10-27"
+    Use Microsoft 365 Agents SDK e Agents Toolkit. Valide agentes declarativos com manifesto v1.9. Mantenha trial do Copilot Studio e Agents Playground opcionais.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Microsoft 365 Agents SDK](https://learn.microsoft.com/microsoft-365/agents-sdk/)
+- [Microsoft 365 Agents Toolkit](https://learn.microsoft.com/microsoft-365/agents-toolkit/)
+- [Declarative agent schema](https://learn.microsoft.com/microsoft-365-copilot/extensibility/declarative-agent-manifest)
+<!-- phase3-modernization:end -->

@@ -315,6 +315,49 @@
 .challenge-validator-result.success { color: #198754; }
 .challenge-validator-result.error { color: #dc3545; }
 
+/* Phase 3 local/real path tabs */
+
+.phase3-path-tabs {
+  margin: 1rem 0;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.phase3-path-tabs [role="tablist"] {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: var(--md-code-bg-color);
+}
+
+.phase3-path-tabs [role="tab"] {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.phase3-path-tabs [role="tab"][aria-selected="true"] {
+  border-color: var(--md-primary-fg-color);
+  background: var(--md-primary-fg-color);
+  color: #fff;
+}
+
+.phase3-path-tabs [role="tab"]:focus-visible {
+  outline: 3px solid #22d3ee;
+  outline-offset: 2px;
+}
+
+.phase3-path-tabs [role="tabpanel"] {
+  padding: 1rem;
+}
+
 /* ─────────────────────────────────────────────
    Home v2
    ───────────────────────────────────────────── */

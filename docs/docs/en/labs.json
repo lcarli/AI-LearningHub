@@ -364,29 +364,32 @@
   },
   {
     "id": "014",
-    "title": "Lab 014: Semantic Kernel — Hello Agent",
-    "summary": "- What Semantic Kernel (SK) is and its key building blocks - How to create an SK **Kernel** connected to GitHub Models (free) - How to add your first **Plugin** (native function) - How to enable **auto function calling** so the LLM decides when to use your function ---",
+    "title": "Lab 014: Hello Agent with Microsoft Agent Framework 1.0",
+    "summary": "- Create a MAF 1.0 agent with a local model adapter - Separate instructions, model, tools, and execution - Migrate a minimal Semantic Kernel agent without planners - Test deterministic fallback behavior",
     "url": "labs/lab-014-sk-hello-agent.md",
     "level": "L100",
-    "journey": "agent-framework",
-    "time_min": 30,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
     "technologies": [
-      "semantic-kernel",
-      "free",
-      "python",
-      "github-models"
+      "maf",
+      "phase-3"
     ],
     "language": "en",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "semantic-kernel",
-      "free",
-      "python",
-      "github-models"
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {
@@ -621,29 +624,32 @@
   },
   {
     "id": "023",
-    "title": "Lab 023: Semantic Kernel — Plugins, Memory & Planners",
-    "summary": "- Create **native function plugins** in Python and C# - Use **KernelArguments** to pass typed data between plugins - Add **in-memory vector store** for semantic memory - Use **auto function calling** to let the LLM orchestrate plugins - Understand how SK planners work ---",
+    "title": "Lab 023: Tools and Memory in Microsoft Agent Framework",
+    "summary": "- Expose typed tools with explicit authorization - Use bounded short-term and durable memory - Replace obsolete SK planners with explicit orchestration - Test injection and memory-isolation boundaries",
     "url": "labs/lab-023-sk-plugins-memory.md",
     "level": "L200",
-    "journey": "agent-framework",
-    "time_min": 45,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
     "technologies": [
-      "semantic-kernel",
-      "python",
-      "free",
-      "github-models"
+      "maf",
+      "phase-3"
     ],
     "language": "en",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "semantic-kernel",
-      "python",
-      "free",
-      "github-models"
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {
@@ -926,31 +932,32 @@
   },
   {
     "id": "034",
-    "title": "Lab 034: Multi-Agent Orchestration with Semantic Kernel",
-    "summary": "- Design a **multi-agent system** with an orchestrator and specialist agents - Use **SK `AgentGroupChat`** for structured agent-to-agent collaboration - Create `ProductAgent`, `PolicyAgent`, and `OrderAgent` as specialists - Route user requests to the right specialist automatical",
+    "title": "Lab 034: Microsoft Agent Framework Orchestration Patterns",
+    "summary": "- Compare sequential, concurrent, handoff, group chat, and magentic patterns - Choose a pattern from measurable coordination needs - Add checkpoints, budgets, and stop conditions - Evaluate outcome and coordination overhead",
     "url": "labs/lab-034-multi-agent-sk.md",
     "level": "L300",
-    "journey": "agent-framework",
-    "time_min": 60,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "journey": "ai-agents",
+    "time_min": 120,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
     "technologies": [
-      "semantic-kernel",
-      "multi-agent",
-      "python",
-      "free",
-      "github-models"
+      "maf",
+      "phase-3"
     ],
     "language": "en",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "semantic-kernel",
-      "multi-agent",
-      "python",
-      "free",
-      "github-models"
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {
@@ -1094,31 +1101,32 @@
   },
   {
     "id": "040",
-    "title": "Lab 040: Production Multi-Agent with AutoGen",
-    "summary": "- Build a **4-agent AutoGen system**: Orchestrator, Researcher, Analyst, and Critic - Use **AutoGen AgentChat** for structured multi-agent conversations - Implement **termination conditions** and **selection strategies** - Design **agent handoffs** for complex multi-step tasks - ",
+    "title": "Lab 040: Production Multi-Agent Systems with Microsoft Agent Framework",
+    "summary": "- Design a production MAF topology - Migrate AutoGen conversations using the official guide - Apply identity, policy, telemetry, budgets, and recovery - Prove rollback and human-approval controls",
     "url": "labs/lab-040-autogen-multi-agent.md",
     "level": "L400",
     "journey": "ai-agents",
-    "time_min": 90,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "time_min": 150,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
     "technologies": [
-      "autogen",
-      "multi-agent",
-      "python",
-      "free",
-      "github-models"
+      "maf",
+      "phase-3"
     ],
     "language": "en",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "autogen",
-      "multi-agent",
-      "python",
-      "free",
-      "github-models"
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {
@@ -1146,20 +1154,33 @@
   },
   {
     "id": "042",
-    "title": "Lab 042: Enterprise RAG with Evaluations",
-    "summary": "> 🚧 **This lab is coming soon.** Content is being developed. > > **Overview:** Build an enterprise RAG pipeline with chunking strategies, re-ranking, and evaluate quality using the Azure AI Evaluation SDK.",
+    "title": "Lab 042: Enterprise RAG with Evaluations and Foundry",
+    "summary": "- Build a local enterprise RAG baseline - Measure retrieval, groundedness, citation, latency, and cost - Use Foundry evaluation and tracing as an optional Real adapter - Gate promotion and clean up paid resources",
     "url": "labs/lab-042-enterprise-rag.md",
     "level": "L400",
     "journey": "llm-foundations",
-    "time_min": 30,
-    "cost": "paid",
-    "simulation": false,
-    "roles": [],
-    "technologies": [],
+    "time_min": 180,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "foundry",
+      "phase-3"
+    ],
     "language": "en",
     "status": "active",
     "last_verified": "2026-10-27",
-    "tags": []
+    "tags": [
+      "foundry",
+      "kit",
+      "local-first",
+      "phase-3",
+      "quiz"
+    ]
   },
   {
     "id": "043",
@@ -2973,6 +2994,156 @@
       "batch",
       "routing",
       "ai-credits"
+    ]
+  },
+  {
+    "id": "102",
+    "title": "Lab 102: Fine-Tuning vs RAG vs Prompting + LoRA on a Small Model",
+    "summary": "- Select prompting, RAG, or fine-tuning from evidence - Prepare a small LoRA dataset - Estimate GPU and Foundry cost before training - Compare quality, freshness, latency, and operations",
+    "url": "labs/lab-102-finetuning-rag-prompting-lora.md",
+    "level": "L300",
+    "journey": "llm-foundations",
+    "time_min": 120,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "lora",
+      "phase-3"
+    ],
+    "language": "en",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "kit",
+      "local-first",
+      "lora",
+      "phase-3",
+      "quiz"
+    ]
+  },
+  {
+    "id": "103",
+    "title": "Lab 103: Deep Dive: Train a Mini-GPT on CPU (Optional)",
+    "summary": "- Implement tokenization, embeddings, attention, and next-token loss - Train a tiny model on CPU with fixed seeds - Inspect overfitting and sampling - Explain why the exercise is educational, not production training",
+    "url": "labs/lab-103-train-mini-gpt-cpu.md",
+    "level": "L400",
+    "journey": "llm-foundations",
+    "time_min": 180,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "gpt",
+      "phase-3"
+    ],
+    "language": "en",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "gpt",
+      "kit",
+      "local-first",
+      "phase-3",
+      "quiz"
+    ]
+  },
+  {
+    "id": "104",
+    "title": "Lab 104: MCP 2026-07-28: Stateless Servers, Discovery, and Multi-Round-Trip",
+    "summary": "- Implement a stateless server contract - Discover capabilities before invoking them - Model multi-round-trip interactions - Place Registry and authorization controls at the correct boundary",
+    "url": "labs/lab-104-mcp-2026-stateless-discovery.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "mcp",
+      "phase-3"
+    ],
+    "language": "en",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "kit",
+      "local-first",
+      "mcp",
+      "phase-3",
+      "quiz"
+    ]
+  },
+  {
+    "id": "105",
+    "title": "Lab 105: MCP Apps: Interactive UI Inside Agents",
+    "summary": "- Declare an MCP App resource - Render accessible interactive UI - Keep host, app, and tool trust boundaries separate - Validate messages, permissions, and fallback text",
+    "url": "labs/lab-105-mcp-apps-interactive-ui.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free-gh",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "mcp-apps",
+      "phase-3"
+    ],
+    "language": "en",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "kit",
+      "local-first",
+      "mcp-apps",
+      "phase-3",
+      "quiz"
+    ]
+  },
+  {
+    "id": "106",
+    "title": "Lab 106: Microsoft Agent Framework: Orchestration Patterns",
+    "summary": "- Implement sequential, concurrent, handoff, and group patterns - Use explicit stop and escalation conditions - Measure coordination cost - Select the smallest sufficient pattern",
+    "url": "labs/lab-106-microsoft-agent-framework-orchestration.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "maf",
+      "phase-3"
+    ],
+    "language": "en",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {

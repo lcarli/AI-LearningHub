@@ -29,3 +29,13 @@ flowchart LR
 ## Free-first route
 
 All required exercises run locally with deterministic fixtures. Hosted embedding, generation, evaluation, and observability services are optional adapters.
+
+<!-- phase3-path:start -->
+## Ajouts de Phase 3
+
+| Lab | Objectif |
+|---|---|
+| [102](../../labs/lab-102-finetuning-rag-prompting-lora.md) | Prompting vs RAG vs LoRA |
+| [103](../../labs/lab-103-train-mini-gpt-cpu.md) | Mini-GPT on CPU |
+| [042](../../labs/lab-042-enterprise-rag.md) | Enterprise RAG and evaluations |
+<!-- phase3-path:end -->

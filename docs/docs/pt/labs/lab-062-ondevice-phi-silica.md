@@ -465,3 +465,20 @@ Corrija todos os 3 bugs e execute novamente até ver `🎉 All 3 tests passed`.
 - **[Lab 061](lab-061-slm-phi4-mini.md)** — SLMs com Phi-4 Mini (inferência local baseada em CPU/GPU via ONNX Runtime)
 - **[Lab 063](lab-063-agent-identity-entra.md)** — Identidade de Agente com Entra (protegendo agentes que acessam recursos na nuvem)
 - **[Lab 043](lab-043-multimodal-agents.md)** — Agentes Multimodais (estendendo capacidades de agentes além de texto)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulação / Caminho Real
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulação / Caminho Real">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulação</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Caminho Real</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Exclua implantações, endpoints, índices, traces e dados de teste após a validação.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

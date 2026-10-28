@@ -313,3 +313,23 @@ Les scores vont de 1 à 5. En dessous de 3.0 en ancrage, cela indique générale
 
 - **CI/CD pour les agents :** → [Lab 037 — GitHub Actions pour les agents IA](lab-037-cicd-github-actions.md)
 - **Évaluation RAG d'entreprise :** → [Lab 042 — RAG d'entreprise avec évaluations](lab-042-enterprise-rag.md) *(bientôt disponible)*
+
+<!-- phase3-modernization:start -->
+## Modernisation de Phase 3
+
+!!! warning "Verified 2026-10-27"
+    Utilisez Microsoft Foundry et Agent Service GA fondé sur Responses API. Les évaluations sont GA ; les hosted agents restent en preview et doivent être signalés. Ne dépendez pas des Workflows du portail retirés le 01/12/2026.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Foundry Agent Service GA announcement](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/)
+- [Foundry Agent Service](https://learn.microsoft.com/azure/ai-foundry/agents/)
+- [Foundry evaluation](https://learn.microsoft.com/azure/ai-foundry/concepts/evaluation-approach-gen-ai)
+- [Foundry Workflows retirement](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow)
+<!-- phase3-modernization:end -->

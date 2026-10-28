@@ -1,0 +1,16 @@
+{
+  "lab": "042",
+  "steps": [
+    "build_baseline",
+    "evaluate_golden_set",
+    "connect_foundry",
+    "gate_and_cleanup"
+  ],
+  "required_route": "local",
+  "credentials_required": false,
+  "real_path": {
+    "optional": true,
+    "cost_cap_required": true,
+    "cleanup_required": true
+  }
+}

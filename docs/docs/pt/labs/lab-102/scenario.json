@@ -1,0 +1,16 @@
+{
+  "lab": "102",
+  "steps": [
+    "score_options",
+    "prepare_dataset",
+    "simulate_lora",
+    "compare_results"
+  ],
+  "required_route": "local",
+  "credentials_required": false,
+  "real_path": {
+    "optional": true,
+    "cost_cap_required": true,
+    "cleanup_required": true
+  }
+}

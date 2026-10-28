@@ -375,3 +375,20 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 - **[Lab 017](lab-017-structured-output.md)** — Structured Output em profundidade (teoria complementar)
 - **[Lab 071](lab-071-context-caching.md)** — Context Caching (otimização de custos para fluxos com muitos schemas)
 - **[Lab 073](lab-073-swe-bench.md)** — Benchmarking de Agentes com SWE-bench (avalie a qualidade do agente)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulação / Caminho Real
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulação / Caminho Real">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulação</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Caminho Real</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Exclua implantações, endpoints, índices, traces e dados de teste após a validação.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

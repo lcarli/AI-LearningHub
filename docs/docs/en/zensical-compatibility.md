@@ -1,45 +1,17 @@
-# Zensical Compatibility Report — Phase 2
+# Zensical Compatibility Report — Phase 3
 
-**Decision:** do not migrate the production site in Phase 2.
+**Decision:** retain the current production build until trilingual folder-based i18n is supported without regression.
 
-## Isolated test
+The migration was re-evaluated against current official Zensical installation, MkDocs migration, and plugin compatibility documentation. The site requires EN/PT/FR folder routing from `mkdocs-static-i18n`, plus search, tags, glightbox, custom JavaScript, CSS, catalog JSON, quizzes, progress, and generated kits. Zensical can read MkDocs configuration and supports several Material surfaces, but its documented compatibility does not provide an equivalent supported path for this repository's folder-based `mkdocs-static-i18n` contract.
 
-The existing `docs/` tree was copied to a session scratch directory and a clean virtual environment was created. Two installation routes were attempted:
+Changing the production engine would therefore violate the Phase 3 no-degradation requirement. CI continues to run the strict MkDocs build, while the configuration and content remain migration-ready.
 
-1. the configured Python package feed requested the Windows ARM64 wheel and returned HTTP 404;
-2. direct PyPI access found Zensical 0.0.73, but the execution host failed the TLS handshake to `files.pythonhosted.org`.
+## Re-test gate
 
-Docker was also checked, but the Docker Desktop engine was not running. No repository file or production configuration was changed by the experiment.
-
-## Actionable compatibility blocker
-
-The repository depends on `mkdocs-static-i18n` with `docs_structure: folder` to build EN, PT, and FR from one configuration. Zensical's official MkDocs plugin compatibility list does not currently include that plugin, and its migration documentation describes native i18n as future compatibility work. A production switch would therefore risk dropping or misrouting two languages.
-
-## Supported surfaces
-
-- Zensical reads `mkdocs.yml` and supports gradual migration.
-- Search, tags, and glightbox have documented compatibility paths.
-- The repository does not use the unsupported MkDocs `hooks` setting.
-
-## Exit result
-
-The Phase 2 criterion is satisfied by an explicit, reproducible incompatibility report: **trilingual i18n is the blocking product gap**. Re-test when Zensical publishes native folder-based i18n or verified `mkdocs-static-i18n` compatibility. Keep MkDocs Material in production until the same navigation, page count, language routes, search, tags, and strict link checks pass.
-
-## Re-test procedure
-
-```powershell
-python -m venv .zensical-test
-.zensical-test\Scripts\python -m pip install zensical
-Copy-Item -Recurse docs .zensical-test\docs-copy
-Push-Location .zensical-test\docs-copy
-..\Scripts\zensical build
-Pop-Location
-```
-
-Compare the Zensical output with `python -m mkdocs build --strict`, including all EN/PT/FR routes.
+Migrate only when a clean Zensical build proves identical EN/PT/FR page counts and routes, navigation, search, tags, glightbox, custom JS/CSS, quizzes, progress, catalogs, and strict internal links.
 
 ## Official references
 
-- [Zensical: get started](https://zensical.org/docs/get-started/)
-- [Zensical: migrate from MkDocs](https://zensical.org/docs/compatibility/mkdocs/migration/)
-- [Zensical: compatible MkDocs plugins](https://zensical.org/docs/compatibility/mkdocs/plugins/)
+- [Zensical get started](https://zensical.org/docs/get-started/)
+- [Migrate from MkDocs](https://zensical.org/docs/compatibility/mkdocs/migration/)
+- [Compatible plugins](https://zensical.org/docs/compatibility/mkdocs/plugins/)

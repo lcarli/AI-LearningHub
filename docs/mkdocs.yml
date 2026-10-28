@@ -19,6 +19,7 @@ nav:
   - Prerequisites & Accounts: prerequisites.md
   - Cost Guide: cost-guide.md
   - Zensical Compatibility: zensical-compatibility.md
+  - Instructor Hub: instructor/index.md
 
   - Learning Paths:
       - By Technology:
@@ -39,6 +40,8 @@ nav:
           - 🎓 Student / Learner: paths/roles/student.md
       - Certification:
           - 🎓 GH-300 GitHub Copilot: paths/gh-300/index.md
+          - 🎓 AI-103 Microsoft Foundry: paths/certifications/ai-103.md
+          - 🎓 GH-600 GitHub Copilot: paths/certifications/gh-600.md
 
   - Labs:
       - All Labs: labs/index.md
@@ -61,7 +64,7 @@ nav:
           - "Lab 011: Copilot Studio First Agent": labs/lab-011-copilot-studio-first-agent.md
           - "Lab 012: What is MCP?": labs/lab-012-what-is-mcp.md
           - "Lab 013: GitHub Models — Free LLMs": labs/lab-013-github-models.md
-          - "Lab 014: SK Hello Agent": labs/lab-014-sk-hello-agent.md
+          - "Lab 014: Hello Agent with Microsoft Agent Framework": labs/lab-014-sk-hello-agent.md
           - "Lab 015: Ollama — Local LLMs": labs/lab-015-ollama-local-llms.md
           - "Lab 016: Copilot Agent Mode": labs/lab-016-copilot-agent-mode.md
           - "Lab 017: Reliable Structured Output": labs/lab-017-structured-output.md
@@ -79,7 +82,7 @@ nav:
           - "Lab 020: MCP Server in Python": labs/lab-020-mcp-server-python.md
           - "Lab 021: MCP Server in C#": labs/lab-021-mcp-server-csharp.md
           - "Lab 022: RAG with GitHub Models + pgvector": labs/lab-022-rag-github-models-pgvector.md
-          - "Lab 023: SK Plugins, Memory & Planners": labs/lab-023-sk-plugins-memory.md
+          - "Lab 023: Tools & Memory in Microsoft Agent Framework": labs/lab-023-sk-plugins-memory.md
           - "Lab 024: Teams AI Library Bot": labs/lab-024-teams-ai-library.md
           - "Lab 025: VS Code Copilot Chat Participant": labs/lab-025-vscode-chat-participant.md
           - "Lab 026: Agentic RAG Pattern": labs/lab-026-agentic-rag.md
@@ -104,6 +107,7 @@ nav:
           - "Lab 099: LLM Evaluations 101": labs/lab-099-llm-evaluations.md
           - "Lab 100: OWASP Threat Modeling for LLM Apps": labs/lab-100-owasp-llm-agentic-threat-modeling.md
           - "Lab 101: Token Economics": labs/lab-101-token-economics.md
+          - "Lab 104: MCP 2026-07-28": labs/lab-104-mcp-2026-stateless-discovery.md
 
       - "L300 — Advanced":
           - "Lab 028: Deploy MCP to Azure Container Apps": labs/lab-028-deploy-mcp-azure.md
@@ -111,7 +115,7 @@ nav:
           - "Lab 031: pgvector Semantic Search on Azure": labs/lab-031-pgvector-semantic-search.md
           - "Lab 032: Row Level Security for Agents": labs/lab-032-row-level-security.md
           - "Lab 033: Agent Observability with App Insights": labs/lab-033-agent-observability.md
-          - "Lab 034: Multi-Agent with Semantic Kernel": labs/lab-034-multi-agent-sk.md
+          - "Lab 034: Agent Framework Orchestration Patterns": labs/lab-034-multi-agent-sk.md
           - "Lab 035: Agent Evaluation with Azure AI Eval SDK": labs/lab-035-agent-evaluation.md
           - "Lab 036: Prompt Injection Defense & Security": labs/lab-036-prompt-injection-security.md
           - "Lab 037: CI/CD for AI Agents": labs/lab-037-cicd-github-actions.md
@@ -142,16 +146,20 @@ nav:
           - "Lab 092: Secure Code with Copilot": labs/lab-092-secure-code-copilot.md
           - "Lab 093: Copilot SDK": labs/lab-093-copilot-sdk-agent-app.md
           - "Lab 095: Measuring Copilot Impact": labs/lab-095-copilot-impact-metrics.md
+          - "Lab 102: Fine-tuning vs RAG vs Prompting + LoRA": labs/lab-102-finetuning-rag-prompting-lora.md
+          - "Lab 105: MCP Apps": labs/lab-105-mcp-apps-interactive-ui.md
+          - "Lab 106: Agent Framework Orchestration": labs/lab-106-microsoft-agent-framework-orchestration.md
 
       - "L400 — Expert":
-          - "Lab 040: Production Multi-Agent (AutoGen)": labs/lab-040-autogen-multi-agent.md
-          - "Lab 042: Enterprise RAG with Evaluations (Coming Soon)": labs/lab-042-enterprise-rag.md
+          - "Lab 040: Production Multi-Agent with Agent Framework": labs/lab-040-autogen-multi-agent.md
+          - "Lab 042: Enterprise RAG with Evaluations": labs/lab-042-enterprise-rag.md
           - "Lab 044: Phi-4 + Ollama in Production": labs/lab-044-phi4-ollama-production.md
           - "Lab 050: Multi-Agent Observability": labs/lab-050-multi-agent-observability.md
           - "Lab 055: A2A + MCP Capstone": labs/lab-055-a2a-mcp-capstone.md
           - "Lab 064: Securing MCP with APIM": labs/lab-064-securing-mcp-apim.md
           - "Lab 084: Capstone — OutdoorGear Agent": labs/lab-084-capstone-outdoorgear-agent.md
           - "Lab 096: Capstone — Agentic DevOps": labs/lab-096-agentic-devops-capstone.md
+          - "Lab 103: Train a Mini-GPT on CPU": labs/lab-103-train-mini-gpt-cpu.md
 
   - Challenges:
       - All Challenges: challenges/index.md
@@ -166,6 +174,7 @@ nav:
       - "Challenge 009: Pass Using Only Copilot Free": challenges/challenge-009-copilot-free.md
       - "Challenge 010: From Spec to PR": challenges/challenge-010-spec-to-pr.md
       - "Challenge 011: Evaluation-Driven RAG": challenges/challenge-011-evaluation-driven-rag.md
+      - "Challenge 012: Harden an MCP Server": challenges/challenge-012-harden-mcp-server.md
 
   - Glossary: glossary.md
   - What's New: whats-new.md
@@ -199,6 +208,7 @@ plugins:
             Prerequisites & Accounts: Pré-requisitos e Contas
             Cost Guide: Guia de Custos
             Zensical Compatibility: Compatibilidade com Zensical
+            Instructor Hub: Hub do Instrutor
             Learning Paths: Trilhas de Aprendizado
             By Technology: Por Tecnologia
             "🧠 LLM Foundations 2.0": "🧠 Fundamentos de LLM 2.0"
@@ -209,6 +219,8 @@ plugins:
             "🔒 Enterprise Admin": "🔒 Admin Corporativo"
             "🎓 Student / Learner": "🎓 Estudante"
             Certification: Certificação
+            "🎓 AI-103 Microsoft Foundry": "🎓 AI-103 Microsoft Foundry"
+            "🎓 GH-600 GitHub Copilot": "🎓 GH-600 GitHub Copilot"
             Labs: Laboratórios
             All Labs: Todos os Labs
             "L50 — Awareness": "L50 — Conscientização"
@@ -229,6 +241,7 @@ plugins:
             "Challenge 009: Pass Using Only Copilot Free": "Desafio 009: Passe Usando Só o Copilot Free"
             "Challenge 010: From Spec to PR": "Desafio 010: Da Spec ao PR"
             "Challenge 011: Evaluation-Driven RAG": "Desafio 011: RAG Guiado por Avaliação"
+            "Challenge 012: Harden an MCP Server": "Desafio 012: Blinde um Servidor MCP"
             Glossary: Glossário
             What's New: Novidades
             Tags: Tags
@@ -249,6 +262,7 @@ plugins:
             Prerequisites & Accounts: Prérequis et Comptes
             Cost Guide: Guide des Coûts
             Zensical Compatibility: Compatibilité Zensical
+            Instructor Hub: Hub de l'instructeur
             Learning Paths: Parcours d'Apprentissage
             By Technology: Par Technologie
             "🧠 LLM Foundations 2.0": "🧠 Fondamentaux LLM 2.0"
@@ -259,6 +273,8 @@ plugins:
             "🔒 Enterprise Admin": "🔒 Admin Entreprise"
             "🎓 Student / Learner": "🎓 Étudiant"
             Certification: Certification
+            "🎓 AI-103 Microsoft Foundry": "🎓 AI-103 Microsoft Foundry"
+            "🎓 GH-600 GitHub Copilot": "🎓 GH-600 GitHub Copilot"
             Labs: Laboratoires
             All Labs: Tous les Labs
             "L50 — Awareness": "L50 — Sensibilisation"
@@ -279,6 +295,7 @@ plugins:
             "Challenge 009: Pass Using Only Copilot Free": "Défi 009 : Réussir uniquement avec Copilot Free"
             "Challenge 010: From Spec to PR": "Défi 010 : De la spécification à la pull request"
             "Challenge 011: Evaluation-Driven RAG": "Défi 011 : RAG guidé par l'évaluation"
+            "Challenge 012: Harden an MCP Server": "Défi 012 : Durcir un serveur MCP"
             Glossary: Glossaire
             What's New: Nouveautés
             Tags: Tags

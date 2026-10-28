@@ -376,3 +376,20 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 - **[Lab 067](lab-067-graphrag.md)** — GraphRAG (aprimore a pesquisa com recuperação por grafo de conhecimento)
 - **[Lab 033](lab-033-agent-observability.md)** — Observabilidade de Agentes (monitore pipelines de pesquisa profunda em produção)
 - **[Lab 076](lab-076-microsoft-agent-framework.md)** — Microsoft Agent Framework (implemente pipelines com MAF Graph Workflows)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulação / Caminho Real
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulação / Caminho Real">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulação</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Caminho Real</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Exclua implantações, endpoints, índices, traces e dados de teste após a validação.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

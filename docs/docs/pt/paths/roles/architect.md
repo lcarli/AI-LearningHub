@@ -49,3 +49,9 @@ Você projeta sistemas de IA em produção — arquiteturas multi-agente, observ
 ## Adições da Fase 2
 
 Use os Labs 095, 098, 100 e 101 para conectar decisões a evidência, risco e custo.
+
+<!-- phase3-role:start -->
+## Rota da Fase 3
+
+Use os Labs 102–106, os labs modernizados de Agent Framework/MCP/Foundry e os formatos do Hub do Instrutor adequados a este perfil.
+<!-- phase3-role:end -->

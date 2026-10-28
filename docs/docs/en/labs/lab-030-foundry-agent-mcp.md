@@ -208,3 +208,23 @@ az group delete --name rg-ai-labs-foundry --yes --no-wait
 
 - **Add pgvector for RAG:** → [Lab 031 — pgvector on Azure](lab-031-pgvector-semantic-search.md)
 - **Row Level Security:** → [Lab 032 — RLS for Agents](lab-032-row-level-security.md)
+
+<!-- phase3-modernization:start -->
+## Phase 3 modernization
+
+!!! warning "Verified 2026-10-27"
+    Use the Microsoft Foundry name and GA Agent Service surfaces based on the Responses API. Evaluations are GA; hosted agents remain preview and must be labeled accordingly. Do not build new dependencies on portal Workflows scheduled for retirement on 2026-12-01.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Foundry Agent Service GA announcement](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/)
+- [Foundry Agent Service](https://learn.microsoft.com/azure/ai-foundry/agents/)
+- [Foundry evaluation](https://learn.microsoft.com/azure/ai-foundry/concepts/evaluation-approach-gen-ai)
+- [Foundry Workflows retirement](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow)
+<!-- phase3-modernization:end -->

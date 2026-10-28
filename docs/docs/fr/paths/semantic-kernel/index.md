@@ -38,3 +38,9 @@ Semantic Kernel (SK) est le SDK open-source de Microsoft pour construire des age
 - [Documentation SK](https://learn.microsoft.com/semantic-kernel/)
 - [SK Cookbook (Python)](https://github.com/microsoft/semantic-kernel/tree/main/python/samples)
 - [SK Cookbook (C#)](https://github.com/microsoft/semantic-kernel/tree/main/dotnet/samples)
+
+<!-- phase3-path:start -->
+## Migration vers Microsoft Agent Framework 1.0
+
+Ce parcours reste un contexte de migration. Les nouvelles implémentations utilisent les Labs 014, 023, 034, 040, 076 et 106 avec Microsoft Agent Framework 1.0.
+<!-- phase3-path:end -->

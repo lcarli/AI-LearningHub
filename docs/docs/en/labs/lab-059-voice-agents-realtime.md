@@ -465,3 +465,20 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 - **[Lab 043](lab-043-multimodal-agents.md)** — Multimodal Agents with GPT-4o Vision (complementary modality)
 - **[Lab 060](lab-060-reasoning-models.md)** — Reasoning Models: Chain-of-Thought with o3 and DeepSeek R1
 - **[Lab 019](lab-019-streaming-responses.md)** — Streaming Responses (foundational streaming concepts)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Real path
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Real path">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Real path</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Delete hosted deployments, endpoints, indexes, traces, and test data after validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

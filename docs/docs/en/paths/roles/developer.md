@@ -61,3 +61,9 @@ Foundry Local (free)            Framework, guardrails           deploy, evaluati
 ## Phase 2 additions
 
 Use Labs 090, 092, 093, 096 and Challenge 010 for tested, secure, agentic delivery.
+
+<!-- phase3-role:start -->
+## Phase 3 route
+
+Use Labs 102–106, the modernized Agent Framework/MCP/Foundry labs, and the Instructor Hub delivery formats appropriate to this role.
+<!-- phase3-role:end -->

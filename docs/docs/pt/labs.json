@@ -374,29 +374,32 @@
   },
   {
     "id": "014",
-    "title": "Lab 014: Semantic Kernel — Hello Agent",
-    "summary": "",
+    "title": "Lab 014: Hello Agent com Microsoft Agent Framework 1.0",
+    "summary": "- Criar um agente MAF 1.0 com adaptador de modelo local - Separar instruções, modelo, ferramentas e execução - Migrar um agente Semantic Kernel mínimo sem planners - Testar fallback determinístico",
     "url": "labs/lab-014-sk-hello-agent.md",
     "level": "L100",
-    "journey": "agent-framework",
-    "time_min": 30,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
     "technologies": [
-      "semantic-kernel",
-      "free",
-      "python",
-      "github-models"
+      "maf",
+      "phase-3"
     ],
     "language": "pt",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "semantic-kernel",
-      "free",
-      "python",
-      "github-models"
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {
@@ -631,29 +634,32 @@
   },
   {
     "id": "023",
-    "title": "Lab 023: Semantic Kernel — Plugins, Memória e Planners",
-    "summary": "",
+    "title": "Lab 023: Ferramentas e Memória no Microsoft Agent Framework",
+    "summary": "- Expor ferramentas tipadas com autorização explícita - Usar memória curta e durável com limites - Substituir planners SK obsoletos por orquestração explícita - Testar injeção e isolamento de memória",
     "url": "labs/lab-023-sk-plugins-memory.md",
     "level": "L200",
-    "journey": "agent-framework",
-    "time_min": 45,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
     "technologies": [
-      "semantic-kernel",
-      "python",
-      "free",
-      "github-models"
+      "maf",
+      "phase-3"
     ],
     "language": "pt",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "semantic-kernel",
-      "python",
-      "free",
-      "github-models"
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {
@@ -936,31 +942,32 @@
   },
   {
     "id": "034",
-    "title": "Lab 034: Orquestração Multi-Agente com Semantic Kernel",
-    "summary": "",
+    "title": "Lab 034: Padrões de Orquestração do Microsoft Agent Framework",
+    "summary": "- Comparar padrões sequencial, concorrente, handoff, group chat e magentic - Escolher padrão por necessidades mensuráveis - Adicionar checkpoints, orçamentos e condições de parada - Avaliar resultado e overhead",
     "url": "labs/lab-034-multi-agent-sk.md",
     "level": "L300",
-    "journey": "agent-framework",
-    "time_min": 60,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "journey": "ai-agents",
+    "time_min": 120,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
     "technologies": [
-      "semantic-kernel",
-      "multi-agent",
-      "python",
-      "free",
-      "github-models"
+      "maf",
+      "phase-3"
     ],
     "language": "pt",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "semantic-kernel",
-      "multi-agent",
-      "python",
-      "free",
-      "github-models"
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {
@@ -1104,31 +1111,32 @@
   },
   {
     "id": "040",
-    "title": "Lab 040: Multi-Agente em Produção com AutoGen",
-    "summary": "",
+    "title": "Lab 040: Sistemas Multiagente de Produção com Microsoft Agent Framework",
+    "summary": "- Projetar topologia MAF de produção - Migrar conversas AutoGen pelo guia oficial - Aplicar identidade, política, telemetria, orçamento e recuperação - Provar rollback e aprovação humana",
     "url": "labs/lab-040-autogen-multi-agent.md",
     "level": "L400",
     "journey": "ai-agents",
-    "time_min": 90,
-    "cost": "free-gh",
-    "simulation": false,
-    "roles": [],
+    "time_min": 150,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
     "technologies": [
-      "autogen",
-      "multi-agent",
-      "python",
-      "free",
-      "github-models"
+      "maf",
+      "phase-3"
     ],
     "language": "pt",
     "status": "active",
     "last_verified": "2026-10-27",
     "tags": [
-      "autogen",
-      "multi-agent",
-      "python",
-      "free",
-      "github-models"
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {
@@ -1156,20 +1164,33 @@
   },
   {
     "id": "042",
-    "title": "Lab 042: RAG Empresarial com Avaliações",
-    "summary": "",
+    "title": "Lab 042: RAG Corporativo com Avaliações e Foundry",
+    "summary": "- Construir linha de base RAG corporativa local - Medir recuperação, fundamentação, citação, latência e custo - Usar avaliação e tracing do Foundry como adaptador Real opcional - Controlar promoção e limpar recursos pagos",
     "url": "labs/lab-042-enterprise-rag.md",
     "level": "L400",
     "journey": "llm-foundations",
-    "time_min": 30,
-    "cost": "paid",
-    "simulation": false,
-    "roles": [],
-    "technologies": [],
+    "time_min": 180,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "foundry",
+      "phase-3"
+    ],
     "language": "pt",
     "status": "active",
     "last_verified": "2026-10-27",
-    "tags": []
+    "tags": [
+      "foundry",
+      "kit",
+      "local-first",
+      "phase-3",
+      "quiz"
+    ]
   },
   {
     "id": "043",
@@ -2983,6 +3004,156 @@
       "batch",
       "routing",
       "ai-credits"
+    ]
+  },
+  {
+    "id": "102",
+    "title": "Lab 102: Fine-tuning vs RAG vs Prompting + LoRA em Modelo Pequeno",
+    "summary": "- Selecionar prompting, RAG ou fine-tuning por evidência - Preparar dataset LoRA pequeno - Estimar custo GPU e Foundry antes do treino - Comparar qualidade, atualização, latência e operação",
+    "url": "labs/lab-102-finetuning-rag-prompting-lora.md",
+    "level": "L300",
+    "journey": "llm-foundations",
+    "time_min": 120,
+    "cost": "free-conditional",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "lora",
+      "phase-3"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "kit",
+      "local-first",
+      "lora",
+      "phase-3",
+      "quiz"
+    ]
+  },
+  {
+    "id": "103",
+    "title": "Lab 103: Mergulho Profundo: Treine um Mini-GPT na CPU (Opcional)",
+    "summary": "- Implementar tokenização, embeddings, atenção e loss - Treinar modelo minúsculo na CPU com seeds fixas - Inspecionar overfitting e amostragem - Explicar por que é exercício educacional",
+    "url": "labs/lab-103-train-mini-gpt-cpu.md",
+    "level": "L400",
+    "journey": "llm-foundations",
+    "time_min": 180,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "gpt",
+      "phase-3"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "gpt",
+      "kit",
+      "local-first",
+      "phase-3",
+      "quiz"
+    ]
+  },
+  {
+    "id": "104",
+    "title": "Lab 104: MCP 2026-07-28: Servidores Stateless, Discovery e Multi Round-Trip",
+    "summary": "- Implementar contrato de servidor stateless - Descobrir capacidades antes da chamada - Modelar interações multi round-trip - Posicionar Registry e autorização na fronteira correta",
+    "url": "labs/lab-104-mcp-2026-stateless-discovery.md",
+    "level": "L200",
+    "journey": "ai-agents",
+    "time_min": 60,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "mcp",
+      "phase-3"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "kit",
+      "local-first",
+      "mcp",
+      "phase-3",
+      "quiz"
+    ]
+  },
+  {
+    "id": "105",
+    "title": "Lab 105: MCP Apps: UI Interativa Dentro de Agentes",
+    "summary": "- Declarar recurso MCP App - Renderizar UI interativa acessível - Separar fronteiras de confiança de host, app e ferramenta - Validar mensagens, permissões e fallback textual",
+    "url": "labs/lab-105-mcp-apps-interactive-ui.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 75,
+    "cost": "free-gh",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "mcp-apps",
+      "phase-3"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "kit",
+      "local-first",
+      "mcp-apps",
+      "phase-3",
+      "quiz"
+    ]
+  },
+  {
+    "id": "106",
+    "title": "Lab 106: Microsoft Agent Framework: Padrões de Orquestração",
+    "summary": "- Implementar padrões sequencial, concorrente, handoff e group - Usar parada e escalonamento explícitos - Medir custo de coordenação - Selecionar o menor padrão suficiente",
+    "url": "labs/lab-106-microsoft-agent-framework-orchestration.md",
+    "level": "L300",
+    "journey": "ai-agents",
+    "time_min": 90,
+    "cost": "free",
+    "simulation": true,
+    "roles": [
+      "developer",
+      "architect",
+      "student"
+    ],
+    "technologies": [
+      "maf",
+      "phase-3"
+    ],
+    "language": "pt",
+    "status": "active",
+    "last_verified": "2026-10-27",
+    "tags": [
+      "kit",
+      "local-first",
+      "maf",
+      "phase-3",
+      "quiz"
     ]
   },
   {

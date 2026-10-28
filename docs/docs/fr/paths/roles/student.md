@@ -42,3 +42,9 @@ Vous débutez avec les agents IA et souhaitez apprendre de zéro — entièremen
 ## Ajouts de la Phase 2
 
 Utilisez les Labs 004, 005, 007, 097–101 et le Défi 011 pour un parcours LLM local et gratuit.
+
+<!-- phase3-role:start -->
+## Parcours de Phase 3
+
+Utilisez les Labs 102–106, les labs Agent Framework/MCP/Foundry modernisés et les formats du Hub instructeur adaptés à ce rôle.
+<!-- phase3-role:end -->

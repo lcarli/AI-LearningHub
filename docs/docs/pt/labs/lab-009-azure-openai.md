@@ -336,3 +336,23 @@ O Azure AI Foundry fornece um portal unificado para gerenciar o Azure OpenAI e o
 - **Construa um agente completo com Foundry:** → [Lab 030 — Foundry Agent Service + MCP](lab-030-foundry-agent-mcp.md)
 - **Adicione RAG ao seu app Azure OpenAI:** → [Lab 031 — Busca Semântica com pgvector no Azure](lab-031-pgvector-semantic-search.md)
 - **Alternativa gratuita para os labs:** → [Lab 013 — GitHub Models](lab-013-github-models.md)
+
+<!-- phase3-modernization:start -->
+## Modernização da Fase 3
+
+!!! warning "Verified 2026-10-27"
+    Use o nome Microsoft Foundry e o Agent Service GA baseado na Responses API. Avaliações estão GA; hosted agents continuam preview e devem ser identificados assim. Não crie dependência nova de Workflows do portal, descontinuados em 01/12/2026.
+
+```mermaid
+flowchart LR
+  L[Legacy or current lab] --> C[Phase 3 contract]
+  C --> V[Local validation]
+  V --> R[Optional Real adapter]
+  R --> O[Operations and cleanup]
+```
+
+- [Foundry Agent Service GA announcement](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/)
+- [Foundry Agent Service](https://learn.microsoft.com/azure/ai-foundry/agents/)
+- [Foundry evaluation](https://learn.microsoft.com/azure/ai-foundry/concepts/evaluation-approach-gen-ai)
+- [Foundry Workflows retirement](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow)
+<!-- phase3-modernization:end -->

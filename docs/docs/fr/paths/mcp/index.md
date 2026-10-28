@@ -53,3 +53,11 @@ Considérez-le comme « l'USB-C pour les agents IA » — une interface standard
 - [MCP pour Débutants (Microsoft)](https://github.com/microsoft/mcp-for-beginners)
 - [Serveur MCP Azure](https://learn.microsoft.com/azure/developer/azure-mcp-server/)
 - [MCP Inspector (outil de débogage)](https://github.com/modelcontextprotocol/inspector)
+
+<!-- phase3-path:start -->
+## Ajouts de Phase 3
+
+- [Lab 104](../../labs/lab-104-mcp-2026-stateless-discovery.md): MCP 2026-07-28.
+- [Lab 105](../../labs/lab-105-mcp-apps-interactive-ui.md): MCP Apps.
+- [Challenge 012](../../challenges/challenge-012-harden-mcp-server.md): attaquer, défendre et relier à OWASP.
+<!-- phase3-path:end -->

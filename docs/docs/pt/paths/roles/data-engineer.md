@@ -46,3 +46,9 @@ Você trabalha com dados — analytics, BI, pipelines ETL — e quer adicionar a
 ## Adições da Fase 2
 
 Use os Labs 022, 095 e 099 com o Desafio 011 para evidência de recuperação e avaliação.
+
+<!-- phase3-role:start -->
+## Rota da Fase 3
+
+Use os Labs 102–106, os labs modernizados de Agent Framework/MCP/Foundry e os formatos do Hub do Instrutor adequados a este perfil.
+<!-- phase3-role:end -->

@@ -1,0 +1,16 @@
+{
+  "lab": "040",
+  "steps": [
+    "model_boundaries",
+    "migrate_autogen",
+    "inject_failures",
+    "prove_operations"
+  ],
+  "required_route": "local",
+  "credentials_required": false,
+  "real_path": {
+    "optional": true,
+    "cost_cap_required": true,
+    "cleanup_required": true
+  }
+}

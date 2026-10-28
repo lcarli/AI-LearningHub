@@ -1,22 +1,29 @@
 ---
 tags:
-- semantic-kernel
-- free
-- python
-- github-models
+- kit
+- local-first
+- maf
+- phase-3
+- quiz
 lab:
   id: '014'
   level: L100
-  journey: agent-framework
-  time_min: 30
+  journey: ai-agents
+  time_min: 60
   cost:
-    tier: free-gh
-    requires:
-    - github
-    - copilot-free
-    estimate_usd: 0 within the documented free path or quota.
-    simulation: false
+    tier: free
+    requires: []
+    estimate_usd: 0 for the local simulation; optional Real usage varies by service
+      and must be capped.
+    simulation: true
     cleanup: false
+  roles:
+  - developer
+  - architect
+  - student
+  technologies:
+  - maf
+  - phase-3
   status: active
   last_verified: '2026-10-27'
   languages:
@@ -24,343 +31,136 @@ lab:
   - pt
   - fr
 ---
-!!! warning "Backend update (October 2026)"
-    GitHub Models inference was retired on July 30, 2026. Any references below are retained only for historical context while this lab is migrated. Use [Lab 013 — Free LLM backends](../labs/lab-013-github-models.md) to configure Foundry Local or Ollama before continuing.
-
-# Lab 014: Semantic Kernel — Hello Agent
+# Lab 014: Hello Agent with Microsoft Agent Framework 1.0
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/semantic-kernel/">🧠 Semantic Kernel</a></span>
-  <span><strong>Time:</strong> ~30 min</span>
-  <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account, no credit card</span>
+  <span><strong>Journey:</strong> ai-agents</span>
+  <span><strong>Time:</strong> ~60 min</span>
+  <span><strong>Cost:</strong> free</span>
 </div>
 
-!!! warning "Semantic Kernel → Microsoft Agent Framework"
-    Semantic Kernel is now part of **Microsoft Agent Framework (MAF)**, which unifies SK and AutoGen into a single framework. The concepts in this lab (Kernel, Plugins, function calling) still apply — MAF builds on top of them. See **[Lab 076: Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** for the migration guide.
+!!! info "Phase 3 · local first"
+    The required route is deterministic and local. The Real route is optional and includes an estimate and cleanup.
 
 ## What You'll Learn
 
-- What Semantic Kernel (SK) is and its key building blocks
-- How to create an SK **Kernel** connected to GitHub Models (free)
-- How to add your first **Plugin** (native function)
-- How to enable **auto function calling** so the LLM decides when to use your function
+- Create a MAF 1.0 agent with a local model adapter
+- Separate instructions, model, tools, and execution
+- Migrate a minimal Semantic Kernel agent without planners
+- Test deterministic fallback behavior
 
----
+## Prerequisites
 
-## Introduction
+- Python 3.10+ and a terminal
+- No credentials for the required route
+- Read the linked official specification before using a hosted adapter
 
-**Semantic Kernel** is Microsoft's open-source SDK for building AI agents and applications. It sits between your code and the LLM, providing:
+## Visual model
 
-- A unified abstraction over any LLM (OpenAI, Azure OpenAI, GitHub Models, Ollama...)
-- A **Plugin system** for defining functions the LLM can call
-- **Auto function calling** — the LLM automatically invokes your functions when needed
-- **Vector memory** for long-term context (covered in Lab 023)
-
-In this lab, we build a simple agent that can answer questions **and** call a custom function.
-
----
-
-## 📁 Starter File
-
-A skeleton starter file is provided with `TODO` comments for each step:
-
-```bash
-pip install -r requirements.txt
-python hello_agent_starter.py
+```mermaid
+flowchart LR
+  U[User] --> A[MAF Agent]
+  A --> M[Local model adapter]
+  A --> T[Typed tool]
+  A --> R[Response]
+  R --> V[Local assertions]
 ```
 
-Complete the TODOs in order (1–16) to build a full SK agent with semantic functions, native plugins, and a chat loop.
+## Scenario
 
----
+OutdoorGear needs a reviewable workshop implementation with deterministic fixtures, explicit trust boundaries, measurable acceptance criteria, and a reversible optional hosted adapter.
 
-## Prerequisites Setup
+## Guided exercise
 
-### Python
+### Step 1: `inspect_contract`
+
+1. Run the deterministic fixture for this step.
+2. Record the declared input, output, policy decision, and failure behavior.
+3. Change one bounded behavior and run the local test again.
+
+**Evidence:** Save the command, result, and one sentence explaining why the evidence is trustworthy.
+
+### Step 2: `implement_agent`
+
+1. Run the deterministic fixture for this step.
+2. Record the declared input, output, policy decision, and failure behavior.
+3. Change one bounded behavior and run the local test again.
+
+**Evidence:** Save the command, result, and one sentence explaining why the evidence is trustworthy.
+
+### Step 3: `add_tool`
+
+1. Run the deterministic fixture for this step.
+2. Record the declared input, output, policy decision, and failure behavior.
+3. Change one bounded behavior and run the local test again.
+
+**Evidence:** Save the command, result, and one sentence explaining why the evidence is trustworthy.
+
+### Step 4: `validate_trace`
+
+1. Run the deterministic fixture for this step.
+2. Record the declared input, output, policy decision, and failure behavior.
+3. Change one bounded behavior and run the local test again.
+
+**Evidence:** Save the command, result, and one sentence explaining why the evidence is trustworthy.
+
+### Run locally
+
 ```bash
-pip install semantic-kernel openai
+cd docs/docs/en/labs/lab-014
+python -m unittest discover -v
 ```
 
-### C#
-```bash
-dotnet new console -n HelloSkAgent
-cd HelloSkAgent
-dotnet add package Microsoft.SemanticKernel
-```
+## Simulation / Real path
 
-Make sure `GITHUB_TOKEN` is set (see [Lab 013](lab-013-github-models.md)).
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Real path">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Real path</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Use the included deterministic fixtures and local validator. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Replace only the adapter boundary. Set a spending cap before execution, retain the same acceptance tests, and record region, retention, identity, telemetry, and pricing assumptions. Delete hosted deployments, endpoints, indexes, traces, and test data after validation.
+  </section>
+</div>
 
----
+## Supporting kit
 
-!!! tip "Quick Start with GitHub Codespaces"
-    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lcarli/AI-LearningHub?quickstart=1)
+- `README.md`: quick start and evidence checklist
+- `CHEATSHEET.md`: decision and review guide
+- `scenario.json`: deterministic exercise contract
+- `test_scenario.py`: local acceptance tests
+- Generated PDF and ZIP through the existing kit pipeline
 
-    All dependencies are pre-installed in the devcontainer.
+## Scored knowledge check
 
+??? question "Why keep a local contract?"
 
-## 📦 Supporting Files
+    ??? success "Answer"
+        It provides a deterministic baseline before adding hosted variability and cost.
 
-!!! note "Download these files before starting the lab"
-    Save all files to a `lab-014/` folder in your working directory.
+??? question "When is the Real route complete?"
 
-| File | Description | Download |
-|------|-------------|----------|
-| `hello_agent_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/hello_agent_starter.py) |
-| `requirements.txt` | Python dependencies | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-014/requirements.txt) |
+    ??? success "Answer"
+        Only after validation evidence and cleanup are recorded.
 
----
+??? question "How should tool output be treated?"
 
-## Lab Exercise
+    ??? success "Answer"
+        As untrusted data until policy and schema validation succeed.
 
-### Step 1: Create a basic Kernel
+## Exit criteria
 
-The **Kernel** is the central object in Semantic Kernel — it holds your LLM connection and all plugins.
+- [ ] Local tests pass without credentials.
+- [ ] The diagram has a text explanation and does not depend on color.
+- [ ] The scored quiz was reviewed.
+- [ ] The Real path has a cost cap and cleanup plan.
+- [ ] Sources and stability status were checked.
 
-=== "Python"
+## Official public sources
 
-    Create `hello_agent.py`:
-
-    ```python
-    import asyncio
-    import os
-    from semantic_kernel import Kernel
-    from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion
-    from semantic_kernel.connectors.ai.function_choice_behavior import FunctionChoiceBehavior
-    from semantic_kernel.contents import ChatHistory
-
-    async def main():
-        # Create the kernel
-        kernel = Kernel()
-
-        # Add GitHub Models as the LLM backend
-        kernel.add_service(
-            OpenAIChatCompletion(
-                ai_model_id="gpt-4o-mini",
-                api_key=os.environ["GITHUB_TOKEN"],
-                base_url="https://models.inference.ai.azure.com",
-            )
-        )
-
-        # Simple chat — no tools yet
-        history = ChatHistory()
-        history.add_system_message("You are a helpful assistant.")
-        history.add_user_message("What is Semantic Kernel?")
-
-        chat = kernel.get_service(type=OpenAIChatCompletion)
-        result = await chat.get_chat_message_content(
-            chat_history=history,
-            settings=kernel.get_prompt_execution_settings_from_service_id("default"),
-        )
-        print(result)
-
-    asyncio.run(main())
-    ```
-
-=== "C#"
-
-    Edit `Program.cs`:
-
-    ```csharp
-    using Microsoft.SemanticKernel;
-    using Microsoft.SemanticKernel.ChatCompletion;
-    using Microsoft.SemanticKernel.Connectors.OpenAI;
-
-    var builder = Kernel.CreateBuilder();
-    builder.AddOpenAIChatCompletion(
-        modelId: "gpt-4o-mini",
-        apiKey: Environment.GetEnvironmentVariable("GITHUB_TOKEN")!,
-        endpoint: new Uri("https://models.inference.ai.azure.com")
-    );
-    var kernel = builder.Build();
-
-    var chat = kernel.GetRequiredService<IChatCompletionService>();
-    var history = new ChatHistory("You are a helpful assistant.");
-    history.AddUserMessage("What is Semantic Kernel?");
-
-    var response = await chat.GetChatMessageContentAsync(history);
-    Console.WriteLine(response.Content);
-    ```
-
-Run it:
-
-=== "Python"
-    ```bash
-    python hello_agent.py
-    ```
-=== "C#"
-    ```bash
-    dotnet run
-    ```
-
-You should see the LLM respond. Now let's add a custom function.
-
----
-
-### Step 2: Add a Plugin (native function)
-
-A **Plugin** is a class with methods the LLM can call. Decorate them with `@kernel_function` (Python) or `[KernelFunction]` (C#).
-
-=== "Python"
-
-    Add this class before `main()`:
-
-    ```python
-    from semantic_kernel.functions import kernel_function
-
-    class WeatherPlugin:
-        """Provides current weather information."""
-
-        @kernel_function(
-            name="get_current_weather",
-            description="Get the current weather for a city",
-        )
-        def get_current_weather(self, city: str) -> str:
-            # In a real lab this would call a weather API
-            # For now, return mock data
-            weather_data = {
-                "Seattle": "🌧️ Rainy, 12°C",
-                "New York": "☀️ Sunny, 22°C",
-                "London": "⛅ Cloudy, 15°C",
-            }
-            return weather_data.get(city, f"Weather data not available for {city}")
-    ```
-
-    Then register the plugin in `main()`:
-    ```python
-    kernel.add_plugin(WeatherPlugin(), plugin_name="weather")
-    ```
-
-=== "C#"
-
-    Add this class to your project:
-
-    ```csharp
-    using Microsoft.SemanticKernel;
-
-    public class WeatherPlugin
-    {
-        [KernelFunction("get_current_weather")]
-        [Description("Get the current weather for a city")]
-        public string GetCurrentWeather(string city)
-        {
-            var weatherData = new Dictionary<string, string>
-            {
-                ["Seattle"] = "🌧️ Rainy, 12°C",
-                ["New York"] = "☀️ Sunny, 22°C",
-                ["London"] = "⛅ Cloudy, 15°C",
-            };
-            return weatherData.TryGetValue(city, out var weather)
-                ? weather
-                : $"Weather data not available for {city}";
-        }
-    }
-    ```
-
-    Register in `Program.cs`:
-    ```csharp
-    kernel.Plugins.AddFromType<WeatherPlugin>("weather");
-    ```
-
----
-
-### Step 3: Enable auto function calling
-
-With auto function calling, the LLM **decides when to call your function** based on the conversation. You don't need to trigger it manually.
-
-=== "Python"
-
-    Update your settings to enable auto function calling:
-
-    ```python
-    from semantic_kernel.connectors.ai.open_ai import OpenAIChatPromptExecutionSettings
-    from semantic_kernel.connectors.ai.function_choice_behavior import FunctionChoiceBehavior
-
-    settings = OpenAIChatPromptExecutionSettings(
-        function_choice_behavior=FunctionChoiceBehavior.Auto(),
-    )
-
-    history = ChatHistory()
-    history.add_system_message("You are a helpful assistant with access to weather data.")
-    history.add_user_message("What's the weather like in Seattle today?")
-
-    result = await chat.get_chat_message_content(
-        chat_history=history,
-        settings=settings,
-        kernel=kernel,  # pass kernel so SK can call plugins
-    )
-    print(result)
-    ```
-
-=== "C#"
-
-    ```csharp
-    var settings = new OpenAIPromptExecutionSettings
-    {
-        FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
-    };
-
-    var history = new ChatHistory("You are a helpful assistant with access to weather data.");
-    history.AddUserMessage("What's the weather like in Seattle today?");
-
-    var response = await chat.GetChatMessageContentAsync(history, settings, kernel);
-    Console.WriteLine(response.Content);
-    ```
-
-Run it and ask: `"What's the weather like in Seattle today?"`
-
-The LLM will:
-1. See that `get_current_weather` is available
-2. Call it with `city = "Seattle"`
-3. Incorporate the result into its answer
-
-!!! success "Expected output"
-    "The current weather in Seattle is 🌧️ Rainy, 12°C. Bring an umbrella!"
-
----
-
-### Step 4: Build a simple conversation loop
-
-Let's make it interactive:
-
-=== "Python"
-
-    ```python
-    history = ChatHistory()
-    history.add_system_message(
-        "You are a helpful assistant with access to weather data. "
-        "Use the weather plugin when the user asks about weather."
-    )
-
-    print("Weather Agent ready. Type 'exit' to quit.\n")
-    while True:
-        user_input = input("You: ").strip()
-        if user_input.lower() == "exit":
-            break
-
-        history.add_user_message(user_input)
-        result = await chat.get_chat_message_content(
-            chat_history=history,
-            settings=settings,
-            kernel=kernel,
-        )
-        history.add_assistant_message(str(result))
-        print(f"Agent: {result}\n")
-    ```
-
----
-
-## Summary
-
-You've built your first **Semantic Kernel agent** that:
-
-- ✅ Connects to an LLM (GitHub Models — free)
-- ✅ Has a custom **Plugin** with a native function
-- ✅ Uses **auto function calling** — the LLM decides when to invoke the function
-- ✅ Maintains **conversation history** across turns
-
----
-
-## Next Steps
-
-- **Add memory and more plugins:** → [Lab 023 — SK Plugins, Memory & Planners](lab-023-sk-plugins-memory.md)
-- **Build an MCP Server and connect it to SK:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
+- [Microsoft Agent Framework 1.0 GA](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/)
+- [AutoGen to Agent Framework migration](https://learn.microsoft.com/agent-framework/migration-guide/from-autogen/)

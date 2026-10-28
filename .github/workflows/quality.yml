@@ -29,6 +29,7 @@ jobs:
       - name: Generate derived pages
         run: |
           python scripts/phase2_content.py
+          python scripts/phase3_content.py
           python scripts/generate_whats_new.py
           python scripts/generate_labs_index.py
           python scripts/generate_labs_json.py
@@ -39,7 +40,7 @@ jobs:
       - name: Test catalog interactions
         run: node --test scripts/test_hub_features.js
 
-      - name: Test Phase 2 exercises and kits
+      - name: Test Phase 2 and Phase 3 exercises and kits
         run: |
           python -m unittest scripts/test_generate_kits.py -v
           python scripts/run_phase2_tests.py

@@ -414,3 +414,20 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
 - **[Lab 062](lab-062-ondevice-phi-silica.md)** — On-Device Agents with Phi Silica (NPU-accelerated on-device inference)
 - **[Lab 060](lab-060-reasoning-models.md)** — Reasoning Models (when you need maximum accuracy over speed)
 - **[Lab 044](lab-044-phi4-ollama-production.md)** — Phi-4 with Ollama in Production (alternative local deployment)
+
+<!-- phase3-real-track:start -->
+## Phase 3 · Simulation / Real path
+
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulation / Real path">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulation</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Real path</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Preserve the existing free simulation and its fixtures. Estimated cost: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Reuse the same acceptance criteria against the documented hosted service. Before running, record a service-specific estimate and a hard spending cap. After validation: Delete hosted deployments, endpoints, indexes, traces, and test data after validation.
+  </section>
+</div>
+<!-- phase3-real-track:end -->

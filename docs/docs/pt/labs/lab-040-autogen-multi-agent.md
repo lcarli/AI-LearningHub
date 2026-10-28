@@ -1,23 +1,30 @@
 ---
 tags:
-- autogen
-- multi-agent
-- python
-- free
-- github-models
+- kit
+- local-first
+- maf
+- phase-3
+- quiz
 lab:
   id: '040'
   level: L400
   journey: ai-agents
-  time_min: 90
+  time_min: 150
   cost:
-    tier: free-gh
+    tier: free-conditional
     requires:
-    - github
-    - copilot-free
-    estimate_usd: 0 within the documented free path or quota.
-    simulation: false
+    - local-compute-or-optional-paid-service
+    estimate_usd: 0 for the local simulation; optional Real usage varies by service
+      and must be capped.
+    simulation: true
     cleanup: false
+  roles:
+  - developer
+  - architect
+  - student
+  technologies:
+  - maf
+  - phase-3
   status: active
   last_verified: '2026-10-27'
   languages:
@@ -25,239 +32,137 @@ lab:
   - pt
   - fr
 ---
-!!! warning "Atualização de backend (outubro de 2026)"
-    A inferência do GitHub Models foi descontinuada em 30 de julho de 2026. As referências abaixo são mantidas apenas como contexto histórico enquanto este lab é migrado. Use o [Lab 013 — Backends de LLM gratuitos](../labs/lab-013-github-models.md) para configurar o Foundry Local ou o Ollama antes de continuar.
-
-# Lab 040: Multi-Agente em Produção com AutoGen
+# Lab 040: Sistemas Multiagente de Produção com Microsoft Agent Framework
 
 <div class="lab-meta">
-  <span><strong>Nível:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">Agentes Pro Code</a></span>
-  <span><strong>Tempo:</strong> ~90 min</span>
-  <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Free</span> — GitHub Models API</span>
+  <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
+  <span><strong>Jornada:</strong> ai-agents</span>
+  <span><strong>Tempo:</strong> ~150 min</span>
+  <span><strong>Custo:</strong> free-conditional</span>
 </div>
-!!! warning "AutoGen -> Microsoft Agent Framework"
-    O AutoGen agora faz parte do **Microsoft Agent Framework (MAF)**, que unifica o SK e o AutoGen em um único framework. Veja o **[Lab 076: Microsoft Agent Framework](lab-076-microsoft-agent-framework.md)** para o guia de migração.
 
+!!! info "Phase 3 · local first"
+    O caminho obrigatório é determinístico e local. O caminho Real é opcional e inclui estimativa e limpeza.
 
+## O que você aprenderá
 
-## O que Você Vai Aprender
-
-- Construir um **sistema AutoGen de 4 agentes**: Orchestrator, Researcher, Analyst e Critic
-- Usar o **AutoGen AgentChat** para conversas multi-agente estruturadas
-- Implementar **condições de terminação** e **estratégias de seleção**
-- Projetar **transferências entre agentes** para tarefas complexas de múltiplas etapas
-- Lidar com erros, loops e agentes travados de forma elegante
-
----
-
-## Introdução
-
-O **AutoGen** da Microsoft é um framework para construir sistemas multi-agente onde os agentes conversam para resolver tarefas complexas. Diferente de loops de agente único, os agentes AutoGen:
-
-- Possuem **personas** e áreas de especialização distintas
-- Podem **criticar** o trabalho uns dos outros
-- Usam **transferências estruturadas** para passar tarefas
-- Terminam com **consenso** ou uma condição de parada definida
-
-Este lab constrói um pipeline de pesquisa de produtos: dada uma pergunta sobre um produto, o Orchestrator designa um Researcher para coletar informações, um Analyst para estruturá-las e um Critic para revisar a qualidade.
-
----
+- Projetar topologia MAF de produção
+- Migrar conversas AutoGen pelo guia oficial
+- Aplicar identidade, política, telemetria, orçamento e recuperação
+- Provar rollback e aprovação humana
 
 ## Pré-requisitos
 
-- Python 3.11+
-- `pip install autogen-agentchat autogen-ext[openai] openai`
-- `GITHUB_TOKEN` configurado
+- Python 3.10+ e um terminal
+- Nenhuma credencial para o caminho obrigatório
+- Leia a especificação oficial vinculada antes de usar um adaptador hospedado
 
----
+## Modelo visual
 
-## Exercício do Lab
+```mermaid
+flowchart LR
+  I[Ingress] --> G[Policy gateway]
+  G --> W[MAF workflow]
+  W --> A1[Specialist]
+  W --> A2[Reviewer]
+  A1 & A2 --> O[OpenTelemetry]
+  W --> H[Human approval]
+```
 
-### Passo 1: Instalar o AutoGen
+## Cenário
+
+A OutdoorGear precisa de uma implementação revisável para workshop, com fixtures determinísticas, fronteiras de confiança explícitas, critérios mensuráveis e adaptador hospedado opcional e reversível.
+
+## Exercício guiado
+
+### Step 1: `model_boundaries`
+
+1. Execute a fixture determinística desta etapa.
+2. Registre entrada, saída, decisão de política e comportamento de falha.
+3. Altere um comportamento limitado e execute o teste local novamente.
+
+**Evidence:** Salve comando, resultado e uma frase explicando por que a evidência é confiável.
+
+### Step 2: `migrate_autogen`
+
+1. Execute a fixture determinística desta etapa.
+2. Registre entrada, saída, decisão de política e comportamento de falha.
+3. Altere um comportamento limitado e execute o teste local novamente.
+
+**Evidence:** Salve comando, resultado e uma frase explicando por que a evidência é confiável.
+
+### Step 3: `inject_failures`
+
+1. Execute a fixture determinística desta etapa.
+2. Registre entrada, saída, decisão de política e comportamento de falha.
+3. Altere um comportamento limitado e execute o teste local novamente.
+
+**Evidence:** Salve comando, resultado e uma frase explicando por que a evidência é confiável.
+
+### Step 4: `prove_operations`
+
+1. Execute a fixture determinística desta etapa.
+2. Registre entrada, saída, decisão de política e comportamento de falha.
+3. Altere um comportamento limitado e execute o teste local novamente.
+
+**Evidence:** Salve comando, resultado e uma frase explicando por que a evidência é confiável.
+
+### Execute localmente
 
 ```bash
-pip install autogen-agentchat autogen-ext[openai]
+cd docs/docs/pt/labs/lab-040
+python -m unittest discover -v
 ```
 
-### Passo 2: Definir o sistema de agentes
+## Simulação / Caminho Real
 
-```python
-# autogen_agents.py
-import asyncio, os
-from autogen_agentchat.agents import AssistantAgent
-from autogen_agentchat.teams import RoundRobinGroupChat, SelectorGroupChat
-from autogen_agentchat.conditions import TextMentionTermination, MaxMessageTermination
-from autogen_agentchat.ui import Console
-from autogen_ext.models.openai import OpenAIChatCompletionClient
+<div class="phase3-path-tabs" data-phase3-tabs>
+  <div role="tablist" aria-label="Simulação / Caminho Real">
+    <button type="button" role="tab" aria-selected="true" data-phase3-tab="simulation">Simulação</button>
+    <button type="button" role="tab" aria-selected="false" data-phase3-tab="real">Caminho Real</button>
+  </div>
+  <section role="tabpanel" data-phase3-panel="simulation">
+    Use as fixtures determinísticas e o validador local incluídos. Custo estimado: **US$0**.
+  </section>
+  <section role="tabpanel" data-phase3-panel="real" hidden>
+    Substitua somente a fronteira do adaptador. Defina teto de gastos, preserve os testes e registre região, retenção, identidade, telemetria e preço. Exclua implantações, endpoints, índices, traces e dados de teste após a validação.
+  </section>
+</div>
 
-# GitHub Models client (free, OpenAI-compatible)
-model_client = OpenAIChatCompletionClient(
-    model="gpt-4o-mini",
-    api_key=os.environ["GITHUB_TOKEN"],
-    base_url="https://models.inference.ai.azure.com",
-    model_capabilities={
-        "vision": False,
-        "function_calling": True,
-        "json_output": True,
-    },
-)
+## Kit de apoio
 
-# --- Define agents ---
+- `README.md`: início rápido e checklist de evidências
+- `CHEATSHEET.md`: guia de decisão e revisão
+- `scenario.json`: contrato determinístico
+- `test_scenario.py`: testes locais
+- PDF e ZIP gerados pelo pipeline existente
 
-orchestrator = AssistantAgent(
-    name="Orchestrator",
-    model_client=model_client,
-    system_message="""You are the orchestrator of a product research team.
-Your job is to coordinate the team to answer customer questions about OutdoorGear Inc. products.
+## Quiz pontuado
 
-Workflow:
-1. Ask Researcher to gather relevant product/policy information
-2. Ask Analyst to structure the information clearly
-3. Ask Critic to review the final answer for accuracy and completeness
-4. Once Critic approves, write the final customer response
-5. End with: TERMINATE
+??? question "Por que manter um contrato local?"
 
-Products: TrailBlazer X200 boots ($189.99), Summit Pro Tent ($349), OmniPack 45L ($279.99), StormShell Jacket ($349), ClimbTech Harness ($129.99)
-Policies: 60-day returns (unused), free shipping over $75, 2-year warranty (lifetime on climbing gear)
-""",
-)
+    ??? success "Resposta"
+        Ele cria uma linha de base determinística antes de adicionar variabilidade e custo hospedados.
 
-researcher = AssistantAgent(
-    name="Researcher",
-    model_client=model_client,
-    system_message="""You are the Researcher agent. When asked a product question:
-1. Identify relevant products from the OutdoorGear catalog
-2. Find relevant policies (returns, shipping, warranty)
-3. Present raw findings as bullet points
-4. Do NOT write the final answer — just gather facts""",
-)
+??? question "Quando o caminho Real termina?"
 
-analyst = AssistantAgent(
-    name="Analyst",
-    model_client=model_client,
-    system_message="""You are the Analyst agent. Given raw research findings:
-1. Organize the information logically
-2. Highlight the most relevant points for the customer's question
-3. Structure as: Products → Recommendations → Relevant Policies
-4. Keep it concise — no more than 150 words""",
-)
+    ??? success "Resposta"
+        Somente após registrar evidência de validação e limpeza.
 
-critic = AssistantAgent(
-    name="Critic",
-    model_client=model_client,
-    system_message="""You are the Critic agent. Review the Analyst's structured response:
-1. Check: Does it answer the customer's actual question?
-2. Check: Are the prices accurate?
-3. Check: Are the policies correctly stated?
-4. If good: reply "APPROVED: [brief reason]"
-5. If needs work: reply "REVISION NEEDED: [specific issue]"
-Do not rewrite the answer yourself.""",
-)
+??? question "Como tratar a saída de ferramentas?"
 
+    ??? success "Resposta"
+        Como dado não confiável até a validação de política e esquema.
 
-async def run_research_team(customer_question: str):
-    """Run the 4-agent team to answer a customer question."""
+## Critérios de saída
 
-    # Termination: stop when Orchestrator says TERMINATE
-    termination = TextMentionTermination("TERMINATE") | MaxMessageTermination(20)
+- [ ] Testes locais passam sem credenciais.
+- [ ] O diagrama tem explicação textual e não depende de cor.
+- [ ] O quiz pontuado foi revisado.
+- [ ] O caminho Real tem teto de custo e plano de limpeza.
+- [ ] Fontes e estabilidade foram verificadas.
 
-    # Use SelectorGroupChat so the orchestrator can direct who speaks next
-    team = SelectorGroupChat(
-        [orchestrator, researcher, analyst, critic],
-        model_client=model_client,
-        termination_condition=termination,
-        selector_prompt="""You are managing a customer service team conversation.
-Select the next agent based on what's needed:
-- Orchestrator: starts, coordinates, writes final answer
-- Researcher: gathers raw product/policy facts
-- Analyst: structures and organizes findings
-- Critic: reviews quality of structured response
+## Fontes públicas oficiais
 
-Current conversation context: {history}
-Available agents: {participants}
-Select the next agent:""",
-    )
-
-    print(f"\n{'='*60}")
-    print(f"Customer Question: {customer_question}")
-    print(f"{'='*60}\n")
-
-    await Console(team.run_stream(task=customer_question))
-
-
-async def main():
-    questions = [
-        "I'm planning a 5-day winter backpacking trip. What gear do I need and what's the total cost?",
-        "I bought boots last month but they hurt my feet. Can I return them?",
-    ]
-    for q in questions:
-        await run_research_team(q)
-        await asyncio.sleep(2)
-
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-
-```bash
-python autogen_agents.py
-```
-
-### Passo 3: Adicionar um agente de escrita de código
-
-O AutoGen se destaca quando os agentes podem escrever e executar código. Adicione um agente **Coder**:
-
-```python
-from autogen_agentchat.agents import CodeExecutorAgent
-from autogen_ext.code_executors.local import LocalCommandLineCodeExecutor
-
-coder = AssistantAgent(
-    name="Coder",
-    model_client=model_client,
-    system_message="""You are a Python coding agent. When asked to calculate prices, 
-generate reports, or process data, write and describe Python code to do it.
-Always include the code in a ```python block.""",
-)
-
-# Execute code safely in a temp directory
-executor = AssistantAgent(
-    name="CodeExecutor",
-    model_client=model_client,
-    system_message="Execute the code provided by Coder and report the output.",
-)
-```
-
-### Passo 4: Lidar com erros e timeouts
-
-```python
-import asyncio
-from autogen_agentchat.base import TaskResult
-
-async def safe_run(question: str, timeout: int = 120) -> TaskResult | None:
-    try:
-        return await asyncio.wait_for(run_research_team(question), timeout=timeout)
-    except asyncio.TimeoutError:
-        print(f"⚠️ Team timed out after {timeout}s for: {question[:50]}")
-        return None
-    except Exception as e:
-        print(f"❌ Error: {e}")
-        return None
-```
-
----
-
-## Resumo dos Papéis dos Agentes
-
-| Agente | Papel | Termina quando |
-|--------|-------|----------------|
-| Orchestrator | Dirige a equipe, escreve a resposta final | Diz "TERMINATE" |
-| Researcher | Coleta fatos brutos | Solicitado pelo Orchestrator |
-| Analyst | Estrutura as descobertas | Solicitado pelo Orchestrator |
-| Critic | Revisão de qualidade | Dá APPROVED/REVISION |
-
----
-
-## Próximos Passos
-
-- **Extensão Copilot para VS Code:** → [Lab 041 — Extensão Copilot Personalizada](lab-041-copilot-extension.md) *(em breve)*
-- **Adicionar avaliação:** → [Lab 035 — Avaliação de Agentes](lab-035-agent-evaluation.md)
+- [Microsoft Agent Framework 1.0 GA](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/)
+- [AutoGen to Agent Framework migration](https://learn.microsoft.com/agent-framework/migration-guide/from-autogen/)
