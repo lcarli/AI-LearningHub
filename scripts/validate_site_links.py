@@ -9,7 +9,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-import yaml
+from mkdocs.config import load_config
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_SITE = ROOT / "docs" / "site"
@@ -27,12 +27,22 @@ class LinkParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.links: list[tuple[str, str]] = []
+        self.language_links: dict[str, str] = {}
+        self.is_material_page = False
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = dict(attrs)
+        classes = (values.get("class") or "").split()
+        if tag == "header" and "md-header" in classes:
+            self.is_material_page = True
+        if tag == "a" and "md-select__link" in (values.get("class") or "").split():
+            language = values.get("hreflang")
+            href = values.get("href")
+            if language and href:
+                self.language_links[language] = href
         expected = LINK_ATTRIBUTES.get(tag)
         if not expected:
             return
-        values = dict(attrs)
         for attribute in expected:
             value = values.get(attribute)
             if value:
@@ -64,12 +74,26 @@ def validate(site: Path) -> list[str]:
     if not html_files:
         return [f"{site}: no rendered HTML files found"]
 
-    config = yaml.safe_load(MKDOCS_CONFIG.read_text(encoding="utf-8"))
-    site_prefix = urlsplit(config["site_url"]).path.rstrip("/")
+    config = load_config(config_file=str(MKDOCS_CONFIG))
+    site_prefix = urlsplit(config.site_url).path.rstrip("/")
 
     for page in html_files:
         parser = LinkParser()
         parser.feed(page.read_text(encoding="utf-8"))
+        if page.name != "404.html" and parser.is_material_page:
+            languages = set(parser.language_links)
+            expected_languages = {"en", "pt", "fr"}
+            if languages != expected_languages:
+                errors.append(
+                    f"{page.relative_to(site)}: language selector has {sorted(languages)}, "
+                    f"expected {sorted(expected_languages)}"
+                )
+            for language, href in parser.language_links.items():
+                candidates = candidate_paths(page, href, site, site_prefix)
+                if not any(candidate.exists() for candidate in candidates):
+                    errors.append(
+                        f"{page.relative_to(site)}: language {language!r} target {href!r} does not exist"
+                    )
         for attribute, value in parser.links:
             parsed = urlsplit(value)
             if (
