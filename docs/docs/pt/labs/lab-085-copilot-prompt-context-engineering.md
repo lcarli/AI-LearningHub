@@ -81,3 +81,9 @@ Use a estrutura **objetivo → contexto → restrições → critérios de aceit
 
 Verifique o código gerado, cite os arquivos-fonte usados, inspecione suposições sensíveis a segurança e rejeite sugestões que inventem APIs ou segredos.
 
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-085-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-085-kit-pt.zip)

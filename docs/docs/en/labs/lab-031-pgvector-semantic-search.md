@@ -30,7 +30,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/rag/">RAG</a></span>
   <span><strong>Time:</strong> ~60 min</span>
   <span><strong>💰 Cost:</strong> ~$15/month (PostgreSQL Flexible Server Burstable B1ms)</span>
 </div>
@@ -95,7 +95,7 @@ az deployment group show \
 
 | File | Description | Download |
 |------|-------------|----------|
-| `migrations` | Database migration files | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-031/migrations) |
+| `001_init.sql` | Database migration | [📥 Download](lab-031/migrations/001_init.sql) |
 
 ---
 
@@ -338,3 +338,10 @@ az group delete --name rg-ai-labs-rag --yes --no-wait
 
 - **Row Level Security for multi-tenant agents:** → [Lab 032 — Row Level Security](lab-032-row-level-security.md)
 - **Agentic RAG on top of this:** → [Lab 026 — Agentic RAG Pattern](lab-026-agentic-rag.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-031-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-031-kit-en.zip)

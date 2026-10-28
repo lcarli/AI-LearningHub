@@ -93,8 +93,8 @@ Ollama s'exécute comme un service en arrière-plan sur `http://localhost:11434`
 
 | Fichier | Description | Téléchargement |
 |---------|-------------|----------------|
-| `Modelfile` | Configuration de modèle Ollama | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) |
-| `chat_starter.py` | Script de démarrage avec des TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) |
+| `Modelfile` | Configuration de modèle Ollama | [📥 Télécharger](lab-015/Modelfile) |
+| `chat_starter.py` | Script de démarrage avec des TODOs | [📥 Télécharger](lab-015/chat_starter.py) |
 
 ---
 
@@ -287,7 +287,7 @@ ollama create outdoorgear -f Modelfile
 ollama run outdoorgear
 ```
 
-Le [📥 `Modelfile`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/Modelfile) crée un persona personnalisé **OutdoorGear Advisor** basé sur Phi-4. Le [📥 `chat_starter.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-015/chat_starter.py) contient 5 exercices couvrant la complétion de base, les modèles personnalisés, la comparaison et le streaming.
+Le [📥 `Modelfile`](lab-015/Modelfile) crée un persona personnalisé **OutdoorGear Advisor** basé sur Phi-4. Le [📥 `chat_starter.py`](lab-015/chat_starter.py) contient 5 exercices couvrant la complétion de base, les modèles personnalisés, la comparaison et le streaming.
 
 ---
 
@@ -320,3 +320,10 @@ Vous disposez maintenant d'une pile LLM entièrement locale :
 - **Construire une application RAG avec des embeddings locaux :** → [Lab 022 — RAG avec GitHub Models + pgvector](lab-022-rag-github-models-pgvector.md)
 - **Utiliser avec les plugins Semantic Kernel :** → [Lab 023 — Plugins, mémoire et planificateurs SK](lab-023-sk-plugins-memory.md)
 - **IA locale en production :** → [Lab 044 — Phi-4 + Ollama en production](lab-044-phi4-ollama-production.md)
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-015-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-015-kit-fr.zip)

@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/foundry/">🏭 Microsoft Foundry</a></span>
   <span><strong>Time:</strong> ~120 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses mock agent data</span>
 </div>
@@ -87,8 +87,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_foundry.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/broken_foundry.py) |
-| `foundry_agents.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) |
+| `broken_foundry.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-074/broken_foundry.py) |
+| `foundry_agents.csv` | Dataset | [📥 Download](lab-074/foundry_agents.csv) |
 
 ---
 
@@ -357,7 +357,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** What is the total number of requests across the entire fleet in the last 24 hours?"
 
-    Run the Step 3 analysis on [📥 `foundry_agents.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) and check the results.
+    Run the Step 3 analysis on [📥 `foundry_agents.csv`](lab-074/foundry_agents.csv) and check the results.
 
     ??? success "✅ Reveal Answer"
         **9,380 requests**
@@ -440,3 +440,10 @@ flowchart LR
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-074-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-074-kit-en.zip)

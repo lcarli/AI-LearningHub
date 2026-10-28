@@ -86,3 +86,9 @@ Utilisez Playwright MCP uniquement sur localhost. Relevez un point d'accessibili
 
 Exposez un outil local OutdoorGear. Ajoutez schéma strict, sortie bornée, erreurs explicites et liste d'autorisation.
 
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-087-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-087-kit-fr.zip)

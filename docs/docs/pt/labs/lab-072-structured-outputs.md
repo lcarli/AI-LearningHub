@@ -90,8 +90,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_structured.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/broken_structured.py) |
-| `structured_outputs.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) |
+| `broken_structured.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-072/broken_structured.py) |
+| `structured_outputs.csv` | Dataset | [📥 Download](lab-072/structured_outputs.csv) |
 
 ---
 
@@ -329,7 +329,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 
 ??? question "**Q3 (Execute o Lab):** Qual é a taxa de validade de schema para os testes de extração com imposição de schema?"
 
-    Execute a análise da Etapa 3 em [📥 `structured_outputs.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-072/structured_outputs.csv) e confira os resultados.
+    Execute a análise da Etapa 3 em [📥 `structured_outputs.csv`](lab-072/structured_outputs.csv) e confira os resultados.
 
     ??? success "✅ Revelar Resposta"
         **100%**

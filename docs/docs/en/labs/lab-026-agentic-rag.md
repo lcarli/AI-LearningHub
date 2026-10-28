@@ -32,7 +32,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Path:</strong> <a href="../paths/rag/">RAG</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/rag/">RAG</a></span>
   <span><strong>Time:</strong> ~40 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> + Docker (local)</span>
 </div>
@@ -292,3 +292,10 @@ Return Answer (or retry)
 
 - **Agent memory across sessions:** → [Lab 027 — Agent Memory Patterns](lab-027-agent-memory-patterns.md)
 - **Evaluate RAG quality at scale:** → [Lab 035 — Agent Evaluation](lab-035-agent-evaluation.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-026-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-026-kit-en.zip)

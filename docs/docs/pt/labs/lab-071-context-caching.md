@@ -86,8 +86,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_cache.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/broken_cache.py) |
-| `cache_benchmark.csv` | Dataset de benchmark | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) |
+| `broken_cache.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-071/broken_cache.py) |
+| `cache_benchmark.csv` | Dataset de benchmark | [📥 Download](lab-071/cache_benchmark.csv) |
 
 ---
 
@@ -354,7 +354,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 
 ??? question "**Q3 (Execute o Lab):** Qual é o TTFT médio para **acertos** de cache em todos os provedores?"
 
-    Execute a análise da Etapa 3 no [📥 `cache_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) e verifique os resultados.
+    Execute a análise da Etapa 3 no [📥 `cache_benchmark.csv`](lab-071/cache_benchmark.csv) e verifique os resultados.
 
     ??? success "✅ Revelar Resposta"
         **217 ms**

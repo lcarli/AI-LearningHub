@@ -40,10 +40,10 @@ Save these files in one folder named `challenge-001/`:
 
 | File | Purpose | Download |
 |------|---------|----------|
-| `products.json` | Mock OutdoorGear product catalog | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/products.json) |
-| `starter_agent_loop.py` | Starter implementation with TODOs | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/starter_agent_loop.py) |
-| `test_agent_loop.py` | Acceptance tests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/test_agent_loop.py) |
-| `validate_agent_loop.py` | Generates the final completion code | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-001/validate_agent_loop.py) |
+| `products.json` | Mock OutdoorGear product catalog | [Download](challenge-001/products.json) |
+| `starter_agent_loop.py` | Starter implementation with TODOs | [Download](challenge-001/starter_agent_loop.py) |
+| `test_agent_loop.py` | Acceptance tests | [Download](challenge-001/test_agent_loop.py) |
+| `validate_agent_loop.py` | Generates the final completion code | [Download](challenge-001/validate_agent_loop.py) |
 
 ---
 

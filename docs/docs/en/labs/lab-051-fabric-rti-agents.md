@@ -89,8 +89,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_alerting.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/broken_alerting.py) |
-| `sensor_events.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-051/sensor_events.csv) |
+| `broken_alerting.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-051/broken_alerting.py) |
+| `sensor_events.csv` | Dataset | [📥 Download](lab-051/sensor_events.csv) |
 
 ---
 
@@ -481,3 +481,10 @@ Fix all 3 bugs and re-run until you see `🎉 All 3 tests passed`.
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-051-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-051-kit-en.zip)

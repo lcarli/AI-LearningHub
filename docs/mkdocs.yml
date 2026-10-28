@@ -12,6 +12,8 @@ copyright: >
   Copyright &copy; 2025 - present · Community Contributors
 
 docs_dir: docs
+hooks:
+  - hooks/generate_site_kits.py
 
 nav:
   - Home: index.md

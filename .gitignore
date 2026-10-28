@@ -12,6 +12,7 @@ dist/
 
 # MkDocs
 docs/site/
+docs/docs/*/downloads/kits/
 
 # Environment variables - NEVER commit these
 .env

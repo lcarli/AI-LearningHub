@@ -88,8 +88,8 @@ This lab analyzes pre-computed scenario data — no Entra ID tenant, Azure subsc
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_identity.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/broken_identity.py) |
-| `identity_scenarios.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv) |
+| `broken_identity.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-063/broken_identity.py) |
+| `identity_scenarios.csv` | Dataset | [📥 Download](lab-063/identity_scenarios.csv) |
 
 ---
 
@@ -126,7 +126,7 @@ Key concepts:
 
 ## Part 2: Load Scenario Data
 
-### Step 2: Load [📥 `identity_scenarios.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv)
+### Step 2: Load [📥 `identity_scenarios.csv`](lab-063/identity_scenarios.csv)
 
 The scenario dataset contains 15 identity configurations across 4 agents:
 

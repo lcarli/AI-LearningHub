@@ -98,8 +98,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_migration.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/broken_migration.py) |
-| `migration_matrix.csv` | Comparação de 15 funcionalidades: SK vs AutoGen vs MAF | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/migration_matrix.csv) |
+| `broken_migration.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-076/broken_migration.py) |
+| `migration_matrix.csv` | Comparação de 15 funcionalidades: SK vs AutoGen vs MAF | [📥 Download](lab-076/migration_matrix.csv) |
 
 ---
 
@@ -291,7 +291,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você ver `All passed!`, est
 
 ??? question "**Q3 (Execute o Laboratório):** Quantas funcionalidades têm esforço de migração 'low'?"
 
-    Execute a análise da Etapa 3 no [📥 `migration_matrix.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-076/migration_matrix.csv) e conte as funcionalidades de baixo esforço.
+    Execute a análise da Etapa 3 no [📥 `migration_matrix.csv`](lab-076/migration_matrix.csv) e conte as funcionalidades de baixo esforço.
 
     ??? success "✅ Revelar Resposta"
         **7 funcionalidades**
@@ -372,3 +372,10 @@ flowchart LR
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-076-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-076-kit-pt.zip)

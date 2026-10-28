@@ -96,8 +96,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `ai_interactions.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-065/ai_interactions.csv) |
-| `broken_dspm.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-065/broken_dspm.py) |
+| `ai_interactions.csv` | Dataset | [📥 Download](lab-065/ai_interactions.csv) |
+| `broken_dspm.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-065/broken_dspm.py) |
 
 ---
 

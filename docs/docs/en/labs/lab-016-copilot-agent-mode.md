@@ -27,7 +27,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/copilot/">🤖 GitHub Copilot</a></span>
   <span><strong>Time:</strong> ~30 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — Free GitHub account (free tier includes agent mode)</span>
 </div>
@@ -80,7 +80,7 @@ GitHub Copilot in VS Code has three modes:
 
 | File | Description | Download |
 |------|-------------|----------|
-| `outdoorgear_api.py` | Python script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) |
+| `outdoorgear_api.py` | Python script | [📥 Download](lab-016/outdoorgear_api.py) |
 
 ---
 
@@ -105,7 +105,7 @@ This exercise gives you a **real broken Python project** to fix using agent mode
 cd AI-LearningHub/docs/docs/en/labs/lab-016
 ```
 
-Or copy the file [📥 `outdoorgear_api.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) below:
+Or copy the file [📥 `outdoorgear_api.py`](lab-016/outdoorgear_api.py) below:
 
 ```python title="lab-016/outdoorgear_api.py — 5 bugs, 1 missing feature, no tests"
 --8<-- "labs/lab-016/outdoorgear_api.py"
@@ -313,3 +313,10 @@ Your request: "Fix all bugs"
 
 - **Build an MCP server to extend agent mode:** → [Lab 020 — MCP Server in Python](lab-020-mcp-server-python.md)
 - **Build a VS Code Chat Participant (custom @agent):** → [Lab 025 — VS Code Chat Participant](lab-025-vscode-chat-participant.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-016-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-016-kit-en.zip)

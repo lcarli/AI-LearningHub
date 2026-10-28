@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">Pro Code</a></span>
   <span><strong>Time:</strong> ~45 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — GitHub Actions free tier (2000 min/month)</span>
 </div>
@@ -73,7 +73,7 @@ CI/CD for AI agents needs:
 
 | File | Description | Download |
 |------|-------------|----------|
-| `ai-agent-ci.yml` | CI/CD workflow template | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) |
+| `ai-agent-ci.yml` | CI/CD workflow template | [📥 Download](lab-037/ai-agent-ci.yml) |
 
 ---
 
@@ -397,7 +397,7 @@ jobs:
 
         The workflow defines: `unit-tests`, `integration-tests`, `security-scan`, `agent-evaluation`, `docker-build`, `deploy-staging`, and `deploy-production`. Each job has a distinct responsibility in the agent deployment pipeline.
 
-??? question "**Q2 (Run the Lab):** Which job in [📥 `ai-agent-ci.yml`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) does NOT run on pull requests — only on pushes to the `main` branch?"
+??? question "**Q2 (Run the Lab):** Which job in [📥 `ai-agent-ci.yml`](lab-037/ai-agent-ci.yml) does NOT run on pull requests — only on pushes to the `main` branch?"
 
     Look at the `if:` condition on each job, or the workflow-level trigger vs per-job conditions.
 
@@ -424,3 +424,10 @@ jobs:
 
 - **Evaluate at scale with Azure AI:** → [Lab 035 — Agent Evaluation with Azure AI Eval SDK](lab-035-agent-evaluation.md)
 - **Deploy your agent to Azure Container Apps:** → [Lab 028 — Deploy MCP to Azure Container Apps](lab-028-deploy-mcp-azure.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-037-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-037-kit-en.zip)

@@ -86,3 +86,9 @@ Use Playwright MCP only against localhost. Capture an accessibility observation 
 
 Expose one local OutdoorGear lookup tool from Lab 020. Add a strict schema, bounded output, explicit errors, and an allowlist.
 
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-087-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-087-kit-en.zip)

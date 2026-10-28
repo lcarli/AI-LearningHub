@@ -86,7 +86,7 @@ Aprenda os conceitos centrais, execute modelos localmente, construa um servidor 
 ```
 Lab 107 → Lab 010 → Lab 085 → Lab 086 → Lab 087 → Lab 088 → Lab 089
 ```
-Continue com as simulações grátis dos Labs 091 e 094 e use a [trilha GH-300 de quatro semanas](paths/gh-300/).
+Continue com as simulações grátis dos Labs 091 e 094 e use a [trilha GH-300 de quatro semanas](paths/gh-300/index.md).
 
 ---
 

@@ -88,8 +88,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_multimodal.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/broken_multimodal.py) |
-| `multimodal_chunks.csv` | Jeu de données — 15 chunks de documents avec scores de récupération | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/multimodal_chunks.csv) |
+| `broken_multimodal.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-083/broken_multimodal.py) |
+| `multimodal_chunks.csv` | Jeu de données — 15 chunks de documents avec scores de récupération | [📥 Télécharger](lab-083/multimodal_chunks.csv) |
 
 ---
 
@@ -360,7 +360,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécutez le lab) :** Combien de chunks contiennent des images (`has_image == True`) ?"
 
-    Chargez [📥 `multimodal_chunks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-083/multimodal_chunks.csv) et comptez les lignes où `has_image == True`.
+    Chargez [📥 `multimodal_chunks.csv`](lab-083/multimodal_chunks.csv) et comptez les lignes où `has_image == True`.
 
     ??? success "✅ Révéler la réponse"
         **6**

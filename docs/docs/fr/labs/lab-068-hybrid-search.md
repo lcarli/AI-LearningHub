@@ -84,8 +84,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |---------|-------------|----------------|
-| roken_search.py | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/broken_search.py) |
-| search_comparison.csv | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-068/search_comparison.csv) |
+| roken_search.py | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-068/broken_search.py) |
+| search_comparison.csv | Jeu de données | [📥 Télécharger](lab-068/search_comparison.csv) |
 
 ---
 

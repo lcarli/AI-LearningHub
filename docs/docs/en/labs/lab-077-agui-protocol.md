@@ -110,8 +110,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_agui.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/broken_agui.py) |
-| `agui_events.csv` | 12 AG-UI event types with directions and categories | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/agui_events.csv) |
+| `broken_agui.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-077/broken_agui.py) |
+| `agui_events.csv` | 12 AG-UI event types with directions and categories | [📥 Download](lab-077/agui_events.csv) |
 
 ---
 
@@ -327,7 +327,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** How many event types flow from agent to frontend?"
 
-    Run the Step 3 analysis on [📥 `agui_events.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/agui_events.csv) and count `agent_to_frontend` events.
+    Run the Step 3 analysis on [📥 `agui_events.csv`](lab-077/agui_events.csv) and count `agent_to_frontend` events.
 
     ??? success "✅ Reveal Answer"
         **9 events**

@@ -89,8 +89,8 @@ This lab analyzes pre-computed benchmark results — no API key or Azure subscri
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_reasoning.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/broken_reasoning.py) |
-| `reasoning_benchmark.csv` | Benchmark dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv) |
+| `broken_reasoning.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-060/broken_reasoning.py) |
+| `reasoning_benchmark.csv` | Benchmark dataset | [📥 Download](lab-060/reasoning_benchmark.csv) |
 
 ---
 
@@ -124,7 +124,7 @@ Key concepts:
 
 ## Part 2: Load Benchmark Data
 
-### Step 2: Load [📥 `reasoning_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-060/reasoning_benchmark.csv)
+### Step 2: Load [📥 `reasoning_benchmark.csv`](lab-060/reasoning_benchmark.csv)
 
 The benchmark dataset contains results from running all 12 problems through each model:
 

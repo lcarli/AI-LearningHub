@@ -86,7 +86,7 @@ Apprenez les concepts centraux, exécutez des modèles localement, construisez u
 ```
 Lab 107 → Lab 010 → Lab 085 → Lab 086 → Lab 087 → Lab 088 → Lab 089
 ```
-Poursuivez avec les simulations gratuites des Labs 091 et 094, puis utilisez le [parcours GH-300 de quatre semaines](paths/gh-300/).
+Poursuivez avec les simulations gratuites des Labs 091 et 094, puis utilisez le [parcours GH-300 de quatre semaines](paths/gh-300/index.md).
 
 ---
 

@@ -1,0 +1,8 @@
+{
+  "allowed_servers": [
+    "outdoorgear"
+  ],
+  "allowed_tools": [
+    "catalog_search"
+  ]
+}

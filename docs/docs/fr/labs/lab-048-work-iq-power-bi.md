@@ -75,10 +75,10 @@ Votre mission : **prouver (ou réfuter) que Copilot génère une amélioration b
 
 | Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `broken_roi_calculator.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/broken_roi_calculator.py) |
-| `business_outcomes.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv) |
-| `copilot_quarterly_summary.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv) |
-| `impact_analyzer.py` | Script de démarrage avec TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/impact_analyzer.py) |
+| `broken_roi_calculator.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-048/broken_roi_calculator.py) |
+| `business_outcomes.csv` | Jeu de données | [📥 Télécharger](lab-048/business_outcomes.csv) |
+| `copilot_quarterly_summary.csv` | Jeu de données | [📥 Télécharger](lab-048/copilot_quarterly_summary.csv) |
+| `impact_analyzer.py` | Script de démarrage avec TODOs | [📥 Télécharger](lab-048/impact_analyzer.py) |
 
 ---
 
@@ -112,7 +112,7 @@ Dans ce lab, nous simulons ces capacités avec Python et des exports CSV.
 
 Vous avez deux jeux de données à utiliser :
 
-**[📥 `copilot_quarterly_summary.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv)** — Données d'utilisation agrégées (21 lignes : 7 départements × 3 mois)
+**[📥 `copilot_quarterly_summary.csv`](lab-048/copilot_quarterly_summary.csv)** — Données d'utilisation agrégées (21 lignes : 7 départements × 3 mois)
 
 | Colonne | Description |
 |--------|-------------|
@@ -123,7 +123,7 @@ Vous avez deux jeux de données à utiliser :
 | `total_meetings` / `total_emails` / `total_docs` / `total_chats` | Totaux par fonctionnalité |
 | `total_time_saved_min` | Minutes estimées économisées |
 
-**[📥 `business_outcomes.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv)** — KPI départementaux (21 lignes : 7 départements × 3 mois)
+**[📥 `business_outcomes.csv`](lab-048/business_outcomes.csv)** — KPI départementaux (21 lignes : 7 départements × 3 mois)
 
 | Colonne | Description |
 |--------|-------------|

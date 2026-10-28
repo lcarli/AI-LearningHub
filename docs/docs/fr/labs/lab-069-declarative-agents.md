@@ -90,8 +90,8 @@ Aucun package supplémentaire requis — le module `json` est inclus avec Python
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_manifest.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/broken_manifest.py) |
-| `declarative_agent.json` | Fichier de configuration / données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-069/declarative_agent.json) |
+| `broken_manifest.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-069/broken_manifest.py) |
+| `declarative_agent.json` | Fichier de configuration / données | [📥 Télécharger](lab-069/declarative_agent.json) |
 
 ---
 

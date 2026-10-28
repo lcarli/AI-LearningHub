@@ -26,7 +26,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/agent-builder-vscode/">Agent Builder — VS Code</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/agent-builder-vscode/">Agent Builder — VS Code</a></span>
   <span><strong>Durée :</strong> ~45 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Abonnement GitHub Copilot OU API Language Model VS Code (gratuit dans VS Code)</span>
 </div>

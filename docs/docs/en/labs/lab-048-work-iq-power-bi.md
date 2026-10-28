@@ -75,10 +75,10 @@ Your mission: **prove (or disprove) that Copilot is driving measurable business 
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_roi_calculator.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/broken_roi_calculator.py) |
-| `business_outcomes.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv) |
-| `copilot_quarterly_summary.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv) |
-| `impact_analyzer.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/impact_analyzer.py) |
+| `broken_roi_calculator.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-048/broken_roi_calculator.py) |
+| `business_outcomes.csv` | Dataset | [📥 Download](lab-048/business_outcomes.csv) |
+| `copilot_quarterly_summary.csv` | Dataset | [📥 Download](lab-048/copilot_quarterly_summary.csv) |
+| `impact_analyzer.py` | Starter script with TODOs | [📥 Download](lab-048/impact_analyzer.py) |
 
 ---
 
@@ -112,7 +112,7 @@ In this lab, we simulate these capabilities with Python and CSV exports.
 
 You have two datasets to work with:
 
-**[📥 `copilot_quarterly_summary.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/copilot_quarterly_summary.csv)** — Aggregated usage data (21 rows: 7 departments × 3 months)
+**[📥 `copilot_quarterly_summary.csv`](lab-048/copilot_quarterly_summary.csv)** — Aggregated usage data (21 rows: 7 departments × 3 months)
 
 | Column | Description |
 |--------|-------------|
@@ -123,7 +123,7 @@ You have two datasets to work with:
 | `total_meetings` / `total_emails` / `total_docs` / `total_chats` | Feature totals |
 | `total_time_saved_min` | Estimated minutes saved |
 
-**[📥 `business_outcomes.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-048/business_outcomes.csv)** — Department KPIs (21 rows: 7 departments × 3 months)
+**[📥 `business_outcomes.csv`](lab-048/business_outcomes.csv)** — Department KPIs (21 rows: 7 departments × 3 months)
 
 | Column | Description |
 |--------|-------------|

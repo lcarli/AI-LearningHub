@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Time:</strong> ~90 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Uses benchmark dataset; Anthropic API optional</span>
 </div>
@@ -83,8 +83,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_safety.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/broken_safety.py) |
-| `desktop_tasks.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) |
+| `broken_safety.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-057/broken_safety.py) |
+| `desktop_tasks.csv` | Dataset | [📥 Download](lab-057/desktop_tasks.csv) |
 
 ---
 
@@ -353,7 +353,7 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ??? question "**Q3 (Run the Lab):** What is the overall task completion rate?"
 
-    Load [📥 `desktop_tasks.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-057/desktop_tasks.csv) and calculate `completed.sum() / total`.
+    Load [📥 `desktop_tasks.csv`](lab-057/desktop_tasks.csv) and calculate `completed.sum() / total`.
 
     ??? success "✅ Reveal Answer"
         **70%**

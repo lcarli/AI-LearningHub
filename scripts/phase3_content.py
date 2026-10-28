@@ -41,7 +41,10 @@ COPY = {
         "step_lines": ["Run the deterministic fixture for this step.", "Record the declared input, output, policy decision, and failure behavior.", "Change one bounded behavior and run the local test again."],
         "simulation_text": "Use the included deterministic fixtures and local validator. Estimated cost: **US$0**.",
         "real_text": "Replace only the adapter boundary. Set a spending cap before execution, retain the same acceptance tests, and record region, retention, identity, telemetry, and pricing assumptions.",
-        "kit_lines": ["`README.md`: quick start and evidence checklist", "`CHEATSHEET.md`: decision and review guide", "`scenario.json`: deterministic exercise contract", "`test_scenario.py`: local acceptance tests", "Generated PDF and ZIP through the existing kit pipeline"],
+        "kit_lines": ["`README.md`: quick start and evidence checklist", "`CHEATSHEET.md`: decision and review guide", "`scenario.json`: deterministic exercise contract", "`test_scenario.py`: local acceptance tests"],
+        "kit_availability": "The site build generates stable PDF and ZIP downloads. CI also keeps a temporary artifact mirror for 30 days.",
+        "download_pdf": "Download generated PDF",
+        "download_zip": "Download generated ZIP",
         "exit_lines": ["Local tests pass without credentials.", "The diagram has a text explanation and does not depend on color.", "The scored quiz was reviewed.", "The Real path has a cost cap and cleanup plan.", "Sources and stability status were checked."],
         "support_intro": "The required route is local and deterministic.",
         "cheatsheet": ["Start with the local contract and explicit acceptance criteria.", "Treat prompts, retrieved content, tool output, and protocol messages as untrusted.", "Keep identity, authorization, policy, telemetry, cost, and cleanup explicit.", "Prefer the smallest orchestration or adaptation that satisfies the evidence."],
@@ -76,7 +79,10 @@ COPY = {
         "step_lines": ["Execute a fixture determinística desta etapa.", "Registre entrada, saída, decisão de política e comportamento de falha.", "Altere um comportamento limitado e execute o teste local novamente."],
         "simulation_text": "Use as fixtures determinísticas e o validador local incluídos. Custo estimado: **US$0**.",
         "real_text": "Substitua somente a fronteira do adaptador. Defina teto de gastos, preserve os testes e registre região, retenção, identidade, telemetria e preço.",
-        "kit_lines": ["`README.md`: início rápido e checklist de evidências", "`CHEATSHEET.md`: guia de decisão e revisão", "`scenario.json`: contrato determinístico", "`test_scenario.py`: testes locais", "PDF e ZIP gerados pelo pipeline existente"],
+        "kit_lines": ["`README.md`: início rápido e checklist de evidências", "`CHEATSHEET.md`: guia de decisão e revisão", "`scenario.json`: contrato determinístico", "`test_scenario.py`: testes locais"],
+        "kit_availability": "O build do site gera downloads estáveis em PDF e ZIP. A CI também mantém um espelho temporário por 30 dias.",
+        "download_pdf": "Baixar PDF gerado",
+        "download_zip": "Baixar ZIP gerado",
         "exit_lines": ["Testes locais passam sem credenciais.", "O diagrama tem explicação textual e não depende de cor.", "O quiz pontuado foi revisado.", "O caminho Real tem teto de custo e plano de limpeza.", "Fontes e estabilidade foram verificadas."],
         "support_intro": "O caminho obrigatório é local e determinístico.",
         "cheatsheet": ["Comece pelo contrato local e critérios explícitos.", "Trate prompts, conteúdo recuperado, ferramentas e mensagens como não confiáveis.", "Mantenha identidade, autorização, política, telemetria, custo e limpeza explícitos.", "Prefira a menor orquestração ou adaptação que satisfaça a evidência."],
@@ -111,7 +117,10 @@ COPY = {
         "step_lines": ["Exécutez la fixture déterministe de cette étape.", "Notez entrée, sortie, décision de politique et comportement d'échec.", "Modifiez un comportement borné et relancez le test local."],
         "simulation_text": "Utilisez les fixtures déterministes et le validateur local. Coût estimé : **0 USD**.",
         "real_text": "Remplacez uniquement la frontière de l'adaptateur. Fixez un plafond, gardez les mêmes tests et notez région, rétention, identité, télémétrie et prix.",
-        "kit_lines": ["`README.md` : démarrage et preuves", "`CHEATSHEET.md` : guide de décision", "`scenario.json` : contrat déterministe", "`test_scenario.py` : tests locaux", "PDF et ZIP générés par le pipeline existant"],
+        "kit_lines": ["`README.md` : démarrage et preuves", "`CHEATSHEET.md` : guide de décision", "`scenario.json` : contrat déterministe", "`test_scenario.py` : tests locaux"],
+        "kit_availability": "Le build du site génère des téléchargements PDF et ZIP stables. La CI conserve aussi un miroir temporaire pendant 30 jours.",
+        "download_pdf": "Télécharger le PDF généré",
+        "download_zip": "Télécharger le ZIP généré",
         "exit_lines": ["Les tests locaux passent sans identifiants.", "Le diagramme a une explication textuelle et ne dépend pas de la couleur.", "Le quiz noté a été revu.", "Le parcours Réel a un plafond et un plan de nettoyage.", "Sources et stabilité ont été vérifiées."],
         "support_intro": "Le parcours obligatoire est local et déterministe.",
         "cheatsheet": ["Commencez par le contrat local et des critères explicites.", "Traitez prompts, contenu récupéré, outils et messages comme non fiables.", "Rendez identité, autorisation, politique, télémétrie, coût et nettoyage explicites.", "Préférez l'orchestration ou l'adaptation minimale suffisante."],
@@ -468,6 +477,18 @@ def render_lab(lab_id: str, lab: dict, lang: str) -> str:
         for question, answer in copy["quiz"]
     )
     sources = "\n".join(f"- [{name}]({url})" for name, url in SOURCES[lab["source"]])
+    kit_lines = []
+    for item in copy["kit_lines"]:
+        label, description = item.split(":", 1)
+        filename = label.strip("` ")
+        kit_lines.append(f"- [{label}](lab-{lab_id}/{filename}):{description}")
+    kit_lines.extend(
+        [
+            f"- [{copy['download_pdf']}](../downloads/kits/lab-{lab_id}-kit-{lang}.pdf)",
+            f"- [{copy['download_zip']}](../downloads/kits/lab-{lab_id}-kit-{lang}.zip)",
+        ]
+    )
+    kit_downloads = "\n".join(kit_lines)
     return f"""---
 {metadata(lab_id, lab)}
 ---
@@ -529,7 +550,9 @@ python -m unittest discover -v
 
 ## {copy['kit']}
 
-{chr(10).join(f"- {item}" for item in copy['kit_lines'])}
+{copy['kit_availability']}
+
+{kit_downloads}
 
 ## {copy['check']}
 

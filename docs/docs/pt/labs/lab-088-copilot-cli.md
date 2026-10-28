@@ -89,3 +89,9 @@ Crie um agente de qualidade documental, um hook que bloqueie comandos que imprim
 
 Produza saída legível por máquina para uma tarefa limitada. Falhe se houver escrita não aprovada ou comando destrutivo.
 
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-088-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-088-kit-pt.zip)

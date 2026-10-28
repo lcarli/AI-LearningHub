@@ -28,6 +28,31 @@ class KitGenerationTests(unittest.TestCase):
         second = hashlib.sha256(generate_kits.pdf_bytes(["same"])).hexdigest()
         self.assertEqual(first, second)
 
+    def test_external_output_records_absolute_paths(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "kit.pdf"
+            path.write_bytes(b"content")
+            self.assertEqual(generate_kits.record_path(path), path.resolve().as_posix())
+
+    def test_site_layout_uses_language_download_directory(self):
+        with tempfile.TemporaryDirectory(dir=generate_kits.ROOT) as directory:
+            output = Path(directory)
+            record = generate_kits.build_kit(
+                "en",
+                {"id": "004", "priority": "P0", "kind": "llm-foundations"},
+                output,
+                site_layout=True,
+            )
+            self.assertIn("/en/downloads/kits/lab-004-kit-en.pdf", record["pdf"])
+            self.assertTrue(
+                (output / "en" / "downloads" / "kits" / "lab-004-kit-en.zip").exists()
+            )
+
+    def test_pdf_source_includes_declared_support_files(self):
+        markdown = generate_kits.find_lab("en", "004")
+        lines = generate_kits.kit_text(markdown, markdown.parent / "lab-004")
+        self.assertIn("Supporting file: token_attention_lab.py", lines)
+
 
 if __name__ == "__main__":
     unittest.main()

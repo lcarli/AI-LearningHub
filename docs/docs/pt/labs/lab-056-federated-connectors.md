@@ -98,8 +98,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_connector.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/broken_connector.py) |
-| `connector_comparison.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) |
+| `broken_connector.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-056/broken_connector.py) |
+| `connector_comparison.csv` | Dataset | [📥 Download](lab-056/connector_comparison.csv) |
 
 ---
 
@@ -389,7 +389,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você ver `🎉 All 3 tests 
 
 ??? question "**Q3 (Execute o Lab):** Qual é a latência média para consultas de conectores federados?"
 
-    Filtre [�� `connector_comparison.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) por `connector_type == "federated"` e calcule `latency_ms.mean()`.
+    Filtre [�� `connector_comparison.csv`](lab-056/connector_comparison.csv) por `connector_type == "federated"` e calcule `latency_ms.mean()`.
 
     ??? success "✅ Revelar Resposta"
         **473 ms**

@@ -1,0 +1,11 @@
+{
+  "hook": "pre-command",
+  "deny": [
+    "rm -rf",
+    "git reset --hard"
+  ],
+  "require_approval": [
+    "deploy",
+    "delete"
+  ]
+}

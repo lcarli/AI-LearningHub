@@ -81,3 +81,9 @@ Utilisez la structure **objectif → contexte → contraintes → critères d'ac
 
 Vérifiez le code généré, citez les fichiers sources utilisés, examinez les hypothèses sensibles et refusez toute suggestion qui invente des API ou des secrets.
 
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-085-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-085-kit-fr.zip)

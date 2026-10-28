@@ -1,0 +1,3 @@
+scenario,input_tokens,output_tokens,estimated_cost
+baseline,10000,2000,=0.01
+cached,10000,2000,=0.006

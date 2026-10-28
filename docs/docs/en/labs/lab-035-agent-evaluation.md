@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">Pro Code</a></span>
   <span><strong>Time:</strong> ~60 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — uses GitHub Models for evaluation</span>
 </div>
@@ -76,7 +76,7 @@ This lab builds an automated evaluation pipeline for the OutdoorGear assistant.
 
 | File | Description | Download |
 |------|-------------|----------|
-| `eval_dataset.jsonl` | Evaluation dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl) |
+| `eval_dataset.jsonl` | Evaluation dataset | [📥 Download](lab-035/eval_dataset.jsonl) |
 
 ---
 
@@ -90,7 +90,7 @@ pip install azure-ai-evaluation openai
 
 ### Step 2: Create a golden dataset
 
-A **golden dataset** is a set of test questions with known-good answers. Create [📥 `eval_dataset.jsonl`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-035/eval_dataset.jsonl):
+A **golden dataset** is a set of test questions with known-good answers. Create [📥 `eval_dataset.jsonl`](lab-035/eval_dataset.jsonl):
 
 ```jsonl
 {"query": "What is the return policy?", "response": "We offer a 60-day return window. Items must be unused in original packaging.", "context": "60-day return window. Items must be unused in original packaging. Worn footwear non-refundable unless defective."}
@@ -333,3 +333,10 @@ flowchart LR
 - [Foundry evaluation](https://learn.microsoft.com/azure/ai-foundry/concepts/evaluation-approach-gen-ai)
 - [Foundry Workflows retirement](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow)
 <!-- phase3-modernization:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-035-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-035-kit-en.zip)

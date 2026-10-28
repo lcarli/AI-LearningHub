@@ -113,3 +113,10 @@ Escreva uma revisão contendo:
 2. Escopo rejeitado e justificativa.
 3. Qual comentário aplicar.
 4. Registro de custo: **AI Credits médios**, **7 minutos de Actions** e a próxima otimização.
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-091-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-091-kit-pt.zip)

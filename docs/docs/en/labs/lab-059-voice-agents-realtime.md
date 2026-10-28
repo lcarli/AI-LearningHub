@@ -100,8 +100,8 @@ This lab analyzes pre-recorded session data — no API key or Azure subscription
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_voice.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/broken_voice.py) |
-| `voice_sessions.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv) |
+| `broken_voice.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-059/broken_voice.py) |
+| `voice_sessions.csv` | Dataset | [📥 Download](lab-059/voice_sessions.csv) |
 
 ---
 
@@ -126,7 +126,7 @@ The ~100 ms target latency makes voice conversations feel natural — comparable
 
 ## Part 2: Load and Explore Voice Session Data
 
-### Step 2: Load [📥 `voice_sessions.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv)
+### Step 2: Load [📥 `voice_sessions.csv`](lab-059/voice_sessions.csv)
 
 OutdoorGear recorded **15 voice sessions** during a pilot test of their Realtime API integration. Each session captures a customer interaction:
 

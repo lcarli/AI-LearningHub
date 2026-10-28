@@ -32,7 +32,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Durée :</strong> ~75 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-azure">Payant — Licence Microsoft 365 Copilot + abonnement Azure + programme Frontier</span></span>
 </div>
@@ -108,9 +108,9 @@ Le SDK Agent 365 se situe *au-dessus* de votre framework d'agent. Il ne le **rem
 
 | Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `a365.config.sample.json` | Fichier de configuration / données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/a365.config.sample.json) |
-| `broken_observability.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/broken_observability.py) |
-| `outdoorgear_a365_starter.py` | Script de démarrage avec TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/outdoorgear_a365_starter.py) |
+| `a365.config.sample.json` | Fichier de configuration / données | [📥 Télécharger](lab-046/a365.config.sample.json) |
+| `broken_observability.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-046/broken_observability.py) |
+| `outdoorgear_a365_starter.py` | Script de démarrage avec TODOs | [📥 Télécharger](lab-046/outdoorgear_a365_starter.py) |
 
 ---
 
@@ -496,3 +496,10 @@ flowchart LR
 - [Microsoft Entra Agent ID GA](https://learn.microsoft.com/entra/agent-id/whats-new-agent-id)
 - [Microsoft Agent 365 GA](https://www.microsoft.com/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/)
 <!-- phase3-modernization:end -->
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-046-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-046-kit-fr.zip)

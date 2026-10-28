@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">💻 Pro Code</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/pro-code/">💻 Pro Code</a></span>
   <span><strong>Durée :</strong> ~60 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Niveau gratuit GitHub Models</span>
 </div>
@@ -348,3 +348,10 @@ print(result["messages"][-1].content)
 - **Plongée approfondie dans l'appel de fonctions :** → [Lab 018 — Appel de fonctions et utilisation d'outils](lab-018-function-calling.md)
 - **Multi-agents avec Semantic Kernel :** → [Lab 034 — Systèmes multi-agents](lab-034-multi-agent-sk.md)
 - **Agents AutoGen en production :** → [Lab 040 — Multi-agent en production](lab-040-autogen-multi-agent.md)
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-029-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-029-kit-fr.zip)

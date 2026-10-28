@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/foundry/">🏭 Microsoft Foundry</a></span>
   <span><strong>Durée :</strong> ~75 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Mode local avec ConsoleSpanExporter (Azure Monitor optionnel)</span>
 </div>
@@ -96,9 +96,9 @@ pip install azure-ai-projects azure-monitor-opentelemetry opentelemetry-instrume
 
 | Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `broken_tracing.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/broken_tracing.py) |
-| `sample_traces.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) |
-| `traced_agent.py` | Script de démarrage avec TODOs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/traced_agent.py) |
+| `broken_tracing.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-049/broken_tracing.py) |
+| `sample_traces.csv` | Jeu de données | [📥 Télécharger](lab-049/sample_traces.csv) |
+| `traced_agent.py` | Script de démarrage avec TODOs | [📥 Télécharger](lab-049/traced_agent.py) |
 
 ---
 
@@ -335,7 +335,7 @@ python lab-049/broken_tracing.py
 
 ??? question "**Q3 (Exécutez le lab) :** Quelle est la durée moyenne des traces sur les 10 traces d'exemple ?"
 
-    Chargez [📥 `sample_traces.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-049/sample_traces.csv) et calculez `traces["duration_ms"].mean()`.
+    Chargez [📥 `sample_traces.csv`](lab-049/sample_traces.csv) et calculez `traces["duration_ms"].mean()`.
 
     ??? success "✅ Révéler la réponse"
         **3 150,0 ms (3,15 secondes)**

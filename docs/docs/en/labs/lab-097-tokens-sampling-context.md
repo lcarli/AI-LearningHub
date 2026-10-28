@@ -83,3 +83,9 @@ Move temperature, top-k, and top-p. Predict whether output becomes more determin
 
 Allocate system instructions, user input, retrieved context, tool output, and response. Keep a safety margin and remove low-value context first.
 
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-097-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-097-kit-en.zip)

@@ -82,8 +82,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |---------|-------------|----------------|
-| \roken_cache.py\ | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/broken_cache.py) |
-| \cache_benchmark.csv\ | Jeu de données de benchmark | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) |
+| \roken_cache.py\ | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-071/broken_cache.py) |
+| \cache_benchmark.csv\ | Jeu de données de benchmark | [📥 Télécharger](lab-071/cache_benchmark.csv) |
 
 ---
 
@@ -350,7 +350,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez \All passed!\, c'est termin
 
 ??? question "**Q3 (Exécuter le lab) :** Quel est le TTFT moyen pour les **succès** de cache sur tous les fournisseurs ?"
 
-    Exécutez l'analyse de l'étape 3 sur [📥 \cache_benchmark.csv\](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-071/cache_benchmark.csv) et vérifiez les résultats.
+    Exécutez l'analyse de l'étape 3 sur [📥 \cache_benchmark.csv\](lab-071/cache_benchmark.csv) et vérifiez les résultats.
 
     ??? success "✅ Révéler la réponse"
         **217 ms**

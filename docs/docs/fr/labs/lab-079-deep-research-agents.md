@@ -107,8 +107,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_research.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/broken_research.py) |
-| `research_trace.csv` | Trace de recherche en 14 étapes avec rôles d'agents, tokens et qualité | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) |
+| `broken_research.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-079/broken_research.py) |
+| `research_trace.csv` | Trace de recherche en 14 étapes avec rôles d'agents, tokens et qualité | [📥 Télécharger](lab-079/research_trace.csv) |
 
 ---
 
@@ -331,7 +331,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécutez le lab) :** Quel est le nombre total de sources citées dans toutes les étapes ?"
 
-    Exécutez l'analyse de l'étape 4 sur [📥 `research_trace.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) et sommez la colonne `sources_cited`.
+    Exécutez l'analyse de l'étape 4 sur [📥 `research_trace.csv`](lab-079/research_trace.csv) et sommez la colonne `sources_cited`.
 
     ??? success "✅ Révéler la réponse"
         **10 sources**
@@ -394,3 +394,10 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-079-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-079-kit-fr.zip)

@@ -100,8 +100,8 @@ Este lab analisa dados de sessão pré-gravados — nenhuma chave de API ou assi
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_voice.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/broken_voice.py) |
-| `voice_sessions.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv) |
+| `broken_voice.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-059/broken_voice.py) |
+| `voice_sessions.csv` | Dataset | [📥 Download](lab-059/voice_sessions.csv) |
 
 ---
 
@@ -126,7 +126,7 @@ A meta de latência de ~100 ms torna as conversas por voz naturais — comparáv
 
 ## Parte 2: Carregar e Explorar Dados de Sessão de Voz
 
-### Etapa 2: Carregar [📥 `voice_sessions.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-059/voice_sessions.csv)
+### Etapa 2: Carregar [📥 `voice_sessions.csv`](lab-059/voice_sessions.csv)
 
 A OutdoorGear gravou **15 sessões de voz** durante um teste piloto da integração com a Realtime API. Cada sessão captura uma interação com o cliente:
 

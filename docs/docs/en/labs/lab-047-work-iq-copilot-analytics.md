@@ -90,9 +90,9 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_scorecard.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/broken_scorecard.py) |
-| `copilot_usage_data.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) |
-| `scorecard_builder.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/scorecard_builder.py) |
+| `broken_scorecard.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-047/broken_scorecard.py) |
+| `copilot_usage_data.csv` | Dataset | [📥 Download](lab-047/copilot_usage_data.csv) |
+| `scorecard_builder.py` | Starter script with TODOs | [📥 Download](lab-047/scorecard_builder.py) |
 
 ---
 
@@ -393,7 +393,7 @@ Fix all 3 bugs, then re-run. When you see `🎉 All 3 tests passed`, you're done
 
 ??? question "**Q3 (Run the Lab):** Which department has the highest Copilot adoption rate (active ÷ enabled × 100)?"
 
-    Run the Step 3 analysis on [📥 `copilot_usage_data.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-047/copilot_usage_data.csv) and check the results.
+    Run the Step 3 analysis on [📥 `copilot_usage_data.csv`](lab-047/copilot_usage_data.csv) and check the results.
 
     ??? success "✅ Reveal Answer"
         **Finance — 100.0%**

@@ -110,8 +110,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_agui.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/broken_agui.py) |
-| `agui_events.csv` | 12 types d'événements AG-UI avec directions et catégories | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/agui_events.csv) |
+| `broken_agui.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-077/broken_agui.py) |
+| `agui_events.csv` | 12 types d'événements AG-UI avec directions et catégories | [📥 Télécharger](lab-077/agui_events.csv) |
 
 ---
 
@@ -327,7 +327,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécutez le lab) :** Combien de types d'événements vont de l'agent vers le frontend ?"
 
-    Exécutez l'analyse de l'étape 3 sur [📥 `agui_events.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-077/agui_events.csv) et comptez les événements `agent_to_frontend`.
+    Exécutez l'analyse de l'étape 3 sur [📥 `agui_events.csv`](lab-077/agui_events.csv) et comptez les événements `agent_to_frontend`.
 
     ??? success "✅ Révéler la réponse"
         **9 événements**

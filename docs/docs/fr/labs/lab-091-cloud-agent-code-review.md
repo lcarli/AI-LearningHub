@@ -113,3 +113,10 @@ Rédigez une revue contenant :
 2. Le périmètre refusé et sa justification.
 3. Le commentaire à appliquer.
 4. Le coût : **AI Credits moyens**, **7 minutes Actions** et la prochaine optimisation.
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-091-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-091-kit-fr.zip)

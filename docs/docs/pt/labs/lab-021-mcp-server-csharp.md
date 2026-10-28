@@ -26,7 +26,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/mcp/">MCP</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/mcp/">MCP</a></span>
   <span><strong>Tempo:</strong> ~45 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito (local + Ollama)</span></span>
 </div>
@@ -61,7 +61,7 @@ Python é ótimo para prototipagem rápida de MCP, mas .NET é comum em ambiente
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `BrokenMcpServer.cs` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs) |
+| `BrokenMcpServer.cs` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-021/BrokenMcpServer.cs) |
 
 ---
 
@@ -276,7 +276,7 @@ dotnet run
 
 ??? question "**Q2 (Execute o Lab):** Após corrigir o bug #3 (o bug de comparação sensível a maiúsculas/minúsculas), qual valor de `StringComparison` substitui `StringComparison.Ordinal` na correção?"
 
-    Leia a descrição do bug #3 cuidadosamente e depois observe a correção que você aplicou em [📥 `BrokenMcpServer.cs`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-021/BrokenMcpServer.cs).
+    Leia a descrição do bug #3 cuidadosamente e depois observe a correção que você aplicou em [📥 `BrokenMcpServer.cs`](lab-021/BrokenMcpServer.cs).
 
     ??? success "✅ Revelar Resposta"
         **`StringComparison.OrdinalIgnoreCase`**
@@ -320,3 +320,10 @@ flowchart LR
 - [MCP authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
 - [MCP Registry](https://registry.modelcontextprotocol.io/)
 <!-- phase3-modernization:end -->
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-021-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-021-kit-pt.zip)

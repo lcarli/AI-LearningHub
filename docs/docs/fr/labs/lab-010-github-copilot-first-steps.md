@@ -30,7 +30,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/copilot/">🤖 GitHub Copilot</a></span>
   <span><strong>Durée :</strong> ~45 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — quota de complétions et allocation mensuelle limitée d'AI Credits</span>
 </div>
@@ -91,10 +91,10 @@ Ou copiez chaque fichier directement depuis les sections ci-dessous.
 
 | Fichier | Description | Téléchargement |
 |---------|-------------|----------------|
-| `exercise1_fibonacci.py` | Script d'exercice interactif | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py) |
-| `exercise2_shopping_cart.py` | Script d'exercice interactif | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py) |
-| `exercise3_product_search.py` | Script d'exercice interactif | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py) |
-| `exercise4_refactor_me.py` | Script d'exercice interactif | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py) |
+| `exercise1_fibonacci.py` | Script d'exercice interactif | [📥 Télécharger](lab-010/exercise1_fibonacci.py) |
+| `exercise2_shopping_cart.py` | Script d'exercice interactif | [📥 Télécharger](lab-010/exercise2_shopping_cart.py) |
+| `exercise3_product_search.py` | Script d'exercice interactif | [📥 Télécharger](lab-010/exercise3_product_search.py) |
+| `exercise4_refactor_me.py` | Script d'exercice interactif | [📥 Télécharger](lab-010/exercise4_refactor_me.py) |
 
 ---
 
@@ -138,7 +138,7 @@ Créez un nouveau fichier `practice.py` et tapez chaque commentaire ci-dessous. 
 
 **Objectif :** Utiliser Copilot Chat pour trouver, comprendre et corriger de vrais bugs.
 
-### Fichier : [📥 `exercise1_fibonacci.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py)
+### Fichier : [📥 `exercise1_fibonacci.py`](lab-010/exercise1_fibonacci.py)
 
 ```python title="exercise1_fibonacci.py — 3 bugs cachés à l'intérieur"
 --8<-- "labs/lab-010/exercise1_fibonacci.py"
@@ -164,7 +164,7 @@ Exécutez `python exercise1_fibonacci.py` — vous devriez voir : `✅ All tests
 
 ---
 
-### Fichier : [📥 `exercise2_shopping_cart.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py)
+### Fichier : [📥 `exercise2_shopping_cart.py`](lab-010/exercise2_shopping_cart.py)
 
 ```python title="exercise2_shopping_cart.py — 4 bugs cachés à l'intérieur"
 --8<-- "labs/lab-010/exercise2_shopping_cart.py"
@@ -197,7 +197,7 @@ Unique items: 2
 
 **Objectif :** Corriger des bugs ET ajouter une nouvelle fonctionnalité en utilisant le chat en ligne (`Ctrl+I`).
 
-### Fichier : [📥 `exercise3_product_search.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py)
+### Fichier : [📥 `exercise3_product_search.py`](lab-010/exercise3_product_search.py)
 
 ```python title="exercise3_product_search.py — 2 bugs + 1 fonctionnalité manquante"
 --8<-- "labs/lab-010/exercise3_product_search.py"
@@ -229,7 +229,7 @@ Le fichier mentionne une fonction `sort_by_price()` qui n'existe pas encore.
 
 **Objectif :** Utiliser le mode Agent pour améliorer la qualité du code avec des instructions en langage naturel — sans changer le comportement.
 
-### Fichier : [📥 `exercise4_refactor_me.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
+### Fichier : [📥 `exercise4_refactor_me.py`](lab-010/exercise4_refactor_me.py)
 
 ```python title="exercise4_refactor_me.py — fonctionne, mais nécessite des améliorations"
 --8<-- "labs/lab-010/exercise4_refactor_me.py"
@@ -307,3 +307,10 @@ Is there a more Pythonic way to write this?
 - **Construire un agent sans code pour Teams :** → [Lab 011 — Copilot Studio](lab-011-copilot-studio-first-agent.md)
 - **Utiliser le mode Agent pour construire une fonctionnalité complète :** → [Lab 016 — Copilot Agent Mode](lab-016-copilot-agent-mode.md)
 - **Utiliser des LLM gratuits dans votre code :** → [Lab 013 — GitHub Models](lab-013-github-models.md)
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-010-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-010-kit-fr.zip)

@@ -93,8 +93,8 @@ Nenhum pacote externo é necessário — este lab usa apenas a biblioteca padrã
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `agent_cards.json` | Arquivo de configuração / dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json) |
-| `broken_a2a.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/broken_a2a.py) |
+| `agent_cards.json` | Arquivo de configuração / dados | [📥 Download](lab-054/agent_cards.json) |
+| `broken_a2a.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-054/broken_a2a.py) |
 
 ---
 
@@ -460,7 +460,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você ver `🎉 All 3 tests 
 
 ??? question "**Q3 (Execute o Lab):** Quantas habilidades no total existem nos 3 agentes da OutdoorGear?"
 
-    Some os arrays de skills de todos os agent cards em [📥 `agent_cards.json`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-054/agent_cards.json).
+    Some os arrays de skills de todos os agent cards em [📥 `agent_cards.json`](lab-054/agent_cards.json).
 
     ??? success "✅ Revelar Resposta"
         **7**

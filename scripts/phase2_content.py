@@ -41,7 +41,8 @@ COPY = {
         "kit": "Supporting kit",
         "kit_text": (
             "The downloadable kit contains the lab guide, local exercise files, a cheat sheet, "
-            "and the diagrams referenced here. CI publishes deterministic PDF and ZIP artifacts."
+            "and the diagrams referenced here. The site build generates stable PDF and ZIP "
+            "downloads; CI also keeps a temporary artifact mirror for 30 days."
         ),
         "check": "Knowledge check",
         "summary": "Exit criteria",
@@ -154,7 +155,8 @@ COPY = {
         "kit": "Kit de apoio",
         "kit_text": (
             "O kit para download contém o guia do lab, exercícios locais, uma folha de consulta "
-            "e os diagramas citados. A CI publica artefatos PDF e ZIP determinísticos."
+            "e os diagramas citados. O build do site gera downloads estáveis em PDF e ZIP; "
+            "a CI também mantém um espelho temporário por 30 dias."
         ),
         "check": "Verificação de conhecimento",
         "summary": "Critérios de saída",
@@ -267,7 +269,8 @@ COPY = {
         "kit": "Kit d'accompagnement",
         "kit_text": (
             "Le kit téléchargeable contient le guide, les exercices locaux, une fiche mémo "
-            "et les diagrammes cités. La CI publie des artefacts PDF et ZIP déterministes."
+            "et les diagrammes cités. Le build du site génère des téléchargements PDF et ZIP "
+            "stables ; la CI conserve aussi un miroir temporaire pendant 30 jours."
         ),
         "check": "Vérification des connaissances",
         "summary": "Critères de sortie",
@@ -1191,7 +1194,17 @@ def render_lab(lab_id: str, lab: dict, lang: str) -> str:
     frontmatter = yaml.safe_dump(metadata, sort_keys=False, allow_unicode=True).strip()
     exit_lines = "\n".join(f"- [ ] {item}" for item in copy["exit"])
     kit_header_a, kit_header_b = copy["kit_headers"]
-    kit_rows = "\n".join(f"| {item} | {purpose} |" for item, purpose in copy["kit_rows"])
+    kit_targets = (
+        f"lab-{lab_id}/README.md",
+        None,
+        f"lab-{lab_id}/CHEATSHEET.md",
+        f"../downloads/kits/lab-{lab_id}-kit-{lang}.pdf",
+        f"../downloads/kits/lab-{lab_id}-kit-{lang}.zip",
+    )
+    kit_rows = "\n".join(
+        f"| [{item}]({target}) | {purpose} |" if target else f"| {item} | {purpose} |"
+        for (item, purpose), target in zip(copy["kit_rows"], kit_targets)
+    )
     return f"""---
 {frontmatter}
 ---

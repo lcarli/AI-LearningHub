@@ -86,8 +86,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_tools.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/broken_tools.py) |
-| `coding_tools_comparison.csv` | Dataset — 10 tarefas comparadas entre ferramentas | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/coding_tools_comparison.csv) |
+| `broken_tools.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-081/broken_tools.py) |
+| `coding_tools_comparison.csv` | Dataset — 10 tarefas comparadas entre ferramentas | [📥 Download](lab-081/coding_tools_comparison.csv) |
 
 ---
 
@@ -334,7 +334,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você ver `All passed!`, est
 
 ??? question "**Q3 (Execute o Laboratório):** Qual é a taxa de sucesso do Claude Code em todas as 10 tarefas?"
 
-    Carregue [📥 `coding_tools_comparison.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-081/coding_tools_comparison.csv) e conte `claude_code_success == True`.
+    Carregue [📥 `coding_tools_comparison.csv`](lab-081/coding_tools_comparison.csv) e conte `claude_code_success == True`.
 
     ??? success "✅ Revelar Resposta"
         **100% (10/10)**

@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-400">L400</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Time:</strong> ~90 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — Mock server data (no Azure subscription required)</span>
 </div>
@@ -91,8 +91,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_apim.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/broken_apim.py) |
-| `mcp_servers.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-064/mcp_servers.csv) |
+| `broken_apim.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-064/broken_apim.py) |
+| `mcp_servers.csv` | Dataset | [📥 Download](lab-064/mcp_servers.csv) |
 
 ---
 

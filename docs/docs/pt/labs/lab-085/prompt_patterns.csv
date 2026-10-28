@@ -1,0 +1,3 @@
+pattern,goal,risk
+goal-context-contract,bounded response,missing validation
+examples-with-tests,stable format,overfitting

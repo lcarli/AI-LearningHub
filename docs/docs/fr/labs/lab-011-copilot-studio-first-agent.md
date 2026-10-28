@@ -26,7 +26,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/agent-builder-teams/">Agent Builder — Teams</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/agent-builder-teams/">Agent Builder — Teams</a></span>
   <span><strong>Durée :</strong> ~30 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Essai gratuit</span> — Essai gratuit de Microsoft Copilot Studio (pas de carte bancaire pendant les 30 premiers jours)</span>
 </div>

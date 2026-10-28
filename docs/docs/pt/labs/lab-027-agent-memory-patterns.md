@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">Pro Code</a> / <a href="../paths/semantic-kernel/">SK</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/pro-code/">Pro Code</a> / <a href="../../paths/semantic-kernel/">SK</a></span>
   <span><strong>Tempo:</strong> ~35 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-free">Gratuito (local)</span></span>
 </div>
@@ -330,3 +330,10 @@ Is it a summary of past sessions?
 
 - **RAG agêntico usa memória de recuperação:** → [Lab 026 — Agentic RAG](lab-026-agentic-rag.md)
 - **SK possui abstrações de memória integradas:** → [Lab 023 — SK Plugins & Memory](lab-023-sk-plugins-memory.md)
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-027-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-027-kit-pt.zip)

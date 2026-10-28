@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Durée :</strong> ~90 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise un jeu de données de benchmark ; API OpenAI optionnelle</span>
 </div>
@@ -87,8 +87,8 @@ pip install pandas
 
 | Fichier | Description | Télécharger |
 |------|-------------|----------|
-| `broken_cua.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/broken_cua.py) |
-| `browser_tasks.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-058/browser_tasks.csv) |
+| `broken_cua.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-058/broken_cua.py) |
+| `browser_tasks.csv` | Jeu de données | [📥 Télécharger](lab-058/browser_tasks.csv) |
 
 ---
 

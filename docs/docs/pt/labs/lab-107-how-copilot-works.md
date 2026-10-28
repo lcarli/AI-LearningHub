@@ -85,3 +85,9 @@ Completions predizem código no fluxo de edição; chat responde conversas; agen
 
 Documente quem controla o repositório, qual contexto sai do cliente, retenção e exclusão aplicáveis e quais interações consomem AI Credits.
 
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-107-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-107-kit-pt.zip)

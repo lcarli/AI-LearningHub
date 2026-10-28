@@ -91,8 +91,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_benchmark.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/broken_benchmark.py) |
-| `swe_bench_results.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/swe_bench_results.csv) |
+| `broken_benchmark.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-073/broken_benchmark.py) |
+| `swe_bench_results.csv` | Dataset | [📥 Download](lab-073/swe_bench_results.csv) |
 
 ---
 
@@ -330,7 +330,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** Which agent configuration has the highest resolve rate?"
 
-    Run the Step 3 analysis on [📥 `swe_bench_results.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/swe_bench_results.csv) and check the ranking.
+    Run the Step 3 analysis on [📥 `swe_bench_results.csv`](lab-073/swe_bench_results.csv) and check the ranking.
 
     ??? success "✅ Reveal Answer"
         **Agentic o3 — 65%**
@@ -393,3 +393,10 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-073-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-073-kit-en.zip)

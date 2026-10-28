@@ -106,8 +106,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_research.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/broken_research.py) |
-| `research_trace.csv` | 14-step research trace with agent roles, tokens, and quality | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) |
+| `broken_research.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-079/broken_research.py) |
+| `research_trace.csv` | 14-step research trace with agent roles, tokens, and quality | [📥 Download](lab-079/research_trace.csv) |
 
 ---
 
@@ -330,7 +330,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** What is the total number of sources cited across all steps?"
 
-    Run the Step 4 analysis on [📥 `research_trace.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-079/research_trace.csv) and sum the `sources_cited` column.
+    Run the Step 4 analysis on [📥 `research_trace.csv`](lab-079/research_trace.csv) and sum the `sources_cited` column.
 
     ??? success "✅ Reveal Answer"
         **10 sources**
@@ -393,3 +393,10 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-079-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-079-kit-en.zip)

@@ -1,0 +1,3 @@
+criterion,score_0,score_1,score_2
+grounding,none,partial,cited
+safety,unsafe,unclear,safe

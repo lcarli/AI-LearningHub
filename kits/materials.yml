@@ -1,0 +1,153 @@
+version: 1
+source: Backlog_Plano_Educacao_LLM_Copilot.xlsx
+priority_scope:
+  required:
+    - "001"
+    - "002"
+    - "003"
+    - "004"
+    - "005"
+    - "006"
+    - "007"
+    - "009"
+    - "010"
+    - "012"
+    - "013"
+    - "014"
+    - "015"
+    - "016"
+    - "017"
+    - "018"
+    - "019"
+    - "020"
+    - "021"
+    - "022"
+    - "023"
+    - "024"
+    - "026"
+    - "027"
+    - "029"
+    - "030"
+    - "031"
+    - "032"
+    - "034"
+    - "035"
+    - "036"
+    - "037"
+    - "038"
+    - "039"
+    - "040"
+    - "044"
+    - "046"
+    - "051"
+    - "073"
+    - "074"
+    - "076"
+    - "079"
+  excluded_retired:
+    - "041"
+    - "045"
+labs:
+  "085":
+    required:
+      - starter/README.md
+      - context_modes.md
+      - prompt_patterns.csv
+  "086":
+    required:
+      - .github/copilot-instructions.md
+      - .github/instructions/security.instructions.md
+      - .github/prompts/review.prompt.md
+      - .github/agents/workshop.agent.md
+      - SKILL.md
+      - AGENTS.md
+      - customization_comparison.csv
+  "087":
+    required:
+      - mcp.json
+      - mcp_allowlist.json
+      - threat_checklist.csv
+  "088":
+    required:
+      - scripts/session_summary.ps1
+      - .github/agents/cli.agent.md
+      - .github/hooks/pre-command.json
+      - commands.csv
+  "089":
+    required:
+      - templates/spec.md
+      - templates/plan.md
+      - templates/tasks.md
+  "090":
+    required:
+      - legacy_calculator.py
+      - coverage_report.csv
+  "091":
+    required:
+      - .github/ISSUE_TEMPLATE/agent-task.yml
+      - firewall_allowlist.txt
+      - cost_estimate.csv
+  "092":
+    required:
+      - vulnerable_app.py
+      - owasp_mapping.csv
+  "093":
+    required:
+      - starter_app.py
+      - architecture.svg
+  "094":
+    required:
+      - metrics_mock.json
+      - metrics_mock.csv
+      - budget_playbook.md
+      - policy_checklist.csv
+  "095":
+    required:
+      - copilot_metrics.csv
+      - impact_analysis.ipynb
+  "096":
+    required:
+      - capstone_spec.md
+      - rubric.csv
+  "097":
+    required:
+      - token_costs.csv
+  "098":
+    required:
+      - context_engineering.ipynb
+      - context_dataset.jsonl
+  "099":
+    required:
+      - eval_dataset.jsonl
+      - evaluation_rubric.csv
+      - eval-regression.yml
+  "100":
+    required:
+      - threat_model.csv
+      - threat_cards.md
+  "101":
+    required:
+      - pricing_matrix.csv
+      - token_calculator.csv
+  "102":
+    required:
+      - adaptation_dataset.jsonl
+      - decision_matrix.md
+  "103":
+    required:
+      - train_tiny_gpt.ipynb
+      - tiny_gpt_dataset.txt
+  "104":
+    required:
+      - migration_checklist.csv
+  "105":
+    required:
+      - example_app.html
+  "106":
+    required:
+      - orchestration_patterns.ipynb
+  "107":
+    required:
+      - copilot_data_flow.svg
+      - copilot_glossary.csv
+      - data_flow_handout.md

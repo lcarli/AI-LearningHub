@@ -89,8 +89,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_pipeline.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/broken_pipeline.py) |
-| `product_reviews.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-053/product_reviews.csv) |
+| `broken_pipeline.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-053/broken_pipeline.py) |
+| `product_reviews.csv` | Dataset | [📥 Download](lab-053/product_reviews.csv) |
 
 ---
 

@@ -93,8 +93,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_powerbi.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/broken_powerbi.py) |
-| `powerbi_reports.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) |
+| `broken_powerbi.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-075/broken_powerbi.py) |
+| `powerbi_reports.csv` | Jeu de données | [📥 Télécharger](lab-075/powerbi_reports.csv) |
 
 ---
 
@@ -359,7 +359,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécutez le lab) :** Combien de rapports ont été créés avec Copilot (assistés ou générés) ?"
 
-    Exécutez l'analyse de l'étape 3 sur [📥 `powerbi_reports.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-075/powerbi_reports.csv) et comptez les rapports copilot.
+    Exécutez l'analyse de l'étape 3 sur [📥 `powerbi_reports.csv`](lab-075/powerbi_reports.csv) et comptez les rapports copilot.
 
     ??? success "✅ Révéler la réponse"
         **8 rapports**

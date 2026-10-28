@@ -85,3 +85,9 @@ Divida o trabalho em tarefas verificáveis e registre dependências reais. Cada 
 
 Execute uma tarefa por vez, rode os menores testes relevantes, compare com a especificação e atualize os artefatos quando a realidade mudar.
 
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-089-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-089-kit-pt.zip)

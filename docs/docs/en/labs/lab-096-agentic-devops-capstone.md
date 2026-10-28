@@ -180,15 +180,15 @@ Create an `evidence/` directory outside the repository if you want to retain com
 
 ## Supporting kit
 
-The downloadable kit contains the lab guide, local exercise files, a cheat sheet, and the diagrams referenced here. CI publishes deterministic PDF and ZIP artifacts.
+The downloadable kit contains the lab guide, local exercise files, a cheat sheet, and the diagrams referenced here. The site build generates stable PDF and ZIP downloads; CI also keeps a temporary artifact mirror for 30 days.
 
 | Item | Purpose |
 |---|---|
-| `README.md` | Quick-start and expected evidence |
+| [`README.md`](lab-096/README.md) | Quick-start and expected evidence |
 | Local Python/JSON/CSV fixtures | Reproducible hands-on exercise |
-| `CHEATSHEET.md` | Concepts, commands, and review checklist |
-| Generated PDF | Printable lab guide produced in CI |
-| Generated ZIP | Offline kit produced in CI |
+| [`CHEATSHEET.md`](lab-096/CHEATSHEET.md) | Concepts, commands, and review checklist |
+| [Generated PDF](../downloads/kits/lab-096-kit-en.pdf) | Printable lab guide produced in CI |
+| [Generated ZIP](../downloads/kits/lab-096-kit-en.zip) | Offline kit produced in CI |
 
 ## Optional real path
 

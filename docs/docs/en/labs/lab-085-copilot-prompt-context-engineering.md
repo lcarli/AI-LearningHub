@@ -81,3 +81,9 @@ Use the structure **goal → context → constraints → acceptance criteria →
 
 Verify generated code, cite the source files used, inspect security-sensitive assumptions, and reject any suggestion that invents APIs or secrets.
 
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-085-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-085-kit-en.zip)

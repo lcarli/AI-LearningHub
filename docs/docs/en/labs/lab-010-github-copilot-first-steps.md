@@ -30,7 +30,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/copilot/">🤖 GitHub Copilot</a></span>
   <span><strong>Time:</strong> ~45 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-github">GitHub Free</span> — completion quota plus a limited monthly AI Credits allowance</span>
 </div>
@@ -91,10 +91,10 @@ Or copy each file directly from the sections below.
 
 | File | Description | Download |
 |------|-------------|----------|
-| `exercise1_fibonacci.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py) |
-| `exercise2_shopping_cart.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py) |
-| `exercise3_product_search.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py) |
-| `exercise4_refactor_me.py` | Interactive exercise script | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py) |
+| `exercise1_fibonacci.py` | Interactive exercise script | [📥 Download](lab-010/exercise1_fibonacci.py) |
+| `exercise2_shopping_cart.py` | Interactive exercise script | [📥 Download](lab-010/exercise2_shopping_cart.py) |
+| `exercise3_product_search.py` | Interactive exercise script | [📥 Download](lab-010/exercise3_product_search.py) |
+| `exercise4_refactor_me.py` | Interactive exercise script | [📥 Download](lab-010/exercise4_refactor_me.py) |
 
 ---
 
@@ -138,7 +138,7 @@ Create a new file `practice.py` and type each comment below. After each comment,
 
 **Goal:** Use Copilot Chat to find, understand, and fix real bugs.
 
-### File: [📥 `exercise1_fibonacci.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise1_fibonacci.py)
+### File: [📥 `exercise1_fibonacci.py`](lab-010/exercise1_fibonacci.py)
 
 ```python title="exercise1_fibonacci.py — 3 bugs hidden inside"
 --8<-- "labs/lab-010/exercise1_fibonacci.py"
@@ -164,7 +164,7 @@ Run `python exercise1_fibonacci.py` — you should see: `✅ All tests passed!`
 
 ---
 
-### File: [📥 `exercise2_shopping_cart.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise2_shopping_cart.py)
+### File: [📥 `exercise2_shopping_cart.py`](lab-010/exercise2_shopping_cart.py)
 
 ```python title="exercise2_shopping_cart.py — 4 bugs hidden inside"
 --8<-- "labs/lab-010/exercise2_shopping_cart.py"
@@ -197,7 +197,7 @@ Unique items: 2
 
 **Goal:** Fix bugs AND add a new feature using inline chat (`Ctrl+I`).
 
-### File: [📥 `exercise3_product_search.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise3_product_search.py)
+### File: [📥 `exercise3_product_search.py`](lab-010/exercise3_product_search.py)
 
 ```python title="exercise3_product_search.py — 2 bugs + 1 missing feature"
 --8<-- "labs/lab-010/exercise3_product_search.py"
@@ -229,7 +229,7 @@ The file mentions a `sort_by_price()` function that doesn't exist yet.
 
 **Goal:** Use Agent mode to improve code quality with natural language instructions — without changing behavior.
 
-### File: [📥 `exercise4_refactor_me.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-010/exercise4_refactor_me.py)
+### File: [📥 `exercise4_refactor_me.py`](lab-010/exercise4_refactor_me.py)
 
 ```python title="exercise4_refactor_me.py — works, but needs improvement"
 --8<-- "labs/lab-010/exercise4_refactor_me.py"
@@ -307,3 +307,10 @@ Is there a more Pythonic way to write this?
 - **Build a no-code Teams agent:** → [Lab 011 — Copilot Studio](lab-011-copilot-studio-first-agent.md)
 - **Use Agent Mode to build a full feature:** → [Lab 016 — Copilot Agent Mode](lab-016-copilot-agent-mode.md)
 - **Use free LLMs in your code:** → [Lab 013 — GitHub Models](lab-013-github-models.md)
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-010-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-010-kit-en.zip)

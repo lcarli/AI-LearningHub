@@ -83,3 +83,9 @@ Mova temperatura, top-k e top-p. Preveja se a saída fica mais determinística o
 
 Aloque instruções, entrada, contexto recuperado, saída de ferramentas e resposta. Preserve margem de segurança e remova contexto de baixo valor.
 
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-097-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-097-kit-pt.zip)

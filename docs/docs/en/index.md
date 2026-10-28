@@ -3,7 +3,7 @@
   <h1>Build practical AI skills for 2026</h1>
   <p>Free-first labs for students and production-minded workshops: GitHub Copilot, agents, MCP, LLM foundations, governance, and GH-300.</p>
   <div class="hero-actions">
-    <a class="hub-button hub-button--primary" href="labs/lab-097-tokens-sampling-context.md">Start free</a>
+    <a class="hub-button hub-button--primary" href="labs/lab-097-tokens-sampling-context/">Start free</a>
     <a class="hub-button" href="labs/">Explore the catalog</a>
   </div>
 </div>
@@ -13,17 +13,17 @@
 ## Choose one of three journeys
 
 <div class="journey-grid">
-<a class="journey-card" href="labs/lab-097-tokens-sampling-context.md"><h3>Foundations</h3><p>Understand models, tokens, context, safety, and agent patterns.</p></a>
+<a class="journey-card" href="labs/lab-097-tokens-sampling-context/"><h3>Foundations</h3><p>Understand models, tokens, context, safety, and agent patterns.</p></a>
 <a class="journey-card" href="paths/copilot/"><h3>GitHub Copilot</h3><p>Move from Copilot Free to customization, MCP, CLI, and issue-to-PR delivery.</p></a>
-<a class="journey-card" href="labs/lab-094-copilot-governance-finops.md"><h3>Enterprise AI</h3><p>Practice governance, FinOps, observability, and production architecture with free simulations.</p></a>
+<a class="journey-card" href="labs/lab-094-copilot-governance-finops/"><h3>Enterprise AI</h3><p>Practice governance, FinOps, observability, and production architecture with free simulations.</p></a>
 </div>
 
 ## Start by persona
 
 <div class="persona-grid">
-<a class="persona-card" href="labs/lab-097-tokens-sampling-context.md"><h3>Student / community</h3><p>Begin with 097 → 004 → 085 and stay on the free path.</p></a>
+<a class="persona-card" href="labs/lab-097-tokens-sampling-context/"><h3>Student / community</h3><p>Begin with 097 → 004 → 085 and stay on the free path.</p></a>
 <a class="persona-card" href="paths/copilot/"><h3>Developer</h3><p>Learn Copilot context, customization, MCP, CLI, and Spec Kit.</p></a>
-<a class="persona-card" href="labs/lab-107-how-copilot-works.md"><h3>Admin / platform</h3><p>Begin with how Copilot works, then governance and cloud-agent simulation.</p></a>
+<a class="persona-card" href="labs/lab-107-how-copilot-works/"><h3>Admin / platform</h3><p>Begin with how Copilot works, then governance and cloud-agent simulation.</p></a>
 <a class="persona-card" href="paths/gh-300/"><h3>GH-300 candidate</h3><p>Follow the structured four-week certification cohort.</p></a>
 </div>
 

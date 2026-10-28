@@ -98,8 +98,8 @@ pip install pandas
 
 | Fichier | Description | Télécharger |
 |---------|-------------|-------------|
-| `broken_connector.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/broken_connector.py) |
-| `connector_comparison.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) |
+| `broken_connector.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-056/broken_connector.py) |
+| `connector_comparison.csv` | Jeu de données | [📥 Télécharger](lab-056/connector_comparison.csv) |
 
 ---
 
@@ -389,7 +389,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `🎉 All 3 tests passed`, 
 
 ??? question "**Q3 (Exécuter le lab) :** Quelle est la latence moyenne pour les requêtes du connecteur fédéré ?"
 
-    Filtrez [📥 `connector_comparison.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-056/connector_comparison.csv) par `connector_type == "federated"` et calculez `latency_ms.mean()`.
+    Filtrez [📥 `connector_comparison.csv`](lab-056/connector_comparison.csv) par `connector_type == "federated"` et calculez `latency_ms.mean()`.
 
     ??? success "✅ Révéler la réponse"
         **473 ms**

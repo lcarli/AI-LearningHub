@@ -83,9 +83,9 @@ Usuários não técnicos — gerentes de loja, analistas de marketing, planejado
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `broken_query_gen.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/broken_query_gen.py) |
-| `orders.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/orders.csv) |
-| `products.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-052/products.csv) |
+| `broken_query_gen.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-052/broken_query_gen.py) |
+| `orders.csv` | Conjunto de dados | [📥 Download](lab-052/orders.csv) |
+| `products.csv` | Conjunto de dados | [📥 Download](lab-052/products.csv) |
 
 ---
 

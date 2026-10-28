@@ -88,8 +88,8 @@ Este lab analisa dados de cenários pré-computados — não é necessário tena
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_identity.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/broken_identity.py) |
-| `identity_scenarios.csv` | Conjunto de dados | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv) |
+| `broken_identity.py` | Exercício de correção de bugs (3 bugs + autotestes) | [📥 Download](lab-063/broken_identity.py) |
+| `identity_scenarios.csv` | Conjunto de dados | [📥 Download](lab-063/identity_scenarios.csv) |
 
 ---
 
@@ -126,7 +126,7 @@ Conceitos-chave:
 
 ## Parte 2: Carregar Dados de Cenários
 
-### Etapa 2: Carregar [📥 `identity_scenarios.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv)
+### Etapa 2: Carregar [📥 `identity_scenarios.csv`](lab-063/identity_scenarios.csv)
 
 O conjunto de dados de cenários contém 15 configurações de identidade em 4 agentes:
 

@@ -31,7 +31,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Nível:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Trilha:</strong> <a href="../paths/pro-code/">Pro Code</a></span>
+  <span><strong>Trilha:</strong> <a href="../../paths/pro-code/">Pro Code</a></span>
   <span><strong>Tempo:</strong> ~45 min</span>
   <span><strong>💰 Custo:</strong> <span class="level-badge cost-github">GitHub Free</span> — Nível gratuito do GitHub Actions (2000 min/mês)</span>
 </div>
@@ -73,7 +73,7 @@ CI/CD para agentes de IA precisa de:
 
 | Arquivo | Descrição | Download |
 |------|-------------|----------|
-| `ai-agent-ci.yml` | Template de workflow CI/CD | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) |
+| `ai-agent-ci.yml` | Template de workflow CI/CD | [📥 Download](lab-037/ai-agent-ci.yml) |
 
 ---
 
@@ -397,7 +397,7 @@ jobs:
 
         O workflow define: `unit-tests`, `integration-tests`, `security-scan`, `agent-evaluation`, `docker-build`, `deploy-staging` e `deploy-production`. Cada job tem uma responsabilidade distinta no pipeline de deploy do agente.
 
-??? question "**Q2 (Execute o Lab):** Qual job no [📥 `ai-agent-ci.yml`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-037/ai-agent-ci.yml) NÃO executa em pull requests — apenas em pushes para a branch `main`?"
+??? question "**Q2 (Execute o Lab):** Qual job no [📥 `ai-agent-ci.yml`](lab-037/ai-agent-ci.yml) NÃO executa em pull requests — apenas em pushes para a branch `main`?"
 
     Observe a condição `if:` em cada job, ou o trigger no nível do workflow versus condições por job.
 
@@ -424,3 +424,10 @@ jobs:
 
 - **Avalie em escala com Azure AI:** → [Lab 035 — Avaliação de Agentes com Azure AI Eval SDK](lab-035-agent-evaluation.md)
 - **Faça deploy do seu agente no Azure Container Apps:** → [Lab 028 — Deploy MCP no Azure Container Apps](lab-028-deploy-mcp-azure.md)
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-037-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-037-kit-pt.zip)

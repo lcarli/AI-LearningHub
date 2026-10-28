@@ -28,7 +28,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/foundry/">🏭 Microsoft Foundry</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/foundry/">🏭 Microsoft Foundry</a></span>
   <span><strong>Durée :</strong> ~120 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Utilise des données d'agents simulées</span>
 </div>
@@ -87,8 +87,8 @@ pip install pandas
 
 | Fichier | Description | Téléchargement |
 |------|-------------|----------|
-| `broken_foundry.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/broken_foundry.py) |
-| `foundry_agents.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) |
+| `broken_foundry.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-074/broken_foundry.py) |
+| `foundry_agents.csv` | Jeu de données | [📥 Télécharger](lab-074/foundry_agents.csv) |
 
 ---
 
@@ -357,7 +357,7 @@ Corrigez les 3 bugs, puis relancez. Quand vous voyez `All passed!`, c'est termin
 
 ??? question "**Q3 (Exécutez le lab) :** Quel est le nombre total de requêtes dans toute la flotte au cours des dernières 24 heures ?"
 
-    Exécutez l'analyse de l'étape 3 sur [📥 `foundry_agents.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-074/foundry_agents.csv) et vérifiez les résultats.
+    Exécutez l'analyse de l'étape 3 sur [📥 `foundry_agents.csv`](lab-074/foundry_agents.csv) et vérifiez les résultats.
 
     ??? success "✅ Révéler la réponse"
         **9 380 requêtes**
@@ -440,3 +440,10 @@ flowchart LR
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-074-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-074-kit-fr.zip)

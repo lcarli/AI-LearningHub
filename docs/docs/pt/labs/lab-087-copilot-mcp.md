@@ -86,3 +86,9 @@ Use Playwright MCP somente em localhost. Registre uma observação de acessibili
 
 Exponha uma ferramenta local de consulta OutdoorGear. Adicione schema estrito, saída limitada, erros explícitos e allowlist.
 
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-087-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-087-kit-pt.zip)

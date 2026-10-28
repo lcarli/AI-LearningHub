@@ -39,11 +39,11 @@ Save these files in one folder named `challenge-003/`:
 
 | File | Purpose | Download |
 |------|---------|----------|
-| `documents.json` | Trusted and untrusted support context | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-003/documents.json) |
-| `requests.json` | Safe and malicious user requests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-003/requests.json) |
-| `starter_prompt_defense.py` | Broken defense implementation | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-003/starter_prompt_defense.py) |
-| `test_prompt_defense.py` | Acceptance tests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-003/test_prompt_defense.py) |
-| `validate_prompt_defense.py` | Generates the final completion code | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-003/validate_prompt_defense.py) |
+| `documents.json` | Trusted and untrusted support context | [Download](challenge-003/documents.json) |
+| `requests.json` | Safe and malicious user requests | [Download](challenge-003/requests.json) |
+| `starter_prompt_defense.py` | Broken defense implementation | [Download](challenge-003/starter_prompt_defense.py) |
+| `test_prompt_defense.py` | Acceptance tests | [Download](challenge-003/test_prompt_defense.py) |
+| `validate_prompt_defense.py` | Generates the final completion code | [Download](challenge-003/validate_prompt_defense.py) |
 
 ---
 

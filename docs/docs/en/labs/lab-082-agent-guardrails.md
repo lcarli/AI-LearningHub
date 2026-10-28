@@ -87,8 +87,8 @@ pip install pandas
 
 | File | Description | Download |
 |------|-------------|----------|
-| `broken_guardrails.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-082/broken_guardrails.py) |
-| `guardrail_tests.csv` | Dataset — 15 guardrail test scenarios | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-082/guardrail_tests.csv) |
+| `broken_guardrails.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-082/broken_guardrails.py) |
+| `guardrail_tests.csv` | Dataset — 15 guardrail test scenarios | [📥 Download](lab-082/guardrail_tests.csv) |
 
 ---
 
@@ -400,7 +400,7 @@ Fix all 3 bugs, then re-run. When you see `All passed!`, you're done!
 
 ??? question "**Q3 (Run the Lab):** How many of the 15 tests triggered a guardrail?"
 
-    Load [📥 `guardrail_tests.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-082/guardrail_tests.csv) and count rows where `triggered == True`.
+    Load [📥 `guardrail_tests.csv`](lab-082/guardrail_tests.csv) and count rows where `triggered == True`.
 
     ??? success "✅ Reveal Answer"
         **10**

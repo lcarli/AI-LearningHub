@@ -29,7 +29,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-200">L200</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/pro-code/">Pro Code</a> / <a href="../paths/semantic-kernel/">SK</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/pro-code/">Pro Code</a> / <a href="../../paths/semantic-kernel/">SK</a></span>
   <span><strong>Durée :</strong> ~35 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit (local)</span></span>
 </div>
@@ -330,3 +330,10 @@ S'agit-il d'un résumé de sessions passées ?
 
 - **Le RAG agentique utilise la mémoire de récupération :** → [Lab 026 — RAG agentique](lab-026-agentic-rag.md)
 - **SK dispose d'abstractions de mémoire intégrées :** → [Lab 023 — Plugins et mémoire SK](lab-023-sk-plugins-memory.md)
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-027-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-027-kit-fr.zip)

@@ -39,11 +39,11 @@ Save these files in one folder named `challenge-004/`:
 
 | File | Purpose | Download |
 |------|---------|----------|
-| `context_docs.json` | Compact and verbose support context | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-004/context_docs.json) |
-| `requests.json` | Budgeted support requests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-004/requests.json) |
-| `starter_token_budget.py` | Broken budget optimizer | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-004/starter_token_budget.py) |
-| `test_token_budget.py` | Acceptance tests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-004/test_token_budget.py) |
-| `validate_token_budget.py` | Generates the final completion code | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-004/validate_token_budget.py) |
+| `context_docs.json` | Compact and verbose support context | [Download](challenge-004/context_docs.json) |
+| `requests.json` | Budgeted support requests | [Download](challenge-004/requests.json) |
+| `starter_token_budget.py` | Broken budget optimizer | [Download](challenge-004/starter_token_budget.py) |
+| `test_token_budget.py` | Acceptance tests | [Download](challenge-004/test_token_budget.py) |
+| `validate_token_budget.py` | Generates the final completion code | [Download](challenge-004/validate_token_budget.py) |
 
 ---
 

@@ -27,7 +27,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Niveau :</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Parcours :</strong> <a href="../paths/copilot/">🤖 GitHub Copilot</a></span>
+  <span><strong>Parcours :</strong> <a href="../../paths/copilot/">🤖 GitHub Copilot</a></span>
   <span><strong>Durée :</strong> ~30 min</span>
   <span><strong>💰 Coût :</strong> <span class="level-badge cost-github">GitHub Free</span> — Compte GitHub gratuit (le niveau gratuit inclut le mode agent)</span>
 </div>
@@ -80,7 +80,7 @@ Le **mode agent** est le plus récent et le plus puissant. Vous décrivez un obj
 
 | Fichier | Description | Téléchargement |
 |---------|-------------|----------------|
-| `outdoorgear_api.py` | Script Python | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) |
+| `outdoorgear_api.py` | Script Python | [📥 Télécharger](lab-016/outdoorgear_api.py) |
 
 ---
 
@@ -105,7 +105,7 @@ Cet exercice vous donne un **vrai projet Python cassé** à corriger en utilisan
 cd AI-LearningHub/docs/docs/en/labs/lab-016
 ```
 
-Ou copiez le fichier [📥 `outdoorgear_api.py`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-016/outdoorgear_api.py) ci-dessous :
+Ou copiez le fichier [📥 `outdoorgear_api.py`](lab-016/outdoorgear_api.py) ci-dessous :
 
 ```python title="lab-016/outdoorgear_api.py — 5 bugs, 1 missing feature, no tests"
 --8<-- "labs/lab-016/outdoorgear_api.py"
@@ -313,3 +313,10 @@ Your request: "Fix all bugs"
 
 - **Créer un serveur MCP pour étendre le mode agent :** → [Lab 020 — Serveur MCP en Python](lab-020-mcp-server-python.md)
 - **Créer un Chat Participant VS Code (@agent personnalisé) :** → [Lab 025 — VS Code Chat Participant](lab-025-vscode-chat-participant.md)
+
+## Kit d'accompagnement
+
+Le build du site génère des téléchargements PDF et ZIP stables. Le ZIP contient le guide du lab et tous les fichiers d'accompagnement déclarés.
+
+- [Télécharger le PDF généré](../downloads/kits/lab-016-kit-fr.pdf)
+- [Télécharger le ZIP généré](../downloads/kits/lab-016-kit-fr.zip)

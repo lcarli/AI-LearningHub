@@ -109,3 +109,29 @@ test("Phase 3 local and real tabs are initialized", () => {
   assert.match(source, /function addPhase3Tabs/);
   assert.match(source, /data-phase3-panel/);
 });
+
+test("Home v2 CTAs use rendered routes in every language", () => {
+  ["en", "pt", "fr"].forEach((lang) => {
+    const docsRoot = path.join(__dirname, `../docs/docs/${lang}`);
+    const source = fs.readFileSync(path.join(docsRoot, "index.md"), "utf8");
+    const hrefs = [...source.matchAll(
+      /<a class="(?:hub-button|journey-card|persona-card)[^"]*" href="([^"]+)"/g
+    )].map((match) => match[1]);
+
+    assert.equal(hrefs.length, 9);
+    assert.equal(hrefs[0], "labs/lab-097-tokens-sampling-context/");
+    hrefs.forEach((href) => {
+      assert.equal(href.startsWith("/"), false, `${lang}: ${href}`);
+      assert.equal(href.includes(".md"), false, `${lang}: ${href}`);
+
+      const route = href.replace(/\/$/, "");
+      const directPage = path.join(docsRoot, `${route}.md`);
+      const indexPage = path.join(docsRoot, route, "index.md");
+      assert.equal(
+        fs.existsSync(directPage) || fs.existsSync(indexPage),
+        true,
+        `${lang}: ${href}`
+      );
+    });
+  });
+});

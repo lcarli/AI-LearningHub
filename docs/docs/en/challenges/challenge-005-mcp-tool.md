@@ -38,11 +38,11 @@ Save these files in one folder named `challenge-005/`:
 
 | File | Purpose | Download |
 |------|---------|----------|
-| `orders.json` | Mock OutdoorGear orders | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-005/orders.json) |
-| `tool_requests.json` | Valid and invalid tool calls | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-005/tool_requests.json) |
-| `starter_mcp_tool.py` | Broken MCP-style tool implementation | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-005/starter_mcp_tool.py) |
-| `test_mcp_tool.py` | Acceptance tests | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-005/test_mcp_tool.py) |
-| `validate_mcp_tool.py` | Generates the final completion code | [Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/challenges/challenge-005/validate_mcp_tool.py) |
+| `orders.json` | Mock OutdoorGear orders | [Download](challenge-005/orders.json) |
+| `tool_requests.json` | Valid and invalid tool calls | [Download](challenge-005/tool_requests.json) |
+| `starter_mcp_tool.py` | Broken MCP-style tool implementation | [Download](challenge-005/starter_mcp_tool.py) |
+| `test_mcp_tool.py` | Acceptance tests | [Download](challenge-005/test_mcp_tool.py) |
+| `validate_mcp_tool.py` | Generates the final completion code | [Download](challenge-005/validate_mcp_tool.py) |
 
 ---
 

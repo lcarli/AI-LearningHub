@@ -88,8 +88,8 @@ Ce lab analyse des données de scénarios pré-calculées — aucun tenant Entra
 
 | Fichier | Description | Télécharger |
 |---------|-------------|-------------|
-| `broken_identity.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/broken_identity.py) |
-| `identity_scenarios.csv` | Jeu de données | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv) |
+| `broken_identity.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-063/broken_identity.py) |
+| `identity_scenarios.csv` | Jeu de données | [📥 Télécharger](lab-063/identity_scenarios.csv) |
 
 ---
 
@@ -126,7 +126,7 @@ Concepts clés :
 
 ## Partie 2 : Charger les données de scénarios
 
-### Étape 2 : Charger [📥 `identity_scenarios.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-063/identity_scenarios.csv)
+### Étape 2 : Charger [📥 `identity_scenarios.csv`](lab-063/identity_scenarios.csv)
 
 Le jeu de données de scénarios contient 15 configurations d'identité à travers 4 agents :
 

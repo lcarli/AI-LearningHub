@@ -32,7 +32,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-300">L300</span></span>
-  <span><strong>Path:</strong> <a href="../paths/pro-code/">⚙️ Pro Code</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/pro-code/">⚙️ Pro Code</a></span>
   <span><strong>Time:</strong> ~75 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-azure">Paid — Microsoft 365 Copilot license + Azure subscription + Frontier program</span></span>
 </div>
@@ -108,9 +108,9 @@ Agent 365 SDK sits *above* your agent framework. It does **not** replace it — 
 
 | File | Description | Download |
 |------|-------------|----------|
-| `a365.config.sample.json` | Configuration / data file | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/a365.config.sample.json) |
-| `broken_observability.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/broken_observability.py) |
-| `outdoorgear_a365_starter.py` | Starter script with TODOs | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-046/outdoorgear_a365_starter.py) |
+| `a365.config.sample.json` | Configuration / data file | [📥 Download](lab-046/a365.config.sample.json) |
+| `broken_observability.py` | Bug-fix exercise (3 bugs + self-tests) | [📥 Download](lab-046/broken_observability.py) |
+| `outdoorgear_a365_starter.py` | Starter script with TODOs | [📥 Download](lab-046/outdoorgear_a365_starter.py) |
 
 ---
 
@@ -496,3 +496,10 @@ flowchart LR
 - [Microsoft Entra Agent ID GA](https://learn.microsoft.com/entra/agent-id/whats-new-agent-id)
 - [Microsoft Agent 365 GA](https://www.microsoft.com/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/)
 <!-- phase3-modernization:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-046-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-046-kit-en.zip)

@@ -1,0 +1,4 @@
+check,required,evidence
+stateless request handling,yes,test trace
+discovery metadata,yes,server document
+multi-round-trip,yes,conversation fixture

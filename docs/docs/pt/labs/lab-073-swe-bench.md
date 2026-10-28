@@ -91,8 +91,8 @@ pip install pandas
 
 | Arquivo | Descrição | Download |
 |---------|-----------|----------|
-| `broken_benchmark.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/broken_benchmark.py) |
-| `swe_bench_results.csv` | Dataset | [📥 Download](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/swe_bench_results.csv) |
+| `broken_benchmark.py` | Exercício de correção de bugs (3 bugs + auto-testes) | [📥 Download](lab-073/broken_benchmark.py) |
+| `swe_bench_results.csv` | Dataset | [📥 Download](lab-073/swe_bench_results.csv) |
 
 ---
 
@@ -330,7 +330,7 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
 
 ??? question "**Q3 (Execute o Lab):** Qual configuração de agente tem a maior taxa de resolução?"
 
-    Execute a análise da Etapa 3 no [📥 `swe_bench_results.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-073/swe_bench_results.csv) e verifique o ranking.
+    Execute a análise da Etapa 3 no [📥 `swe_bench_results.csv`](lab-073/swe_bench_results.csv) e verifique o ranking.
 
     ??? success "✅ Revelar Resposta"
         **Agentic o3 — 65%**
@@ -393,3 +393,10 @@ Corrija todos os 3 bugs e execute novamente. Quando você vir `All passed!`, est
   </section>
 </div>
 <!-- phase3-real-track:end -->
+
+## Kit de apoio
+
+O build do site gera downloads estáveis em PDF e ZIP. O ZIP contém o guia do lab e todos os arquivos de apoio declarados para este lab.
+
+- [Baixar PDF gerado](../downloads/kits/lab-073-kit-pt.pdf)
+- [Baixar ZIP gerado](../downloads/kits/lab-073-kit-pt.zip)

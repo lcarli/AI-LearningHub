@@ -21,7 +21,7 @@ lab:
 
 <div class="lab-meta">
   <span><strong>Level:</strong> <span class="level-badge level-100">L100</span></span>
-  <span><strong>Path:</strong> <a href="../paths/mcp/">🔌 MCP</a></span>
+  <span><strong>Path:</strong> <a href="../../paths/mcp/">🔌 MCP</a></span>
   <span><strong>Time:</strong> ~20 min</span>
   <span><strong>💰 Cost:</strong> <span class="level-badge cost-free">Free</span> — No account needed</span>
 </div>
@@ -225,3 +225,10 @@ flowchart LR
 - [MCP authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
 - [MCP Registry](https://registry.modelcontextprotocol.io/)
 <!-- phase3-modernization:end -->
+
+## Supporting kit
+
+The site build generates stable PDF and ZIP downloads. The ZIP contains the lab guide and every supporting file declared for this lab.
+
+- [Download generated PDF](../downloads/kits/lab-012-kit-en.pdf)
+- [Download generated ZIP](../downloads/kits/lab-012-kit-en.zip)

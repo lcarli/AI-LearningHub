@@ -87,8 +87,8 @@ Ce lab analyse des résultats de benchmark pré-calculés — aucune clé API, G
 
 | Fichier | Description | Télécharger |
 |---------|-------------|-------------|
-| `broken_slm.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/broken_slm.py) |
-| `slm_benchmark.csv` | Jeu de données de benchmark | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv) |
+| `broken_slm.py` | Exercice de correction de bugs (3 bugs + auto-tests) | [📥 Télécharger](lab-061/broken_slm.py) |
+| `slm_benchmark.csv` | Jeu de données de benchmark | [📥 Télécharger](lab-061/slm_benchmark.csv) |
 
 ---
 
@@ -122,7 +122,7 @@ Concepts clés :
 
 ## Partie 2 : Charger les données du benchmark
 
-### Étape 2 : Charger [📥 `slm_benchmark.csv`](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-061/slm_benchmark.csv)
+### Étape 2 : Charger [📥 `slm_benchmark.csv`](lab-061/slm_benchmark.csv)
 
 Le jeu de données de benchmark contient les résultats de l'exécution des 15 tâches à travers les deux modèles :
 
