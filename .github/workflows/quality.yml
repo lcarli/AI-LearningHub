@@ -44,6 +44,7 @@ jobs:
         run: |
           python -m unittest scripts/test_content_links.py -v
           python -m unittest scripts/test_generate_kits.py -v
+          python -m unittest scripts/test_language_links.py -v
           python scripts/run_phase2_tests.py
           python scripts/generate_kits.py --check
 

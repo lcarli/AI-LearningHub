@@ -1,5 +1,5 @@
 site_name: AI Agents Learning Hub
-site_url: https://lcarli.github.io/AI-LearningHub/
+site_url: !ENV [SITE_URL, https://ailearninghub.nonprodlucas.com/]
 site_author: Community Contributors
 site_description: >-
   Step-by-step labs for building AI agents with Microsoft technologies.
@@ -14,6 +14,7 @@ copyright: >
 docs_dir: docs
 hooks:
   - hooks/generate_site_kits.py
+  - hooks/fix_language_links.py
 
 nav:
   - Home: index.md
