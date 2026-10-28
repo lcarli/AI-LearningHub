@@ -52,3 +52,6 @@ The simulator covers the curriculum through five personas. It stores only the fi
 - [GH-300 certification](https://learn.microsoft.com/credentials/certifications/github-copilot/)
 - [GitHub Copilot documentation](https://docs.github.com/copilot)
 - [Copilot plans](https://docs.github.com/copilot/get-started/plans)
+## Phase 2 Challenges
+
+- [Challenge 010](../../challenges/challenge-010-spec-to-pr.md) validates the spec-to-PR workflow with local tests.

@@ -1,0 +1,27 @@
+{
+  "host": {
+    "surface": "app-or-chat-participant",
+    "owns": [
+      "authentication",
+      "cancellation",
+      "ui"
+    ]
+  },
+  "runtime": {
+    "owns": [
+      "planning",
+      "tool-selection",
+      "response-contract"
+    ]
+  },
+  "mcp": {
+    "owns": [
+      "tool-schema",
+      "authorization-boundary",
+      "result-contract"
+    ]
+  },
+  "provider": {
+    "mode": "copilot-or-local-byok"
+  }
+}

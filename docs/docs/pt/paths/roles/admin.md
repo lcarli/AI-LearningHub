@@ -42,3 +42,6 @@ Você gerencia implantações de IA — identidade, conformidade, DLP, monitoram
 ---
 
 **Total: 11 labs · ~10 horas · Do zero à governança empresarial de IA**
+## Adições da Fase 2
+
+Use os Labs 092, 094 e 100 para políticas, controles, modelagem de ameaças e revisão.

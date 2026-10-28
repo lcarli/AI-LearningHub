@@ -39,3 +39,6 @@ Você é novo em agentes de IA e quer aprender do zero — totalmente gratuito, 
 ---
 
 **Total: 13 labs · ~8 horas · 100% gratuito — sem Azure, sem cartão de crédito**
+## Adições da Fase 2
+
+Use os Labs 004, 005, 007, 097–101 e o Desafio 011 para uma trilha gratuita e local de fundamentos de LLM.

@@ -34,10 +34,14 @@ jobs:
           pip install -r docs/requirements.txt
 
       - name: Generate What's New page
-        run: python scripts/generate_whats_new.py
+        run: |
+          python scripts/phase2_content.py
+          python scripts/generate_whats_new.py
 
       - name: Generate Labs Index
-        run: python scripts/generate_labs_index.py
+        run: |
+          python scripts/generate_labs_index.py
+          python scripts/generate_labs_json.py
 
       - name: Validate content
         run: python scripts/validate_content.py

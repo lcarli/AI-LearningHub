@@ -1,0 +1,25 @@
+{
+  "goal": "Add a validated inventory status endpoint",
+  "non_goals": [
+    "database migration",
+    "production deployment"
+  ],
+  "acceptance_criteria": [
+    "tests pass",
+    "invalid SKU returns a typed error",
+    "PR includes validation evidence"
+  ],
+  "steps": [
+    "inspect current API",
+    "write characterization tests",
+    "implement endpoint",
+    "run tests and review diff"
+  ],
+  "validation_commands": [
+    "python -m unittest -v",
+    "git diff --check"
+  ],
+  "risks": [
+    "breaking API compatibility"
+  ]
+}

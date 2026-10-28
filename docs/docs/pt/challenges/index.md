@@ -24,3 +24,9 @@ Desafios são menos guiados que os labs. Use-os depois de concluir os labs relac
 - Você **não** recebe um passo a passo.
 - Quando possível, o desafio inclui um **validador local** que gera um código de conclusão.
 - Digite o código na página do desafio para confirmar o resultado final.
+## Desafios da Fase 2
+
+- [Challenge 010](challenge-010-spec-to-pr.md) — Da Spec ao PR
+- [Challenge 011](challenge-011-evaluation-driven-rag.md) — RAG Guiado por Avaliação
+
+Both challenges include local unit tests and a completion-code validator.

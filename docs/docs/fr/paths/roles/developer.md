@@ -58,3 +58,6 @@ Foundry Local (gratuit)           Framework, guardrails          déploiement, �
 ---
 
 **Total : 17 labs · ~17 heures · Du zéro au créateur d'agents prêt pour la production**
+## Ajouts de la Phase 2
+
+Utilisez les Labs 090, 092, 093, 096 et le Défi 010 pour une livraison testée, sûre et agentique.

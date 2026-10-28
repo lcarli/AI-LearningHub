@@ -1,0 +1,7 @@
+# Évaluations LLM 101 : jeux de référence, LLM juge et régression CI — Fiche Mémo
+
+- Commencez par un objectif mesurable et des critères explicites.
+- Gardez le parcours gratuit/local complet et marquez les services payants facultatifs.
+- Traitez sorties du modèle, récupération et outils comme non fiables avant validation.
+- Notez hypothèses, preuves, échecs et étapes de retour arrière.
+- Relancez les tests locaux après chaque modification.

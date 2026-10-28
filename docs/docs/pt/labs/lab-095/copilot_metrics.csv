@@ -1,0 +1,3 @@
+period,eligible,active,accepted_suggestions,shown_suggestions,lead_time_hours,deploy_frequency,change_fail_rate,satisfaction
+before,40,18,0,0,72,3,0.18,3.4
+after,40,29,460,800,54,5,0.15,3.8

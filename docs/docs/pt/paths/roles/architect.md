@@ -46,3 +46,6 @@ Você projeta sistemas de IA em produção — arquiteturas multi-agente, observ
 ---
 
 **Total: 15 labs · ~18 horas · Da arquitetura à governança em produção**
+## Adições da Fase 2
+
+Use os Labs 095, 098, 100 e 101 para conectar decisões a evidência, risco e custo.

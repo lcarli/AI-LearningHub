@@ -1,0 +1,6 @@
+{
+  "verify_alert": true,
+  "review_patch": true,
+  "run_tests": true,
+  "rotate_secret": true
+}

@@ -10,6 +10,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs" / "docs"
+KIT_MANIFEST = ROOT / "kits" / "manifest.yml"
 LANGS = ("en", "pt", "fr")
 ALLOWED_TIERS = {"free", "free-gh", "free-conditional", "paid"}
 NOTICE_MARKERS = (
@@ -21,6 +22,25 @@ LEGACY_BACKEND = re.compile(
     r"models\.inference\.ai\.azure\.com|github\.com/marketplace/models",
     re.IGNORECASE,
 )
+PHASE2_LABS = {
+    "004",
+    "005",
+    "007",
+    "017",
+    "018",
+    "019",
+    "022",
+    "090",
+    "092",
+    "093",
+    "095",
+    "096",
+    "098",
+    "099",
+    "100",
+    "101",
+}
+PHASE2_CHALLENGES = {"010", "011"}
 
 
 def parse_frontmatter(path: Path) -> tuple[dict, str]:
@@ -130,6 +150,24 @@ def main() -> int:
             if any(len(question.get("options", [])) != 4 for question in questions):
                 errors.append(f"{question_path}: every question requires four options")
 
+        for lab_id in PHASE2_LABS:
+            matches = list((DOCS / lang / "labs").glob(f"lab-{lab_id}-*.md"))
+            if len(matches) != 1:
+                errors.append(f"{lang}: expected one Phase 2 Lab {lab_id}")
+                continue
+            support = DOCS / lang / "labs" / f"lab-{lab_id}"
+            if not support.exists() or not (support / "CHEATSHEET.md").exists():
+                errors.append(f"{support}: Phase 2 lab requires a supporting kit directory")
+
+        for challenge_id in PHASE2_CHALLENGES:
+            matches = list((DOCS / lang / "challenges").glob(f"challenge-{challenge_id}-*.md"))
+            support = DOCS / lang / "challenges" / f"challenge-{challenge_id}"
+            if len(matches) != 1:
+                errors.append(f"{lang}: expected one Phase 2 Challenge {challenge_id}")
+            for required_file in ("test_challenge.py", "validate.py"):
+                if not (support / required_file).exists():
+                    errors.append(f"{support}: missing {required_file}")
+
     for lang in LANGS:
         for lab_id in ("041", "045"):
             matches = list((DOCS / lang / "labs").glob(f"lab-{lab_id}-*.md"))
@@ -139,6 +177,18 @@ def main() -> int:
             frontmatter, _ = parse_frontmatter(matches[0])
             if frontmatter.get("lab", {}).get("status") != "retired":
                 errors.append(f"{matches[0]}: retired lab must declare status: retired")
+
+    try:
+        kit_manifest = yaml.safe_load(KIT_MANIFEST.read_text(encoding="utf-8"))
+    except (OSError, yaml.YAMLError) as exc:
+        errors.append(f"{KIT_MANIFEST}: invalid or missing kit manifest ({exc})")
+    else:
+        kit_ids = {str(item["id"]).zfill(3) for item in kit_manifest.get("labs", [])}
+        missing_kits = PHASE2_LABS - kit_ids
+        if missing_kits:
+            errors.append(f"{KIT_MANIFEST}: missing Phase 2 kits {sorted(missing_kits)}")
+        if any(item.get("priority") not in {"P0", "P1"} for item in kit_manifest.get("labs", [])):
+            errors.append(f"{KIT_MANIFEST}: every kit must declare priority P0 or P1")
 
     if errors:
         print("Content validation failed:")

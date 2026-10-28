@@ -1,0 +1,30 @@
+{
+  "baseline": {
+    "chunk_words": 80,
+    "top_k": 3
+  },
+  "candidate": {
+    "chunk_words": 60,
+    "top_k": 4
+  },
+  "golden_queries": [
+    {
+      "query": "return window",
+      "relevant": [
+        "returns"
+      ]
+    },
+    {
+      "query": "waterproof tent weight",
+      "relevant": [
+        "tent"
+      ]
+    }
+  ],
+  "thresholds": {
+    "recall_at_k": 1.0,
+    "citation_coverage": 1.0,
+    "unsupported_claims": 0
+  },
+  "decision": "promote only if all thresholds pass"
+}

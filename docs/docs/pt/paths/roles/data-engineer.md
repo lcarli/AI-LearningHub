@@ -43,3 +43,6 @@ Você trabalha com dados — analytics, BI, pipelines ETL — e quer adicionar a
 ---
 
 **Total: 12 labs · ~11 horas · Dos fundamentos de dados à análise com IA**
+## Adições da Fase 2
+
+Use os Labs 022, 095 e 099 com o Desafio 011 para evidência de recuperação e avaliação.

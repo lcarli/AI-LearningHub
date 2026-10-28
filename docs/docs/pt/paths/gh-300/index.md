@@ -52,3 +52,6 @@ O simulador cobre o currículo por cinco personas. Somente a pontuação final �
 - [GH-300 certification](https://learn.microsoft.com/credentials/certifications/github-copilot/)
 - [GitHub Copilot documentation](https://docs.github.com/copilot)
 - [Copilot plans](https://docs.github.com/copilot/get-started/plans)
+## Desafios da Fase 2
+
+- [Challenge 010](../../challenges/challenge-010-spec-to-pr.md) valida o fluxo da spec ao PR com testes locais.

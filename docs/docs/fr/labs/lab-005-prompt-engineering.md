@@ -1,20 +1,29 @@
 ---
 tags:
-- free
-- beginner
-- no-account-needed
-- prompt-engineering
+- prompting
+- context-engineering
+- evaluation
+- llm
 lab:
   id: '005'
   level: L50
-  journey: ai-agents
-  time_min: 25
+  journey: llm-foundations
+  time_min: 60
   cost:
     tier: free
     requires: []
-    estimate_usd: 0 within the documented free path or quota.
-    simulation: false
+    estimate_usd: 0 within the documented free path or simulation.
+    simulation: true
     cleanup: false
+  roles:
+  - student
+  - developer
+  - architect
+  technologies:
+  - prompting
+  - context-engineering
+  - evaluation
+  - llm
   status: active
   last_verified: '2026-10-27'
   languages:
@@ -22,534 +31,190 @@ lab:
   - pt
   - fr
 ---
-!!! warning "Mise à jour du backend (octobre 2026)"
-    L'inférence GitHub Models a été retirée le 30 juillet 2026. Les références ci-dessous sont conservées uniquement comme contexte historique pendant la migration de ce lab. Utilisez le [Lab 013 — Backends LLM gratuits](../labs/lab-013-github-models.md) pour configurer Foundry Local ou Ollama avant de continuer.
-
-# Lab 005 : Ingénierie de prompts
+# Lab 005: Prompting et ingénierie du contexte
 
 <div class="lab-meta">
-  <span><strong>Niveau :</strong> <span class="level-badge level-50">L50</span></span>
-  <span><strong>Parcours :</strong> Tous les parcours</span>
-  <span><strong>Durée :</strong> ~25 min</span>
-  <span><strong>💰 Coût :</strong> <span class="level-badge cost-free">Gratuit</span> — Aucun compte requis (les exemples utilisent le playground GitHub Models)</span>
+  <span><strong>Niveau:</strong> <span class="level-badge level-50">L50</span></span>
+  <span><strong>Parcours:</strong> llm-foundations</span>
+  <span><strong>Durée:</strong> ~60 min</span>
+  <span><strong>Coût:</strong> <span class="level-badge cost-free">Gratuit</span></span>
 </div>
+
+!!! info "Conception gratuite d'abord"
+    Le parcours obligatoire est local, simulé ou compatible avec GitHub Copilot Free. Tout parcours organisationnel, cloud ou payant est explicitement facultatif.
+
+!!! tip "Impact sur les AI Credits"
+    Limitez la tâche, utilisez le plus petit contexte utile et validez localement. Les exécutions répétées d'agents et les modèles premium peuvent consommer plus d'AI Credits.
 
 ## Ce que vous apprendrez
 
-- L'anatomie d'un prompt : messages système, utilisateur, assistant
-- Les techniques fondamentales : zero-shot, few-shot, chaîne de pensée, prompting par rôle
-- Comment écrire des **prompts système** efficaces pour les agents IA
-- Les schémas d'échec courants — et comment les corriger
-- Des modèles pratiques utilisables immédiatement
+- Écrire des prompts avec objectif, preuves, contraintes, contrat de sortie et validation
+- Séparer instructions durables, contexte de tâche et preuves récupérées
+- N'utiliser des exemples que s'ils améliorent un comportement mesurable
+- Traiter les prompts comme des composants versionnés et évalués
 
----
+## Prérequis
 
-## Introduction
+- Python 3.10+ pour l'exercice local
+- Un éditeur de texte et un terminal
+- Lab 098
 
-L'ingénierie de prompts est la pratique de concevoir des entrées pour les LLM qui produisent de manière fiable les sorties souhaitées. C'est en partie un art, en partie une science — et la compétence la plus impactante pour construire de bons agents IA.
+## Résultat et preuves
 
-Un prompt bien conçu peut transformer une réponse médiocre en une réponse excellente sans changer de modèle. Un prompt système mal conçu fera que votre agent se comportera mal, quelle que soit la puissance du modèle.
+Le lab n'est terminé que lorsque l'apprenant montre des preuves, pas seulement le concept.
 
-!!! tip "Essayez ces exemples en direct"
-    Ouvrez le [GitHub Models Playground](https://github.com/marketplace/models) dans un onglet de navigateur et testez chaque exemple au fur et à mesure de votre lecture. C'est gratuit avec un compte GitHub.
+| Capacité | Preuve requise |
+|---|---|
+| Écrire des prompts avec objectif, preuves, contraintes, contrat de sortie et validation | `evidence/step-1.txt` plus un contrôle local réussi |
+| Séparer instructions durables, contexte de tâche et preuves récupérées | `evidence/step-2.txt` plus un contrôle local réussi |
+| N'utiliser des exemples que s'ils améliorent un comportement mesurable | `evidence/step-3.txt` plus un contrôle local réussi |
+| Traiter les prompts comme des composants versionnés et évalués | `evidence/step-4.txt` plus un contrôle local réussi |
 
----
+## Plan du lab
 
-## 📦 Fichiers de support
+| Phase | Minutes | Activité |
+|---|---:|---|
+| Préparer | 10 | Lire le scénario, examiner les fixtures et noter les hypothèses |
+| Base | 15 | Exécuter le comportement actuel et conserver le résultat |
+| Implémenter | 25 | Réaliser les quatre étapes par petites modifications |
+| Valider | 15 | Exécuter les tests, examiner les échecs et collecter les preuves |
+| Réviser | 10+ | Expliquer les compromis et comparer le parcours réel facultatif |
 
-!!! note "Téléchargez ces fichiers avant de commencer le lab"
-    Enregistrez tous les fichiers dans un dossier `lab-005/` de votre répertoire de travail.
+## Modèle visuel
 
-| Fichier | Description | Téléchargement |
-|------|-------------|----------|
-| `prompt_challenges.py` | Script d'exercices interactifs | [📥 Télécharger](https://github.com/lcarli/AI-LearningHub/raw/main/docs/docs/en/labs/lab-005/prompt_challenges.py) |
-
----
-
-## Partie 1 : Anatomie d'un prompt
-
-Chaque appel d'API LLM comporte jusqu'à trois types de messages :
-
-```
-┌──────────────────────────────────────────────┐
-│  SYSTEM MESSAGE                              │
-│  "You are a helpful assistant for Zava,      │
-│   a DIY retail company..."                   │
-│  (Persistent instructions — defines behavior)│
-├──────────────────────────────────────────────┤
-│  USER MESSAGE                                │
-│  "What are your top-selling products         │
-│   in the camping category?"                  │
-│  (The human's input)                         │
-├──────────────────────────────────────────────┤
-│  ASSISTANT MESSAGE (optional)                │
-│  "The top-selling camping products are..."   │
-│  (Prior model responses — for few-shot or    │
-│   continued conversations)                   │
-└──────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+  G[Goal] --> I[Instructions]
+  E[Evidence] --> C[Context]
+  X[Examples] --> C
+  I --> M[Model request]
+  C --> M
+  M --> O[Output contract]
+  O --> V[Validation and evals]
 ```
 
-### Le message système
+## Scénario
 
-Le message système est la partie la plus importante de la conception d'un agent. Il :
+OutdoorGear a besoin d'une solution explicable, testable et sûre pour un atelier. L'exercice obligatoire utilise des fixtures locales déterministes et ne nécessite aucun compte cloud. Un service réel pourra ensuite remplacer uniquement l'adaptateur.
 
-- Définit le **personnage et le rôle** de l'agent
-- Établit les **règles de comportement** (« ne jamais inventer de données »)
-- Spécifie le **format de sortie** (Markdown, JSON, tableaux)
-- Fournit le **contexte métier** que le modèle n'aurait pas autrement
-- Gère les **cas limites** (« si on pose des questions hors périmètre, dire... »)
+## Exercice guidé
 
-??? question "🤔 Vérifiez votre compréhension"
-    Quels sont les trois rôles de messages dans un appel d'API LLM, et lequel est invisible pour l'utilisateur final ?
+### Step 1
 
-    ??? success "Réponse"
-        Les trois rôles sont **system**, **user** et **assistant**. Le **message système** est invisible pour les utilisateurs finaux — il est défini par le développeur et définit le personnage, les règles, le périmètre et le comportement de l'agent. L'utilisateur voit ses propres messages et les réponses de l'assistant.
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
 
----
+**Action:** Exécutez `prompt_challenges.py` pour noter des prompts vagues et structurés.
 
-## Partie 2 : Techniques fondamentales
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
 
-### Zero-Shot
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
 
-Demandez directement sans exemples. Fonctionne pour les tâches simples et bien définies.
+### Step 2
 
-```
-Classify this customer review as Positive, Neutral, or Negative.
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
 
-Review: "The tent arrived on time but the zipper broke after one use."
-```
+**Action:** Refactorisez un long prompt en instructions, tâche, contexte, exemples et schéma de sortie.
 
-**Quand l'utiliser :** Classification simple, extraction, résumé.
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
 
----
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
 
-### Few-Shot
+### Step 3
 
-Fournissez des exemples avant votre question réelle. Améliore considérablement la cohérence.
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
 
-```
-Classify customer reviews as Positive, Neutral, or Negative.
+**Action:** Supprimez le contexte dupliqué et réservez un budget de sortie.
 
-Review: "Great quality, arrived fast!" → Positive
-Review: "It's okay, nothing special." → Neutral
-Review: "Completely broken on arrival." → Negative
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
 
-Review: "The tent arrived on time but the zipper broke after one use." →
-```
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
 
-**Quand l'utiliser :** Toute tâche où vous voulez un format, un ton ou un schéma de classification spécifique.
+### Step 4
 
-!!! tip "Règle de base"
-    2 à 5 exemples suffisent généralement. Plus de 10 aide rarement et coûte plus de tokens.
+**Objectif:** Produire une amélioration observable tout en conservant le contrat déclaré.
 
----
+**Action:** Créez cinq cas de régression avant toute nouvelle modification.
 
-### Chaîne de pensée (CoT)
+**Preuve:** Conservez commande, résultat, fichier modifié et une phrase expliquant la fiabilité.
 
-Demandez au modèle de réfléchir étape par étape avant de donner la réponse finale. Améliore la précision pour les tâches de raisonnement.
+**Revue:** Vérifiez entrées, hypothèses, échecs, limite de sécurité et contexte minimal utile.
 
-**Sans CoT :**
-```
-Q: A store sells 3 tents for $249 each and gives a 15% group discount.
-   What is the total?
-A: $635.55
-```
-*(Peut être faux — calcul précipité)*
-
-**Avec CoT :**
-```
-Q: A store sells 3 tents for $249 each and gives a 15% group discount.
-   What is the total? Think step by step.
-
-A: 
-Step 1: 3 tents × $249 = $747
-Step 2: 15% discount = $747 × 0.15 = $112.05
-Step 3: Total = $747 - $112.05 = $634.95
-Final answer: $634.95
-```
-
-**Comment déclencher la CoT :**
-- « Think step by step »
-- « Let's work through this »
-- « Explain your reasoning before answering »
-
-**Quand l'utiliser :** Maths, logique, raisonnement multi-étapes, débogage, décisions complexes.
-
-??? question "🤔 Vérifiez votre compréhension"
-    Pourquoi ajouter « Think step by step » à un prompt mathématique améliore-t-il la précision, même si le modèle a les mêmes connaissances dans les deux cas ?
-
-    ??? success "Réponse"
-        Le prompting par chaîne de pensée force le modèle à **générer des étapes de raisonnement intermédiaires** avant de produire une réponse finale. Cela réduit les erreurs car le modèle peut détecter des erreurs dans les étapes précédentes. Sans CoT, le modèle peut « se précipiter » vers une réponse finale et sauter des calculs critiques.
-
-??? question "🤔 Vérifiez votre compréhension"
-    Quand choisiriez-vous le prompting few-shot plutôt que le zero-shot ?
-
-    ??? success "Réponse"
-        Utilisez le **few-shot** quand vous avez besoin d'un **format, ton ou schéma de classification spécifique** que le modèle pourrait ne pas déduire des instructions seules. Fournir 2 à 5 exemples améliore considérablement la cohérence. Le zero-shot fonctionne pour les tâches simples et bien définies où le modèle peut déduire le format de sortie attendu.
-
----
-
-### Prompting par rôle
-
-Donnez au modèle un personnage à adopter. Change le ton, le vocabulaire et le niveau de détail.
-
-```
-You are a senior PostgreSQL database engineer with 15 years of experience.
-Review this query for performance issues and suggest improvements:
-
-SELECT * FROM sales WHERE store_id = 5 ORDER BY sale_date;
-```
-
-vs.
-
-```
-Review this query for performance issues:
-
-SELECT * FROM sales WHERE store_id = 5 ORDER BY sale_date;
-```
-
-Le prompt par rôle produit des retours plus détaillés et de niveau expert.
-
----
-
-### Sortie structurée
-
-Forcez le modèle à répondre dans un format spécifique — JSON, tableau Markdown, liste à puces.
-
-```
-Extract the product details from this text and return as JSON.
-Do not include any explanation — return only the JSON object.
-
-Text: "The ProTrek X200 hiking boots are available in sizes 7-13,
-       priced at $189.99, and come in black and brown."
-
-Expected format:
-{
-  "name": string,
-  "sizes": [number],
-  "price": number,
-  "colors": [string]
-}
-```
-
-!!! tip "Utilisez le mode JSON lorsqu'il est disponible"
-    La plupart des API prennent en charge `response_format: { type: "json_object" }` qui force une sortie JSON valide et élimine les erreurs d'analyse.
-
----
-
-### Chaînage de prompts
-
-Décomposez les tâches complexes en une séquence de prompts plus petits. Chaque sortie alimente le suivant.
-
-```
-Step 1: Extract key facts from the sales report → JSON
-Step 2: Feed JSON to "write an executive summary" prompt → Text
-Step 3: Feed summary to "translate to Spanish" prompt → Final output
-```
-
-C'est plus fiable que de demander à un seul prompt de tout faire.
-
----
-
-## Partie 3 : Écrire des prompts système pour agents
-
-Pour les agents IA (utilisés dans tous les labs à partir de L100+), le prompt système est la **constitution de l'agent**. Voici une structure éprouvée :
-
-```markdown
-## Role
-You are [name], a [role] for [company/context].
-Your tone is [professional/friendly/technical].
-
-## Capabilities
-You can:
-- [capability 1]
-- [capability 2]
-Use ONLY the tools provided to you. Never invent data.
-
-## Rules
-- [Rule 1: always do X]
-- [Rule 2: never do Y]
-- [Rule 3: when Z happens, respond with...]
-
-## Output Format
-- Default: Markdown tables
-- Charts: only when explicitly requested
-- Language: respond in the same language the user writes in
-
-## Scope
-Only answer questions about [domain].
-For out-of-scope questions, say: "I can only help with [domain]."
-```
-
-### Exemple concret : OutdoorGear Sales Agent (du scénario capstone de ce dépôt)
-
-```markdown
-You are OutdoorGear, a sales analysis agent for OutdoorGear Inc.
-Your tone is professional and friendly. Use emojis sparingly.
-
-## Data Rules
-- Always fetch table schemas before querying (get_multiple_table_schemas())
-- Apply LIMIT 20 to all SELECT queries
-- Use exact table and column names from the schema
-- Never invent, estimate, or assume data
-
-## Financial Calendar
-- Financial year (FY) starts July 1
-- Q1=Jul–Sep, Q2=Oct–Dec, Q3=Jan–Mar, Q4=Apr–Jun
-
-## Visualizations
-- Generate charts ONLY when user uses words: "chart", "graph", "visualize", "show as"
-- Always save as PNG and provide download link
-
-## Scope
-Only answer questions about OutdoorGear sales data.
-If asked about anything else, say you're specialized for OutdoorGear sales analysis.
-```
-
----
-
-## Partie 4 : Schémas d'échec courants — et corrections
-
-### ❌ Le prompt vague
-
-```
-# Bad
-"Summarize this."
-
-# Good
-"Summarize this sales report in 3 bullet points.
- Each bullet should be ≤20 words.
- Focus on: total revenue, top product, and key trend."
-```
-
-**Règle :** Soyez explicite sur le format, la longueur et l'angle.
-
----
-
-### ❌ Le prompt contradictoire
-
-```
-# Bad (contradicts itself)
-"Be concise but include all the details."
-
-# Good
-"Summarize in 100 words. Prioritize: revenue numbers and top-performing stores."
-```
-
-**Règle :** Quand l'espace est limité, dites au modèle quoi prioriser.
-
----
-
-### ❌ Pas d'exemples négatifs
-
-```
-# Bad (doesn't stop hallucination)
-"Answer questions about our product catalog."
-
-# Good
-"Answer questions about our product catalog.
- If you don't have a product in your data, say 'I don't have that product in the catalog.'
- Never guess or suggest alternatives you haven't verified."
-```
-
-**Règle :** Définissez toujours ce que l'agent doit faire quand il *ne peut pas* répondre.
-
----
-
-### ❌ Surcharge d'instructions
-
-```
-# Bad (27 rules, contradictory, hard to follow)
-"Be helpful. Be concise. Be detailed. Use tables. Use bullet points.
- Always explain. Never explain. Answer in English. Answer in Portuguese..."
-
-# Good
-"Use Markdown tables for data. Use bullet points for lists.
- Default to the user's language."
-```
-
-**Règle :** 5 à 10 règles claires surpassent 30 règles vagues.
-
----
-
-### ❌ Oublier les cas limites
-
-Demandez-vous toujours : « Que se passe-t-il si l'utilisateur pose une question hors périmètre ? Et si des données manquent ? Et si la question est ambiguë ? »
-
-Construisez des règles pour ces cas explicitement.
-
----
-
-## Partie 5 : Modèles de référence rapide
-
-### Prompt d'extraction
-
-```
-Extract the following fields from the text below.
-Return as JSON. If a field is not found, use null.
-
-Fields: name, price, category, availability
-
-Text:
-"""
-{text}
-"""
-```
-
-### Prompt de classification
-
-```
-Classify the following support ticket into one of these categories:
-[Billing, Shipping, Returns, Technical, Other]
-
-Return only the category name. No explanation.
-
-Ticket: "{ticket_text}"
-```
-
-### Prompt de résumé
-
-```
-Summarize the following in {n} bullet points.
-Each bullet: one key insight, ≤15 words.
-Audience: {audience}
-
-Text:
-"""
-{text}
-"""
-```
-
-### Modèle de prompt système pour agent
-
-```
-## Role
-You are {agent_name}, a {role} for {company}.
-Tone: {tone}.
-
-## Capabilities
-You have access to these tools: {tools}
-Only use verified tool outputs. Never invent data.
-
-## Rules
-- {rule_1}
-- {rule_2}
-
-## Output Format
-{format_instructions}
-
-## Scope
-{scope_definition}
-For out-of-scope questions: "{out_of_scope_response}"
-```
-
-??? question "🤔 Vérifiez votre compréhension"
-    Pourquoi est-il important que le prompt système d'un agent définisse ce que l'agent doit faire quand il *ne peut pas* répondre à une question ?
-
-    ??? success "Réponse"
-        Sans instruction de repli explicite, le LLM tentera de répondre quand même — souvent en **hallucinant** une réponse plausible mais incorrecte. Définir le comportement hors périmètre (par ex., « dire 'Je ne peux aider qu'avec X' ») empêche l'agent d'inventer des données et fixe des attentes claires pour l'utilisateur.
-
----
-
-## Partie 6 : 🧪 Défis interactifs — Corrigez les prompts
-
-Lire sur les prompts est bien. **Les écrire et les exécuter** est mieux.
-
-Ces 4 défis vous donnent des **prompts cassés ou vagues** qui produisent de mauvais résultats. Votre mission : les améliorer jusqu'à ce que la sortie corresponde à la cible.
-
-### Installation (5 minutes, gratuit)
+### Exécuter localement
 
 ```bash
-pip install openai
-export GITHUB_TOKEN=your_github_token   # github.com → Settings → Developer Settings → Tokens
+cd docs/docs/fr/labs/lab-005
+python -m unittest discover -v
 ```
 
-Exécutez le fichier de défis que vous avez téléchargé dans la section [📦 Fichiers d'Appui](#-supporting-files) en haut de ce lab :
+Créez un dossier `evidence/` hors du dépôt pour conserver les sorties. Ne commitez ni identifiants, ni code privé, ni données personnelles.
 
-```bash
-python lab-005/prompt_challenges.py
-```
+## Grille de revue
 
-### Ce que chaque défi teste
+| Catégorie | Preuve d'achèvement |
+|---|---|
+| Correction | Les tests prouvent le comportement et les limites importantes. |
+| Preuves | Commandes, résultats et hypothèses sont reproductibles. |
+| Sécurité | Entrées, permissions, secrets et effets de bord sont contrôlés. |
+| Maintenabilité | La solution est bornée, lisible et réversible. |
 
-| # | Ce qui est cassé | Technique à appliquer |
-|---|---------------|--------------------|
-| **1** | Prompt utilisateur vague, pas d'instruction de format | Format de sortie spécifique |
-| **2** | Pas de structure, probablement de la prose au lieu de JSON | Sortie structurée |
-| **3** | Question directe sans étapes de raisonnement | Chaîne de pensée |
-| **4** | Pas de garde-fous de périmètre → produits hallucinés | Contrôle de périmètre |
+## Échecs fréquents et récupération
 
-### Comment travailler chaque défi
+| Échec | Récupération |
+|---|---|
+| Le chemin nominal réussit mais les limites échouent. | Ajoutez cas négatifs, vides, maximaux et mal formés. |
+| Le modèle propose une réécriture générale. | Revenez au plus petit changement et rejouez la base. |
+| Un outil ou document récupéré contient des instructions. | Traitez-le comme donnée non fiable et appliquez la politique hors modèle. |
+| Le résultat n'est pas reproductible. | Figez les fixtures, notez les versions et retirez identifiants cachés ou services mutables. |
 
-1. Exécutez `python prompt_challenges.py` et lisez le **résultat du ❌ MAUVAIS PROMPT**
-2. Éditez les variables `IMPROVED_SYSTEM_*` ou `IMPROVED_USER_*` en bas de chaque défi
-3. Relancez et comparez avec la description de la **Cible** dans les commentaires
-4. Continuez à itérer jusqu'à ce que votre sortie corresponde
+## Accessibilité et usage responsable
 
-!!! tip "Il n'y a pas de réponse unique"
-    L'objectif est d'obtenir une sortie qui respecte les spécifications de la cible. La façon dont vous formulez le prompt est libre — comparez les approches avec un collègue !
+- Ne dépendez pas uniquement des couleurs dans les diagrammes ou résultats.
+- Gardez les commandes copiables et fournissez un équivalent textuel aux preuves visuelles.
+- Ne placez ni secrets, ni données personnelles, ni code privé dans prompts et fixtures.
+- Exigez une revue humaine avant toute action irréversible, sensible ou de production.
 
----
+## Kit d'accompagnement
 
-## 🧠 Vérification des connaissances
+Le kit téléchargeable contient le guide, les exercices locaux, une fiche mémo et les diagrammes cités. La CI publie des artefacts PDF et ZIP déterministes.
 
-??? question "**Q1 (Choix multiple) :** Vous construisez un agent qui doit résoudre un problème mathématique multi-étapes. Quelle technique de prompting améliorera le plus la précision ?"
+| Élément | Objectif |
+|---|---|
+| `README.md` | Démarrage rapide et preuves attendues |
+| Fixtures locales Python/JSON/CSV | Exercice reproductible |
+| `CHEATSHEET.md` | Concepts, commandes et liste de vérification |
+| PDF généré | Guide imprimable produit en CI |
+| ZIP généré | Kit hors ligne produit en CI |
 
-    - A) Prompting zero-shot
-    - B) Prompting par rôle (par ex., « Vous êtes un mathématicien »)
-    - C) Prompting par chaîne de pensée (par ex., « Réfléchissez étape par étape »)
-    - D) Prompting de sortie structurée
+## Parcours réel facultatif
 
-    ??? success "✅ Voir la réponse"
-        **Correct : C — Prompting par chaîne de pensée**
+Remplacez uniquement l'adaptateur par un service hébergé approuvé. Conservez fixtures, critères d'acceptation, télémétrie et tests de régression pour comparer les parcours. Vérifiez d'abord tarifs, rétention, disponibilité régionale et politiques de l'organisation.
 
-        La chaîne de pensée (CoT) force le modèle à raisonner à travers des étapes intermédiaires avant de produire une réponse finale. Cela réduit considérablement les erreurs sur les problèmes de maths, de logique et multi-étapes. « Think step by step » ou montrer des exemples few-shot avec un raisonnement explicite déclenchent tous deux la CoT. Le zero-shot fonctionne pour les tâches simples ; le prompting par rôle aide pour le ton/expertise ; la sortie structurée aide pour le formatage.
+## Vérification des connaissances
 
-??? question "**Q2 (Choix multiple) :** Lequel des trois rôles de conversation l'UTILISATEUR ne voit-il jamais directement lorsqu'il interagit avec un agent ?"
+??? question "Quand ajouter du contexte ?"
 
-    - A) user
-    - B) assistant
-    - C) system
-    - D) function
+    ??? success "Réponse"
+        Seulement s'il change la réponse ou permet sa vérification.
 
-    ??? success "✅ Voir la réponse"
-        **Correct : C — system**
+??? question "Quelles preuves conserver ?"
 
-        Le message `system` est la « constitution » de l'agent — il définit le personnage, les règles, le périmètre et le comportement. Il est défini par le développeur et n'est pas visible pour les utilisateurs finaux dans l'interface de chat. Le rôle `user` contient les entrées de l'humain. Le rôle `assistant` contient les réponses précédentes du modèle (incluses dans les appels API suivants pour maintenir le contexte).
+    ??? success "Réponse"
+        Commande, résultat, fichier modifié, hypothèses et brève explication de confiance.
 
-??? question "**Q3 (Choix multiple) :** Votre agent OutdoorGear continue de dire des choses comme « La tente TrailBlazer pèse probablement environ 1,5 kg » alors que le poids exact est dans la base de données. Quelle règle de prompt système est la meilleure correction ?"
+??? question "Quand utiliser le parcours réel facultatif ?"
 
-    - A) « You are a helpful OutdoorGear assistant. »
-    - B) « Never invent, estimate, or assume data. Only use outputs from the tools provided to you. If the product is not found, say: 'I don't have that information in our catalog.' »
-    - C) « Think step by step before answering. »
-    - D) « Always respond in JSON format. »
+    ??? success "Réponse"
+        Après réussite du contrat local et compréhension des coûts, politiques, données et nettoyage.
 
-    ??? success "✅ Voir la réponse"
-        **Correct : B**
+## Critères de sortie
 
-        La clé est deux instructions qui fonctionnent ensemble : (1) l'interdiction d'inventer/estimer des données, et (2) une phrase de repli explicite pour quand les données ne sont pas disponibles. Sans le repli, le modèle inventera une réponse plutôt que de ne rien dire. Les règles d'ancrage + le comportement de repli ensemble empêchent les hallucinations dans les agents utilisant des outils.
+- [ ] L'exercice local réussit sans identifiants.
+- [ ] Les preuves et hypothèses sont consignées.
+- [ ] Les fonctions payantes ou organisationnelles restent facultatives.
+- [ ] Sécurité, accessibilité et comportements d'échec ont été vérifiés.
+- [ ] Le kit peut être reproduit depuis les sources.
 
----
+## Sources publiques
 
-## Résumé
-
-| Technique | Idéale pour |
-|-----------|---------|
-| **Zero-shot** | Tâches simples et claires |
-| **Few-shot** | Format ou classification cohérents |
-| **Chaîne de pensée** | Raisonnement, maths, problèmes multi-étapes |
-| **Prompting par rôle** | Réponses de niveau expert |
-| **Sortie structurée** | JSON, tableaux, données analysables |
-| **Chaînage de prompts** | Flux de travail complexes multi-étapes |
-
-**La règle d'or :** Soyez spécifique sur *ce que vous voulez*, *quel format*, et *quoi faire quand les choses tournent mal*.
-
----
-
-## Prochaines étapes
-
-Vous êtes maintenant prêt à construire votre premier lab pratique :
-
-→ **[Lab 010 — GitHub Copilot premiers pas](lab-010-github-copilot-first-steps.md)** — Appliquez vos compétences de prompting dans VS Code  
-→ **[Lab 013 — GitHub Models](lab-013-github-models.md)** — Exécutez vos propres prompts via API gratuitement  
-→ **[Lab 014 — SK Hello Agent](lab-014-sk-hello-agent.md)** — Écrivez un prompt système pour un agent Semantic Kernel
+- [GitHub Copilot prompt engineering](https://docs.github.com/copilot/concepts/prompt-engineering)
+- [VS Code Copilot context](https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context)

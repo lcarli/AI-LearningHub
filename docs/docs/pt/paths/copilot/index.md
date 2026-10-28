@@ -1,56 +1,37 @@
-# 🤖 Trilha GitHub Copilot
+# Trilha GitHub Copilot — Fase 2
 
-<span class="level-badge level-100">L100</span> <span class="level-badge level-200">L200</span> <span class="level-badge level-300">L300</span> <span class="level-badge level-400">L400</span>
-
-Aprenda o fluxo atual do Copilot: completações, Ask, Plan, Agent, chat inline, MCP, aprovações seguras e instruções do repositório.
-
-## Labs Atuais
-
-| Lab | Título | Nível | Custo |
-|-----|--------|-------|-------|
-| [Lab 010](../../labs/lab-010-github-copilot-first-steps.md) | GitHub Copilot — Primeiros Passos | L100 | GRÁTIS·GH |
-| [Lab 016](../../labs/lab-016-copilot-agent-mode.md) | Copilot Agent e Plan | L100 | GRÁTIS·GH |
-| [Lab 025](../../labs/lab-025-vscode-chat-participant.md) | VS Code Chat Participant | L200 | GRÁTIS·GH |
-| [Lab 081](../../labs/lab-081-agentic-coding-tools.md) | Ferramentas de Programação Agêntica | L100 | GRÁTIS |
-| [Lab 085](../../labs/lab-085-copilot-prompt-context-engineering.md) | Engenharia de Prompt e Contexto | L100 | GRÁTIS · GH |
-| [Lab 086](../../labs/lab-086-customize-copilot.md) | Instruções, Prompt Files, Agentes e Skills | L200 | GRÁTIS · GH |
-| [Lab 087](../../labs/lab-087-copilot-mcp.md) | Copilot + MCP | L200 | GRÁTIS · GH |
-| [Lab 088](../../labs/lab-088-copilot-cli.md) | Copilot CLI | L200 | GRÁTIS · GH |
-| [Lab 089](../../labs/lab-089-spec-kit.md) | Desenvolvimento Orientado a Especificação | L200 | GRÁTIS · GH |
-| [Lab 091](../../labs/lab-091-cloud-agent-code-review.md) | Cloud Agent e Code Review | L300 | Simulação GRÁTIS / caminho real PAGO |
-| [Lab 094](../../labs/lab-094-copilot-governance-finops.md) | Governança e FinOps | L300 | Simulação GRÁTIS |
-| [Lab 107](../../labs/lab-107-how-copilot-works.md) | Como o GitHub Copilot Funciona | L50 | GRÁTIS |
-
-## Status da Migração 2026
-
-- O Lab 041 foi aposentado porque as Copilot Extensions baseadas em GitHub Apps foram descontinuadas. Use MCP, a API do VS Code ou o futuro lab do Copilot SDK.
-- O Lab 045 foi aposentado porque o Copilot Workspace foi descontinuado. Use Plan e Agent; o roadmap adiciona um lab de Spec Kit.
-- Os Labs 085–094 agora cobrem instruções, skills, MCP, CLI, Spec Kit, cloud agent, code review, governança e FinOps.
-
-## Sequência Recomendada para 2026
+Evolua da assistência individual para entrega agêntica testada, segura, mensurável e revisável.
 
 ```mermaid
 flowchart LR
-  L107[107 Conceitos] --> L010[010 Primeiros passos]
-  L010 --> L085[085 Contexto]
-  L085 --> L086[086 Personalização]
-  L086 --> L087[087 MCP]
-  L087 --> L088[088 CLI]
-  L088 --> L089[089 Spec Kit]
-  L089 --> L091[091 Simulação cloud]
-  L091 --> L094[094 Governança]
+  C[Context] --> S[Spec]
+  S --> T[Tests and modernization]
+  T --> G[Security and governance]
+  G --> A[Agentic delivery]
+  A --> M[Metrics]
 ```
 
-→ [Siga a trilha GH-300 de quatro semanas](../gh-300/index.md)
+| Lab | Title | Level |
+|---|---|---|
+| [Lab 085](../../labs/lab-085-copilot-prompt-context-engineering.md) | Engenharia de Prompt e Contexto | L100 |
+| [Lab 086](../../labs/lab-086-customize-copilot.md) | Personalize o Copilot | L200 |
+| [Lab 087](../../labs/lab-087-copilot-mcp.md) | Copilot + MCP | L200 |
+| [Lab 088](../../labs/lab-088-copilot-cli.md) | Copilot CLI | L200 |
+| [Lab 089](../../labs/lab-089-spec-kit.md) | Desenvolvimento Orientado a Especificação | L200 |
+| [Lab 090](../../labs/lab-090-copilot-testing-legacy-modernization.md) | Testes, Refatoração e Modernização de Legado com Copilot | L200 |
+| [Lab 091](../../labs/lab-091-cloud-agent-code-review.md) | Cloud Agent e Code Review | L300 |
+| [Lab 092](../../labs/lab-092-secure-code-copilot.md) | Código Seguro com Copilot: Autofix, Secret Scanning e Riscos de Agentes | L300 |
+| [Lab 093](../../labs/lab-093-copilot-sdk-agent-app.md) | Copilot SDK: Incorpore um Agente no Seu Aplicativo | L300 |
+| [Lab 094](../../labs/lab-094-copilot-governance-finops.md) | Governança e FinOps do Copilot | L300 |
+| [Lab 095](../../labs/lab-095-copilot-impact-metrics.md) | Medindo o Impacto do Copilot: API de Métricas, DORA e SPACE | L300 |
+| [Lab 096](../../labs/lab-096-agentic-devops-capstone.md) | Capstone — DevOps Agêntico: Spec → Plano → Agente → Revisão → Deploy | L400 |
 
-## Copilot Free
+## Capstone sequence
 
-Esta trilha foi desenhada para funcionar no Copilot Free, salvo quando um lab estiver explicitamente marcado como pago ou simulado. O plano inclui uma cota de completações e uma franquia limitada de AI Credits; a disponibilidade exata pode mudar, por isso os labs não fixam cotas de chat ou modelos.
+Labs 089, 090, 092, 093, and 095 prepare the learner for Lab 096. Challenge 010 verifies the spec-to-PR workflow without GitHub Classroom.
 
-→ [Ativar o GitHub Copilot Free](https://github.com/features/copilot)
+## Public resources
 
-## Recursos Externos
-
-- [Documentação do GitHub Copilot](https://docs.github.com/copilot)
-- [Personalizar o Copilot](https://docs.github.com/copilot/customizing-copilot)
+- [GitHub Copilot documentation](https://docs.github.com/copilot)
+- [VS Code Chat extension API](https://code.visualstudio.com/api/extension-guides/chat)
 - [Model Context Protocol](https://modelcontextprotocol.io/)

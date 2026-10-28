@@ -39,3 +39,6 @@ You're new to AI agents and want to learn from scratch — completely free, no A
 ---
 
 **Total: 13 labs · ~8 hours · 100% free — no Azure, no credit card**
+## Phase 2 additions
+
+Use Labs 004, 005, 007, 097–101 and Challenge 011 for a free local LLM foundations route.

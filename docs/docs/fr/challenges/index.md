@@ -24,3 +24,9 @@ Les défis sont moins guidés que les labs. Utilisez-les après les labs associ�
 - Vous ne recevez **pas** de walkthrough étape par étape.
 - Lorsque c'est possible, le défi inclut un **validateur local** qui génère un code de réussite.
 - Saisissez le code sur la page du défi pour confirmer le résultat final.
+## Défis de la Phase 2
+
+- [Challenge 010](challenge-010-spec-to-pr.md) — De la spécification à la pull request
+- [Challenge 011](challenge-011-evaluation-driven-rag.md) — RAG guidé par l'évaluation
+
+Both challenges include local unit tests and a completion-code validator.
